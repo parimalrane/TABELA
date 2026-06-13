@@ -15,6 +15,7 @@ from scoring_engine import (
 from composite_engine import calculate_composite_score
 from watchlist_engine import build_long_watchlist
 from short_engine import build_short_watchlist
+from breadth_engine import build_theme_breadth
 
 # ==========================================
 # LOAD FILES
@@ -224,9 +225,23 @@ long_watchlist = build_long_watchlist(stocks)
 
 short_watchlist = build_short_watchlist(stocks)
 
+
 # ==========================================
-# FINAL OUTPUT
+# STEP 9 — THEME BREADTH
 # ==========================================
+theme_breadth = build_theme_breadth(stocks)
+
+
+
+# ==========================================
+# FINAL OUTPUT — THEMEPULSE DAILY SCAN
+# ==========================================
+
+import datetime
+
+today = datetime.date.today()
+
+# sort outputs
 
 long_watchlist = long_watchlist.sort_values(
 
@@ -234,21 +249,134 @@ long_watchlist = long_watchlist.sort_values(
     ascending=False
 )
 
+short_watchlist = short_watchlist.sort_values(
+
+    "Composite_Score",
+    ascending=True
+)
+
+institutional_leaders = stocks.sort_values(
+
+    "Composite_Score",
+    ascending=False
+).head(20)
+
+
+# ==========================================
+# HEADER
+# ==========================================
+
+print("\n")
+print("==============================================")
+print("THEMEPULSE DAILY MARKET SCAN")
+print("DATE:", today)
+print("==============================================")
+print("\n")
+
+
+# ==========================================
+# MARKET ROTATION SUMMARY
+# ==========================================
+
+print("MARKET ROTATION SUMMARY")
+print("----------------------------")
+
+print("\nLEADING THEMES")
+
 print(
 
-    short_watchlist[[
-        "Ticker",
-        "Mapped_Theme",
-        "Theme_Class",
-        "Theme_Score",
-        "RS_Rating",
-        "Composite_Score"
-    ]]
+    theme_strength[
 
-    .head(50)
+        theme_strength["Theme"].isin(
+
+            [k for k, v in theme_class_map.items() if v == "Leading"]
+
+        )
+
+    ]["Theme"].tolist()
+
+)
+
+print("\nEMERGING THEMES")
+
+print(
+
+    theme_strength[
+
+        theme_strength["Theme"].isin(
+
+            [k for k, v in theme_class_map.items() if v == "Emerging"]
+
+        )
+
+    ]["Theme"].tolist()
+
+)
+
+print("\nWEAKENING THEMES")
+
+print(
+
+    theme_strength[
+
+        theme_strength["Theme"].isin(
+
+            [k for k, v in theme_class_map.items() if v == "Weakening"]
+
+        )
+
+    ]["Theme"].tolist()
+
+)
+
+print("\nLAGGING THEMES")
+
+print(
+
+    theme_strength[
+
+        theme_strength["Theme"].isin(
+
+            [k for k, v in theme_class_map.items() if v == "Lagging"]
+
+        )
+
+    ]["Theme"].tolist()
+
 )
 
 print("\n\n")
+
+
+# ==========================================
+# THEME BREADTH
+# ==========================================
+
+print("THEME BREADTH ANALYSIS")
+print("----------------------------")
+
+print(
+
+    theme_breadth[[
+        "Mapped_Theme",
+        "Total_Stocks",
+        "Strong_Stocks",
+        "Breadth_Percent"
+    ]]
+
+    .head(20)
+
+)
+
+print("\n\n")
+
+
+# ==========================================
+# TOP LONG WATCHLIST
+# ==========================================
+
+print("TOP LONG WATCHLIST")
+print("----------------------------")
 
 print(
 
@@ -256,10 +384,61 @@ print(
         "Ticker",
         "Mapped_Theme",
         "Theme_Class",
-        "Theme_Score",
         "RS_Rating",
         "Composite_Score"
     ]]
 
-    .head(50)
+    .head(20)
+
 )
+
+print("\n\n")
+
+
+# ==========================================
+# TOP SHORT WATCHLIST
+# ==========================================
+
+print("TOP SHORT WATCHLIST")
+print("----------------------------")
+
+print(
+
+    short_watchlist[[
+        "Ticker",
+        "Mapped_Theme",
+        "Theme_Class",
+        "RS_Rating",
+        "Composite_Score"
+    ]]
+
+    .head(20)
+
+)
+
+print("\n\n")
+
+
+# ==========================================
+# TOP INSTITUTIONAL LEADERS
+# ==========================================
+
+print("TOP 20 INSTITUTIONAL LEADERS")
+print("----------------------------")
+
+print(
+
+    institutional_leaders[[
+        "Ticker",
+        "Mapped_Theme",
+        "Theme_Class",
+        "RS_Rating",
+        "Composite_Score"
+    ]]
+
+)
+
+print("\n")
+print("==============================================")
+print("END OF THEMEPULSE SCAN")
+print("==============================================")
