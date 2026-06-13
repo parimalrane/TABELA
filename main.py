@@ -14,7 +14,7 @@ from scoring_engine import (
 
 from composite_engine import calculate_composite_score
 from watchlist_engine import build_long_watchlist
-
+from short_engine import build_short_watchlist
 
 # ==========================================
 # LOAD FILES
@@ -219,6 +219,12 @@ long_watchlist = build_long_watchlist(stocks)
 
 
 # ==========================================
+# STEP 8 — BUILD SHORT WATCHLIST
+# ==========================================
+
+short_watchlist = build_short_watchlist(stocks)
+
+# ==========================================
 # FINAL OUTPUT
 # ==========================================
 
@@ -227,6 +233,22 @@ long_watchlist = long_watchlist.sort_values(
     "Composite_Score",
     ascending=False
 )
+
+print(
+
+    short_watchlist[[
+        "Ticker",
+        "Mapped_Theme",
+        "Theme_Class",
+        "Theme_Score",
+        "RS_Rating",
+        "Composite_Score"
+    ]]
+
+    .head(50)
+)
+
+print("\n\n")
 
 print(
 
