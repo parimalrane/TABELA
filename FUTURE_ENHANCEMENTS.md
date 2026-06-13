@@ -593,3 +593,191 @@ New features must be validated against real market behavior.
 Production stability is more important than feature expansion.
 
 
+===========================================================
+PRIORITY C4 — BREADTH TREND ENGINE
+(HIGH PRIORITY)
+===========================================================
+
+Current Problem:
+
+Breadth analysis only shows current snapshot.
+
+No ability to measure change over time.
+
+
+Objective:
+
+Track whether internal participation inside themes is improving or deteriorating.
+
+
+Example:
+
+Semiconductors
+
+Yesterday Breadth = 42%
+
+Today Breadth = 55%
+
+Interpretation:
+
+Institutional participation expanding.
+
+Theme strengthening.
+
+
+-----------------------------------------------------------
+
+C4.1 — Historical Breadth Database
+
+Store daily breadth values for every theme.
+
+Example:
+
+Date | Theme | Breadth %
+
+2026-06-12 | Semiconductors | 42%
+
+2026-06-13 | Semiconductors | 48%
+
+
+-----------------------------------------------------------
+
+C4.2 — Breadth Acceleration Score
+
+Measure speed of participation change.
+
+Example:
+
+Semiconductors
+
+5 Day Breadth Change = +12%
+
+Interpretation:
+
+Theme rapidly strengthening.
+
+
+-----------------------------------------------------------
+
+C4.3 — Breadth Deterioration Detection
+
+Detect weakening internal participation.
+
+Example:
+
+Artificial Intelligence
+
+Yesterday = 65%
+
+Today = 48%
+
+Interpretation:
+
+Institutions reducing participation.
+
+Potential early warning signal.
+
+
+-----------------------------------------------------------
+
+C4.4 — Minimum Breadth Threshold Filter
+
+Current Problem:
+
+Themes with 1 stock create misleading 100% breadth.
+
+Example:
+
+AI ASIC = 1 stock = 100%
+
+This does NOT represent broad institutional participation.
+
+
+Solution:
+
+Ignore themes with fewer than 5 stocks.
+
+Rule:
+
+If Total Stocks < 5
+
+Label:
+
+Insufficient Breadth Data
+
+
+-----------------------------------------------------------
+
+C4.5 — Breadth Leadership Ranking
+
+Rank themes by:
+
+Breadth %
+
+AND
+
+Breadth acceleration
+
+Formula Example:
+
+Breadth Score =
+
+Current Breadth × 70%
+
+5 Day Breadth Change × 30%
+
+
+Use Cases:
+
+Detect emerging leadership before price breakout.
+
+
+
+===========================================================
+PRIORITY C5 — THEME QUALITY ENGINE
+(HIGH PRIORITY)
+===========================================================
+
+Problem:
+
+Theme can show strong breadth but average stock quality may be poor.
+
+
+Objective:
+
+Measure average quality inside each theme.
+
+
+Metrics:
+
+Average Composite Score
+
+Average RS Rating
+
+Average Sales Score
+
+
+Example:
+
+Semiconductors
+
+Average Composite Score = 82
+
+Average RS Rating = 88
+
+
+Cloud Computing
+
+Average Composite Score = 54
+
+Average RS Rating = 61
+
+
+Interpretation:
+
+Higher quality themes receive stronger institutional sponsorship.
+
+
+Use Cases:
+
+Improve theme ranking system beyond ETF relative strength alone.
