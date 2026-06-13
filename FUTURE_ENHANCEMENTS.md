@@ -1,213 +1,111 @@
-CAPITAL ROTATION ENGINE — FUTURE ENHANCEMENTS
+# FUTURE_ENHANCEMENTS.md
 
-Version Status
+# THEMEPULSE FUTURE DEVELOPMENT ROADMAP
 
-Current Version: V1 Production Beta
+============================================================
+PROJECT STATUS
+==============
 
-Core Architecture Status:
+Current Version:
 
-Completed
+ThemePulse V1
 
----
+Current Status:
 
-PRIORITY A — INSTITUTIONAL BEHAVIOR ENGINE
-(HIGH PRIORITY)
----------------
+Production Ready
 
-Objective:
+Architecture Status:
 
-Improve short and long candidate quality by detecting institutional accumulation and distribution behavior.
+Frozen
 
-A1 — Volume Dry Up Detection
+Important Rule:
 
-Goal:
+Do NOT continuously modify stable production architecture.
 
-Detect stocks where selling pressure is disappearing before breakout.
+Future enhancements must be tested against real market behavior before implementation.
 
-Logic:
-
-Current Volume < 50 Day Average Volume
-
-Use Cases:
-
-Long Watchlist confirmation
-
-A2 — Distribution Day Detection
-
-Goal:
-
-Detect institutional selling.
-
-Logic:
-
-Down Day + Volume Above Average
-
-Use Cases:
-
-Short Watchlist confirmation
-
-Detect broken leaders
-
-A3 — Relative Weakness Trend
-
-Goal:
-
-Detect stocks losing institutional sponsorship.
-
-Logic:
-
-Stock underperforming benchmark over rolling period
-
-Possible Factors:
-
-4 Week Relative Performance deterioration
-
-12 Week Relative Performance deterioration
-
-Use Cases:
-
-Short Watchlist ranking
-
----
-
-## PRIORITY B — ADVANCED MARKET BEHAVIOR
-
-B1 — Earnings Gap Detection
-
-Detect earnings breakouts and earnings breakdowns.
-
-B2 — Gap Up / Gap Down Engine
-
-Measure institutional reaction after earnings.
-
-B3 — Accumulation Days Engine
-
-Up Day + Above Average Volume
-
-B4 — Distribution Days Count
-
-Track institutional selling over rolling 20 days.
-
----
-
-## PRIORITY C — TECHNICAL CONFIRMATION ENGINE
-
-C1 — Moving Average Alignment
-
-20 EMA > 50 SMA > 200 SMA
-
-C2 — Distance From 52 Week High
-
-C3 — Volatility Contraction Pattern Detection
-
-C4 — Breakout Detection
-
----
-
-## PRIORITY D — THEME EVOLUTION ENGINE
-
-Detect emerging themes BEFORE ETF providers classify them.
-
-Examples:
-
-Quantum Computing
-
-Stablecoins
-
-Robotics
-
-Defense AI
-
-Space Infrastructure
-
-Nuclear Infrastructure
-
----
-
-## LONG TERM GOAL
-
-Build proprietary institutional money flow research engine superior to retail scanners.
-
-Reference Philosophy:
-
-DeepVue
-
-IBD / MarketSurge
-
-Institutional Growth Investing
-
-Theme Rotation First Approach
-
----
-
-## IMPORTANT PROJECT PRINCIPLE
+Core Philosophy:
 
 Institutional Narrative > Traditional Sector Classification
 
-Price Action reveals institutional behavior before classification systems catch up.
+Primary Objective:
 
+Track institutional capital rotation before retail market recognizes leadership changes.
 
-# THEMEPULSE — FUTURE ENHANCEMENTS ROADMAP
+############################################################
+TIER 1 — HIGHEST PRIORITY
+(Core Future Edge)
+############################################################
 
-Current Version: V1 Production Beta
+============================================================
 
-Core Architecture Status:
-Stable
+1. INSTITUTIONAL BEHAVIOR ENGINE
+   (HIGHEST PRIORITY)
+   ============================================================
 
-Current Capabilities:
-- ETF Relative Strength Engine
-- Theme Rotation Engine
-- Stock Mapping Engine
-- Institutional Narrative Database
-- Long Watchlist Engine
-- Short Watchlist Engine
-- Composite Scoring Engine
+Importance:
 
-
-===========================================================
-PRIORITY A — INSTITUTIONAL BEHAVIOR ENGINE
-(HIGHEST PRIORITY)
-===========================================================
+10/10
 
 Objective:
 
-Detect institutional accumulation and institutional distribution.
+Detect institutional accumulation and distribution behavior.
 
-This can become the biggest edge of the entire system.
+This is likely the single biggest future edge of ThemePulse.
 
+Reason:
 
-A1 — Volume Dry Up Detection
+Price action and volume often reveal institutional behavior before fundamentals or theme rotation becomes obvious.
+
+---
+
+## 1A — VOLUME DRY UP DETECTION
 
 Goal:
 
-Identify stocks where selling pressure is disappearing.
+Detect tight volume before breakout.
 
-Logic:
+Logic Example:
 
 Current Volume < 50 Day Average Volume
+
+Interpretation:
+
+Selling pressure disappearing.
+
+Institutions quietly accumulating.
 
 Use Cases:
 
 Long Watchlist confirmation
 
-Example:
+Examples:
 
-Tight volume before breakout
+Pre-breakout setup
 
+Volatility contraction
 
------------------------------------------------------------
+Tight institutional accumulation
 
-A2 — Distribution Day Detection
+---
+
+## 1B — DISTRIBUTION DAY DETECTION
 
 Goal:
 
 Detect institutional selling pressure.
 
-Logic:
+Logic Example:
 
 Price closes down
+
 AND
+
 Volume > Average Volume
+
+Interpretation:
+
+Institutions distributing shares.
 
 Use Cases:
 
@@ -215,421 +113,80 @@ Short Watchlist confirmation
 
 Detect broken leaders early
 
+---
 
------------------------------------------------------------
-
-A3 — Accumulation Day Detection
+## 1C — ACCUMULATION DAY DETECTION
 
 Goal:
 
 Detect institutional buying.
 
-Logic:
+Logic Example:
 
 Price closes up
+
 AND
+
 Volume > Average Volume
 
-Use Cases:
+Interpretation:
 
-Long Watchlist confirmation
-
-
------------------------------------------------------------
-
-A4 — Relative Weakness Trend
-
-Goal:
-
-Detect gradual institutional exit.
-
-Logic:
-
-4 Week relative performance deterioration
-
-12 Week relative performance deterioration
-
-Use Cases:
-
-Short Watchlist ranking
-
-
-===========================================================
-PRIORITY B — TECHNICAL CONFIRMATION ENGINE
-===========================================================
-
-B1 — Moving Average Alignment
-
-Goal:
-
-Trend confirmation.
-
-Logic:
-
-20 EMA > 50 SMA > 200 SMA
+Institutions accumulating aggressively.
 
 Use Cases:
 
 Long confirmation
 
+---
 
------------------------------------------------------------
-
-B2 — Distance From 52 Week High
-
-Goal:
-
-Find true leaders.
-
-Logic:
-
-Percent distance from 52 week high
-
-Use Cases:
-
-Long ranking
-
-
------------------------------------------------------------
-
-B3 — Breakout Detection Engine
+## 1D — RELATIVE WEAKNESS TREND ENGINE
 
 Goal:
 
-Detect fresh breakouts.
+Detect gradual institutional exit.
 
-Logic:
+Logic Example:
 
-Price crosses resistance zone
+4 Week underperformance
 
-
------------------------------------------------------------
-
-B4 — Volatility Contraction Pattern Detection
-
-Goal:
-
-Detect institutional accumulation patterns.
-
-Reference:
-
-Mark Minervini methodology
-
-
-===========================================================
-PRIORITY C — MARKET STRUCTURE ENGINE
-===========================================================
-
-C1 — Theme Breadth Analysis
-
-Goal:
-
-Measure strength inside each theme.
-
-Output:
-
-Theme | Stocks | Strong Stocks | Breadth %
-
-Strong Stock Definition:
-
-RS Rating >= 80
-AND
-Composite Score >= 75
-
-
------------------------------------------------------------
-
-C2 — Market Health Dashboard
-
-Goal:
-
-Understand market quality.
-
-Metrics:
-
-Number of Leading Themes
-
-Number of Lagging Themes
-
-Number of Strong Stocks
-
-Number of Weak Stocks
-
-Breadth expansion / contraction
-
-
------------------------------------------------------------
-
-C3 — ETF Leadership Momentum
-
-Goal:
-
-Detect emerging sector rotation.
-
-Logic:
-
-Acceleration in ETF relative strength ranking
-
-
-===========================================================
-PRIORITY D — STOCK CLASSIFICATION ENGINE
-===========================================================
-
-D1 — Expand stock_mapper.py
-
-Current Problem:
-
-Poor coverage outside growth sectors.
-
-Need better mapping for:
-
-- Consumer
-- Retail
-- Restaurants
-- Housing
-- Construction
-- Telecom
-- Utilities
-- Industrials
-- Manufacturing
-- Transportation
-- Entertainment
-
-
------------------------------------------------------------
-
-D2 — Expand company_theme_engine.py
-
-Current Status:
-
-Strong growth stock coverage
-
-Need expansion for:
-
-- Consumer leaders
-- Financial leaders
-- Industrial leaders
-- Emerging narratives
-
-
------------------------------------------------------------
-
-D3 — Auto Classification Engine
-
-Goal:
-
-Reduce manual mapping.
-
-Logic:
-
-Automatically classify stocks using business descriptions.
-
-Example:
-
-If company description contains:
-
-GPU
-Datacenter
-AI Inference
-Cybersecurity
-Cloud Infrastructure
-
-Then assign probable narrative automatically.
-
-
-===========================================================
-PRIORITY E — ADVANCED MARKET EVENTS ENGINE
-===========================================================
-
-E1 — Earnings Gap Detection
-
-Detect gap up / gap down after earnings.
-
-
------------------------------------------------------------
-
-E2 — Earnings Surprise Engine
-
-Track positive and negative earnings reactions.
-
-
------------------------------------------------------------
-
-E3 — Post Earnings Drift Detection
-
-Detect institutional continuation after earnings.
-
-
-===========================================================
-PRIORITY F — AI / MACHINE LEARNING
-(LONG TERM)
-===========================================================
-
-F1 — Automatic Theme Discovery
-
-Goal:
-
-Detect new themes BEFORE ETF providers launch ETFs.
-
-Examples:
-
-- Quantum Computing
-- Stablecoins
-- Robotics
-- Defense AI
-- Space Infrastructure
-- Nuclear Infrastructure
-
-
------------------------------------------------------------
-
-F2 — Adaptive Theme Evolution Engine
-
-Goal:
-
-Re-rank themes automatically as market narratives evolve.
-
-
-===========================================================
-PRIORITY G — DATA QUALITY ENGINE
-===========================================================
-
-G1 — Missing Theme Detection
-
-Detect stocks classified as Unknown.
-
-
------------------------------------------------------------
-
-G2 — Theme Mapping Audit Report
-
-Output:
-
-Total Stocks
-
-Mapped Stocks
-
-Unmapped Stocks
-
-
------------------------------------------------------------
-
-G3 — Confidence Score
-
-Every stock gets classification confidence.
-
-Example:
-
-NVDA → 95%
-
-Unknown stock → 20%
-
-
-===========================================================
-PRIORITY H — REPORTING ENGINE
-===========================================================
-
-H1 — Daily Report Generator
-
-Output:
-
-Top Long Candidates
-
-Top Short Candidates
-
-Leading Themes
-
-Lagging Themes
-
-
------------------------------------------------------------
-
-H2 — Export to Excel
-
-Auto generate ranked Excel output.
-
-
------------------------------------------------------------
-
-H3 — Historical Database
-
-Store previous daily scans.
-
-Track changes over time.
-
-
-===========================================================
-PROJECT PHILOSOPHY
-===========================================================
-
-Core Principle:
-
-Institutional Narrative > Traditional Sector Classification
-
-
-Price action reveals institutional behavior before classification systems catch up.
-
-
-===========================================================
-REFERENCE PHILOSOPHY
-===========================================================
-
-Inspired by:
-
-- DeepVue
-- IBD / MarketSurge
-- Theme Rotation Investing
-- Institutional Growth Investing
-
-
-===========================================================
-IMPORTANT RULE
-===========================================================
-
-Do NOT continuously change stable architecture.
-
-New features must be validated against real market behavior.
-
-Production stability is more important than feature expansion.
-
-
-===========================================================
-PRIORITY C4 — BREADTH TREND ENGINE
-(HIGH PRIORITY)
-===========================================================
-
-Current Problem:
-
-Breadth analysis only shows current snapshot.
-
-No ability to measure change over time.
-
-
-Objective:
-
-Track whether internal participation inside themes is improving or deteriorating.
-
-
-Example:
-
-Semiconductors
-
-Yesterday Breadth = 42%
-
-Today Breadth = 55%
+12 Week underperformance
 
 Interpretation:
 
-Institutional participation expanding.
+Institutional sponsorship weakening.
 
-Theme strengthening.
+Use Cases:
 
+Early short candidates
 
------------------------------------------------------------
+############################################################
+TIER 2 — VERY HIGH PRIORITY
+(Market Structure Intelligence)
+############################################################
 
-C4.1 — Historical Breadth Database
+============================================================
+2. BREADTH TREND ENGINE
+=======================
 
-Store daily breadth values for every theme.
+Importance:
+
+9.5/10
+
+Current Problem:
+
+Breadth engine shows only current snapshot.
+
+No trend detection.
+
+Objective:
+
+Track whether theme participation is improving or weakening over time.
+
+---
+
+## 2A — HISTORICAL BREADTH DATABASE
+
+Store daily breadth values.
 
 Example:
 
@@ -639,10 +196,9 @@ Date | Theme | Breadth %
 
 2026-06-13 | Semiconductors | 48%
 
+---
 
------------------------------------------------------------
-
-C4.2 — Breadth Acceleration Score
+## 2B — BREADTH ACCELERATION SCORE
 
 Measure speed of participation change.
 
@@ -654,44 +210,39 @@ Semiconductors
 
 Interpretation:
 
-Theme rapidly strengthening.
+Institutional participation expanding rapidly.
 
+---
 
------------------------------------------------------------
-
-C4.3 — Breadth Deterioration Detection
+## 2C — BREADTH DETERIORATION DETECTION
 
 Detect weakening internal participation.
 
 Example:
 
-Artificial Intelligence
+AI Theme
 
-Yesterday = 65%
+Yesterday = 60%
 
-Today = 48%
+Today = 42%
 
 Interpretation:
 
 Institutions reducing participation.
 
-Potential early warning signal.
+---
 
-
------------------------------------------------------------
-
-C4.4 — Minimum Breadth Threshold Filter
+## 2D — MINIMUM BREADTH FILTER
 
 Current Problem:
 
-Themes with 1 stock create misleading 100% breadth.
+1 stock out of 1 stock = 100% breadth
 
 Example:
 
-AI ASIC = 1 stock = 100%
+AI ASIC = 100%
 
-This does NOT represent broad institutional participation.
-
+Misleading result.
 
 Solution:
 
@@ -705,48 +256,26 @@ Label:
 
 Insufficient Breadth Data
 
+############################################################
+TIER 3 — HIGH PRIORITY
+(Theme Intelligence Improvements)
+############################################################
 
------------------------------------------------------------
+============================================================
+3. THEME QUALITY ENGINE
+=======================
 
-C4.5 — Breadth Leadership Ranking
+Importance:
 
-Rank themes by:
-
-Breadth %
-
-AND
-
-Breadth acceleration
-
-Formula Example:
-
-Breadth Score =
-
-Current Breadth × 70%
-
-5 Day Breadth Change × 30%
-
-
-Use Cases:
-
-Detect emerging leadership before price breakout.
-
-
-
-===========================================================
-PRIORITY C5 — THEME QUALITY ENGINE
-(HIGH PRIORITY)
-===========================================================
+9/10
 
 Problem:
 
-Theme can show strong breadth but average stock quality may be poor.
-
+Theme can show high breadth but underlying stock quality may be weak.
 
 Objective:
 
 Measure average quality inside each theme.
-
 
 Metrics:
 
@@ -756,28 +285,436 @@ Average RS Rating
 
 Average Sales Score
 
+Average Profit Margin
 
 Example:
 
 Semiconductors
 
-Average Composite Score = 82
-
-Average RS Rating = 88
-
+Average Composite Score = 86
 
 Cloud Computing
 
-Average Composite Score = 54
+Average Composite Score = 55
 
-Average RS Rating = 61
+---
 
+## 3A — ETF LEADERSHIP MOMENTUM ENGINE
 
-Interpretation:
+Goal:
 
-Higher quality themes receive stronger institutional sponsorship.
+Detect emerging sector rotation early.
 
+Logic:
+
+Acceleration in ETF RS rankings.
 
 Use Cases:
 
-Improve theme ranking system beyond ETF relative strength alone.
+Detect theme rotation before market recognizes leadership.
+
+############################################################
+TIER 4 — HIGH PRIORITY
+(DATA QUALITY IMPROVEMENTS)
+############################################################
+
+============================================================
+4. ETF UNIVERSE QUALITY FILTER
+==============================
+
+Importance:
+
+8.5/10
+
+Current Problem:
+
+ETF engine includes geographic ETFs.
+
+Examples:
+
+South Korea
+
+Taiwan
+
+Peru
+
+Chile
+
+Poland
+
+Broad Pacific
+
+Problem:
+
+These geographic ETFs create noisy theme rotation output.
+
+Solution:
+
+Remove irrelevant ETFs.
+
+Exclude:
+
+Country ETFs
+
+Regional ETFs
+
+Broad International ETFs
+
+Broad Index ETFs
+
+Desired Output:
+
+Focus only on actionable themes.
+
+Examples:
+
+Semiconductors
+
+Artificial Intelligence
+
+Software
+
+Cybersecurity
+
+Infrastructure
+
+Energy
+
+Biotech
+
+---
+
+## 4A — UNKNOWN STOCK REDUCTION ENGINE
+
+Current Unknown Ratio:
+
+5.34%
+
+Goal:
+
+Reduce Unknown ratio below 3%
+
+Method:
+
+Expand stock_mapper.py continuously.
+
+Examples needing future mapping:
+
+GM
+
+HON
+
+PCAR
+
+LI
+
+BAH
+
+---
+
+## 4B — THEME CONFIDENCE SCORE
+
+Every stock receives confidence score.
+
+Example:
+
+NVDA → 95%
+
+Unknown stock → 20%
+
+Purpose:
+
+Measure confidence in classification accuracy.
+
+############################################################
+TIER 5 — ADVANCED MARKET EVENT ENGINE
+############################################################
+
+============================================================
+5. EARNINGS REACTION ENGINE
+===========================
+
+Importance:
+
+8/10
+
+Modules:
+
+Earnings Gap Up Detection
+
+Earnings Gap Down Detection
+
+Post Earnings Drift Detection
+
+Positive Earnings Surprise Detection
+
+Negative Earnings Surprise Detection
+
+Use Cases:
+
+Detect institutional reactions immediately after earnings.
+
+############################################################
+TIER 6 — ADVANCED TECHNICAL ENGINE
+############################################################
+
+============================================================
+6. TECHNICAL CONFIRMATION ENGINE
+================================
+
+Importance:
+
+7.5/10
+
+Modules:
+
+Moving Average Alignment
+
+20 EMA > 50 SMA > 200 SMA
+
+Distance From 52 Week High
+
+Breakout Detection
+
+Volatility Contraction Pattern Detection
+
+Reference:
+
+Mark Minervini methodology
+
+Important Note:
+
+Avoid adding too many technical indicators.
+
+DO NOT ADD:
+
+RSI
+
+MACD
+
+Stochastic
+
+Random indicator combinations
+
+Reason:
+
+ThemePulse should remain a market intelligence engine, not indicator overload.
+
+############################################################
+TIER 7 — AUTOMATION & REPORTING ENGINE
+############################################################
+
+============================================================
+7. DAILY REPORT AUTOMATION
+==========================
+
+Importance:
+
+7/10
+
+Features:
+
+Automatic daily scan
+
+Store historical daily reports
+
+Track leadership changes
+
+Auto generate CSV reports
+
+Auto generate Excel reports
+
+Store historical database
+
+---
+
+## 7A — MARKET HEALTH DASHBOARD
+
+Metrics:
+
+Number of Leading Themes
+
+Number of Lagging Themes
+
+Number of Strong Stocks
+
+Number of Weak Stocks
+
+Breadth Expansion / Contraction
+
+Goal:
+
+Understand overall market health quickly.
+
+############################################################
+TIER 8 — ADVANCED AI ENGINE
+(Long Term Vision)
+############################################################
+
+============================================================
+8. AUTOMATIC THEME DISCOVERY ENGINE
+===================================
+
+Importance:
+
+Future Research
+
+Goal:
+
+Detect new institutional narratives before ETF providers launch ETFs.
+
+Examples:
+
+Quantum Computing
+
+Stablecoins
+
+Defense AI
+
+Space Infrastructure
+
+Nuclear Infrastructure
+
+Robotics
+
+Autonomous Mobility
+
+Objective:
+
+Detect new themes before market crowd recognizes them.
+
+############################################################
+TIER 9 — OPTIONAL SMALL ENHANCEMENTS
+(Low Priority)
+############################################################
+
+============================================================
+9. OUTPUT FORMATTING ENGINE
+===========================
+
+Importance:
+
+Low
+
+Possible Improvements:
+
+Pretty console tables
+
+CSV export
+
+Excel export
+
+Cleaner display formatting
+
+HTML report generation
+
+---
+
+## 9A — VERSION CONTROL DOCUMENTATION
+
+Maintain:
+
+VERSION_HISTORY.md
+
+Purpose:
+
+Track project architecture and release history.
+
+---
+
+## 9B — DAILY TRADING WORKFLOW DOCUMENT
+
+Create formal trading workflow.
+
+Example:
+
+Run ThemePulse after market close
+
+Review market rotation summary
+
+Review breadth analysis
+
+Review long watchlist
+
+Review short watchlist
+
+Open charts manually
+
+Build next day watchlist
+
+Rule:
+
+ThemePulse generates ideas.
+
+Final trade decision requires manual chart review.
+
+############################################################
+LONG TERM VISION
+############################################################
+
+ThemePulse Pro
+
+Goal:
+
+Build a proprietary institutional capital rotation intelligence system superior to retail scanners.
+
+Inspired By:
+
+DeepVue
+
+IBD / MarketSurge
+
+Institutional Growth Investing
+
+Theme Rotation Investing
+
+############################################################
+IMPORTANT DEVELOPMENT RULES
+############################################################
+
+Rule 1
+
+Production stability is more important than new features.
+
+Rule 2
+
+Never continuously modify stable architecture.
+
+Rule 3
+
+Do NOT add random indicators.
+
+Rule 4
+
+Real market feedback is more valuable than more code.
+
+Rule 5
+
+Observe system behavior for weeks before coding new features.
+
+Rule 6
+
+Institutional behavior is the biggest future edge.
+
+Rule 7
+
+Keep ThemePulse focused on institutional capital flow, not generic stock screening.
+
+============================================================
+FINAL DEVELOPMENT PRINCIPLE
+===========================
+
+Follow the money.
+
+Not the news.
+
+Not opinions.
+
+Not indicators.
+
+Institutional capital flow determines market leadership.
+
+Created: 2026-06-12
+Status: Future Roadmap
+Priority Order: Highest → Lowest
+Architecture Frozen: YES
