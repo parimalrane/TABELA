@@ -600,3 +600,65 @@ Created: 2026-06-12
 Updated After Live Production Review: 2026-06-14
 
 Architecture Frozen: YES
+
+
+
+UPDATED PRIORITY ROADMAP
+
+HIGH PRIORITY
+
+1. ETF Discovery Engine
+
+Purpose
+
+Detect new institutional themes emerging outside manually approved ETF universe.
+
+Problem
+
+Allowed ETF list is static. Market creates new themes dynamically.
+
+Examples
+
+Quantum Computing
+Defense AI
+Space Infrastructure
+Robotics Automation
+Gene Editing
+
+Solution
+
+Daily scan full ETF.csv universe.
+
+Process
+
+• Exclude approved ETFs
+• Detect strongest untracked ETFs
+• Generate candidate ETF report
+• Manual approval required before adding new ETF
+
+2. Theme Cleanup Engine
+
+Problem
+
+ETF universe still produces noisy themes.
+
+Examples
+
+Broad
+broad
+Socially Responsible
+China
+
+Solution
+
+Review ETF.csv mapping logic and normalize theme definitions.
+
+3. Unknown Stock Mapping Cleanup
+
+Problem
+
+Some stocks still classified as Unknown.
+
+Solution
+
+Improve stock to theme mapping engine and fallback logic.

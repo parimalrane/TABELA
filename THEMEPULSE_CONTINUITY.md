@@ -415,3 +415,43 @@ This chat contains full project continuity.
 ============================================================
 END OF CONTINUITY STATE
 =======================
+
+
+Current Stable State
+
+Tabela V1.3 Stable
+
+Core Philosophy
+
+Tabela is not a stock screener.
+
+Tabela is an institutional capital flow engine.
+
+Primary Objective
+
+Detect strongest institutional themes in US market.
+
+Generate long and short candidate universe for manual chart review.
+
+Current Output Structure
+
+1. Market Rotation Summary
+
+2. Theme Breadth Analysis
+
+3. Long Candidate Universe
+
+4. Short Candidate Universe
+
+Engineering Principle
+
+Do not optimize based on intuition.
+
+Always trace output backward:
+
+Stock
+→ Theme Mapping
+→ Theme Classification
+→ RS Rating
+→ Composite Score
+→ Output Rule

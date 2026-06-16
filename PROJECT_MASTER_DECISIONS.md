@@ -49,3 +49,38 @@ Rule:
 Do not continuously modify core architecture after production stability is achieved.
 
 New features must be validated against real market behavior first.
+
+
+NEW ARCHITECTURE DECISIONS
+
+Decision 14
+
+Allowed ETF whitelist is mandatory.
+
+Reason
+
+Broad ETF universe introduces country and non-actionable theme contamination.
+
+Decision 15
+
+Tabela output will use a single Long Candidate Universe.
+
+Reason
+
+Separate Long Watchlist and Institutional Leaders created unnecessary duplication.
+
+Decision 16
+
+Institutional flow candidates not selected by primary long rules will be marked with *.
+
+Reason
+
+Provides visual distinction during manual chart review.
+
+Decision 17
+
+Breadth scoring must reward large institutional participation.
+
+Reason
+
+Themes with 1 stock should not outrank dominant institutional themes such as Semiconductors.

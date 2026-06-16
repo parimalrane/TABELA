@@ -493,3 +493,55 @@ Principle
 Tabela should detect emerging institutional themes automatically but should never auto-add ETFs without manual review.
 
 
+VERSION 1.3 STABLE
+Date: 2026-06-16
+
+Major Architecture Repairs
+
+Core Pipeline Fixes
+
+• Fixed critical bug where ETF.csv was not actively driving system logic
+• Removed hidden dependency on stale etf_master.csv architecture
+• Reconnected ETF processing pipeline to main.py
+• Reconnected etf_engine.py and theme parsing workflow
+
+ETF Universe Fixes
+
+• Integrated curated allowed ETF whitelist (42 approved ETFs)
+• Removed country and region ETF contamination
+• Eliminated incorrect theme detection caused by broad ETF universe
+
+Breadth Engine Improvements
+
+• Fixed breadth ranking flaw where themes with 1 stock could rank above dominant themes
+• Introduced weighted breadth scoring logic using theme size weighting
+• Large institutional themes now rank correctly above tiny isolated themes
+
+Long Candidate Engine Improvements
+
+• Removed duplicate output between Long Watchlist and Institutional Leaders
+• Merged both systems into single Long Candidate Universe
+• Long Candidate Universe now represents union of:
+
+* Primary theme qualified candidates
+* Institutional accumulation candidates
+
+Institutional Flow Marker
+
+• Added * marker to stocks added only through institutional flow engine
+• Allows visual identification of secondary institutional accumulation candidates
+
+Output Improvements
+
+• Removed unnecessary pandas dataframe index numbers from console output
+• Improved readability of final market scan report
+
+Current Architecture Status
+
+Tabela V1.3 Stable
+
+Known Remaining Issues
+
+• ETF Discovery Engine not implemented
+• Theme cleanup required (Broad, broad, Socially Responsible)
+• Unknown stock mapping cleanup pending
