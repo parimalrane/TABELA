@@ -293,30 +293,53 @@ institutional_leaders = build_institutional_leaders(stocks)
 
 import pandas as pd
 
-
 # ==========================================
 # BUILD LONG CANDIDATE UNIVERSE
 # ==========================================
 
+# Get primary long tickers
+long_tickers = set(long_watchlist["Ticker"])
+
+
+# Combine both lists
 long_candidates = pd.concat(
 
     [long_watchlist, institutional_leaders]
 
 )
 
+
+# Remove duplicates
 long_candidates = long_candidates.drop_duplicates(
 
     subset="Ticker"
 
 )
 
+
+# Mark stocks added only through institutional flow
+long_candidates["Ticker"] = long_candidates.apply(
+
+    lambda row:
+
+        row["Ticker"]
+
+        if row["Ticker"] in long_tickers
+
+        else row["Ticker"] + "*",
+
+    axis=1
+
+)
+
+
+# Final sorting
 long_candidates = long_candidates.sort_values(
 
     "Composite_Score",
     ascending=False
 
 )
-
 
 # ==========================================
 # HEADER
@@ -421,7 +444,7 @@ print(
         "Weighted_Breadth_Score"
     ]]
 
-    .head(20)
+    .head(20).to_string(index=False)
 
 )
 
@@ -448,7 +471,7 @@ print(
         "Composite_Score"
     ]]
 
-    .head(40)
+    .head(40).to_string(index=False)
 
     )
 
@@ -475,7 +498,7 @@ print(
         "Composite_Score"
     ]]
 
-    .head(20)
+    .head(20).to_string(index=False)
 
 )
 
