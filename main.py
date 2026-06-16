@@ -20,6 +20,9 @@ from composite_engine import calculate_composite_score
 from watchlist_engine import build_long_watchlist
 from short_engine import build_short_watchlist
 from breadth_engine import build_theme_breadth
+from institutional_leaders_engine import build_institutional_leaders
+from watchlist_engine import build_long_watchlist
+from short_engine import build_short_watchlist
 
 # LOAD FILES
 
@@ -284,12 +287,8 @@ short_watchlist = short_watchlist.sort_values(
     ascending=True
 )
 
-institutional_leaders = stocks.sort_values(
 
-    "Composite_Score",
-    ascending=False
-).head(20)
-
+institutional_leaders = build_institutional_leaders(stocks)
 
 # ==========================================
 # HEADER
