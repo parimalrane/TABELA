@@ -47,117 +47,19 @@ Importance:
 
 10/10
 
+Modules:
+
+Volume Dry Up Detection
+
+Distribution Day Detection
+
+Accumulation Day Detection
+
+Relative Weakness Trend Engine
+
 Objective:
 
-Detect institutional accumulation and distribution behavior.
-
-This is likely the single biggest future edge of ThemePulse.
-
-Reason:
-
-Price action and volume often reveal institutional behavior before fundamentals or theme rotation becomes obvious.
-
----
-
-## 1A — VOLUME DRY UP DETECTION
-
-Goal:
-
-Detect tight volume before breakout.
-
-Logic Example:
-
-Current Volume < 50 Day Average Volume
-
-Interpretation:
-
-Selling pressure disappearing.
-
-Institutions quietly accumulating.
-
-Use Cases:
-
-Long Watchlist confirmation
-
-Examples:
-
-Pre-breakout setup
-
-Volatility contraction
-
-Tight institutional accumulation
-
----
-
-## 1B — DISTRIBUTION DAY DETECTION
-
-Goal:
-
-Detect institutional selling pressure.
-
-Logic Example:
-
-Price closes down
-
-AND
-
-Volume > Average Volume
-
-Interpretation:
-
-Institutions distributing shares.
-
-Use Cases:
-
-Short Watchlist confirmation
-
-Detect broken leaders early
-
----
-
-## 1C — ACCUMULATION DAY DETECTION
-
-Goal:
-
-Detect institutional buying.
-
-Logic Example:
-
-Price closes up
-
-AND
-
-Volume > Average Volume
-
-Interpretation:
-
-Institutions accumulating aggressively.
-
-Use Cases:
-
-Long confirmation
-
----
-
-## 1D — RELATIVE WEAKNESS TREND ENGINE
-
-Goal:
-
-Detect gradual institutional exit.
-
-Logic Example:
-
-4 Week underperformance
-
-12 Week underperformance
-
-Interpretation:
-
-Institutional sponsorship weakening.
-
-Use Cases:
-
-Early short candidates
+Detect institutional accumulation and distribution before price expansion.
 
 ############################################################
 TIER 2 — VERY HIGH PRIORITY
@@ -178,83 +80,83 @@ Breadth engine shows only current snapshot.
 
 No trend detection.
 
-Objective:
+Modules:
 
-Track whether theme participation is improving or weakening over time.
+Historical Breadth Database
 
----
+Breadth Acceleration Score
 
-## 2A — HISTORICAL BREADTH DATABASE
+Breadth Deterioration Detection
 
-Store daily breadth values.
+Minimum Breadth Filter
 
-Example:
+Current Known Issue:
 
-Date | Theme | Breadth %
+1 stock out of 1 stock = 100% breadth.
 
-2026-06-12 | Semiconductors | 42%
-
-2026-06-13 | Semiconductors | 48%
-
----
-
-## 2B — BREADTH ACCELERATION SCORE
-
-Measure speed of participation change.
-
-Example:
-
-Semiconductors
-
-5 Day Breadth Change = +12%
-
-Interpretation:
-
-Institutional participation expanding rapidly.
-
----
-
-## 2C — BREADTH DETERIORATION DETECTION
-
-Detect weakening internal participation.
-
-Example:
-
-AI Theme
-
-Yesterday = 60%
-
-Today = 42%
-
-Interpretation:
-
-Institutions reducing participation.
-
----
-
-## 2D — MINIMUM BREADTH FILTER
-
-Current Problem:
-
-1 stock out of 1 stock = 100% breadth
+This creates mathematically correct but intellectually misleading output.
 
 Example:
 
 AI ASIC = 100%
 
-Misleading result.
+Semiconductors = 73%
 
-Solution:
+Market Interpretation:
+
+Semiconductors represent much broader institutional participation.
+
+Future Rule:
 
 Ignore themes with fewer than 5 stocks.
 
-Rule:
+---
 
-If Total Stocks < 5
+2E — BREADTH QUALITY ENGINE
+(NEW FROM LIVE PRODUCTION OBSERVATION)
+--------------------------------------
 
-Label:
+Importance:
 
-Insufficient Breadth Data
+9.5/10
+
+Problem:
+
+Breadth % alone does not measure theme importance.
+
+Example:
+
+AI ASIC
+
+1 strong stock out of 1 stock = 100%
+
+Semiconductors
+
+61 strong stocks out of 83 stocks = 73%
+
+Current engine incorrectly makes AI ASIC look stronger.
+
+Objective:
+
+Measure breadth quality, not only breadth ratio.
+
+Possible Formula:
+
+Breadth Score =
+
+(Breadth Percent × 40%)
+
+*
+
+(Theme Size Weight × 30%)
+
+*
+
+(Average Composite Score × 30%)
+
+Purpose:
+
+Prioritize institutional participation depth.
 
 ############################################################
 TIER 3 — HIGH PRIORITY
@@ -271,11 +173,7 @@ Importance:
 
 Problem:
 
-Theme can show high breadth but underlying stock quality may be weak.
-
-Objective:
-
-Measure average quality inside each theme.
+Theme can show strong breadth while underlying stock quality remains weak.
 
 Metrics:
 
@@ -285,33 +183,11 @@ Average RS Rating
 
 Average Sales Score
 
-Average Profit Margin
-
-Example:
-
-Semiconductors
-
-Average Composite Score = 86
-
-Cloud Computing
-
-Average Composite Score = 55
-
----
-
-## 3A — ETF LEADERSHIP MOMENTUM ENGINE
+Average Margin Score
 
 Goal:
 
-Detect emerging sector rotation early.
-
-Logic:
-
-Acceleration in ETF RS rankings.
-
-Use Cases:
-
-Detect theme rotation before market recognizes leadership.
+Measure average quality of stocks inside theme.
 
 ############################################################
 TIER 4 — HIGH PRIORITY
@@ -328,7 +204,7 @@ Importance:
 
 Current Problem:
 
-ETF engine includes geographic ETFs.
+ETF engine includes irrelevant geographic ETFs.
 
 Examples:
 
@@ -346,11 +222,11 @@ Broad Pacific
 
 Problem:
 
-These geographic ETFs create noisy theme rotation output.
+These geographic ETFs pollute market rotation output.
 
 Solution:
 
-Remove irrelevant ETFs.
+Remove non-actionable ETF themes.
 
 Exclude:
 
@@ -362,33 +238,9 @@ Broad International ETFs
 
 Broad Index ETFs
 
-Desired Output:
-
-Focus only on actionable themes.
-
-Examples:
-
-Semiconductors
-
-Artificial Intelligence
-
-Software
-
-Cybersecurity
-
-Infrastructure
-
-Energy
-
-Biotech
-
 ---
 
 ## 4A — UNKNOWN STOCK REDUCTION ENGINE
-
-Current Unknown Ratio:
-
-5.34%
 
 Goal:
 
@@ -398,33 +250,85 @@ Method:
 
 Expand stock_mapper.py continuously.
 
-Examples needing future mapping:
-
-GM
-
-HON
-
-PCAR
-
-LI
-
-BAH
-
 ---
 
 ## 4B — THEME CONFIDENCE SCORE
 
-Every stock receives confidence score.
+Goal:
+
+Assign confidence score to every mapping.
 
 Example:
 
 NVDA → 95%
 
-Unknown stock → 20%
+Unknown → 20%
 
-Purpose:
+---
 
-Measure confidence in classification accuracy.
+4C — US MARKET ETF PURIFICATION ENGINE
+(NEW FROM LIVE PRODUCTION OBSERVATION)
+--------------------------------------
+
+Importance:
+
+9/10
+
+Observation:
+
+User trades US market only.
+
+Market rotation output currently dominated by geographic ETF themes.
+
+Current Output Problem:
+
+Leading Themes includes:
+
+South Korea
+
+Taiwan
+
+Peru
+
+Israel
+
+Broad Pacific
+
+Issue:
+
+These ETFs are US-listed but do not represent actionable internal US sector rotation.
+
+Goal:
+
+Restrict ETF universe to US institutional capital rotation themes.
+
+Keep:
+
+Semiconductors
+
+Artificial Intelligence
+
+Software
+
+Cloud Computing
+
+Cybersecurity
+
+Biotech
+
+Infrastructure
+
+Energy
+
+Healthcare
+
+Remove:
+
+Country ETFs
+
+Regional ETFs
+
+Broad international exposure ETFs
 
 ############################################################
 TIER 5 — ADVANCED MARKET EVENT ENGINE
@@ -450,10 +354,6 @@ Positive Earnings Surprise Detection
 
 Negative Earnings Surprise Detection
 
-Use Cases:
-
-Detect institutional reactions immediately after earnings.
-
 ############################################################
 TIER 6 — ADVANCED TECHNICAL ENGINE
 ############################################################
@@ -470,35 +370,21 @@ Modules:
 
 Moving Average Alignment
 
-20 EMA > 50 SMA > 200 SMA
-
-Distance From 52 Week High
-
 Breakout Detection
 
 Volatility Contraction Pattern Detection
 
-Reference:
+Important Rule:
 
-Mark Minervini methodology
+Avoid indicator overload.
 
-Important Note:
-
-Avoid adding too many technical indicators.
-
-DO NOT ADD:
+Do NOT Add:
 
 RSI
 
 MACD
 
 Stochastic
-
-Random indicator combinations
-
-Reason:
-
-ThemePulse should remain a market intelligence engine, not indicator overload.
 
 ############################################################
 TIER 7 — AUTOMATION & REPORTING ENGINE
@@ -516,35 +402,13 @@ Features:
 
 Automatic daily scan
 
-Store historical daily reports
+Historical database
 
-Track leadership changes
+CSV reports
 
-Auto generate CSV reports
+Excel reports
 
-Auto generate Excel reports
-
-Store historical database
-
----
-
-## 7A — MARKET HEALTH DASHBOARD
-
-Metrics:
-
-Number of Leading Themes
-
-Number of Lagging Themes
-
-Number of Strong Stocks
-
-Number of Weak Stocks
-
-Breadth Expansion / Contraction
-
-Goal:
-
-Understand overall market health quickly.
+Historical report storage
 
 ############################################################
 TIER 8 — ADVANCED AI ENGINE
@@ -561,31 +425,22 @@ Future Research
 
 Goal:
 
-Detect new institutional narratives before ETF providers launch ETFs.
+Detect emerging institutional narratives before ETF providers recognize them.
 
 Examples:
 
 Quantum Computing
 
-Stablecoins
-
 Defense AI
-
-Space Infrastructure
-
-Nuclear Infrastructure
 
 Robotics
 
+Space Infrastructure
+
 Autonomous Mobility
-
-Objective:
-
-Detect new themes before market crowd recognizes them.
 
 ############################################################
 TIER 9 — OPTIONAL SMALL ENHANCEMENTS
-(Low Priority)
 ############################################################
 
 ============================================================
@@ -596,15 +451,11 @@ Importance:
 
 Low
 
-Possible Improvements:
+Features:
 
 Pretty console tables
 
 CSV export
-
-Excel export
-
-Cleaner display formatting
 
 HTML report generation
 
@@ -616,57 +467,63 @@ Maintain:
 
 VERSION_HISTORY.md
 
-Purpose:
-
-Track project architecture and release history.
-
 ---
 
 ## 9B — DAILY TRADING WORKFLOW DOCUMENT
 
-Create formal trading workflow.
+Formal workflow around scanner usage.
 
-Example:
+---
 
-Run ThemePulse after market close
+9C — INSTITUTIONAL LEADERS REDESIGN
+(NEW FROM LIVE PRODUCTION OBSERVATION)
+--------------------------------------
 
-Review market rotation summary
+Importance:
 
-Review breadth analysis
+Medium
 
-Review long watchlist
+Observation:
 
-Review short watchlist
+TOP LONG WATCHLIST and TOP 20 INSTITUTIONAL LEADERS currently produce nearly identical output.
 
-Open charts manually
+Reason:
 
-Build next day watchlist
+Composite Score heavily weights Theme Score.
 
-Rule:
+Strongest stocks naturally overlap with Long Watchlist.
 
-ThemePulse generates ideas.
+Current Problem:
 
-Final trade decision requires manual chart review.
+Institutional Leaders section adds little new information.
 
-############################################################
-LONG TERM VISION
-############################################################
+Future Options:
 
-ThemePulse Pro
+Option A
 
-Goal:
+Remove completely.
 
-Build a proprietary institutional capital rotation intelligence system superior to retail scanners.
+Option B
 
-Inspired By:
+Redesign as highest RS stocks ignoring Theme Score.
 
-DeepVue
+Option C (Preferred Long Term)
 
-IBD / MarketSurge
+Redesign using Institutional Behavior Engine.
 
-Institutional Growth Investing
+Metrics:
 
-Theme Rotation Investing
+Accumulation Days
+
+Volume Dry Up
+
+Tight Consolidation
+
+Repeated High Volume Buying
+
+Purpose:
+
+Show true institutional accumulation independent of long watchlist logic.
 
 ############################################################
 IMPORTANT DEVELOPMENT RULES
@@ -678,27 +535,51 @@ Production stability is more important than new features.
 
 Rule 2
 
-Never continuously modify stable architecture.
+Observe system behavior for weeks before coding.
 
 Rule 3
 
-Do NOT add random indicators.
+Real market feedback is more valuable than more code.
 
 Rule 4
 
-Real market feedback is more valuable than more code.
+Never continuously modify stable architecture.
 
 Rule 5
 
-Observe system behavior for weeks before coding new features.
+Institutional behavior remains biggest future edge.
 
 Rule 6
 
-Institutional behavior is the biggest future edge.
+Do NOT add random technical indicators.
 
 Rule 7
 
-Keep ThemePulse focused on institutional capital flow, not generic stock screening.
+ThemePulse must remain institutional capital intelligence engine.
+
+============================================================
+LATEST V1 OBSERVATIONS FROM PRODUCTION USE
+==========================================
+
+Observation 1
+
+Breadth engine overvalues tiny themes with 100% breadth.
+
+Observation 2
+
+ETF universe polluted by geographic ETFs.
+
+Observation 3
+
+Institutional Leaders section redundant with Long Watchlist.
+
+Conclusion
+
+Live market usage has identified architecture improvements for future versions.
+
+No immediate code changes required.
+
+Continue observing system behavior for 2–4 weeks before modifying architecture.
 
 ============================================================
 FINAL DEVELOPMENT PRINCIPLE
@@ -715,6 +596,7 @@ Not indicators.
 Institutional capital flow determines market leadership.
 
 Created: 2026-06-12
-Status: Future Roadmap
-Priority Order: Highest → Lowest
+
+Updated After Live Production Review: 2026-06-14
+
 Architecture Frozen: YES

@@ -1,5 +1,9 @@
 import pandas as pd
-
+from etf_engine import (
+    filter_valid_etfs,
+    calculate_etf_rs,
+    assign_theme_score
+)
 from stock_mapper import map_stock_theme
 from company_theme_engine import COMPANY_THEME
 from theme_translation_engine import THEME_TRANSLATION
@@ -11,19 +15,44 @@ from scoring_engine import (
     calculate_zacks_score,
     calculate_margin_score
 )
-
+from theme_parser import parse_theme
 from composite_engine import calculate_composite_score
 from watchlist_engine import build_long_watchlist
 from short_engine import build_short_watchlist
 from breadth_engine import build_theme_breadth
 
-# ==========================================
 # LOAD FILES
-# ==========================================
 
 stocks = pd.read_csv("stocks.csv")
-etf_master = pd.read_csv("etf_master.csv")
+etf_df = pd.read_csv("ETF.csv")
 
+
+# ETF PROCESSING PIPELINE
+
+etf_df = filter_valid_etfs(etf_df)
+
+
+# CREATE THEME COLUMNS
+
+etf_df[["Sector","Theme","Subtheme"]] = etf_df[
+    "Investment Strategy"
+].apply(
+    lambda x: pd.Series(parse_theme(x))
+)
+
+
+# CONTINUE PIPELINE
+
+etf_df = calculate_etf_rs(etf_df)
+
+etf_df = assign_theme_score(etf_df)
+
+
+# FINAL ETF MASTER DATASET
+
+etf_master = etf_df.copy()
+
+print("VALID ETFs =", len(etf_master))
 
 # ==========================================
 # STEP 1 — BUILD THEME STRENGTH TABLE

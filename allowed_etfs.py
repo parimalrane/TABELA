@@ -1,0 +1,16 @@
+ALLOWED_ETFS = [
+
+"AIQ","AIRR","AMLP","ARKF","AWAY",
+"BOTZ","BUG","CIBR","CLOU","COPX",
+"FINX","GDX","GRID","HACK","IAI",
+"IBB","IGV","IHI","ITA","ITB",
+"IYT","KBE","KIE","KRE","KWEB",
+"LIT","OIH","PAVE","PBJ","PEJ",
+"PICK","PPA","QTUM","REMX","ROBO",
+"SKYY","SMH","SOXX","URNM","WGMI",
+"XBI","XLI","XOP","XRT","XSW",
+
+# additions
+"XLE","XLF","TAN","XLU","XLC"
+
+]
