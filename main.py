@@ -427,11 +427,16 @@ print(
 
 print("\n\n")
 
-print()
-
-print("LONG CANDIDATE UNIVERSE")
 
 print("----------------------------")
+
+# ==========================================
+# SHORT CANDIDATE UNIVERSE
+# ==========================================
+
+print("LONG CANDIDATE UNIVERSE")
+print("----------------------------")
+
 
 print(
 
@@ -454,10 +459,10 @@ print()
 print("----------------------------")
 
 # ==========================================
-# TOP SHORT WATCHLIST
+# SHORT CANDIDATE UNIVERSE
 # ==========================================
 
-print("TOP SHORT WATCHLIST")
+print("SHORT CANDIDATE UNIVERSE")
 print("----------------------------")
 
 print(
