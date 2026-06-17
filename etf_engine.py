@@ -122,17 +122,15 @@ def calculate_etf_rs(df):
 
     df["ETF_RS_Raw"] = (
 
-        df["Performance 1Y (%)"] * 0.35 +
+        df["Performance 3M (%)"] * 0.35 +
 
-        df["Performance YTD (%)"] * 0.25 +
+        df["Performance 1M (%)"] * 0.30 +
 
         df["Performance 6M (%)"] * 0.20 +
 
-        df["Performance 3M (%)"] * 0.10 +
+        df["Performance 1Y (%)"] * 0.10 +
 
-        df["Performance 1M (%)"] * 0.05 +
-
-        df["Price as a % of 52 Wk H-L Range"] * 0.05
+        df["Performance 1W (%)"] * 0.05
 
     )
 

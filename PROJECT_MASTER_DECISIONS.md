@@ -84,3 +84,25 @@ Breadth scoring must reward large institutional participation.
 Reason
 
 Themes with 1 stock should not outrank dominant institutional themes such as Semiconductors.
+
+
+
+
+SCORING PRINCIPLE
+
+ThemePulse scoring models must prioritize recent institutional behavior over historical performance.
+
+Recent timeframes should carry higher weight than older timeframes.
+
+However, very short-term periods (1 week) must have limited influence to avoid noise and temporary profit booking distortion.
+
+
+
+
+GLOBAL SCORING RULE
+
+Recent market behavior must carry more weight than historical performance.
+
+Tabela prioritizes recent institutional rotation over legacy performance.
+
+

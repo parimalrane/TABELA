@@ -1,13 +1,36 @@
 # theme_parser.py
 
 
+INVALID_THEMES = [
+
+    "Broad",
+    "broad",
+
+    "Socially Responsible",
+
+    "China",
+    "Taiwan",
+    "South Korea",
+    "Japan",
+    "India",
+    "Brazil",
+    "Mexico",
+    "Peru",
+    "Chile",
+
+    "Europe",
+    "Emerging Markets"
+]
+
+
 def parse_theme(strategy):
 
     strategy = str(strategy).strip()
 
 
-    # CASE 1
-    # Format: Technology - Semiconductors
+    # ---------------------------------
+    # CASE 1 → Split ETF strategy
+    # ---------------------------------
 
     if "-" in strategy:
 
@@ -17,19 +40,11 @@ def parse_theme(strategy):
 
         theme = parts[1].strip()
 
-
-    # CASE 2
-    # AI / Robotics ETF
-
     elif "artificial intelligence" in strategy.lower():
 
         sector = "Technology"
 
         theme = "Artificial Intelligence"
-
-
-    # CASE 3
-    # fallback
 
     else:
 
@@ -38,9 +53,18 @@ def parse_theme(strategy):
         theme = strategy
 
 
-    # --------------------------
-    # Subtheme logic
-    # --------------------------
+    # ---------------------------------
+    # FILTER INVALID THEMES
+    # ---------------------------------
+
+    if theme in INVALID_THEMES:
+
+        theme = "Filtered"
+
+
+    # ---------------------------------
+    # SUBTHEME
+    # ---------------------------------
 
     if "semiconductor" in theme.lower():
 
@@ -49,14 +73,6 @@ def parse_theme(strategy):
     elif "robotics" in strategy.lower():
 
         subtheme = "Robotics"
-
-    elif "south korea" in theme.lower():
-
-        subtheme = "Country Rotation"
-
-    elif "taiwan" in theme.lower():
-
-        subtheme = "Country Rotation"
 
     elif "cloud" in theme.lower():
 

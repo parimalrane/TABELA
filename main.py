@@ -24,6 +24,7 @@ from institutional_leaders_engine import build_institutional_leaders
 from watchlist_engine import build_long_watchlist
 from short_engine import build_short_watchlist
 
+
 # LOAD FILES
 
 stocks = pd.read_csv("stocks.csv")
@@ -70,6 +71,12 @@ theme_strength = (
 
     .reset_index()
 )
+
+theme_strength = theme_strength[
+
+    theme_strength["Theme"] != "Filtered"
+
+]
 
 theme_strength = theme_strength.sort_values(
 
@@ -145,6 +152,7 @@ for _, row in stocks.iterrows():
 
     # Translate to ETF theme
 
+
     if stock_theme in THEME_TRANSLATION:
 
         etf_theme = THEME_TRANSLATION[stock_theme]
@@ -152,7 +160,7 @@ for _, row in stocks.iterrows():
     else:
 
         etf_theme = stock_theme
-
+    
     mapped_themes.append(stock_theme)
     etf_themes.append(etf_theme)
 
@@ -359,6 +367,20 @@ print("\n")
 
 print("MARKET ROTATION SUMMARY")
 print("----------------------------")
+
+
+print()
+
+print(theme_strength.sort_values(
+
+    "ETF_RS_Raw",
+
+    ascending=False
+
+).to_string(index=False))
+
+print("\n\n")
+
 
 print("\nLEADING THEMES")
 

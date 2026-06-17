@@ -545,3 +545,16 @@ Known Remaining Issues
 • ETF Discovery Engine not implemented
 • Theme cleanup required (Broad, broad, Socially Responsible)
 • Unknown stock mapping cleanup pending
+
+
+- Rebuilt theme_parser.py
+
+- Removed broad ETF contamination
+
+- Removed country theme contamination
+
+- Removed Socially Responsible / China / Broad labels
+
+- Added invalid theme rejection logic
+
+- Excluded filtered themes from ETF ranking engine
