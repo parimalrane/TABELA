@@ -558,3 +558,82 @@ Known Remaining Issues
 - Added invalid theme rejection logic
 
 - Excluded filtered themes from ETF ranking engine
+
+
+# VERSION 1.5 — ETF Scoring Architecture Upgrade
+
+**Date:** 2026-06-16
+
+## Major Changes Implemented
+
+### 1. ETF Relative Strength Formula Rebuilt
+
+Old Formula:
+
+* 1Y Performance = 35%
+* YTD Performance = 25%
+* 6M Performance = 20%
+* 3M Performance = 10%
+* 1M Performance = 5%
+* 52 Week Range = 5%
+
+New Formula:
+
+* 3M Performance = 35%
+* 1M Performance = 30%
+* 6M Performance = 20%
+* 1Y Performance = 10%
+* 1W Performance = 5%
+
+Removed:
+
+* YTD Performance
+* Price as % of 52 Week Range
+
+Purpose:
+
+Prioritize recent institutional capital rotation instead of historical performance.
+
+---
+
+### 2. Theme Engine Cleanup Completed
+
+Removed invalid ETF theme contamination.
+
+Removed invalid themes:
+
+* Broad
+* broad
+* China
+* Socially Responsible
+* Country ETF contamination
+
+Root cause identified in:
+
+* theme_parser.py
+
+---
+
+### 3. Theme Filtering Logic Added
+
+Invalid ETF themes now excluded from rotation engine before ranking.
+
+Filtered themes no longer pollute output.
+
+---
+
+### 4. Architecture Discovery
+
+Identified that ETF ranking alone is insufficient.
+
+Breadth participation should eventually influence final theme ranking.
+
+Future architecture redesign required.
+
+---
+
+## System Status
+
+Tabela architecture stable.
+
+Production remains operational.

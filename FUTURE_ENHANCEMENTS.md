@@ -662,3 +662,90 @@ Some stocks still classified as Unknown.
 Solution
 
 Improve stock to theme mapping engine and fallback logic.
+
+
+# HIGH PRIORITY FUTURE ENHANCEMENTS
+
+## PRIORITY 1 — Breadth Integrated Theme Ranking
+
+Current limitation:
+
+Theme ranking uses ETF_RS_Raw only.
+
+Problem:
+
+Strong ETF performance alone does not confirm broad institutional participation.
+
+Future design:
+
+Final Theme Score =
+
+70% ETF_RS_Raw
+
+30% Weighted Breadth Score
+
+Architecture change required in main.py pipeline.
+
+Current blocker:
+
+theme_breadth currently generated after theme classification.
+
+Requires pipeline redesign.
+
+---
+
+## PRIORITY 2 — Equipment and Services Theme Cleanup
+
+Current suspicious output:
+
+Equipment and services
+
+Need trace:
+
+Identify ETF source in ETF.csv causing generic theme label.
+
+Likely parser improvement required.
+
+---
+
+## PRIORITY 3 — Short Engine Philosophy Review
+
+Need review whether short candidates represent:
+
+True weak themes in US market
+
+OR
+
+Weakest themes inside current ETF universe.
+
+Potential redesign required.
+
+---
+
+## PRIORITY 4 — ETF Discovery Engine
+
+Purpose:
+
+Detect new emerging themes not currently present in allowed_etfs.py
+
+Process:
+
+Full ETF.csv
+
+↓
+
+Detect strong ETFs not already approved
+
+↓
+
+Recommend new ETF for theme expansion
+
+Example:
+
+* Quantum Computing
+* Defense AI
+* Robotics
+* Space Infrastructure
+
+
+

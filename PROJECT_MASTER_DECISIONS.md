@@ -106,3 +106,34 @@ Recent market behavior must carry more weight than historical performance.
 Tabela prioritizes recent institutional rotation over legacy performance.
 
 
+
+
+# GLOBAL SCORING PRINCIPLE
+
+Tabela is an institutional capital rotation engine.
+
+All scoring systems inside Tabela must prioritize recent market behavior over historical performance.
+
+Core philosophy:
+
+Recent institutional movement matters more than historical legacy performance.
+
+Scoring systems should follow exponential weighting philosophy.
+
+General rule:
+
+Most recent data > intermediate data > historical data
+
+However:
+
+Very short-term data (1 week) must carry low weight to avoid temporary noise and profit booking distortion.
+
+This principle applies to:
+
+* ETF scoring
+* Stock scoring
+* Theme scoring
+* Breadth scoring
+* Future institutional behavior engine
+
+This rule is permanent architecture guidance for all future development.
