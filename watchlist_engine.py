@@ -1,16 +1,19 @@
+from config import LONG_FILTERS
+
+
 def build_long_watchlist(stocks):
 
     long_watchlist = stocks[
 
         (stocks["Theme_Class"].isin(["Leading", "Emerging"])) &
 
-        (stocks["Composite_Score"] >= 80) &
+        (stocks["Composite_Score"] >= LONG_FILTERS["MIN_COMPOSITE"]) &
 
-        (stocks["RS_Rating"] >= 80) &
+        (stocks["RS_Rating"] >= LONG_FILTERS["MIN_RS"]) &
 
-        (stocks["Sales_Score"] >= 60) &
+        (stocks["Sales_Score"] >= LONG_FILTERS["MIN_SALES"]) &
 
-        (stocks["Zacks_Score"] >= 60)
+        (stocks["Zacks_Score"] >= LONG_FILTERS["MIN_ZACKS"])
 
     ]
 
@@ -19,6 +22,7 @@ def build_long_watchlist(stocks):
 
         "Composite_Score",
         ascending=False
+
     )
 
 

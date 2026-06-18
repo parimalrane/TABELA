@@ -1,13 +1,32 @@
 COMPOSITE_WEIGHTS = {
 
+    "RS_WEIGHT": 0.40,
+    "THEME_WEIGHT": 0.25,
+    "MARGIN_WEIGHT": 0.05,
+    "ZACKS_WEIGHT": 0.10
 
-"RS_WEIGHT": 0.40,
+}
 
-"THEME_WEIGHT": 0.25,
 
-"MARGIN_WEIGHT": 0.05,
+LONG_FILTERS = {
 
-"ZACKS_WEIGHT": 0.10
+    "MIN_RS": 80,
+    "MIN_COMPOSITE": 80,
+    "MIN_SALES": 60,
+    "MIN_ZACKS": 60
 
+}
+
+
+
+SHORT_FILTERS = {
+
+    "MAX_RS": 40,
+
+    "MAX_COMPOSITE": 45,
+
+    "MAX_SALES": 40,
+
+    "MAX_ZACKS": 40
 
 }

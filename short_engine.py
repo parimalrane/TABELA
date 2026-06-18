@@ -1,28 +1,33 @@
-def build_short_watchlist(stocks):
+from config import SHORT_FILTERS
 
-    # ==========================================
-    # SHORT CANDIDATES
-    # Weak themes only
-    # ==========================================
+
+def build_short_watchlist(stocks):
 
     short_watchlist = stocks[
 
-        (stocks["Theme_Class"].isin(["Weakening", "Lagging"])) &
+        (stocks["RS_Rating"] <= SHORT_FILTERS["MAX_RS"]) &
 
-        (stocks["Composite_Score"] < 50)
+        (stocks["Composite_Score"] <= SHORT_FILTERS["MAX_COMPOSITE"]) &
+
+        (
+
+            (stocks["Sales_Score"] <= SHORT_FILTERS["MAX_SALES"]) |
+
+            (stocks["Zacks_Score"] <= SHORT_FILTERS["MAX_ZACKS"])
+
+        ) &
+
+        (stocks["Theme_Class"] != "Unclassified Leader")
 
     ]
 
 
-    # ==========================================
-    # SORT WEAKEST FIRST
-    # ==========================================
-
     short_watchlist = short_watchlist.sort_values(
 
-        ["Composite_Score", "RS_Rating"],
+        ["RS_Rating", "Composite_Score"],
 
         ascending=True
+
     )
 
 
