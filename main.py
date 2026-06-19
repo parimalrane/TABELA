@@ -26,6 +26,7 @@ from theme_hierarchy import THEME_PARENT_MAP
 from etf_filter import filter_valid_etfs
 from snapshot_engine import save_daily_snapshot
 from etf_filter import filter_institutional_etfs
+from rotation_engine import calculate_rotation_delta, print_rotation_report
 
 
 
@@ -583,21 +584,6 @@ print(
 )
 
 
-# ==========================================
-# SAVE DAILY MARKET SNAPSHOT
-# ==========================================
-
-save_daily_snapshot(
-    leading_themes,
-    emerging_themes,
-    weakening_themes,
-    lagging_themes,
-    long_candidates,
-    short_watchlist
-)
-
-
-
 
 # ==========================================
 # TRADINGVIEW WATCHLIST EXPORT
@@ -635,6 +621,33 @@ short_list = ",".join(
 # TradingView import format
 print("###LONG," + long_list + ",")
 print("###SHORT," + short_list)
+
+
+
+
+# ==========================================
+# PRINT THEME ROTATION
+# ==========================================
+
+rotation_data = calculate_rotation_delta()
+print_rotation_report(rotation_data)
+
+
+
+# ==========================================
+# SAVE DAILY MARKET SNAPSHOT
+# ==========================================
+
+save_daily_snapshot(
+    leading_themes,
+    emerging_themes,
+    weakening_themes,
+    lagging_themes,
+    long_candidates,
+    short_watchlist
+)
+
+
 
 
 
