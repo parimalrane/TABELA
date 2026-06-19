@@ -190,6 +190,115 @@ def map_stock_theme(industry, sector):
     elif "wireless communications" in industry:
         return "Telecom"
 
+# ==========================================
+# CONSUMER / RETAIL
+# ==========================================
+
+    elif "apparel" in industry:
+        return "Footwear/Apparel"
+
+    elif "footwear" in industry:
+        return "Footwear/Apparel"
+
+    elif "luxury goods" in industry:
+        return "Footwear/Apparel"
+
+    elif "department stores" in industry:
+        return "Discount Retail"
+
+    elif "discount stores" in industry:
+        return "Discount Retail"
+
+    elif "specialty retail" in industry:
+        return "Consumer Retail"
+
+    elif "internet retail" in industry:
+        return "E Commerce"
+
+    elif "restaurants" in industry:
+        return "Restaurants"
+
+    elif "food distribution" in industry:
+        return "Consumer Staples"
+
+    elif "beverages" in industry:
+        return "Consumer Staples"
+
+    elif "packaged foods" in industry:
+        return "Consumer Staples"
+
+    elif "household products" in industry:
+        return "Consumer Staples"
+
+# ==========================================
+# HOUSING / CONSTRUCTION
+# ==========================================
+
+    elif "building products" in industry:
+        return "Building Materials"
+
+    elif "homebuilding" in industry:
+        return "Homebuilders"
+
+    elif "residential construction" in industry:
+        return "Homebuilders"
+
+    elif "construction materials" in industry:
+        return "Building Materials"
+
+    elif "engineering & construction" in industry:
+        return "Infrastructure"
+    
+    # ==========================================
+# INDUSTRIALS
+# ==========================================
+
+    elif "electrical equipment" in industry:
+        return "Electrical Infrastructure"
+
+    elif "industrial products" in industry:
+        return "Industrial Automation"
+
+    elif "industrial machinery" in industry:
+        return "Industrial Automation"
+
+    elif "manufacturing" in industry:
+        return "Industrial Automation"
+
+    elif "farm machinery" in industry:
+        return "Industrial Automation"
+    
+    # ==========================================
+# TELECOM / MEDIA
+# ==========================================
+
+    elif "telecom services" in industry:
+        return "Telecom Infrastructure"
+
+    elif "wireless services" in industry:
+        return "Telecom Infrastructure"
+
+    elif "broadcasting" in industry:
+        return "Media Distribution"
+
+    elif "entertainment" in industry:
+        return "Media Distribution"
+    
+    # ==========================================
+# TRAVEL / PLATFORM
+# ==========================================
+
+    elif "travel services" in industry:
+        return "Travel Platform"
+
+    elif "online travel" in industry:
+        return "Travel Platform"
+
+    elif "ridesharing" in industry:
+        return "Transportation Platform"
+    
+    
+
     # ==========================================
     # REAL ESTATE
     # ==========================================

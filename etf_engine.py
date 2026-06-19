@@ -79,41 +79,6 @@ EXCLUDE_KEYWORDS = [
 ]
 
 
-# ---------------------------------------------------
-# Filter ETFs
-# ---------------------------------------------------
-def filter_valid_etfs(df):
-
-    df = df.copy()
-
-    # FIRST FILTER → only curated ETF universe
-    df = df[df["Ticker"].isin(ALLOWED_ETFS)]
-
-    def is_valid(row):
-
-        text = (
-            str(row["Company Name"]) + " " +
-            str(row["Investment Category"]) + " " +
-            str(row["Investment Strategy"])
-        )
-
-        for keyword in EXCLUDE_KEYWORDS:
-            if keyword.lower() in text.lower():
-                return False
-
-        category = str(row["Investment Category"])
-
-        if category not in VALID_CATEGORIES:
-            return False
-
-        return True
-
-    df["Valid"] = df.apply(is_valid, axis=1)
-
-    filtered = df[df["Valid"] == True]
-
-    return filtered
-
 
 # ---------------------------------------------------
 # ETF Relative Strength Score

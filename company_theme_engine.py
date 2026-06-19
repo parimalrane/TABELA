@@ -212,4 +212,64 @@ COMPANY_THEME = {
     "HUT": "Digital Assets Infrastructure",
     "MARA": "Digital Assets Infrastructure",
 
+    # ==========================================
+    # CONSUMER / RETAIL
+    # ==========================================
+
+    "NKE": "Footwear/Apparel",
+    "LULU": "Footwear/Apparel",
+    "ONON": "Footwear/Apparel",
+    "CROX": "Footwear/Apparel",
+    "DECK": "Footwear/Apparel",
+
+    "CAVA": "Restaurants",
+    "CMG": "Restaurants",
+    "WING": "Restaurants",
+    "SBUX": "Restaurants",
+
+    "COST": "Discount Retail",
+    "WMT": "Discount Retail",
+    "TJX": "Discount Retail",
+
+    "KHC": "Consumer Staples",
+    "KMB": "Consumer Staples",
+    "STZ": "Consumer Staples",
+
+    # ==========================================
+    # HOUSING / CONSTRUCTION
+    # ==========================================
+
+    "BLDR": "Building Materials",
+    "LEN": "Homebuilders",
+    "KBH": "Homebuilders",
+    "DHI": "Homebuilders",
+    "PHM": "Homebuilders",
+
+    "FIX": "Infrastructure",
+    "PWR": "Electrical Infrastructure",
+    "URI": "Infrastructure",
+
+    # ==========================================
+    # INDUSTRIALS
+    # ==========================================
+
+    "GE": "Industrial Automation",
+    "GEV": "Electrical Infrastructure",
+    "ETN": "Electrical Infrastructure",
+
+    "PH": "Industrial Automation",
+    "ROK": "Industrial Automation",
+    "EMR": "Industrial Automation",
+    "JCI": "Industrial Automation",
+
+    # ==========================================
+    # TELECOM
+    # ==========================================
+
+    "CHTR": "Telecom Infrastructure",
+    "T": "Telecom Infrastructure",
+    "VZ": "Telecom Infrastructure",
+    "TMUS": "Telecom Infrastructure",
+
+
 }

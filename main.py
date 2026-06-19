@@ -1,6 +1,5 @@
 import pandas as pd
 from etf_engine import (
-    filter_valid_etfs,
     calculate_etf_rs,
     assign_theme_score
 )
@@ -24,40 +23,33 @@ from institutional_leaders_engine import build_institutional_leaders
 from watchlist_engine import build_long_watchlist
 from short_engine import build_short_watchlist
 from theme_hierarchy import THEME_PARENT_MAP
+from etf_filter import filter_valid_etfs
 
-# LOAD FILES
+
+print("\n")
+
+# LOAD STOCKS FILES
 
 stocks = pd.read_csv("stocks.csv")
-
 print("TOTAL STOCK UNIVERSE (RAW):", len(stocks))
 
 
 # Keep only rows with valid Zacks ranks 1-5
-# (handles values like 1,2,3 or '1-Strong Buy')
-
 stocks = stocks[
-
     stocks["Zacks Rank"].astype(str).str.startswith(
         ("1", "2", "3", "4", "5")
     )
-
 ].copy()
-
 
 print("TOTAL STOCK UNIVERSE (FILTERED):", len(stocks))
 
-
+# LOAD ETF FILES
 etf_df = pd.read_csv("ETF.csv")
 
-
 # ETF PROCESSING PIPELINE
-
 etf_df = filter_valid_etfs(etf_df)
 
 
-# ETF PROCESSING PIPELINE
-
-etf_df = filter_valid_etfs(etf_df)
 
 
 # CREATE THEME COLUMNS
@@ -397,9 +389,7 @@ print("----------------------------")
 
 print()
 
-
-
-print("\n\n")
+print("\n")
 
 
 print("\nLEADING THEMES")
@@ -546,13 +536,9 @@ print(
 
 )
 
-print("\n\n")
-
-
-
-
 print("\n")
 print("==============================================")
 print("END OF THEMEPULSE SCAN")
 print("==============================================")
+
 
