@@ -682,3 +682,39 @@ Removed false leadership caused by low-liquidity ETF outliers.
 Current threshold:
 
 MIN_MARKET_VALUE = 200 million.
+
+
+
+
+
+VERSION 2.2
+
+Major Enhancement
+
+RS Engine redesigned.
+
+Old Problem:
+
+RS calculation relied too heavily on calendar year performance.
+
+60% weighting tied to YTD metrics caused backward-looking bias.
+
+New RS Formula:
+
+12 Week Price Change = 35%
+
+4 Week Price Change = 30%
+
+Relative Price Change YTD = 15%
+
+Price as % of 52 Week Range = 15%
+
+1 Week Price Change = 5%
+
+Result:
+
+Better detection of recent institutional momentum.
+
+Improved ranking of emerging leadership stocks.
+
+Reduced dependence on stale historical performance.

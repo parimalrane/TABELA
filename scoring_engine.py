@@ -5,21 +5,24 @@ import pandas as pd
 # RS RAW SCORE
 # ----------------------------
 
+# ----------------------------
+# RS RAW SCORE V2
+# ----------------------------
+
 def calculate_rs_raw(stocks):
 
     stocks["RS_Raw"] = (
 
-        stocks["Relative Price Change (YTD)"] * 0.35 +
+        stocks["% Price Change (12 Weeks)"] * 0.35 +
 
-        stocks["% Price Change (YTD)"] * 0.25 +
+        stocks["% Price Change (4 Weeks)"] * 0.30 +
 
-        stocks["% Price Change (12 Weeks)"] * 0.20 +
+        stocks["Relative Price Change (YTD)"] * 0.15 +
 
-        stocks["% Price Change (4 Weeks)"] * 0.10 +
+        stocks["Price as a % of 52 Wk H-L Range"] * 0.15 +
 
-        stocks["% Price Change (1 Week)"] * 0.05 +
+        stocks["% Price Change (1 Week)"] * 0.05
 
-        stocks["Price as a % of 52 Wk H-L Range"] * 0.05
     )
 
     return stocks
