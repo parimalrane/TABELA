@@ -145,10 +145,4 @@ def filter_valid_etfs(etf_df):
 
     filtered_etfs = etf_df[valid_mask].copy()
 
-
-    print("TOTAL ETF UNIVERSE (RAW):", len(etf_df))
-
-    print("TOTAL ETF UNIVERSE (FILTERED):", len(filtered_etfs))
-
-    print("REMOVED ETF COUNT:", len(etf_df) - len(filtered_etfs))
     return filtered_etfs

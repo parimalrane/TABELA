@@ -32,8 +32,6 @@ print("\n")
 # LOAD STOCKS FILES
 
 stocks = pd.read_csv("stocks.csv")
-print("TOTAL STOCK UNIVERSE (RAW):", len(stocks))
-
 
 # Keep only rows with valid Zacks ranks 1-5
 stocks = stocks[
@@ -41,8 +39,6 @@ stocks = stocks[
         ("1", "2", "3", "4", "5")
     )
 ].copy()
-
-print("TOTAL STOCK UNIVERSE (FILTERED):", len(stocks))
 
 # LOAD ETF FILES
 etf_df = pd.read_csv("ETF.csv")
