@@ -577,16 +577,54 @@ print(
 # ==========================================
 
 save_daily_snapshot(
-
     leading_themes,
     emerging_themes,
     weakening_themes,
     lagging_themes,
-
     long_candidates,
     short_watchlist
+)
+
+
+
+
+# ==========================================
+# TRADINGVIEW WATCHLIST EXPORT
+# ==========================================
+
+print("\n")
+print("----------------------------")
+print("TRADINGVIEW WATCHLIST EXPORT")
+print("----------------------------")
+
+
+# Long watchlist
+
+long_list = ",".join(
+
+    long_candidates["Ticker"]
+    .head(40)
+    .astype(str)
+    .tolist()
 
 )
+
+
+# Short watchlist
+short_list = ",".join(
+
+    short_watchlist["Ticker"]
+    .head(40)
+    .astype(str)
+    .tolist()
+
+)
+
+
+# TradingView import format
+print("###LONG," + long_list + ",")
+print("###SHORT," + short_list)
+
 
 
 print("\n")

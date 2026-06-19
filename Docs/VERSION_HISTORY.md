@@ -639,3 +639,20 @@ Tabela architecture stable.
 Production remains operational.
 
 
+
+
+VERSION 2.0
+
+Completed:
+
+- Expanded ETF universe (5000+ ETF architecture)
+- Composite score weights configurable
+- Long engine validated against institutional rotation philosophy
+- Short engine filtering stabilized
+- Zacks rank filtering enforced
+- Snapshot Engine implemented
+- Automatic historical database generation
+
+Architecture philosophy locked:
+
+ThemePulse prioritizes accelerating institutional capital rotation rather than established market leaders.

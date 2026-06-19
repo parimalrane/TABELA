@@ -1,5 +1,5 @@
 Prompt 1 — Monthly institutional review
-
+-------------------------------------------------------------------------
 
 Analyze attached ThemePulse historical snapshots.
 
@@ -44,7 +44,7 @@ Prompt 2 — Rotation change review
 If you upload 30 days.
 
 Use:
-
+-------------------------------------------------------------------------
 
 Analyze attached ThemePulse historical files.
 
@@ -73,6 +73,8 @@ Provide institutional capital flow analysis.
 ============================================
 
 Prompt 3 — Trade planning prompt
+-------------------------------------------------------------------------
+
 
 Review attached ThemePulse historical snapshots.
 
@@ -92,5 +94,44 @@ Focus on swing trading opportunities for next 5-10 trading sessions.
 
 
 =========================================================================
+Future prompt you will use with me
+
+After 20–30 files exist.
+-------------------------------------------------------------------------
+
+Analyze ThemePulse historical snapshots.
+
+Study institutional capital rotation behavior.
+
+Identify:
+
+1. Themes consistently attracting capital.
+
+2. Themes transitioning from Emerging to Leading.
+
+3. Themes transitioning from Leading to Weakening.
+
+4. Themes under institutional distribution.
+
+5. Strongest long-side themes developing.
+
+6. Weakest short-side themes developing.
+
+7. New market narratives emerging.
+
+Focus on institutional capital movement first.
+
+Ignore individual stock analysis initially.
 
 
+
+
+=========================================================================
+
+-------------------------------------------------------------------------
+
+
+
+=========================================================================
+
+-------------------------------------------------------------------------
