@@ -5,7 +5,7 @@ def build_long_watchlist(stocks):
 
     long_watchlist = stocks[
 
-        (stocks["Theme_Class"].isin(["Leading", "Emerging"])) &
+        (stocks["Theme_Class"].isin(["Leading", "Emerging", "Unclassified Leader"])) &
 
         (stocks["Composite_Score"] >= LONG_FILTERS["MIN_COMPOSITE"]) &
 
