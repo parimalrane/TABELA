@@ -166,13 +166,13 @@ def print_rotation_report(rotation_data):
 
         print(f"{theme} ({delta})")
 
-    print("\nNEWLY RANKED THEMES")
+    print("\nTHEMES ENTERING TOP RANKING UNIVERSE")
 
     for theme in rotation_data["new_entries"]:
 
         print(theme)
 
-    print("\nREMOVED FROM RANKING")
+    print("\nTHEMES EXITING TOP RANKING UNIVERSE")
 
     for theme in rotation_data["dropped_entries"]:
 

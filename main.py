@@ -600,7 +600,7 @@ print("----------------------------")
 long_list = ",".join(
 
     long_candidates["Ticker"]
-    .head(40)
+    .head(50)
     .astype(str)
     .tolist()
 
@@ -611,7 +611,7 @@ long_list = ",".join(
 short_list = ",".join(
 
     short_watchlist["Ticker"]
-    .head(40)
+    .head(50)
     .astype(str)
     .tolist()
 
