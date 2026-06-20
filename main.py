@@ -625,19 +625,7 @@ print("###SHORT," + short_list)
 
 
 
-# ==========================================
-# PRINT THEME ROTATION
-# ==========================================
-
-rotation_data = calculate_rotation_delta()
-print_rotation_report(rotation_data)
-
-
-
-# ==========================================
-# SAVE DAILY MARKET SNAPSHOT
-# ==========================================
-
+# SAVE DAILY MARKET SNAPSHOT FIRST
 save_daily_snapshot(
     leading_themes,
     emerging_themes,
@@ -647,6 +635,9 @@ save_daily_snapshot(
     short_watchlist
 )
 
+# NOW CALCULATE ROTATION
+rotation_data = calculate_rotation_delta()
+print_rotation_report(rotation_data)
 
 
 
