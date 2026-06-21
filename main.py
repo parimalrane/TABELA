@@ -27,6 +27,7 @@ from etf_filter import filter_valid_etfs
 from snapshot_engine import save_daily_snapshot
 from etf_filter import filter_institutional_etfs
 from rotation_engine import calculate_rotation_delta, print_rotation_report
+from stock_history_engine import save_stock_history
 
 
 
@@ -281,6 +282,7 @@ stocks = calculate_margin_score(stocks)
 
 stocks = calculate_composite_score(stocks)
 
+save_stock_history(stocks)
 
 # ==========================================
 # STEP 7 — BUILD LONG WATCHLIST
