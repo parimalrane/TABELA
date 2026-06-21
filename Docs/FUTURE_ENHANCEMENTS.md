@@ -1,29 +1,32 @@
-# TABELA FUTURE ROADMAP
+# TABELA FUTURE ENHANCEMENTS
 
 ## CORE IDENTITY
 
-TABELA is an Institutional Capital Rotation Intelligence Engine.
+TABELA is an Institutional Market Intelligence Engine.
 
-Primary purpose:
+TABELA is NOT a stock scanner.
 
-* Detect institutional capital flow
-* Identify strongest themes for LONG trades
-* Identify weakest themes for SHORT trades
-* Track capital rotation between themes over time
-* Build long-term historical market intelligence database
+Primary objectives:
 
-Important principle:
+* Detect institutional capital accumulation
+* Detect institutional capital distribution
+* Identify strongest LONG candidates
+* Identify highest quality SHORT candidates
+* Track institutional capital rotation between themes
+* Build proprietary historical market intelligence database
+* Learn recurring behavior before future market leaders emerge
 
-Capital Rotation Detection First
+Core philosophy:
+
+Capital Flow Detection First
 Stock Selection Second
+Historical Intelligence Compounds Over Time
 
 ---
 
-# CURRENT STATUS
+# CURRENT STABLE MODULES
 
-Stable Production Architecture
-
-Modules completed:
+Production stable architecture:
 
 * ETF ingestion engine
 * Stock ingestion engine
@@ -32,181 +35,189 @@ Modules completed:
 * Relative Strength engine
 * Composite scoring engine
 * Long candidate engine
+* Weakness Score engine
 * Short candidate engine
 * TradingView export engine
 * Snapshot history engine
-* Rotation Delta Report
-* Stock History Engine
+* Stock history engine
+* Rotation Delta engine
 
-Current phase:
+Protected modules:
 
-P0 Observation Phase
-
-No unnecessary architecture modifications.
+* Long engine
+* Composite engine
+* Snapshot architecture
+* Historical logs
 
 ---
 
-# ACTIVE PRIORITY ROADMAP
+# ACTIVE PRIORITIES
 
 ## P0 — LIVE OBSERVATION PHASE
 
-Objective:
+Observe 10–15 live sessions.
 
-Observe 5–10 live market sessions.
-
-Focus:
+Validate:
 
 * Theme persistence
-* Long candidate stability
-* Short candidate quality
-* Rotation report quality
-* Unexpected ranking behavior
+* Long quality consistency
+* Short quality consistency
+* Rotation behavior stability
+* Historical logging consistency
 
-Rules:
+Rule:
 
-No architecture redesign.
+No architecture redesign during observation.
+
+Status:
+
+ACTIVE
 
 ---
 
 ## P1 — THEME CLASSIFICATION EXPANSION
 
-Objective:
+Goal:
 
-Reduce Unknown stock classification.
+Reduce unknown mapping.
 
-Goals:
+Focus:
 
-* Improve ETF to stock mapping
-* Reduce unclassified leaders
-* Improve theme coverage
+* ETF mapping improvement
+* Unknown stock reduction
+* Better theme coverage
 
 Priority:
 
 HIGH
 
-Status:
-
-Pending
-
 ---
 
-## P2 — THEME STABILITY VALIDATION ENGINE
+## P2 — THEME STABILITY ENGINE
 
-Objective:
+Goal:
 
 Measure trustworthiness of theme movement.
 
-Questions:
+Metrics:
 
-* Is leadership persistent?
-* Is strength temporary?
-* Is weakness structural?
-* Is theme movement random noise?
-
-Future metrics:
-
-* Days in leading themes
-* Days in weakening themes
-* Leadership persistence score
+* Days in leadership
+* Theme persistence score
+* Leadership consistency score
 
 Priority:
 
 HIGH
 
-Status:
+---
 
-Pending
+# SHORT SIDE RESEARCH (NEW ARCHITECTURE)
+
+Important principle:
+
+Long and Short behavior are NOT symmetrical.
+
+Long side measures accumulation.
+
+Short side measures distribution.
 
 ---
 
-## P3 — SHORT ENGINE QUALITY REVIEW
+## P3A — INTERNAL ROTATION SHORT ENGINE
 
-Objective:
+Goal:
 
-Improve short candidate reliability.
+Detect weak stocks inside strong themes.
 
-Research:
+Example:
 
-* False weakness detection
-* Temporary pullback detection
-* Mean reversion contamination
+Semiconductors strong
 
-Questions:
+MU strong
 
-* Are short candidates structurally weak?
-* Are short candidates just temporarily weak?
+CRDO strong
+
+AMD weakening
+
+Signal:
+
+Capital rotating internally.
+
+Example future output:
+
+Weak stock inside leading theme.
+
+Priority:
+
+VERY HIGH
+
+---
+
+## P3B — DISTRIBUTION ENGINE
+
+Goal:
+
+Detect institutions exiting former leaders.
+
+Example:
+
+NVDA
+
+Composite:
+
+98 → 92 → 83 → 74
+
+Signal:
+
+Institutional distribution.
+
+Requires history.
+
+Priority:
+
+VERY HIGH
+
+---
+
+## P3C — FORMER LEADER BREAKDOWN ENGINE
+
+Goal:
+
+Detect stocks repeatedly appearing in longs then deteriorating.
+
+Signal:
+
+Leadership failure.
+
+Requires historical pattern recognition.
 
 Priority:
 
 HIGH
 
-Status:
-
-Pending
-
 ---
 
-## P4 — ETF SIGNAL QUALITY AUDIT V2
+## P3D — SHORT QUALITY VALIDATION ENGINE
 
-Objective:
+Goal:
 
-Improve ETF quality.
+Separate:
 
-Possible improvements:
-
-* Remove synthetic ETFs
-* Remove duplicate ETF exposure
-* Improve liquidity filter
-* Improve ETF quality scoring
+* structurally weak stocks
+* temporarily weak stocks
+* active institutional distribution
 
 Priority:
 
-MEDIUM
-
-Status:
-
-Pending
+HIGH
 
 ---
 
-## P5 — RS FORMULA REVIEW
+# HISTORICAL INTELLIGENCE LAYER
 
-Objective:
+## P4 — STOCK EVOLUTION HISTORY ENGINE
 
-Review current Relative Strength calculation logic.
-
-Questions:
-
-* Does recent market behavior carry enough weight?
-* Does RS detect true leadership properly?
-
-Rules:
-
-Do NOT modify unless enough live evidence exists.
-
-Priority:
-
-MEDIUM
-
-Status:
-
-Delayed
-
----
-
-# NEW FUTURE INTELLIGENCE LAYER
-
-## P6 — STOCK EVOLUTION HISTORY ENGINE
-
-Objective:
-
-Store full stock universe history daily.
-
-Purpose:
-
-Track changes before stocks become obvious leaders.
-
-Daily overwrite allowed.
+Store daily stock universe history.
 
 Store:
 
@@ -215,271 +226,193 @@ Store:
 * Avg Volume
 * 52 Week High
 * 52 Week Low
-* Price Position in 52 Week Range
+* Price Position
 * Theme
 * Theme Class
 * RS Rating
+* Weakness Score
 * Composite Score
 * Sales Score
 * Zacks Score
 
+Rules:
+
+Overwrite same trading day.
+
 Purpose:
 
-Historical research.
-
-Priority:
-
-HIGH
+Future intelligence research.
 
 Status:
 
-Newly added
+ACTIVE
 
 ---
 
-## P7 — COMPOSITE SCORE VELOCITY ENGINE
+## P5 — THEME BREADTH EXPANSION ENGINE
 
-Objective:
+Goal:
 
-Measure acceleration of stock strength.
-
-Example:
-
-ARM
-
-Day 1 → 58
-Day 2 → 63
-Day 3 → 72
-Day 4 → 81
+Measure internal theme participation.
 
 Questions:
 
-* Which stocks are strengthening fastest?
-* Which stocks are deteriorating fastest?
-
-Future metrics:
-
-* 5 day score change
-* 10 day score change
-* Score acceleration rate
-
-Priority:
-
-HIGH
-
-Status:
-
-Future
-
----
-
-## P8 — FIRST APPEARANCE ENGINE
-
-Objective:
-
-Track when stocks first enter institutional leadership.
-
-Questions:
-
-* Which stocks recently entered top candidates?
-* Which stocks are fresh leaders?
-
-Metrics:
-
-* First appearance date
-* Days since first appearance
-* Rank progression
-
-Example:
-
-Day 1 → Rank 42
-Day 4 → Rank 18
-Day 7 → Rank 4
-
-Priority:
-
-HIGH
-
-Status:
-
-Future
-
----
-
-## P9 — QUIET ACCUMULATION ENGINE
-
-Objective:
-
-Detect silent institutional accumulation before breakout.
-
-Example:
-
-RS Rating
-
-72 → 76 → 81 → 89 → 94
-
-Without stock entering top candidates.
-
-Questions:
-
-* Which stocks improve consistently?
-* Which stocks are strengthening quietly?
-
-Priority:
-
-HIGH
-
-Status:
-
-Future
-
----
-
-## P10 — THEME BREADTH EXPANSION ENGINE
-
-Objective:
-
-Measure internal strength inside themes.
-
-Example:
-
-Semiconductors
-
-Day 1 → 4 strong stocks
-Day 10 → 9 strong stocks
-Day 20 → 16 strong stocks
-
-Questions:
-
-* Is theme internally strengthening?
-* Is breadth expanding before leadership becomes obvious?
+* Is theme strengthening internally?
+* Are more stocks joining leadership?
 
 Metrics:
 
 * Strong stock count
-* Average composite score by theme
-* Theme breadth trend
+* Average composite score
+* Breadth expansion trend
 
 Priority:
 
-VERY HIGH
-
-Status:
-
-Future
+EXTREMELY HIGH
 
 ---
 
-## P11 — PRE BREAKOUT FINGERPRINT ENGINE
-
-Objective:
-
-Learn what happens before explosive moves.
-
-Research examples:
-
-ARM
-NVDA
-PLTR
-CRDO
-
-Questions:
-
-What changes happened 10–20 days before explosive breakout?
-
-Possible signals:
-
-* Composite score rising continuously
-* RS above 90
-* Price position near 52 week high
-* Theme entering leadership
-* First appearance in long candidates
+## P6 — COMPOSITE VELOCITY ENGINE
 
 Goal:
 
-Detect tomorrow’s explosive stocks.
+Measure acceleration.
 
-Priority:
+Example:
 
-VERY HIGH
-
-Status:
-
-Long term research
-
----
-
-## P12 — HISTORICAL INSTITUTIONAL INTELLIGENCE ENGINE
-
-Objective:
-
-Build long term market intelligence database.
+58 → 62 → 71 → 84
 
 Questions:
 
-* Which themes lead repeatedly?
-* Which sectors consistently weaken?
-* Which market structures repeat over time?
-* Which stocks repeatedly attract institutions?
-
-Purpose:
-
-Long term institutional pattern recognition.
+* Which stocks strengthen fastest?
+* Which stocks weaken fastest?
 
 Priority:
 
 VERY HIGH
 
-Status:
+---
 
-Delayed until enough historical data exists
+# FUTURE RESEARCH ENGINES
+
+## P7 — QUIET ACCUMULATION ENGINE
+
+Detect silent accumulation before breakout.
+
+Priority:
+
+EXTREMELY HIGH
+
+---
+
+## P8 — PRE BREAKOUT FINGERPRINT ENGINE
+
+Study:
+
+* ARM
+* NVDA
+* PLTR
+* APP
+
+Question:
+
+What changes occur before explosive moves?
+
+Priority:
+
+MAXIMUM
+
+---
+
+## P9 — EMERGING MONSTER DETECTOR
+
+Detect future explosive winners early.
+
+Focus:
+
+Acceleration before breakout.
+
+Priority:
+
+MAXIMUM
+
+---
+
+## P10 — INSTITUTIONAL DISTRIBUTION EARLY WARNING ENGINE
+
+Detect institutions exiting leaders before obvious breakdown.
+
+Priority:
+
+EXTREMELY HIGH
+
+---
+
+## P11 — ETF LEADERSHIP PREDICTIVE ENGINE
+
+Can stock behavior predict ETF leadership before ETF ranking changes?
+
+Priority:
+
+VERY HIGH
+
+---
+
+## P12 — MARKET REGIME PREDICTOR
+
+Detect:
+
+* Risk on
+* Risk off
+* Leadership narrowing
+* Structural weakness
+
+Priority:
+
+HIGH
+
+---
+
+## P13 — HISTORICAL INSTITUTIONAL INTELLIGENCE ENGINE
+
+Final intelligence brain.
+
+Learn:
+
+* recurring accumulation patterns
+* recurring distribution patterns
+* recurring breakout patterns
+
+Ultimate objective:
+
+Understand what institutions do before market recognizes it.
+
+Priority:
+
+ULTIMATE DESTINATION
 
 ---
 
 # ENGINEERING RULES
 
-Do not redesign architecture casually.
+Do not redesign stable modules casually.
 
-Historical logs are critical.
+Historical logs are sacred.
 
-Recent market behavior always carries more weight than historical behavior.
+Protect Long Engine aggressively.
 
-Protect stable modules aggressively.
+Do not modify RS logic without strong reason.
 
-Long Engine is protected and should not be modified without strong reason.
+Long side = accumulation intelligence.
 
-Snapshot JSON stores raw market state only.
+Short side = distribution intelligence.
 
-Rotation Delta Report remains diagnostic only.
-
-Detect institutional capital flow first.
-
-Stock selection is secondary.
-
-Avoid feature creep.
-
-Never optimize without observing enough live market data.
+Observe before optimizing.
 
 Automation first.
 
 No manual logging.
 
----
+Capital flow first.
 
-# LONG TERM VISION
-
-Current TABELA
-
-Institutional Capital Rotation Engine
-
-Future TABELA
-
-Institutional Capital Intelligence Platform
-
-Possible future capability
-
-Detect institutional accumulation BEFORE explosive stock breakouts.
-
-Ultimate goal
-
-Understand what institutions are accumulating before the market recognizes it.
+Stock selection second.

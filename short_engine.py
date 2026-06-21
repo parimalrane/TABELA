@@ -5,30 +5,26 @@ def build_short_watchlist(stocks):
 
     short_watchlist = stocks[
 
-        (stocks["RS_Rating"] <= SHORT_FILTERS["MAX_RS"]) &
+        (stocks["Weakness_Score"] >= 70) &
 
         (stocks["Composite_Score"] <= SHORT_FILTERS["MAX_COMPOSITE"]) &
 
         (
 
-            (stocks["Sales_Score"] <= SHORT_FILTERS["MAX_SALES"]) |
+            (stocks["Theme_Class"] == "Weakening") |
 
-            (stocks["Zacks_Score"] <= SHORT_FILTERS["MAX_ZACKS"])
+            (stocks["Theme_Class"] == "Lagging")
 
-        ) &
-
-        (stocks["Theme_Class"] != "Unclassified Leader")
+        )
 
     ]
 
-
     short_watchlist = short_watchlist.sort_values(
 
-        ["RS_Rating", "Composite_Score"],
+        ["Weakness_Score", "Composite_Score"],
 
-        ascending=True
+        ascending=False
 
     )
-
 
     return short_watchlist

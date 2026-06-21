@@ -50,8 +50,18 @@ def assign_rs(percentile):
         return 70
     elif percentile >= 60:
         return 60
-    else:
+    elif percentile >= 50:
+        return 50
+    elif percentile >= 40:
         return 40
+    elif percentile >= 30:
+        return 30
+    elif percentile >= 20:
+        return 20
+    elif percentile >= 10:
+        return 10
+    else:
+        return 1
 
 
 def calculate_rs_rating(stocks):
@@ -75,7 +85,16 @@ def calculate_rs_rating(stocks):
         .apply(assign_rs)
     )
 
+    # NEW FIELD FOR SHORT ENGINE ONLY
+
+    stocks["Weakness_Score"] = (
+
+        100 - stocks["Percentile"]
+
+    )
+
     return stocks
+
 
 
 # ----------------------------
