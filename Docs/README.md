@@ -106,8 +106,10 @@ This approach captures **where institutional capital is flowing**, not static bu
 - **short_engine.py** — Selects short candidates
 - **institutional_leaders_engine.py** — Top 20 institutional leader candidates
 - **breadth_engine.py** — Theme participation analysis (% of strong stocks)
-- **snapshot_engine.py** — Saves daily snapshots to history/ folder
+- **snapshot_engine.py** — Saves daily snapshots to market_data/snapshots
 - **rotation_engine.py** — Compares daily snapshots for theme rotation deltas
+- **stock_history_engine.py** — Saves daily stock universe history to market_data/stock_universe
+- **persistence_engine.py** — Prints repeated long/short and theme persistence reports
 
 ### Configuration & Data
 - **config.py** — Scoring weights, filter thresholds, ETF parameters
@@ -115,8 +117,6 @@ This approach captures **where institutional capital is flowing**, not static bu
 - **stocks.csv** — Daily input: ticker, industry, sector, RS, sales, Zacks, margin
 - **ETF.csv** — Daily input: 5,000+ ETFs with names, strategies, performance data
 
-### Reference (Legacy)
-- **allowed_etfs.py** — Superseded by dynamic etf_filter.py (kept for backward compatibility)
 
 ---
 
@@ -145,7 +145,7 @@ python main.py
 # • Theme breadth analysis
 # • Top 40 long candidates (with * for institutional flow only)
 # • Top 20 short candidates
-# • Snapshot saved to: history/YYYY-MM-DD.json
+# • Snapshot saved to: market_data/snapshots/YYYY-MM-DD.json
 ```
 
 ### Historical Analysis
@@ -154,7 +154,7 @@ python main.py
 python main.py  # Auto-generates snapshots
 
 # View snapshots
-ls history/  # See daily JSON files
+ls market_data/snapshots/  # See daily JSON files
 ```
 
 ---
@@ -249,7 +249,7 @@ Rank | Ticker | Score | Theme | RS Rating
 | **Manual Mappings** | 100+ high-conviction narrative overrides |
 | **Composite Weights** | 40% momentum + 25% theme + 20% sales + 10% ratings + 5% margins |
 | **Execution Time** | <30 seconds per daily run |
-| **Daily Snapshots** | Stored as JSON in history/ folder |
+| **Daily Snapshots** | Stored as JSON in market_data/snapshots folder |
 
 ---
 

@@ -1,4 +1,4 @@
-from config import LONG_FILTERS
+from core.config import LONG_FILTERS
 
 
 def build_long_watchlist(stocks):

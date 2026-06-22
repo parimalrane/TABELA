@@ -44,7 +44,7 @@ python main.py
 
 ### Step 5: Review Output
 - Console output shows market scan results
-- Results automatically saved to `history/YYYY-MM-DD.json`
+- Results automatically saved to `market_data/snapshots/YYYY-MM-DD.json`
 - Check asterisks (*) for institutional flow-only plays
 
 **Done!** Your first market scan is complete.
@@ -152,11 +152,11 @@ python -c "import pandas; print(pandas.__version__)"
 # TABELA needs:
 # • stocks.csv (in project root)
 # • ETF.csv (in project root)
-# • history/ folder (auto-created if missing)
+# • market_data/snapshots/ folder (auto-created if missing)
 
 # Verify directory structure:
 dir *.csv        # Should see stocks.csv and ETF.csv
-dir history/     # Folder for historical snapshots
+dir market_data/snapshots/     # Folder for historical snapshots
 ```
 
 #### 5. Test Installation
@@ -178,7 +178,7 @@ python main.py
 - [ ] pandas installed via pip
 - [ ] stocks.csv in project folder
 - [ ] ETF.csv in project folder
-- [ ] history/ folder exists (or will be created)
+- [ ] market_data/snapshots/ folder exists (or will be created)
 
 ### Execution
 
@@ -196,7 +196,7 @@ python main.py
 5. Scores all stocks
 6. Generates watchlists
 7. Displays console output
-8. Saves snapshot to history/{YYYY-MM-DD}.json
+8. Saves snapshot to market_data/snapshots/{YYYY-MM-DD}.json
 
 **Expected Output Time:** <30 seconds
 
@@ -412,7 +412,7 @@ Interpretation: Institutional accumulation signal
 Action: Light positions for potential bounce
 ```
 
-**Advanced:** Compare JSON files in history/ folder for multi-day trends
+**Advanced:** Compare JSON files in market_data/snapshots/ folder for multi-day trends
 
 ### Use Case 3: Finding Short Opportunities
 
@@ -463,7 +463,7 @@ Others (ranked 20-30): 25% of theme allocation
 **Goal:** Track theme rotation across multiple weeks/months
 
 **Steps:**
-1. Check `history/` folder for past snapshots
+1. Check `market_data/snapshots/` folder for past snapshots
 2. Compare theme classifications across dates:
    - Is AI still Leading or moved to Emerging?
    - Are any new themes appearing?
@@ -595,7 +595,7 @@ python -c "import pandas as pd; print(pd.read_csv('stocks.csv').head())"
 
 **Error Message:**
 ```
-PermissionError: [Errno 13] Permission denied: 'history/2026-06-19.json'
+PermissionError: [Errno 13] Permission denied: 'market_data/snapshots/2026-06-19.json'
 ```
 
 **Solution:**
@@ -648,7 +648,7 @@ python -c "import pandas as pd; print(pd.read_csv('stocks.csv').columns.tolist()
 
 ### Problem 7: Historical Folder Issues
 
-**Issue:** history/ folder won't create or can't write files
+**Issue:** market_data/snapshots/ folder won't create or can't write files
 
 **Solution:**
 ```bash
@@ -707,11 +707,11 @@ import json
 from datetime import datetime, timedelta
 
 # Load yesterday's snapshot
-with open('history/2026-06-18.json') as f:
+with open('market_data/snapshots/2026-06-18.json') as f:
     yesterday = json.load(f)
 
 # Load today's snapshot
-with open('history/2026-06-19.json') as f:
+with open('market_data/snapshots/2026-06-19.json') as f:
     today = json.load(f)
 
 # Compare themes
@@ -726,7 +726,7 @@ if rotation:
 
 ### Creating Custom Reports
 
-You can extract data from history/ JSON files to create custom analyses:
+You can extract data from market_data/snapshots/ JSON files to create custom analyses:
 
 ```python
 # Example: Track a specific stock over time
@@ -734,7 +734,7 @@ import json
 import glob
 
 stock_history = {}
-for file in sorted(glob.glob('history/*.json')):
+for file in sorted(glob.glob('market_data/snapshots/*.json')):
     with open(file) as f:
         snapshot = json.load(f)
         date = snapshot['date']

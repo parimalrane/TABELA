@@ -1,4 +1,4 @@
-from config import ETF_FILTERS
+from core.config import ETF_FILTERS
 
 # ==========================================
 # ETF FILTER ENGINE

@@ -1,4 +1,4 @@
-from config import COMPOSITE_WEIGHTS
+from core.config import COMPOSITE_WEIGHTS
 
 
 def calculate_composite_score(stocks):

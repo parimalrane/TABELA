@@ -37,7 +37,7 @@ institutional money flows through AI-focused ETFs, not semiconductor ETFs.
 - **Manual Narratives:** 100+ expert-curated institutional theme mappings
 - **Scoring Factors:** 5 (Momentum 40%, Theme 25%, Sales 20%, Zacks 10%, Margin 5%)
 - **Execution Time:** <30 seconds per run
-- **Historical Database:** Daily JSON snapshots in history/ folder
+- **Historical Database:** Daily JSON snapshots in market_data/snapshots folder
 
 ---
 
@@ -243,12 +243,11 @@ institutional money flows through AI-focused ETFs, not semiconductor ETFs.
 │   • Sorted by RS rating (ascending)                            │
 │   • Includes: Ticker, Score, Theme, RS Rating                  │
 │                                                                 │
-│ JSON Snapshot: Saved to history/{YYYY-MM-DD}.json              │
+│ JSON Snapshot: Saved to market_data/snapshots/{YYYY-MM-DD}.json │
 │   • Leading/Emerging/Weakening/Lagging themes                  │
 │   • Top 20 long candidates + scores                            │
 │   • Top 20 short candidates + scores                           │
-│   • Theme breadth percentages                                  │
-│   • Timestamp & execution metadata                             │
+│   • Date only (no execution timestamp)                         │
 │                                                                 │
 │ Module: snapshot_engine.py, main.py                            │
 └────────────────────────────────────────────────────────────────┘
@@ -508,7 +507,7 @@ For each theme:
 }
 ```
 
-**Storage:** `history/{YYYY-MM-DD}.json`
+**Storage:** `market_data/snapshots/{YYYY-MM-DD}.json`
 
 ---
 

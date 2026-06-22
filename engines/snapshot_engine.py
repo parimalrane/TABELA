@@ -3,6 +3,11 @@ import json
 from datetime import datetime
 
 
+SNAPSHOT_DIR = "market_data/snapshots"
+
+os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+
+
 def save_daily_snapshot(
     leading_themes,
     emerging_themes,
@@ -11,10 +16,6 @@ def save_daily_snapshot(
     long_candidates,
     short_candidates
 ):
-
-    # Create history folder if missing
-    if not os.path.exists("history"):
-        os.makedirs("history")
 
     today = datetime.today().strftime("%Y-%m-%d")
 
@@ -48,7 +49,10 @@ def save_daily_snapshot(
 
     }
 
-    filename = f"history/{today}.json"
+    filename = os.path.join(
+        SNAPSHOT_DIR,
+        f"{today}.json"
+    )
 
     with open(filename, "w") as f:
         json.dump(snapshot, f, indent=4)

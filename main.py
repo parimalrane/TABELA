@@ -1,34 +1,49 @@
+import os
 import pandas as pd
-from etf_engine import (
+import datetime
+
+from engines.etf_engine import (
     calculate_etf_rs,
     assign_theme_score
 )
-from stock_mapper import map_stock_theme
-from company_theme_engine import COMPANY_THEME
-from theme_translation_engine import THEME_TRANSLATION
 
-from scoring_engine import (
+from core.stock_mapper import map_stock_theme
+from core.company_theme_engine import COMPANY_THEME
+from core.theme_translation_engine import THEME_TRANSLATION
+
+from engines.scoring_engine import (
     calculate_rs_raw,
     calculate_rs_rating,
     calculate_sales_score,
     calculate_zacks_score,
     calculate_margin_score
 )
-from theme_parser import parse_theme
-from composite_engine import calculate_composite_score
-from watchlist_engine import build_long_watchlist
-from short_engine import build_short_watchlist
-from breadth_engine import build_theme_breadth
-from institutional_leaders_engine import build_institutional_leaders
-from watchlist_engine import build_long_watchlist
-from short_engine import build_short_watchlist
-from theme_hierarchy import THEME_PARENT_MAP
-from etf_filter import filter_valid_etfs
-from snapshot_engine import save_daily_snapshot
-from etf_filter import filter_institutional_etfs
-from rotation_engine import calculate_rotation_delta, print_rotation_report
-from stock_history_engine import save_stock_history
 
+from core.theme_parser import parse_theme
+from engines.composite_engine import calculate_composite_score
+from engines.watchlist_engine import build_long_watchlist
+from engines.short_engine import build_short_watchlist
+from engines.breadth_engine import build_theme_breadth
+from engines.institutional_leaders_engine import build_institutional_leaders
+from core.theme_hierarchy import THEME_PARENT_MAP
+from engines.etf_filter import filter_valid_etfs
+from engines.etf_filter import filter_institutional_etfs
+
+# NEW IMPORT PATHS
+from engines.snapshot_engine import save_daily_snapshot
+from engines.rotation_engine import calculate_rotation_delta, print_rotation_report
+from engines.stock_history_engine import save_stock_history
+from engines.persistence_engine import print_persistence_report
+
+
+# ==========================================
+# PATH CONFIGURATION
+# ==========================================
+
+DATA_DIR = "market_data"
+
+ETF_FILE = os.path.join(DATA_DIR, "ETF.csv")
+STOCK_FILE = os.path.join(DATA_DIR, "stocks.csv")
 
 
 # ==========================================
@@ -47,19 +62,25 @@ AUDIT_THEMES = [
 
 print("\n")
 
-# LOAD STOCKS FILES
 
-stocks = pd.read_csv("stocks.csv")
+# ==========================================
+# LOAD STOCKS FILE
+# ==========================================
 
-# Keep only rows with valid Zacks ranks 1-5
+stocks = pd.read_csv(STOCK_FILE)
+
 stocks = stocks[
     stocks["Zacks Rank"].astype(str).str.startswith(
         ("1", "2", "3", "4", "5")
     )
 ].copy()
 
-# LOAD ETF FILES
-etf_df = pd.read_csv("ETF.csv")
+
+# ==========================================
+# LOAD ETF FILE
+# ==========================================
+
+etf_df = pd.read_csv(ETF_FILE)
 
 
 # ETF PROCESSING PIPELINE
@@ -68,7 +89,7 @@ etf_df = filter_institutional_etfs(etf_df)
 
 
 # CREATE THEME COLUMNS
-etf_df[["Sector","Theme","Subtheme"]] = etf_df[
+etf_df[["Sector", "Theme", "Subtheme"]] = etf_df[
     "Investment Strategy"
 ].apply(
     lambda x: pd.Series(parse_theme(x))
@@ -76,13 +97,8 @@ etf_df[["Sector","Theme","Subtheme"]] = etf_df[
 
 
 # CONTINUE PIPELINE
-
 etf_df = calculate_etf_rs(etf_df)
-
 etf_df = assign_theme_score(etf_df)
-
-
-# FINAL ETF MASTER DATASET
 
 etf_master = etf_df.copy()
 
@@ -103,20 +119,13 @@ theme_strength = (
 )
 
 theme_strength = theme_strength[
-
     theme_strength["Theme"] != "Filtered"
-
 ]
 
-
-
 theme_strength = theme_strength.sort_values(
-
     "ETF_RS_Raw",
     ascending=False
-
 ).reset_index(drop=True)
-
 
 total_themes = len(theme_strength)
 
@@ -131,7 +140,6 @@ theme_score_map = {}
 for i, row in theme_strength.iterrows():
 
     percentile = (i + 1) / total_themes
-
     theme = row["Theme"]
 
     if percentile <= 0.25:
@@ -169,8 +177,6 @@ for _, row in stocks.iterrows():
 
     ticker = row["Ticker"]
 
-    # Priority 1 → Manual company mapping
-
     if ticker in COMPANY_THEME:
 
         stock_theme = COMPANY_THEME[ticker]
@@ -178,13 +184,9 @@ for _, row in stocks.iterrows():
     else:
 
         stock_theme = map_stock_theme(
-
             row["Industry"],
             row["Sector"]
         )
-
-    # Translate to ETF theme
-
 
     if stock_theme in THEME_TRANSLATION:
 
@@ -193,10 +195,9 @@ for _, row in stocks.iterrows():
     else:
 
         etf_theme = stock_theme
-    
+
     mapped_themes.append(stock_theme)
     etf_themes.append(etf_theme)
-
 
 stocks["Mapped_Theme"] = mapped_themes
 stocks["ETF_Theme"] = etf_themes
@@ -207,12 +208,10 @@ stocks["ETF_Theme"] = etf_themes
 # ==========================================
 
 stocks = calculate_rs_raw(stocks)
-
 stocks = calculate_rs_rating(stocks)
-
 stocks = calculate_sales_score(stocks)
-
 stocks = calculate_zacks_score(stocks)
+
 
 # ==========================================
 # STEP 4 — ASSIGN FINAL THEME SCORE
@@ -226,23 +225,15 @@ for _, row in stocks.iterrows():
     etf_theme = row["ETF_Theme"]
     mapped_theme = row["Mapped_Theme"]
 
-    # Resolve child theme to parent ETF theme
-
     if mapped_theme in THEME_PARENT_MAP:
         etf_theme = THEME_PARENT_MAP[mapped_theme]
-
-    # Normal ETF classified stocks
 
     if etf_theme in theme_class_map:
 
         theme_class = theme_class_map[etf_theme]
         theme_score = theme_score_map[etf_theme]
 
-    # Unknown theme stocks
-
     else:
-
-        # Exceptional unknown stocks
 
         if (
 
@@ -265,9 +256,9 @@ for _, row in stocks.iterrows():
     theme_classes.append(theme_class)
     theme_scores.append(theme_score)
 
-
 stocks["Theme_Class"] = theme_classes
 stocks["Theme_Score"] = theme_scores
+
 
 # ==========================================
 # STEP 5 — MARGIN SCORE
@@ -284,106 +275,67 @@ stocks = calculate_composite_score(stocks)
 
 save_stock_history(stocks)
 
+
 # ==========================================
-# STEP 7 — BUILD LONG WATCHLIST
+# STEP 7 — BUILD WATCHLISTS
 # ==========================================
 
 long_watchlist = build_long_watchlist(stocks)
-
-
-# ==========================================
-# STEP 8 — BUILD SHORT WATCHLIST
-# ==========================================
-
 short_watchlist = build_short_watchlist(stocks)
 
 
 # ==========================================
-# STEP 9 — THEME BREADTH
+# STEP 8 — THEME BREADTH
 # ==========================================
+
 theme_breadth = build_theme_breadth(stocks)
 
 
-
-# ==========================================
-# FINAL OUTPUT — TABELA DAILY SCAN
-# ==========================================
-
-import datetime
-
 today = datetime.date.today()
 
-# sort outputs
-
 long_watchlist = long_watchlist.sort_values(
-
     "Composite_Score",
     ascending=False
 )
 
 short_watchlist = short_watchlist.sort_values(
-
     "Composite_Score",
     ascending=True
 )
 
-
 institutional_leaders = build_institutional_leaders(stocks)
 
 
-
-import pandas as pd
-
 # ==========================================
-# BUILD LONG CANDIDATE UNIVERSE
+# BUILD LONG CANDIDATES
 # ==========================================
 
-# Get primary long tickers
 long_tickers = set(long_watchlist["Ticker"])
 
-
-# Combine both lists
 long_candidates = pd.concat(
-
     [long_watchlist, institutional_leaders]
-
 )
 
-
-# Remove duplicates
 long_candidates = long_candidates.drop_duplicates(
-
     subset="Ticker"
-
 )
 
-
-# Mark stocks added only through institutional flow
 long_candidates["Ticker"] = long_candidates.apply(
-
     lambda row:
-
         row["Ticker"]
-
         if row["Ticker"] in long_tickers
-
         else row["Ticker"] + "*",
-
     axis=1
-
 )
 
-
-# Final sorting
 long_candidates = long_candidates.sort_values(
-
     "Composite_Score",
     ascending=False
-
 )
 
+
 # ==========================================
-# HEADER
+# OUTPUT
 # ==========================================
 
 print("\n")
@@ -394,17 +346,11 @@ print("==============================================")
 print("\n")
 
 
-
-# ==========================================
-# STORE THEME LISTS FOR SNAPSHOT ENGINE
-# ==========================================
-
 leading_themes = theme_strength[
     theme_strength["Theme"].isin(
         [k for k, v in theme_class_map.items() if v == "Leading"]
     )
 ]["Theme"].tolist()
-
 
 emerging_themes = theme_strength[
     theme_strength["Theme"].isin(
@@ -412,13 +358,11 @@ emerging_themes = theme_strength[
     )
 ]["Theme"].tolist()
 
-
 weakening_themes = theme_strength[
     theme_strength["Theme"].isin(
         [k for k, v in theme_class_map.items() if v == "Weakening"]
     )
 ]["Theme"].tolist()
-
 
 lagging_themes = theme_strength[
     theme_strength["Theme"].isin(
@@ -427,90 +371,23 @@ lagging_themes = theme_strength[
 ]["Theme"].tolist()
 
 
-
-# ==========================================
-# MARKET ROTATION SUMMARY
-# ==========================================
-
 print("MARKET ROTATION SUMMARY")
 print("----------------------------")
-
-
-print()
-
 print("\n")
 
-
 print("\nLEADING THEMES")
-
-print(
-
-    theme_strength[
-
-        theme_strength["Theme"].isin(
-
-            [k for k, v in theme_class_map.items() if v == "Leading"]
-
-        )
-
-    ]["Theme"].tolist()
-
-)
+print(leading_themes)
 
 print("\nEMERGING THEMES")
-
-print(
-
-    theme_strength[
-
-        theme_strength["Theme"].isin(
-
-            [k for k, v in theme_class_map.items() if v == "Emerging"]
-
-        )
-
-    ]["Theme"].tolist()
-
-)
+print(emerging_themes)
 
 print("\nWEAKENING THEMES")
-
-print(
-
-    theme_strength[
-
-        theme_strength["Theme"].isin(
-
-            [k for k, v in theme_class_map.items() if v == "Weakening"]
-
-        )
-
-    ]["Theme"].tolist()
-
-)
+print(weakening_themes)
 
 print("\nLAGGING THEMES")
-
-print(
-
-    theme_strength[
-
-        theme_strength["Theme"].isin(
-
-            [k for k, v in theme_class_map.items() if v == "Lagging"]
-
-        )
-
-    ]["Theme"].tolist()
-
-)
+print(lagging_themes)
 
 print("\n\n")
-
-
-# ==========================================
-# THEME BREADTH
-# ==========================================
 
 print("THEME BREADTH ANALYSIS")
 print("----------------------------")
@@ -531,16 +408,8 @@ print(
 
 print("\n\n")
 
-
-print("----------------------------")
-
-# ==========================================
-# SHORT CANDIDATE UNIVERSE
-# ==========================================
-
 print("LONG CANDIDATE UNIVERSE")
 print("----------------------------")
-
 
 print(
 
@@ -554,19 +423,9 @@ print(
 
     .head(40).to_string(index=False)
 
-    )
+)
 
 print("\n\n")
-
-print()
-
-print("----------------------------")
-
-
-
-# ==========================================
-# SHORT CANDIDATE UNIVERSE
-# ==========================================
 
 print("SHORT CANDIDATE UNIVERSE")
 print("----------------------------")
@@ -585,49 +444,29 @@ print(
 
 )
 
-
-
-# ==========================================
-# TRADINGVIEW WATCHLIST EXPORT
-# ==========================================
-
 print("\n")
 print("----------------------------")
 print("TRADINGVIEW WATCHLIST EXPORT")
 print("----------------------------")
 
-
-# Long watchlist
-
 long_list = ",".join(
-
     long_candidates["Ticker"]
     .head(50)
     .astype(str)
     .tolist()
-
 )
 
-
-# Short watchlist
 short_list = ",".join(
-
     short_watchlist["Ticker"]
     .head(50)
     .astype(str)
     .tolist()
-
 )
 
-
-# TradingView import format
 print("###LONG," + long_list + ",")
 print("###SHORT," + short_list)
 
 
-
-
-# SAVE DAILY MARKET SNAPSHOT FIRST
 save_daily_snapshot(
     leading_themes,
     emerging_themes,
@@ -637,10 +476,9 @@ save_daily_snapshot(
     short_watchlist
 )
 
-# NOW CALCULATE ROTATION
 rotation_data = calculate_rotation_delta()
 print_rotation_report(rotation_data)
-
+print_persistence_report()
 
 
 
@@ -648,4 +486,3 @@ print("\n")
 print("==============================================")
 print("END OF TABELA SCAN")
 print("==============================================")
-

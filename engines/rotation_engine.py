@@ -2,19 +2,20 @@ import os
 import json
 
 
+SNAPSHOT_DIR = "market_data/snapshots"
+
+
 # ------------------------------------------
 # LOAD LAST TWO SNAPSHOTS
 # ------------------------------------------
 
 def load_last_two_snapshots():
 
-    history_folder = "history"
-
     files = sorted(
 
         [
 
-            f for f in os.listdir(history_folder)
+            f for f in os.listdir(SNAPSHOT_DIR)
 
             if f.endswith(".json")
 
@@ -26,8 +27,8 @@ def load_last_two_snapshots():
 
         return None, None
 
-    previous_file = os.path.join(history_folder, files[-2])
-    latest_file = os.path.join(history_folder, files[-1])
+    previous_file = os.path.join(SNAPSHOT_DIR, files[-2])
+    latest_file = os.path.join(SNAPSHOT_DIR, files[-1])
 
     with open(previous_file, "r") as f:
         previous = json.load(f)
@@ -90,22 +91,18 @@ def calculate_rotation_delta():
 
         delta = new_score - old_score
 
-        # Theme entered ranking universe today
         if theme not in previous_scores:
 
             new_entries.append(theme)
 
-        # Theme removed from ranking universe today
         elif theme not in latest_scores:
 
             dropped_entries.append(theme)
 
-        # Positive movement
         elif delta > 0:
 
             positive_rotation.append((theme, delta))
 
-        # Negative movement
         elif delta < 0:
 
             negative_rotation.append((theme, delta))

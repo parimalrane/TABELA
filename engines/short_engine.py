@@ -1,4 +1,4 @@
-from config import SHORT_FILTERS
+from core.config import SHORT_FILTERS
 
 
 def build_short_watchlist(stocks):

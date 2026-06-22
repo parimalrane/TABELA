@@ -3,11 +3,12 @@ import json
 from datetime import datetime
 
 
-def save_stock_history(stocks):
+STOCK_HISTORY_DIR = "market_data/stock_universe"
 
-    # Create folder if missing
-    if not os.path.exists("stock_history"):
-        os.makedirs("stock_history")
+os.makedirs(STOCK_HISTORY_DIR, exist_ok=True)
+
+
+def save_stock_history(stocks):
 
     today = datetime.today().strftime("%Y-%m-%d")
 
@@ -61,9 +62,11 @@ def save_stock_history(stocks):
 
         })
 
-    filename = f"stock_history/{today}.json"
+    filename = os.path.join(
+        STOCK_HISTORY_DIR,
+        f"{today}.json"
+    )
 
-    # overwrite same day
     with open(filename, "w") as f:
 
         json.dump(stock_data, f, indent=4)
