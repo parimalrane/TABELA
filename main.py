@@ -33,7 +33,6 @@ from engines.etf_filter import filter_institutional_etfs
 from engines.snapshot_engine import save_daily_snapshot
 from engines.rotation_engine import calculate_rotation_delta, print_rotation_report
 from engines.stock_history_engine import save_stock_history
-from engines.persistence_engine import print_persistence_report
 from engines.long_scoring_engine import calculate_long_score
 from engines.short_scoring_engine import calculate_short_score
 
@@ -482,19 +481,42 @@ print("###LONG," + long_list + ",")
 print("###SHORT," + short_list)
 
 
+# ==========================================
+# SNAPSHOT METADATA
+# ==========================================
+
+total_stock_count = len(stocks)
+
+classified_stock_count = len(
+
+    stocks[
+        stocks["Theme_Class"] != "Unknown"
+    ]
+
+)
+
+unclassified_stock_count = len(
+
+    stocks[
+        stocks["Theme_Class"] == "Unknown"
+    ]
+
+)
+
+
 save_daily_snapshot(
     leading_themes,
     emerging_themes,
     weakening_themes,
     lagging_themes,
-    long_candidates,
-    short_watchlist,
-    len(stocks)
+    total_stock_count,
+    classified_stock_count,
+    unclassified_stock_count,
+    theme_breadth
 )
 
 rotation_data = calculate_rotation_delta()
 print_rotation_report(rotation_data)
-print_persistence_report()
 
 
 

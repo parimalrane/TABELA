@@ -4,7 +4,6 @@ from datetime import datetime
 
 
 SNAPSHOT_DIR = "market_data/snapshots"
-
 os.makedirs(SNAPSHOT_DIR, exist_ok=True)
 
 
@@ -13,9 +12,10 @@ def save_daily_snapshot(
     emerging_themes,
     weakening_themes,
     lagging_themes,
-    long_candidates,
-    short_candidates,
-    total_stock_count
+    total_stock_count,
+    classified_stock_count,
+    unclassified_stock_count,
+    theme_breadth
 ):
 
     today = datetime.today().strftime("%Y-%m-%d")
@@ -26,11 +26,11 @@ def save_daily_snapshot(
 
         "metadata": {
 
-            "stock_count": total_stock_count,
+            "total_stock_count": total_stock_count,
 
-            "long_candidates": len(long_candidates),
+            "classified_stock_count": classified_stock_count,
 
-            "weakness_candidates": len(short_candidates)
+            "unclassified_stock_count": unclassified_stock_count
 
         },
 
@@ -42,31 +42,19 @@ def save_daily_snapshot(
 
         "lagging_themes": lagging_themes,
 
-        "top_longs": [
-            {
-                "ticker": row["Ticker"],
-                "score": round(row["Composite_Score"], 2)
-            }
-            for _, row in long_candidates.head(20).iterrows()
-        ],
-
-        "top_weakness": [
-            {
-                "ticker": row["Ticker"],
-                "score": round(row["Composite_Score"], 2)
-            }
-            for _, row in short_candidates.head(20).iterrows()
-        ]
+        "theme_breadth": theme_breadth.to_dict(
+    orient="records"
+)
 
     }
 
     filename = os.path.join(
         SNAPSHOT_DIR,
-        f"{today}.json"
+        f"{today}_market_snapshot.json"
     )
 
     with open(filename, "w") as f:
         json.dump(snapshot, f, indent=4)
 
     print()
-    print("SNAPSHOT SAVED:", filename)
+    print("MARKET SNAPSHOT SAVED:", filename)

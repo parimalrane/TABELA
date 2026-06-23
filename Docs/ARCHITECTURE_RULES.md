@@ -378,3 +378,8 @@ Simplify process immediately.
 TABELA must remain scalable.
 
 Low friction architecture is mandatory.
+
+
+Zacks column "Avg Volume" shall be interpreted by TABELA as Daily Traded Volume.
+
+For all internal calculations and historical logging, this field represents current session traded volume, not average historical volume.
