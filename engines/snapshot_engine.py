@@ -14,7 +14,8 @@ def save_daily_snapshot(
     weakening_themes,
     lagging_themes,
     long_candidates,
-    short_candidates
+    short_candidates,
+    total_stock_count
 ):
 
     today = datetime.today().strftime("%Y-%m-%d")
@@ -22,6 +23,16 @@ def save_daily_snapshot(
     snapshot = {
 
         "date": today,
+
+        "metadata": {
+
+            "stock_count": total_stock_count,
+
+            "long_candidates": len(long_candidates),
+
+            "weakness_candidates": len(short_candidates)
+
+        },
 
         "leading_themes": leading_themes,
 
@@ -39,7 +50,7 @@ def save_daily_snapshot(
             for _, row in long_candidates.head(20).iterrows()
         ],
 
-        "top_shorts": [
+        "top_weakness": [
             {
                 "ticker": row["Ticker"],
                 "score": round(row["Composite_Score"], 2)

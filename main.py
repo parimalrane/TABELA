@@ -473,7 +473,8 @@ save_daily_snapshot(
     weakening_themes,
     lagging_themes,
     long_candidates,
-    short_watchlist
+    short_watchlist,
+    len(stocks)
 )
 
 rotation_data = calculate_rotation_delta()

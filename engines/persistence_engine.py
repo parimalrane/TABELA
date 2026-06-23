@@ -39,27 +39,27 @@ def load_snapshots():
 def stock_persistence_report(snapshots):
 
     long_counter = Counter()
-    short_counter = Counter()
+    weakness_counter = Counter()
 
     for snapshot in snapshots:
 
         for stock in snapshot["top_longs"]:
             long_counter[stock["ticker"]] += 1
 
-        for stock in snapshot["top_shorts"]:
-            short_counter[stock["ticker"]] += 1
+        for stock in snapshot["top_weakness"]:
+            weakness_counter[stock["ticker"]] += 1
 
     repeated_longs = {
         k: v for k, v in long_counter.items()
         if v > 1
     }
 
-    repeated_shorts = {
-        k: v for k, v in short_counter.items()
+    repeated_weakness = {
+        k: v for k, v in weakness_counter.items()
         if v > 1
     }
 
-    return repeated_longs, repeated_shorts
+    return repeated_longs, repeated_weakness
 
 
 # ==========================================
@@ -75,15 +75,15 @@ def first_appearance_report(snapshots):
     previous = snapshots[:-1]
 
     historical_longs = set()
-    historical_shorts = set()
+    historical_weakness = set()
 
     for snapshot in previous:
 
         for stock in snapshot["top_longs"]:
             historical_longs.add(stock["ticker"])
 
-        for stock in snapshot["top_shorts"]:
-            historical_shorts.add(stock["ticker"])
+        for stock in snapshot["top_weakness"]:
+            historical_weakness.add(stock["ticker"])
 
     new_longs = []
 
@@ -94,16 +94,16 @@ def first_appearance_report(snapshots):
         if ticker not in historical_longs:
             new_longs.append(ticker)
 
-    new_shorts = []
+    new_weakness = []
 
-    for stock in today["top_shorts"]:
+    for stock in today["top_weakness"]:
 
         ticker = stock["ticker"]
 
-        if ticker not in historical_shorts:
-            new_shorts.append(ticker)
+        if ticker not in historical_weakness:
+            new_weakness.append(ticker)
 
-    return new_longs, new_shorts
+    return new_longs, new_weakness
 
 
 # ==========================================
@@ -155,10 +155,10 @@ def print_persistence_report():
 
     snapshots = load_snapshots()
 
-    repeated_longs, repeated_shorts = \
+    repeated_longs, repeated_weakness = \
         stock_persistence_report(snapshots)
 
-    new_longs, new_shorts = \
+    new_longs, new_weakness = \
         first_appearance_report(snapshots)
 
     persistent_themes = \
@@ -168,8 +168,6 @@ def print_persistence_report():
     print("==============================================")
     print("TABELA HISTORICAL INTELLIGENCE V0")
     print("==============================================")
-
-    # ------------------------------------------
 
     print("\nREPEATED LONG LEADERS")
     print("----------------------------")
@@ -186,14 +184,12 @@ def print_persistence_report():
 
         print(f"{ticker:<10} {count} days")
 
-    # ------------------------------------------
-
-    print("\nREPEATED SHORT CANDIDATES")
+    print("\nREPEATED WEAKNESS CANDIDATES")
     print("----------------------------")
 
     for ticker, count in sorted(
 
-        repeated_shorts.items(),
+        repeated_weakness.items(),
 
         key=lambda x: x[1],
 
@@ -203,25 +199,17 @@ def print_persistence_report():
 
         print(f"{ticker:<10} {count} days")
 
-    # ------------------------------------------
-
     print("\nNEW LONG ENTRIES")
     print("----------------------------")
 
     for ticker in new_longs[:10]:
-
         print(ticker)
 
-    # ------------------------------------------
-
-    print("\nNEW SHORT ENTRIES")
+    print("\nNEW WEAKNESS ENTRIES")
     print("----------------------------")
 
-    for ticker in new_shorts[:10]:
-
+    for ticker in new_weakness[:10]:
         print(ticker)
-
-    # ------------------------------------------
 
     print("\nTHEME PERSISTENCE")
     print("----------------------------")
