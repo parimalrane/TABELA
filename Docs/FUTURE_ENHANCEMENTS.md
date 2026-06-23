@@ -2,25 +2,28 @@
 
 ## CORE IDENTITY
 
-TABELA is an Institutional Market Intelligence Engine.
+TABELA is an Institutional Capital Rotation Intelligence Engine.
 
 TABELA is NOT a stock scanner.
+
+TABELA does NOT generate trade signals.
 
 Primary objectives:
 
 * Detect institutional capital accumulation
-* Detect institutional capital distribution
-* Identify strongest LONG candidates
-* Identify highest quality SHORT candidates
-* Track institutional capital rotation between themes
+* Detect institutional capital rotation between themes
+* Detect unusual market behavior requiring investigation
+* Surface highest quality opportunity universe for discretionary review
 * Build proprietary historical market intelligence database
-* Learn recurring behavior before future market leaders emerge
+* Learn recurring institutional behavior before future market leaders emerge
 
 Core philosophy:
 
 Capital Flow Detection First
 Stock Selection Second
 Historical Intelligence Compounds Over Time
+Chart Review Always Mandatory
+TABELA Surfaces Opportunity — Human Executes Decision
 
 ---
 
@@ -34,13 +37,13 @@ Production stable architecture:
 * Theme classification engine
 * Relative Strength engine
 * Composite scoring engine
-* Long candidate engine
-* Weakness Score engine
-* Short candidate engine
+* Institutional Leaders engine
+* Weakness engine (temporary architecture)
 * TradingView export engine
-* Snapshot history engine
+* Snapshot persistence engine
 * Stock history engine
 * Rotation Delta engine
+* Historical intelligence engine V0
 
 Protected modules:
 
@@ -48,6 +51,7 @@ Protected modules:
 * Composite engine
 * Snapshot architecture
 * Historical logs
+* ETF ranking logic
 
 ---
 
@@ -55,13 +59,13 @@ Protected modules:
 
 ## P0 — LIVE OBSERVATION PHASE
 
-Observe 10–15 live sessions.
+Observe 10–20 live sessions.
 
 Validate:
 
 * Theme persistence
 * Long quality consistency
-* Short quality consistency
+* Weakness quality consistency
 * Rotation behavior stability
 * Historical logging consistency
 
@@ -104,6 +108,7 @@ Metrics:
 * Days in leadership
 * Theme persistence score
 * Leadership consistency score
+* Theme acceleration score
 
 Priority:
 
@@ -111,23 +116,96 @@ HIGH
 
 ---
 
-# SHORT SIDE RESEARCH (NEW ARCHITECTURE)
+# MARKET OPPORTUNITY ENGINE (NEW ARCHITECTURE)
 
 Important principle:
 
-Long and Short behavior are NOT symmetrical.
+Long and Weakness behavior are NOT symmetrical.
 
-Long side measures accumulation.
+Weakness does NOT automatically imply short opportunity.
 
-Short side measures distribution.
+TABELA identifies interesting market behavior.
+
+Final trade direction decided only after chart review.
 
 ---
 
-## P3A — INTERNAL ROTATION SHORT ENGINE
+## P3A — BEHAVIORAL ANOMALY ENGINE
 
 Goal:
 
-Detect weak stocks inside strong themes.
+Detect stocks behaving differently than expected.
+
+Examples:
+
+* Strong theme + weak stock
+* Strong fundamentals + weak price behavior
+* Stock underperforming peers inside strong theme
+
+Interpretation:
+
+Possible:
+
+* Distribution
+* Failed breakout
+* Temporary weakness
+* Rotation
+* Opportunity reversal
+
+Final decision:
+
+Chart review mandatory.
+
+Purpose:
+
+Highest priority opportunity discovery engine.
+
+Priority:
+
+CRITICAL
+
+---
+
+## P3B — STRUCTURAL WEAKNESS ENGINE
+
+Goal:
+
+Detect persistently weak stocks inside weak themes.
+
+Conditions:
+
+* Low RS
+* Low Composite Score
+* Weakening or Lagging Theme
+
+Interpretation:
+
+Possible:
+
+* Continuation downside
+* Long term weakness
+* Base formation
+* Reversal opportunity
+
+Final decision:
+
+Chart review mandatory.
+
+Important:
+
+Structural weakness ≠ automatic short candidate
+
+Priority:
+
+VERY HIGH
+
+---
+
+## P3C — INTERNAL ROTATION ENGINE
+
+Goal:
+
+Detect unusual internal sector divergence.
 
 Example:
 
@@ -135,17 +213,15 @@ Semiconductors strong
 
 MU strong
 
-CRDO strong
+AMD weak
 
-AMD weakening
+CRDO weak
 
-Signal:
+Interpretation:
 
 Capital rotating internally.
 
-Example future output:
-
-Weak stock inside leading theme.
+Possible opportunity emerging.
 
 Priority:
 
@@ -153,67 +229,50 @@ VERY HIGH
 
 ---
 
-## P3B — DISTRIBUTION ENGINE
+## P3D — LEADERSHIP DETERIORATION ENGINE
 
 Goal:
 
-Detect institutions exiting former leaders.
+Detect former leaders beginning to weaken.
 
 Example:
 
-NVDA
+Composite Score deterioration over multiple sessions.
 
-Composite:
+Example:
 
-98 → 92 → 83 → 74
+95 → 88 → 79 → 67
 
-Signal:
+Interpretation:
 
-Institutional distribution.
+Leadership weakening.
 
-Requires history.
+Could indicate:
+
+* Distribution
+* Consolidation
+* Failed breakout
+* Temporary weakness
+
+Requires historical intelligence.
 
 Priority:
 
 VERY HIGH
-
----
-
-## P3C — FORMER LEADER BREAKDOWN ENGINE
-
-Goal:
-
-Detect stocks repeatedly appearing in longs then deteriorating.
-
-Signal:
-
-Leadership failure.
-
-Requires historical pattern recognition.
-
-Priority:
-
-HIGH
-
----
-
-## P3D — SHORT QUALITY VALIDATION ENGINE
-
-Goal:
-
-Separate:
-
-* structurally weak stocks
-* temporarily weak stocks
-* active institutional distribution
-
-Priority:
-
-HIGH
 
 ---
 
 # HISTORICAL INTELLIGENCE LAYER
+
+Important rule:
+
+History enhances confidence.
+
+History never creates candidates.
+
+Core system must always function without history.
+
+---
 
 ## P4 — STOCK EVOLUTION HISTORY ENGINE
 
@@ -230,7 +289,6 @@ Store:
 * Theme
 * Theme Class
 * RS Rating
-* Weakness Score
 * Composite Score
 * Sales Score
 * Zacks Score
@@ -259,6 +317,7 @@ Questions:
 
 * Is theme strengthening internally?
 * Are more stocks joining leadership?
+* Is breadth expanding?
 
 Metrics:
 
@@ -276,16 +335,17 @@ EXTREMELY HIGH
 
 Goal:
 
-Measure acceleration.
+Measure acceleration and deterioration speed.
 
 Example:
 
-58 → 62 → 71 → 84
+58 → 64 → 72 → 83
 
 Questions:
 
 * Which stocks strengthen fastest?
 * Which stocks weaken fastest?
+* Which former leaders are deteriorating rapidly?
 
 Priority:
 
@@ -297,7 +357,7 @@ VERY HIGH
 
 ## P7 — QUIET ACCUMULATION ENGINE
 
-Detect silent accumulation before breakout.
+Detect silent accumulation before obvious breakout.
 
 Priority:
 
@@ -307,7 +367,9 @@ EXTREMELY HIGH
 
 ## P8 — PRE BREAKOUT FINGERPRINT ENGINE
 
-Study:
+Study historical leaders.
+
+Examples:
 
 * ARM
 * NVDA
@@ -316,7 +378,7 @@ Study:
 
 Question:
 
-What changes occur before explosive moves?
+What recurring behavior appears before explosive moves?
 
 Priority:
 
@@ -338,9 +400,17 @@ MAXIMUM
 
 ---
 
-## P10 — INSTITUTIONAL DISTRIBUTION EARLY WARNING ENGINE
+## P10 — BEHAVIOR CHANGE EARLY WARNING ENGINE
 
-Detect institutions exiting leaders before obvious breakdown.
+Goal:
+
+Detect major behavioral change before obvious market recognition.
+
+Focus:
+
+* Former leaders weakening
+* Unexpected relative weakness
+* Rotation divergence
 
 Priority:
 
@@ -349,6 +419,8 @@ EXTREMELY HIGH
 ---
 
 ## P11 — ETF LEADERSHIP PREDICTIVE ENGINE
+
+Question:
 
 Can stock behavior predict ETF leadership before ETF ranking changes?
 
@@ -366,6 +438,7 @@ Detect:
 * Risk off
 * Leadership narrowing
 * Structural weakness
+* Breadth deterioration
 
 Priority:
 
@@ -380,12 +453,14 @@ Final intelligence brain.
 Learn:
 
 * recurring accumulation patterns
-* recurring distribution patterns
-* recurring breakout patterns
+* recurring weakness patterns
+* recurring anomaly patterns
+* recurring breakout fingerprints
+* recurring rotation behavior
 
 Ultimate objective:
 
-Understand what institutions do before market recognizes it.
+Understand institutional behavior before market recognizes it.
 
 Priority:
 
@@ -393,26 +468,54 @@ ULTIMATE DESTINATION
 
 ---
 
-# ENGINEERING RULES
+# PERMANENT ARCHITECTURE RULES
 
-Do not redesign stable modules casually.
+Rule 1
 
-Historical logs are sacred.
+TABELA never generates trade signals.
+
+Rule 2
+
+Final execution always requires discretionary chart review.
+
+Rule 3
+
+System must function without history.
+
+Rule 4
+
+History enhances ranking and confidence.
+
+History never creates candidates.
+
+Rule 5
 
 Protect Long Engine aggressively.
 
-Do not modify RS logic without strong reason.
+Do not modify casually.
 
-Long side = accumulation intelligence.
+Rule 6
 
-Short side = distribution intelligence.
+TABELA detects opportunity.
 
-Observe before optimizing.
+Human decides trade direction.
+
+Rule 7
+
+Recent market behavior always carries more weight than historical behavior.
+
+Rule 8
 
 Automation first.
 
 No manual logging.
 
-Capital flow first.
+Rule 9
+
+Capital flow detection first.
 
 Stock selection second.
+
+Rule 10
+
+Never redesign stable architecture without strong reason.
