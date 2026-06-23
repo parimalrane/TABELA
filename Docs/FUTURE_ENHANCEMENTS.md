@@ -519,3 +519,215 @@ Stock selection second.
 Rule 10
 
 Never redesign stable architecture without strong reason.
+
+
+
+
+
+# ADDITIONAL FUTURE ENHANCEMENTS (POST ANOMALY ENGINE REVIEW)
+
+## LESSONS LEARNED — ANOMALY ENGINE V1 EXPERIMENT
+
+Behavioral Anomaly Engine V1 experiment was intentionally paused.
+
+Key learning:
+
+Single day snapshot data from ETF.csv and stocks.csv is insufficient for reliable anomaly detection.
+
+Attempting anomaly detection using only present-day weakness created low quality outputs.
+
+Conclusion:
+
+Do not force advanced market behavior detection on insufficient data.
+
+Future anomaly intelligence should only be built when sufficient historical data exists.
+
+Status:
+
+ON HOLD
+
+---
+
+## P14 — BEHAVIORAL ANOMALY ENGINE V2
+
+Goal:
+
+Detect unusual behavior in institutionally relevant stocks.
+
+Important rule:
+
+Do NOT scan entire stock universe.
+
+Focus only on historically important stocks.
+
+Possible anomaly signals:
+
+* Leadership deterioration
+* Relative strength decay
+* Composite score deterioration
+* Sudden exit from leadership universe
+* Internal theme divergence
+
+Data dependency:
+
+Requires minimum 5–10 days historical stock snapshots.
+
+Priority:
+
+HIGH (Future)
+
+Status:
+
+WAITING FOR SUFFICIENT HISTORY
+
+---
+
+## P15 — LEADERSHIP DETERIORATION ENGINE
+
+Goal:
+
+Detect strong stocks beginning to lose leadership characteristics.
+
+Example:
+
+Composite score deterioration across multiple sessions.
+
+Example pattern:
+
+95 → 89 → 81 → 72 → 61
+
+Signals:
+
+* Institutional distribution
+* Failed breakout
+* Momentum exhaustion
+* Leadership weakening
+
+Output example:
+
+HIGH ATTENTION WATCHLIST
+
+Purpose:
+
+Surface high quality stocks requiring immediate chart review.
+
+Priority:
+
+VERY HIGH
+
+---
+
+## P16 — RELATIVE STRENGTH DECAY ENGINE
+
+Goal:
+
+Track gradual deterioration in relative strength over multiple sessions.
+
+Example:
+
+RS Rating
+
+96 → 91 → 83 → 74 → 66
+
+Purpose:
+
+Detect weakening momentum before market consensus recognizes weakness.
+
+Signals:
+
+* Early distribution
+* Capital rotation
+* Institutional exit behavior
+
+Priority:
+
+VERY HIGH
+
+---
+
+## P17 — LEADER EXIT DETECTION ENGINE
+
+Goal:
+
+Track stocks repeatedly appearing in Institutional Leaders universe.
+
+Detect sudden disappearance.
+
+Example:
+
+PLTR appears in leadership universe for 7 consecutive sessions.
+
+Day 8 disappears.
+
+Possible interpretation:
+
+* Distribution
+* Failed breakout
+* Leadership transfer
+* Temporary weakness
+
+Purpose:
+
+Identify important stocks changing character.
+
+Priority:
+
+EXTREMELY HIGH
+
+---
+
+## P18 — INTERNAL THEME DIVERGENCE ENGINE
+
+Goal:
+
+Detect divergence inside strong themes.
+
+Example:
+
+Semiconductors remains leading theme.
+
+NVDA stable.
+
+MU stable.
+
+AMD weakening consistently.
+
+Possible interpretation:
+
+Institutional rotation happening inside theme.
+
+Purpose:
+
+Detect non-consensus internal capital movement.
+
+Priority:
+
+HIGH
+
+---
+
+## PERMANENT ARCHITECTURE RULE
+
+Do not force advanced intelligence layers on insufficient data.
+
+Single day snapshot data supports:
+
+* Capital flow detection
+* Theme rotation detection
+* Institutional leader detection
+* Weakness detection
+
+Single day snapshot data does NOT reliably support:
+
+* Behavioral anomaly detection
+* Distribution detection
+* Leadership deterioration detection
+* Character change detection
+
+Advanced intelligence layers must be supported by sufficient historical data.
+
+Architecture principle:
+
+Data capability defines intelligence capability.
+
+Never force philosophy beyond available data.
