@@ -36,6 +36,11 @@ from engines.stock_history_engine import save_stock_history
 from engines.long_scoring_engine import calculate_long_score
 from engines.short_scoring_engine import calculate_short_score
 from engines.unknown_classification_engine import save_unknown_classification
+from engines.rotation_engine import (
+    calculate_rotation_delta,
+    print_rotation_report,
+    save_rotation_delta
+)
 
 
 
@@ -516,7 +521,11 @@ save_daily_snapshot(
     theme_breadth
 )
 
+
 rotation_data = calculate_rotation_delta()
+
+save_rotation_delta(rotation_data)
+
 print_rotation_report(rotation_data)
 
 

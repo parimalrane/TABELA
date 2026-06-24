@@ -1,30 +1,26 @@
 import os
 import json
+from datetime import datetime
 
 
 SNAPSHOT_DIR = "market_data/snapshots"
+ROTATION_DIR = "market_data/rotation_delta"
+
+os.makedirs(ROTATION_DIR, exist_ok=True)
 
 
-# ------------------------------------------
-# LOAD LAST TWO SNAPSHOTS
-# ------------------------------------------
+# ==========================================
+# LOAD LAST TWO AVAILABLE SNAPSHOTS
+# ==========================================
 
 def load_last_two_snapshots():
 
-    files = sorted(
-
-        [
-
-            f for f in os.listdir(SNAPSHOT_DIR)
-
-            if f.endswith(".json")
-
-        ]
-
-    )
+    files = sorted([
+        f for f in os.listdir(SNAPSHOT_DIR)
+        if f.endswith(".json")
+    ])
 
     if len(files) < 2:
-
         return None, None
 
     previous_file = os.path.join(SNAPSHOT_DIR, files[-2])
@@ -39,138 +35,169 @@ def load_last_two_snapshots():
     return previous, latest
 
 
-# ------------------------------------------
-# CONVERT SNAPSHOT TO THEME SCORE MAP
-# ------------------------------------------
+# ==========================================
+# BUILD THEME → CATEGORY MAP
+# ==========================================
 
-def build_theme_score(snapshot):
+def build_theme_category_map(snapshot):
 
-    theme_scores = {}
+    theme_map = {}
 
     for theme in snapshot["leading_themes"]:
-        theme_scores[theme] = 2
+        theme_map[theme] = "Leading"
 
     for theme in snapshot["emerging_themes"]:
-        theme_scores[theme] = 1
+        theme_map[theme] = "Emerging"
 
     for theme in snapshot["weakening_themes"]:
-        theme_scores[theme] = -1
+        theme_map[theme] = "Weakening"
 
     for theme in snapshot["lagging_themes"]:
-        theme_scores[theme] = -2
+        theme_map[theme] = "Lagging"
 
-    return theme_scores
+    return theme_map
 
 
-# ------------------------------------------
+# ==========================================
 # CALCULATE ROTATION DELTA
-# ------------------------------------------
+# ==========================================
 
 def calculate_rotation_delta():
 
     previous, latest = load_last_two_snapshots()
 
     if previous is None:
-
         return None
 
-    previous_scores = build_theme_score(previous)
-    latest_scores = build_theme_score(latest)
+    previous_map = build_theme_category_map(previous)
+    latest_map = build_theme_category_map(latest)
 
-    all_themes = set(previous_scores.keys()) | set(latest_scores.keys())
+    previous_themes = set(previous_map.keys())
+    latest_themes = set(latest_map.keys())
 
-    positive_rotation = []
-    negative_rotation = []
-    new_entries = []
-    dropped_entries = []
+    # --------------------------------------
+    # NEW ENTRIES
+    # --------------------------------------
 
-    for theme in all_themes:
+    new_entries = list(latest_themes - previous_themes)
 
-        old_score = previous_scores.get(theme, 0)
-        new_score = latest_scores.get(theme, 0)
+    # --------------------------------------
+    # EXITS
+    # --------------------------------------
 
-        delta = new_score - old_score
+    exits = list(previous_themes - latest_themes)
 
-        if theme not in previous_scores:
+    # --------------------------------------
+    # CATEGORY CHANGES
+    # --------------------------------------
 
-            new_entries.append(theme)
+    category_changes = []
 
-        elif theme not in latest_scores:
+    common_themes = previous_themes & latest_themes
 
-            dropped_entries.append(theme)
+    for theme in common_themes:
 
-        elif delta > 0:
+        old_category = previous_map[theme]
+        new_category = latest_map[theme]
 
-            positive_rotation.append((theme, delta))
+        if old_category != new_category:
 
-        elif delta < 0:
+            category_changes.append({
 
-            negative_rotation.append((theme, delta))
+                "theme": theme,
 
-    positive_rotation = sorted(
+                "from": old_category,
 
-        positive_rotation,
-        key=lambda x: x[1],
-        reverse=True
+                "to": new_category
 
-    )
+            })
 
-    negative_rotation = sorted(
+    rotation_data = {
 
-        negative_rotation,
-        key=lambda x: x[1]
+        "date": latest["date"],
 
-    )
+        "compared_against": previous["date"],
 
-    return {
+        "new_entries": sorted(new_entries),
 
-        "positive_rotation": positive_rotation,
-        "negative_rotation": negative_rotation,
-        "new_entries": new_entries,
-        "dropped_entries": dropped_entries,
-        "previous_date": previous["date"],
-        "latest_date": latest["date"]
+        "exits": sorted(exits),
+
+        "category_changes": category_changes
 
     }
 
+    return rotation_data
 
-# ------------------------------------------
+
+# ==========================================
+# SAVE ROTATION DELTA JSON
+# ==========================================
+
+def save_rotation_delta(rotation_data):
+
+    if rotation_data is None:
+        return
+
+    filename = os.path.join(
+
+        ROTATION_DIR,
+
+        f"{rotation_data['date']}_rotation_delta.json"
+
+    )
+
+    with open(filename, "w") as f:
+
+        json.dump(rotation_data, f, indent=4)
+
+    print()
+    print("ROTATION DELTA SAVED:", filename)
+
+
+# ==========================================
 # PRINT REPORT
-# ------------------------------------------
+# ==========================================
 
 def print_rotation_report(rotation_data):
 
     if rotation_data is None:
-
         return
 
     print("\nROTATION DELTA REPORT")
     print("----------------------------")
 
     print(
-        f"Period: {rotation_data['previous_date']} → {rotation_data['latest_date']}"
+
+        f"Period: "
+
+        f"{rotation_data['compared_against']}"
+
+        f" → "
+
+        f"{rotation_data['date']}"
+
     )
 
-    print("\nACCELERATING THEMES")
-
-    for theme, delta in rotation_data["positive_rotation"]:
-
-        print(f"{theme} (+{delta})")
-
-    print("\nWEAKENING THEMES")
-
-    for theme, delta in rotation_data["negative_rotation"]:
-
-        print(f"{theme} ({delta})")
-
-    print("\nTHEMES ENTERING TOP RANKING UNIVERSE")
+    print("\nNEW THEME ENTRIES")
 
     for theme in rotation_data["new_entries"]:
 
         print(theme)
 
-    print("\nTHEMES EXITING TOP RANKING UNIVERSE")
+    print("\nTHEME EXITS")
 
-    for theme in rotation_data["dropped_entries"]:
+    for theme in rotation_data["exits"]:
 
         print(theme)
+
+    print("\nCATEGORY CHANGES")
+
+    for item in rotation_data["category_changes"]:
+
+        print(
+
+            f"{item['theme']} : "
+
+            f"{item['from']} → {item['to']}"
+
+        )
