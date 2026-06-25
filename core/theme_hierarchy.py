@@ -1,7 +1,5 @@
 THEME_PARENT_MAP = {
 
-    "Digital Assets Infrastructure": "Banking",
-
     "AI Platform": "Artificial Intelligence",
 
     "AI Accelerators": "Semiconductors",

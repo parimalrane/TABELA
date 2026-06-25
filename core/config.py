@@ -35,30 +35,6 @@ ETF_FILTERS = {
 
 
 
-# ---------------------------------
-# BEHAVIORAL ANOMALY ENGINE
-# ---------------------------------
-
-ANOMALY_THEME_CLASSES = ["Leading", "Emerging"]
-
-ABSOLUTE_RS_THRESHOLD = 40
-
-RELATIVE_WEAKNESS_FACTOR = 0.75
-
-COMPOSITE_CONFLICT_THRESHOLD = 75
-
-MAX_ANOMALY_OUTPUT = 20
-
-
-# Anomaly scoring weights
-
-ABSOLUTE_WEAKNESS_SCORE = 40
-
-PEER_UNDERPERFORMANCE_SCORE = 35
-
-COMPOSITE_CONFLICT_SCORE = 25
-
-
 
 LONG_WEIGHTS = {
 
@@ -111,20 +87,6 @@ SALES_WEIGHT = 10
 ZACKS_WEIGHT = 10
 
 
-
-# ==========================================
-# LONG ENGINE
-# ==========================================
-
-LONG_SCORE_THRESHOLD = 80
-
-
-
-# ==========================================
-# SHORT ENGINE
-# ==========================================
-
-SHORT_SCORE_THRESHOLD = 80
 
 
 
