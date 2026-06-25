@@ -3,7 +3,8 @@ import json
 import datetime
 
 
-WATCHLIST_DIR = "market_data"
+WATCHLIST_DIR = "market_data/watchlist_history"
+os.makedirs(WATCHLIST_DIR, exist_ok=True)
 
 
 def compare_watchlists(current_long, current_short):
