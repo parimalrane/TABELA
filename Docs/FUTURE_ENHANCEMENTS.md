@@ -1,427 +1,308 @@
-# TABELA FUTURE ROADMAP
 
-## CORE IDENTITY
+# TABELA FUTURE ROADMAP (REVISED)
 
-TABELA is a proprietary Institutional Capital Rotation Intelligence Engine.
+## CURRENT STATUS
 
-TABELA is NOT:
+```text
+CORE ENGINE            → STABLE
+HISTORY LAYER         → STABLE
+LONG ENGINE           → PROTECTED
+DATA COLLECTION       → ACTIVE
+OBSERVATION PHASE     → ACTIVE
+```
 
-* Stock scanner
-* Trade signal generator
-* Automated trading system
+Current rule:
 
-Primary objectives:
-
-* Detect institutional capital accumulation
-* Detect institutional capital rotation between themes
-* Identify strongest themes for LONG opportunities
-* Identify weakest themes for SHORT opportunities
-* Build proprietary historical market intelligence database
-* Learn recurring institutional behavior before future leaders emerge
-
-Core philosophy:
-
-* Capital Flow Detection First
-* Market Structure First
-* Stock Selection Second
-* Historical Intelligence Compounds Over Time
-* Price Action Leads Narrative
-* Chart Review Always Mandatory
+```text
+No major architecture changes until enough live market history exists.
+```
 
 ---
 
-# CURRENT PRODUCTION STABLE MODULES
+# P0 — OBSERVATION PHASE (ACTIVE NOW)
 
-Core engine (protected):
+Duration:
 
-* ETF ingestion engine
-* Stock ingestion engine
-* ETF ranking engine
-* Theme engine
-* Stock mapper engine
-* Relative Strength engine
-* Long scoring engine
-* Short scoring engine
-* Rotation engine
+```text
+15–20 live trading sessions minimum
+```
 
-Historical layer (stable):
-
-* Stock history engine
-* Market snapshot engine
-* Unknown emerging leaders engine
-
-Optional intelligence layer:
-
-* TradingView export engine
-
-Protected modules:
-
-* Long engine
-* Short engine
-* Historical logging architecture
-* ETF ranking logic
-
----
-
-# CURRENT ACTIVE PRIORITIES
-
-## P0 — LIVE OBSERVATION PHASE (ACTIVE)
-
-Run live market observation for 10–20 sessions.
-
-Validate:
+Daily validation:
 
 * Long output quality
 * Short output quality
-* Theme rotation stability
-* Historical logging consistency
-* Unknown emerging leaders quality
+* Theme rotation consistency
+* Unknown classification quality
+* Historical logging integrity
 
-Rule:
+Rules:
 
-No major scoring redesign during observation period.
+* No scoring changes
+* No architecture redesign
+* No history redesign
 
 Status:
 
+```text
 ACTIVE
+```
 
 ---
 
-## P1 — THEME ARCHITECTURE REDESIGN (HIGHEST PRIORITY)
+# P1 — SHORT ENGINE REBUILD (HIGHEST PRIORITY)
+
+Current issue:
+
+Short engine is weakest component.
 
 Problem:
 
-Current theme architecture fragmented.
+Weak stock ≠ Short opportunity
+
+Need better distinction:
+
+```text
+Healthy Pullback
+vs
+Institutional Distribution
+vs
+Structural Weakness
+```
+
+Future buckets:
+
+```text
+Bucket 1 → Distribution Watchlist
+Bucket 2 → Weakness Watchlist
+Bucket 3 → True Short Candidates
+```
+
+Priority:
+
+```text
+CRITICAL
+```
+
+---
+
+# P2 — UNKNOWN CLASSIFICATION LEARNING LOOP
+
+Current system exists.
+
+Weekly process:
+
+```text
+Review unknown_emerging_leaders.csv
+Update company_theme_mapping.csv
+Improve classification accuracy
+```
+
+Purpose:
+
+Allow market behavior to improve theme intelligence.
+
+Priority:
+
+```text
+HIGH
+```
+
+Status:
+
+```text
+ACTIVE
+```
+
+---
+
+# P3 — THEME ARCHITECTURE REDESIGN
 
 Current weaknesses:
 
 * Hardcoded ticker mapping
-* Multiple theme sources of truth
-* Excessive theme fragmentation
-* High maintenance burden
+* Multiple theme authority sources
+* Manual maintenance burden
 
-Goal:
+Future structure:
 
-Replace current theme architecture.
-
-Target architecture:
-
+```text
 config/
 
-* company_theme_mapping.csv
-* theme_rules.csv
-* theme_taxonomy.csv
+company_theme_mapping.csv
+theme_rules.csv
+theme_taxonomy.csv
+```
 
 Objectives:
 
-* Remove hardcoded theme dictionaries
-* Simplify maintenance
-* Weekly CSV updates only
-* Eliminate multiple theme authority problem
+* Remove hardcoded dictionaries
+* Single source of truth
+* Weekly maintenance only
 
 Priority:
 
-CRITICAL
-
----
-
-## P2 — UNKNOWN CLASSIFICATION LEARNING LOOP
-
-Current system implemented.
-
-Purpose:
-
-Identify unknown emerging leaders requiring classification.
-
-Weekly workflow:
-
-* Run Friday TABELA
-* Review unknown_emerging_leaders.csv
-* Update company_theme_mapping.csv
-
-Goal:
-
-Allow TABELA classification database to improve continuously from market behavior.
-
-Priority:
-
-ACTIVE
-
-Status:
-
-IMPLEMENTED
-
----
-
-## P3 — THEME TAXONOMY RESTRUCTURE
-
-Current issue:
-
-Themes are over fragmented.
-
-Example:
-
-Current:
-
-* AI Accelerators
-* AI ASIC
-* AI Sensors
-* AI Connectivity
-
-Future:
-
-Macro Theme:
-
-Artificial Intelligence
-
-Sub Themes:
-
-* AI Infrastructure
-* AI Compute
-* AI Networking
-
-Goal:
-
-Track capital rotation at institutional level.
-
-Not micro categories.
-
-Priority:
-
+```text
 HIGH
+```
 
 ---
 
-## P4 — THEME NORMALIZATION ENGINE
+# P4 — ARCHITECTURE CLEANUP
 
 Current issue:
 
-Theme inconsistency exists.
+```text
+main.py becoming orchestration bottleneck
+```
 
-Example:
+Future structure:
 
-* Natural Gas
-* natural gas
-
-Problem:
-
-Historical intelligence corruption.
-
-Goal:
-
-Single canonical theme naming system.
-
-Priority:
-
-HIGH
-
----
-
-## P5 — ARCHITECTURE CLEANUP
-
-Current issue:
-
-main.py becoming orchestration bottleneck.
-
-Future architecture:
-
-* main.py
-* core_pipeline.py
-* logging_pipeline.py
-* reporting_pipeline.py
+```text
+main.py
+core_pipeline.py
+logging_pipeline.py
+reporting_pipeline.py
+```
 
 Rule:
 
-Optional modules must never break core engine.
+Optional modules never break core engine.
 
 Priority:
 
+```text
 HIGH
+```
 
-Status:
-
-DEFERRED
+Deferred until observation phase ends.
 
 ---
 
-## P6 — SCORING ENGINE REVIEW
+# P5 — SCORING ENGINE REVIEW
 
-Current objective:
-
-Audit scoring logic.
-
-Review:
+Audit:
 
 * RS weighting
 * Theme weighting
-* Sales Growth weighting
+* Sales growth weighting
 * Margin weighting
 * Zacks weighting
 
 Question:
 
-Are fundamentals overweighted?
+```text
+Are analyst/fundamental factors overweighted?
+```
 
 Principle:
 
-Price leads analyst opinion.
+```text
+Price leads analyst opinion
+```
 
 Priority:
 
+```text
 HIGH
+```
 
 ---
 
-## P7 — SHORT ENGINE REVIEW
-
-Current objective:
-
-Review short side logic.
-
-Important principle:
-
-Weakness does NOT automatically imply short opportunity.
-
-Review:
-
-* Institutional distribution behavior
-* Structural weakness behavior
-* Short score thresholds
-* Theme weakness relationships
-
-Priority:
-
-HIGH
-
----
-
-# HISTORICAL INTELLIGENCE LAYER (FUTURE)
-
-Important rule:
-
-Core system must always function without history.
-
-History improves intelligence.
-
-History never becomes runtime dependency.
-
----
-
-## P8 — ROTATION INTELLIGENCE ENGINE
+# P6 — ROTATION INTELLIGENCE ENGINE
 
 Purpose:
 
-Track capital movement over time.
+Track:
 
-Examples:
+* Theme acceleration
+* Theme weakening
+* Theme persistence
+* Entry/exit from leadership
 
-* Themes accelerating
-* Themes weakening
-* Themes entering leadership
-* Themes exiting leadership
+Example:
 
-Example output:
-
-Semiconductors strengthening 5 sessions
-
+```text
+Semiconductors strengthening 6 sessions
+Biotech emerging 4 sessions
 Software weakening 3 sessions
+```
 
-Defense entering emerging status
-
-Priority:
-
-VERY HIGH
-
----
-
-## P9 — THEME BREADTH EXPANSION ENGINE
-
-Goal:
-
-Measure internal participation inside themes.
-
-Metrics:
-
-* Stock count inside theme
-* Strong stock count
-* Breadth expansion trend
-* Breadth deterioration trend
-
-Questions:
-
-* Is leadership broadening?
-* Is theme participation shrinking?
+Requires sufficient historical data.
 
 Priority:
 
-VERY HIGH
+```text
+HIGH
+```
+
+Do not build before 30+ sessions.
 
 ---
 
-## P10 — LEADERSHIP DETERIORATION ENGINE
+# P7 — LEADERSHIP DETERIORATION ENGINE
 
-Goal:
+Purpose:
 
-Track strong stocks losing leadership quality.
+Detect leaders losing sponsorship.
 
 Signals:
 
 * RS deterioration
 * Long score deterioration
-* Leadership disappearance
 * Theme deterioration
-
-Purpose:
-
-Detect institutional distribution behavior.
-
-Requires history.
-
-Priority:
-
-VERY HIGH
-
----
-
-## P11 — RELATIVE STRENGTH DECAY ENGINE
+* Exit from long candidate universe
 
 Goal:
 
-Track gradual RS weakening.
+Detect institutional distribution.
 
-Example:
-
-96 → 91 → 84 → 73 → 61
-
-Signals:
-
-* Institutional exit
-* Distribution
-* Momentum deterioration
-
-Requires history.
+Requires historical database.
 
 Priority:
 
-VERY HIGH
+```text
+HIGH
+```
 
 ---
 
-## P12 — INTERNAL ROTATION ENGINE
+# P8 — THEME BREADTH EXPANSION ENGINE
 
-Goal:
+Track:
+
+* Breadth expansion trend
+* Breadth deterioration trend
+* Internal participation changes
+
+Questions:
+
+```text
+Is participation broadening?
+Is leadership narrowing?
+```
+
+Priority:
+
+```text
+HIGH
+```
+
+---
+
+# P9 — INTERNAL ROTATION ENGINE
 
 Detect divergence inside strong themes.
 
 Example:
 
-Semiconductors strong.
+```text
+Semiconductors strong
 
-NVDA strong.
-
-MU strong.
-
-AMD weak.
+NVDA strong
+MU strong
+AMD weakening
+AVGO weakening
+```
 
 Interpretation:
 
@@ -429,157 +310,111 @@ Capital rotating internally.
 
 Priority:
 
-HIGH
+```text
+MEDIUM
+```
+
+Requires history.
 
 ---
 
-## P13 — QUIET ACCUMULATION ENGINE
+# P10 — MARKET REGIME ENGINE
 
-Goal:
-
-Detect silent institutional accumulation before obvious breakout.
-
-Requires:
-
-Historical pattern database.
-
-Priority:
-
-EXTREMELY HIGH
-
----
-
-## P14 — PRE BREAKOUT FINGERPRINT ENGINE
-
-Study historical winners.
-
-Examples:
-
-* NVDA
-* PLTR
-* ARM
-* APP
-
-Question:
-
-What recurring behavior occurs before explosive moves?
-
-Priority:
-
-MAXIMUM
-
----
-
-## P15 — MARKET REGIME ENGINE
-
-Classify market environment.
+Classify environment.
 
 Possible regimes:
 
-* Broad bull market
-* Narrow leadership market
-* Defensive rotation
-* Commodity cycle
-* Risk off environment
-* AI supercycle
+```text
+Broad Bull Market
+Narrow Leadership
+Defensive Rotation
+Risk Off
+Commodity Cycle
+AI Supercycle
+```
+
+Purpose:
+
+Understand macro institutional behavior.
 
 Priority:
 
-HIGH
+```text
+MEDIUM
+```
 
 ---
 
-## P16 — HISTORICAL INTELLIGENCE ENGINE
+# P11 — QUIET ACCUMULATION ENGINE
 
-Final intelligence brain.
+Goal:
 
-Learn recurring patterns:
+Detect silent institutional accumulation before breakout.
 
-* Institutional accumulation
-* Institutional distribution
+Requires:
+
+Large historical database.
+
+Priority:
+
+```text
+LATER
+```
+
+Minimum 3 months data first.
+
+---
+
+# P12 — PRE BREAKOUT FINGERPRINT ENGINE
+
+Study past winners.
+
+Examples:
+
+```text
+NVDA
+PLTR
+ARM
+APP
+CRDO
+```
+
+Question:
+
+```text
+What recurring behavior exists before explosive moves?
+```
+
+Priority:
+
+```text
+LATER
+```
+
+Need substantial history.
+
+---
+
+# LONG TERM DESTINATION
+
+## HISTORICAL INTELLIGENCE ENGINE
+
+Final objective:
+
+Learn recurring institutional behavior.
+
+Detect:
+
+* Capital accumulation
+* Distribution
 * Theme persistence
 * Leadership deterioration
 * Rotation sequences
 
-Ultimate objective:
+Goal:
 
+```text
 Understand institutional behavior before market recognizes it.
-
-Priority:
-
-ULTIMATE DESTINATION
+```
 
 ---
-
-# REMOVED PERMANENTLY
-
-Deleted future ideas:
-
-* Persistence Engine
-* Behavioral Anomaly Engine V1
-* Behavioral Anomaly Engine V2
-* Composite Velocity Engine
-* Historical Intelligence Engine V0
-
-Reason:
-
-Insufficient data support or obsolete architecture.
-
----
-
-# PERMANENT ENGINEERING RULES
-
-Rule 1
-
-TABELA never generates trade signals.
-
-Rule 2
-
-Chart review always mandatory.
-
-Rule 3
-
-Core engine must work without history.
-
-Rule 4
-
-History improves intelligence but never becomes dependency.
-
-Rule 5
-
-Engine files contain logic.
-
-Config files contain assumptions.
-
-Rule 6
-
-Remove hard coding whenever possible.
-
-Rule 7
-
-Weekly maintenance maximum 30 minutes.
-
-Rule 8
-
-Monthly review includes:
-
-* Theme taxonomy review
-* Scoring weight review
-* Hard coding audit
-* Unknown classification review
-
-Rule 9
-
-Recent market behavior has higher authority than old behavior.
-
-Rule 10
-
-Data capability defines intelligence capability.
-
-Rule 11
-
-Never force advanced intelligence unsupported by available data.
-
-Rule 12
-
-Institutional capital flow detection always has highest priority.
