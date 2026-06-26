@@ -1,5 +1,4 @@
-
-# TABELA FUTURE ROADMAP (REVISED)
+# TABELA FUTURE ROADMAP (LIVE RESEARCH VERSION)
 
 ## CURRENT STATUS
 
@@ -9,12 +8,19 @@ HISTORY LAYER         → STABLE
 LONG ENGINE           → PROTECTED
 DATA COLLECTION       → ACTIVE
 OBSERVATION PHASE     → ACTIVE
+MARKET RESEARCH MODE  → ACTIVE
 ```
 
 Current rule:
 
 ```text
 No major architecture changes until enough live market history exists.
+```
+
+Primary rule:
+
+```text
+Market behavior has higher authority than code elegance.
 ```
 
 ---
@@ -34,12 +40,16 @@ Daily validation:
 * Theme rotation consistency
 * Unknown classification quality
 * Historical logging integrity
+* Repeated leadership persistence
+* Theme breadth anomalies
+* ETF vs Breadth divergence
 
 Rules:
 
 * No scoring changes
 * No architecture redesign
 * No history redesign
+* No formula redesign
 
 Status:
 
@@ -53,13 +63,13 @@ ACTIVE
 
 Current issue:
 
-Short engine is weakest component.
+Short engine remains weakest component.
 
 Problem:
 
 Weak stock ≠ Short opportunity
 
-Need better distinction:
+Need distinction:
 
 ```text
 Healthy Pullback
@@ -69,12 +79,12 @@ vs
 Structural Weakness
 ```
 
-Future buckets:
+Future structure:
 
 ```text
-Bucket 1 → Distribution Watchlist
-Bucket 2 → Weakness Watchlist
-Bucket 3 → True Short Candidates
+Bucket 1 → Healthy Pullback Watchlist
+Bucket 2 → Distribution Watchlist
+Bucket 3 → Structural Weakness Watchlist
 ```
 
 Priority:
@@ -85,7 +95,44 @@ CRITICAL
 
 ---
 
-# P2 — UNKNOWN CLASSIFICATION LEARNING LOOP
+# P2 — ROTATION INTELLIGENCE ENGINE
+
+Purpose:
+
+Track capital movement between themes.
+
+Track:
+
+* Theme acceleration
+* Theme weakening
+* Theme persistence
+* Entry into leadership
+* Exit from leadership
+* Sponsorship deterioration
+
+Examples:
+
+```text
+Semiconductors strengthening 8 sessions
+
+AI Infrastructure strengthening 6 sessions
+
+Healthcare weakening 4 sessions
+```
+
+Requires sufficient history.
+
+Priority:
+
+```text
+VERY HIGH
+```
+
+Do not build before sufficient observation period.
+
+---
+
+# P3 — UNKNOWN CLASSIFICATION LEARNING LOOP
 
 Current system exists.
 
@@ -93,13 +140,21 @@ Weekly process:
 
 ```text
 Review unknown_emerging_leaders.csv
+
 Update company_theme_mapping.csv
+
 Improve classification accuracy
 ```
 
 Purpose:
 
-Allow market behavior to improve theme intelligence.
+Allow market behavior to improve classification intelligence.
+
+Rule:
+
+```text
+Unknown classification is discovery mechanism, not failure.
+```
 
 Priority:
 
@@ -115,70 +170,7 @@ ACTIVE
 
 ---
 
-# P3 — THEME ARCHITECTURE REDESIGN
-
-Current weaknesses:
-
-* Hardcoded ticker mapping
-* Multiple theme authority sources
-* Manual maintenance burden
-
-Future structure:
-
-```text
-config/
-
-company_theme_mapping.csv
-theme_rules.csv
-theme_taxonomy.csv
-```
-
-Objectives:
-
-* Remove hardcoded dictionaries
-* Single source of truth
-* Weekly maintenance only
-
-Priority:
-
-```text
-HIGH
-```
-
----
-
-# P4 — ARCHITECTURE CLEANUP
-
-Current issue:
-
-```text
-main.py becoming orchestration bottleneck
-```
-
-Future structure:
-
-```text
-main.py
-core_pipeline.py
-logging_pipeline.py
-reporting_pipeline.py
-```
-
-Rule:
-
-Optional modules never break core engine.
-
-Priority:
-
-```text
-HIGH
-```
-
-Deferred until observation phase ends.
-
----
-
-# P5 — SCORING ENGINE REVIEW
+# P4 — SCORING ENGINE REVIEW
 
 Audit:
 
@@ -188,18 +180,22 @@ Audit:
 * Margin weighting
 * Zacks weighting
 
-Question:
+Research question:
 
 ```text
-Are analyst/fundamental factors overweighted?
+Are fundamental/analyst factors overweighted?
 ```
 
-Principle:
+Core principle:
 
 ```text
 Price leads analyst opinion
 ```
 
+Concern:
+
+Institutional accumulation may begin before fundamentals improve.
+
 Priority:
 
 ```text
@@ -208,26 +204,53 @@ HIGH
 
 ---
 
-# P6 — ROTATION INTELLIGENCE ENGINE
+# P5 — BREADTH INTELLIGENCE RESEARCH (NEW)
 
 Purpose:
 
-Track:
-
-* Theme acceleration
-* Theme weakening
-* Theme persistence
-* Entry/exit from leadership
-
-Example:
+Study relationship between:
 
 ```text
-Semiconductors strengthening 6 sessions
-Biotech emerging 4 sessions
-Software weakening 3 sessions
+ETF Strength
+
+vs
+
+Internal Breadth Participation
 ```
 
-Requires sufficient historical data.
+Research questions:
+
+```text
+Can strong ETF coexist with weak breadth?
+
+Does low breadth + strong ETF indicate narrow leadership?
+
+Does broad breadth confirm institutional sponsorship?
+```
+
+Example observed:
+
+```text
+Software
+
+ETF Rank = High
+
+Breadth Participation = Weak
+```
+
+Possible future output:
+
+```text
+Broad Institutional Sponsorship
+
+vs
+
+Narrow Institutional Concentration
+```
+
+No coding changes now.
+
+Observation only.
 
 Priority:
 
@@ -235,11 +258,9 @@ Priority:
 HIGH
 ```
 
-Do not build before 30+ sessions.
-
 ---
 
-# P7 — LEADERSHIP DETERIORATION ENGINE
+# P6 — LEADERSHIP DETERIORATION ENGINE
 
 Purpose:
 
@@ -250,11 +271,11 @@ Signals:
 * RS deterioration
 * Long score deterioration
 * Theme deterioration
-* Exit from long candidate universe
+* Exit from long universe
 
 Goal:
 
-Detect institutional distribution.
+Detect institutional distribution early.
 
 Requires historical database.
 
@@ -266,20 +287,25 @@ HIGH
 
 ---
 
-# P8 — THEME BREADTH EXPANSION ENGINE
+# P7 — THEME BREADTH EXPANSION ENGINE
 
 Track:
 
 * Breadth expansion trend
 * Breadth deterioration trend
-* Internal participation changes
+* Internal participation change over time
 
 Questions:
 
 ```text
 Is participation broadening?
+
 Is leadership narrowing?
+
+Which themes are internally weakening?
 ```
+
+Requires history.
 
 Priority:
 
@@ -289,7 +315,79 @@ HIGH
 
 ---
 
-# P9 — INTERNAL ROTATION ENGINE
+# P8 — ARCHITECTURE CLEANUP
+
+Current issue:
+
+```text
+main.py becoming orchestration bottleneck
+```
+
+Future structure:
+
+```text
+main.py
+
+core_pipeline.py
+
+logging_pipeline.py
+
+reporting_pipeline.py
+```
+
+Rule:
+
+Optional modules never break core engine.
+
+Priority:
+
+```text
+MEDIUM
+```
+
+Deferred until observation phase ends.
+
+---
+
+# P9 — THEME ARCHITECTURE REDESIGN
+
+Current weaknesses:
+
+* Hardcoded ticker mapping
+* Manual maintenance burden
+* Multiple authority sources
+
+Future structure:
+
+```text
+config/
+
+company_theme_mapping.csv
+
+theme_rules.csv
+
+theme_taxonomy.csv
+```
+
+Objectives:
+
+* Remove hardcoding
+* Single source of truth
+* Weekly maintenance only
+
+Priority:
+
+```text
+MEDIUM
+```
+
+No urgency.
+
+---
+
+# P10 — INTERNAL ROTATION ENGINE
+
+Purpose:
 
 Detect divergence inside strong themes.
 
@@ -299,8 +397,9 @@ Example:
 Semiconductors strong
 
 NVDA strong
-MU strong
+
 AMD weakening
+
 AVGO weakening
 ```
 
@@ -318,7 +417,7 @@ Requires history.
 
 ---
 
-# P10 — MARKET REGIME ENGINE
+# P11 — MARKET REGIME ENGINE
 
 Classify environment.
 
@@ -326,10 +425,15 @@ Possible regimes:
 
 ```text
 Broad Bull Market
+
 Narrow Leadership
+
 Defensive Rotation
+
 Risk Off
+
 Commodity Cycle
+
 AI Supercycle
 ```
 
@@ -345,7 +449,7 @@ MEDIUM
 
 ---
 
-# P11 — QUIET ACCUMULATION ENGINE
+# P12 — QUIET ACCUMULATION ENGINE
 
 Goal:
 
@@ -365,7 +469,7 @@ Minimum 3 months data first.
 
 ---
 
-# P12 — PRE BREAKOUT FINGERPRINT ENGINE
+# P13 — PRE BREAKOUT FINGERPRINT ENGINE
 
 Study past winners.
 
@@ -373,9 +477,13 @@ Examples:
 
 ```text
 NVDA
+
 PLTR
+
 ARM
+
 APP
+
 CRDO
 ```
 
@@ -410,11 +518,10 @@ Detect:
 * Theme persistence
 * Leadership deterioration
 * Rotation sequences
+* Institutional concentration patterns
 
 Goal:
 
 ```text
 Understand institutional behavior before market recognizes it.
 ```
-
----

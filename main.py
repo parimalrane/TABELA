@@ -501,7 +501,7 @@ print(
         "Long_Score"
     ]]
 
-    .head(21).to_string(index=False)
+    .head(50).to_string(index=False)
 
 )
 
@@ -522,7 +522,7 @@ print(
         "Short_Score"
     ]]
     
-    .head(21).to_string(index=False)
+    .head(50).to_string(index=False)
 
 )
 
