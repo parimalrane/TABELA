@@ -47,6 +47,24 @@ def normalize_theme(theme):
         return None
     return str(theme).strip().title()
 
+
+
+def print_theme_group(title, themes):
+
+    print(f"\n{title}")
+    print("-" * 65)
+    print(f"{'Rank':<6} {'Theme':<40} {'ETF Strength':>12}")
+    print("-" * 65)
+
+    for item in themes:
+
+        print(
+            f"{item['Theme_Rank']:<6} "
+            f"{item['Theme']:<40} "
+            f"{item['ETF_RS_Raw']:>12.2f}"
+        )
+
+
 # ==========================================
 # PATH CONFIGURATION
 # ==========================================
@@ -451,21 +469,18 @@ lagging_themes = theme_strength[
 ][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
 
 
+print("\n==============================================")
 print("MARKET ROTATION SUMMARY")
-print("----------------------------")
-print("\n")
+print("==============================================")
 
-print("\nLEADING THEMES")
-print(leading_themes)
+print_theme_group("LEADING THEMES", leading_themes)
 
-print("\nEMERGING THEMES")
-print(emerging_themes)
+print_theme_group("EMERGING THEMES", emerging_themes)
 
-print("\nWEAKENING THEMES")
-print(weakening_themes)
+print_theme_group("WEAKENING THEMES", weakening_themes)
 
-print("\nLAGGING THEMES")
-print(lagging_themes)
+print_theme_group("LAGGING THEMES", lagging_themes)
+
 
 print("\n\n")
 
