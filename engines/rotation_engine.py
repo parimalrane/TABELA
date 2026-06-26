@@ -43,17 +43,29 @@ def build_theme_category_map(snapshot):
 
     theme_map = {}
 
-    for theme in snapshot["leading_themes"]:
-        theme_map[theme] = "Leading"
+    for item in snapshot["leading_themes"]:
+        theme_map[item["theme"]] = {
+            "state": "Leading",
+            "days": item.get("days", 1)
+        }
 
-    for theme in snapshot["emerging_themes"]:
-        theme_map[theme] = "Emerging"
+    for item in snapshot["emerging_themes"]:
+        theme_map[item["theme"]] = {
+            "state": "Emerging",
+            "days": item.get("days", 1)
+        }
 
-    for theme in snapshot["weakening_themes"]:
-        theme_map[theme] = "Weakening"
+    for item in snapshot["weakening_themes"]:
+        theme_map[item["theme"]] = {
+            "state": "Weakening",
+            "days": item.get("days", 1)
+        }
 
-    for theme in snapshot["lagging_themes"]:
-        theme_map[theme] = "Lagging"
+    for item in snapshot["lagging_themes"]:
+        theme_map[item["theme"]] = {
+            "state": "Lagging",
+            "days": item.get("days", 1)
+        }
 
     return theme_map
 
@@ -75,21 +87,9 @@ def calculate_rotation_delta():
     previous_themes = set(previous_map.keys())
     latest_themes = set(latest_map.keys())
 
-    # --------------------------------------
-    # NEW ENTRIES
-    # --------------------------------------
-
     new_entries = list(latest_themes - previous_themes)
 
-    # --------------------------------------
-    # EXITS
-    # --------------------------------------
-
     exits = list(previous_themes - latest_themes)
-
-    # --------------------------------------
-    # CATEGORY CHANGES
-    # --------------------------------------
 
     category_changes = []
 
@@ -97,8 +97,8 @@ def calculate_rotation_delta():
 
     for theme in common_themes:
 
-        old_category = previous_map[theme]
-        new_category = latest_map[theme]
+        old_category = previous_map[theme]["state"]
+        new_category = latest_map[theme]["state"]
 
         if old_category != new_category:
 
@@ -181,13 +181,11 @@ def print_rotation_report(rotation_data):
     print("\nNEW THEME ENTRIES")
 
     for theme in rotation_data["new_entries"]:
-
         print(theme)
 
     print("\nTHEME EXITS")
 
     for theme in rotation_data["exits"]:
-
         print(theme)
 
     print("\nCATEGORY CHANGES")

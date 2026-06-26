@@ -30,19 +30,64 @@ def save_daily_snapshot(
 
             "classified_stock_count": classified_stock_count,
 
-            "unclassified_stock_count": unclassified_stock_count
+            "unclassified_stock_count": unclassified_stock_count,
+
+            "total_themes_detected": len(theme_breadth)
 
         },
 
-        "leading_themes": leading_themes,
+       "leading_themes": [
+    {
+        "theme": t["Theme"],
+        "rank": int(t["Theme_Rank"]),
+        "score": round(float(t["ETF_RS_Raw"]), 2),
+        "days": 1
+    }
+    for t in leading_themes
+],
 
-        "emerging_themes": emerging_themes,
 
-        "weakening_themes": weakening_themes,
+"emerging_themes": [
+    {
+        "theme": t["Theme"],
+        "rank": int(t["Theme_Rank"]),
+        "score": round(float(t["ETF_RS_Raw"]), 2),
+        "days": 1
+    }
+    for t in emerging_themes
+],
 
-        "lagging_themes": lagging_themes,
 
-        "theme_breadth": theme_breadth.to_dict(
+"weakening_themes": [
+    {
+        "theme": t["Theme"],
+        "rank": int(t["Theme_Rank"]),
+        "score": round(float(t["ETF_RS_Raw"]), 2),
+        "days": 1
+    }
+    for t in weakening_themes
+],
+
+
+"lagging_themes": [
+    {
+        "theme": t["Theme"],
+        "rank": int(t["Theme_Rank"]),
+        "score": round(float(t["ETF_RS_Raw"]), 2),
+        "days": 1
+    }
+    for t in lagging_themes
+],
+
+        "theme_breadth": theme_breadth[
+    [
+        "Mapped_Theme",
+        "Total_Stocks",
+        "Strong_Stocks",
+        "Breadth_Percent",
+        "Weighted_Breadth_Score"
+    ]
+].to_dict(
     orient="records"
 )
 

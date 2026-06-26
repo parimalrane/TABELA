@@ -42,6 +42,10 @@ from engines.rotation_engine import (
 )
 
 
+def normalize_theme(theme):
+    if pd.isna(theme):
+        return None
+    return str(theme).strip().title()
 
 # ==========================================
 # PATH CONFIGURATION
@@ -122,6 +126,11 @@ theme_strength = theme_strength.sort_values(
     ascending=False
 ).reset_index(drop=True)
 
+theme_strength["Theme_Rank"] = range(
+    1,
+    len(theme_strength) + 1
+)
+
 total_themes = len(theme_strength)
 
 
@@ -131,11 +140,15 @@ total_themes = len(theme_strength)
 
 theme_class_map = {}
 theme_score_map = {}
+theme_rank_map = {}
+theme_raw_score_map = {}
 
 for i, row in theme_strength.iterrows():
 
     percentile = (i + 1) / total_themes
     theme = row["Theme"]
+    theme_rank_map[theme] = i + 1
+    theme_raw_score_map[theme] = round(row["ETF_RS_Raw"], 2)
 
     if percentile <= 0.25:
 
@@ -197,6 +210,14 @@ for _, row in stocks.iterrows():
 stocks["Mapped_Theme"] = mapped_themes
 stocks["ETF_Theme"] = etf_themes
 
+stocks["ETF_Theme"] = stocks["ETF_Theme"].apply(
+    normalize_theme
+)
+
+stocks["Theme_Rank"] = stocks["ETF_Theme"].map(
+    theme_rank_map
+)
+
 
 # ==========================================
 # STEP 3 — STOCK SCORING ENGINE
@@ -253,6 +274,13 @@ for _, row in stocks.iterrows():
 
 stocks["Theme_Class"] = theme_classes
 stocks["Theme_Score"] = theme_scores
+stocks["Theme_State"] = stocks["ETF_Theme"].map(
+    theme_class_map
+)
+
+stocks["ETF_Raw_Score"] = stocks["ETF_Theme"].map(
+    theme_raw_score_map
+)
 
 
 # ==========================================
@@ -272,8 +300,6 @@ stocks = calculate_long_score(stocks)
 
 stocks = calculate_short_score(stocks)
 
-
-save_stock_history(stocks)
 
 
 # ==========================================
@@ -337,7 +363,53 @@ long_candidates = long_candidates.sort_values(
     ascending=False
 )
 
+stocks["Long_Rank"] = None
+stocks["Short_Rank"] = None
+stocks["Is_Long_Candidate"] = False
+stocks["Is_Short_Candidate"] = False
 
+
+for rank, ticker in enumerate(
+    long_candidates["Ticker"],
+    start=1
+):
+
+    clean_ticker = ticker.replace("*", "")
+
+    stocks.loc[
+        stocks["Ticker"] == clean_ticker,
+        "Long_Rank"
+    ] = rank
+
+    stocks.loc[
+        stocks["Ticker"] == clean_ticker,
+        "Is_Long_Candidate"
+    ] = True
+
+
+for rank, ticker in enumerate(
+    short_watchlist["Ticker"],
+    start=1
+):
+
+    stocks.loc[
+        stocks["Ticker"] == ticker,
+        "Short_Rank"
+    ] = rank
+
+    stocks.loc[
+        stocks["Ticker"] == ticker,
+        "Is_Short_Candidate"
+    ] = True
+
+try:
+
+    save_stock_history(stocks)
+
+except Exception as e:
+
+    print()
+    print("STOCK HISTORY ERROR:", e)    
 
 # ==========================================
 # OUTPUT
@@ -355,25 +427,28 @@ leading_themes = theme_strength[
     theme_strength["Theme"].isin(
         [k for k, v in theme_class_map.items() if v == "Leading"]
     )
-]["Theme"].tolist()
+][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
+
 
 emerging_themes = theme_strength[
     theme_strength["Theme"].isin(
         [k for k, v in theme_class_map.items() if v == "Emerging"]
     )
-]["Theme"].tolist()
+][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
+
 
 weakening_themes = theme_strength[
     theme_strength["Theme"].isin(
         [k for k, v in theme_class_map.items() if v == "Weakening"]
     )
-]["Theme"].tolist()
+][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
+
 
 lagging_themes = theme_strength[
     theme_strength["Theme"].isin(
         [k for k, v in theme_class_map.items() if v == "Lagging"]
     )
-]["Theme"].tolist()
+][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
 
 
 print("MARKET ROTATION SUMMARY")
@@ -426,7 +501,7 @@ print(
         "Long_Score"
     ]]
 
-    .head(40).to_string(index=False)
+    .head(21).to_string(index=False)
 
 )
 
@@ -447,7 +522,7 @@ print(
         "Short_Score"
     ]]
     
-    .head(40).to_string(index=False)
+    .head(21).to_string(index=False)
 
 )
 
@@ -501,31 +576,33 @@ unclassified_stock_count = len(
 
 )
 
-
-save_daily_snapshot(
-    leading_themes,
-    emerging_themes,
-    weakening_themes,
-    lagging_themes,
-    total_stock_count,
-    classified_stock_count,
-    unclassified_stock_count,
-    theme_breadth
-)
-
-
-rotation_data = calculate_rotation_delta()
-
-save_rotation_delta(rotation_data)
-
-print_rotation_report(rotation_data)
-
-
 # ==========================================
-# UNKNOWN CLASSIFICATION REPORT
+# OPTIONAL INTELLIGENCE LAYER
 # ==========================================
 
+try:
 
+    save_daily_snapshot(
+        leading_themes,
+        emerging_themes,
+        weakening_themes,
+        lagging_themes,
+        total_stock_count,
+        classified_stock_count,
+        unclassified_stock_count,
+        theme_breadth
+    )
+
+    rotation_data = calculate_rotation_delta()
+
+    save_rotation_delta(rotation_data)
+
+    print_rotation_report(rotation_data)
+
+except Exception as e:
+
+    print()
+    print("INTELLIGENCE LAYER ERROR:", e)
 
 
 
