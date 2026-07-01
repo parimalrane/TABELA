@@ -1,3 +1,5 @@
+
+
 # TABELA FUTURE ROADMAP (LIVE RESEARCH VERSION)
 
 ## CURRENT STATUS
@@ -23,6 +25,12 @@ Primary rule:
 Market behavior has higher authority than code elegance.
 ```
 
+Secondary rule:
+
+```text
+Do not modify stable engines without strong market evidence.
+```
+
 ---
 
 # P0 — OBSERVATION PHASE (ACTIVE NOW)
@@ -43,6 +51,7 @@ Daily validation:
 * Repeated leadership persistence
 * Theme breadth anomalies
 * ETF vs Breadth divergence
+* Sponsorship persistence quality
 
 Rules:
 
@@ -50,6 +59,7 @@ Rules:
 * No architecture redesign
 * No history redesign
 * No formula redesign
+* No optimization for code elegance
 
 Status:
 
@@ -67,7 +77,9 @@ Short engine remains weakest component.
 
 Problem:
 
+```text
 Weak stock ≠ Short opportunity
+```
 
 Need distinction:
 
@@ -83,7 +95,9 @@ Future structure:
 
 ```text
 Bucket 1 → Healthy Pullback Watchlist
+
 Bucket 2 → Distribution Watchlist
+
 Bucket 3 → Structural Weakness Watchlist
 ```
 
@@ -128,8 +142,6 @@ Priority:
 VERY HIGH
 ```
 
-Do not build before sufficient observation period.
-
 ---
 
 # P3 — UNKNOWN CLASSIFICATION LEARNING LOOP
@@ -145,10 +157,6 @@ Update company_theme_mapping.csv
 
 Improve classification accuracy
 ```
-
-Purpose:
-
-Allow market behavior to improve classification intelligence.
 
 Rule:
 
@@ -180,10 +188,16 @@ Audit:
 * Margin weighting
 * Zacks weighting
 
-Research question:
+Research questions:
 
 ```text
-Are fundamental/analyst factors overweighted?
+Are fundamentals overweighted?
+
+Does RS formula overreward already extended leaders?
+
+Does 52 week position overweight late stage moves?
+
+Does YTD introduce stale performance bias?
 ```
 
 Core principle:
@@ -192,19 +206,17 @@ Core principle:
 Price leads analyst opinion
 ```
 
-Concern:
-
-Institutional accumulation may begin before fundamentals improve.
-
 Priority:
 
 ```text
 HIGH
 ```
 
+Deferred until observation phase ends.
+
 ---
 
-# P5 — BREADTH INTELLIGENCE RESEARCH (NEW)
+# P5 — BREADTH INTELLIGENCE RESEARCH
 
 Purpose:
 
@@ -228,14 +240,14 @@ Does low breadth + strong ETF indicate narrow leadership?
 Does broad breadth confirm institutional sponsorship?
 ```
 
-Example observed:
+Observed example:
 
 ```text
 Software
 
-ETF Rank = High
+Strong ETF ranking
 
-Breadth Participation = Weak
+Weak breadth participation
 ```
 
 Possible future output:
@@ -248,15 +260,13 @@ vs
 Narrow Institutional Concentration
 ```
 
-No coding changes now.
-
-Observation only.
-
 Priority:
 
 ```text
 HIGH
 ```
+
+Observation only.
 
 ---
 
@@ -272,12 +282,13 @@ Signals:
 * Long score deterioration
 * Theme deterioration
 * Exit from long universe
+* Days in leadership decline
 
 Goal:
 
-Detect institutional distribution early.
-
-Requires historical database.
+```text
+Detect institutional distribution early
+```
 
 Priority:
 
@@ -287,7 +298,107 @@ HIGH
 
 ---
 
-# P7 — THEME BREADTH EXPANSION ENGINE
+# P7 — EXECUTION TIMING RESEARCH (NEW)
+
+Observation discovered:
+
+```text
+TABELA identifies strong leaders
+
+But many leaders are already extended on charts
+```
+
+Important distinction:
+
+```text
+Institutional Leadership Detection
+
+≠
+
+Low Risk Entry Timing
+```
+
+Purpose:
+
+Study whether future optional layer can classify:
+
+```text
+Extended
+
+Pullback Candidate
+
+Consolidating Leader
+
+Fresh Breakout
+
+Late Stage Extended
+```
+
+Rule:
+
+```text
+DO NOT integrate into core TABELA
+```
+
+TABELA mission remains:
+
+```text
+Institutional capital detection
+```
+
+Priority:
+
+```text
+RESEARCH ONLY
+```
+
+---
+
+# P8 — COMPETITOR BENCHMARKING ENGINE (NEW)
+
+Reference systems:
+
+```text
+Deepvue Theme Tracker
+
+Institutional dashboards
+
+Theme ranking systems
+```
+
+Purpose:
+
+Benchmark TABELA against external institutional tools.
+
+Questions:
+
+```text
+What signals are competitors tracking?
+
+Where does TABELA outperform?
+
+Where does TABELA lack visibility?
+```
+
+Current edge:
+
+```text
+Historical intelligence layer
+
+Daily JSON database
+
+Proprietary rotation history
+```
+
+Priority:
+
+```text
+MEDIUM
+```
+
+---
+
+# P9 — THEME BREADTH EXPANSION ENGINE
 
 Track:
 
@@ -310,17 +421,17 @@ Requires history.
 Priority:
 
 ```text
-HIGH
+MEDIUM
 ```
 
 ---
 
-# P8 — ARCHITECTURE CLEANUP
+# P10 — ARCHITECTURE CLEANUP
 
 Current issue:
 
 ```text
-main.py becoming orchestration bottleneck
+main.py orchestration becoming large
 ```
 
 Future structure:
@@ -337,25 +448,28 @@ reporting_pipeline.py
 
 Rule:
 
-Optional modules never break core engine.
+```text
+Do not refactor for beauty.
+
+Refactor only if maintainability degrades.
+```
 
 Priority:
 
 ```text
-MEDIUM
+LOW
 ```
 
-Deferred until observation phase ends.
+Deferred.
 
 ---
 
-# P9 — THEME ARCHITECTURE REDESIGN
+# P11 — THEME ARCHITECTURE REDESIGN
 
 Current weaknesses:
 
 * Hardcoded ticker mapping
 * Manual maintenance burden
-* Multiple authority sources
 
 Future structure:
 
@@ -378,14 +492,12 @@ Objectives:
 Priority:
 
 ```text
-MEDIUM
+LOW
 ```
-
-No urgency.
 
 ---
 
-# P10 — INTERNAL ROTATION ENGINE
+# P12 — INTERNAL ROTATION ENGINE
 
 Purpose:
 
@@ -405,21 +517,19 @@ AVGO weakening
 
 Interpretation:
 
-Capital rotating internally.
+```text
+Capital rotating internally
+```
 
 Priority:
 
 ```text
-MEDIUM
+LATER
 ```
-
-Requires history.
 
 ---
 
-# P11 — MARKET REGIME ENGINE
-
-Classify environment.
+# P13 — MARKET REGIME ENGINE
 
 Possible regimes:
 
@@ -444,12 +554,12 @@ Understand macro institutional behavior.
 Priority:
 
 ```text
-MEDIUM
+LATER
 ```
 
 ---
 
-# P12 — QUIET ACCUMULATION ENGINE
+# P14 — QUIET ACCUMULATION ENGINE
 
 Goal:
 
@@ -469,7 +579,7 @@ Minimum 3 months data first.
 
 ---
 
-# P13 — PRE BREAKOUT FINGERPRINT ENGINE
+# P15 — PRE BREAKOUT FINGERPRINT ENGINE
 
 Study past winners.
 
@@ -499,8 +609,6 @@ Priority:
 LATER
 ```
 
-Need substantial history.
-
 ---
 
 # LONG TERM DESTINATION
@@ -525,3 +633,5 @@ Goal:
 ```text
 Understand institutional behavior before market recognizes it.
 ```
+
+---
