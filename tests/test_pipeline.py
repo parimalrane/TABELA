@@ -23,10 +23,31 @@ def test_build_theme_classification_assigns_expected_classes():
     assert theme_rank_map["Alpha"] == 1
     assert theme_raw_score_map["Alpha"] == 100.0
 
+    assert theme_score_map["Beta"] == 73.33
+    assert theme_score_map["Gamma"] == 46.67
+
     assert theme_class_map["Delta"] == "Lagging"
     assert theme_score_map["Delta"] == 20
     assert theme_rank_map["Delta"] == 4
     assert theme_raw_score_map["Delta"] == 40.0
+
+
+def test_build_theme_classification_single_theme_scores_100():
+    theme_strength = pd.DataFrame(
+        {
+            "Theme": ["Solo"],
+            "ETF_RS_Raw": [12.34],
+        }
+    )
+
+    theme_class_map, theme_score_map, theme_rank_map, theme_raw_score_map = (
+        build_theme_classification(theme_strength)
+    )
+
+    assert theme_class_map["Solo"] == "Lagging"
+    assert theme_score_map["Solo"] == 100
+    assert theme_rank_map["Solo"] == 1
+    assert theme_raw_score_map["Solo"] == 12.34
 
 
 def test_assign_stock_theme_classification_handles_unclassified_leader_fallback():
@@ -51,6 +72,6 @@ def test_assign_stock_theme_classification_handles_unclassified_leader_fallback(
     )
 
     assert result.loc[0, "Theme_Class"] == "Unclassified Leader"
-    assert result.loc[0, "Theme_Score"] == 75
+    assert result.loc[0, "Theme_Score"] == 80
     assert result.loc[0, "Theme_State"] is None
     assert result.loc[0, "ETF_Raw_Score"] is None

@@ -4,6 +4,7 @@ import os
 import pandas as pd
 
 from core.company_theme_engine import COMPANY_THEME
+from core.industry_theme_engine import INDUSTRY_THEME
 from core.stock_mapper import map_stock_theme
 from core.theme_hierarchy import THEME_PARENT_MAP
 from core.theme_parser import parse_theme
@@ -75,16 +76,21 @@ def build_theme_classification(theme_strength):
 
         if percentile <= 0.25:
             theme_class = "Leading"
-            theme_score = 100
         elif percentile <= 0.50:
             theme_class = "Emerging"
-            theme_score = 75
         elif percentile <= 0.75:
             theme_class = "Weakening"
-            theme_score = 40
         else:
             theme_class = "Lagging"
-            theme_score = 20
+
+        rank_position = i + 1
+        if total_themes == 1:
+            theme_score = 100
+        else:
+            theme_score = round(
+                20 + 80 * (total_themes - rank_position) / (total_themes - 1),
+                2,
+            )
 
         theme_class_map[theme] = theme_class
         theme_score_map[theme] = theme_score
@@ -117,13 +123,13 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
                 and row["Zacks_Score"] >= 85
             ):
                 theme_class = "Unclassified Leader"
-                theme_score = 75
+                theme_score = 80
                 theme_state = None
                 etf_raw_score = None
                 print("UNCLASSIFIED LEADER:", row["Ticker"])
             else:
                 theme_class = "Unknown"
-                theme_score = 20
+                theme_score = 60
                 theme_state = None
                 etf_raw_score = None
 
@@ -170,9 +176,12 @@ def map_stock_themes(stocks):
 
     for _, row in stocks.iterrows():
         ticker = row["Ticker"]
+        industry_key = str(row["Industry"]).strip().lower()
 
         if ticker in COMPANY_THEME:
             stock_theme = COMPANY_THEME[ticker]
+        elif industry_key in INDUSTRY_THEME:
+            stock_theme = INDUSTRY_THEME[industry_key]
         else:
             stock_theme = map_stock_theme(row["Industry"], row["Sector"])
 
@@ -301,7 +310,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
             "Theme_Class",
             "RS_Rating",
             "Long_Score",
-        ]].head(50).to_string(index=False)
+        ]].head(21).to_string(index=False)
     )
 
     print("\n\n")
@@ -314,7 +323,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
             "Theme_Class",
             "RS_Rating",
             "Short_Score",
-        ]].head(50).to_string(index=False)
+        ]].head(21).to_string(index=False)
     )
 
     print("\n")
