@@ -39,8 +39,7 @@ def save_daily_snapshot(
     {
         "theme": t["Theme"],
         "rank": int(t["Theme_Rank"]),
-        "score": round(float(t["ETF_RS_Raw"]), 2),
-        "days": 1
+        "score": round(float(t["ETF_RS_Raw"]), 2)
     }
     for t in leading_themes
 ],
@@ -50,8 +49,7 @@ def save_daily_snapshot(
     {
         "theme": t["Theme"],
         "rank": int(t["Theme_Rank"]),
-        "score": round(float(t["ETF_RS_Raw"]), 2),
-        "days": 1
+        "score": round(float(t["ETF_RS_Raw"]), 2)
     }
     for t in neutral_themes
 ],
@@ -61,8 +59,7 @@ def save_daily_snapshot(
     {
         "theme": t["Theme"],
         "rank": int(t["Theme_Rank"]),
-        "score": round(float(t["ETF_RS_Raw"]), 2),
-        "days": 1
+        "score": round(float(t["ETF_RS_Raw"]), 2)
     }
     for t in lagging_themes
 ],
