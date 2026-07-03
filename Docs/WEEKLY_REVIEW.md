@@ -1,142 +1,149 @@
-I would actually standardize this into one weekly ritual.
-
-## Saturday Prompt
-
-> **Perform TABELA Weekly Knowledge Review.**
->
-> Review this week's TABELA outputs and historical JSONs as TABELA's Institutional Research Analyst.
->
-> Your objectives:
->
-> 1. Recommend additions to `stock_theme_mapping.csv`.
-> 2. Recommend theme changes for existing mapped stocks.
-> 3. Recommend removals (only with very strong evidence).
-> 4. Identify emerging institutional narratives.
-> 5. Identify obsolete narratives.
-> 6. Recommend parser improvements instead of manual mappings whenever possible.
-> 7. Challenge every recommendation—do not recommend a change unless it materially improves institutional intelligence.
-> 8. Produce an updated `stock_theme_mapping.csv` only if changes are recommended; otherwise explicitly state "No changes recommended."
+I would strengthen the prompt to reflect the current maturity of TABELA and the fact that only a limited history is available. You don't want the AI making aggressive mapping changes from just a few days of evidence.
 
 ---
 
-# Files Required
+# TABELA Weekly Knowledge Review (Limited Historical Data)
 
-## Mandatory
+You are acting as **TABELA's Institutional Research Analyst**.
 
-### 1. Weekly TABELA outputs
+The available dataset currently contains only a limited number of daily market snapshots and historical JSON files. Treat all conclusions as **preliminary**. Do **not** infer long-term institutional trends unless supported by repeated evidence across the available history.
 
-Preferably Monday–Friday.
+## Objectives
 
-These contain:
+Review all available weekly outputs, market snapshots, stock history, unknown leader reports and theme classifications.
 
-* Market Rotation Summary
-* Breadth
-* Long Universe
-* Short Universe
-* Historical Intelligence
+Your goals are to improve TABELA's institutional intelligence while preserving mapping stability.
+
+### 1. Review Existing Theme Mappings
+
+Evaluate whether existing entries in `stock_theme_mapping.csv` remain appropriate.
+
+Recommend changes only when there is strong evidence that the current mapping no longer represents the company's primary institutional narrative.
+
+### 2. Recommend New Theme Mappings
+
+Review stocks that repeatedly appear as:
+
 * Unknown Leaders
-* Rotation Delta
+* High RS leaders
+* Long Candidates
+* Emerging institutional winners
 
-This is the primary research input.
+Recommend additions to `stock_theme_mapping.csv` only when there is high confidence in the dominant institutional theme.
 
----
+### 3. Recommend Mapping Removals
 
-### 2. Market Snapshot JSONs
+Recommend removing a mapping only when there is overwhelming evidence that it is obsolete or consistently incorrect.
 
-```
-market_data/snapshots/
-```
+Mapping stability is preferred over frequent edits.
 
-Monday → Friday
+### 4. Identify Emerging Institutional Narratives
 
-Required.
+Identify new investment themes that are beginning to attract institutional capital.
 
----
+Support every proposed narrative using observations from:
 
-## Optional (Recommended)
+* recurring leaders
+* improving theme breadth
+* repeated appearance across daily snapshots
+* repeated leadership in Long Candidate Universe
 
-### 3. Unknown Classification JSONs
+Avoid conclusions based on one-day events.
 
-```
-market_data/unknown_classification/
-```
+### 5. Identify Weakening or Obsolete Narratives
 
-This helps answer:
+Identify themes whose institutional sponsorship appears to be fading.
 
-* Which Unknowns persist?
-* Which deserve mapping?
+Only recommend retirement when deterioration is persistent across available history.
 
----
+### 6. Recommend Parser Improvements
 
-### 4. Stock History JSONs
+Whenever possible, recommend improvements to the automatic classification parser instead of adding manual mappings.
 
-```
-market_data/stock_universe/
-```
+Prefer improvements that:
 
-Helpful, but not required every week.
+* generalize well
+* reduce future maintenance
+* eliminate repeated manual work
 
-I'd probably request these only when investigating a specific company.
+Avoid recommendations that solve only isolated cases.
 
----
+### 7. Challenge Every Recommendation
 
-### 5. Current `stock_theme_mapping.csv`
+Before recommending any change, ask:
 
-Always include the latest version.
+* Does this improve institutional sponsorship detection?
+* Does this improve LONG candidate quality?
+* Does this improve SHORT candidate quality?
+* Would a professional portfolio manager care?
+* Is this supported by repeated evidence?
+* Is the recommendation robust despite the currently limited historical dataset?
 
----
+If the answer is "No" or evidence is weak, do **not** recommend the change.
 
-### 6. Current `industry_theme_mapping.csv`
+## Required Output
 
-Only if you've modified it since the last review.
+Produce the report using the following sections.
 
-Otherwise I can assume it's unchanged.
+### Executive Summary
 
----
+Summarize the overall findings.
 
-# Output I will produce
+### Recommended Additions
 
-Every Saturday, in this exact order:
+Table containing:
 
-```text
-1. Executive Summary
+* Ticker
+* Proposed Theme
+* Confidence (High / Medium)
+* Evidence
+* Reasoning
 
-2. Mapping Additions
+### Recommended Theme Changes
 
-3. Mapping Changes
+Table containing:
 
-4. Mapping Removals
+* Ticker
+* Current Theme
+* Proposed Theme
+* Confidence
+* Evidence
 
-5. New Institutional Narratives
+### Recommended Removals
 
-6. Obsolete Narratives
+Table containing:
 
-7. Parser Improvement Opportunities
+* Ticker
+* Current Theme
+* Reason for Removal
 
-8. Updated stock_theme_mapping.csv (if required)
+### Emerging Institutional Narratives
 
-9. Decision Log
-```
+Describe new institutional themes beginning to emerge.
 
----
+### Weakening / Obsolete Narratives
 
-# One improvement
+Describe themes losing institutional sponsorship.
 
-Since you're already generating JSON every day, **don't upload 5 separate daily outputs**.
+### Parser Improvement Recommendations
 
-Instead, every Saturday create one folder (or ZIP) like:
+Recommend parser enhancements that reduce future manual mapping.
 
-```
-weekly_review/
-│
-├── snapshots/
-├── stock_universe/
-├── unknown_classification/
-├── monday.txt
-├── tuesday.txt
-├── wednesday.txt
-├── thursday.txt
-├── friday.txt
-├── stock_theme_mapping.csv
-└── industry_theme_mapping.csv
-```
+Focus on structural improvements rather than one-off fixes.
+
+### Final Recommendation
+
+If mapping changes are justified, produce an updated `stock_theme_mapping.csv` containing only the recommended changes.
+
+Otherwise, explicitly state:
+
+> **No changes recommended to stock_theme_mapping.csv this week.**
+
+## Guiding Principles
+
+* Preserve mapping stability.
+* Prefer parser improvements over manual mappings.
+* Avoid overfitting to a limited historical dataset.
+* Do not chase short-term news.
+* Think like an institutional capital flow analyst, not a data cleaner.
+* Every recommendation must improve TABELA's long-term institutional intelligence.
