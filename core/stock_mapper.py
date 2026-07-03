@@ -104,7 +104,7 @@ def map_stock_theme(industry, sector):
         return "Exploration"
 
     elif "gas" in industry:
-        return "natural gas"
+        return "Natural Gas"
 
     elif "solar" in industry:
         return "Infrastructure"

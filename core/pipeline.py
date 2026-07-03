@@ -44,9 +44,29 @@ STOCK_FILE = os.path.join(DATA_DIR, "stocks.csv")
 
 
 def normalize_theme(theme):
+
     if pd.isna(theme):
         return None
-    return str(theme).strip().title()
+
+    theme = str(theme).strip()
+
+    normalization_map = {
+
+        "natural gas": "Natural Gas",
+        "Natural Gas": "Natural Gas",
+
+        "broad": "Broad",
+        "Broad": "Broad",
+
+        "mlp": "MLP",
+        "MLP": "MLP",
+
+        "reits": "REITs",
+        "REITs": "REITs"
+
+    }
+
+    return normalization_map.get(theme, theme)
 
 
 def print_theme_group(title, themes):
@@ -162,8 +182,26 @@ def load_inputs():
     etf_df = filter_institutional_etfs(etf_df)
 
     etf_df[["Sector", "Theme", "Subtheme"]] = etf_df["Investment Strategy"].apply(
-        lambda x: pd.Series(parse_theme(x))
-    )
+    lambda x: pd.Series(parse_theme(x))
+)
+
+# ETF Theme normalization (mandatory)
+
+    etf_df["Theme"] = etf_df["Theme"].replace({
+
+        "natural gas": "Natural Gas",
+        "Natural Gas": "Natural Gas",
+
+        "broad": "Broad",
+        "Broad": "Broad",
+
+        "mlp": "MLP",
+        "MLP": "MLP",
+
+        "reits": "REITs",
+        "REITs": "REITs"
+
+    })
 
     return stocks, etf_df
 
@@ -311,7 +349,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
             "Theme_Class",
             "RS_Rating",
             "Long_Score",
-        ]].head(60).to_string(index=False)
+        ]].head(50).to_string(index=False)
     )
 
     print("\n\n")
@@ -324,7 +362,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
             "Theme_Class",
             "RS_Rating",
             "Short_Score",
-        ]].head(60).to_string(index=False)
+        ]].head(50).to_string(index=False)
     )
 
     print("\n")

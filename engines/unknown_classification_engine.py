@@ -1,4 +1,5 @@
 import os
+import json
 from datetime import datetime
 from core.config import *
 
@@ -9,81 +10,67 @@ os.makedirs(UNKNOWN_DIR, exist_ok=True)
 
 def save_unknown_classification(stocks):
 
-    # ==========================================
-    # FILTER UNKNOWN EMERGING LEADERS ONLY
-    # ==========================================
-
     unknown_stocks = stocks[
-
         (stocks["Mapped_Theme"] == "Unknown")
-
         &
-
         (stocks["RS_Rating"] >= UNKNOWN_RS_THRESHOLD)
-
         &
-
         (stocks["Long_Score"] >= UNKNOWN_LONG_SCORE_THRESHOLD)
-
         &
-
         (
-
             stocks["Price as a % of 52 Wk H-L Range"]
-
             >=
-
             UNKNOWN_PRICE_POSITION_THRESHOLD
-
         )
-
         &
-
         (
-
             stocks["Market Cap (mil)"]
-
             >=
-
             UNKNOWN_MARKET_CAP_THRESHOLD
-
         )
-
     ].copy()
 
-    # ==========================================
-    # KEEP ONLY RESEARCH USEFUL COLUMNS
-    # ==========================================
-
-    output = unknown_stocks[[
-        "Ticker",
-        "Company Name",
-        "Sector",
-        "Industry",
-        "RS_Rating",
-        "Long_Score",
-        "Last Close",
-        "Price as a % of 52 Wk H-L Range",
-        "Market Cap (mil)"
-    ]]
-
-    # ==========================================
-    # SAVE CSV
-    # ==========================================
-
-    today = datetime.today().strftime("%Y-%m-%d")
-
-    output = output.sort_values(
+    unknown_stocks = unknown_stocks.sort_values(
         by=["RS_Rating", "Long_Score"],
         ascending=False
-)
+    )
+
+    unknown_data = []
+
+    for _, row in unknown_stocks.iterrows():
+
+        unknown_data.append({
+
+            "ticker": row["Ticker"],
+            "company_name": row["Company Name"],
+            "sector": row["Sector"],
+            "industry": row["Industry"],
+            "rs_rating": int(row["RS_Rating"]),
+            "long_score": float(row["Long_Score"]),
+            "last_close": float(row["Last Close"]),
+            "price_position": float(
+                row["Price as a % of 52 Wk H-L Range"]
+            ),
+            "market_cap_mil": float(
+                row["Market Cap (mil)"]
+            )
+
+        })
+
+    output = {
+
+        "date": datetime.today().strftime("%Y-%m-%d"),
+        "unknown_leaders": unknown_data
+
+    }
 
     filename = os.path.join(
         UNKNOWN_DIR,
-        f"{today}_unknown_emerging_leaders.csv"
+        f"{datetime.today().strftime('%Y-%m-%d')}_unknown_classification.json"
     )
 
-    output.to_csv(filename, index=False)
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=4)
 
     print()
-    print("UNKNOWN EMERGING LEADERS SAVED:", filename)
+    print("UNKNOWN CLASSIFICATION SAVED:", filename)

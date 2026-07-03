@@ -4,10 +4,7 @@
 INVALID_THEMES = [
 
     "Broad",
-    "broad",
-
     "Socially Responsible",
-
     "China",
     "Taiwan",
     "South Korea",
@@ -38,7 +35,7 @@ def parse_theme(strategy):
 
         sector = parts[0].strip()
 
-        theme = parts[1].strip()
+        theme = parts[1].strip().title()
 
     elif "artificial intelligence" in strategy.lower():
 

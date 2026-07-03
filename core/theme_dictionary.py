@@ -68,7 +68,7 @@ THEME_NORMALIZATION = {
         "Exploration",
         "Equipment and services",
         "Infrastructure",
-        "natural gas"
+        "Natural Gas"
     ],
 
 

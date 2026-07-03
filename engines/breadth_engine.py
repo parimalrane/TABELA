@@ -43,9 +43,14 @@ def build_theme_breadth(stocks):
 
         .groupby("Mapped_Theme")
 
-        .size()
+        .agg(
 
-        .reset_index(name="Strong_Stocks")
+            Strong_Stocks=("Mapped_Theme", "size"),
+
+            Avg_Strong_RS=("RS_Rating", "mean")
+
+        )
+        .reset_index()
 
     )
 
@@ -66,6 +71,7 @@ def build_theme_breadth(stocks):
 
 
     breadth["Strong_Stocks"] = breadth["Strong_Stocks"].fillna(0)
+    breadth["Avg_Strong_RS"] = breadth["Avg_Strong_RS"].fillna(0)
 
 
     # ==========================================
@@ -87,7 +93,13 @@ def build_theme_breadth(stocks):
 
     breadth["Weighted_Breadth_Score"] = round(
 
-        breadth["Breadth_Percent"] *
+        breadth["Breadth_Percent"]
+
+        *
+
+        (breadth["Avg_Strong_RS"] / 100)
+
+        *
 
         breadth["Total_Stocks"].apply(
 

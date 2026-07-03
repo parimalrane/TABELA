@@ -67,7 +67,7 @@ THEME_TRANSLATION = {
     "Alternative Energy": "Infrastructure",
     "Fuel Cell Infrastructure": "Infrastructure",
     "Energy Infrastructure": "Infrastructure",
-    "Natural Gas": "natural gas",
+    "Natural Gas": "Natural Gas",
     "Nuclear Infrastructure": "Uranium Mining",
     "Electronics Manufacturing": "Infrastructure",
     "Integrated Energy": "Energy",
