@@ -9,8 +9,7 @@ os.makedirs(SNAPSHOT_DIR, exist_ok=True)
 
 def save_daily_snapshot(
     leading_themes,
-    emerging_themes,
-    weakening_themes,
+    neutral_themes,
     lagging_themes,
     total_stock_count,
     classified_stock_count,
@@ -47,25 +46,14 @@ def save_daily_snapshot(
 ],
 
 
-"emerging_themes": [
+"neutral_themes": [
     {
         "theme": t["Theme"],
         "rank": int(t["Theme_Rank"]),
         "score": round(float(t["ETF_RS_Raw"]), 2),
         "days": 1
     }
-    for t in emerging_themes
-],
-
-
-"weakening_themes": [
-    {
-        "theme": t["Theme"],
-        "rank": int(t["Theme_Rank"]),
-        "score": round(float(t["ETF_RS_Raw"]), 2),
-        "days": 1
-    }
-    for t in weakening_themes
+    for t in neutral_themes
 ],
 
 

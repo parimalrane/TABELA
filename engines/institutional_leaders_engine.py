@@ -10,7 +10,7 @@ def build_institutional_leaders(stocks):
 
     strong_themes = stocks[
 
-        stocks["Theme_Class"].isin(["Leading", "Emerging"])
+        stocks["Theme_Class"].isin(["Leading"])
 
     ]
 

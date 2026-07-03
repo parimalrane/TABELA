@@ -42,22 +42,19 @@ def load_last_two_snapshots():
 def build_theme_category_map(snapshot):
 
     theme_map = {}
+    leading_themes = set()
+    lagging_themes = set()
 
     for item in snapshot["leading_themes"]:
         theme_map[item["theme"]] = {
             "state": "Leading",
             "days": item.get("days", 1)
         }
+        leading_themes.add(item["theme"])
 
-    for item in snapshot["emerging_themes"]:
+    for item in snapshot["neutral_themes"]:
         theme_map[item["theme"]] = {
-            "state": "Emerging",
-            "days": item.get("days", 1)
-        }
-
-    for item in snapshot["weakening_themes"]:
-        theme_map[item["theme"]] = {
-            "state": "Weakening",
+            "state": "Neutral",
             "days": item.get("days", 1)
         }
 
@@ -66,8 +63,9 @@ def build_theme_category_map(snapshot):
             "state": "Lagging",
             "days": item.get("days", 1)
         }
+        lagging_themes.add(item["theme"])
 
-    return theme_map
+    return theme_map, leading_themes, lagging_themes
 
 
 # ==========================================
@@ -81,8 +79,8 @@ def calculate_rotation_delta():
     if previous is None:
         return None
 
-    previous_map = build_theme_category_map(previous)
-    latest_map = build_theme_category_map(latest)
+    previous_map, previous_leading, previous_lagging = build_theme_category_map(previous)
+    latest_map, latest_leading, latest_lagging = build_theme_category_map(latest)
 
     previous_themes = set(previous_map.keys())
     latest_themes = set(latest_map.keys())
@@ -90,27 +88,6 @@ def calculate_rotation_delta():
     new_entries = list(latest_themes - previous_themes)
 
     exits = list(previous_themes - latest_themes)
-
-    category_changes = []
-
-    common_themes = previous_themes & latest_themes
-
-    for theme in common_themes:
-
-        old_category = previous_map[theme]["state"]
-        new_category = latest_map[theme]["state"]
-
-        if old_category != new_category:
-
-            category_changes.append({
-
-                "theme": theme,
-
-                "from": old_category,
-
-                "to": new_category
-
-            })
 
     rotation_data = {
 
@@ -122,7 +99,13 @@ def calculate_rotation_delta():
 
         "exits": sorted(exits),
 
-        "category_changes": category_changes
+        "entered_leading": sorted(latest_leading - previous_leading),
+
+        "exited_leading": sorted(previous_leading - latest_leading),
+
+        "entered_lagging": sorted(latest_lagging - previous_lagging),
+
+        "exited_lagging": sorted(previous_lagging - latest_lagging)
 
     }
 
@@ -188,14 +171,22 @@ def print_rotation_report(rotation_data):
     for theme in rotation_data["exits"]:
         print(theme)
 
-    print("\nCATEGORY CHANGES")
+    print("\nENTERED LEADING")
 
-    for item in rotation_data["category_changes"]:
+    for theme in rotation_data["entered_leading"]:
+        print(theme)
 
-        print(
+    print("\nEXITED LEADING")
 
-            f"{item['theme']} : "
+    for theme in rotation_data["exited_leading"]:
+        print(theme)
 
-            f"{item['from']} → {item['to']}"
+    print("\nENTERED LAGGING")
 
-        )
+    for theme in rotation_data["entered_lagging"]:
+        print(theme)
+
+    print("\nEXITED LAGGING")
+
+    for theme in rotation_data["exited_lagging"]:
+        print(theme)

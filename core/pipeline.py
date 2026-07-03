@@ -1,4 +1,5 @@
 import datetime
+import math
 import os
 
 import pandas as pd
@@ -13,6 +14,7 @@ from engines.breadth_engine import build_theme_breadth
 from engines.composite_engine import calculate_composite_score
 from engines.etf_engine import assign_theme_score, calculate_etf_rs
 from engines.etf_filter import filter_institutional_etfs, filter_valid_etfs
+from engines.historical_intelligence_engine import build_historical_intelligence_report
 from engines.institutional_leaders_engine import build_institutional_leaders
 from engines.long_scoring_engine import calculate_long_score
 from engines.rotation_engine import (
@@ -67,23 +69,27 @@ def build_theme_classification(theme_strength):
     theme_score_map = {}
     theme_rank_map = {}
     theme_raw_score_map = {}
+    leading_count = 1 if total_themes > 0 else 0
+
+    if total_themes > 1:
+        leading_count = max(1, math.ceil(total_themes * 0.20))
+    lagging_start = total_themes - leading_count + 1
 
     for i, row in theme_strength.iterrows():
-        percentile = (i + 1) / total_themes
         theme = row["Theme"]
-        theme_rank_map[theme] = i + 1
+        rank_position = i + 1
+        theme_rank_map[theme] = rank_position
         theme_raw_score_map[theme] = round(row["ETF_RS_Raw"], 2)
 
-        if percentile <= 0.25:
+        if total_themes == 1:
             theme_class = "Leading"
-        elif percentile <= 0.50:
-            theme_class = "Emerging"
-        elif percentile <= 0.75:
-            theme_class = "Weakening"
-        else:
+        elif rank_position <= leading_count:
+            theme_class = "Leading"
+        elif rank_position >= lagging_start:
             theme_class = "Lagging"
+        else:
+            theme_class = "Neutral"
 
-        rank_position = i + 1
         if total_themes == 1:
             theme_score = 100
         else:
@@ -259,12 +265,8 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
         theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Leading"])
     ][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
 
-    emerging_themes = theme_strength[
-        theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Emerging"])
-    ][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
-
-    weakening_themes = theme_strength[
-        theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Weakening"])
+    neutral_themes = theme_strength[
+        theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Neutral"])
     ][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
 
     lagging_themes = theme_strength[
@@ -283,8 +285,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
     print("==============================================")
 
     print_theme_group("LEADING THEMES", leading_themes)
-    print_theme_group("EMERGING THEMES", emerging_themes)
-    print_theme_group("WEAKENING THEMES", weakening_themes)
+    print_theme_group("NEUTRAL THEMES", neutral_themes)
     print_theme_group("LAGGING THEMES", lagging_themes)
 
     print("\n\n")
@@ -310,7 +311,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
             "Theme_Class",
             "RS_Rating",
             "Long_Score",
-        ]].head(21).to_string(index=False)
+        ]].head(60).to_string(index=False)
     )
 
     print("\n\n")
@@ -323,7 +324,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
             "Theme_Class",
             "RS_Rating",
             "Short_Score",
-        ]].head(21).to_string(index=False)
+        ]].head(60).to_string(index=False)
     )
 
     print("\n")
@@ -341,7 +342,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
     )
 
 
-def save_intelligence_outputs(leading_themes, emerging_themes, weakening_themes, lagging_themes, stocks, theme_breadth):
+def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, stocks, theme_breadth):
     total_stock_count = len(stocks)
     classified_stock_count = len(stocks[stocks["Theme_Class"] != "Unknown"])
     unclassified_stock_count = len(stocks[stocks["Theme_Class"] == "Unknown"])
@@ -349,14 +350,19 @@ def save_intelligence_outputs(leading_themes, emerging_themes, weakening_themes,
     try:
         save_daily_snapshot(
             leading_themes,
-            emerging_themes,
-            weakening_themes,
+            neutral_themes,
             lagging_themes,
             total_stock_count,
             classified_stock_count,
             unclassified_stock_count,
             theme_breadth,
         )
+
+        try:
+            build_historical_intelligence_report(min_days=3, max_days=21)
+        except Exception as e:
+            print()
+            print("HISTORICAL INTELLIGENCE ERROR:", e)
 
         rotation_data = calculate_rotation_delta()
         save_rotation_delta(rotation_data)
@@ -416,12 +422,8 @@ def run_tabela_pipeline():
         theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Leading"])
     ][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
 
-    emerging_themes = theme_strength[
-        theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Emerging"])
-    ][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
-
-    weakening_themes = theme_strength[
-        theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Weakening"])
+    neutral_themes = theme_strength[
+        theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Neutral"])
     ][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
 
     lagging_themes = theme_strength[
@@ -430,8 +432,7 @@ def run_tabela_pipeline():
 
     save_intelligence_outputs(
         leading_themes,
-        emerging_themes,
-        weakening_themes,
+        neutral_themes,
         lagging_themes,
         stocks,
         theme_breadth,

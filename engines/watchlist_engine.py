@@ -7,7 +7,7 @@ def build_long_watchlist(stocks):
 
         (
             stocks["Theme_Class"].isin(
-                ["Leading", "Emerging", "Unclassified Leader"]
+                ["Leading", "Unclassified Leader"]
             )
         )
 
