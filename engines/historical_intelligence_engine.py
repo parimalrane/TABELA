@@ -129,9 +129,25 @@ def detect_emerging_from_history(theme_daily_deltas):
                 class_transitions.append(f"{from_class} -> {to_class}")
 
         has_rank_improvement = rank_improvement is not None and rank_improvement > 0
-        has_score_improvement = score_improvement is not None and score_improvement > 0
+        has_score_improvement = score_improvement is not None and score_improvement >= 2
 
-        if not has_rank_improvement and not has_score_improvement and not class_transitions:
+        signal_strength = 0
+
+        if has_rank_improvement:
+            signal_strength += 1
+
+        if has_score_improvement:
+            signal_strength += 1
+
+        if class_transitions:
+            signal_strength += 2
+
+        if signal_strength < 2:
+            continue    
+        
+        current_class = points[-1].get("class")
+
+        if current_class == "Lagging":
             continue
 
         emerging_candidates.append(
@@ -195,9 +211,25 @@ def detect_weakening_from_history(theme_daily_deltas):
                 class_transitions.append(f"{from_class} -> {to_class}")
 
         has_rank_deterioration = rank_deterioration is not None and rank_deterioration > 0
-        has_score_decline = score_decline is not None and score_decline > 0
+        has_score_decline = score_decline is not None and score_decline >= 2
 
-        if not has_rank_deterioration and not has_score_decline and not class_transitions:
+        signal_strength = 0
+
+        if has_rank_deterioration:
+            signal_strength += 1
+
+        if has_score_decline:
+            signal_strength += 1
+
+        if class_transitions:
+            signal_strength += 2
+
+        if signal_strength < 2:
+            continue
+
+        current_class = points[-1].get("class")
+
+        if current_class == "Leading":
             continue
 
         weakening_candidates.append(

@@ -5,9 +5,10 @@ def build_institutional_leaders(stocks):
     selected_tickers = set()
 
     # ==========================================
-    # STAGE 1 → BEST STOCK FROM EACH STRONG THEME
+    # STAGE 1 → ADD ALL ELITE INSTITUTIONAL LEADERS
+    # FROM LEADING THEMES
     # ==========================================
-
+    
     strong_themes = stocks[
 
         stocks["Theme_Class"].isin(["Leading"])
