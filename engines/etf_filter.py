@@ -159,3 +159,20 @@ def filter_institutional_etfs(df):
     ].copy()
 
     return df
+
+
+def filter_etfs_with_sufficient_history(df):
+
+    required_periods = [
+
+        "Performance 1W (%)",
+        "Performance 1M (%)",
+        "Performance 3M (%)",
+        "Performance 6M (%)",
+        "Performance 1Y (%)",
+
+    ]
+
+    valid_mask = df[required_periods].notna().all(axis=1) & (df[required_periods] != 0.0).all(axis=1)
+
+    return df[valid_mask].copy(), int((~valid_mask).sum())

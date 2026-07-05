@@ -13,7 +13,11 @@ from core.theme_translation_engine import THEME_TRANSLATION
 from engines.breadth_engine import build_theme_breadth
 from engines.composite_engine import calculate_composite_score
 from engines.etf_engine import assign_theme_score, calculate_etf_rs
-from engines.etf_filter import filter_institutional_etfs, filter_valid_etfs
+from engines.etf_filter import (
+    filter_etfs_with_sufficient_history,
+    filter_institutional_etfs,
+    filter_valid_etfs,
+)
 from engines.historical_intelligence_engine import build_historical_intelligence_report
 from engines.institutional_leaders_engine import build_institutional_leaders
 from engines.long_scoring_engine import calculate_long_score
@@ -180,6 +184,14 @@ def load_inputs():
     etf_df = pd.read_csv(ETF_FILE)
     etf_df = filter_valid_etfs(etf_df)
     etf_df = filter_institutional_etfs(etf_df)
+    total_etfs = len(etf_df)
+    etf_df, excluded_insufficient_history = filter_etfs_with_sufficient_history(etf_df)
+
+    print(
+        f"ETF Eligibility: Total ETFs={total_etfs}, "
+        f"Eligible ETFs={len(etf_df)}, "
+        f"Excluded ETFs (Insufficient History)={excluded_insufficient_history}"
+    )
 
     etf_df[["Sector", "Theme", "Subtheme"]] = etf_df["Investment Strategy"].apply(
     lambda x: pd.Series(parse_theme(x))
@@ -207,7 +219,19 @@ def load_inputs():
 
 
 def build_theme_strength(etf_master):
-    theme_strength = etf_master.groupby("Theme")["ETF_RS_Raw"].mean().reset_index()
+    def weighted_theme_strength(group):
+        aum = pd.to_numeric(group["Market Value (mil)"], errors="coerce").fillna(0)
+        raw_score = pd.to_numeric(group["ETF_RS_Raw"], errors="coerce").fillna(0)
+        total_aum = aum.sum()
+
+        if total_aum > 0:
+            theme_strength = (raw_score * (aum / total_aum)).sum()
+        else:
+            theme_strength = raw_score.mean()
+
+        return pd.Series({"ETF_RS_Raw": theme_strength})
+
+    theme_strength = etf_master.groupby("Theme").apply(weighted_theme_strength).reset_index()
     theme_strength = theme_strength[theme_strength["Theme"] != "Filtered"]
     theme_strength = theme_strength.sort_values("ETF_RS_Raw", ascending=False).reset_index(drop=True)
     theme_strength["Theme_Rank"] = range(1, len(theme_strength) + 1)
