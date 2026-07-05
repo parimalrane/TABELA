@@ -7,9 +7,6 @@ PHONE_DEST="$HOME/storage/downloads"
 
 cd "$REPO" || exit 1
 
-echo "Refreshing code from GitHub..."
-git pull origin master || exit 1
-
 mkdir -p "$DEST"
 
 mapfile -t FILES < <(ls -t "$SRC"/*.csv 2>/dev/null | head -n 2)
