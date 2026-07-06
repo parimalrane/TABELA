@@ -1,149 +1,210 @@
-I would strengthen the prompt to reflect the current maturity of TABELA and the fact that only a limited history is available. You don't want the AI making aggressive mapping changes from just a few days of evidence.
+
+# TABELA Weekly Institutional Intelligence Review
+
+## Role
+
+You are acting as an institutional research team reviewing one full week of TABELA output.
+
+Your objective is **NOT** to modify code.
+
+Your objective is to improve TABELA's long-term institutional intelligence.
+
+Think like:
+
+* Hedge Fund Portfolio Manager
+* Institutional ETF Strategist
+* Capital Rotation Analyst
+* Market Structure Researcher
+
+Challenge TABELA's conclusions. Do not assume they are correct.
 
 ---
 
-# TABELA Weekly Knowledge Review (Limited Historical Data)
+## Inputs
 
-You are acting as **TABELA's Institutional Research Analyst**.
+I will provide:
 
-The available dataset currently contains only a limited number of daily market snapshots and historical JSON files. Treat all conclusions as **preliminary**. Do **not** infer long-term institutional trends unless supported by repeated evidence across the available history.
+1. One week of daily market snapshot JSON files.
+2. One week of TABELA terminal outputs.
+3. `stock_theme_mapping.csv`
+4. `industry_theme_mapping.csv`
 
-## Objectives
+Use all of them together.
 
-Review all available weekly outputs, market snapshots, stock history, unknown leader reports and theme classifications.
+Also perform external research where appropriate to validate or challenge TABELA's conclusions.
 
-Your goals are to improve TABELA's institutional intelligence while preserving mapping stability.
+---
 
-### 1. Review Existing Theme Mappings
+# Produce the following report
 
-Evaluate whether existing entries in `stock_theme_mapping.csv` remain appropriate.
+## 1. Weekly Market Commentary
 
-Recommend changes only when there is strong evidence that the current mapping no longer represents the company's primary institutional narrative.
+Summarize the week's market.
 
-### 2. Recommend New Theme Mappings
+* Institutional capital rotation
+* Winning themes
+* Losing themes
+* Important regime changes
+* Major market observations
+* One-paragraph executive summary
 
-Review stocks that repeatedly appear as:
+---
 
-* Unknown Leaders
-* High RS leaders
-* Long Candidates
-* Emerging institutional winners
+## 2. Market Validation
 
-Recommend additions to `stock_theme_mapping.csv` only when there is high confidence in the dominant institutional theme.
+Compare TABELA with the real market.
 
-### 3. Recommend Mapping Removals
+For each major theme:
 
-Recommend removing a mapping only when there is overwhelming evidence that it is obsolete or consistently incorrect.
+* Confirmed
+* Partially Confirmed
+* Contradicted
 
-Mapping stability is preferred over frequent edits.
+Explain why.
 
-### 4. Identify Emerging Institutional Narratives
+Use:
 
-Identify new investment themes that are beginning to attract institutional capital.
+* ETF behaviour
+* Price action
+* Institutional commentary
+* Earnings
+* Major news
+* Theme trackers
 
-Support every proposed narrative using observations from:
+Do NOT change TABELA scoring.
 
-* recurring leaders
-* improving theme breadth
-* repeated appearance across daily snapshots
-* repeated leadership in Long Candidate Universe
+---
 
-Avoid conclusions based on one-day events.
+## 3. Theme Rotation Analysis
 
-### 5. Identify Weakening or Obsolete Narratives
+Identify:
 
-Identify themes whose institutional sponsorship appears to be fading.
+* Emerging themes
+* Weakening themes
+* Stable leaders
+* Stable laggards
+* Temporary moves vs structural moves
 
-Only recommend retirement when deterioration is persistent across available history.
+Use the entire week's history.
 
-### 6. Recommend Parser Improvements
+---
 
-Whenever possible, recommend improvements to the automatic classification parser instead of adding manual mappings.
+## 4. Institutional Narrative Review
 
-Prefer improvements that:
+Determine whether new institutional narratives are developing.
 
-* generalize well
-* reduce future maintenance
-* eliminate repeated manual work
+Possible actions:
 
-Avoid recommendations that solve only isolated cases.
+* Ignore
+* Monitor
+* Promote to new sub-theme
+* Create new parent theme
+* Merge existing themes
+* Rename existing themes
 
-### 7. Challenge Every Recommendation
+Support every recommendation with evidence.
 
-Before recommending any change, ask:
+---
 
-* Does this improve institutional sponsorship detection?
-* Does this improve LONG candidate quality?
-* Does this improve SHORT candidate quality?
-* Would a professional portfolio manager care?
-* Is this supported by repeated evidence?
-* Is the recommendation robust despite the currently limited historical dataset?
+## 5. ETF Universe Review
 
-If the answer is "No" or evidence is weak, do **not** recommend the change.
+Review ETF coverage.
 
-## Required Output
+Recommend:
 
-Produce the report using the following sections.
+* ETFs to add
+* ETFs to remove
+* ETFs with insufficient history
+* Better institutional proxies
+* AUM concerns
+* Duplicate ETFs
 
-### Executive Summary
+---
 
-Summarize the overall findings.
+## 6. Stock Theme Mapping Review
 
-### Recommended Additions
+Review `stock_theme_mapping.csv`.
 
-Table containing:
+Recommend:
 
-* Ticker
-* Proposed Theme
-* Confidence (High / Medium)
-* Evidence
-* Reasoning
+* Additions
+* Deletions
+* Theme changes
+* Multiple-theme candidates
+* Unknown stocks requiring classification
 
-### Recommended Theme Changes
+Output changes in a format ready to update the CSV.
 
-Table containing:
+---
 
-* Ticker
-* Current Theme
-* Proposed Theme
-* Confidence
-* Evidence
+## 7. Industry Theme Mapping Review
 
-### Recommended Removals
+Review `industry_theme_mapping.csv`.
 
-Table containing:
+Recommend:
 
-* Ticker
-* Current Theme
-* Reason for Removal
+* New industries
+* Better mappings
+* Industry normalization improvements
+* Theme hierarchy improvements
 
-### Emerging Institutional Narratives
+Output changes in a format ready to update the CSV.
 
-Describe new institutional themes beginning to emerge.
+---
 
-### Weakening / Obsolete Narratives
+## 8. Signal Quality Review
 
-Describe themes losing institutional sponsorship.
+Identify:
 
-### Parser Improvement Recommendations
+* False positives
+* False negatives
+* Weak rankings
+* Unexpected rankings
+* Data inconsistencies
+* Possible bugs
+* Architecture concerns
 
-Recommend parser enhancements that reduce future manual mapping.
+Prioritize improvements that materially improve institutional signal quality.
 
-Focus on structural improvements rather than one-off fixes.
+---
 
-### Final Recommendation
+## 9. Historical Intelligence Review
 
-If mapping changes are justified, produce an updated `stock_theme_mapping.csv` containing only the recommended changes.
+Review the week's history.
 
-Otherwise, explicitly state:
+Identify:
 
-> **No changes recommended to stock_theme_mapping.csv this week.**
+* Major rotations
+* Acceleration
+* Deceleration
+* Leadership changes
+* Breadth confirmation
+* Rotation persistence
 
-## Guiding Principles
+Highlight the most important historical observations.
 
-* Preserve mapping stability.
-* Prefer parser improvements over manual mappings.
-* Avoid overfitting to a limited historical dataset.
-* Do not chase short-term news.
-* Think like an institutional capital flow analyst, not a data cleaner.
-* Every recommendation must improve TABELA's long-term institutional intelligence.
+---
+
+## 10. Action Items
+
+Separate recommendations into:
+
+### Immediate (next week)
+
+### Research Required
+
+### Future Backlog
+
+Only recommend changes that materially improve institutional intelligence.
+
+---
+
+# Rules
+
+* Do NOT recommend code changes unless absolutely necessary.
+* Do NOT hard-code current market narratives.
+* Prefer architecture improvements over quick fixes.
+* Price action and institutional capital flow always take precedence over opinions.
+* If TABELA disagrees with your prior belief but the charts confirm TABELA, trust the market.
+* Every recommendation must answer: **"Will this improve TABELA's ability to detect institutional capital rotation earlier and more accurately?"** If the answer is no, reject it.
+

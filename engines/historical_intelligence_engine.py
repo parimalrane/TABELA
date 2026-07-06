@@ -94,6 +94,26 @@ def compute_theme_daily_deltas(theme_daily_series):
 
     return deltas
 
+def emerging_priority(transitions):
+    if "Lagging -> Leading" in transitions:
+        return 0
+    if "Neutral -> Leading" in transitions:
+        return 1
+    if "Lagging -> Neutral" in transitions:
+        return 2
+    return 3
+
+
+def weakening_priority(transitions):
+    if "Leading -> Lagging" in transitions:
+        return 0
+    if "Leading -> Neutral" in transitions:
+        return 1
+    if "Neutral -> Lagging" in transitions:
+        return 2
+    return 3
+
+
 
 def detect_emerging_from_history(theme_daily_deltas):
     emerging_candidates = []
@@ -167,10 +187,10 @@ def detect_emerging_from_history(theme_daily_deltas):
 
     emerging_candidates.sort(
         key=lambda x: (
-            x.get("last_rank") if x.get("last_rank") is not None else 10**9,
-            -(x.get("rank_improvement") if x.get("rank_improvement") is not None else -10**9),
-            -(x.get("score_improvement") if x.get("score_improvement") is not None else -10**9),
-            x.get("theme", ""),
+            emerging_priority(x["class_transitions"]),
+            -(x.get("rank_improvement") or 0),
+            -(x.get("score_improvement") or 0),
+            x["theme"],
         )
     )
 
@@ -249,10 +269,10 @@ def detect_weakening_from_history(theme_daily_deltas):
 
     weakening_candidates.sort(
         key=lambda x: (
-            x.get("last_rank") if x.get("last_rank") is not None else 10**9,
-            -(x.get("rank_deterioration") if x.get("rank_deterioration") is not None else -10**9),
-            -(x.get("score_decline") if x.get("score_decline") is not None else -10**9),
-            x.get("theme", ""),
+            weakening_priority(x["class_transitions"]),
+            -(x.get("rank_deterioration") or 0),
+            -(x.get("score_decline") or 0),
+            x["theme"],
         )
     )
 
@@ -288,30 +308,108 @@ def build_historical_intelligence_report(min_days=3, max_days=21):
             print("PRELIMINARY SIGNALS")
             print()
 
-        print("EMERGING THEMES")
-        if emerging_candidates:
-            for c in emerging_candidates:
-                class_transition_text = ", ".join(c["class_transitions"]) if c["class_transitions"] else "None"
-                print(
-                    f"{c['theme']} | Rank Improvement {c['rank_improvement']} | "
-                    f"Score Improvement {c['score_improvement']} | "
-                    f"Class Transition {class_transition_text}"
-                )
-        else:
-            print("- None")
+    # -----------------------------
+    # Structural Rotation
+    # -----------------------------
+    structural = []
 
-        print()
-        print("WEAKENING THEMES")
-        if weakening_candidates:
-            for c in weakening_candidates:
-                class_transition_text = ", ".join(c["class_transitions"]) if c["class_transitions"] else "None"
-                print(
-                    f"{c['theme']} | Rank Deterioration {c['rank_deterioration']} | "
-                    f"Score Decline {c['score_decline']} | "
-                    f"Class Transition {class_transition_text}"
-                )
-        else:
-            print("- None")
+    for c in emerging_candidates:
+        if c["class_transitions"]:
+            structural.append({
+                **c,
+                "direction": "Emerging"
+            })
+
+    for c in weakening_candidates:
+        if c["class_transitions"]:
+            structural.append({
+                **c,
+                "direction": "Weakening"
+            })
+
+    print("STRUCTURAL ROTATION")
+    print("-" * 75)
+    print(f"{'Theme':<35}{'Rank Chg':>10}{'Score Chg':>11}   Transition")
+    print("-" * 75)
+
+    if structural:
+
+        structural.sort(
+            key=lambda x: (
+                0 if x["direction"] == "Emerging" else 1,
+                emerging_priority(x["class_transitions"])
+                if x["direction"] == "Emerging"
+                else weakening_priority(x["class_transitions"])
+            )
+        )
+
+        for c in structural:
+
+            if c["direction"] == "Emerging":
+                rank = f"{c['rank_improvement']:+}"
+                score = f"{c['score_improvement']:+.2f}"
+            else:
+                rank = f"{-c['rank_deterioration']:+}"
+                score = f"{-c['score_decline']:+.2f}"
+
+            print(
+                f"{c['theme']:<35}"
+                f"{rank:>6}"
+                f"{score:>10}   "
+                f"{', '.join(c['class_transitions'])}"
+            )
+    else:
+        print("- None")
+
+    print()
+
+    # -----------------------------
+    # Strengthening Themes
+    # -----------------------------
+    print("STRENGTHENING THEMES")
+    print("-" * 75)
+    print(f"{'Theme':<35}{'↑ Rank':>8}{'↑ Score':>10}")
+    print("-" * 75)
+
+    strengthening = [c for c in emerging_candidates if not c["class_transitions"]]
+
+    if strengthening:
+
+        for c in strengthening:
+
+            print(
+                f"{c['theme']:<35}"
+                f"{c['rank_improvement']:+6}"
+                f"{c['score_improvement']:+10.2f}"
+            )
+
+    else:
+        print("- None")
+
+    print()
+
+    # -----------------------------
+    # Weakening Themes
+    # -----------------------------
+    print("WEAKENING THEMES")
+    print("-" * 75)
+    print(f"{'Theme':<35}{'↓ Rank':>8}{'↓ Score':>10}")
+    print("-" * 75)
+
+    weakening = [c for c in weakening_candidates if not c["class_transitions"]]
+
+    if weakening:
+
+        for c in weakening:
+
+            print(
+                f"{c['theme']:<35}"
+                f"{-c['rank_deterioration']:+6}"
+                f"{-c['score_decline']:+10.2f}"
+            )
+
+    else:
+        print("- None")
 
     return {
         "window_days": len(snapshots),
