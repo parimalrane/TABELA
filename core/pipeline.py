@@ -366,28 +366,38 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
     print("\n\n")
     print("LONG CANDIDATE UNIVERSE")
     print("----------------------------")
-    print(
-        long_candidates[[
+    display_df = long_candidates[
+        [
             "Ticker",
             "Mapped_Theme",
             "Theme_Class",
             "RS_Rating",
             "Long_Score",
-        ]].head(50).to_string(index=False)
-    )
+            "Zacks Rank",
+        ]
+    ].copy()
+
+    display_df["Zacks Rank"] = display_df["Zacks Rank"].astype(int)
+
+    print(display_df.to_string(index=False))
 
     print("\n\n")
     print("SHORT CANDIDATE UNIVERSE")
     print("----------------------------")
-    print(
-        short_watchlist[[
+    display_df = short_watchlist[
+        [
             "Ticker",
             "Mapped_Theme",
             "Theme_Class",
             "RS_Rating",
-            "Short_Score",
-        ]].head(50).to_string(index=False)
-    )
+            "Long_Score",
+            "Zacks Rank",
+        ]
+    ].copy()
+
+    display_df["Zacks Rank"] = display_df["Zacks Rank"].astype(int)
+
+    print(display_df.to_string(index=False))
 
     print("\n")
     print("----------------------------")
