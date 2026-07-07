@@ -366,6 +366,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
     print("\n\n")
     print("LONG CANDIDATE UNIVERSE")
     print("----------------------------")
+    
     display_df = long_candidates[
         [
             "Ticker",
@@ -377,7 +378,17 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
         ]
     ].copy()
 
-    display_df["Zacks Rank"] = display_df["Zacks Rank"].astype(int)
+    display_df["Zacks Rank"] = (
+        display_df["Zacks Rank"]
+        .fillna(0)
+        .astype(int)
+        .astype(str)
+    )
+
+    display_df.loc[
+        display_df["Zacks Rank"].isin(["4", "5"]),
+        "Zacks Rank"
+    ] += "*"
 
     print(display_df.to_string(index=False))
 
