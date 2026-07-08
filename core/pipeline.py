@@ -227,9 +227,9 @@ def print_theme_strength_diagnostics(theme_strength):
             ).round(4)
 
     print("\n")
-    print("THEME STRENGTH DIAGNOSTICS (TEMP - ALL THEMES)")
-    print("----------------------------------------")
-    print(diagnostics_df.to_string(index=False))
+  #  print("THEME STRENGTH DIAGNOSTICS (TEMP - ALL THEMES)")
+  #  print("----------------------------------------")
+  #  print(diagnostics_df.to_string(index=False))
 
 
 def build_theme_classification(theme_strength):
