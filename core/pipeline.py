@@ -441,15 +441,15 @@ def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, st
             theme_breadth,
         )
 
+        rotation_data = calculate_rotation_delta()
+        save_rotation_delta(rotation_data)
+        print_rotation_report(rotation_data)
+
         try:
             build_historical_intelligence_report(min_days=3, max_days=21)
         except Exception as e:
             print()
             print("HISTORICAL INTELLIGENCE ERROR:", e)
-
-        rotation_data = calculate_rotation_delta()
-        save_rotation_delta(rotation_data)
-        print_rotation_report(rotation_data)
     except Exception as e:
         print()
         print("INTELLIGENCE LAYER ERROR:", e)

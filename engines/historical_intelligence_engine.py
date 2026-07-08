@@ -1,11 +1,16 @@
 import json
 import os
+from datetime import datetime
 
 
 SNAPSHOT_DIR = "market_data/snapshots"
+ROTATION_DIR = "market_data/rotation_delta"
 
 
 def load_snapshot_window(min_days=1, max_days=21):
+    if not os.path.exists(SNAPSHOT_DIR):
+        return []
+
     files = sorted([
         f for f in os.listdir(SNAPSHOT_DIR)
         if f.endswith(".json")
@@ -19,10 +24,44 @@ def load_snapshot_window(min_days=1, max_days=21):
 
     for filename in selected_files:
         path = os.path.join(SNAPSHOT_DIR, filename)
-        with open(path, "r") as f:
-            snapshots.append(json.load(f))
+        try:
+            with open(path, "r") as f:
+                snapshots.append(json.load(f))
+        except Exception as e:
+            print(f"WARNING: Skipping invalid snapshot: {filename} ({e})")
+            continue
 
     return snapshots
+
+
+def load_latest_valid_rotation_delta():
+    if not os.path.exists(ROTATION_DIR):
+        return None, None
+
+    files = sorted([
+        f for f in os.listdir(ROTATION_DIR)
+        if f.endswith("_rotation_delta.json")
+    ])
+
+    for filename in reversed(files):
+        path = os.path.join(ROTATION_DIR, filename)
+        try:
+            with open(path, "r") as f:
+                payload = json.load(f)
+
+            if not isinstance(payload, dict):
+                raise ValueError("rotation payload is not a JSON object")
+
+            rotation_date = payload.get("date")
+            if not rotation_date:
+                rotation_date = filename.replace("_rotation_delta.json", "")
+
+            return payload, rotation_date
+        except Exception as e:
+            print(f"WARNING: Skipping invalid rotation delta: {filename} ({e})")
+            continue
+
+    return None, None
 
 
 def build_theme_daily_series(snapshots):
@@ -283,6 +322,7 @@ def build_historical_intelligence_report(min_days=3, max_days=21):
     snapshots = load_snapshot_window(min_days=1, max_days=max_days)
     theme_daily_series = build_theme_daily_series(snapshots)
     raw_deltas = compute_theme_daily_deltas(theme_daily_series)
+    rotation_data, rotation_date = load_latest_valid_rotation_delta()
 
     theme_daily_deltas = {}
     for theme, points in theme_daily_series.items():
@@ -299,33 +339,177 @@ def build_historical_intelligence_report(min_days=3, max_days=21):
     print("HISTORICAL INTELLIGENCE REPORT")
     print("====================================")
 
-    if len(snapshots) < 2:
-        print()
-        print("INSUFFICIENT HISTORY")
+    today = datetime.today().strftime("%Y-%m-%d")
+
+    print()
+    print("DAILY ROTATION INTELLIGENCE")
+    print("-" * 75)
+
+    if rotation_data is None:
+        print("Daily rotation data unavailable.")
     else:
-        print()
-        if len(snapshots) < min_days:
-            print("PRELIMINARY SIGNALS")
-            print()
+        if rotation_date != today:
+            print(f"NOTE: Using latest available rotation data ({rotation_date}).")
+
+        rank_changes = rotation_data.get("rank_changes", [])
+        score_changes = rotation_data.get("score_changes", [])
+        strengthening_themes = rotation_data.get("strengthening_themes", [])
+        weakening_themes = rotation_data.get("weakening_themes", [])
+
+        top_strengthening = sorted(
+            [
+                x for x in strengthening_themes
+                if isinstance(x.get("score_change"), (int, float))
+            ],
+            key=lambda x: abs(x.get("score_change")),
+            reverse=True,
+        )[:5]
+
+        top_weakening = sorted(
+            [
+                x for x in weakening_themes
+                if isinstance(x.get("score_change"), (int, float))
+            ],
+            key=lambda x: abs(x.get("score_change")),
+            reverse=True,
+        )[:5]
+
+        print(f"Source Rotation Date: {rotation_date}")
+
+        top_rank_movers = sorted(
+            [
+                x for x in rank_changes
+                if isinstance(x.get("rank_change"), int)
+            ],
+            key=lambda x: abs(x.get("rank_change")),
+            reverse=True,
+        )[:10]
+
+        print("\nTOP RANK MOVERS")
+        print("-" * 75)
+        if top_rank_movers:
+            print(f"{'Theme':<35}Movement")
+            for item in top_rank_movers:
+                previous_rank = item.get("previous_rank")
+                latest_rank = item.get("latest_rank")
+                rank_change = item.get("rank_change")
+                arrow = "↑" if rank_change < 0 else "↓"
+                print(
+                    f"{item.get('theme', '-'):<35}"
+                    f"{arrow} {previous_rank} → {latest_rank}"
+                )
+        else:
+            print("None")
+
+        top_score_movers = sorted(
+            [
+                x for x in score_changes
+                if isinstance(x.get("score_change"), (int, float))
+            ],
+            key=lambda x: abs(x.get("score_change")),
+            reverse=True,
+        )[:10]
+
+        print("\nTOP SCORE MOVERS")
+        print("-" * 75)
+        if top_score_movers:
+            print(f"{'Theme':<35}Score Change")
+            for item in top_score_movers:
+                delta = item.get("score_change")
+                print(
+                    f"{item.get('theme', '-'):<35}"
+                    f"{delta:+.2f}"
+                )
+        else:
+            print("None")
+
+        print("\nSTRENGTHENING THEMES (TOP 5)")
+        print("-" * 75)
+        if top_strengthening:
+            for item in top_strengthening:
+                score_change = item.get("score_change")
+                print(
+                    f"{item.get('theme', '-'):<35}"
+                    f"score {score_change:+.2f}"
+                )
+        else:
+            print("None")
+
+        print("\nWEAKENING THEMES (TOP 5)")
+        print("-" * 75)
+        if top_weakening:
+            for item in top_weakening:
+                score_change = item.get("score_change")
+                print(
+                    f"{item.get('theme', '-'):<35}"
+                    f"score {score_change:+.2f}"
+                )
+        else:
+            print("None")
+
+    print()
 
     # -----------------------------
-    # Structural Rotation
+    # Structural Rotation (latest valid snapshot pair only)
     # -----------------------------
     structural = []
 
-    for c in emerging_candidates:
-        if c["class_transitions"]:
-            structural.append({
-                **c,
-                "direction": "Emerging"
-            })
+    if len(snapshots) >= 2:
+        previous_snapshot = snapshots[-2]
+        latest_snapshot = snapshots[-1]
 
-    for c in weakening_candidates:
-        if c["class_transitions"]:
-            structural.append({
-                **c,
-                "direction": "Weakening"
-            })
+        def build_state_map(snapshot):
+            state_map = {}
+
+            for state_key, state_name in [
+                ("leading_themes", "Leading"),
+                ("neutral_themes", "Neutral"),
+                ("lagging_themes", "Lagging"),
+            ]:
+                for item in snapshot.get(state_key, []):
+                    theme = item.get("theme")
+                    if theme is None:
+                        continue
+                    state_map[theme] = {
+                        "state": state_name,
+                        "rank": item.get("rank"),
+                        "score": item.get("score"),
+                    }
+
+            return state_map
+
+        previous_map = build_state_map(previous_snapshot)
+        latest_map = build_state_map(latest_snapshot)
+
+        for theme in sorted(set(previous_map.keys()) & set(latest_map.keys())):
+            previous_state = previous_map[theme].get("state")
+            latest_state = latest_map[theme].get("state")
+
+            if previous_state == latest_state:
+                continue
+
+            previous_rank = previous_map[theme].get("rank")
+            latest_rank = latest_map[theme].get("rank")
+
+            previous_score = previous_map[theme].get("score")
+            latest_score = latest_map[theme].get("score")
+
+            rank_delta = None
+            if previous_rank is not None and latest_rank is not None:
+                rank_delta = latest_rank - previous_rank
+
+            score_delta = None
+            if previous_score is not None and latest_score is not None:
+                score_delta = round(latest_score - previous_score, 2)
+
+            structural.append(
+                {
+                    "theme": theme,
+                    "rank_delta": rank_delta,
+                    "score_delta": score_delta,
+                    "transition": f"{previous_state} -> {latest_state}",
+                }
+            )
 
     print("STRUCTURAL ROTATION")
     print("-" * 75)
@@ -333,83 +517,28 @@ def build_historical_intelligence_report(min_days=3, max_days=21):
     print("-" * 75)
 
     if structural:
-
-        structural.sort(
-            key=lambda x: (
-                0 if x["direction"] == "Emerging" else 1,
-                emerging_priority(x["class_transitions"])
-                if x["direction"] == "Emerging"
-                else weakening_priority(x["class_transitions"])
-            )
-        )
-
         for c in structural:
-
-            if c["direction"] == "Emerging":
-                rank = f"{c['rank_improvement']:+}"
-                score = f"{c['score_improvement']:+.2f}"
-            else:
-                rank = f"{-c['rank_deterioration']:+}"
-                score = f"{-c['score_decline']:+.2f}"
+            rank = "n/a" if c["rank_delta"] is None else f"{c['rank_delta']:+}"
+            score = "n/a" if c["score_delta"] is None else f"{c['score_delta']:+.2f}"
 
             print(
                 f"{c['theme']:<35}"
                 f"{rank:>6}"
                 f"{score:>10}   "
-                f"{', '.join(c['class_transitions'])}"
+                f"{c['transition']}"
             )
     else:
-        print("- None")
+        print("No structural rotation detected.")
 
     print()
-
-    # -----------------------------
-    # Strengthening Themes
-    # -----------------------------
-    print("STRENGTHENING THEMES")
+    print("MULTI-DAY INTELLIGENCE")
     print("-" * 75)
-    print(f"{'Theme':<35}{'↑ Rank':>8}{'↑ Score':>10}")
-    print("-" * 75)
-
-    strengthening = [c for c in emerging_candidates if not c["class_transitions"]]
-
-    if strengthening:
-
-        for c in strengthening:
-
-            print(
-                f"{c['theme']:<35}"
-                f"{c['rank_improvement']:+6}"
-                f"{c['score_improvement']:+10.2f}"
-            )
-
+    if len(snapshots) < 20:
+        print(f"Insufficient historical data ({len(snapshots)}/20 snapshots collected).")
     else:
-        print("- None")
+        print("No multi-day intelligence available yet. More history required.")
 
     print()
-
-    # -----------------------------
-    # Weakening Themes
-    # -----------------------------
-    print("WEAKENING THEMES")
-    print("-" * 75)
-    print(f"{'Theme':<35}{'↓ Rank':>8}{'↓ Score':>10}")
-    print("-" * 75)
-
-    weakening = [c for c in weakening_candidates if not c["class_transitions"]]
-
-    if weakening:
-
-        for c in weakening:
-
-            print(
-                f"{c['theme']:<35}"
-                f"{-c['rank_deterioration']:+6}"
-                f"{-c['score_decline']:+10.2f}"
-            )
-
-    else:
-        print("- None")
 
     return {
         "window_days": len(snapshots),
@@ -417,4 +546,6 @@ def build_historical_intelligence_report(min_days=3, max_days=21):
         "theme_daily_deltas": raw_deltas,
         "emerging_candidates": emerging_candidates,
         "weakening_candidates": weakening_candidates,
+        "daily_rotation_date": rotation_date,
+        "daily_rotation_data": rotation_data,
     }

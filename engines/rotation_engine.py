@@ -15,22 +15,34 @@ os.makedirs(ROTATION_DIR, exist_ok=True)
 
 def load_last_two_snapshots():
 
+    if not os.path.exists(SNAPSHOT_DIR):
+        return None, None
+
     files = sorted([
         f for f in os.listdir(SNAPSHOT_DIR)
         if f.endswith(".json")
     ])
 
-    if len(files) < 2:
+    valid_snapshots = []
+
+    for filename in reversed(files):
+        path = os.path.join(SNAPSHOT_DIR, filename)
+        try:
+            with open(path, "r") as f:
+                snapshot = json.load(f)
+            valid_snapshots.append(snapshot)
+        except Exception as e:
+            print(f"WARNING: Skipping invalid snapshot: {filename} ({e})")
+            continue
+
+        if len(valid_snapshots) == 2:
+            break
+
+    if len(valid_snapshots) < 2:
         return None, None
 
-    previous_file = os.path.join(SNAPSHOT_DIR, files[-2])
-    latest_file = os.path.join(SNAPSHOT_DIR, files[-1])
-
-    with open(previous_file, "r") as f:
-        previous = json.load(f)
-
-    with open(latest_file, "r") as f:
-        latest = json.load(f)
+    latest = valid_snapshots[0]
+    previous = valid_snapshots[1]
 
     return previous, latest
 
@@ -48,24 +60,56 @@ def build_theme_category_map(snapshot):
     for item in snapshot["leading_themes"]:
         theme_map[item["theme"]] = {
             "state": "Leading",
-            "days": item.get("days", 1)
+            "days": item.get("days", 1),
+            "rank": item.get("rank"),
+            "score": item.get("score"),
         }
         leading_themes.add(item["theme"])
 
     for item in snapshot["neutral_themes"]:
         theme_map[item["theme"]] = {
             "state": "Neutral",
-            "days": item.get("days", 1)
+            "days": item.get("days", 1),
+            "rank": item.get("rank"),
+            "score": item.get("score"),
         }
 
     for item in snapshot["lagging_themes"]:
         theme_map[item["theme"]] = {
             "state": "Lagging",
-            "days": item.get("days", 1)
+            "days": item.get("days", 1),
+            "rank": item.get("rank"),
+            "score": item.get("score"),
         }
         lagging_themes.add(item["theme"])
 
     return theme_map, leading_themes, lagging_themes
+
+
+def classify_direction(previous_rank, latest_rank, previous_score, latest_score):
+
+    strengthening_signals = 0
+    weakening_signals = 0
+
+    if previous_rank is not None and latest_rank is not None:
+        if latest_rank < previous_rank:
+            strengthening_signals += 1
+        elif latest_rank > previous_rank:
+            weakening_signals += 1
+
+    if previous_score is not None and latest_score is not None:
+        if latest_score > previous_score:
+            strengthening_signals += 1
+        elif latest_score < previous_score:
+            weakening_signals += 1
+
+    if strengthening_signals > weakening_signals:
+        return "Strengthening"
+
+    if weakening_signals > strengthening_signals:
+        return "Weakening"
+
+    return "Stable"
 
 
 # ==========================================
@@ -89,6 +133,83 @@ def calculate_rotation_delta():
 
     exits = list(previous_themes - latest_themes)
 
+    persistent_same_bucket = []
+    rank_changes = []
+    score_changes = []
+    strengthening_themes = []
+    weakening_themes = []
+
+    for theme in sorted(previous_themes & latest_themes):
+        previous_payload = previous_map.get(theme, {})
+        latest_payload = latest_map.get(theme, {})
+
+        previous_state = previous_payload.get("state")
+        latest_state = latest_payload.get("state")
+
+        if previous_state != latest_state:
+            continue
+
+        previous_rank = previous_payload.get("rank")
+        latest_rank = latest_payload.get("rank")
+        previous_score = previous_payload.get("score")
+        latest_score = latest_payload.get("score")
+
+        rank_change = None
+        if previous_rank is not None and latest_rank is not None:
+            rank_change = latest_rank - previous_rank
+
+        score_change = None
+        if previous_score is not None and latest_score is not None:
+            score_change = round(latest_score - previous_score, 2)
+
+        has_rank_change = rank_change not in (None, 0)
+        has_score_change = score_change not in (None, 0)
+
+        if not (has_rank_change or has_score_change):
+            continue
+
+        direction = classify_direction(
+            previous_rank,
+            latest_rank,
+            previous_score,
+            latest_score,
+        )
+
+        change_record = {
+            "theme": theme,
+            "bucket": latest_state,
+            "previous_rank": previous_rank,
+            "latest_rank": latest_rank,
+            "rank_change": rank_change,
+            "previous_score": previous_score,
+            "latest_score": latest_score,
+            "score_change": score_change,
+            "direction": direction,
+        }
+
+        persistent_same_bucket.append(change_record)
+
+        if has_rank_change:
+            rank_changes.append(change_record)
+
+        if has_score_change:
+            score_changes.append(change_record)
+
+        if direction == "Strengthening":
+            strengthening_themes.append(change_record)
+        elif direction == "Weakening":
+            weakening_themes.append(change_record)
+
+    persistent_leaders = [
+        item for item in persistent_same_bucket
+        if item["bucket"] == "Leading"
+    ]
+
+    persistent_laggards = [
+        item for item in persistent_same_bucket
+        if item["bucket"] == "Lagging"
+    ]
+
     rotation_data = {
 
         "date": latest["date"],
@@ -105,7 +226,21 @@ def calculate_rotation_delta():
 
         "entered_lagging": sorted(latest_lagging - previous_lagging),
 
-        "exited_lagging": sorted(previous_lagging - latest_lagging)
+        "exited_lagging": sorted(previous_lagging - latest_lagging),
+
+        "persistent_same_bucket": persistent_same_bucket,
+
+        "persistent_leaders": persistent_leaders,
+
+        "persistent_laggards": persistent_laggards,
+
+        "rank_changes": rank_changes,
+
+        "score_changes": score_changes,
+
+        "strengthening_themes": strengthening_themes,
+
+        "weakening_themes": weakening_themes,
 
     }
 
@@ -141,52 +276,49 @@ def save_rotation_delta(rotation_data):
 # PRINT REPORT
 # ==========================================
 
+
+
 def print_rotation_report(rotation_data):
 
     if rotation_data is None:
         return
 
-    print("\nROTATION DELTA REPORT")
-    print("----------------------------")
+    print("\n========================================")
+    print("STRUCTURAL ROTATION SUMMARY")
+    print("========================================")
+    print(f"Period : {rotation_data['compared_against']} -> {rotation_data['date']}")
 
-    print(
+    print("\nSUMMARY")
+    print("----------------------------------------")
+    print(f"New Themes       : {len(rotation_data['new_entries'])}")
+    print(f"Exited Themes    : {len(rotation_data['exits'])}")
+    print(f"Entered Leading  : {len(rotation_data['entered_leading'])}")
+    print(f"Exited Leading   : {len(rotation_data['exited_leading'])}")
+    print(f"Entered Lagging  : {len(rotation_data['entered_lagging'])}")
+    print(f"Exited Lagging   : {len(rotation_data['exited_lagging'])}")
 
-        f"Period: "
+    print("\nRESULT")
+    print("----------------------------------------")
 
-        f"{rotation_data['compared_against']}"
+    changes_found = False
 
-        f" → "
+    sections = [
+        ("New Themes", rotation_data["new_entries"]),
+        ("Exited Themes", rotation_data["exits"]),
+        ("Promoted to Leading", rotation_data["entered_leading"]),
+        ("Demoted from Leading", rotation_data["exited_leading"]),
+        ("Dropped to Lagging", rotation_data["entered_lagging"]),
+        ("Recovered from Lagging", rotation_data["exited_lagging"]),
+    ]
 
-        f"{rotation_data['date']}"
+    for title, items in sections:
+        if items:
+            changes_found = True
+            print(f"\n{title}")
+            for item in sorted(items):
+                print(f"  • {item}")
 
-    )
-
-    print("\nNEW THEME ENTRIES")
-
-    for theme in rotation_data["new_entries"]:
-        print(theme)
-
-    print("\nTHEME EXITS")
-
-    for theme in rotation_data["exits"]:
-        print(theme)
-
-    print("\nENTERED LEADING")
-
-    for theme in rotation_data["entered_leading"]:
-        print(theme)
-
-    print("\nEXITED LEADING")
-
-    for theme in rotation_data["exited_leading"]:
-        print(theme)
-
-    print("\nENTERED LAGGING")
-
-    for theme in rotation_data["entered_lagging"]:
-        print(theme)
-
-    print("\nEXITED LAGGING")
-
-    for theme in rotation_data["exited_lagging"]:
-        print(theme)
+    if not changes_found:
+        print("✓ Market structure remained stable.")
+    else:
+        print("\n✓ Structural rotation detected.")
