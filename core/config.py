@@ -35,16 +35,26 @@ ETF_FILTERS = {
 
 
 THEME_STRENGTH_CONFIG = {
+    # Benchmark ETF used for relative-return subtraction.
     "BENCHMARK_TICKER": "QQQ",
+
+    # Relative-return weights by ETF performance period.
     "PERIOD_WEIGHTS": {
         "Performance 1M (%)": 0.45,
         "Performance 1W (%)": 0.30,
         "Performance 3M (%)": 0.20,
         "Performance 1D (%)": 0.05,
     },
-}
 
-THEME_AGGREGATION = "aum_weighted"
+    # Theme aggregation mode: "aum_weighted" or "equal_weight".
+    "AGGREGATION_MODE": "aum_weighted",
+
+    # Controls whether the 0-100 normalized diagnostic score is computed.
+    "ENABLE_NORMALIZATION": True,
+
+    # Enables temporary terminal diagnostics for Theme Strength.
+    "DEBUG_THEME_STRENGTH": True,
+}
 
 
 
