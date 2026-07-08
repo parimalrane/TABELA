@@ -34,6 +34,19 @@ ETF_FILTERS = {
 }
 
 
+THEME_STRENGTH_CONFIG = {
+    "BENCHMARK_TICKER": "QQQ",
+    "PERIOD_WEIGHTS": {
+        "Performance 1M (%)": 0.45,
+        "Performance 1W (%)": 0.30,
+        "Performance 3M (%)": 0.20,
+        "Performance 1D (%)": 0.05,
+    },
+}
+
+THEME_AGGREGATION = "aum_weighted"
+
+
 
 
 LONG_WEIGHTS = {

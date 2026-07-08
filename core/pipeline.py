@@ -5,6 +5,7 @@ import os
 import pandas as pd
 
 from core.company_theme_engine import COMPANY_THEME
+from core.config import THEME_AGGREGATION, THEME_STRENGTH_CONFIG
 from core.industry_theme_engine import INDUSTRY_THEME
 from core.stock_mapper import map_stock_theme
 from core.theme_hierarchy import THEME_PARENT_MAP
@@ -85,6 +86,105 @@ def print_theme_group(title, themes):
             f"{item['Theme']:<40} "
             f"{item['ETF_RS_Raw']:>12.2f}"
         )
+
+
+def print_theme_strength_diagnostics(theme_strength):
+    # Temporary diagnostics block for Theme Strength transparency.
+    diagnostics_columns = [
+        "Theme",
+        "Rel_1D",
+        "Rel_1W",
+        "Rel_1M",
+        "Rel_3M",
+        "WgtContr_1D",
+        "WgtContr_1W",
+        "WgtContr_1M",
+        "WgtContr_3M",
+        "ContrPct_1D",
+        "ContrPct_1W",
+        "ContrPct_1M",
+        "ContrPct_3M",
+        "Dominant_Driver",
+        "ETF_RS_Raw",
+        "Theme_Strength_Normalized",
+        "Theme_Rank",
+    ]
+
+    available_columns = [
+        column for column in diagnostics_columns
+        if column in theme_strength.columns
+    ]
+
+    if not available_columns:
+        return
+
+    diagnostics_df = theme_strength.sort_values("Theme_Rank").copy()
+
+    contribution_periods = ["1D", "1W", "1M", "3M"]
+
+    for period in contribution_periods:
+        wgt_column = f"WgtContr_{period}"
+        pct_column = f"ContrPct_{period}"
+
+        if wgt_column in diagnostics_df.columns:
+            diagnostics_df[pct_column] = diagnostics_df.apply(
+                lambda row: (
+                    (pd.to_numeric(row.get(wgt_column), errors="coerce")
+                     / pd.to_numeric(row.get("ETF_RS_Raw"), errors="coerce")) * 100.0
+                )
+                if pd.notna(pd.to_numeric(row.get("ETF_RS_Raw"), errors="coerce"))
+                and pd.to_numeric(row.get("ETF_RS_Raw"), errors="coerce") != 0
+                and pd.notna(pd.to_numeric(row.get(wgt_column), errors="coerce"))
+                else 0.0,
+                axis=1,
+            )
+
+    def resolve_dominant_driver(row):
+        period_contributions = {}
+        for period in contribution_periods:
+            wgt_value = pd.to_numeric(row.get(f"WgtContr_{period}"), errors="coerce")
+            period_contributions[period] = 0.0 if pd.isna(wgt_value) else float(wgt_value)
+
+        if not period_contributions:
+            return "N/A"
+
+        return max(period_contributions, key=lambda period: abs(period_contributions[period]))
+
+    diagnostics_df["Dominant_Driver"] = diagnostics_df.apply(resolve_dominant_driver, axis=1)
+
+    available_columns = [
+        column for column in diagnostics_columns
+        if column in diagnostics_df.columns
+    ]
+    diagnostics_df = diagnostics_df[available_columns]
+
+    numeric_columns = [
+        "Rel_1D",
+        "Rel_1W",
+        "Rel_1M",
+        "Rel_3M",
+        "WgtContr_1D",
+        "WgtContr_1W",
+        "WgtContr_1M",
+        "WgtContr_3M",
+        "ContrPct_1D",
+        "ContrPct_1W",
+        "ContrPct_1M",
+        "ContrPct_3M",
+        "ETF_RS_Raw",
+        "Theme_Strength_Normalized",
+    ]
+
+    for column in numeric_columns:
+        if column in diagnostics_df.columns:
+            diagnostics_df[column] = pd.to_numeric(
+                diagnostics_df[column], errors="coerce"
+            ).round(4)
+
+    print("\n")
+    print("THEME STRENGTH DIAGNOSTICS (TEMP - ALL THEMES)")
+    print("----------------------------------------")
+    print(diagnostics_df.to_string(index=False))
 
 
 def build_theme_classification(theme_strength):
@@ -175,13 +275,50 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
     return stocks
 
 
+def extract_benchmark_returns(raw_etf_df):
+    benchmark_ticker = str(
+        THEME_STRENGTH_CONFIG.get("BENCHMARK_TICKER", "QQQ")
+    ).strip().upper()
+    period_weights = dict(THEME_STRENGTH_CONFIG.get("PERIOD_WEIGHTS", {}))
+
+    if not period_weights:
+        period_weights = {
+            "Performance 1M (%)": 0.45,
+            "Performance 1W (%)": 0.30,
+            "Performance 3M (%)": 0.20,
+            "Performance 1D (%)": 0.05,
+        }
+
+    benchmark_rows = raw_etf_df[
+        raw_etf_df["Ticker"].astype(str).str.upper() == benchmark_ticker
+    ]
+
+    if benchmark_rows.empty:
+        raise ValueError(
+            f"Benchmark ETF '{benchmark_ticker}' not found in ETF.csv."
+        )
+
+    benchmark_row = benchmark_rows.iloc[0]
+    benchmark_returns = {}
+
+    for period in period_weights:
+        benchmark_returns[period] = pd.to_numeric(
+            benchmark_row.get(period), errors="coerce"
+        )
+
+    return benchmark_returns
+
+
 def load_inputs():
     stocks = pd.read_csv(STOCK_FILE)
     stocks = stocks[
         stocks["Zacks Rank"].astype(str).str.startswith(("1", "2", "3", "4", "5"))
     ].copy()
 
-    etf_df = pd.read_csv(ETF_FILE)
+    raw_etf_df = pd.read_csv(ETF_FILE)
+    benchmark_returns = extract_benchmark_returns(raw_etf_df)
+
+    etf_df = raw_etf_df.copy()
     etf_df = filter_valid_etfs(etf_df)
     etf_df = filter_institutional_etfs(etf_df)
     total_etfs = len(etf_df)
@@ -215,24 +352,162 @@ def load_inputs():
 
     })
 
-    return stocks, etf_df
+    return stocks, etf_df, benchmark_returns
 
 
-def build_theme_strength(etf_master):
-    def weighted_theme_strength(group):
-        aum = pd.to_numeric(group["Market Value (mil)"], errors="coerce").fillna(0)
-        raw_score = pd.to_numeric(group["ETF_RS_Raw"], errors="coerce").fillna(0)
-        total_aum = aum.sum()
+def build_theme_strength(etf_master, benchmark_returns):
+    benchmark_ticker = str(
+        THEME_STRENGTH_CONFIG.get("BENCHMARK_TICKER", "QQQ")
+    ).strip().upper()
+    period_weights = dict(THEME_STRENGTH_CONFIG.get("PERIOD_WEIGHTS", {}))
 
-        if total_aum > 0:
-            theme_strength = (raw_score * (aum / total_aum)).sum()
+    if not period_weights:
+        period_weights = {
+            "Performance 1M (%)": 0.45,
+            "Performance 1W (%)": 0.30,
+            "Performance 3M (%)": 0.20,
+            "Performance 1D (%)": 0.05,
+        }
+
+    period_alias_map = {
+        "Performance 1D (%)": "1D",
+        "Performance 1W (%)": "1W",
+        "Performance 1M (%)": "1M",
+        "Performance 3M (%)": "3M",
+    }
+
+    etf_master = etf_master.copy()
+
+    # Prevent benchmark ETF membership from biasing any theme score.
+    etf_master = etf_master[
+        etf_master["Ticker"].astype(str).str.upper() != benchmark_ticker
+    ].copy()
+
+    def compute_relative_components(row):
+        weighted_sum = 0.0
+        total_weight = 0.0
+        result = {}
+
+        for period, weight in period_weights.items():
+            etf_return = pd.to_numeric(row.get(period), errors="coerce")
+            benchmark_return = benchmark_returns.get(period)
+            period_alias = period_alias_map.get(period, period)
+
+            if pd.isna(etf_return) or pd.isna(benchmark_return):
+                result[f"Rel_{period_alias}"] = None
+                result[f"WgtContr_{period_alias}"] = 0.0
+                continue
+
+            relative_return = etf_return - benchmark_return
+            result[f"Rel_{period_alias}"] = relative_return
+            weighted_sum += relative_return * weight
+            total_weight += weight
+
+        if total_weight == 0:
+            for period in period_weights:
+                period_alias = period_alias_map.get(period, period)
+                result[f"WgtContr_{period_alias}"] = 0.0
+            result["Relative_ETF_Score"] = 0.0
+            return pd.Series(result)
+
+        for period, weight in period_weights.items():
+            period_alias = period_alias_map.get(period, period)
+            relative_value = result.get(f"Rel_{period_alias}")
+            if relative_value is None or pd.isna(relative_value):
+                result[f"WgtContr_{period_alias}"] = 0.0
+            else:
+                result[f"WgtContr_{period_alias}"] = relative_value * (weight / total_weight)
+
+        result["Relative_ETF_Score"] = weighted_sum / total_weight
+        return pd.Series(result)
+
+    relative_components = etf_master.apply(compute_relative_components, axis=1)
+    etf_master = pd.concat([etf_master, relative_components], axis=1)
+
+    aggregation_mode = str(THEME_AGGREGATION).strip().lower()
+
+    diagnostics_columns = [
+        "Relative_ETF_Score",
+        "Rel_1D",
+        "Rel_1W",
+        "Rel_1M",
+        "Rel_3M",
+        "WgtContr_1D",
+        "WgtContr_1W",
+        "WgtContr_1M",
+        "WgtContr_3M",
+    ]
+
+    def aggregate_theme_relative_score(group):
+        aum = pd.to_numeric(group["Market Value (mil)"], errors="coerce")
+        diagnostics_df = group[diagnostics_columns].apply(pd.to_numeric, errors="coerce").fillna(0)
+
+        if aggregation_mode == "equal_weight":
+            aggregate_values = diagnostics_df.mean()
+        elif aggregation_mode == "aum_weighted":
+            valid_aum = aum.where(aum > 0)
+            total_aum = valid_aum.fillna(0).sum()
+
+            if total_aum > 0:
+                weights = valid_aum.fillna(0) / total_aum
+                aggregate_values = diagnostics_df.mul(weights, axis=0).sum()
+            else:
+                aggregate_values = diagnostics_df.mean()
         else:
-            theme_strength = raw_score.mean()
+            raise ValueError(
+                f"Unsupported THEME_AGGREGATION mode: '{THEME_AGGREGATION}'."
+            )
 
-        return pd.Series({"ETF_RS_Raw": theme_strength})
+        return pd.Series({
+            "Theme_Relative_Score": aggregate_values.get("Relative_ETF_Score", 0.0),
+            "Rel_1D": aggregate_values.get("Rel_1D", 0.0),
+            "Rel_1W": aggregate_values.get("Rel_1W", 0.0),
+            "Rel_1M": aggregate_values.get("Rel_1M", 0.0),
+            "Rel_3M": aggregate_values.get("Rel_3M", 0.0),
+            "WgtContr_1D": aggregate_values.get("WgtContr_1D", 0.0),
+            "WgtContr_1W": aggregate_values.get("WgtContr_1W", 0.0),
+            "WgtContr_1M": aggregate_values.get("WgtContr_1M", 0.0),
+            "WgtContr_3M": aggregate_values.get("WgtContr_3M", 0.0),
+        })
 
-    theme_strength = etf_master.groupby("Theme").apply(weighted_theme_strength).reset_index()
-    theme_strength = theme_strength[theme_strength["Theme"] != "Filtered"]
+    theme_strength = (
+        etf_master.groupby("Theme").apply(aggregate_theme_relative_score).reset_index()
+    )
+    theme_strength = theme_strength[theme_strength["Theme"] != "Filtered"].copy()
+
+    min_score = theme_strength["Theme_Relative_Score"].min()
+    max_score = theme_strength["Theme_Relative_Score"].max()
+
+    theme_strength["ETF_RS_Raw"] = theme_strength["Theme_Relative_Score"].round(4)
+
+    if pd.isna(min_score) or pd.isna(max_score):
+        theme_strength["Theme_Strength_Normalized"] = 0.0
+    elif max_score == min_score:
+        theme_strength["Theme_Strength_Normalized"] = 100.0
+    else:
+        theme_strength["Theme_Strength_Normalized"] = (
+            (theme_strength["Theme_Relative_Score"] - min_score)
+            / (max_score - min_score)
+            * 100.0
+        )
+
+    theme_strength["Theme_Strength_Normalized"] = theme_strength[
+        "Theme_Strength_Normalized"
+    ].round(2)
+
+    theme_strength = theme_strength[[
+        "Theme",
+        "ETF_RS_Raw",
+        "Theme_Strength_Normalized",
+        "Rel_1D",
+        "Rel_1W",
+        "Rel_1M",
+        "Rel_3M",
+        "WgtContr_1D",
+        "WgtContr_1W",
+        "WgtContr_1M",
+        "WgtContr_3M",
+    ]]
     theme_strength = theme_strength.sort_values("ETF_RS_Raw", ascending=False).reset_index(drop=True)
     theme_strength["Theme_Rank"] = range(1, len(theme_strength) + 1)
     return theme_strength
@@ -349,6 +624,7 @@ def print_report(today, theme_strength, theme_class_map, long_candidates, short_
     print_theme_group("LEADING THEMES", leading_themes)
     print_theme_group("NEUTRAL THEMES", neutral_themes)
     print_theme_group("LAGGING THEMES", lagging_themes)
+    print_theme_strength_diagnostics(theme_strength)
 
     print("\n\n")
     print("THEME BREADTH ANALYSIS")
@@ -464,12 +740,12 @@ def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, st
 def run_tabela_pipeline():
     print("\n")
 
-    stocks, etf_df = load_inputs()
+    stocks, etf_df, benchmark_returns = load_inputs()
     etf_df = calculate_etf_rs(etf_df)
     etf_df = assign_theme_score(etf_df)
     etf_master = etf_df.copy()
 
-    theme_strength = build_theme_strength(etf_master)
+    theme_strength = build_theme_strength(etf_master, benchmark_returns)
     theme_class_map, theme_score_map, theme_rank_map, theme_raw_score_map = build_theme_classification(theme_strength)
 
     stocks = map_stock_themes(stocks)
