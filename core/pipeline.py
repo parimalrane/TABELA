@@ -577,12 +577,11 @@ def score_stocks(stocks):
 
 def build_candidates(stocks):
     long_watchlist = build_long_watchlist(stocks)
-    short_watchlist = build_short_watchlist(stocks)
+    distribution_watchlist = build_short_watchlist(stocks)
     theme_breadth = build_theme_breadth(stocks)
     institutional_leaders = build_institutional_leaders(stocks)
 
     long_watchlist = long_watchlist.sort_values("Long_Score", ascending=False)
-    short_watchlist = short_watchlist.sort_values("Short_Score", ascending=False)
 
     long_tickers = set(long_watchlist["Ticker"])
     long_candidates = pd.concat([long_watchlist, institutional_leaders])
@@ -592,6 +591,10 @@ def build_candidates(stocks):
         axis=1,
     )
     long_candidates = long_candidates.sort_values("Long_Score", ascending=False)
+
+    distribution_watchlist = distribution_watchlist[
+        ~distribution_watchlist["Ticker"].isin(long_tickers)
+    ]
 
     stocks["Long_Rank"] = None
     stocks["Short_Rank"] = None
@@ -603,11 +606,11 @@ def build_candidates(stocks):
         stocks.loc[stocks["Ticker"] == clean_ticker, "Long_Rank"] = rank
         stocks.loc[stocks["Ticker"] == clean_ticker, "Is_Long_Candidate"] = True
 
-    for rank, ticker in enumerate(short_watchlist["Ticker"], start=1):
+    for rank, ticker in enumerate(distribution_watchlist["Ticker"], start=1):
         stocks.loc[stocks["Ticker"] == ticker, "Short_Rank"] = rank
         stocks.loc[stocks["Ticker"] == ticker, "Is_Short_Candidate"] = True
 
-    return stocks, long_candidates, short_watchlist, theme_breadth
+    return stocks, long_candidates, distribution_watchlist, theme_breadth
 
 
 def save_history(stocks):
@@ -623,7 +626,7 @@ def print_report(
     theme_strength,
     theme_class_map,
     long_candidates,
-    short_watchlist,
+    distribution_watchlist,
     theme_breadth,
     theme_strength_settings,
 ):
@@ -699,35 +702,48 @@ def print_report(
     print(display_df.to_string(index=False))
 
     print("\n\n")
-    print("SHORT CANDIDATE UNIVERSE")
-    print("----------------------------")
-    display_df = short_watchlist[
-        [
-            "Ticker",
-            "Mapped_Theme",
-            "Theme_Class",
-            "RS_Rating",
-            "Long_Score",
-            "Zacks Rank",
-        ]
-    ].copy()
+    print("========================================")
+    print("DISTRIBUTION WATCHLIST")
+    print("========================================")
 
-    display_df["Zacks Rank"] = display_df["Zacks Rank"].astype(int)
+    if distribution_watchlist.empty:
+        print("No qualified distribution candidates today.")
+    else:
+        display_df = distribution_watchlist[
+            [
+                "Ticker",
+                "Mapped_Theme",
+                "Theme_Class",
+                "RS_Rating",
+                "Composite_Score",
+                "Distribution_Reasons",
+            ]
+        ].copy()
 
-    print(display_df.to_string(index=False))
+        display_df = display_df.rename(
+            columns={
+                "Mapped_Theme": "Theme",
+                "Theme_Class": "Theme Class",
+                "RS_Rating": "RS Rating",
+                "Composite_Score": "Composite Score",
+                "Distribution_Reasons": "Reasons",
+            }
+        )
+
+        print(display_df.to_string(index=False))
 
     print("\n")
     print("----------------------------")
     print("TRADINGVIEW WATCHLIST EXPORT")
     print("----------------------------")
     long_list = ",".join(long_candidates["Ticker"].head(50).astype(str).tolist())
-    short_list = ",".join(short_watchlist["Ticker"].head(50).astype(str).tolist())
+    short_list = ",".join(distribution_watchlist["Ticker"].head(50).astype(str).tolist())
     print("###LONG," + long_list + ",")
     print("###SHORT," + short_list)
 
     compare_watchlists(
         long_candidates["Ticker"].head(50).tolist(),
-        short_watchlist["Ticker"].head(50).tolist(),
+        distribution_watchlist["Ticker"].head(50).tolist(),
     )
 
 
@@ -799,7 +815,7 @@ def run_tabela_pipeline():
     )
 
     stocks = score_stocks(stocks)
-    stocks, long_candidates, short_watchlist, theme_breadth = build_candidates(stocks)
+    stocks, long_candidates, distribution_watchlist, theme_breadth = build_candidates(stocks)
 
     today = datetime.date.today()
     save_history(stocks)
@@ -809,7 +825,7 @@ def run_tabela_pipeline():
         theme_strength,
         theme_class_map,
         long_candidates,
-        short_watchlist,
+        distribution_watchlist,
         theme_breadth,
         theme_strength_settings,
     )

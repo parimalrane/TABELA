@@ -1,48 +1,7 @@
-from core.config import SHORT_FILTERS
+from engines.distribution_engine import build_distribution_watchlist
 
 
 def build_short_watchlist(stocks):
-
-    short_watchlist = stocks[
-
-        (
-
-            stocks["Short_Score"]
-
-            >= SHORT_FILTERS["MIN_SHORT_SCORE"]
-
-        )
-
-        &
-
-        (
-
-            (stocks["Theme_Class"] == "Weakening")
-
-            |
-
-            (stocks["Theme_Class"] == "Lagging")
-
-        )
-
-        &
-
-        (
-
-            stocks["Weakness_Score"] >= 70
-
-        )
-
-    ]
-
-
-    short_watchlist = short_watchlist.sort_values(
-
-        "Short_Score",
-
-        ascending=False
-
-    )
-
-
-    return short_watchlist
+    # Backward-compatible wrapper for existing imports.
+    # The short universe is now sourced from the distribution engine.
+    return build_distribution_watchlist(stocks)

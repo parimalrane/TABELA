@@ -182,6 +182,10 @@ def save_stock_history(stocks):
                 safe_float(row["Long_Score"]), 2
             ),
 
+            "composite_score": round(
+                safe_float(row.get("Composite_Score", 0)), 2
+            ),
+
             "short_score": round(
                 safe_float(row["Short_Score"]), 2
             )
