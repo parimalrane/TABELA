@@ -20,6 +20,30 @@ def _safe_float(value) -> Optional[float]:
     return float(numeric_value)
 
 
+def _format_drop_token(prefix: str, value: Optional[float], decimals: int, min_abs: float) -> Optional[str]:
+    if value is None:
+        return None
+    if abs(value) < min_abs:
+        return None
+    return f"{prefix}:-{abs(value):.{decimals}f}"
+
+
+def _ordered_reason_tokens(tokens: List[str]) -> List[str]:
+    ordered_groups = [
+        "RS:",
+        "Leader:",
+        "Hist:",
+        "Comp:",
+        "Rot:",
+        "Theme:",
+    ]
+    grouped: List[str] = []
+    for prefix in ordered_groups:
+        grouped.extend([token for token in tokens if token.startswith(prefix)])
+    grouped.extend([token for token in tokens if token not in grouped])
+    return grouped
+
+
 def _load_recent_json_payloads(directory: str, suffix: str, max_files: int) -> List[dict]:
     if not os.path.exists(directory):
         return []
@@ -333,6 +357,9 @@ def _theme_context_reasons(
     lagging_streak = int(theme_snapshot.get("lagging_streak", 0) or 0)
     weakening_transitions = int(theme_snapshot.get("weakening_transitions", 0) or 0)
 
+    if mapped_theme in rotation_context.get("weakening_themes", set()):
+        reasons.append("Rot:Weak")
+
     if theme_class == "Lagging":
         reasons.append("Theme:Lag")
 
@@ -341,9 +368,6 @@ def _theme_context_reasons(
 
     if mapped_theme in rotation_context.get("exited_leading", set()):
         reasons.append("Theme:ExitLead")
-
-    if mapped_theme in rotation_context.get("weakening_themes", set()):
-        reasons.append("Rot:Weak")
 
     if lagging_streak >= int(config["MIN_THEME_LAGGING_STREAK_DAYS"]):
         reasons.append(f"Theme:Lag{lagging_streak}d")
@@ -363,6 +387,7 @@ def _primary_evidence(
     config: dict,
 ) -> dict:
     reasons: List[str] = []
+    min_abs_delta = float(config["EVIDENCE_MIN_ABS_DELTA"])
 
     history_days = int(trend_metrics.get("history_days", 0) or 0)
     composite_history_points = int(trend_metrics.get("composite_history_points", 0) or 0)
@@ -387,26 +412,34 @@ def _primary_evidence(
     if rs_drop_1d is not None:
         if rs_drop_1d > float(config["MIN_RS_DROP_1D"]):
             rs_deterioration = True
-            reasons.append(f"RS:-{rs_drop_1d:.0f}(1d)")
+            rs_1d_token = _format_drop_token("RS", rs_drop_1d, 0, min_abs_delta)
+            if rs_1d_token:
+                reasons.append(f"{rs_1d_token}(1d)")
 
     if rs_drop_recent is not None:
         if rs_drop_recent > float(config["MIN_RS_DROP_RECENT"]):
             rs_deterioration = True
-            reasons.append(f"RS:-{rs_drop_recent:.0f}")
+            rs_recent_token = _format_drop_token("RS", rs_drop_recent, 0, min_abs_delta)
+            if rs_recent_token:
+                reasons.append(rs_recent_token)
 
     if composite_drop_1d is not None:
         if composite_drop_1d > float(config["MIN_COMPOSITE_DROP_1D"]):
             composite_deterioration = True
-            reasons.append(f"Comp:-{composite_drop_1d:.1f}(1d)")
+            comp_1d_token = _format_drop_token("Comp", composite_drop_1d, 1, min_abs_delta)
+            if comp_1d_token:
+                reasons.append(f"{comp_1d_token}(1d)")
 
     if composite_drop_recent is not None:
         if composite_drop_recent > float(config["MIN_COMPOSITE_DROP_RECENT"]):
             composite_deterioration = True
-            reasons.append(f"Comp:-{composite_drop_recent:.1f}")
+            comp_recent_token = _format_drop_token("Comp", composite_drop_recent, 1, min_abs_delta)
+            if comp_recent_token:
+                reasons.append(comp_recent_token)
 
     if (
         bool(config["USE_COMPOSITE_MEDIAN_CONFIRMATION_WHEN_HISTORY_SPARSE"])
-        and composite_history_points == 0
+        and composite_history_points <= int(config["SPARSE_COMPOSITE_HISTORY_MAX_POINTS"])
         and current_composite is not None
         and composite_universe_median is not None
         and (composite_universe_median - current_composite)
@@ -573,8 +606,9 @@ def build_distribution_watchlist(stocks: pd.DataFrame, top_n: Optional[int] = No
 
         row_copy = row.copy()
         all_reasons = evidence["reasons"] + theme_reasons
+        ordered_reasons = _ordered_reason_tokens(all_reasons)
         row_copy["Distribution_Reasons"] = " | ".join(
-            all_reasons[: int(config["MAX_REASON_TOKENS"])]
+            ordered_reasons[: int(config["MAX_REASON_TOKENS"])]
         ) if all_reasons else "N/A"
         row_copy["_Sort_RS_Persistence"] = int(evidence.get("rs_persistence_days", 0) or 0)
         row_copy["_Sort_Composite_Persistence"] = int(evidence.get("composite_persistence_days", 0) or 0)

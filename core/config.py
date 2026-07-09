@@ -28,30 +28,51 @@ SHORT_FILTERS = {
 
 
 DISTRIBUTION_ENGINE_CONFIG = {
+    # Universe and file windows.
     "DEFAULT_TOP_N": 50,
     "MAX_HISTORY_DAYS": 21,
     "SNAPSHOT_MAX_DAYS": 21,
     "ROTATION_MAX_FILES": 3,
+
+    # Trend/baseline lookbacks.
     "RECENT_BASELINE_LOOKBACK_DAYS": 5,
     "DOWNTREND_WINDOW_DAYS": 5,
+
+    # RS deterioration thresholds.
     "MIN_RS_DROP_1D": 0.0,
     "MIN_RS_DROP_RECENT": 0.0,
+
+    # Composite deterioration thresholds.
     "MIN_COMPOSITE_DROP_1D": -0.001,
     "MIN_COMPOSITE_DROP_RECENT": -0.001,
+
+    # Persistence and down-day confirmation.
     "MIN_RS_PERSISTENCE_DAYS": 2,
     "MIN_COMPOSITE_PERSISTENCE_DAYS": 2,
     "MIN_RS_DOWN_DAYS_IN_WINDOW": 2,
     "MIN_COMPOSITE_DOWN_DAYS_IN_WINDOW": 2,
     "MIN_RS_DROP_RECENT_FOR_DOWN_DAYS": 25.0,
     "MIN_COMPOSITE_DROP_RECENT_FOR_DOWN_DAYS": 0.0,
+
+    # Sparse-history handling.
+    "SPARSE_COMPOSITE_HISTORY_MAX_POINTS": 1,
     "USE_COMPOSITE_MEDIAN_CONFIRMATION_WHEN_HISTORY_SPARSE": True,
     "MIN_COMPOSITE_MEDIAN_CONFIRMATION_GAP": 0.0,
+
+    # Leadership-based historical confirmation.
     "LEADERSHIP_RS_THRESHOLD": 80.0,
     "USE_LEADERSHIP_AS_HISTORY_CONFIRMATION": True,
     "MIN_RS_DROP_RECENT_FOR_LEADERSHIP_CONFIRMATION": 25.0,
+
+    # Theme context thresholds (context only, not classifier).
     "MIN_THEME_LAGGING_STREAK_DAYS": 3,
     "MIN_THEME_WEAKENING_TRANSITIONS": 2,
+
+    # Output/readability controls.
     "MAX_REASON_TOKENS": 6,
+    "EVIDENCE_MIN_ABS_DELTA": 0.05,
+
+    # Ranking defaults.
     "SORT_LEADERSHIP_MISSING_SENTINEL": 9999,
 }
 
