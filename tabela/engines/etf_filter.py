@@ -1,0 +1,178 @@
+from core.config import ETF_FILTERS
+
+# ==========================================
+# ETF FILTER ENGINE
+# TABELA V2
+# ==========================================
+
+EXCLUDE_KEYWORDS = [
+
+    # Fixed income
+
+    "bond",
+    "treasury",
+    "municipal",
+    "mortgage",
+    "mbs",
+    "fixed income",
+    "preferred",
+
+    # Income / yield products
+
+    "income",
+    "dividend",
+    "covered call",
+    "buffer",
+    "target date",
+    "allocation",
+
+    # Leveraged / inverse
+
+    "inverse",
+    "bear",
+    "ultra",
+    "2x",
+    "3x",
+    "leveraged",
+
+    # Currency
+
+    "currency",
+    "forex",
+    "yen",
+    "euro",
+
+    # Volatility
+
+    "volatility",
+    "vix",
+
+    # Geography / country
+
+    "china",
+    "japan",
+    "canada",
+    "europe",
+    "latin america",
+    "asia",
+    "africa",
+    "middle east",
+    "israel",
+    "vietnam",
+    "argentina",
+    "colombia",
+    "thailand",
+    "south africa",
+    "global ex",
+    "eafe",
+    "emerging markets",
+    "developed markets",
+    "world",
+
+    # Factor products
+
+    "alpha",
+    "beta",
+    "momentum",
+    "growth",
+    "value",
+    "blend",
+    "quality",
+    "multi factor",
+    "factor",
+    "low volatility",
+
+    # Portfolio strategy wrappers
+
+    "transparent",
+    "long/short",
+    "130/30",
+    "absolute return",
+    "absolute returns",
+    "conservative",
+    "target outcome",
+    "derivative",
+    "asset allocation",
+
+    # Commodities (remove for now)
+
+    "corn",
+    "wheat",
+    "sugar",
+    "platinum",
+    "palladium",
+    "silver",
+    "gold",
+
+    "nanotech",
+    "services",
+    "asset",
+    "global total market",
+    "digital economy",
+    "marijuana",
+    "bdcs",
+    "private equity",
+    "m&a",
+    "inflation",
+    "water",
+    "softs"
+
+]
+
+def filter_valid_etfs(etf_df):
+
+    # Combine searchable text columns
+
+    combined_text = (
+
+        etf_df["Company Name"].fillna("").astype(str) + " " +
+
+        etf_df["Investment Category"].fillna("").astype(str) + " " +
+
+        etf_df["Investment Strategy"].fillna("").astype(str)
+
+    ).str.lower()
+
+
+    # Start with all ETFs
+
+    valid_mask = ~combined_text.str.contains(
+
+        "|".join(EXCLUDE_KEYWORDS),
+
+        na=False
+
+    )
+
+
+    filtered_etfs = etf_df[valid_mask].copy()
+
+    return filtered_etfs
+
+
+def filter_institutional_etfs(df):
+
+    df = df[
+
+        df["Market Value (mil)"] >= ETF_FILTERS["MIN_MARKET_VALUE"]
+
+    ].copy()
+
+    return df
+
+
+def filter_etfs_with_sufficient_history(df):
+
+    required_periods = [
+
+        "Performance 1W (%)",
+        "Performance 1M (%)",
+        "Performance 3M (%)",
+        "Performance 6M (%)",
+        "Performance 1Y (%)",
+
+    ]
+
+    valid_mask = df[required_periods].notna().all(axis=1) & (df[required_periods] != 0.0).all(axis=1)
+
+    return df[valid_mask].copy(), int((~valid_mask).sum())
