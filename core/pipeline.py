@@ -3,7 +3,8 @@ import math
 import os
 
 import pandas as pd
-
+from engines.weekly_intelligence_engine import WeeklyIntelligenceEngine
+from engines.weekly_report_writer import WeeklyReportWriter
 from core.company_theme_engine import COMPANY_THEME
 from core.config import THEME_STRENGTH_CONFIG
 from core.industry_theme_engine import INDUSTRY_THEME
@@ -772,6 +773,24 @@ def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, st
         except Exception as e:
             print()
             print("HISTORICAL INTELLIGENCE ERROR:", e)
+
+        try:
+            weekly_engine = WeeklyIntelligenceEngine()
+
+            weekly_report = weekly_engine.build()
+
+            writer = WeeklyReportWriter()
+
+            report_path = writer.write(weekly_report)
+
+            print()
+            print(f"WEEKLY INTELLIGENCE SAVED: {report_path}")
+
+        except Exception as e:
+            print()
+            print("WEEKLY INTELLIGENCE ERROR:", e)
+
+
     except Exception as e:
         print()
         print("INTELLIGENCE LAYER ERROR:", e)

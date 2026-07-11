@@ -1,22 +1,14 @@
-from dataclasses import dataclass, field
-from datetime import date, datetime
+from dataclasses import dataclass
+from datetime import datetime
 
 from engines.historical_intelligence_engine import (
     compute_historical_intelligence,
 )
-from engines.historical_query_engine import load_history
-from engines.historical_queries import HistoricalQueries
 
-
-# =============================================================================
-# WEEKLY WINDOW
-# =============================================================================
-
-@dataclass(slots=True)
-class WeeklyWindow:
-    start_date: date
-    end_date: date
-    runs: list
+from engines.weekly_dataset_builder import (
+    WeeklyDataset,
+    WeeklyDatasetBuilder,
+)
 
 
 # =============================================================================
@@ -25,10 +17,12 @@ class WeeklyWindow:
 
 @dataclass(slots=True)
 class WeeklyReport:
-    window: WeeklyWindow
+
+    dataset: WeeklyDataset
+
     historical: dict
+
     generated_at: datetime
-    summary: dict = field(default_factory=dict)
 
 
 # =============================================================================
@@ -38,29 +32,28 @@ class WeeklyReport:
 class WeeklyIntelligenceEngine:
 
     def __init__(self):
-        self.history = load_history()
-        self.queries = HistoricalQueries(self.history)
 
-    def latest_week(self) -> WeeklyWindow:
+        self.builder = WeeklyDatasetBuilder()
 
-        runs = self.queries.latest_n_runs(5)
+    # -------------------------------------------------------------------------
+    # Build Weekly Report
+    # -------------------------------------------------------------------------
 
-        return WeeklyWindow(
-            start_date=runs[0].date,
-            end_date=runs[-1].date,
-            runs=runs,
+    def build(
+        self,
+        trading_days: int = 5,
+    ) -> WeeklyReport:
+
+        dataset = self.builder.build(
+            trading_days=trading_days,
         )
 
-    def build(self) -> WeeklyReport:
-
-        window = self.latest_week()
-
         historical = compute_historical_intelligence(
-            max_days=len(window.runs)
+            max_days=trading_days,
         )
 
         return WeeklyReport(
-            window=window,
+            dataset=dataset,
             historical=historical,
             generated_at=datetime.now(),
         )
@@ -80,13 +73,29 @@ if __name__ == "__main__":
     print("TABELA WEEKLY INTELLIGENCE")
     print("=" * 70)
 
-    print(f"Start : {report.window.start_date}")
-    print(f"End   : {report.window.end_date}")
-    print(f"Runs  : {len(report.window.runs)}")
+    print(f"Start Date   : {report.dataset.metadata.start_date}")
+    print(f"End Date     : {report.dataset.metadata.end_date}")
+    print(f"Trading Days : {report.dataset.metadata.trading_days}")
+    print(f"Themes       : {len(report.dataset.themes)}")
+
+    print()
+
+    print("Largest Weekly Rank Improvement")
+
+    improvement = report.dataset.summary["largest_rank_improvement"]
+
+    if improvement:
+
+        print(
+            f"{improvement['theme']} : "
+            f"{improvement['start_rank']} -> "
+            f"{improvement['end_rank']}"
+        )
 
     print()
 
     print("Historical Keys")
 
     for key in report.historical.keys():
+
         print(f" - {key}")
