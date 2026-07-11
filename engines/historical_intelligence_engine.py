@@ -266,8 +266,9 @@ def detect_weakening_from_history(theme_daily_deltas):
     return weakening_candidates
 
 
-def build_historical_intelligence_report(max_days=21):
+def compute_historical_intelligence(max_days=21):
 
+    
     snapshot_datasets = queries.datasets("snapshot")
 
     snapshots = [
@@ -519,3 +520,24 @@ def build_historical_intelligence_report(max_days=21):
         "daily_rotation_date": rotation_date,
         "daily_rotation_data": rotation_data,
     }
+
+def build_historical_intelligence_report(
+        min_days=3,
+        max_days=21,
+    ):
+        """
+        Legacy wrapper.
+
+        Will be removed after all callers migrate.
+        """
+
+        intelligence = compute_historical_intelligence(
+            max_days=max_days
+        )
+
+        #
+        # Temporary:
+        # Existing print/report code stays here.
+        #
+
+        return intelligence

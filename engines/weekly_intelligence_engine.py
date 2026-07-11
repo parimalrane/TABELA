@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from datetime import date, datetime
 
 from engines.historical_intelligence_engine import (
-    build_historical_intelligence_report,
+    compute_historical_intelligence,
 )
 from engines.historical_query_engine import load_history
 from engines.historical_queries import HistoricalQueries
@@ -55,7 +55,7 @@ class WeeklyIntelligenceEngine:
 
         window = self.latest_week()
 
-        historical = build_historical_intelligence_report(
+        historical = compute_historical_intelligence(
             max_days=len(window.runs)
         )
 
