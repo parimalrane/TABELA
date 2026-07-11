@@ -68,12 +68,22 @@ class WeeklyReportWriter:
             report,
         )
 
+
+        self._render_stock_intelligence(
+            lines,
+            report.dataset.stocks,
+        )
+
+
         output_file.write_text(
             "\n".join(lines),
             encoding="utf-8",
         )
 
         return output_file
+    
+
+
 
     def _render_header(
         self,
@@ -82,7 +92,7 @@ class WeeklyReportWriter:
 
         lines.append("# TABELA WEEKLY INTELLIGENCE")
         lines.append("")
-        
+  
     def _render_executive_summary(
         self,
         lines,
@@ -101,6 +111,9 @@ class WeeklyReportWriter:
         lines.append("")
 
         improvement = summary["largest_rank_improvement"]
+        decline = summary["largest_rank_decline"]
+        gain = summary["largest_score_gain"]
+        loss = summary["largest_score_loss"]
 
         if improvement:
 
@@ -111,8 +124,6 @@ class WeeklyReportWriter:
                 f"{improvement['end_rank']})"
             )
 
-        decline = summary["largest_rank_decline"]
-
         if decline:
 
             lines.append(
@@ -120,6 +131,22 @@ class WeeklyReportWriter:
                 f"{decline['theme']} "
                 f"({decline['start_rank']} → "
                 f"{decline['end_rank']})"
+            )
+
+        if gain:
+
+            lines.append(
+                f"Largest Score Gain       : "
+                f"{gain['theme']} "
+                f"({gain['score_change']:+.2f})"
+            )
+
+        if loss:
+
+            lines.append(
+                f"Largest Score Loss       : "
+                f"{loss['theme']} "
+                f"({loss['score_change']:+.2f})"
             )
 
         lines.append("")
@@ -178,6 +205,20 @@ class WeeklyReportWriter:
             rotation["rank_declines"],
         )
 
+        self._write_rotation(
+            lines,
+            "Top Score Gains",
+            rotation["score_gains"],
+            score_mode=True,
+        )
+
+        self._write_rotation(
+            lines,
+            "Top Score Losses",
+            rotation["score_losses"],
+            score_mode=True,
+        )
+
     def _render_theme_performance(
         self,
         lines,
@@ -188,22 +229,35 @@ class WeeklyReportWriter:
         lines.append("")
 
         lines.append(
-            "| Theme | Start | End | Avg | Leading | Seen |"
+            "| Theme | Start | End | ΔRank | Start Score | End Score | ΔScore | Leading | Seen |"
         )
 
         lines.append(
-            "|------|------:|----:|----:|--------:|----:|"
+            "|------|------:|----:|------:|------------:|----------:|-------:|---------:|----:|"
         )
 
-        for theme in sorted(themes):
+        ranked = sorted(
+            themes.items(),
+            key=lambda x: x[1]["end_rank"],
+        )
 
-            data = themes[theme]
+        for theme, data in ranked:
+
+            rank_delta = data["start_rank"] - data["end_rank"]
+
+            score_delta = (
+                data["end_score"]
+                - data["start_score"]
+            )
 
             lines.append(
                 f"| {theme} | "
                 f"{data['start_rank']} | "
                 f"{data['end_rank']} | "
-                f"{data['average_rank']:.1f} | "
+                f"{rank_delta:+d} | "
+                f"{data['start_score']:.2f} | "
+                f"{data['end_score']:.2f} | "
+                f"{score_delta:+.2f} | "
                 f"{data['days_leading']} | "
                 f"{data['days_seen']} |"
             )
@@ -218,12 +272,21 @@ class WeeklyReportWriter:
 
         lines.append("## BREADTH")
         lines.append("")
+        lines.append("*Initial implementation*")
+        lines.append("")
 
-        strongest = breadth["strongest_average"][0]
+        strongest = breadth["strongest_average"]
 
-        lines.append(
-            f"Strongest Average Theme : {strongest[0]}"
-        )
+        if strongest:
+
+            lines.append("| Theme | Weekly Average Score |")
+            lines.append("|------|----------:|")
+
+            for theme, data in strongest[:10]:
+
+                lines.append(
+                    f"| {theme} | {data['average_score']:.2f} |"
+                )
 
         lines.append("")
 
@@ -237,14 +300,72 @@ class WeeklyReportWriter:
         lines.append("")
 
         lines.append(
-            f"Window Days : {historical['window_days']}"
+            f"History Window : {historical['window_days']} trading days"
         )
 
         lines.append(
-            f"Rotation Date : {historical['daily_rotation_date']}"
+            f"Latest Rotation : {historical['daily_rotation_date']}"
         )
 
         lines.append("")
+
+        if historical.get("emerging_candidates"):
+
+            lines.append("### Emerging Themes")
+
+            for item in historical["emerging_candidates"][:5]:
+
+                lines.append(f"• {item['theme']}")
+                lines.append(
+                    f"  Rank : {item['first_rank']} → "
+                    f"{item['last_rank']} "
+                    f"({item['rank_improvement']:+d})"
+                )
+                lines.append(
+                    f"  Score: {item['first_score']:.2f} → "
+                    f"{item['last_score']:.2f} "
+                    f"({item['score_improvement']:+.2f})"
+                )
+
+                if item.get("class_transitions"):
+
+                    lines.append(
+                        f"  Transition: "
+                        f"{', '.join(item['class_transitions'])}"
+                    )
+
+                lines.append("")
+
+            lines.append("")
+
+        if historical.get("weakening_candidates"):
+
+            lines.append("### Weakening Themes")
+
+            for item in historical["weakening_candidates"][:5]:
+
+                lines.append(f"• {item['theme']}")
+                lines.append(
+                    f"  Rank : {item['first_rank']} → "
+                    f"{item['last_rank']} "
+                    f"(-{item['rank_deterioration']})"
+                )
+                lines.append(
+                    f"  Score: {item['first_score']:.2f} → "
+                    f"{item['last_score']:.2f} "
+                    f"(-{item['score_decline']:.2f})"
+                )
+
+                if item.get("class_transitions"):
+
+                    lines.append(
+                        f"  Transition: "
+                        f"{', '.join(item['class_transitions'])}"
+                    )
+
+                lines.append("")
+
+            lines.append("")
 
     def _render_statistics(
         self,
@@ -252,16 +373,72 @@ class WeeklyReportWriter:
         report,
     ):
 
+        metadata = report.dataset.metadata
+
         lines.append("## DATASET STATISTICS")
         lines.append("")
 
-        lines.append(
-            f"Runs Loaded : {len(report.dataset.runs)}"
-        )
+        lines.append(f"Trading Days : {metadata.trading_days}")
+        lines.append(f"Runs Loaded  : {len(report.dataset.runs)}")
+        lines.append(f"Themes       : {len(report.dataset.themes)}")
+        lines.append(f"Generated    : {report.generated_at:%Y-%m-%d %H:%M:%S}")
+        lines.append("")
 
-        lines.append(
-            f"Themes : {len(report.dataset.themes)}"
-        )
+    def _render_stock_intelligence(
+        self,
+        lines,
+        stocks,
+    ):
+
+        lines.append("## WEEKLY STOCK INTELLIGENCE")
+        lines.append("")
+
+        #
+        # Long
+        #
+        lines.append("### Institutional Long Leaders")
+        lines.append("")
+
+        if stocks["long"]:
+
+            lines.append("| Ticker | Days |")
+            lines.append("|--------|-----:|")
+
+            for stock in stocks["long"]:
+
+                lines.append(
+                    f"| {stock['ticker']} | "
+                    f"{stock['days']}/5 |"
+                )
+
+        else:
+
+            lines.append("No institutional long leaders (4+/5 days).")
+
+        lines.append("")
+        #
+        # Short
+        #
+        lines.append("### Institutional Short Leaders")
+        lines.append("")
+
+        if stocks["short"]:
+
+            lines.append("| Ticker | Days |")
+            lines.append("|--------|-----:|")
+
+            for stock in stocks["short"]:
+
+                lines.append(
+                    f"| {stock['ticker']} | "
+                    f"{stock['days']}/5 |"
+                )
+
+        else:
+
+            lines.append("No institutional short leaders (4+/5 days).")
+
+        lines.append("")
 
     # ==============================================================
     # Helpers
@@ -293,6 +470,7 @@ class WeeklyReportWriter:
         lines,
         title,
         items,
+        score_mode=False,
     ):
 
         lines.append(f"### {title}")
@@ -305,11 +483,26 @@ class WeeklyReportWriter:
 
         for item in items:
 
-            lines.append(
-                f"- {item['theme']} : "
-                f"{item['start_rank']} → "
-                f"{item['end_rank']}"
-            )
+            if score_mode:
+
+                lines.append(
+                    f"- {item['theme']}: "
+                    f"{item['score_change']:+.2f}"
+                )
+
+            else:
+
+                rank_delta = (
+                    item["start_rank"]
+                    - item["end_rank"]
+                )
+
+                lines.append(
+                    f"- {item['theme']}: "
+                    f"{item['start_rank']} → "
+                    f"{item['end_rank']} "
+                    f"({rank_delta:+d})"
+                )
 
         lines.append("")
 

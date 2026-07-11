@@ -83,11 +83,6 @@ class WeeklyDatasetBuilder:
     # -------------------------------------------------------------------------
     # Metadata
     # -------------------------------------------------------------------------
-        
-
-    # -------------------------------------------------------------------------
-    # Metadata
-    # -------------------------------------------------------------------------
 
     def build_metadata(
         self,
@@ -140,6 +135,8 @@ class WeeklyDatasetBuilder:
 
         breadth = self.compute_breadth(themes)
 
+        stocks = self.compute_stock_intelligence(runs)
+
         dataset = WeeklyDataset(
             metadata=metadata,
             runs=runs,
@@ -147,12 +144,102 @@ class WeeklyDatasetBuilder:
             rotation=rotation,
             leadership=leadership,
             breadth=breadth,
+            stocks=stocks,
         )
 
         dataset.summary = self.compute_summary(dataset)
 
         return dataset
     
+
+        # -------------------------------------------------------------------------
+   
+    # Weekly Stock Intelligence
+    # -------------------------------------------------------------------------
+
+    # -------------------------------------------------------------------------
+# Weekly Stock Intelligence
+# -------------------------------------------------------------------------
+
+    def compute_stock_intelligence(
+        self,
+        runs: list[Run],
+    ) -> dict[str, list[dict]]:
+
+        import json
+        from pathlib import Path
+
+        long_counts = {}
+        short_counts = {}
+
+        watchlist_dir = Path("market_data/watchlist_history")
+
+        for run in runs:
+
+            watchlist_file = (
+                watchlist_dir /
+                f"watchlist_{run.date}.json"
+            )
+
+
+            if not watchlist_file.exists():
+                continue
+
+            with open(watchlist_file, "r", encoding="utf-8") as f:
+                watchlist = json.load(f)
+
+            #
+            # Long
+            #
+            for ticker in watchlist.get("long", []):
+
+                if ticker not in long_counts:
+
+                    long_counts[ticker] = {
+                        "ticker": ticker,
+                        "days": 0,
+                    }
+
+                long_counts[ticker]["days"] += 1
+
+            #
+            # Short
+            #
+            for ticker in watchlist.get("short", []):
+
+                if ticker not in short_counts:
+
+                    short_counts[ticker] = {
+                        "ticker": ticker,
+                        "days": 0,
+                    }
+
+                short_counts[ticker]["days"] += 1
+
+        long_list = [
+            stock
+            for stock in long_counts.values()
+            if stock["days"] >= 4
+        ]
+
+        short_list = [
+            stock
+            for stock in short_counts.values()
+            if stock["days"] >= 4
+        ]
+
+        long_list.sort(
+            key=lambda x: (-x["days"], x["ticker"])
+        )
+
+        short_list.sort(
+            key=lambda x: (-x["days"], x["ticker"])
+        )
+
+        return {
+            "long": long_list,
+            "short": short_list,
+        }
 
     # -------------------------------------------------------------------------
     # Theme Dataset
@@ -316,11 +403,9 @@ class WeeklyDatasetBuilder:
             "largest_score_loss": score_losses[0] if score_losses else None,
         }
 
-
     # -------------------------------------------------------------------------
     # Leadership
     # -------------------------------------------------------------------------
-
 
     def compute_leadership(
         self,
@@ -399,7 +484,6 @@ class WeeklyDatasetBuilder:
 
         }
 
-
     # -------------------------------------------------------------------------
     # Summary
     # -------------------------------------------------------------------------
@@ -443,6 +527,14 @@ if __name__ == "__main__":
     builder = WeeklyDatasetBuilder()
 
     weekly = builder.build()
+
+    print()
+    print("Weekly Long Stocks")
+    print(weekly.stocks["long"])
+
+    print()
+    print("Weekly Short Stocks")
+    print(weekly.stocks["short"])
 
     print("=" * 70)
     print("TABELA WEEKLY DATASET BUILDER")
