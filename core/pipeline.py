@@ -768,7 +768,7 @@ def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, st
         print_rotation_report(rotation_data)
 
         try:
-            build_historical_intelligence_report(min_days=3, max_days=21)
+            build_historical_intelligence_report(max_days=21)
         except Exception as e:
             print()
             print("HISTORICAL INTELLIGENCE ERROR:", e)

@@ -1,67 +1,15 @@
-import json
-import os
+from engines.historical_query_engine import load_history
+from engines.historical_queries import HistoricalQueries
 from datetime import datetime
+from core.config import MIN_HISTORY_DAYS
 
+
+history = load_history()
+queries = HistoricalQueries(history)
 
 SNAPSHOT_DIR = "market_data/snapshots"
 ROTATION_DIR = "market_data/rotation_delta"
 
-
-def load_snapshot_window(min_days=1, max_days=21):
-    if not os.path.exists(SNAPSHOT_DIR):
-        return []
-
-    files = sorted([
-        f for f in os.listdir(SNAPSHOT_DIR)
-        if f.endswith(".json")
-    ])
-
-    if len(files) < min_days:
-        return []
-
-    selected_files = files[-max_days:]
-    snapshots = []
-
-    for filename in selected_files:
-        path = os.path.join(SNAPSHOT_DIR, filename)
-        try:
-            with open(path, "r") as f:
-                snapshots.append(json.load(f))
-        except Exception as e:
-            print(f"WARNING: Skipping invalid snapshot: {filename} ({e})")
-            continue
-
-    return snapshots
-
-
-def load_latest_valid_rotation_delta():
-    if not os.path.exists(ROTATION_DIR):
-        return None, None
-
-    files = sorted([
-        f for f in os.listdir(ROTATION_DIR)
-        if f.endswith("_rotation_delta.json")
-    ])
-
-    for filename in reversed(files):
-        path = os.path.join(ROTATION_DIR, filename)
-        try:
-            with open(path, "r") as f:
-                payload = json.load(f)
-
-            if not isinstance(payload, dict):
-                raise ValueError("rotation payload is not a JSON object")
-
-            rotation_date = payload.get("date")
-            if not rotation_date:
-                rotation_date = filename.replace("_rotation_delta.json", "")
-
-            return payload, rotation_date
-        except Exception as e:
-            print(f"WARNING: Skipping invalid rotation delta: {filename} ({e})")
-            continue
-
-    return None, None
 
 
 def build_theme_daily_series(snapshots):
@@ -318,11 +266,30 @@ def detect_weakening_from_history(theme_daily_deltas):
     return weakening_candidates
 
 
-def build_historical_intelligence_report(min_days=3, max_days=21):
-    snapshots = load_snapshot_window(min_days=1, max_days=max_days)
+def build_historical_intelligence_report(max_days=21):
+
+    snapshot_datasets = queries.datasets("snapshot")
+
+    snapshots = [
+        dataset.data
+        for dataset in snapshot_datasets
+        if dataset.data is not None
+    ][-max_days:]
+
     theme_daily_series = build_theme_daily_series(snapshots)
     raw_deltas = compute_theme_daily_deltas(theme_daily_series)
-    rotation_data, rotation_date = load_latest_valid_rotation_delta()
+    rotation_dataset = queries.latest_available_dataset("rotation_delta")
+
+    rotation_data = None
+    rotation_date = None
+
+    if rotation_dataset is not None:
+
+        rotation_data = rotation_dataset.data
+
+        if isinstance(rotation_data, dict):
+
+            rotation_date = rotation_data.get("date")
 
     theme_daily_deltas = {}
     for theme, points in theme_daily_series.items():
@@ -339,7 +306,7 @@ def build_historical_intelligence_report(min_days=3, max_days=21):
     print("HISTORICAL INTELLIGENCE REPORT")
     print("====================================")
 
-    today = datetime.today().strftime("%Y-%m-%d")
+    today = history.latest_run.date.isoformat()
 
     print()
     print("DAILY ROTATION INTELLIGENCE")
@@ -533,7 +500,10 @@ def build_historical_intelligence_report(min_days=3, max_days=21):
     print()
     print("MULTI-DAY INTELLIGENCE")
     print("-" * 75)
-    if len(snapshots) < 20:
+
+
+    if len(snapshots) < MIN_HISTORY_DAYS:
+        
         print(f"Insufficient historical data ({len(snapshots)}/20 snapshots collected).")
     else:
         print("No multi-day intelligence available yet. More history required.")

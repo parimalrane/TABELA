@@ -27,6 +27,9 @@ SHORT_FILTERS = {
 }
 
 
+MIN_HISTORY_DAYS = 20
+
+
 DISTRIBUTION_ENGINE_CONFIG = {
     # Universe and file windows.
     "DEFAULT_TOP_N": 50,
