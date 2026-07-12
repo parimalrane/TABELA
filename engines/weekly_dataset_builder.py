@@ -104,7 +104,21 @@ class WeeklyDatasetBuilder:
 
         breadth = self.compute_breadth(themes)
 
-        stocks = self.compute_stock_intelligence(runs)
+        persistent = self.compute_stock_intelligence(runs)
+
+        weekly = self.compute_weekly_stock_history(runs)
+
+        stocks = {
+
+            "persistent_long": persistent["long"],
+
+            "persistent_short": persistent["short"],
+
+            "weekly_long": weekly["long"],
+
+            "weekly_short": weekly["short"],
+
+        }
 
         unknown = self.compute_unknown_intelligence(runs)
 
@@ -343,6 +357,231 @@ class WeeklyDatasetBuilder:
         return {
             "long": long_list,
             "short": short_list,
+        }
+
+    def compute_weekly_stock_history(
+        self,
+        runs: list[Run],
+    ) -> dict[str, list[dict]]:
+
+        import json
+        from pathlib import Path
+
+        watchlist_dir = Path("market_data/watchlist_history")
+        stock_history_dir = Path("market_data/stock_universe")
+
+        weekly_long = {}
+        weekly_short = {}
+
+        for run in runs:
+
+            watchlist_file = (
+                watchlist_dir /
+                f"watchlist_{run.date}.json"
+            )
+
+            history_file = (
+                stock_history_dir /
+                f"{run.date}_stock_history.json"
+            )
+
+            if (
+                not watchlist_file.exists()
+                or
+                not history_file.exists()
+            ):
+                continue
+
+            with open(
+                watchlist_file,
+                "r",
+                encoding="utf-8",
+            ) as f:
+
+                watchlist = json.load(f)
+
+            with open(
+                history_file,
+                "r",
+                encoding="utf-8",
+            ) as f:
+
+                stock_history = json.load(f)
+
+            history_lookup = {
+
+                stock["ticker"]: stock
+
+                for stock in stock_history
+
+            }
+
+            #
+            # LONG
+            #
+
+            for item in watchlist.get("long", []):
+
+                ticker = (
+                    item
+                    if isinstance(item, str)
+                    else item["ticker"]
+                )
+
+                if ticker not in history_lookup:
+                    continue
+
+                stock = history_lookup[ticker]
+
+                weekly_long.setdefault(
+
+                    ticker,
+
+                    {
+
+                        "ticker": ticker,
+
+                        "theme": stock.get("theme"),
+
+                        "days": 0,
+
+                        "history": [],
+
+                    }
+
+                )
+
+                weekly_long[ticker]["days"] += 1
+
+                weekly_long[ticker]["history"].append(
+
+                    {
+
+                        "date": run.date,
+
+                        "theme": stock.get("theme"),
+
+                        "theme_rank": stock.get("theme_rank"),
+
+                        "theme_class": stock.get("theme_class"),
+
+                        "theme_strength_score":
+                            stock.get("theme_strength_score"),
+
+                        "long_rank":
+                            stock.get("long_rank"),
+
+                        "rs_rating":
+                            stock.get("rs_rating"),
+
+                        "long_score":
+                            stock.get("long_score"),
+
+                        "composite_score":
+                            stock.get("composite_score"),
+
+                    }
+
+                )
+
+            #
+            # SHORT
+            #
+
+            for item in watchlist.get("short", []):
+
+                ticker = (
+                    item
+                    if isinstance(item, str)
+                    else item["ticker"]
+                )
+
+                if ticker not in history_lookup:
+                    continue
+
+                stock = history_lookup[ticker]
+
+                weekly_short.setdefault(
+
+                    ticker,
+
+                    {
+
+                        "ticker": ticker,
+
+                        "theme": stock.get("theme"),
+
+                        "days": 0,
+
+                        "history": [],
+
+                    }
+
+                )
+
+                weekly_short[ticker]["days"] += 1
+
+                weekly_short[ticker]["history"].append(
+
+                    {
+
+                        "date": run.date,
+
+                        "theme": stock.get("theme"),
+
+                        "theme_rank": stock.get("theme_rank"),
+
+                        "theme_class": stock.get("theme_class"),
+
+                        "theme_strength_score":
+                            stock.get("theme_strength_score"),
+
+                        "short_rank":
+                            stock.get("short_rank"),
+
+                        "rs_rating":
+                            stock.get("rs_rating"),
+
+                        "short_score":
+                            stock.get("short_score"),
+
+                        "composite_score":
+                            stock.get("composite_score"),
+
+                    }
+
+                )
+
+        return {
+
+            "long": sorted(
+
+                weekly_long.values(),
+
+                key=lambda x: (
+
+                    -x["days"],
+
+                    x["ticker"],
+
+                ),
+
+            ),
+
+            "short": sorted(
+
+                weekly_short.values(),
+
+                key=lambda x: (
+
+                    -x["days"],
+
+                    x["ticker"],
+
+                ),
+
+            ),
+
         }
 
     def compute_unknown_intelligence(

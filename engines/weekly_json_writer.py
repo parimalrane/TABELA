@@ -75,10 +75,16 @@ class WeeklyJSONWriter:
             "review_queue": {
 
                 "persistent_long_candidates":
-                    dataset.stocks["long"],
+                dataset.stocks["persistent_long"],
 
-                "persistent_short_candidates":
-                    dataset.stocks["short"],
+            "persistent_short_candidates":
+                dataset.stocks["persistent_short"],
+
+            "weekly_long_candidates":
+                dataset.stocks["weekly_long"],
+
+            "weekly_short_candidates":
+                dataset.stocks["weekly_short"],
 
                 "largest_rank_improvements":
                     dataset.rotation["rank_improvements"][:5],
