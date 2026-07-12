@@ -20,9 +20,6 @@ def build_theme_lookup(stocks):
     if stocks is None:
         return lookup
     
-    print("\n========== STOCK DATAFRAME COLUMNS ==========")
-    print(list(stocks.columns))
-
     for _, row in stocks.iterrows():
 
         ticker = str(row["Ticker"]).replace("*", "").strip()
