@@ -1,108 +1,51 @@
-# TABELA Weekly Intelligence Review
+Review the attached weekly market intelligence.
 
-Use the attached files together:
+Your goal is NOT to summarize the supplied data.
 
-1. weekly_intelligence.json
-2. stock_theme_mapping.csv
-3. industry_theme_mapping.csv
+Your goal is to produce NEW institutional intelligence.
 
-Follow the project instructions for this project exactly.
+Follow the project instructions exactly.
 
----
+Use the supplied JSON as factual evidence.
 
-# Objective
+Challenge the data.
 
-Produce this week's Institutional Capital Rotation Intelligence Report.
+Challenge the taxonomy.
 
-Use the JSON as the authoritative data source.
+Challenge the market narrative.
 
-The CSV files provide reference mappings and should be used to validate themes, industries, and company classifications. They are not primary market data.
+Challenge TABELA itself.
 
-Do not recalculate metrics already provided.
+Whenever possible:
 
-Interpret them.
+• discover hidden relationships
 
----
+• identify contradictions
 
-# Required Analysis
+• expose market traps
 
-Perform every review pass defined in the project instructions.
+• detect emerging institutional behavior
 
-Pay particular attention to:
+• identify missing themes
 
-- Institutional capital rotation
-- Theme leadership changes
-- Breadth quality
-- Leadership persistence
-- Emerging themes
-- Weakening themes
-- Distribution signals
-- Theme evolution
-- Mapping quality
-- AI review queue
+• identify obsolete themes
 
-Always distinguish between facts, interpretation, and uncertainty.
+• identify mapping errors
 
----
+• identify weaknesses in TABELA's current intelligence
 
-# Validation
+Treat Unknown classifications as high-priority investigations.
 
-Before writing the report, validate the weekly dataset.
+Treat contradictions as more valuable than confirmations.
 
-If any important section appears incomplete, inconsistent, or unexpectedly empty, identify it as a potential software issue before continuing with market analysis.
+Conclude with:
 
-Do not silently ignore missing information.
+1. Highest conviction observations.
 
----
+2. Lowest confidence observations.
 
-# Theme Mapping Review
+3. Three market hypotheses for next week.
 
-Review both mapping CSV files.
+4. Recommended improvements to TABELA.
 
-Identify:
-
-- companies mapped to questionable themes
-- industries mapped incorrectly
-- duplicate themes
-- obsolete themes
-- missing themes
-- opportunities to improve classification
-
-Only recommend changes supported by objective evidence.
-
----
-
-# Historical Perspective
-
-Treat this report as one chapter of a long-term institutional market journal.
-
-Compare this week's leadership with previous market structure when the supplied data supports it.
-
-Avoid making long-term conclusions from one week's activity.
-
----
-
-# Deliverables
-
-Produce the report using the exact section order defined in the project instructions.
-
-Provide:
-
-- clear observations
-- supporting evidence
-- confidence where appropriate
-- concise reasoning
-
-Do not provide:
-
-- buy recommendations
-- sell recommendations
-- entry prices
-- exit prices
-- position sizing
-- trading advice
-- Elliott Wave analysis
-
-Focus on understanding institutional capital movement rather than predicting future prices.
-
-The report should read like a professional institutional market intelligence report rather than a stock newsletter.
+The report should leave the reader knowing something they could not have learned by simply reading the JSON.
