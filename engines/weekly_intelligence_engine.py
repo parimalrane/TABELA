@@ -80,21 +80,25 @@ if __name__ == "__main__":
 
     print()
 
+    largest = report.dataset.rotation.get(
+        "largest_rank_improvement"
+    )
+
     print("Largest Weekly Rank Improvement")
 
-    improvement = report.dataset.summary["largest_rank_improvement"]
-
-    if improvement:
+    if largest:
 
         print(
-            f"{improvement['theme']} : "
-            f"{improvement['start_rank']} -> "
-            f"{improvement['end_rank']}"
+            f"{largest['theme']} : "
+            f"{largest['start_rank']} -> "
+            f"{largest['end_rank']}"
         )
+    else:
+        print("None")
 
     print()
 
-    print("Historical Keys")
+    print("Historical Sections")
 
     for key in report.historical.keys():
 

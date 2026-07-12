@@ -43,6 +43,13 @@ class WeeklyReportWriter:
             leadership,
         )
 
+
+        self._render_stock_intelligence(
+            lines,
+            report.dataset.stocks,
+        )
+    
+
         self._render_rotation(
             lines,
             rotation,
@@ -69,10 +76,6 @@ class WeeklyReportWriter:
         )
 
 
-        self._render_stock_intelligence(
-            lines,
-            report.dataset.stocks,
-        )
 
 
         output_file.write_text(

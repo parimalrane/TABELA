@@ -211,6 +211,9 @@ TRADINGVIEW WATCHLIST EXPORT
 ###LONG,MU,STX,SNDK,SIMO,ALAB,ASX,DDOG,MXL,ACMR,VPG,UMC,AMAT,TOELY,VSH,MRVL,AMD,ICHR,DELL,WDC,OUST,CRDO,LRCX,VICR,ARM,HPE,STM,UCTT,SNOW,AMBQ,NBIS,DOCN,TXN,MKSI,COHU,NET,ALGM,EXTR,SYNA,NTCT,CSCO,VIRT,MRX,TWLO,MAMA,INTC,SVCO,
 ###SHORT,SPIR,RKLB,PL,MRCY,NRDBY,RBA,MC,RGNX,VOYG,SAIL,FSUN,RSKD,MNTN,FLYW,DT,NTES,MDB,ALKT,ZS,PRGS,WAY,VERX,DUOT,ZETA,CGNT,ARLO,EVLV,BZ,BGC,GTLB,XPER,CLBT,GEN,DSGX,VVX,AVPT,PDYN,SRAD,BKSY,COMP,VRNS,CRWD,OKTA,FTNT,FROG,TENB,PAR,SUPV,RYAAY
 
+========== STOCK DATAFRAME COLUMNS ==========
+['Company Name', 'Ticker', 'Market Cap (mil)', 'Last Close', 'Avg Volume', '% Price Change (1 Week)', '% Price Change (4 Weeks)', '% Price Change (12 Weeks)', 'Price as a % of 52 Wk H-L Range', 'Relative Price Change (YTD)', 'Sales Growth F(0)/F(-1)', 'Operating Margin 12 Mo %', '52 Week High', '52 Week Low', 'Zacks Industry Rank', 'Sector', 'Industry', 'Net Margin %', 'Zacks Rank', 'Mapped_Theme', 'ETF_Theme', 'Theme_Rank', 'RS_Raw', 'Percentile', 'RS_Rating', 'Weakness_Score', 'Sales_Score', 'Zacks_Score', 'Theme_Class', 'Theme_Score', 'Theme_State', 'ETF_Raw_Score', 'Margin_Percentile', 'Margin_Score', 'Composite_Score', 'Long_Score', 'RS_Weakness', 'Theme_Weakness', 'Zacks_Weakness', 'Margin_Weakness', 'Short_Score', 'Long_Rank', 'Short_Rank', 'Is_Long_Candidate', 'Is_Short_Candidate']
+
 WATCHLIST DELTA REPORT
 ----------------------------
 
@@ -325,73 +328,6 @@ MULTI-DAY INTELLIGENCE
 ---------------------------------------------------------------------------
 Insufficient historical data (10/20 snapshots collected).
 
-====================================
-HISTORICAL INTELLIGENCE REPORT
-====================================
-
-DAILY ROTATION INTELLIGENCE
----------------------------------------------------------------------------
-Source Rotation Date: 2026-07-11
-
-TOP RANK MOVERS
----------------------------------------------------------------------------
-Theme                              Movement
-Mlp                                ↓ 17 → 24
-Timber                             ↑ 27 → 21
-Transportation/Shipping            ↑ 13 → 8
-Engineering And Construction       ↑ 23 → 19
-Reits                              ↓ 18 → 22
-Software                           ↓ 9 → 13
-Insurance                          ↓ 8 → 11
-Natural Gas                        ↓ 28 → 31
-Banking                            ↑ 12 → 10
-Copper                             ↑ 19 → 17
-
-TOP SCORE MOVERS
----------------------------------------------------------------------------
-Theme                              Score Change
-Biotech                            -3.07
-Natural Gas                        -3.02
-Mlp                                -2.03
-Crude Oil                          -1.87
-Nuclear Power                      +1.82
-Timber                             +1.46
-Insurance                          -1.40
-Software                           -1.38
-Brent Oil                          -1.29
-Engineering And Construction       +1.24
-
-STRENGTHENING THEMES (TOP 5)
----------------------------------------------------------------------------
-Nuclear Power                      score +1.82
-Timber                             score +1.46
-Engineering And Construction       score +1.24
-Copper Mining                      score +1.19
-Regional Banks                     score +0.56
-
-WEAKENING THEMES (TOP 5)
----------------------------------------------------------------------------
-Biotech                            score -3.07
-Natural Gas                        score -3.02
-Mlp                                score -2.03
-Crude Oil                          score -1.87
-Insurance                          score -1.40
-
-STRUCTURAL ROTATION
----------------------------------------------------------------------------
-Theme                                Rank Chg  Score Chg   Transition
----------------------------------------------------------------------------
-Exploration                            +6     -2.66   Neutral -> Lagging
-Pharma                                 +6     -2.21   Leading -> Neutral
-Telecom                                -4     +0.65   Neutral -> Leading
-Uranium Mining                         -4     +2.87   Lagging -> Neutral
-
-MULTI-DAY INTELLIGENCE
----------------------------------------------------------------------------
-Insufficient historical data (5/20 snapshots collected).
-
-
-WEEKLY INTELLIGENCE SAVED: reports\2026-07-07_to_2026-07-11_WEEKLY_INTELLIGENCE.md
 
 UNKNOWN CLASSIFICATION SAVED: market_data/unknown_classification\2026-07-11_unknown_classification.json
 

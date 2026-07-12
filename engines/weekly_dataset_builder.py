@@ -27,6 +27,8 @@ from engines.historical_query_engine import (
 )
 
 from engines.historical_queries import HistoricalQueries
+from datetime import date, datetime
+
 
 # =============================================================================
 # WEEKLY METADATA
@@ -48,14 +50,10 @@ class WeeklyDataset:
 
     metadata: WeeklyMetadata
 
-    #
-    # Foundation
-    #
+    generated_at: datetime
+
     runs: list[Run] = field(default_factory=list)
 
-    #
-    # Intelligence Layers
-    #
     themes: dict[str, Any] = field(default_factory=dict)
 
     rotation: dict[str, Any] = field(default_factory=dict)
@@ -65,8 +63,6 @@ class WeeklyDataset:
     breadth: dict[str, Any] = field(default_factory=dict)
 
     stocks: dict[str, Any] = field(default_factory=dict)
-
-    summary: dict[str, Any] = field(default_factory=dict)
 
 # =============================================================================
 # WEEKLY DATASET BUILDER
@@ -139,6 +135,7 @@ class WeeklyDatasetBuilder:
 
         dataset = WeeklyDataset(
             metadata=metadata,
+            generated_at=datetime.now(),
             runs=runs,
             themes=themes,
             rotation=rotation,
@@ -146,8 +143,6 @@ class WeeklyDatasetBuilder:
             breadth=breadth,
             stocks=stocks,
         )
-
-        dataset.summary = self.compute_summary(dataset)
 
         return dataset
     
@@ -160,7 +155,6 @@ class WeeklyDatasetBuilder:
     # -------------------------------------------------------------------------
 # Weekly Stock Intelligence
 # -------------------------------------------------------------------------
-
     def compute_stock_intelligence(
         self,
         runs: list[Run],
@@ -181,7 +175,6 @@ class WeeklyDatasetBuilder:
                 f"watchlist_{run.date}.json"
             )
 
-
             if not watchlist_file.exists():
                 continue
 
@@ -191,30 +184,58 @@ class WeeklyDatasetBuilder:
             #
             # Long
             #
-            for ticker in watchlist.get("long", []):
+            for item in watchlist.get("long", []):
+
+                if isinstance(item, str):
+                    ticker = item
+                    theme = "Unknown"
+                else:
+                    ticker = item.get("ticker")
+                    theme = item.get("theme", "Unknown")
 
                 if ticker not in long_counts:
 
                     long_counts[ticker] = {
                         "ticker": ticker,
+                        "theme": theme,
                         "days": 0,
                     }
 
                 long_counts[ticker]["days"] += 1
 
+                if (
+                    long_counts[ticker]["theme"] == "Unknown"
+                    and theme != "Unknown"
+                ):
+                    long_counts[ticker]["theme"] = theme
+
             #
             # Short
             #
-            for ticker in watchlist.get("short", []):
+            for item in watchlist.get("short", []):
+
+                if isinstance(item, str):
+                    ticker = item
+                    theme = "Unknown"
+                else:
+                    ticker = item.get("ticker")
+                    theme = item.get("theme", "Unknown")
 
                 if ticker not in short_counts:
 
                     short_counts[ticker] = {
                         "ticker": ticker,
+                        "theme": theme,
                         "days": 0,
                     }
 
                 short_counts[ticker]["days"] += 1
+
+                if (
+                    short_counts[ticker]["theme"] == "Unknown"
+                    and theme != "Unknown"
+                ):
+                    short_counts[ticker]["theme"] = theme
 
         long_list = [
             stock
@@ -484,44 +505,6 @@ class WeeklyDatasetBuilder:
 
         }
 
-    # -------------------------------------------------------------------------
-    # Summary
-    # -------------------------------------------------------------------------
-
-    def compute_summary(
-        self,
-        dataset: WeeklyDataset,
-    ) -> dict[str, Any]:
-
-        return {
-
-            "trading_days": dataset.metadata.trading_days,
-
-            "theme_count": len(dataset.themes),
-
-            "persistent_leaders":
-                len(dataset.leadership["persistent_leaders"]),
-
-            "emerging_leaders":
-                len(dataset.leadership["emerging_leaders"]),
-
-            "persistent_laggards":
-                len(dataset.leadership["persistent_laggards"]),
-
-            "largest_rank_improvement":
-                dataset.rotation["largest_rank_improvement"],
-
-            "largest_rank_decline":
-                dataset.rotation["largest_rank_decline"],
-
-            "largest_score_gain":
-                dataset.rotation["largest_score_gain"],
-
-            "largest_score_loss":
-                dataset.rotation["largest_score_loss"],
-
-        }
-
 if __name__ == "__main__":
 
     builder = WeeklyDatasetBuilder()
@@ -575,9 +558,11 @@ if __name__ == "__main__":
             weekly.breadth["strongest_average"][0][0]
         )
         print()
-        print("Summary")
-        print(f"Theme Count : {weekly.summary['theme_count']}")
-        print(
-            "Largest Improvement :",
-            weekly.summary["largest_rank_improvement"]["theme"]
-        )
+        print("Dataset")
+        print(f"Theme Count : {len(weekly.themes)}")
+
+        if weekly.rotation["largest_rank_improvement"]:
+            print(
+                "Largest Improvement :",
+                weekly.rotation["largest_rank_improvement"]["theme"]
+            )

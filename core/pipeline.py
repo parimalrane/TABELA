@@ -3,8 +3,6 @@ import math
 import os
 
 import pandas as pd
-from engines.weekly_intelligence_engine import WeeklyIntelligenceEngine
-from engines.weekly_report_writer import WeeklyReportWriter
 from core.company_theme_engine import COMPANY_THEME
 from core.config import THEME_STRENGTH_CONFIG
 from core.industry_theme_engine import INDUSTRY_THEME
@@ -630,6 +628,7 @@ def print_report(
     distribution_watchlist,
     theme_breadth,
     theme_strength_settings,
+    stocks,
 ):
     leading_themes = theme_strength[
         theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Leading"])
@@ -745,9 +744,10 @@ def print_report(
     compare_watchlists(
         long_candidates["Ticker"].head(50).tolist(),
         distribution_watchlist["Ticker"].head(50).tolist(),
+        stocks,
     )
 
-
+ 
 def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, stocks, theme_breadth):
     total_stock_count = len(stocks)
     classified_stock_count = len(stocks[stocks["Theme_Class"] != "Unknown"])
@@ -773,22 +773,6 @@ def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, st
         except Exception as e:
             print()
             print("HISTORICAL INTELLIGENCE ERROR:", e)
-
-        try:
-            weekly_engine = WeeklyIntelligenceEngine()
-
-            weekly_report = weekly_engine.build()
-
-            writer = WeeklyReportWriter()
-
-            report_path = writer.write(weekly_report)
-
-            print()
-            print(f"WEEKLY INTELLIGENCE SAVED: {report_path}")
-
-        except Exception as e:
-            print()
-            print("WEEKLY INTELLIGENCE ERROR:", e)
 
 
     except Exception as e:
@@ -847,6 +831,7 @@ def run_tabela_pipeline():
         distribution_watchlist,
         theme_breadth,
         theme_strength_settings,
+        stocks,
     )
 
     leading_themes = theme_strength[
