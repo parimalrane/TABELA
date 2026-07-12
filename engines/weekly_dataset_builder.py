@@ -151,7 +151,7 @@ class WeeklyDatasetBuilder:
             "theme_to_companies": {},
         }
 
-        industry_file = Path("market_data/mappings/industry_theme_mapping.csv")
+        industry_file = Path("data//industry_theme_mapping.csv")
 
         if industry_file.exists():
 
@@ -169,7 +169,7 @@ class WeeklyDatasetBuilder:
                         []
                     ).append(industry)
 
-        company_file = Path("market_data/mappings/stock_theme_mapping.csv")
+        company_file = Path("data/stock_theme_mapping.csv")
 
         if company_file.exists():
 

@@ -1,7 +1,7 @@
 {
     "metadata": {
         "schema_version": "1.0",
-        "generated_at": "2026-07-12T10:31:36.446433",
+        "generated_at": "2026-07-12T10:52:36.372567",
         "start_date": "2026-07-07",
         "end_date": "2026-07-11",
         "trading_days": 5,
@@ -3520,12 +3520,406 @@
         ]
     },
     "taxonomy": {
-        "theme_to_industries": {},
-        "theme_to_companies": {},
+        "theme_to_industries": {
+            "Software": [
+                "Technology Services",
+                "Computers - IT Services"
+            ],
+            "Telecom": [
+                "Wireless National",
+                "Wireless Equipment"
+            ],
+            "Media Distribution": [
+                "Media Conglomerates",
+                "Broadcast Radio and Television"
+            ],
+            "Consumer Staples": [
+                "Consumer Products - Staples"
+            ],
+            "Infrastructure": [
+                "Waste Removal Services"
+            ],
+            "Semiconductor Equipment": [
+                "Electronics - Miscellaneous Products"
+            ],
+            "Banking": [
+                "Financial Transaction Services"
+            ],
+            "Semiconductors": [
+                "Electronics - Miscellaneous Components"
+            ],
+            "Leisure and Entertainment": [
+                "Leisure and Recreation Services"
+            ],
+            "Cybersecurity": [
+                "Security"
+            ],
+            "Financial Services": [
+                "Financial - Miscellaneous Services"
+            ],
+            "Business Software": [
+                "Business - Information Services"
+            ],
+            "Automotive Technology": [
+                "Automotive - Original Equipment"
+            ],
+            "Education": [
+                "Schools"
+            ]
+        },
+        "theme_to_companies": {
+            "AI Infrastructure": [
+                "CRDO",
+                "AVGO",
+                "SMCI",
+                "INOD",
+                "NBIS"
+            ],
+            "AI Accelerators": [
+                "NVDA"
+            ],
+            "AI Compute": [
+                "AMD",
+                "ARM",
+                "INTC"
+            ],
+            "AI Servers": [
+                "DELL",
+                "HPE"
+            ],
+            "AI Networking": [
+                "ANET",
+                "CSCO",
+                "EXTR"
+            ],
+            "AI Connectivity": [
+                "ALAB",
+                "APH"
+            ],
+            "AI Power Infrastructure": [
+                "MPWR",
+                "VRT",
+                "ETN",
+                "AAON"
+            ],
+            "Electronics Manufacturing": [
+                "TTMI",
+                "CLS",
+                "FLEX",
+                "JBL",
+                "AVT"
+            ],
+            "Optical Networking": [
+                "AAOI",
+                "LITE",
+                "CIEN",
+                "COHR",
+                "VIAV",
+                "LWLG"
+            ],
+            "AI ASIC": [
+                "MRVL"
+            ],
+            "Semiconductor Equipment": [
+                "LRCX",
+                "AMAT",
+                "KLAC",
+                "AEHR",
+                "UCTT",
+                "AMKR",
+                "ICHR",
+                "ONTO",
+                "ACMR",
+                "ASML",
+                "ENTG",
+                "KLIC",
+                "MKSI"
+            ],
+            "Memory": [
+                "MU",
+                "WDC",
+                "SNDK",
+                "SIMO"
+            ],
+            "Data Storage": [
+                "STX"
+            ],
+            "Foundry": [
+                "GFS",
+                "TSM",
+                "UMC"
+            ],
+            "Semiconductor Analytics": [
+                "PDFS"
+            ],
+            "Wireless Chips": [
+                "QCOM",
+                "ADI"
+            ],
+            "Semiconductors": [
+                "MCHP",
+                "ON",
+                "NXPI",
+                "LSCC",
+                "ALGM",
+                "SMTC",
+                "FORM",
+                "POWI",
+                "RMBS",
+                "ASX",
+                "AXTI",
+                "HIMX",
+                "IFNNY",
+                "MTSI",
+                "MXL",
+                "NVTS",
+                "SKYT",
+                "SYNA",
+                "VSH"
+            ],
+            "Semiconductor Testing": [
+                "TER",
+                "COHU"
+            ],
+            "Cybersecurity": [
+                "PANW",
+                "CRWD",
+                "ZS",
+                "FTNT",
+                "OKTA",
+                "S",
+                "CYBR",
+                "TENB"
+            ],
+            "Cloud Infrastructure": [
+                "SNOW",
+                "NET",
+                "DOCN",
+                "DDOG"
+            ],
+            "Data Infrastructure": [
+                "MDB",
+                "ESTC",
+                "NTAP"
+            ],
+            "Enterprise Cloud": [
+                "NOW",
+                "CRM"
+            ],
+            "SaaS Platform": [
+                "HUBS"
+            ],
+            "Communications Cloud": [
+                "TWLO"
+            ],
+            "Developer Infrastructure": [
+                "GTLB",
+                "FROG",
+                "TEAM"
+            ],
+            "Mobile Adtech": [
+                "APP"
+            ],
+            "Digital Advertising": [
+                "TTD"
+            ],
+            "Social Media Platform": [
+                "RDDT",
+                "PINS",
+                "SNAP"
+            ],
+            "AI Platform": [
+                "META",
+                "GOOG"
+            ],
+            "Alternative Energy": [
+                "BE"
+            ],
+            "Fuel Cell Infrastructure": [
+                "FCEL"
+            ],
+            "Solar Infrastructure": [
+                "ENPH",
+                "SEDG",
+                "RUN",
+                "ARRY",
+                "FSLR"
+            ],
+            "Nuclear Infrastructure": [
+                "SMR",
+                "OKLO"
+            ],
+            "Integrated Energy": [
+                "XOM",
+                "CVX",
+                "SHEL",
+                "BP",
+                "KGS",
+                "VIST"
+            ],
+            "Oil Services": [
+                "SLB",
+                "HAL",
+                "BKR"
+            ],
+            "Exploration": [
+                "MUR",
+                "OXY",
+                "DVN",
+                "OVV"
+            ],
+            "Autonomous Driving AI": [
+                "TSLA"
+            ],
+            "Defense Software": [
+                "PLTR"
+            ],
+            "Space Infrastructure": [
+                "RKLB",
+                "IRDM",
+                "SATS",
+                "ASTS",
+                "PL"
+            ],
+            "Autonomous Mobility": [
+                "ACHR",
+                "JOBY",
+                "BWA"
+            ],
+            "AI Sensors": [
+                "OUST"
+            ],
+            "Defense Systems": [
+                "KTOS"
+            ],
+            "Defense Drone Systems": [
+                "AVAV"
+            ],
+            "Digital Assets Infrastructure": [
+                "COIN",
+                "RIOT",
+                "CIFR",
+                "BTDR",
+                "HUT",
+                "MARA",
+                "CORZ"
+            ],
+            "Retail Trading Platform": [
+                "HOOD"
+            ],
+            "Digital Banking": [
+                "SOFI",
+                "NU"
+            ],
+            "Digital Payments": [
+                "PYPL",
+                "SQ"
+            ],
+            "Consumer Momentum": [
+                "CELH",
+                "DUOL",
+                "SPOT"
+            ],
+            "Travel Platform": [
+                "ABNB"
+            ],
+            "Transportation Platform": [
+                "UBER"
+            ],
+            "Delivery Platform": [
+                "DASH"
+            ],
+            "E Commerce Infrastructure": [
+                "SHOP",
+                "MELI"
+            ],
+            "Optical Infrastructure": [
+                "GLW"
+            ],
+            "Footwear/Apparel": [
+                "NKE",
+                "LULU",
+                "ONON",
+                "CROX",
+                "DECK"
+            ],
+            "Restaurants": [
+                "CAVA",
+                "CMG",
+                "WING",
+                "SBUX"
+            ],
+            "Discount Retail": [
+                "COST",
+                "WMT",
+                "TJX"
+            ],
+            "Consumer Staples": [
+                "KHC",
+                "KMB",
+                "STZ",
+                "COCO"
+            ],
+            "Building Materials": [
+                "BLDR"
+            ],
+            "Homebuilders": [
+                "LEN",
+                "KBH",
+                "DHI",
+                "PHM"
+            ],
+            "Infrastructure": [
+                "FIX",
+                "URI",
+                "STRL"
+            ],
+            "Electrical Infrastructure": [
+                "PWR",
+                "GEV",
+                "POWL",
+                "NVT"
+            ],
+            "Industrial Automation": [
+                "GE",
+                "PH",
+                "ROK",
+                "EMR",
+                "JCI",
+                "VG"
+            ],
+            "Telecom Infrastructure": [
+                "CHTR",
+                "T",
+                "VZ",
+                "TMUS"
+            ],
+            "Communication Infrastructure": [
+                "BAND"
+            ],
+            "Private Wireless Infrastructure": [
+                "ATEX"
+            ],
+            "Aerospace & Defense": [
+                "ATI"
+            ],
+            "Copper Mining": [
+                "FCX"
+            ],
+            "Medical Devices": [
+                "ALC"
+            ],
+            "Healthcare Services": [
+                "ENSG"
+            ],
+            "Diagnostics": [
+                "NTRA"
+            ]
+        },
         "summary": {
-            "theme_count": 0,
-            "industry_count": 0,
-            "company_count": 0
+            "theme_count": 14,
+            "industry_count": 17,
+            "company_count": 207
         }
     },
     "maintenance": {
