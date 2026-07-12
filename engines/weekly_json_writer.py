@@ -18,9 +18,9 @@ class WeeklyJSONWriter:
 
         filename = (
             f"{metadata.start_date}"
-            f"_to_"
+            "_to_"
             f"{metadata.end_date}"
-            f"_weekly_intelligence.json"
+            "_weekly_intelligence.json"
         )
 
         output_file = self.OUTPUT_DIR / filename
@@ -28,12 +28,19 @@ class WeeklyJSONWriter:
         data = {
 
             "metadata": {
+
                 "schema_version": "1.0",
+
                 "generated_at": dataset.generated_at.isoformat(),
+
                 "start_date": str(metadata.start_date),
+
                 "end_date": str(metadata.end_date),
+
                 "trading_days": metadata.trading_days,
+
                 "runs_loaded": len(dataset.runs),
+
             },
 
             "market": {
@@ -92,27 +99,15 @@ class WeeklyJSONWriter:
                     dataset.leadership["weakening_leaders"],
 
             },
-            
+
             "taxonomy": dataset.taxonomy,
-            
-            "maintenance": {
 
-                "stock_mapping_candidates": [],
+            #
+            # Builder owns maintenance.
+            #
 
-                "theme_mapping_candidates": [],
-
-                "industry_mapping_candidates": [],
-
-                "possible_new_themes": [],
-
-                "possible_retired_themes": [],
-
-                "taxonomy_review": {
-                    "status": "pending_ai_review",
-                    "last_reviewed": str(metadata.end_date),
-                },
-
-            },
+            "maintenance":
+                getattr(dataset, "maintenance", {}),
 
             "quality": {
 
@@ -120,10 +115,8 @@ class WeeklyJSONWriter:
 
                 "errors": [],
 
-                "missing_days": max(
-                    0,
-                    5 - metadata.trading_days,
-                ),
+                "missing_days":
+                    max(0, 5 - metadata.trading_days),
 
                 "completeness":
                     round(metadata.trading_days / 5, 2),

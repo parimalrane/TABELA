@@ -41,12 +41,6 @@ class WeeklyMetadata:
     end_date: date
     trading_days: int
 
-# =============================================================================
-# WEEKLY DATASET
-# =============================================================================
-
-
-
 @dataclass(slots=True)
 class WeeklyDataset:
 
@@ -68,9 +62,7 @@ class WeeklyDataset:
 
     taxonomy: dict[str, Any] = field(default_factory=dict)
 
-# =============================================================================
-# WEEKLY DATASET BUILDER
-# =============================================================================
+    maintenance: dict[str, Any] = field(default_factory=dict)
 
 class WeeklyDatasetBuilder:
 
@@ -79,28 +71,6 @@ class WeeklyDatasetBuilder:
         self.history = load_history()
 
         self.queries = HistoricalQueries(self.history)
-
-    # -------------------------------------------------------------------------
-    # Metadata
-    # -------------------------------------------------------------------------
-
-    def build_metadata(
-        self,
-        runs: list[Run],
-    ) -> WeeklyMetadata:
-
-        if not runs:
-            raise ValueError("No historical runs available.")
-
-        return WeeklyMetadata(
-            start_date=runs[0].date,
-            end_date=runs[-1].date,
-            trading_days=len(runs),
-        )
-
-    # -------------------------------------------------------------------------
-    # Runs
-    # -------------------------------------------------------------------------
 
     def build_runs(
         self,
@@ -113,10 +83,6 @@ class WeeklyDatasetBuilder:
             raise ValueError("No historical runs found.")
 
         return runs
-
-    # -------------------------------------------------------------------------
-    # Build
-    # -------------------------------------------------------------------------
 
     def build(
         self,
@@ -140,6 +106,8 @@ class WeeklyDatasetBuilder:
 
         stocks = self.compute_stock_intelligence(runs)
 
+        unknown = self.compute_unknown_intelligence(runs)
+
         #
         # ------------------------------------------------------------------
         # Taxonomy
@@ -151,7 +119,7 @@ class WeeklyDatasetBuilder:
             "theme_to_companies": {},
         }
 
-        industry_file = Path("data//industry_theme_mapping.csv")
+        industry_file = Path("data/industry_theme_mapping.csv")
 
         if industry_file.exists():
 
@@ -187,47 +155,89 @@ class WeeklyDatasetBuilder:
                         []
                     ).append(ticker)
 
-        #
-        # Taxonomy Summary
-        #
-
         taxonomy["summary"] = {
-            "theme_count": len(
-                taxonomy["theme_to_industries"]
-            ),
-            "industry_count": sum(
-                len(v)
-                for v in taxonomy["theme_to_industries"].values()
-            ),
-            "company_count": sum(
-                len(v)
-                for v in taxonomy["theme_to_companies"].values()
-            ),
+
+            "theme_count":
+                len(taxonomy["theme_to_industries"]),
+
+            "industry_count":
+                sum(
+                    len(v)
+                    for v in taxonomy["theme_to_industries"].values()
+                ),
+
+            "company_count":
+                sum(
+                    len(v)
+                    for v in taxonomy["theme_to_companies"].values()
+                ),
         }
 
+        maintenance = {
+
+            "unknown": unknown,
+
+            "stock_mapping_candidates": [],
+
+            "industry_mapping_candidates": [],
+
+            "theme_mapping_candidates": [],
+
+            "possible_new_themes": [],
+
+            "possible_retired_themes": [],
+
+            "taxonomy_review": {
+
+                "status": "pending_ai_review",
+
+                "last_reviewed": str(metadata.end_date),
+
+            }
+
+        }
 
         dataset = WeeklyDataset(
+
             metadata=metadata,
+
             generated_at=datetime.now(),
+
             runs=runs,
+
             themes=themes,
+
             rotation=rotation,
+
             leadership=leadership,
+
             breadth=breadth,
+
             stocks=stocks,
+
             taxonomy=taxonomy,
+
+            maintenance=maintenance,
+
         )
 
-     
 
         return dataset
 
-    # Weekly Stock Intelligence
-    # -------------------------------------------------------------------------
+    def build_metadata(
+        self,
+        runs: list[Run],
+    ) -> WeeklyMetadata:
 
-    # -------------------------------------------------------------------------
-# Weekly Stock Intelligence
-# -------------------------------------------------------------------------
+        if not runs:
+            raise ValueError("No historical runs available.")
+
+        return WeeklyMetadata(
+            start_date=runs[0].date,
+            end_date=runs[-1].date,
+            trading_days=len(runs),
+        )
+
     def compute_stock_intelligence(
         self,
         runs: list[Run],
@@ -335,9 +345,173 @@ class WeeklyDatasetBuilder:
             "short": short_list,
         }
 
-    # -------------------------------------------------------------------------
-    # Theme Dataset
-    # -------------------------------------------------------------------------
+    def compute_unknown_intelligence(
+        self,
+        runs: list[Run],
+    ) -> dict[str, Any]:
+
+        import json
+        from pathlib import Path
+
+        unknown_dir = Path("market_data/unknown_classification")
+
+        company_counts = {}
+
+        industry_counts = {}
+
+        sector_counts = {}
+
+        for run in runs:
+
+            filename = (
+                unknown_dir /
+                f"{run.date}_unknown_classification.json"
+            )
+
+            if not filename.exists():
+                continue
+
+            with open(filename, "r", encoding="utf-8") as f:
+
+                payload = json.load(f)
+
+            for stock in payload.get("unknown_leaders", []):
+
+                ticker = stock["ticker"]
+
+                if ticker not in company_counts:
+
+                    company_counts[ticker] = {
+
+                        "ticker": ticker,
+
+                        "company_name": stock.get("company_name", ""),
+                        
+                        "industry": stock.get("industry", "Unknown"),
+                        
+                        "sector": stock.get("sector", "Unknown"),
+
+                        "days": 0,
+
+                        "total_rs": 0,
+
+                        "total_long_score": 0,
+
+                    }
+
+                company_counts[ticker]["days"] += 1
+
+                company_counts[ticker]["total_rs"] += stock.get("rs_rating", 0)
+
+                company_counts[ticker]["total_long_score"] += stock.get("long_score", 0)
+
+                industry = stock["industry"]
+
+                industry_counts[industry] = (
+                    industry_counts.get(industry, 0) + 1
+                )
+
+                sector = stock["sector"]
+
+                sector_counts[sector] = (
+                    sector_counts.get(sector, 0) + 1
+                )
+
+        persistent = []
+
+        emerging = []
+
+        for item in company_counts.values():
+
+            item["average_rs"] = round(
+                item["total_rs"] / item["days"],
+                1,
+            )
+
+            item["average_long_score"] = round(
+                item["total_long_score"] / item["days"],
+                2,
+            )
+
+            del item["total_rs"]
+
+            del item["total_long_score"]
+
+            if item["days"] >= 4:
+
+                persistent.append(item)
+
+            else:
+
+                emerging.append(item)
+
+        persistent.sort(
+            key=lambda x: (
+                -x["days"],
+                -x["average_rs"],
+                x["ticker"],
+            )
+        )
+
+        emerging.sort(
+            key=lambda x: (
+                -x["days"],
+                -x["average_rs"],
+                x["ticker"],
+            )
+        )
+
+        unknown_industries = [
+
+            {
+
+                "industry": industry,
+
+                "occurrences": count,
+
+            }
+
+            for industry, count in sorted(
+
+                industry_counts.items(),
+
+                key=lambda x: (-x[1], x[0])
+
+            )
+
+        ]
+
+        unknown_sectors = [
+
+            {
+
+                "sector": sector,
+
+                "occurrences": count,
+
+            }
+
+            for sector, count in sorted(
+
+                sector_counts.items(),
+
+                key=lambda x: (-x[1], x[0])
+
+            )
+
+        ]
+
+        return {
+
+            "persistent_unknowns": persistent,
+
+            "emerging_unknowns": emerging,
+
+            "unknown_industries": unknown_industries,
+
+            "unknown_sectors": unknown_sectors,
+
+        }
 
     def build_theme_dataset(
         self,
@@ -427,10 +601,6 @@ class WeeklyDatasetBuilder:
 
         return themes
 
-    # -------------------------------------------------------------------------
-    # Weekly Rotation
-    # -------------------------------------------------------------------------
-
     def compute_rotation(
         self,
         themes: dict[str, Any],
@@ -497,10 +667,6 @@ class WeeklyDatasetBuilder:
             "largest_score_loss": score_losses[0] if score_losses else None,
         }
 
-    # -------------------------------------------------------------------------
-    # Leadership
-    # -------------------------------------------------------------------------
-
     def compute_leadership(
         self,
         themes: dict[str, Any],
@@ -549,10 +715,6 @@ class WeeklyDatasetBuilder:
         }
 
         # -------------------------------------------------------------------------
-    
-    # -------------------------------------------------------------------------
-    # Breadth
-    # -------------------------------------------------------------------------
 
     def compute_breadth(
         self,
@@ -577,6 +739,8 @@ class WeeklyDatasetBuilder:
             "weakest_average": weakening[:10],
 
         }
+
+
 
 if __name__ == "__main__":
 
