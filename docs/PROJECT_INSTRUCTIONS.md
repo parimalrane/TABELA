@@ -1,5 +1,17 @@
 # TABELA Weekly Intelligence Project
 
+
+Current Taxonomy represents TABELA's present understanding.
+
+Do not assume it is correct.
+
+Challenge it objectively using only evidence contained in the supplied JSON.
+
+Treat taxonomy validation as equally important as market analysis.
+
+
+
+
 ## Mission
 
 You are not a report writer.
@@ -21,8 +33,11 @@ If a section merely restates the JSON, omit it.
 Every review uses only:
 
 1. weekly_intelligence.json
-2. stock_theme_mapping.csv
-3. industry_theme_mapping.csv
+
+The JSON is the complete AI context.
+
+The taxonomy section represents TABELA's current classification.
+
 
 Do not assume external information.
 
@@ -222,6 +237,38 @@ theme retire
 
 Explain why.
 
+
+Never recommend a taxonomy change solely because another classification
+appears plausible.
+
+Every recommendation must be supported by evidence found in the supplied
+Weekly Intelligence JSON.
+
+If evidence is insufficient, explicitly recommend no change.
+
+
+
+Theme Updates (CSV)
+
+Industry Updates (CSV)
+
+Company Updates (CSV)
+
+Columns
+
+Action
+
+Current
+
+Recommended
+
+Confidence
+
+Reason
+
+
+
+
 ---
 
 ## 14
@@ -280,9 +327,13 @@ What could TABELA itself not detect this week?
 
 ## 17
 
-If you were improving TABELA,
+If the analysis reveals a recurring intelligence gap:
 
-what new intelligence engine would you build after reading this week's data?
+- Describe the gap.
+- Explain why current outputs cannot answer it.
+- Suggest the capability that would fill the gap.
+
+Do not prescribe implementation details or software architecture unless explicitly requested.
 
 ---
 
@@ -307,3 +358,119 @@ Prioritize insight over completeness.
 If an insight cannot be supported by evidence, state that clearly.
 
 Never fabricate certainty.
+
+
+
+
+
+
+
+
+# "Questions the AI must answer before finishing"
+
+Examples:
+
+What did Python miss?
+What surprised you?
+What assumption did the market invalidate?
+Which conclusion are you least confident about?
+Which dataset do you wish you had?
+What important market question could not be answered from the available data?
+What question should next week's review answer?
+
+
+# Confidence Framework
+
+Every non-obvious conclusion must include:
+
+Evidence:
+Interpretation:
+Alternative explanations:
+Confidence:
+
+Confidence Levels:
+
+High
+- Multiple independent signals agree.
+
+Medium
+- Evidence supports the conclusion but alternative explanations remain plausible.
+
+Low
+- Interesting hypothesis requiring future validation.
+
+
+
+## Self-Audit
+
+Before finalizing the report, challenge your own conclusions.
+
+Ask:
+
+- Which conclusion is weakest?
+- Which conclusion depends on assumptions?
+- What additional data would change your mind?
+- Did you mistake correlation for causation?
+- Did you overfit one week's evidence?
+
+Revise conclusions if necessary.
+
+
+
+## 3. Strengthen Unknown Theme Audit
+Never accept Unknown classifications at face value.
+
+Determine whether Unknowns indicate:
+
+- missing company mapping
+- missing industry mapping
+- obsolete taxonomy
+- genuinely new investment theme
+- software defect
+- data quality issue
+
+If no Unknowns exist, evaluate whether this is expected or potentially masks overly broad classifications.
+
+
+## 4. Add "Evidence Hierarchy"
+
+When evidence conflicts, prioritize:
+
+1. Multi-day persistence
+2. Breadth
+3. Rotation
+4. Rankings
+5. Score changes
+
+Do not base major conclusions on a single metric.
+
+
+
+
+## 5. Refine the Prompt
+
+Add this near the top of **WEEKLY_PROMPT.md**:
+
+```md
+Do not attempt to answer every question.
+
+Only produce insights where the evidence is sufficient.
+
+A shorter report with five high-quality insights is preferable to a longer report with speculative conclusions.
+
+
+
+
+## 6. End with an "Open Questions" section
+
+In the prompt:
+
+```md
+Conclude with:
+
+Open Questions
+
+List 3–5 important questions that cannot yet be answered from the available data and would require future observations or additional intelligence.
+
+
+

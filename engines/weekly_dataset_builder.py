@@ -45,6 +45,8 @@ class WeeklyMetadata:
 # WEEKLY DATASET
 # =============================================================================
 
+
+
 @dataclass(slots=True)
 class WeeklyDataset:
 
@@ -63,6 +65,8 @@ class WeeklyDataset:
     breadth: dict[str, Any] = field(default_factory=dict)
 
     stocks: dict[str, Any] = field(default_factory=dict)
+
+    taxonomy: dict[str, Any] = field(default_factory=dict)
 
 # =============================================================================
 # WEEKLY DATASET BUILDER
@@ -119,6 +123,9 @@ class WeeklyDatasetBuilder:
         trading_days: int = 5,
     ) -> WeeklyDataset:
 
+        import csv
+        from pathlib import Path
+
         runs = self.build_runs(trading_days)
 
         metadata = self.build_metadata(runs)
@@ -133,6 +140,72 @@ class WeeklyDatasetBuilder:
 
         stocks = self.compute_stock_intelligence(runs)
 
+        #
+        # ------------------------------------------------------------------
+        # Taxonomy
+        # ------------------------------------------------------------------
+        #
+
+        taxonomy = {
+            "theme_to_industries": {},
+            "theme_to_companies": {},
+        }
+
+        industry_file = Path("market_data/mappings/industry_theme_mapping.csv")
+
+        if industry_file.exists():
+
+            with open(industry_file, newline="", encoding="utf-8") as f:
+
+                reader = csv.DictReader(f)
+
+                for row in reader:
+
+                    theme = row["Theme"].strip()
+                    industry = row["Industry"].strip()
+
+                    taxonomy["theme_to_industries"].setdefault(
+                        theme,
+                        []
+                    ).append(industry)
+
+        company_file = Path("market_data/mappings/stock_theme_mapping.csv")
+
+        if company_file.exists():
+
+            with open(company_file, newline="", encoding="utf-8") as f:
+
+                reader = csv.DictReader(f)
+
+                for row in reader:
+
+                    theme = row["Theme"].strip()
+                    ticker = row["Ticker"].strip()
+
+                    taxonomy["theme_to_companies"].setdefault(
+                        theme,
+                        []
+                    ).append(ticker)
+
+        #
+        # Taxonomy Summary
+        #
+
+        taxonomy["summary"] = {
+            "theme_count": len(
+                taxonomy["theme_to_industries"]
+            ),
+            "industry_count": sum(
+                len(v)
+                for v in taxonomy["theme_to_industries"].values()
+            ),
+            "company_count": sum(
+                len(v)
+                for v in taxonomy["theme_to_companies"].values()
+            ),
+        }
+
+
         dataset = WeeklyDataset(
             metadata=metadata,
             generated_at=datetime.now(),
@@ -142,13 +215,13 @@ class WeeklyDatasetBuilder:
             leadership=leadership,
             breadth=breadth,
             stocks=stocks,
+            taxonomy=taxonomy,
         )
 
-        return dataset
-    
+     
 
-        # -------------------------------------------------------------------------
-   
+        return dataset
+
     # Weekly Stock Intelligence
     # -------------------------------------------------------------------------
 

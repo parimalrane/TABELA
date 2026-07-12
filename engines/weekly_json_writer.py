@@ -92,7 +92,9 @@ class WeeklyJSONWriter:
                     dataset.leadership["weakening_leaders"],
 
             },
-
+            
+            "taxonomy": dataset.taxonomy,
+            
             "maintenance": {
 
                 "stock_mapping_candidates": [],
@@ -104,6 +106,11 @@ class WeeklyJSONWriter:
                 "possible_new_themes": [],
 
                 "possible_retired_themes": [],
+
+                "taxonomy_review": {
+                    "status": "pending_ai_review",
+                    "last_reviewed": str(metadata.end_date),
+                },
 
             },
 
