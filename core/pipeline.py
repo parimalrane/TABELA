@@ -40,11 +40,12 @@ from engines.stock_history_engine import save_stock_history
 from engines.unknown_classification_engine import save_unknown_classification
 from engines.watchlist_delta_engine import compare_watchlists
 from engines.watchlist_engine import build_long_watchlist
+from engines.runtime_context import context
 
 
 DATA_DIR = "market_data"
-ETF_FILE = os.path.join(DATA_DIR, "ETF.csv")
-STOCK_FILE = os.path.join(DATA_DIR, "stocks.csv")
+ETF_FILE = context.etf_file
+STOCK_FILE = context.stocks_file
 
 
 def normalize_theme(theme):
@@ -645,7 +646,7 @@ def print_report(
     print("\n")
     print("==============================================")
     print("TABELA DAILY MARKET SCAN")
-    print("DATE:", today)
+    print("MARKET DATE:", today)
     print("==============================================")
     print("\n")
 
@@ -820,7 +821,7 @@ def run_tabela_pipeline():
     stocks = score_stocks(stocks)
     stocks, long_candidates, distribution_watchlist, theme_breadth = build_candidates(stocks)
 
-    today = datetime.date.today()
+    today = context.market_date
     save_history(stocks)
 
     print_report(

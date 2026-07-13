@@ -1,7 +1,8 @@
 import os
 import json
-from datetime import datetime
+
 from core.config import *
+from engines.runtime_context import context
 
 
 UNKNOWN_DIR = "market_data/unknown_classification"
@@ -57,16 +58,18 @@ def save_unknown_classification(stocks):
 
         })
 
+    today = context.market_date
+
     output = {
 
-        "date": datetime.today().strftime("%Y-%m-%d"),
+        "date": str(today),
         "unknown_leaders": unknown_data
 
     }
 
     filename = os.path.join(
         UNKNOWN_DIR,
-        f"{datetime.today().strftime('%Y-%m-%d')}_unknown_classification.json"
+        f"{context.market_date}_unknown_classification.json"
     )
 
     with open(filename, "w", encoding="utf-8") as f:

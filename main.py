@@ -1,9 +1,9 @@
 import io
 from contextlib import redirect_stdout
-from datetime import datetime
 from pathlib import Path
 
 from core.pipeline import run_tabela_pipeline
+from engines.runtime_context import context
 
 
 if __name__ == "__main__":
@@ -23,5 +23,5 @@ if __name__ == "__main__":
     report_dir = Path("market_data") / "daily_reports"
     report_dir.mkdir(parents=True, exist_ok=True)
 
-    report_file = report_dir / f"{datetime.today():%Y-%m-%d}.txt"
+    report_file = report_dir / f"{context.market_date}.txt"
     report_file.write_text(output, encoding="utf-8")

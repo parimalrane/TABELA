@@ -1,16 +1,16 @@
 
 
-ETF Eligibility: Total ETFs=275, Eligible ETFs=260, Excluded ETFs (Insufficient History)=15
+ETF Eligibility: Total ETFs=277, Eligible ETFs=263, Excluded ETFs (Insufficient History)=14
 UNCLASSIFIED LEADER: VIRT
+UNCLASSIFIED LEADER: MAMA
 UNCLASSIFIED LEADER: MRX
-UNCLASSIFIED LEADER: ABX
 
 STOCK HISTORY SAVED: market_data/stock_universe\2026-07-10_stock_history.json
 
 
 ==============================================
 TABELA DAILY MARKET SCAN
-DATE: 2026-07-10
+MARKET DATE: 2026-07-10
 ==============================================
 
 
@@ -23,50 +23,50 @@ LEADING THEMES
 -----------------------------------------------------------------
 Rank   Theme                                    ETF Strength
 -----------------------------------------------------------------
-1      Biotech                                          8.23
-2      Semiconductors                                   6.21
-3      Cloud Computing                                  4.68
-4      Healthcare                                       3.79
-5      Artificial Intelligence                          1.90
-6      Pharma                                           1.72
-7      Media                                            1.62
+1      Semiconductors                                   6.42
+2      Biotech                                          5.16
+3      Cloud Computing                                  3.66
+4      Healthcare                                       2.74
+5      Media                                            1.84
+6      Artificial Intelligence                          1.64
+7      Telecom                                          0.85
 
 NEUTRAL THEMES
 -----------------------------------------------------------------
 Rank   Theme                                    ETF Strength
 -----------------------------------------------------------------
-8      Insurance                                        1.35
-9      Software                                         0.64
-10     Internet                                         0.40
-11     Telecom                                          0.20
-12     Banking                                          0.17
-13     Transportation/Shipping                         -0.22
-14     Brokers/ Capital Markets                        -0.49
-15     Regional Banks                                  -1.34
-16     Leisure And Entertainment                       -2.09
-17     Mlp                                             -3.44
-18     Reits                                           -4.27
-19     Copper                                          -4.39
-20     Retail                                          -4.66
-21     Infrastructure                                  -5.00
-22     Agribusiness                                    -5.31
-23     Engineering And Construction                    -5.76
-24     Exploration                                     -6.18
-25     Medical Devices                                 -6.19
-26     Aerospace & Defense                             -6.39
-27     Timber                                          -6.54
+8      Transportation/Shipping                          0.17
+9      Internet                                         0.16
+10     Banking                                         -0.01
+11     Insurance                                       -0.05
+12     Pharma                                          -0.49
+13     Software                                        -0.74
+14     Regional Banks                                  -0.78
+15     Brokers/ Capital Markets                        -1.22
+16     Leisure And Entertainment                       -3.14
+17     Copper                                          -4.35
+18     Retail                                          -4.50
+19     Engineering And Construction                    -4.52
+20     Infrastructure                                  -4.80
+21     Timber                                          -5.08
+22     Reits                                           -5.13
+23     Agribusiness                                    -5.15
+24     Mlp                                             -5.47
+25     Medical Devices                                 -5.91
+26     Aerospace & Defense                             -6.74
+27     Uranium Mining                                  -7.90
 
 LAGGING THEMES
 -----------------------------------------------------------------
 Rank   Theme                                    ETF Strength
 -----------------------------------------------------------------
-28     Natural Gas                                     -9.28
-29     Copper Mining                                   -9.55
-30     Nuclear Power                                  -10.63
-31     Uranium Mining                                 -10.77
-32     Rare Earth/Lithium                             -13.02
-33     Brent Oil                                      -13.58
-34     Crude Oil                                      -13.90
+28     Copper Mining                                   -8.36
+29     Nuclear Power                                   -8.81
+30     Exploration                                     -8.84
+31     Natural Gas                                    -12.30
+32     Rare Earth/Lithium                             -13.61
+33     Brent Oil                                      -14.87
+34     Crude Oil                                      -15.77
 
 
 
@@ -75,25 +75,25 @@ Rank   Theme                                    ETF Strength
 THEME BREADTH ANALYSIS
 ----------------------------
                    Mapped_Theme  Total_Stocks  Strong_Stocks  Breadth_Percent  Weighted_Breadth_Score
-                  Cybersecurity            10            8.0            80.00                  185.36
-        Semiconductor Equipment            21           14.0            66.67                  183.26
+                  Cybersecurity            10            8.0            80.00                  182.48
+        Semiconductor Equipment            21           12.0            57.14                  158.96
                          Memory             4            4.0           100.00                  158.93
-           Cloud Infrastructure             4            4.0           100.00                  152.09
+           Cloud Infrastructure             4            4.0           100.00                  150.08
                      AI Compute             3            3.0           100.00                  135.39
-                 Semiconductors            48           18.0            37.50                  130.94
+                 Semiconductors            48           18.0            37.50                  130.29
+                  AI Networking             3            3.0           100.00                  123.84
                         Foundry             3            3.0           100.00                  119.68
-                  AI Networking             3            3.0           100.00                  118.76
                      AI Servers             2            2.0           100.00                  107.66
        Developer Infrastructure             3            2.0            66.67                   82.26
-                       Software           180           30.0            16.67                   78.80
-             Optical Networking             8            3.0            37.50                   71.41
+   Communication Infrastructure             1            1.0           100.00                   68.62
        Fuel Cell Infrastructure             1            1.0           100.00                   68.62
 Private Wireless Infrastructure             1            1.0           100.00                   68.62
-   Communication Infrastructure             1            1.0           100.00                   68.62
-                   Data Storage             1            1.0           100.00                   67.24
+              AI Infrastructure             5            2.0            40.00                   68.09
+                   Data Storage             1            1.0           100.00                   67.93
                         AI ASIC             1            1.0           100.00                   67.24
-                     AI Sensors             1            1.0           100.00                   67.24
-              AI Infrastructure             5            2.0            40.00                   66.30
+                     AI Sensors             1            1.0           100.00                   65.85
+                       Software           177           24.0            13.56                   64.67
+           Communications Cloud             1            1.0           100.00                   62.38
                     Diagnostics             1            1.0           100.00                   62.38
 
 
@@ -101,52 +101,53 @@ Private Wireless Infrastructure             1            1.0           100.00   
 LONG CANDIDATE UNIVERSE
 ----------------------------
 Ticker            Mapped_Theme         Theme_Class  RS_Rating  Long_Score Zacks Rank
-    MU                  Memory             Leading         99     97.6450          1
-   STX            Data Storage             Leading         97     96.5450          1
-  ALAB         AI Connectivity             Leading         99     95.0250          3
-  CRDO       AI Infrastructure             Leading         95     94.8250          1
-  SIMO                  Memory             Leading         99     94.6450          1
+    MU                  Memory             Leading         99     98.2500          1
+   STX            Data Storage             Leading         98     97.7000          1
+  SNDK                  Memory             Leading         99     95.8500          1
+  SIMO                  Memory             Leading         99     95.2500          1
+  ALAB         AI Connectivity             Leading         99     94.4200          3
+  CRDO       AI Infrastructure             Leading         95     94.2200          1
+   ASX          Semiconductors             Leading         97     93.8500          1
   DDOG    Cloud Infrastructure             Leading         98     93.3375          2
-  SNDK                  Memory             Leading         99     93.2450          3
-   ASX          Semiconductors             Leading         97     93.2450          1
-  MRVL                 AI ASIC             Leading         97     92.7250          3
-   AMD              AI Compute             Leading         98     92.6750          3
-   MXL          Semiconductors             Leading         99     92.6450          3
-  DELL              AI Servers             Leading         99     92.5250          1
-   VPG          Semiconductors             Leading         98     92.2950          1
-  OUST              AI Sensors             Leading         97     92.1250          3
-   UMC                 Foundry             Leading         99     92.0450          3
-  AMAT Semiconductor Equipment             Leading         95     91.8450          1
- TOELY Semiconductor Equipment             Leading         95     91.8450          1
-  ACMR Semiconductor Equipment             Leading         98     91.7950          3
-  ALGM          Semiconductors             Leading         95     91.6950          2
-  DOCN    Cloud Infrastructure             Leading         95     91.6875          2
-   ARM              AI Compute             Leading         98     91.4750          3
-  ICHR Semiconductor Equipment             Leading         99     91.4450          3
-   HPE              AI Servers             Leading         97     91.1250          1
-   WDC                  Memory             Leading         98     91.0950          1
-  VICR          Semiconductors             Leading         90     90.7450          2
-  LRCX Semiconductor Equipment             Leading         90     90.7450          2
-   VSH          Semiconductors             Leading         95     90.6450          1
-  NBIS       AI Infrastructure             Leading         90     90.0750          3
+   MXL          Semiconductors             Leading         99     93.2500          3
+   VPG          Semiconductors             Leading         98     92.9000          1
+   UMC                 Foundry             Leading         99     92.6500          3
+  AMAT Semiconductor Equipment             Leading         95     92.4500          1
+ TOELY Semiconductor Equipment             Leading         95     92.4500          1
+  ACMR Semiconductor Equipment             Leading         98     92.4000          3
+   VSH          Semiconductors             Leading         97     92.3500          1
+  NBIS       AI Infrastructure             Leading         95     92.2200          3
+  MRVL                 AI ASIC             Leading         97     92.1200          3
+   AMD              AI Compute             Leading         98     92.0700          3
+  ICHR Semiconductor Equipment             Leading         99     92.0500          3
+  DELL              AI Servers             Leading         99     91.9200          1
+   WDC                  Memory             Leading         98     91.7000          1
+  LRCX Semiconductor Equipment             Leading         90     91.3500          2
+  VICR          Semiconductors             Leading         90     91.3500          2
+   ARM              AI Compute             Leading         98     90.8700          3
+   HPE              AI Servers             Leading         97     90.5200          1
+  OUST              AI Sensors             Leading         95     90.4200          3
+   STM          Semiconductors             Leading         97     89.9500          1
+  UCTT Semiconductor Equipment             Leading         98     89.9000          1
   SNOW    Cloud Infrastructure             Leading         95     89.8375          3
-   TXN          Semiconductors             Leading         90     89.5450          2
-   STM          Semiconductors             Leading         97     89.3450          1
-  UCTT Semiconductor Equipment             Leading         98     89.2950          1
-  AMBQ          Semiconductors             Leading         99     89.0950          2
+  AMBQ          Semiconductors             Leading         99     89.7000          2
+  DOCN    Cloud Infrastructure             Leading         90     88.9375          2
+   TXN          Semiconductors             Leading         90     88.9000          3
+  MKSI Semiconductor Equipment             Leading         90     88.8000          1
+  COHU   Semiconductor Testing             Leading         90     88.3500          2
    NET    Cloud Infrastructure             Leading         90     88.3375          2
-  MKSI Semiconductor Equipment             Leading         90     88.1950          1
-   ABX      Financial Services Unclassified Leader         90     88.1500          2
-  SVCO          Semiconductors             Leading         95     88.0450          3
-  EXTR           AI Networking             Leading         97     87.9250          3
-  COHU   Semiconductor Testing             Leading         90     87.7450          2
-  INTC              AI Compute             Leading         97     86.9250          1
+  ALGM          Semiconductors             Leading         90     88.3000          3
+  EXTR           AI Networking             Leading         98     87.8700          3
+  KLIC Semiconductor Equipment             Leading         95     87.1500          3
+  NTCT      Optical Networking             Leading         90     87.1000          3
+  SYNA          Semiconductors             Leading         90     87.1000          3
+  CSCO           AI Networking             Leading         90     86.6700          1
   VIRT      Financial Services Unclassified Leader         90     86.5000          1
-  SYNA          Semiconductors             Leading         90     86.4950          3
-  NTCT      Optical Networking             Leading         90     86.4950          3
+   MRX      Financial Services Unclassified Leader         90     86.5000          1
   TWLO    Communications Cloud             Leading         90     86.4875          3
-  DGII      Optical Networking             Leading         90     86.1950          3
-   MRX      Financial Services Unclassified Leader         90     85.7500          2
+  MAMA                 Unknown Unclassified Leader         90     86.3500          2
+  INTC              AI Compute             Leading         97     86.3200          1
+  SVCO          Semiconductors             Leading         90     85.9000          3
 
 
 
@@ -154,78 +155,78 @@ Ticker            Mapped_Theme         Theme_Class  RS_Rating  Long_Score Zacks 
 DISTRIBUTION WATCHLIST
 ========================================
 Ticker                   Theme Theme Class  RS Rating  Composite Score                                                                   Reasons
-  LMND               Insurance     Neutral         50          66.7575       RS:-30 | RS:3/5↓ | Leader:-2d | Hist:Confirm | Comp:-6.4 | Comp:3d↓
-  SPIR     Aerospace & Defense     Neutral         30          43.3475     RS:-20 | Leader:-8d | Hist:Confirm | Comp:-9.8 | Comp:3d↓ | Comp:3/5↓
-  CINF               Insurance     Neutral         50          65.7575     RS:-20 | Leader:-5d | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓
-  TRUP               Insurance     Neutral         10          47.7575 RS:-20 | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-  VLRS Transportation/Shipping     Neutral         50          53.7275     RS:-20 | Leader:-3d | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓
-   OSG               Insurance     Neutral         50          60.7575 RS:-20 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-   EIG               Insurance     Neutral         70          65.7575     RS:-10 | Leader:-1d | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓
-   CNA               Insurance     Neutral         60          62.2575 RS:-10 | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-    CB               Insurance     Neutral         60          66.7575 RS:-10 | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-   RNR               Insurance     Neutral         50          63.7575 RS:-10 | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-   ORI               Insurance     Neutral         30          56.7575 RS:-10 | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-   AIG               Insurance     Neutral         30          50.7575 RS:-10 | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-  KNSL               Insurance     Neutral         20          53.7575 RS:-10 | Hist:Confirm | Comp:-6.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+  SPIR     Aerospace & Defense     Neutral         20          39.3475      RS:-30 | RS:3/5↓ | Leader:-8d | Hist:Confirm | Comp:-13.8 | Comp:3d↓
+  VLRS Transportation/Shipping     Neutral         40          52.7575       RS:-30 | RS:3/5↓ | Leader:-3d | Hist:Confirm | Comp:-3.4 | Comp:3d↓
+ EADSY     Aerospace & Defense     Neutral         40          49.3475       RS:-20 | Hist:Confirm | Comp:-5.8 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  SARO     Aerospace & Defense     Neutral         30          47.3475       RS:-20 | Hist:Confirm | Comp:-5.8 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+   PAR                 Banking     Neutral         30          57.5450     RS:-20 | Leader:-4d | Hist:Confirm | Comp:-5.2 | Comp:3d↓ | Comp:3/5↓
+    MC                 Banking     Neutral         20          51.5450 RS:-20 | Hist:Confirm | Comp:-5.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+  FSUN                 Banking     Neutral         20          49.5450 RS:-20 | Hist:Confirm | Comp:-5.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+   MDB     Data Infrastructure     Neutral         50          62.7275     RS:-20 | Leader:-2d | Hist:Confirm | Comp:-5.0 | Comp:3d↓ | Comp:3/5↓
+  MNTN                Software     Neutral         30          55.2275       RS:-20 | Hist:Confirm | Comp:-5.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  SAIL                Software     Neutral         20          49.7275       RS:-20 | Hist:Confirm | Comp:-5.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  LOAR     Aerospace & Defense     Neutral         50          58.3475     RS:-20 | Leader:-3d | Hist:Confirm | Comp:-1.8 | Comp:3d↓ | Comp:3/5↓
+  ALKT                Software     Neutral         20          51.7275       RS:-20 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  MRCY     Aerospace & Defense     Neutral         70          61.8475     RS:-10 | Leader:-1d | Hist:Confirm | Comp:-5.8 | Comp:3d↓ | Comp:3/5↓
+   HXL     Aerospace & Defense     Neutral         70          55.3475     RS:-10 | Leader:-1d | Hist:Confirm | Comp:-5.8 | Comp:3d↓ | Comp:3/5↓
   RKLB    Space Infrastructure     Neutral         20          43.8475    RS:-10 | Leader:-14d | Hist:Confirm | Comp:-5.8 | Comp:3d↓ | Comp:3/5↓
+  AXON     Aerospace & Defense     Neutral         80          69.3475       RS:-10 | Hist:Confirm | Comp:-5.8 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
     PL    Space Infrastructure     Neutral         10          35.8475                  RS:-10 | Hist:Confirm | Comp:-5.8 | Comp:3d↓ | Comp:3/5↓
-  SLDE               Insurance     Neutral         70          77.7575     RS:-10 | Leader:-2d | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓
-   UNM               Insurance     Neutral         50          62.2575 RS:-10 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-   GNW               Insurance     Neutral         50          61.7575 RS:-10 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-  DASH       Delivery Platform     Neutral         40          57.2275                  RS:-10 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓
- BRK.B               Insurance     Neutral         40          61.2575 RS:-10 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-   RLI               Insurance     Neutral         40          57.7575 RS:-10 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-  RYAN               Insurance     Neutral         40          62.2575 RS:-10 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-  ETOR               Insurance     Neutral         40          63.7575 RS:-10 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
-   AGO               Insurance     Neutral         30          59.7575 RS:-10 | Hist:Confirm | Comp:-2.4 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+   RBA                 Banking     Neutral         40          59.5450 RS:-10 | Hist:Confirm | Comp:-5.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+ NRDBY                 Banking     Neutral         40          57.0450 RS:-10 | Hist:Confirm | Comp:-5.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+    DB                 Banking     Neutral         40          51.0450 RS:-10 | Hist:Confirm | Comp:-5.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+   EVR                 Banking     Neutral         20          53.5450 RS:-10 | Hist:Confirm | Comp:-5.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+  FLYW                Software     Neutral         80          74.7275       RS:-10 | Hist:Confirm | Comp:-5.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  FOUR                 Banking     Neutral         30          59.0450 RS:-10 | Hist:Confirm | Comp:-2.7 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
  MOG.A     Aerospace & Defense     Neutral         80          63.3475       RS:-10 | Hist:Confirm | Comp:-1.8 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
-  AXON     Aerospace & Defense     Neutral         80          73.3475       RS:-10 | Hist:Confirm | Comp:-1.8 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
- EADSY     Aerospace & Defense     Neutral         50          53.3475       RS:-10 | Hist:Confirm | Comp:-1.8 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
-  SARO     Aerospace & Defense     Neutral         40          51.3475       RS:-10 | Hist:Confirm | Comp:-1.8 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
-   NOC     Aerospace & Defense     Neutral          1          32.2475        RS:-9 | Hist:Confirm | Comp:-5.4 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
-  ASTS    Space Infrastructure     Neutral          1          36.2475                   RS:-9 | Hist:Confirm | Comp:-5.4 | Comp:3d↓ | Comp:3/5↓
-  IRDM    Space Infrastructure     Neutral         90          67.8475                   RS:-5 | Hist:Confirm | Comp:-3.8 | Comp:3d↓ | Comp:3/5↓
+  WSBC                 Banking     Neutral         60          77.0450 RS:-10 | Hist:Confirm | Comp:-1.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+   BGC                 Banking     Neutral         30          55.0450    RS:-10 | Leader:-12d | Hist:Confirm | Comp:-1.2 | Comp:3d↓ | Comp:3/5↓
+   GPN                 Banking     Neutral         40          51.5450 RS:-10 | Hist:Confirm | Comp:-1.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+ SCGLY                 Banking     Neutral         40          58.5450 RS:-10 | Hist:Confirm | Comp:-1.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+  EVTC                 Banking     Neutral         30          55.5450 RS:-10 | Hist:Confirm | Comp:-1.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+   IBN                 Banking     Neutral         30          54.5450 RS:-10 | Hist:Confirm | Comp:-1.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+    WU                 Banking     Neutral         10          41.5450 RS:-10 | Hist:Confirm | Comp:-1.2 | Comp:3d↓ | Comp:3/5↓ | Theme:ExitLead
+  CLBT                Software     Neutral         70          69.7275     RS:-10 | Leader:-1d | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓
+   CXT                Software     Neutral         50          61.2275     RS:-10 | Leader:-4d | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓
+   AYI                Software     Neutral         50          61.2275     RS:-10 | Leader:-8d | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓
+  DUOT                Software     Neutral         20          53.7275     RS:-10 | Leader:-8d | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓
+  ZETA                Software     Neutral         60          63.7275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+   IOT                Software     Neutral         60          69.2275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  RSKD                Software     Neutral         60          61.7275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  JBTM                Software     Neutral         30          58.7275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  CGNT                Software     Neutral         20          44.7275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+    ZS           Cybersecurity     Neutral         20          49.7275                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓
+  DSGX                Software     Neutral         10          46.7275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  NCNO                Software     Neutral         10          47.2275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  EVLV                Software     Neutral         10          45.7275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  ARLO                Software     Neutral         10          43.2275       RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
+  BKSY                Software     Neutral          1          38.1275        RS:-9 | Hist:Confirm | Comp:-0.6 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
   HNGE         Medical Devices     Neutral         98          81.6550        RS:-1 | Hist:Confirm | Comp:-2.8 | Comp:3d↓ | Comp:3/5↓ | Rot:Weak
-   GVA          Infrastructure     Neutral         30          47.8800     RS:-30 | Leader:-8d | Hist:Confirm | Comp:-9.0 | Comp:2d↓ | Comp:2/5↓
+   TIC                Software     Neutral          1          44.1275       RS:-19 | Hist:Confirm | Comp:-3.0 | Comp:2d↓ | Comp:2/5↓ | Rot:Weak
   VOYG     Aerospace & Defense     Neutral         20          39.8475       RS:-10 | Hist:Confirm | Comp:-7.0 | Comp:2d↓ | Comp:2/5↓ | Rot:Weak
-  INSW Transportation/Shipping     Neutral         70          64.7275     RS:-10 | Leader:-1d | Hist:Confirm | Comp:-6.4 | Comp:2d↓ | Comp:2/5↓
- RYAAY Transportation/Shipping     Neutral         40          55.7275       RS:-10 | Hist:Confirm | Comp:-6.4 | Comp:2d↓ | Comp:2/5↓ | Rot:Weak
-   RDW     Aerospace & Defense     Neutral         10          33.8475       RS:-10 | Hist:Confirm | Comp:-3.0 | Comp:2d↓ | Comp:2/5↓ | Rot:Weak
-   KNF      Building Materials     Neutral         30          45.8800    RS:-10 | Leader:-10d | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-  EVRG          Infrastructure     Neutral         50          57.3800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-   AEP          Infrastructure     Neutral         50          59.3800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-   DTE          Infrastructure     Neutral         50          58.3800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-    ED          Infrastructure     Neutral         40          52.8800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-   AEE          Infrastructure     Neutral         40          55.3800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-    SO          Infrastructure     Neutral         40          55.3800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-   WEC          Infrastructure     Neutral         40          50.8800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-    FE          Infrastructure     Neutral         30          50.8800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-   DUK          Infrastructure     Neutral         30          49.3800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-   CMS          Infrastructure     Neutral         30          48.8800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-   EXC          Infrastructure     Neutral         30          44.8800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
-     J      Building Materials     Neutral         20          44.3800                  RS:-10 | Hist:Confirm | Comp:-1.0 | Comp:2d↓ | Comp:2/5↓
+   LUV Transportation/Shipping     Neutral         60          65.7575     RS:-10 | Leader:-3d | Hist:Confirm | Comp:-3.4 | Comp:2d↓ | Comp:2/5↓
 
 
 ----------------------------
 TRADINGVIEW WATCHLIST EXPORT
 ----------------------------
-###LONG,MU,STX,ALAB,CRDO,SIMO,DDOG,SNDK,ASX,MRVL,AMD,MXL,DELL,VPG,OUST,UMC,AMAT,TOELY,ACMR,ALGM,DOCN,ARM,ICHR,HPE,WDC,VICR,LRCX,VSH,NBIS,SNOW,TXN,STM,UCTT,AMBQ,NET,MKSI,ABX,SVCO,EXTR,COHU,INTC,VIRT,SYNA,NTCT,TWLO,DGII,MRX,
-###SHORT,LMND,SPIR,CINF,TRUP,VLRS,OSG,EIG,CNA,CB,RNR,ORI,AIG,KNSL,RKLB,PL,SLDE,UNM,GNW,DASH,BRK.B,RLI,RYAN,ETOR,AGO,MOG.A,AXON,EADSY,SARO,NOC,ASTS,IRDM,HNGE,GVA,VOYG,INSW,RYAAY,RDW,KNF,EVRG,AEP,DTE,ED,AEE,SO,WEC,FE,DUK,CMS,EXC,J
+###LONG,MU,STX,SNDK,SIMO,ALAB,CRDO,ASX,DDOG,MXL,VPG,UMC,AMAT,TOELY,ACMR,VSH,NBIS,MRVL,AMD,ICHR,DELL,WDC,LRCX,VICR,ARM,HPE,OUST,STM,UCTT,SNOW,AMBQ,DOCN,TXN,MKSI,COHU,NET,ALGM,EXTR,KLIC,NTCT,SYNA,CSCO,VIRT,MRX,TWLO,MAMA,INTC,SVCO,
+###SHORT,SPIR,VLRS,EADSY,SARO,PAR,MC,FSUN,MDB,MNTN,SAIL,LOAR,ALKT,MRCY,HXL,RKLB,AXON,PL,RBA,NRDBY,DB,EVR,FLYW,FOUR,MOG.A,WSBC,BGC,GPN,SCGLY,EVTC,IBN,WU,CLBT,CXT,AYI,DUOT,ZETA,IOT,RSKD,JBTM,CGNT,ZS,DSGX,NCNO,EVLV,ARLO,BKSY,HNGE,TIC,VOYG,LUV
 
 WATCHLIST DELTA REPORT
 ----------------------------
 
 NEW LONGS ADDED TODAY
-ALAB,AMD,ARM,COHU,CRDO,DELL,DGII,EXTR,HPE,INTC,LRCX,MRVL,NBIS,OUST,SVCO,SYNA,TWLO
+ALAB,AMD,ARM,COHU,CRDO,CSCO,DELL,EXTR,HPE,INTC,KLIC,LRCX,MAMA,MRVL,NBIS,OUST,SVCO,SYNA,TWLO
 
 LONGS REMOVED TODAY
-BAYRY,OSCR,PRSU,SGHC
+ABX,BAYRY,OSCR,PRSU,SGHC
 
 NEW SHORTS ADDED TODAY
-AEE,AEP,AGO,AIG,ASTS,AXON,BRK.B,CB,CINF,CMS,CNA,DASH,DTE,DUK,EADSY,ED,EIG,ETOR,EVRG,EXC,FE,GNW,GVA,HNGE,INSW,IRDM,J,KNF,KNSL,LMND,MOG.A,NOC,ORI,OSG,PL,RDW,RLI,RNR,RYAAY,RYAN,SLDE,SO,SPIR,TRUP,UNM,VLRS,VOYG,WEC
+ARLO,AXON,AYI,BGC,BKSY,CGNT,CLBT,CXT,DB,DSGX,DUOT,EADSY,EVLV,EVR,EVTC,FLYW,FOUR,HNGE,HXL,IBN,IOT,JBTM,LUV,MC,MDB,MNTN,MOG.A,MRCY,NCNO,NRDBY,PAR,PL,RBA,RSKD,SAIL,SCGLY,SPIR,TIC,VLRS,VOYG,WSBC,WU,ZETA,ZS
 
 SHORTS REMOVED TODAY
-AFRM,ALGN,ALHC,ALKT,ARDT,BAX,BBNX,BILL,BKD,BLFS,CBLL,CCC,CERT,CRNC,EOLS,FSUN,FTAI,GEN,GPN,HAYW,HQY,HSIC,HTFL,INTA,LEGN,LOAR,LSPD,MNDY,NVCR,NVST,ODD,OPFI,PHR,PRGS,RDNT,RGEN,RNST,SDGR,SGRY,SHC,TEM,TEVA,TOST,VERX,VRTX,WAL,WAY,XPER
+AFRM,ALGN,ALHC,ARDT,BAX,BBNX,BILL,BKD,BLFS,CBLL,CCC,CERT,CRNC,EOLS,FTAI,GEN,HAYW,HQY,HSIC,HTFL,INTA,LEGN,LSPD,MNDY,NVCR,NVST,ODD,OPFI,PHR,PRGS,RDNT,RGEN,RNST,SDGR,SGRY,SHC,TEM,TEVA,TOST,VERX,VRTX,WAL,WAY,XPER
 
 MARKET SNAPSHOT SAVED: market_data/snapshots\2026-07-10_market_snapshot.json
 
@@ -240,25 +241,29 @@ SUMMARY
 ----------------------------------------
 New Themes       : 0
 Exited Themes    : 0
-Entered Leading  : 1
-Exited Leading   : 1
-Entered Lagging  : 1
-Exited Lagging   : 1
+Entered Leading  : 2
+Exited Leading   : 2
+Entered Lagging  : 2
+Exited Lagging   : 2
 
 RESULT
 ----------------------------------------
 
 Promoted to Leading
   • Artificial Intelligence
+  • Telecom
 
 Demoted from Leading
   • Insurance
+  • Pharma
 
 Dropped to Lagging
+  • Exploration
   • Natural Gas
 
 Recovered from Lagging
   • Timber
+  • Uranium Mining
 
 ✓ Structural rotation detected.
 ====================================
@@ -267,60 +272,65 @@ HISTORICAL INTELLIGENCE REPORT
 
 DAILY ROTATION INTELLIGENCE
 ---------------------------------------------------------------------------
-Source Rotation Date: 2026-07-10
+NOTE: Using latest available rotation data (2026-07-09).
+Source Rotation Date: 2026-07-09
 
 TOP RANK MOVERS
 ---------------------------------------------------------------------------
 Theme                              Movement
-Software                           ↑ 18 → 9
-Copper                             ↑ 27 → 19
-Banking                            ↓ 8 → 12
-Brent Oil                          ↓ 29 → 33
-Brokers/ Capital Markets           ↓ 10 → 14
-Crude Oil                          ↓ 30 → 34
-Internet                           ↑ 14 → 10
-Leisure And Entertainment          ↓ 12 → 16
-Medical Devices                    ↓ 21 → 25
-Nuclear Power                      ↑ 34 → 30
+Regional Banks                     ↓ 8 → 16
+Telecom                            ↑ 19 → 11
+Mlp                                ↑ 22 → 15
+Brent Oil                          ↑ 34 → 29
+Agribusiness                       ↑ 23 → 19
+Engineering And Construction       ↓ 20 → 24
+Infrastructure                     ↑ 26 → 22
+Medical Devices                    ↓ 17 → 21
+Software                           ↓ 14 → 18
+Copper                             ↓ 24 → 27
 
 TOP SCORE MOVERS
 ---------------------------------------------------------------------------
 Theme                              Score Change
-Brent Oil                          -5.16
-Crude Oil                          -4.84
-Pharma                             -4.44
-Medical Devices                    -4.38
-Agribusiness                       -3.98
-Aerospace & Defense                -3.79
-Biotech                            -3.66
-Reits                              -3.55
-Mlp                                -3.34
-Retail                             -2.97
+Brent Oil                          +6.17
+Crude Oil                          +4.72
+Regional Banks                     -3.16
+Engineering And Construction       -2.52
+Natural Gas                        +2.34
+Copper Mining                      -2.18
+Aerospace & Defense                -2.00
+Medical Devices                    -1.97
+Healthcare                         -1.93
+Software                           -1.73
 
 STRENGTHENING THEMES (TOP 5)
 ---------------------------------------------------------------------------
-Semiconductors                     score +2.11
-Cloud Computing                    score +2.04
-Software                           score +1.37
-Copper Mining                      score +0.72
-Nuclear Power                      score +0.55
+Brent Oil                          score +6.17
+Crude Oil                          score +4.72
+Natural Gas                        score +2.34
+Mlp                                score +1.67
+Uranium Mining                     score +1.07
 
 WEAKENING THEMES (TOP 5)
 ---------------------------------------------------------------------------
-Brent Oil                          score -5.16
-Crude Oil                          score -4.84
-Pharma                             score -4.44
-Medical Devices                    score -4.38
-Agribusiness                       score -3.98
+Regional Banks                     score -3.16
+Engineering And Construction       score -2.52
+Copper Mining                      score -2.18
+Aerospace & Defense                score -2.00
+Medical Devices                    score -1.97
 
 STRUCTURAL ROTATION
 ---------------------------------------------------------------------------
 Theme                                Rank Chg  Score Chg   Transition
 ---------------------------------------------------------------------------
-Artificial Intelligence                -8     +1.56   Neutral -> Leading
-Insurance                              +4     -4.25   Leading -> Neutral
-Natural Gas                            +3     -6.05   Neutral -> Lagging
-Timber                                 -1     -2.68   Lagging -> Neutral
+Artificial Intelligence                -7     +1.30   Neutral -> Leading
+Exploration                            +4     -5.55   Neutral -> Lagging
+Insurance                              +7     -5.65   Leading -> Neutral
+Natural Gas                            +6     -9.07   Neutral -> Lagging
+Pharma                                 +9     -6.65   Leading -> Neutral
+Telecom                                -4     +0.45   Neutral -> Leading
+Timber                                 -7     -1.22   Lagging -> Neutral
+Uranium Mining                         -5     +3.13   Lagging -> Neutral
 
 MULTI-DAY INTELLIGENCE
 ---------------------------------------------------------------------------

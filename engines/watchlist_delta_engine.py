@@ -1,6 +1,7 @@
 import os
 import json
-import datetime
+
+from engines.runtime_context import context
 
 
 WATCHLIST_DIR = "market_data/watchlist_history"
@@ -41,14 +42,14 @@ def compare_watchlists(
     stocks=None,
 ):
 
-    today = str(datetime.date.today())
+    today = context.market_date
 
     current_file = os.path.join(
         WATCHLIST_DIR,
-        f"watchlist_{today}.json",
+        f"watchlist_{context.market_date}.json",
     )
 
-    previous_file = get_previous_watchlist(today)
+    previous_file = get_previous_watchlist(str(today))
 
     theme_lookup = build_theme_lookup(stocks)
 

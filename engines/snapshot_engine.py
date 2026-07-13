@@ -1,6 +1,7 @@
 import os
 import json
-from datetime import datetime
+
+from engines.runtime_context import context
 
 
 SNAPSHOT_DIR = "market_data/snapshots"
@@ -17,11 +18,11 @@ def save_daily_snapshot(
     theme_breadth
 ):
 
-    today = datetime.today().strftime("%Y-%m-%d")
+    today = context.market_date
 
     snapshot = {
 
-        "date": today,
+        "date": str(today),
 
         "metadata": {
 
@@ -80,7 +81,7 @@ def save_daily_snapshot(
 
     filename = os.path.join(
         SNAPSHOT_DIR,
-        f"{today}_market_snapshot.json"
+        f"{context.market_date}_market_snapshot.json"
     )
 
     with open(filename, "w") as f:

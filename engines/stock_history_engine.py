@@ -1,7 +1,9 @@
 import os
 import json
-from datetime import datetime
+
 import pandas as pd
+
+from engines.runtime_context import context
 
 
 STOCK_HISTORY_DIR = "market_data/stock_universe"
@@ -46,7 +48,7 @@ def load_previous_stock_history():
 
 def save_stock_history(stocks):
 
-    today = datetime.today().strftime("%Y-%m-%d")
+    today = context.market_date
     stock_data = []
 
     previous_data = load_previous_stock_history()
@@ -79,7 +81,7 @@ def save_stock_history(stocks):
 
         stock_data.append({
 
-            "scan_date": today,
+            "scan_date": str(today),
 
             "ticker": row["Ticker"],
 
@@ -194,7 +196,7 @@ def save_stock_history(stocks):
 
     filename = os.path.join(
         STOCK_HISTORY_DIR,
-        f"{today}_stock_history.json"
+        f"{context.market_date}_stock_history.json"
     )
 
     with open(filename, "w") as f:
