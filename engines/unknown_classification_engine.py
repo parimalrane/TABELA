@@ -28,10 +28,16 @@ def save_unknown_classification(stocks):
 
             "ticker": row["Ticker"],
             "company_name": row["Company Name"],
+
+            "mapped_theme": row["Mapped_Theme"],
+            "theme_class": row["Theme_Class"],
+
             "sector": row["Sector"],
             "industry": row["Industry"],
+
             "rs_rating": int(row["RS_Rating"]),
             "long_score": float(row["Long_Score"]),
+
             "last_close": float(row["Last Close"]),
             "price_position": float(
                 row["Price as a % of 52 Wk H-L Range"]

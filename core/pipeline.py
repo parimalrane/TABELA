@@ -304,7 +304,7 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
                 is_unclassified = True
                 theme_state = None
                 etf_raw_score = None
-                print("UNCLASSIFIED LEADER:", row["Ticker"])
+                
             else:
                 theme_class = "Unknown"
                 theme_score = 60
@@ -707,7 +707,31 @@ def print_report(
         "Zacks Rank"
     ] += "*"
 
+    
     print(display_df.to_string(index=False))
+
+    unclassified = long_candidates[
+        long_candidates["Theme_Class"] == "Unclassified Leader"
+    ][
+        [
+            "Ticker",
+            "Mapped_Theme",
+            "Industry",
+        ]
+    ].copy()
+
+    if not unclassified.empty:
+        print("\n")
+        print("UNCLASSIFIED LEADERS")
+        print("----------------------------")
+        print(
+            unclassified.rename(
+                columns={
+                    "Mapped_Theme": "Theme",
+                    "Industry": "Industry",
+                }
+            ).to_string(index=False)
+        )
 
     print("\n\n")
     print("========================================")
