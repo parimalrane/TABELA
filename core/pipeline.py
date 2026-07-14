@@ -275,6 +275,7 @@ def build_theme_classification(theme_strength):
 
 def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, theme_raw_score_map):
     theme_classes = []
+    is_unclassified_leaders = []
     theme_scores = []
     theme_states = []
     etf_raw_scores = []
@@ -291,6 +292,7 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
             theme_score = theme_score_map[etf_theme]
             theme_state = theme_class_map.get(etf_theme)
             etf_raw_score = theme_raw_score_map.get(etf_theme)
+            is_unclassified = False
         else:
             if (
                 row["RS_Rating"] >= 90
@@ -299,6 +301,7 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
             ):
                 theme_class = "Unclassified Leader"
                 theme_score = 80
+                is_unclassified = True
                 theme_state = None
                 etf_raw_score = None
                 print("UNCLASSIFIED LEADER:", row["Ticker"])
@@ -307,16 +310,20 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
                 theme_score = 60
                 theme_state = None
                 etf_raw_score = None
+                is_unclassified = False
 
         theme_classes.append(theme_class)
         theme_scores.append(theme_score)
         theme_states.append(theme_state)
         etf_raw_scores.append(etf_raw_score)
+        is_unclassified_leaders.append(is_unclassified)
+
 
     stocks["Theme_Class"] = theme_classes
     stocks["Theme_Score"] = theme_scores
     stocks["Theme_State"] = theme_states
     stocks["ETF_Raw_Score"] = etf_raw_scores
+    stocks["Is_Unclassified_Leader"] = is_unclassified_leaders
     return stocks
 
 

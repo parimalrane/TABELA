@@ -12,23 +12,7 @@ os.makedirs(UNKNOWN_DIR, exist_ok=True)
 def save_unknown_classification(stocks):
 
     unknown_stocks = stocks[
-        (stocks["Mapped_Theme"] == "Unknown")
-        &
-        (stocks["RS_Rating"] >= UNKNOWN_RS_THRESHOLD)
-        &
-        (stocks["Long_Score"] >= UNKNOWN_LONG_SCORE_THRESHOLD)
-        &
-        (
-            stocks["Price as a % of 52 Wk H-L Range"]
-            >=
-            UNKNOWN_PRICE_POSITION_THRESHOLD
-        )
-        &
-        (
-            stocks["Market Cap (mil)"]
-            >=
-            UNKNOWN_MARKET_CAP_THRESHOLD
-        )
+        stocks["Is_Unclassified_Leader"]
     ].copy()
 
     unknown_stocks = unknown_stocks.sort_values(
