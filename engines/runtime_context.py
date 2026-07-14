@@ -17,17 +17,17 @@ def load_runtime_context() -> RuntimeContext:
 
     data_dir = Path("market_data") / "zacks_input_data"
 
-    etf_files = list(data_dir.glob("*_ETF.csv"))
-    stock_files = list(data_dir.glob("*_stocks.csv"))
+    etf_files = sorted(data_dir.glob("*_ETF.csv"))
+    stock_files = sorted(data_dir.glob("*_stocks.csv"))
 
-    if len(etf_files) != 1:
-        raise RuntimeError("Expected exactly one *_ETF.csv file.")
+    if not etf_files:
+        raise RuntimeError("No *_ETF.csv file found.")
 
-    if len(stock_files) != 1:
-        raise RuntimeError("Expected exactly one *_stocks.csv file.")
+    if not stock_files:
+        raise RuntimeError("No *_stocks.csv file found.")
 
-    etf_file = etf_files[0]
-    stocks_file = stock_files[0]
+    etf_file = etf_files[-1]
+    stocks_file = stock_files[-1]
 
     etf_date = re.match(r"(\d{8})_ETF\.csv$", etf_file.name).group(1)
     stock_date = re.match(r"(\d{8})_stocks\.csv$", stocks_file.name).group(1)
