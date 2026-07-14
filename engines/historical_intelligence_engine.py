@@ -279,7 +279,12 @@ def compute_historical_intelligence(max_days=21):
 
     theme_daily_series = build_theme_daily_series(snapshots)
     raw_deltas = compute_theme_daily_deltas(theme_daily_series)
-    rotation_dataset = queries.latest_available_dataset("rotation_delta")
+    latest_run = queries.latest_run()
+
+    rotation_dataset = None
+
+    if latest_run is not None:
+        rotation_dataset = queries.dataset(latest_run, "rotation_delta")
 
     rotation_data = None
     rotation_date = None
