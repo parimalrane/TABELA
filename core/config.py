@@ -89,7 +89,7 @@ ETF_FILTERS = {
 
 THEME_STRENGTH_CONFIG = {
     # Benchmark ETF used for relative-return subtraction.
-    "BENCHMARK_TICKER": "QQQ",
+    "BENCHMARK_TICKER": "SPY",
 
     # Relative-return weights by ETF performance period.
     "PERIOD_WEIGHTS": {
