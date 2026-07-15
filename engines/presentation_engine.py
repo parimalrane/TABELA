@@ -509,7 +509,7 @@ def print_daily_scan(
 
     if transition["distribution"]:
         print()
-        print(f"{'Ticker':<8} {'Runs'}")
+        print(f"{'Ticker':<8} {'Days'}")
         print("----------------------------")
 
         for item in transition["distribution"]:
@@ -517,4 +517,3 @@ def print_daily_scan(
                 f"{item['ticker']:<8} "
                 f"{item['runs']}"
             )
-            

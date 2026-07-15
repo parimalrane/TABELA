@@ -72,13 +72,7 @@ def _increment_state_days(registry: Dict) -> None:
         if state.get("last_market_date") == today:
             continue
 
-        current_days = state.get(
-            "state_days",
-            state.get("tracking_runs", 0)
-        )
-
-        state["state_days"] = current_days + 1
-        state.pop("tracking_runs", None)
+        state["state_days"] += 1
         state["last_market_date"] = today
 
 def _remove_recovered(
