@@ -359,7 +359,7 @@ def print_daily_scan(
             columns={
                 "Mapped_Theme": "Theme",
                 "Total_Stocks": "Total",
-                "Strong_Stocks": "Qualified",
+                "Strong_Stocks": "Qualified Stocks",
                 "Breadth_Percent": "Breadth %",
                 "Weighted_Breadth_Score": "Breadth Score",
             }
@@ -381,6 +381,12 @@ def print_daily_scan(
         ]
     ].copy()
 
+    # Prefix every stock with Long Score >= 90 with ★★★★★
+    display_df["Ticker"] = display_df.apply(
+        lambda row: f"★★★★★ {row['Ticker']}" if row.get("Long_Score", 0) >= 90 else row["Ticker"],
+        axis=1
+    )
+
     display_df["Zacks Rank"] = (
         display_df["Zacks Rank"]
         .fillna(0)
@@ -393,25 +399,33 @@ def print_daily_scan(
         "Zacks Rank"
     ] += "*"
 
+    display_df = display_df.rename(
+        columns={
+            "Theme_Class": "Theme Classification",
+        }
+    )
 
     print(display_df.to_string(index=False))
 
     unclassified = long_candidates[
         long_candidates["Theme_Class"] == "Unclassified Leader"
-    ][
-        [
-            "Ticker",
-            "Industry",
-        ]
     ].copy()
 
     if not unclassified.empty:
         print("\n")
         print("UNCLASSIFIED LEADERS")
         print("----------------------------")
-        print(
-            unclassified.to_string(index=False)
+        unclassified["Ticker_Display"] = unclassified.apply(
+            lambda row: f"★★★★★ {row['Ticker']}" if row.get("Long_Score", 0) >= 90 else row["Ticker"],
+            axis=1
         )
+        col_width = max(unclassified["Ticker_Display"].astype(str).map(len).max(), len("Ticker")) + 3
+        print(f"{'Ticker':<{col_width}}{'Industry'}")
+        for _, row in unclassified.iterrows():
+            ticker_disp = row["Ticker_Display"]
+            industry = row["Industry"]
+            print(f"{ticker_disp:<{col_width}}{industry}")
+
 
     print("\n\n")
     print("========================================")

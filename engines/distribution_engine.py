@@ -619,26 +619,42 @@ def build_distribution_watchlist(stocks: pd.DataFrame, top_n: Optional[int] = No
             rs_delta_val = f"-{int(round(trend_metrics.get('rs_drop_1d')))}(1d)"
         row_copy["RS_Delta_Val"] = rs_delta_val
 
-        rs_trend_parts = []
-        if evidence.get("rs_persistence_days", 0) >= int(config["MIN_RS_PERSISTENCE_DAYS"]):
-            rs_trend_parts.append(f"{evidence['rs_persistence_days']}d\u2193")
-        if (
+        # Format RS Trend human-readably
+        has_rs_persistence = evidence.get("rs_persistence_days", 0) >= int(config["MIN_RS_PERSISTENCE_DAYS"])
+        has_rs_down_days = (
             evidence.get("rs_down_days_5d", 0) >= int(config["MIN_RS_DOWN_DAYS_IN_WINDOW"])
             and evidence.get("rs_drop_recent") is not None
             and evidence.get("rs_drop_recent") >= float(config["MIN_RS_DROP_RECENT_FOR_DOWN_DAYS"])
-        ):
-            rs_trend_parts.append(f"{evidence['rs_down_days_5d']}/{int(config['DOWNTREND_WINDOW_DAYS'])}\u2193")
-        row_copy["RS_Trend_Val"] = ", ".join(rs_trend_parts) if rs_trend_parts else "-"
+        )
+        rs_trend_val = "-"
+        if has_rs_persistence or has_rs_down_days:
+            rs_trend_parts = []
+            if has_rs_persistence:
+                days = evidence['rs_persistence_days']
+                rs_trend_parts.append(f"{days} consecutive day{'s' if days != 1 else ''}")
+            if has_rs_down_days:
+                down = evidence['rs_down_days_5d']
+                window = int(config['DOWNTREND_WINDOW_DAYS'])
+                rs_trend_parts.append(f"{down} of last {window} days")
+            rs_trend_val = f"Declining ({', '.join(rs_trend_parts)})"
+        row_copy["RS_Trend_Val"] = rs_trend_val
 
-        row_copy["Leadership_Loss_Val"] = f"-{evidence['leadership_loss_days']}d" if evidence.get("leadership_loss_days") is not None else "-"
+        # Format Leadership Loss human-readably
+        leadership_loss_val = "-"
+        if evidence.get("leadership_loss_days") is not None:
+            days = evidence["leadership_loss_days"]
+            leadership_loss_val = f"Lost {days} day{'s' if days != 1 else ''} ago"
+        row_copy["Leadership_Loss_Val"] = leadership_loss_val
 
+        # Format History human-readably
         history_val = "-"
         if evidence.get("historical_signal"):
-            history_val = "Confirm"
+            history_val = "Confirmed"
         elif evidence.get("fallback_signal"):
             history_val = "Sparse"
         row_copy["History_Val"] = history_val
 
+        # Format Composite Delta
         comp_delta_val = "-"
         if evidence.get("composite_drop_recent") is not None and evidence.get("composite_drop_recent") >= float(config["MIN_COMPOSITE_DROP_RECENT"]):
             comp_delta_val = f"-{evidence.get('composite_drop_recent'):.1f}"
@@ -646,33 +662,40 @@ def build_distribution_watchlist(stocks: pd.DataFrame, top_n: Optional[int] = No
             comp_delta_val = f"-{trend_metrics.get('composite_drop_1d'):.1f}(1d)"
         row_copy["Composite_Delta_Val"] = comp_delta_val
 
-        comp_trend_parts = []
-        if evidence.get("composite_persistence_days", 0) >= int(config["MIN_COMPOSITE_PERSISTENCE_DAYS"]):
-            comp_trend_parts.append(f"{evidence['composite_persistence_days']}d\u2193")
-        if (
+        # Format Composite Trend human-readably
+        has_comp_persistence = evidence.get("composite_persistence_days", 0) >= int(config["MIN_COMPOSITE_PERSISTENCE_DAYS"])
+        has_comp_down_days = (
             evidence.get("composite_down_days_5d", 0) >= int(config["MIN_COMPOSITE_DOWN_DAYS_IN_WINDOW"])
             and evidence.get("composite_drop_recent") is not None
             and evidence.get("composite_drop_recent") >= float(config["MIN_COMPOSITE_DROP_RECENT_FOR_DOWN_DAYS"])
-        ):
-            comp_trend_parts.append(f"{evidence['composite_down_days_5d']}/{int(config['DOWNTREND_WINDOW_DAYS'])}\u2193")
-        if evidence.get("composite_confirmation") and not (
-            evidence.get("composite_drop_recent") is not None and evidence.get("composite_drop_recent") >= float(config["MIN_COMPOSITE_DROP_RECENT"])
-        ) and not (
-            trend_metrics.get("composite_drop_1d") is not None and trend_metrics.get("composite_drop_1d") >= float(config["MIN_COMPOSITE_DROP_1D"])
-        ) and not (
-            evidence.get("composite_persistence_days", 0) >= int(config["MIN_COMPOSITE_PERSISTENCE_DAYS"])
-        ) and not (
-            evidence.get("composite_down_days_5d", 0) >= int(config["MIN_COMPOSITE_DOWN_DAYS_IN_WINDOW"])
-        ):
-            if (
-                bool(config["USE_COMPOSITE_MEDIAN_CONFIRMATION_WHEN_HISTORY_SPARSE"])
-                and trend_metrics.get("composite_history_points", 0) <= int(config["SPARSE_COMPOSITE_HISTORY_MAX_POINTS"])
-                and _safe_float(row.get("Composite_Score")) is not None
-                and composite_universe_median is not None
-                and (composite_universe_median - _safe_float(row.get("Composite_Score"))) >= float(config["MIN_COMPOSITE_MEDIAN_CONFIRMATION_GAP"])
+        )
+        comp_trend_val = "-"
+        if has_comp_persistence or has_comp_down_days:
+            comp_trend_parts = []
+            if has_comp_persistence:
+                days = evidence['composite_persistence_days']
+                comp_trend_parts.append(f"{days} consecutive day{'s' if days != 1 else ''}")
+            if has_comp_down_days:
+                down = evidence['composite_down_days_5d']
+                window = int(config['DOWNTREND_WINDOW_DAYS'])
+                comp_trend_parts.append(f"{down} of last {window} days")
+            comp_trend_val = f"Declining ({', '.join(comp_trend_parts)})"
+        else:
+            if evidence.get("composite_confirmation") and not (
+                evidence.get("composite_drop_recent") is not None and evidence.get("composite_drop_recent") >= float(config["MIN_COMPOSITE_DROP_RECENT"])
+            ) and not (
+                trend_metrics.get("composite_drop_1d") is not None and trend_metrics.get("composite_drop_1d") >= float(config["MIN_COMPOSITE_DROP_1D"])
             ):
-                comp_trend_parts.append("Comp<Med")
-        row_copy["Composite_Trend_Val"] = ", ".join(comp_trend_parts) if comp_trend_parts else "-"
+                if (
+                    bool(config["USE_COMPOSITE_MEDIAN_CONFIRMATION_WHEN_HISTORY_SPARSE"])
+                    and trend_metrics.get("composite_history_points", 0) <= int(config["SPARSE_COMPOSITE_HISTORY_MAX_POINTS"])
+                    and _safe_float(row.get("Composite_Score")) is not None
+                    and composite_universe_median is not None
+                    and (composite_universe_median - _safe_float(row.get("Composite_Score"))) >= float(config["MIN_COMPOSITE_MEDIAN_CONFIRMATION_GAP"])
+                ):
+                    comp_trend_val = "Below Median"
+        row_copy["Composite_Trend_Val"] = comp_trend_val
+
 
         row_copy["_Sort_RS_Persistence"] = int(evidence.get("rs_persistence_days", 0) or 0)
         row_copy["_Sort_Composite_Persistence"] = int(evidence.get("composite_persistence_days", 0) or 0)
