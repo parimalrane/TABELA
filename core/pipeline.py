@@ -18,6 +18,10 @@ from engines.etf_filter import (
     filter_institutional_etfs,
     filter_valid_etfs,
 )
+from engines.watchlist_delta_engine import (
+    compare_watchlists,
+    load_previous_long_watchlist,
+)
 from engines.historical_intelligence_engine import build_historical_intelligence_report
 from engines.institutional_leaders_engine import build_institutional_leaders
 from engines.long_scoring_engine import calculate_long_score
@@ -31,6 +35,7 @@ from engines.presentation_engine import (
     print_stock_history_error,
     print_unknown_classification_error,
 )
+from engines.stock_transition_engine import apply_tracking_state
 from engines.rotation_engine import (
     calculate_rotation_delta,
     print_rotation_report,
@@ -43,14 +48,19 @@ from engines.scoring_engine import (
     calculate_sales_score,
     calculate_zacks_score,
 )
-from engines.short_engine import build_short_watchlist
+from engines.distribution_engine import build_distribution_watchlist
 from engines.short_scoring_engine import calculate_short_score
 from engines.snapshot_engine import save_daily_snapshot
 from engines.stock_history_engine import save_stock_history
 from engines.unknown_classification_engine import save_unknown_classification
 from engines.watchlist_engine import build_long_watchlist
 from engines.runtime_context import context
-
+from engines.stock_transition_engine import (
+    load_registry,
+    pre_distribution_update,
+    get_distribution_candidates,
+    post_distribution_update,
+)
 
 DATA_DIR = "market_data"
 ETF_FILE = context.etf_file
@@ -475,21 +485,67 @@ def score_stocks(stocks):
 
 
 def build_candidates(stocks):
+
+    registry = load_registry()
+
     long_watchlist = build_long_watchlist(stocks)
-    distribution_watchlist = build_short_watchlist(stocks)
     theme_breadth = build_theme_breadth(stocks)
     institutional_leaders = build_institutional_leaders(stocks)
 
-    long_watchlist = long_watchlist.sort_values("Long_Score", ascending=False)
+    long_watchlist = long_watchlist.sort_values(
+        "Long_Score",
+        ascending=False
+    )
 
     long_tickers = set(long_watchlist["Ticker"])
-    long_candidates = pd.concat([long_watchlist, institutional_leaders])
-    long_candidates = long_candidates.drop_duplicates(subset="Ticker")
+
+    long_candidates = pd.concat(
+        [long_watchlist, institutional_leaders]
+    )
+
+    long_candidates = long_candidates.drop_duplicates(
+        subset="Ticker"
+    )
+
     long_candidates["Ticker"] = long_candidates.apply(
-        lambda row: row["Ticker"] if row["Ticker"] in long_tickers else row["Ticker"] + "*",
+        lambda row:
+            row["Ticker"]
+            if row["Ticker"] in long_tickers
+            else row["Ticker"] + "*",
         axis=1,
     )
-    long_candidates = long_candidates.sort_values("Long_Score", ascending=False)
+
+    long_candidates = long_candidates.sort_values(
+        "Long_Score",
+        ascending=False,
+    )
+
+    registry = pre_distribution_update(
+        registry=registry,
+        previous_long_candidates=load_previous_long_watchlist(),
+        current_long_candidates=long_candidates,
+    )
+
+    observation_candidates = get_distribution_candidates(
+        registry,
+        stocks,
+    )
+
+    distribution_watchlist = build_distribution_watchlist(
+        observation_candidates
+    )
+
+    registry = post_distribution_update(
+        registry,
+        distribution_watchlist,
+    )
+
+    
+
+    long_tickers = {
+        ticker.replace("*", "")
+        for ticker in long_candidates["Ticker"]
+    }
 
     distribution_watchlist = distribution_watchlist[
         ~distribution_watchlist["Ticker"].isin(long_tickers)
@@ -500,17 +556,46 @@ def build_candidates(stocks):
     stocks["Is_Long_Candidate"] = False
     stocks["Is_Short_Candidate"] = False
 
-    for rank, ticker in enumerate(long_candidates["Ticker"], start=1):
+    for rank, ticker in enumerate(
+        long_candidates["Ticker"],
+        start=1,
+    ):
         clean_ticker = ticker.replace("*", "")
-        stocks.loc[stocks["Ticker"] == clean_ticker, "Long_Rank"] = rank
-        stocks.loc[stocks["Ticker"] == clean_ticker, "Is_Long_Candidate"] = True
+        stocks.loc[
+            stocks["Ticker"] == clean_ticker,
+            "Long_Rank",
+        ] = rank
 
-    for rank, ticker in enumerate(distribution_watchlist["Ticker"], start=1):
-        stocks.loc[stocks["Ticker"] == ticker, "Short_Rank"] = rank
-        stocks.loc[stocks["Ticker"] == ticker, "Is_Short_Candidate"] = True
+        stocks.loc[
+            stocks["Ticker"] == clean_ticker,
+            "Is_Long_Candidate",
+        ] = True
 
-    return stocks, long_candidates, distribution_watchlist, theme_breadth
+    for rank, ticker in enumerate(
+        distribution_watchlist["Ticker"],
+        start=1,
+    ):
+        stocks.loc[
+            stocks["Ticker"] == ticker,
+            "Short_Rank",
+        ] = rank
 
+        stocks.loc[
+            stocks["Ticker"] == ticker,
+            "Is_Short_Candidate",
+        ] = True
+
+    stocks = apply_tracking_state(
+        registry,
+        stocks,
+    )
+
+    return (
+        stocks,
+        long_candidates,
+        distribution_watchlist,
+        theme_breadth,
+    )
 
 def save_history(stocks):
     try:

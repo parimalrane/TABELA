@@ -542,10 +542,14 @@ def _is_distribution_candidate(evidence: dict) -> bool:
     )
 
 
-def build_distribution_watchlist(stocks: pd.DataFrame, top_n: Optional[int] = None) -> pd.DataFrame:
+def build_distribution_watchlist(
+    observation_candidates: pd.DataFrame,
+    top_n: Optional[int] = None,
+) -> pd.DataFrame:
+
     config = DISTRIBUTION_CFG
     effective_top_n = int(top_n or config["DEFAULT_TOP_N"])
-    if stocks is None or stocks.empty:
+    if observation_candidates is None or observation_candidates.empty:
         return pd.DataFrame(columns=[
             "Ticker",
             "Mapped_Theme",
@@ -559,16 +563,16 @@ def build_distribution_watchlist(stocks: pd.DataFrame, top_n: Optional[int] = No
     snapshot_context = _build_theme_snapshot_context(max_days=int(config["SNAPSHOT_MAX_DAYS"]))
     rotation_context = _load_latest_rotation_context(max_files=int(config["ROTATION_MAX_FILES"]))
 
-    rs_universe_median = _safe_float(stocks["RS_Rating"].median()) if "RS_Rating" in stocks.columns else None
+    rs_universe_median = _safe_float(observation_candidates["RS_Rating"].median()) if "RS_Rating" in stocks.columns else None
     composite_universe_median = (
-        _safe_float(stocks["Composite_Score"].median())
+        _safe_float(observation_candidates["Composite_Score"].median())
         if "Composite_Score" in stocks.columns
         else None
     )
 
     candidates = []
 
-    for _, row in stocks.iterrows():
+    for _, row in observation_candidates.iterrows():
         ticker = str(row.get("Ticker", "")).strip().upper()
         if not ticker:
             continue
