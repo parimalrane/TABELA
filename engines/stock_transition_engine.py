@@ -61,12 +61,25 @@ def _long_ticker_set(long_candidates: pd.DataFrame) -> Set[str]:
     }
 
 
-def _increment_tracking_runs(registry: Dict) -> None:
+from engines.runtime_context import context
 
-    for ticker in registry:
+def _increment_state_days(registry: Dict) -> None:
 
-        registry[ticker]["tracking_runs"] += 1
+    today = str(context.market_date)
 
+    for state in registry.values():
+
+        if state.get("last_market_date") == today:
+            continue
+
+        current_days = state.get(
+            "state_days",
+            state.get("tracking_runs", 0)
+        )
+
+        state["state_days"] = current_days + 1
+        state.pop("tracking_runs", None)
+        state["last_market_date"] = today
 
 def _remove_recovered(
     registry: Dict,
@@ -83,18 +96,22 @@ def _remove_recovered(
     for ticker in remove_list:
         del registry[ticker]
 
-
 def _expire_observation(
-    registry: Dict
+    registry: Dict,
 ) -> None:
 
     remove_list = []
 
     for ticker, state in registry.items():
 
+        state_days = state.get(
+            "state_days",
+            state.get("tracking_runs", 0),
+        )
+
         if (
             state["tracking_state"] == OBSERVATION
-            and state["tracking_runs"] > OBSERVATION_MAX_RUNS
+            and state_days > OBSERVATION_MAX_RUNS
         ):
             remove_list.append(ticker)
 
@@ -105,7 +122,8 @@ def _expire_observation(
 def _add_new_observations(
     registry: Dict,
     previous_longs: Set[str],
-    current_longs: Set[str]
+    current_longs: Set[str],
+    current_market_date,
 ) -> None:
 
     removed_today = previous_longs - current_longs
@@ -118,7 +136,9 @@ def _add_new_observations(
 
                 "tracking_state": OBSERVATION,
 
-                "tracking_runs": 1
+                "state_days": 1,
+
+                "last_market_date": str(current_market_date),
 
             }
 
@@ -130,18 +150,17 @@ def _add_new_observations(
 def pre_distribution_update(
     registry: Dict,
     previous_long_candidates: pd.DataFrame,
-    current_long_candidates: pd.DataFrame
+    current_long_candidates: pd.DataFrame,
 ) -> Dict:
 
     previous_longs = _long_ticker_set(previous_long_candidates)
-
     current_longs = _long_ticker_set(current_long_candidates)
 
-    _increment_tracking_runs(registry)
+    _increment_state_days(registry)
 
     _remove_recovered(
         registry,
-        current_longs
+        current_longs,
     )
 
     _expire_observation(registry)
@@ -149,7 +168,8 @@ def pre_distribution_update(
     _add_new_observations(
         registry,
         previous_longs,
-        current_longs
+        current_longs,
+        context.market_date,
     )
 
     return registry
@@ -166,22 +186,30 @@ def get_distribution_candidates(
     if stocks is None or stocks.empty:
         return stocks.iloc[0:0].copy()
 
-    eligible = {
-        ticker
-        for ticker, state in registry.items()
+    eligible = set()
+
+    for ticker, state in registry.items():
+
+        state_days = state.get(
+            "state_days",
+            state.get("tracking_runs", 0),
+        )
+
         if (
             state["tracking_state"] == OBSERVATION
-            and state["tracking_runs"] >= OBSERVATION_MIN_RUNS
-        )
-    }
+            and state_days >= OBSERVATION_MIN_RUNS
+        ):
+            eligible.add(ticker)
 
     if not eligible:
         return stocks.iloc[0:0].copy()
 
     return stocks[
-        stocks["Ticker"].astype(str).str.upper().isin(eligible)
+        stocks["Ticker"]
+        .astype(str)
+        .str.upper()
+        .isin(eligible)
     ].copy()
-
 
 # ==========================================================
 # Registry Update After Distribution
@@ -207,7 +235,7 @@ def post_distribution_update(
             continue
 
         registry[ticker]["tracking_state"] = DISTRIBUTION
-        registry[ticker]["tracking_runs"] = 1
+        registry[ticker]["last_market_date"] = str(context.market_date)
 
     save_registry(registry)
 
@@ -250,3 +278,53 @@ def apply_tracking_state(
     )
 
     return stocks
+
+
+def get_transition_summary(registry: Dict) -> Dict:
+
+    observation = []
+    distribution = []
+
+    for ticker, state in sorted(registry.items()):
+
+        state_days = state.get(
+            "state_days",
+            state.get("tracking_runs", 0),
+        )
+
+        entry = {
+            "ticker": ticker,
+            "runs": state_days,
+        }
+
+        if state["tracking_state"] == OBSERVATION:
+            observation.append(entry)
+
+        elif state["tracking_state"] == DISTRIBUTION:
+            distribution.append(entry)
+
+    return {
+        "observation": observation,
+        "distribution": distribution,
+    }
+
+    observation = []
+    distribution = []
+
+    for ticker, state in sorted(registry.items()):
+
+        entry = {
+            "ticker": ticker,
+            "runs": state["state_days"],
+        }
+
+        if state["tracking_state"] == OBSERVATION:
+            observation.append(entry)
+
+        elif state["tracking_state"] == DISTRIBUTION:
+            distribution.append(entry)
+
+    return {
+        "observation": observation,
+        "distribution": distribution,
+    }

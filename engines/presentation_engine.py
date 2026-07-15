@@ -3,8 +3,12 @@ import sys
 import io
 import re
 import engines.rotation_engine
+from engines.stock_transition_engine import (
+    load_registry,
+    get_transition_summary,
+    OBSERVATION_MIN_RUNS,
+)
 
-# Monkey patch print_rotation_report to be a no-op to remove the standalone STRUCTURAL ROTATION SUMMARY
 engines.rotation_engine.print_rotation_report = lambda *args, **kwargs: None
 
 from engines.watchlist_delta_engine import compare_watchlists
@@ -144,6 +148,7 @@ def print_scan_epilogue():
         "\u2713 Market Snapshot\n"
         "\u2713 Rotation Delta\n"
         "\u2713 Unknown Classification\n"
+        "\u2713 Stock Transition Registry\n"
         "\n"
     )
     final_output.append(files_generated)
@@ -473,3 +478,43 @@ def print_daily_scan(
         distribution_watchlist["Ticker"].head(50).tolist(),
         stocks,
     )
+    registry = load_registry()
+    transition = get_transition_summary(registry)
+
+    print()
+    print("========================================")
+    print("STOCK TRANSITIONS")
+    print("========================================")
+
+    print()
+    print("OBSERVATION")
+    print("----------------------------")
+    print(f"Count : {len(transition['observation'])}")
+
+    if transition["observation"]:
+        print()
+        print(f"{'Ticker':<8} {'Progress'}")
+        print("----------------------------")
+
+        for item in transition["observation"]:
+            print(
+                f"{item['ticker']:<8} "
+                f"{item['runs']:>2} / {OBSERVATION_MIN_RUNS}"
+            )
+
+    print()
+    print("DISTRIBUTION")
+    print("----------------------------")
+    print(f"Count : {len(transition['distribution'])}")
+
+    if transition["distribution"]:
+        print()
+        print(f"{'Ticker':<8} {'Runs'}")
+        print("----------------------------")
+
+        for item in transition["distribution"]:
+            print(
+                f"{item['ticker']:<8} "
+                f"{item['runs']}"
+            )
+            

@@ -563,10 +563,14 @@ def build_distribution_watchlist(
     snapshot_context = _build_theme_snapshot_context(max_days=int(config["SNAPSHOT_MAX_DAYS"]))
     rotation_context = _load_latest_rotation_context(max_files=int(config["ROTATION_MAX_FILES"]))
 
-    rs_universe_median = _safe_float(observation_candidates["RS_Rating"].median()) if "RS_Rating" in stocks.columns else None
+    rs_universe_median = (
+    _safe_float(observation_candidates["RS_Rating"].median())
+    if "RS_Rating" in observation_candidates.columns
+    else None
+)
     composite_universe_median = (
         _safe_float(observation_candidates["Composite_Score"].median())
-        if "Composite_Score" in stocks.columns
+        if "Composite_Score" in observation_candidates.columns
         else None
     )
 
