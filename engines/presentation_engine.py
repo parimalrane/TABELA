@@ -381,11 +381,6 @@ def print_daily_scan(
         ]
     ].copy()
 
-    # Prefix every stock with Long Score >= 90 with ★★★★★
-    display_df["Ticker"] = display_df.apply(
-        lambda row: f"★★★★★ {row['Ticker']}" if row.get("Long_Score", 0) >= 90 else row["Ticker"],
-        axis=1
-    )
 
     display_df["Zacks Rank"] = (
         display_df["Zacks Rank"]
