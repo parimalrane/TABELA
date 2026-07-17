@@ -554,34 +554,68 @@ def print_daily_scan(
     print("STOCK TRANSITIONS")
     print("========================================")
 
+    #
+    # OBSERVATION
+    #
     print()
     print("OBSERVATION")
     print("----------------------------")
-    print(f"Count : {len(transition['observation'])}")
+    print(f"Total : {len(transition['observation'])}")
 
     if transition["observation"]:
-        print()
-        print(f"{'Ticker':<8} {'Progress'}")
-        print("----------------------------")
+
+        observation_groups = {}
 
         for item in transition["observation"]:
-            print(
-                f"{item['ticker']:<8} "
-                f"{item['runs']:>2} / {OBSERVATION_MIN_RUNS}"
+            observation_groups.setdefault(item["runs"], []).append(
+                item["ticker"]
             )
 
-    print()
+        print()
+
+        for runs in sorted(observation_groups.keys(), reverse=True):
+
+            tickers = sorted(observation_groups[runs])
+
+            print(
+                f"{runs} / {OBSERVATION_MIN_RUNS} "
+                f"({len(tickers)})"
+            )
+
+            print(", ".join(tickers))
+            print()
+
+    #
+    # DISTRIBUTION
+    #
     print("DISTRIBUTION")
     print("----------------------------")
-    print(f"Count : {len(transition['distribution'])}")
+    print(f"Total : {len(transition['distribution'])}")
 
     if transition["distribution"]:
-        print()
-        print(f"{'Ticker':<8} {'Days'}")
-        print("----------------------------")
+
+        distribution_groups = {}
 
         for item in transition["distribution"]:
-            print(
-                f"{item['ticker']:<8} "
-                f"{item['runs']}"
+            distribution_groups.setdefault(item["runs"], []).append(
+                item["ticker"]
             )
+
+        print()
+
+        max_runs = max(
+            item["runs"]
+            for item in transition["distribution"]
+        )
+
+        for runs in sorted(distribution_groups.keys(), reverse=True):
+
+            tickers = sorted(distribution_groups[runs])
+
+            print(
+                f"{runs} / {max_runs} "
+                f"({len(tickers)})"
+            )
+
+            print(", ".join(tickers))
+            print()
