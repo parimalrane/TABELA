@@ -222,15 +222,17 @@ def print_theme_performance(theme_performance):
         if col not in df.columns:
             df[col] = None
 
-    def fmt_delta(value):
+    def fmt_delta(value, top3=False, bottom3=False):
         if pd.isna(value):
             return "—"
-        return f"{value:+.2f}"
 
-    def fmt_strength(value):
-        if pd.isna(value):
-            return "—"
-        return f"{value:.2f}"
+        marker = ""
+        if top3:
+            marker = "↑"
+        elif bottom3:
+            marker = "↓"
+
+        return f"{value:.2f}{marker}"
 
     def fmt_text(value):
         if pd.isna(value) or value == "":
@@ -246,28 +248,37 @@ def print_theme_performance(theme_performance):
     print(
         f"{'Rank':>4}  "
         f"{'Theme':<35}"
-        f"{'Strength':>7}"
-        f"{'D':>8}"
-        f"{'W':>8}"
-        f"{'M':>8}"
-        f"{'Q':>8}"
+        f"{'Strength':>9}"
+        f"{'D':>9}"
+        f"{'W':>9}"
+        f"{'M':>9}"
+        f"{'Q':>9}"
         f"{'Rank Δ':>9}"
         f"{'Score Δ':>10}"
         f"  Transition"
     )
 
-    print("-" * 110)
+    print("-" * 120)
+
+    top3_strength = set(df.nlargest(3, "Strength")["Theme"])
+    bottom3_strength = set(df.nsmallest(3, "Strength")["Theme"])
+
+    top3_d = set(df.nlargest(3, "D")["Theme"])
+    bottom3_d = set(df.nsmallest(3, "D")["Theme"])
+
+    top3_w = set(df.nlargest(3, "W")["Theme"])
+    bottom3_w = set(df.nsmallest(3, "W")["Theme"])
 
     for _, row in df.sort_values("Rank").iterrows():
 
         print(
             f"{int(row['Rank']):>4}  "
             f"{row['Theme']:<35}"
-            f"{fmt_strength(row['Strength']):>7}"
-            f"{fmt_delta(row['D']):>8}"
-            f"{fmt_delta(row['W']):>8}"
-            f"{fmt_delta(row['M']):>8}"
-            f"{fmt_delta(row['Q']):>8}"
+            f"{fmt_delta(row['Strength'], row['Theme'] in top3_strength, row['Theme'] in bottom3_strength):>9}"
+            f"{fmt_delta(row['D'], row['Theme'] in top3_d, row['Theme'] in bottom3_d):>9}"
+            f"{fmt_delta(row['W'], row['Theme'] in top3_w, row['Theme'] in bottom3_w):>9}"
+            f"{fmt_delta(row['M']):>9}"
+            f"{fmt_delta(row['Q']):>9}"
             f"{fmt_text(row['Rank Δ']):>9}"
             f"{fmt_text(row['Score Δ']):>10}"
             f"  {fmt_text(row['Transition'])}"
