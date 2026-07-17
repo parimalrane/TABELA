@@ -80,9 +80,8 @@ def print_scan_epilogue():
 
     titles = [
         ("HEADER", "TABELA DAILY MARKET SCAN"),
-        ("MARKET_ROTATION", "MARKET ROTATION SUMMARY"),
+        ("THEME_PERFORMANCE", "THEME PERFORMANCE"),
         ("THEME_BREADTH", "THEME BREADTH ANALYSIS"),
-        ("HISTORICAL_INTEL", "HISTORICAL INTELLIGENCE REPORT"),
         ("LONG_UNIVERSE", "LONG CANDIDATE UNIVERSE"),
         ("UNCLASSIFIED_LEADERS", "UNCLASSIFIED LEADERS"),
         ("DISTRIBUTION_WATCHLIST", "DISTRIBUTION WATCHLIST"),
@@ -119,9 +118,8 @@ def print_scan_epilogue():
         section_texts[key] = clean_saved_messages(section_texts[key])
 
     order = [
-        "MARKET_ROTATION",
+        "THEME_PERFORMANCE",
         "THEME_BREADTH",
-        "HISTORICAL_INTEL",
         "LONG_UNIVERSE",
         "UNCLASSIFIED_LEADERS",
         "DISTRIBUTION_WATCHLIST",
@@ -198,19 +196,82 @@ def print_unknown_classification_error(error):
     print("UNKNOWN CLASSIFICATION ERROR:", error)
 
 
-def print_theme_group(title, themes):
-    print(f"\n{title}")
-    print("-" * 65)
-    print(f"{'Rank':<6} {'Theme':<40} {'ETF Strength':>12}")
-    print("-" * 65)
+def print_theme_performance(theme_performance):
+    print()
+    print("==============================================")
+    print("THEME PERFORMANCE")
+    print("==============================================")
+    print()
 
-    for item in themes:
+    df = theme_performance.copy()
+
+    expected_columns = [
+        "Rank",
+        "Theme",
+        "Strength",
+        "D",
+        "W",
+        "M",
+        "Q",
+        "Rank Δ",
+        "Score Δ",
+        "Transition",
+    ]
+
+    for col in expected_columns:
+        if col not in df.columns:
+            df[col] = None
+
+    def fmt_delta(value):
+        if pd.isna(value):
+            return "—"
+        return f"{value:+.2f}"
+
+    def fmt_strength(value):
+        if pd.isna(value):
+            return "—"
+        return f"{value:.2f}"
+
+    def fmt_text(value):
+        if pd.isna(value) or value == "":
+            return "—"
+
+        if isinstance(value, (int, float)):
+            if float(value).is_integer():
+                return f"{int(value):+d}"
+            return f"{value:+.2f}"
+
+        return str(value)
+
+    print(
+        f"{'Rank':>4}  "
+        f"{'Theme':<35}"
+        f"{'Strength':>7}"
+        f"{'D':>8}"
+        f"{'W':>8}"
+        f"{'M':>8}"
+        f"{'Q':>8}"
+        f"{'Rank Δ':>9}"
+        f"{'Score Δ':>10}"
+        f"  Transition"
+    )
+
+    print("-" * 110)
+
+    for _, row in df.sort_values("Rank").iterrows():
+
         print(
-            f"{item['Theme_Rank']:<6} "
-            f"{item['Theme']:<40} "
-            f"{item['ETF_RS_Raw']:>12.2f}"
+            f"{int(row['Rank']):>4}  "
+            f"{row['Theme']:<35}"
+            f"{fmt_strength(row['Strength']):>7}"
+            f"{fmt_delta(row['D']):>8}"
+            f"{fmt_delta(row['W']):>8}"
+            f"{fmt_delta(row['M']):>8}"
+            f"{fmt_delta(row['Q']):>8}"
+            f"{fmt_text(row['Rank Δ']):>9}"
+            f"{fmt_text(row['Score Δ']):>10}"
+            f"  {fmt_text(row['Transition'])}"
         )
-
 
 def print_theme_strength_diagnostics(theme_strength):
     # Temporary diagnostics block for Theme Strength transparency.
@@ -320,6 +381,7 @@ def print_daily_scan(
     theme_breadth,
     theme_strength_settings,
     stocks,
+    theme_performance,
 ):
     leading_themes = theme_strength[
         theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Leading"])
@@ -340,13 +402,8 @@ def print_daily_scan(
     print("==============================================")
     print("\n")
 
-    print("\n==============================================")
-    print("MARKET ROTATION SUMMARY")
-    print("==============================================")
+    print_theme_performance(theme_performance)
 
-    print_theme_group("LEADING THEMES", leading_themes)
-    print_theme_group("NEUTRAL THEMES", neutral_themes)
-    print_theme_group("LAGGING THEMES", lagging_themes)
     if theme_strength_settings["debug_theme_strength"]:
         print_theme_strength_diagnostics(theme_strength)
 

@@ -265,10 +265,15 @@ def detect_weakening_from_history(theme_daily_deltas):
 
     return weakening_candidates
 
-
 def compute_historical_intelligence(max_days=21):
+    """
+    Build historical intelligence.
 
-    
+    Data only.
+    No printing.
+    No presentation.
+    """
+
     snapshot_datasets = queries.datasets("snapshot")
 
     snapshots = [
@@ -279,159 +284,61 @@ def compute_historical_intelligence(max_days=21):
 
     theme_daily_series = build_theme_daily_series(snapshots)
     raw_deltas = compute_theme_daily_deltas(theme_daily_series)
+
     latest_run = queries.latest_run()
-
-    rotation_dataset = None
-
-    if latest_run is not None:
-        rotation_dataset = queries.dataset(latest_run, "rotation_delta")
 
     rotation_data = None
     rotation_date = None
 
-    if rotation_dataset is not None:
+    if latest_run is not None:
 
-        rotation_data = rotation_dataset.data
+        rotation_dataset = queries.dataset(
+            latest_run,
+            "rotation_delta",
+        )
 
-        if isinstance(rotation_data, dict):
+        if (
+            rotation_dataset is not None
+            and rotation_dataset.data
+        ):
 
+            rotation_data = rotation_dataset.data
             rotation_date = rotation_data.get("date")
 
     theme_daily_deltas = {}
+
     for theme, points in theme_daily_series.items():
-        ordered_points = sorted(points, key=lambda x: (x.get("date") is None, x.get("date")))
+
+        ordered_points = sorted(
+            points,
+            key=lambda x: (
+                x.get("date") is None,
+                x.get("date"),
+            ),
+        )
+
         theme_daily_deltas[theme] = {
             "points": ordered_points,
             "deltas": raw_deltas.get(theme, []),
         }
 
-    emerging_candidates = detect_emerging_from_history(theme_daily_deltas)
-    weakening_candidates = detect_weakening_from_history(theme_daily_deltas)
+    emerging_candidates = detect_emerging_from_history(
+        theme_daily_deltas
+    )
 
-    print("====================================")
-    print("HISTORICAL INTELLIGENCE REPORT")
-    print("====================================")
+    weakening_candidates = detect_weakening_from_history(
+        theme_daily_deltas
+    )
 
-    today = history.latest_run.date.isoformat()
-
-    print()
-    print("DAILY ROTATION INTELLIGENCE")
-    print("-" * 75)
-
-    if rotation_data is None:
-        print("Daily rotation data unavailable.")
-    else:
-        if rotation_date != today:
-            print(f"NOTE: Using latest available rotation data ({rotation_date}).")
-
-        rank_changes = rotation_data.get("rank_changes", [])
-        score_changes = rotation_data.get("score_changes", [])
-        strengthening_themes = rotation_data.get("strengthening_themes", [])
-        weakening_themes = rotation_data.get("weakening_themes", [])
-
-        top_strengthening = sorted(
-            [
-                x for x in strengthening_themes
-                if isinstance(x.get("score_change"), (int, float))
-            ],
-            key=lambda x: abs(x.get("score_change")),
-            reverse=True,
-        )[:5]
-
-        top_weakening = sorted(
-            [
-                x for x in weakening_themes
-                if isinstance(x.get("score_change"), (int, float))
-            ],
-            key=lambda x: abs(x.get("score_change")),
-            reverse=True,
-        )[:5]
-
-        print(f"Source Rotation Date: {rotation_date}")
-
-        top_rank_movers = sorted(
-            [
-                x for x in rank_changes
-                if isinstance(x.get("rank_change"), int)
-            ],
-            key=lambda x: abs(x.get("rank_change")),
-            reverse=True,
-        )[:10]
-
-        print("\nTOP RANK MOVERS")
-        print("-" * 75)
-        if top_rank_movers:
-            print(f"{'Theme':<35}Movement")
-            for item in top_rank_movers:
-                previous_rank = item.get("previous_rank")
-                latest_rank = item.get("latest_rank")
-                rank_change = item.get("rank_change")
-                arrow = "↑" if rank_change < 0 else "↓"
-                print(
-                    f"{item.get('theme', '-'):<35}"
-                    f"{arrow} {previous_rank} → {latest_rank}"
-                )
-        else:
-            print("None")
-
-        top_score_movers = sorted(
-            [
-                x for x in score_changes
-                if isinstance(x.get("score_change"), (int, float))
-            ],
-            key=lambda x: abs(x.get("score_change")),
-            reverse=True,
-        )[:10]
-
-        print("\nTOP SCORE MOVERS")
-        print("-" * 75)
-        if top_score_movers:
-            print(f"{'Theme':<35}Score Change")
-            for item in top_score_movers:
-                delta = item.get("score_change")
-                print(
-                    f"{item.get('theme', '-'):<35}"
-                    f"{delta:+.2f}"
-                )
-        else:
-            print("None")
-
-        print("\nSTRENGTHENING THEMES (TOP 5)")
-        print("-" * 75)
-        if top_strengthening:
-            for item in top_strengthening:
-                score_change = item.get("score_change")
-                print(
-                    f"{item.get('theme', '-'):<35}"
-                    f"score {score_change:+.2f}"
-                )
-        else:
-            print("None")
-
-        print("\nWEAKENING THEMES (TOP 5)")
-        print("-" * 75)
-        if top_weakening:
-            for item in top_weakening:
-                score_change = item.get("score_change")
-                print(
-                    f"{item.get('theme', '-'):<35}"
-                    f"score {score_change:+.2f}"
-                )
-        else:
-            print("None")
-
-    print()
-
-    # -----------------------------
-    # Structural Rotation (latest valid snapshot pair only)
-    # -----------------------------
     structural = []
 
     if len(snapshots) >= 2:
+
         previous_snapshot = snapshots[-2]
         latest_snapshot = snapshots[-1]
 
         def build_state_map(snapshot):
+
             state_map = {}
 
             for state_key, state_name in [
@@ -439,11 +346,10 @@ def compute_historical_intelligence(max_days=21):
                 ("neutral_themes", "Neutral"),
                 ("lagging_themes", "Lagging"),
             ]:
+
                 for item in snapshot.get(state_key, []):
-                    theme = item.get("theme")
-                    if theme is None:
-                        continue
-                    state_map[theme] = {
+
+                    state_map[item["theme"]] = {
                         "state": state_name,
                         "rank": item.get("rank"),
                         "score": item.get("score"),
@@ -454,26 +360,39 @@ def compute_historical_intelligence(max_days=21):
         previous_map = build_state_map(previous_snapshot)
         latest_map = build_state_map(latest_snapshot)
 
-        for theme in sorted(set(previous_map.keys()) & set(latest_map.keys())):
-            previous_state = previous_map[theme].get("state")
-            latest_state = latest_map[theme].get("state")
+        for theme in sorted(
+            set(previous_map.keys()) &
+            set(latest_map.keys())
+        ):
+
+            previous_state = previous_map[theme]["state"]
+            latest_state = latest_map[theme]["state"]
 
             if previous_state == latest_state:
                 continue
 
-            previous_rank = previous_map[theme].get("rank")
-            latest_rank = latest_map[theme].get("rank")
+            previous_rank = previous_map[theme]["rank"]
+            latest_rank = latest_map[theme]["rank"]
 
-            previous_score = previous_map[theme].get("score")
-            latest_score = latest_map[theme].get("score")
+            previous_score = previous_map[theme]["score"]
+            latest_score = latest_map[theme]["score"]
 
             rank_delta = None
-            if previous_rank is not None and latest_rank is not None:
+            if (
+                previous_rank is not None
+                and latest_rank is not None
+            ):
                 rank_delta = latest_rank - previous_rank
 
             score_delta = None
-            if previous_score is not None and latest_score is not None:
-                score_delta = round(latest_score - previous_score, 2)
+            if (
+                previous_score is not None
+                and latest_score is not None
+            ):
+                score_delta = round(
+                    latest_score - previous_score,
+                    2,
+                )
 
             structural.append(
                 {
@@ -484,38 +403,6 @@ def compute_historical_intelligence(max_days=21):
                 }
             )
 
-    print("STRUCTURAL ROTATION")
-    print("-" * 75)
-    print(f"{'Theme':<35}{'Rank Chg':>10}{'Score Chg':>11}   Transition")
-    print("-" * 75)
-
-    if structural:
-        for c in structural:
-            rank = "n/a" if c["rank_delta"] is None else f"{c['rank_delta']:+}"
-            score = "n/a" if c["score_delta"] is None else f"{c['score_delta']:+.2f}"
-
-            print(
-                f"{c['theme']:<35}"
-                f"{rank:>6}"
-                f"{score:>10}   "
-                f"{c['transition']}"
-            )
-    else:
-        print("No structural rotation detected.")
-
-    print()
-    print("MULTI-DAY INTELLIGENCE")
-    print("-" * 75)
-
-
-    if len(snapshots) < MIN_HISTORY_DAYS:
-        
-        print(f"Insufficient historical data ({len(snapshots)}/20 snapshots collected).")
-    else:
-        print("No multi-day intelligence available yet. More history required.")
-
-    print()
-
     return {
         "window_days": len(snapshots),
         "theme_daily_series": theme_daily_series,
@@ -524,25 +411,183 @@ def compute_historical_intelligence(max_days=21):
         "weakening_candidates": weakening_candidates,
         "daily_rotation_date": rotation_date,
         "daily_rotation_data": rotation_data,
+        "structural_rotation": structural,
     }
 
-def build_historical_intelligence_report(
-        min_days=3,
-        max_days=21,
+import pandas as pd
+
+def build_theme_performance_table(theme_strength, max_days=63):
+    """
+    Build one normalized Theme Performance table.
+
+    Read-only.
+    Uses existing snapshot history and rotation data.
+    """
+
+    snapshot_datasets = queries.datasets("snapshot")
+
+    snapshots = [
+        dataset.data
+        for dataset in snapshot_datasets
+        if dataset.data is not None
+    ][-max_days:]
+
+    # -------------------------------------------------------
+    # Historical score series
+    # -------------------------------------------------------
+
+    history = {}
+
+    for snapshot in snapshots:
+
+        for state in (
+            "leading_themes",
+            "neutral_themes",
+            "lagging_themes",
+        ):
+
+            for item in snapshot.get(state, []):
+
+                theme = item["theme"]
+
+                history.setdefault(theme, []).append(
+                    {
+                        "date": snapshot["date"],
+                        "rank": item["rank"],
+                        "score": item["score"],
+                    }
+                )
+
+    # -------------------------------------------------------
+    # Structural transition (latest snapshot pair)
+    # -------------------------------------------------------
+
+    transition_lookup = {}
+
+    if len(snapshots) >= 2:
+
+        previous = snapshots[-2]
+        latest = snapshots[-1]
+
+        def build_state_map(snapshot):
+
+            mapping = {}
+
+            for key, state in [
+                ("leading_themes", "Leading"),
+                ("neutral_themes", "Neutral"),
+                ("lagging_themes", "Lagging"),
+            ]:
+
+                for item in snapshot.get(key, []):
+
+                    mapping[item["theme"]] = {
+                        "state": state,
+                        "rank": item.get("rank"),
+                        "score": item.get("score"),
+                    }
+
+            return mapping
+
+        previous_map = build_state_map(previous)
+        latest_map = build_state_map(latest)
+
+        for theme in set(previous_map) & set(latest_map):
+
+            previous_state = previous_map[theme]["state"]
+            latest_state = latest_map[theme]["state"]
+
+            previous_rank = previous_map[theme]["rank"]
+            latest_rank = latest_map[theme]["rank"]
+
+            previous_score = previous_map[theme]["score"]
+            latest_score = latest_map[theme]["score"]
+
+            rank_delta = None
+            if previous_rank is not None and latest_rank is not None:
+                rank_delta = latest_rank - previous_rank
+
+            score_delta = None
+            if previous_score is not None and latest_score is not None:
+                score_delta = round(
+                    latest_score - previous_score,
+                    2,
+                )
+
+            transition_lookup[theme] = {
+                "transition": (
+                    None
+                    if previous_state == latest_state
+                    else f"{previous_state} -> {latest_state}"
+                ),
+                "rank_delta": rank_delta,
+                "score_delta": score_delta,
+            }
+
+    # -------------------------------------------------------
+    # Final table
+    # -------------------------------------------------------
+
+    rows = []
+
+    for _, current in (
+        theme_strength
+        .sort_values("Theme_Rank")
+        .iterrows()
     ):
-        """
-        Legacy wrapper.
 
-        Will be removed after all callers migrate.
-        """
+        theme = current["Theme"]
 
-        intelligence = compute_historical_intelligence(
-            max_days=max_days
+        points = sorted(
+            history.get(theme, []),
+            key=lambda x: x["date"],
         )
 
-        #
-        # Temporary:
-        # Existing print/report code stays here.
-        #
+        current_rank = int(current["Theme_Rank"])
+        current_score = float(current["ETF_RS_Raw"])
 
-        return intelligence
+        d = w = m = q = None
+
+        if len(points) >= 2:
+            d = round(current_score - points[-2]["score"], 2)
+
+        if len(points) >= 6:
+            w = round(current_score - points[-6]["score"], 2)
+
+        if len(points) >= 22:
+            m = round(current_score - points[-22]["score"], 2)
+
+        if len(points) >= 64:
+            q = round(current_score - points[-64]["score"], 2)
+
+        movement = transition_lookup.get(theme, {})
+
+        rows.append(
+            {
+                "Rank": current_rank,
+                "Theme": theme,
+                "Strength": round(current_score, 2),
+                "D": d,
+                "W": w,
+                "M": m,
+                "Q": q,
+                "Rank Δ": movement.get("rank_delta"),
+                "Score Δ": movement.get("score_delta"),
+                "Transition": movement.get("transition"),
+            }
+        )
+
+    return pd.DataFrame(rows)[
+        [
+            "Rank",
+            "Theme",
+            "Strength",
+            "D",
+            "W",
+            "M",
+            "Q",
+            "Rank Δ",
+            "Score Δ",
+            "Transition",
+        ]
+    ]

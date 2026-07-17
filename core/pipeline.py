@@ -22,13 +22,13 @@ from engines.watchlist_delta_engine import (
     compare_watchlists,
     load_previous_long_watchlist,
 )
-from engines.historical_intelligence_engine import build_historical_intelligence_report
+
+from engines.historical_intelligence_engine import build_theme_performance_table
 from engines.institutional_leaders_engine import build_institutional_leaders
 from engines.long_scoring_engine import calculate_long_score
 from engines.presentation_engine import (
     print_daily_scan,
     print_etf_eligibility,
-    print_historical_intelligence_error,
     print_intelligence_layer_error,
     print_scan_epilogue,
     print_scan_preamble,
@@ -622,12 +622,11 @@ def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, st
 
         rotation_data = calculate_rotation_delta()
         save_rotation_delta(rotation_data)
-        print_rotation_report(rotation_data)
+        
 
-        try:
-            build_historical_intelligence_report(max_days=21)
-        except Exception as e:
-            print_historical_intelligence_error(e)
+        # Historical intelligence is now consumed by
+        # Theme Performance. No standalone report.
+        pass
 
 
     except Exception as e:
@@ -676,6 +675,10 @@ def run_tabela_pipeline():
     today = context.market_date
     save_history(stocks)
 
+    theme_performance = build_theme_performance_table(
+        theme_strength
+    )
+
     print_daily_scan(
         today,
         theme_strength,
@@ -685,6 +688,7 @@ def run_tabela_pipeline():
         theme_breadth,
         theme_strength_settings,
         stocks,
+        theme_performance,
     )
 
     leading_themes = theme_strength[
