@@ -8,6 +8,7 @@ from engines.stock_transition_engine import (
     get_transition_summary,
     OBSERVATION_MIN_RUNS,
 )
+import textwrap
 
 engines.rotation_engine.print_rotation_report = lambda *args, **kwargs: None
 
@@ -200,6 +201,7 @@ def print_theme_performance(theme_performance):
     print()
     print("==============================================")
     print("THEME PERFORMANCE")
+    print("[ ] = Top 3    ( ) = Bottom 3")
     print("==============================================")
     print()
 
@@ -226,13 +228,15 @@ def print_theme_performance(theme_performance):
         if pd.isna(value):
             return "—"
 
-        marker = ""
-        if top3:
-            marker = "↑"
-        elif bottom3:
-            marker = "↓"
+        text = f"{value:.2f}"
 
-        return f"{value:.2f}{marker}"
+        if top3:
+            return f"[{text}]"
+
+        if bottom3:
+            return f"({text})"
+
+        return text
 
     def fmt_text(value):
         if pd.isna(value) or value == "":
@@ -578,11 +582,20 @@ def print_daily_scan(
             tickers = sorted(observation_groups[runs])
 
             print(
-                f"{runs} / {OBSERVATION_MIN_RUNS} "
+                f"Progress {runs} / {OBSERVATION_MIN_RUNS} "
                 f"({len(tickers)})"
             )
 
-            print(", ".join(tickers))
+            print("-" * 30)
+
+            wrapped = textwrap.fill(
+                ", ".join(tickers),
+                width=90,
+                break_long_words=False,
+                break_on_hyphens=False,
+            )
+
+            print(wrapped)
             print()
 
     #
@@ -613,9 +626,18 @@ def print_daily_scan(
             tickers = sorted(distribution_groups[runs])
 
             print(
-                f"{runs} / {max_runs} "
-                f"({len(tickers)})"
-            )
+            f"Progress {runs} / {max_runs} "
+            f"({len(tickers)})"
+        )
 
-            print(", ".join(tickers))
-            print()
+        print("-" * 30)
+
+        wrapped = textwrap.fill(
+            ", ".join(tickers),
+            width=90,
+            break_long_words=False,
+            break_on_hyphens=False,
+        )
+
+        print(wrapped)
+        print()
