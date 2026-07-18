@@ -201,7 +201,7 @@ def print_theme_performance(theme_performance):
     print()
     print("==============================================")
     print("THEME PERFORMANCE")
-    print("[ ] = Top 3    ( ) = Bottom 3")
+    print("Legend: [] = Top 3   () = Bottom 3")
     print("==============================================")
     print()
 
@@ -238,14 +238,20 @@ def print_theme_performance(theme_performance):
 
         return text
 
-    def fmt_text(value):
+    def fmt_text(value, signed=True):
         if pd.isna(value) or value == "":
             return "—"
 
         if isinstance(value, (int, float)):
+
             if float(value).is_integer():
-                return f"{int(value):+d}"
-            return f"{value:+.2f}"
+
+                if int(value) == 0:
+                    return "0"
+
+                return f"{int(value):+d}" if signed else f"{int(value)}"
+
+            return f"{value:+.2f}" if signed else f"{value:.2f}"
 
         return str(value)
 
