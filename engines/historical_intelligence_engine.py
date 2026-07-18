@@ -403,15 +403,40 @@ def compute_historical_intelligence(max_days=21):
                 }
             )
 
+    # ------------------------------------------------------------------
+    # Theme history
+    # Raw historical observations only.
+    # No calculations are performed here.
+    # ------------------------------------------------------------------
+
+    theme_history = {}
+
+    for theme, points in theme_daily_series.items():
+        theme_history[theme] = [
+            {
+                "date": p["date"],
+                "rank": p["rank"],
+                "score": p["score"],
+                "classification": p["class"],
+            }
+            for p in points
+        ]
+
     return {
         "window_days": len(snapshots),
+
+        # Raw historical series
+        "theme_history": theme_history,
+
+        # Existing structures retained for backward compatibility
         "theme_daily_series": theme_daily_series,
         "theme_daily_deltas": raw_deltas,
+
         "emerging_candidates": emerging_candidates,
         "weakening_candidates": weakening_candidates,
+
         "daily_rotation_date": rotation_date,
         "daily_rotation_data": rotation_data,
-        "structural_rotation": structural,
     }
 
 import pandas as pd

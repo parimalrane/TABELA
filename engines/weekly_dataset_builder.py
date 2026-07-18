@@ -118,6 +118,8 @@ class WeeklyDatasetBuilder:
 
             "weekly_short": weekly["short"],
 
+            "transition_registry": self.load_stock_transition_registry(),
+
         }
 
         unknown = self.compute_unknown_intelligence(runs)
@@ -187,29 +189,43 @@ class WeeklyDatasetBuilder:
                 ),
         }
 
+        #
         maintenance = {
 
+        "taxonomy_review": {
+
+            "status": "pending_ai_review",
+
+            "last_reviewed": str(metadata.end_date),
+
+            # Existing unknown evidence
             "unknown": unknown,
 
-            "stock_mapping_candidates": [],
+            # Existing stock persistence evidence
+            "stock_transition_registry":
+                stocks["transition_registry"],
 
-            "industry_mapping_candidates": [],
+            # Existing theme evidence
+            "theme_transitions": {
 
-            "theme_mapping_candidates": [],
+                theme: data["transitions"]
 
-            "possible_new_themes": [],
+                for theme, data in themes.items()
 
-            "possible_retired_themes": [],
+            },
 
-            "taxonomy_review": {
+            # Existing weekly theme history
+            "theme_history": {
 
-                "status": "pending_ai_review",
+                theme: data["daily"]
 
-                "last_reviewed": str(metadata.end_date),
+                for theme, data in themes.items()
 
-            }
+            },
 
         }
+
+    }
 
         dataset = WeeklyDataset(
 
@@ -584,6 +600,30 @@ class WeeklyDatasetBuilder:
 
         }
 
+
+    def load_stock_transition_registry(
+        self,
+    ) -> dict:
+
+        import json
+        from pathlib import Path
+
+        filename = Path(
+            "market_data/stock_transition_registry.json"
+        )
+
+        if not filename.exists():
+            return {}
+
+        with open(
+            filename,
+            "r",
+            encoding="utf-8",
+        ) as f:
+
+            return json.load(f)
+
+
     def compute_unknown_intelligence(
         self,
         runs: list[Run],
@@ -805,6 +845,33 @@ class WeeklyDatasetBuilder:
                 theme_data["daily"],
                 key=lambda x: x["date"],
             )
+
+            # ---------------------------------
+            # Theme transition timeline
+            # ---------------------------------
+
+            transitions = []
+
+            for previous, current in zip(
+                daily,
+                daily[1:],
+            ):
+
+                if previous["classification"] != current["classification"]:
+
+                    transitions.append(
+                        {
+                            "date": current["date"],
+                            "from": previous["classification"],
+                            "to": current["classification"],
+                        }
+                    )
+
+            theme_data["transitions"] = transitions
+
+            # ---------------------------------
+            # Weekly statistics
+            # ---------------------------------
 
             ranks = [d["rank"] for d in daily]
             scores = [d["score"] for d in daily]
