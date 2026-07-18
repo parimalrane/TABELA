@@ -290,7 +290,7 @@ def print_theme_performance(theme_performance):
             f"{fmt_delta(row['M']):>9}"
             f"{fmt_delta(row['Q']):>9}"
             f"{fmt_text(row['Rank Δ']):>9}"
-            f"{fmt_text(row['Score Δ']):>10}"
+            f"{fmt_text(row['Score Δ'], signed=False):>10}"
             f"  {fmt_text(row['Transition'])}"
         )
 
