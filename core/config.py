@@ -206,3 +206,31 @@ STOCK_TRANSITION_CONFIG = {
     "OBSERVATION_MIN_RUNS": 7,
     "OBSERVATION_MAX_RUNS": 60,
 }
+
+# ============================================================================
+# MARKET CONTEXT ENGINE
+# ============================================================================
+
+MARKET_CONTEXT_CONFIG = {
+
+"PERFORMANCE_LOOKBACKS": [
+    2,
+    3,
+    4,
+    5,
+],
+
+"RELATIVE_VOLUME_LOOKBACKS": [
+    2,
+    5,
+],
+
+    # Required market ETFs.
+    "MARKET_ETFS": [
+        "SPY",
+        "QQQ",
+        "IWM",
+        "DIA",
+    ],
+}
+

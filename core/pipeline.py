@@ -30,11 +30,13 @@ from engines.presentation_engine import (
     print_daily_scan,
     print_etf_eligibility,
     print_intelligence_layer_error,
+    print_market_context_summary,
     print_scan_epilogue,
     print_scan_preamble,
     print_stock_history_error,
     print_unknown_classification_error,
 )
+
 from engines.stock_transition_engine import apply_tracking_state
 from engines.rotation_engine import (
     calculate_rotation_delta,
@@ -639,7 +641,12 @@ def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, st
 
 
 def run_tabela_pipeline():
+    from engines.market_context_engine import run_market_context_engine
+
+    market_context = run_market_context_engine()
     print_scan_preamble()
+    print_market_context_summary(market_context)
+
 
     theme_strength_settings = get_theme_strength_settings()
 

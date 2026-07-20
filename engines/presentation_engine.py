@@ -80,6 +80,7 @@ def print_scan_epilogue():
         captured_text = ""
 
     titles = [
+        ("MARKET_CONTEXT", "MARKET CONTEXT"),
         ("HEADER", "TABELA DAILY MARKET SCAN"),
         ("THEME_PERFORMANCE", "THEME PERFORMANCE"),
         ("THEME_BREADTH", "THEME BREADTH ANALYSIS"),
@@ -129,6 +130,10 @@ def print_scan_epilogue():
     ]
 
     final_output = []
+
+    if "MARKET_CONTEXT" in section_texts:
+        final_output.append(section_texts["MARKET_CONTEXT"])
+
     if pre_header.strip():
         final_output.append(pre_header)
 
@@ -143,11 +148,12 @@ def print_scan_epilogue():
         "\n"
         "FILES GENERATED\n"
         "---------------\n"
-        "\u2713 Stock History\n"
-        "\u2713 Market Snapshot\n"
-        "\u2713 Rotation Delta\n"
-        "\u2713 Unknown Classification\n"
-        "\u2713 Stock Transition Registry\n"
+        "✓ Market Context\n"
+        "✓ Stock History\n"
+        "✓ Market Snapshot\n"
+        "✓ Rotation Delta\n"
+        "✓ Unknown Classification\n"
+        "✓ Stock Transition Registry\n"
         "\n"
     )
     final_output.append(files_generated)
@@ -392,6 +398,113 @@ def print_theme_strength_diagnostics(theme_strength):
   #  print("----------------------------------------")
   #  print(diagnostics_df.to_string(index=False))
 
+def print_market_context_summary(market_context):
+    """
+    Display Market Context summary.
+    """
+
+    print()
+    print("==============================================")
+    print("MARKET CONTEXT")
+    print("==============================================")
+    print()
+
+    analytics = market_context["market_analytics"]
+
+    relative_volume = analytics["relative_volume"]
+    lookback_performance = analytics["lookback_performance"]
+
+    #
+    # Market Statistics
+    #
+    print("MARKET STATISTICS")
+
+    headers = ["ETF"]
+
+    for lookback in relative_volume.keys():
+        headers.append(f"RV{lookback.upper()}")
+
+    for lookback in lookback_performance.keys():
+        headers.append(f"{lookback.upper()}%")
+
+    header_line = "".join(f"{h:<10}" for h in headers)
+
+    print("-" * len(header_line))
+    print(header_line)
+    print("-" * len(header_line))
+
+    for etf in market_context["market"].keys():
+
+        row = [etf]
+
+        #
+        # Relative Volume
+        #
+        for lookback in relative_volume.keys():
+
+            value = relative_volume[lookback].get(etf)
+
+            row.append(
+                "-" if value is None else f"{value:.2f}"
+            )
+
+        #
+        # Lookback Performance
+        #
+        for lookback in lookback_performance.keys():
+
+            value = lookback_performance[lookback].get(etf)
+
+            row.append(
+                "-" if value is None else f"{value:.2f}"
+            )
+
+        print("".join(f"{v:<10}" for v in row))
+
+    print()
+
+    #
+    # Relative Performance
+    #
+    print("RELATIVE PERFORMANCE")
+    print("-" * 90)
+
+    relative_perf = analytics["relative_performance"]
+
+    first_period = next(iter(relative_perf))
+    pairs = list(relative_perf[first_period].keys())
+
+    headers = ["Pair"] + [
+        period.upper()
+        for period in relative_perf.keys()
+    ]
+
+    header_line = (
+        f"{headers[0]:<16}" +
+        "".join(f"{h:>9}" for h in headers[1:])
+    )
+
+    print(header_line)
+    print("-" * len(header_line))
+
+    for pair in pairs:
+
+        display_pair = pair.replace("_vs_", " vs ")
+
+        line = f"{display_pair:<16}"
+
+        for period in relative_perf.keys():
+
+            value = relative_perf[period].get(pair)
+
+            if value is None:
+                line += f"{'-':>9}"
+            else:
+                line += f"{value:>9.2f}"
+
+        print(line)
+
+    print()
 
 def print_daily_scan(
     today,
