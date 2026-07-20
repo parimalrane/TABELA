@@ -583,7 +583,7 @@ def print_daily_scan(
 
         print()
 
-        for runs in sorted(observation_groups.keys(), reverse=True):
+        for runs in sorted(observation_groups.keys()):
 
             tickers = sorted(observation_groups[runs])
 
@@ -627,7 +627,7 @@ def print_daily_scan(
             for item in transition["distribution"]
         )
 
-        for runs in sorted(distribution_groups.keys(), reverse=True):
+        for runs in sorted(distribution_groups.keys()):
 
             tickers = sorted(distribution_groups[runs])
 
