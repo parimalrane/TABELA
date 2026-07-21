@@ -81,20 +81,30 @@ def validate_market_data(df):
             )
 
 
-def build_market_snapshot(df):
-    """Return latest market snapshot."""
+def build_market_snapshot(
+    df,
+    market_date,
+):
+    """
+    Return market snapshot for the requested market date.
+    """
 
-    latest_date = df["Date"].max()
+    target_date = pd.to_datetime(market_date)
 
     snapshot = (
-        df[df["Date"] == latest_date]
+        df[df["Date"] == target_date]
         .set_index("ETF")
         .loc[MARKET_ETFS]
         .reset_index()
     )
 
+    if snapshot.empty:
+        raise ValueError(
+            f"Market.csv does not contain market date {market_date}"
+        )
+
     return {
-        "date": latest_date.strftime("%Y-%m-%d"),
+        "date": target_date.strftime("%Y-%m-%d"),
         "market": snapshot,
     }
 
@@ -513,7 +523,95 @@ def calculate_institutional_activity(
     return activity
 
 
-def run_market_context_engine():
+def run_market_context_engine(market_date):
+    """Entry point."""
+
+    df = load_market_data()
+
+    validate_market_data(df)
+
+    latest_date = pd.to_datetime(market_date)
+
+    snapshot = build_market_snapshot(
+        df,
+        latest_date,
+    )
+
+    #
+    # Relative Volume
+    #
+    relative_volume = {}
+
+    for lookback in RELATIVE_VOLUME_LOOKBACKS:
+
+        relative_volume[f"{lookback}d"] = (
+            calculate_relative_volume(
+                df,
+                latest_date,
+                lookback,
+            )
+        )
+
+    #
+    # Lookback Performance
+    #
+    lookback_performance = {}
+
+    for lookback in PERFORMANCE_LOOKBACKS:
+
+        lookback_performance[f"{lookback}d"] = (
+            calculate_lookback_performance(
+                df,
+                latest_date,
+                lookback,
+            )
+        )
+
+    #
+    # Relative Performance
+    #
+    relative_performance = {}
+
+    for lookback, performance in lookback_performance.items():
+
+        relative_performance[lookback] = (
+            calculate_relative_performance_matrix(
+                performance
+            )
+        )
+
+    #
+    # Market Structure
+    #
+    market_structure = calculate_market_structure(
+        df,
+        latest_date,
+    )
+
+    #
+    # Institutional Activity
+    #
+    institutional_activity = (
+        calculate_institutional_activity(
+            df,
+            latest_date,
+        )
+    )
+
+    market_context = build_market_context_json(
+        snapshot,
+        relative_volume,
+        lookback_performance,
+        relative_performance,
+        market_structure,
+        institutional_activity,
+    )
+
+    save_market_context_json(
+        market_context,
+    )
+
+    return market_context
     """Entry point."""
 
     df = load_market_data()

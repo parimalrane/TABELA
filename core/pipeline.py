@@ -643,7 +643,9 @@ def save_intelligence_outputs(leading_themes, neutral_themes, lagging_themes, st
 def run_tabela_pipeline():
     from engines.market_context_engine import run_market_context_engine
 
-    market_context = run_market_context_engine()
+    market_context = run_market_context_engine(
+        context.market_date
+    )
     print_scan_preamble()
     print_market_context_summary(market_context)
 
