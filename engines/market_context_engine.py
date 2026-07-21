@@ -49,6 +49,13 @@ def load_market_data():
 def validate_market_data(df):
     """Validate Market.csv integrity."""
 
+    duplicates = df[df.duplicated(["Date", "ETF"], keep=False)]
+
+    if not duplicates.empty:
+        raise ValueError(
+            "Duplicate Date/ETF records found:\n"
+            + duplicates[["Date", "ETF"]].to_string(index=False)
+        )
     invalid = set(df["ETF"]) - set(MARKET_ETFS)
     if invalid:
         raise ValueError(

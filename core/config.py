@@ -214,15 +214,15 @@ STOCK_TRANSITION_CONFIG = {
 MARKET_CONTEXT_CONFIG = {
 
 "PERFORMANCE_LOOKBACKS": [
-    2,
-    3,
-    4,
     5,
+    20,
+    50,
+    200,
 ],
 
 "RELATIVE_VOLUME_LOOKBACKS": [
-    2,
-    5,
+    20,
+    50,
 ],
 
     # Required market ETFs.
