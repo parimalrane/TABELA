@@ -704,6 +704,7 @@ def print_daily_scan(
     registry = load_registry()
     transition = get_transition_summary(registry)
 
+    #
     print()
     print("========================================")
     print("STOCK TRANSITIONS")
@@ -713,41 +714,81 @@ def print_daily_scan(
     # OBSERVATION
     #
     print()
-    print("OBSERVATION")
-    print("----------------------------")
-    print(f"Total : {len(transition['observation'])}")
+    print(f"Observation : {len(transition['observation'])}")
 
     if transition["observation"]:
 
         observation_groups = {}
 
         for item in transition["observation"]:
-            observation_groups.setdefault(item["runs"], []).append(
-                item["ticker"]
-            )
+            observation_groups.setdefault(
+                item["runs"],
+                []
+            ).append(item["ticker"])
 
-        print()
-
-        for runs in sorted(observation_groups.keys()):
+        for runs in sorted(observation_groups):
 
             tickers = sorted(observation_groups[runs])
 
-            print(
-                f"Progress {runs} / {OBSERVATION_MIN_RUNS} "
-                f"({len(tickers)})"
-            )
-
-            print("-" * 30)
+            prefix = f"{runs}/{OBSERVATION_MIN_RUNS:<2} ({len(tickers):>2}) : "
 
             wrapped = textwrap.fill(
                 ", ".join(tickers),
-                width=90,
+                width=95,
+                initial_indent=prefix,
+                subsequent_indent=" " * len(prefix),
                 break_long_words=False,
                 break_on_hyphens=False,
             )
 
             print(wrapped)
-            print()
+
+    #
+    # DISTRIBUTION
+    #
+    print()
+
+    print(f"Distribution : {len(transition['distribution'])}")
+
+    if transition["distribution"]:
+
+        distribution_groups = {}
+
+        for item in transition["distribution"]:
+            distribution_groups.setdefault(
+                item["runs"],
+                []
+            ).append(item["ticker"])
+
+        max_runs = max(
+            item["runs"]
+            for item in transition["distribution"]
+        )
+
+        for runs in sorted(distribution_groups):
+
+            tickers = sorted(distribution_groups[runs])
+
+            wrapped = textwrap.fill(
+                ", ".join(tickers),
+                width=95,
+                subsequent_indent=" " * 11,
+                break_long_words=False,
+                break_on_hyphens=False,
+            )
+
+            prefix = f"{runs}/{max_runs:<2} ({len(tickers):>2}) : "
+
+            wrapped = textwrap.fill(
+                ", ".join(tickers),
+                width=95,
+                initial_indent=prefix,
+                subsequent_indent=" " * len(prefix),
+                break_long_words=False,
+                break_on_hyphens=False,
+            )
+
+            print(wrapped)
 
     #
     # DISTRIBUTION
