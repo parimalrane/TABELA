@@ -434,23 +434,20 @@ def print_market_context_summary(market_context):
     market_structure = analytics["market_structure"]
     institutional_activity = analytics["institutional_activity"]
 
-    #
-    # Market Statistics
-    #
     print("MARKET STATISTICS")
 
     header = (
         f"{'ETF':<6}"
-        f"{'RV.20':>8}"
-        f"{'RV.50':>8}"
+        f"{'Type':>6}"
         f"{'5D%':>8}"
         f"{'20D%':>8}"
         f"{'50D%':>8}"
         f"{'200D%':>8}"
+        f"{'RV.20':>8}"
+        f"{'RV.50':>8}"
         f"{'20Dist':>10}"
         f"{'50Dist':>10}"
         f"{'200Dist':>10}"
-        f"{'Type':>6}"
     )
 
     print("-" * len(header))
@@ -482,23 +479,20 @@ def print_market_context_summary(market_context):
 
         print(
             f"{etf:<6}"
-            f"{fmt_rv(rv20):>8}"
-            f"{fmt_rv(rv50):>8}"
+            f"{symbol:>6}"
             f"{fmt(perf5):>8}"
             f"{fmt(perf20):>8}"
             f"{fmt(perf50):>8}"
             f"{fmt(perf200):>8}"
+            f"{fmt_rv(rv20):>8}"
+            f"{fmt_rv(rv50):>8}"
             f"{fmt(dist20):>10}"
             f"{fmt(dist50):>10}"
             f"{fmt(dist200):>10}"
-            f"{symbol:>6}"
         )
 
     print()
 
-    #
-    # Relative Performance
-    #
     print("RELATIVE PERFORMANCE")
     print("-" * 90)
 
@@ -511,8 +505,8 @@ def print_market_context_summary(market_context):
     ]
 
     header_line = (
-        f"{headers[0]:<16}" +
-        "".join(f"{h:>9}" for h in headers[1:])
+        f"{headers[0]:<16}"
+        + "".join(f"{h:>9}" for h in headers[1:])
     )
 
     print(header_line)
