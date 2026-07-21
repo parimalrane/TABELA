@@ -27,23 +27,25 @@ class WeeklyJSONWriter:
 
         data = {
 
-            "metadata": {
+                "metadata": {
 
-                "schema_version": "1.0",
+                    "schema_version": "1.0",
 
-                "generated_at": dataset.generated_at.isoformat(),
+                    "generated_at": dataset.generated_at.isoformat(),
 
-                "start_date": str(metadata.start_date),
+                    "start_date": str(metadata.start_date),
 
-                "end_date": str(metadata.end_date),
+                    "end_date": str(metadata.end_date),
 
-                "trading_days": metadata.trading_days,
+                    "trading_days": metadata.trading_days,
 
-                "runs_loaded": len(dataset.runs),
+                    "runs_loaded": len(dataset.runs),
 
-            },
+                },
 
-            "market": {
+                "market_context": dataset.market_context,
+
+                "market": {
 
                 "rotation": dataset.rotation,
 

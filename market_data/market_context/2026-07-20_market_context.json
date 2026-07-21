@@ -1,98 +1,88 @@
 {
-    "date": "2026-07-20",
-    "configuration": {
-        "performance_lookbacks": [
-            5,
-            20,
-            50,
-            200
-        ],
-        "relative_volume_lookbacks": [
-            20,
-            50
-        ]
+    "week_summary": {
+        "accumulation_days": 0,
+        "distribution_days": 0,
+        "consolidation_days": 0,
+        "neutral_days": 4
     },
-    "market": {
-        "SPY": {
-            "ohlcv": {
-                "open": 747.06,
-                "high": 748.73,
-                "low": 741.51,
-                "close": 742.09,
-                "volume": 49855561
-            }
-        },
-        "QQQ": {
-            "ohlcv": {
-                "open": 702.26,
-                "high": 705.8,
-                "low": 695.51,
-                "close": 696.06,
-                "volume": 28995795
-            }
-        },
-        "IWM": {
-            "ohlcv": {
-                "open": 295.01,
-                "high": 295.99,
-                "low": 292.18,
-                "close": 292.31,
-                "volume": 20451977
-            }
-        },
-        "DIA": {
-            "ohlcv": {
-                "open": 522.04,
-                "high": 523.4,
-                "low": 517.16,
-                "close": 517.94,
-                "volume": 2259018
-            }
-        }
-    },
-    "market_analytics": {
-        "relative_volume": {
-            "20d": {
-                "SPY": 0.95,
-                "QQQ": 0.69,
-                "IWM": 0.87,
-                "DIA": 0.54
+    "latest_market_snapshot": {
+        "market_date": "2026-07-20",
+        "market_statistics": {
+            "SPY": {
+                "day_type": "Neutral",
+                "relative_volume": {
+                    "20d": 0.95,
+                    "50d": 0.93
+                },
+                "returns": {
+                    "1w": -1.3,
+                    "4w": -0.31,
+                    "10w": 1.44,
+                    "40w": 11.02
+                },
+                "moving_average_extension": {
+                    "20dma": -0.36,
+                    "50dma": -0.33,
+                    "200dma": 6.46
+                }
             },
-            "50d": {
-                "SPY": 0.93,
-                "QQQ": 0.65,
-                "IWM": 0.78,
-                "DIA": 0.47
-            }
-        },
-        "lookback_performance": {
-            "5d": {
-                "SPY": -1.3,
-                "QQQ": -3.28,
-                "IWM": -0.75,
-                "DIA": -1.29
+            "QQQ": {
+                "day_type": "Neutral",
+                "relative_volume": {
+                    "20d": 0.69,
+                    "50d": 0.65
+                },
+                "returns": {
+                    "1w": -3.28,
+                    "4w": -5.68,
+                    "10w": 0.16,
+                    "40w": 15.38
+                },
+                "moving_average_extension": {
+                    "20dma": -2.8,
+                    "50dma": -3.19,
+                    "200dma": 8.54
+                }
             },
-            "20d": {
-                "SPY": -0.31,
-                "QQQ": -5.68,
-                "IWM": -1.97,
-                "DIA": 0.17
+            "IWM": {
+                "day_type": "Neutral",
+                "relative_volume": {
+                    "20d": 0.87,
+                    "50d": 0.78
+                },
+                "returns": {
+                    "1w": -0.75,
+                    "4w": -1.97,
+                    "10w": 3.56,
+                    "40w": 20.55
+                },
+                "moving_average_extension": {
+                    "20dma": -1.46,
+                    "50dma": 0.66,
+                    "200dma": 10.86
+                }
             },
-            "50d": {
-                "SPY": 1.44,
-                "QQQ": 0.16,
-                "IWM": 3.56,
-                "DIA": 4.44
-            },
-            "200d": {
-                "SPY": 11.02,
-                "QQQ": 15.38,
-                "IWM": 20.55,
-                "DIA": 11.56
+            "DIA": {
+                "day_type": "Neutral",
+                "relative_volume": {
+                    "20d": 0.54,
+                    "50d": 0.47
+                },
+                "returns": {
+                    "1w": -1.29,
+                    "4w": 0.17,
+                    "10w": 4.44,
+                    "40w": 11.56
+                },
+                "moving_average_extension": {
+                    "20dma": -0.91,
+                    "50dma": 1.01,
+                    "200dma": 6.13
+                }
             }
         },
         "relative_performance": {
-            "5d": {
+            "1w": {
                 "SPY_vs_QQQ": 1.98,
                 "SPY_vs_IWM": -0.55,
                 "SPY_vs_DIA": -0.01,
@@ -100,7 +90,7 @@
                 "QQQ_vs_DIA": -1.99,
                 "IWM_vs_DIA": 0.54
             },
-            "20d": {
+            "4w": {
                 "SPY_vs_QQQ": 5.37,
                 "SPY_vs_IWM": 1.66,
                 "SPY_vs_DIA": -0.48,
@@ -108,7 +98,7 @@
                 "QQQ_vs_DIA": -5.85,
                 "IWM_vs_DIA": -2.14
             },
-            "50d": {
+            "10w": {
                 "SPY_vs_QQQ": 1.28,
                 "SPY_vs_IWM": -2.12,
                 "SPY_vs_DIA": -3.0,
@@ -116,49 +106,13 @@
                 "QQQ_vs_DIA": -4.28,
                 "IWM_vs_DIA": -0.88
             },
-            "200d": {
+            "40w": {
                 "SPY_vs_QQQ": -4.36,
                 "SPY_vs_IWM": -9.53,
                 "SPY_vs_DIA": -0.54,
                 "QQQ_vs_IWM": -5.17,
                 "QQQ_vs_DIA": 3.82,
                 "IWM_vs_DIA": 8.99
-            }
-        },
-        "market_structure": {
-            "SPY": {
-                "distance_to_20sma_pct": -0.36,
-                "distance_to_50sma_pct": -0.33,
-                "distance_to_200sma_pct": 6.46
-            },
-            "QQQ": {
-                "distance_to_20sma_pct": -2.8,
-                "distance_to_50sma_pct": -3.19,
-                "distance_to_200sma_pct": 8.54
-            },
-            "IWM": {
-                "distance_to_20sma_pct": -1.46,
-                "distance_to_50sma_pct": 0.66,
-                "distance_to_200sma_pct": 10.86
-            },
-            "DIA": {
-                "distance_to_20sma_pct": -0.91,
-                "distance_to_50sma_pct": 1.01,
-                "distance_to_200sma_pct": 6.13
-            }
-        },
-        "institutional_activity": {
-            "SPY": {
-                "day_type": "Neutral"
-            },
-            "QQQ": {
-                "day_type": "Neutral"
-            },
-            "IWM": {
-                "day_type": "Neutral"
-            },
-            "DIA": {
-                "day_type": "Neutral"
             }
         }
     }

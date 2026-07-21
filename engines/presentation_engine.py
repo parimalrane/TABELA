@@ -398,6 +398,7 @@ def print_theme_strength_diagnostics(theme_strength):
   #  print("----------------------------------------")
   #  print(diagnostics_df.to_string(index=False))
 
+
 def print_market_context_summary(market_context):
     """
     Display Market Context summary.
@@ -408,6 +409,7 @@ def print_market_context_summary(market_context):
         "Distribution": "Distribution",
         "Consolidation": "Consolidation",
         "Neutral": "N/A",
+        None: "N/A",
     }
 
     def fmt(value):
@@ -426,13 +428,9 @@ def print_market_context_summary(market_context):
     print("==============================================")
     print()
 
-    analytics = market_context["market_analytics"]
-
-    relative_volume = analytics["relative_volume"]
-    lookback_performance = analytics["lookback_performance"]
-    relative_performance = analytics["relative_performance"]
-    market_structure = analytics["market_structure"]
-    institutional_activity = analytics["institutional_activity"]
+    snapshot = market_context["latest_market_snapshot"]
+    stats = snapshot["market_statistics"]
+    relative_performance = snapshot["relative_performance"]
 
     print("MARKET STATISTICS")
 
@@ -454,41 +452,26 @@ def print_market_context_summary(market_context):
     print(header)
     print("-" * len(header))
 
-    for etf in market_context["market"].keys():
+    for etf in ["SPY", "QQQ", "IWM", "DIA"]:
 
-        rv20 = relative_volume["20d"].get(etf)
-        rv50 = relative_volume["50d"].get(etf)
+        data = stats[etf]
 
-        perf5 = lookback_performance["5d"].get(etf)
-        perf20 = lookback_performance["20d"].get(etf)
-        perf50 = lookback_performance["50d"].get(etf)
-        perf200 = lookback_performance["200d"].get(etf)
-
-        structure = market_structure.get(etf, {})
-
-        dist20 = structure.get("distance_to_20sma_pct")
-        dist50 = structure.get("distance_to_50sma_pct")
-        dist200 = structure.get("distance_to_200sma_pct")
-
-        day_type = institutional_activity.get(etf, {}).get(
-            "day_type",
-            "Neutral",
-        )
-
-        symbol = TYPE_SYMBOL.get(day_type, "-")
+        returns = data["returns"]
+        rv = data["relative_volume"]
+        ma = data["moving_average_extension"]
 
         print(
             f"{etf:<6}"
-            f"{symbol:>12}"
-            f"{fmt(perf5):>8}"
-            f"{fmt(perf20):>8}"
-            f"{fmt(perf50):>8}"
-            f"{fmt(perf200):>8}"
-            f"{fmt_rv(rv20):>8}"
-            f"{fmt_rv(rv50):>8}"
-            f"{fmt(dist20):>10}"
-            f"{fmt(dist50):>10}"
-            f"{fmt(dist200):>10}"
+            f"{TYPE_SYMBOL.get(data.get('day_type'),'N/A'):>12}"
+            f"{fmt(returns.get('1w')):>8}"
+            f"{fmt(returns.get('4w')):>8}"
+            f"{fmt(returns.get('10w')):>8}"
+            f"{fmt(returns.get('40w')):>8}"
+            f"{fmt_rv(rv.get('20d')):>8}"
+            f"{fmt_rv(rv.get('50d')):>8}"
+            f"{fmt(ma.get('20dma')):>10}"
+            f"{fmt(ma.get('50dma')):>10}"
+            f"{fmt(ma.get('200dma')):>10}"
         )
 
     print()
@@ -496,17 +479,17 @@ def print_market_context_summary(market_context):
     print("RELATIVE PERFORMANCE")
     print("-" * 90)
 
-    first_period = next(iter(relative_performance))
+    period_order = ["1w", "4w", "10w", "40w"]
+
+    first_period = period_order[0]
     pairs = list(relative_performance[first_period].keys())
 
-    headers = ["Pair"] + [
-        period.upper()
-        for period in relative_performance.keys()
-    ]
-
     header_line = (
-        f"{headers[0]:<16}"
-        + "".join(f"{h:>9}" for h in headers[1:])
+        f"{'Pair':<16}"
+        + "".join(
+            f"{period.upper():>9}"
+            for period in period_order
+        )
     )
 
     print(header_line)
@@ -514,11 +497,9 @@ def print_market_context_summary(market_context):
 
     for pair in pairs:
 
-        display_pair = pair.replace("_vs_", " vs ")
+        line = f"{pair.replace('_vs_', ' vs '):<16}"
 
-        line = f"{display_pair:<16}"
-
-        for period in relative_performance.keys():
+        for period in period_order:
 
             value = relative_performance[period].get(pair)
 
@@ -530,6 +511,7 @@ def print_market_context_summary(market_context):
         print(line)
 
     print()
+
 
 def print_daily_scan(
     today,

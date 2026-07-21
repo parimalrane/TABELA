@@ -64,6 +64,8 @@ class WeeklyDataset:
 
     maintenance: dict[str, Any] = field(default_factory=dict)
 
+    market_context: dict[str, Any] = field(default_factory=dict)
+
 class WeeklyDatasetBuilder:
 
     def __init__(self):
@@ -227,6 +229,8 @@ class WeeklyDatasetBuilder:
 
     }
 
+        market_context = self.build_market_context(metadata.end_date)
+
         dataset = WeeklyDataset(
 
             metadata=metadata,
@@ -248,6 +252,8 @@ class WeeklyDatasetBuilder:
             taxonomy=taxonomy,
 
             maintenance=maintenance,
+
+            market_context=market_context,
 
         )
 
@@ -600,7 +606,6 @@ class WeeklyDatasetBuilder:
 
         }
 
-
     def load_stock_transition_registry(
         self,
     ) -> dict:
@@ -622,7 +627,6 @@ class WeeklyDatasetBuilder:
         ) as f:
 
             return json.load(f)
-
 
     def compute_unknown_intelligence(
         self,
@@ -1046,7 +1050,82 @@ class WeeklyDatasetBuilder:
 
         }
 
+    def build_market_context(
+        self,
+        market_date,
+    ) -> dict[str, Any]:
 
+        import json
+        from collections import Counter
+        from pathlib import Path
+
+        market_context_dir = Path("market_data") / "market_context"
+
+        files = sorted(
+            market_context_dir.glob("*_market_context.json")
+        )
+
+        if not files:
+            raise FileNotFoundError(
+                "No Market Context JSON files found."
+            )
+
+        files = files[-min(5, len(files)):]
+
+        if not files:
+            raise FileNotFoundError(
+                "No Market Context JSON files found."
+            )
+
+
+        week_summary = {
+            "accumulation_days": 0,
+            "distribution_days": 0,
+            "consolidation_days": 0,
+            "neutral_days": 0,
+        }
+
+        latest_snapshot = None
+
+        for filename in files:
+
+            with open(
+                filename,
+                "r",
+                encoding="utf-8",
+            ) as f:
+
+                payload = json.load(f)
+
+            latest_snapshot = payload["latest_market_snapshot"]
+
+            counts = Counter()
+
+            for etf in latest_snapshot["market_statistics"].values():
+
+                counts[etf["day_type"]] += 1
+
+            dominant = counts.most_common(1)[0][0]
+
+            if dominant == "Accumulation":
+                week_summary["accumulation_days"] += 1
+
+            elif dominant == "Distribution":
+                week_summary["distribution_days"] += 1
+
+            elif dominant == "Consolidation":
+                week_summary["consolidation_days"] += 1
+
+            else:
+                week_summary["neutral_days"] += 1
+
+        return {
+
+            "week_summary": week_summary,
+
+            "latest_market_snapshot": latest_snapshot,
+
+        }
 
 if __name__ == "__main__":
 
@@ -1054,13 +1133,12 @@ if __name__ == "__main__":
 
     weekly = builder.build()
 
-    print()
-    print("Weekly Long Stocks")
-    print(weekly.stocks["long"])
+    
+    print("\nWeekly Long Stocks")
+    print(weekly.stocks["weekly_long"])
 
-    print()
-    print("Weekly Short Stocks")
-    print(weekly.stocks["short"])
+    print("\nWeekly Short Stocks")
+    print(weekly.stocks["weekly_short"])
 
     print("=" * 70)
     print("TABELA WEEKLY DATASET BUILDER")

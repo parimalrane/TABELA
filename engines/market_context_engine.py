@@ -118,47 +118,64 @@ def build_market_context_json(
 ):
     """
     Build the daily Market Context JSON.
+
+    This JSON is the canonical Market Context consumed by
+    the Weekly Intelligence pipeline.
     """
 
-    market = {}
+   
+
+    market_statistics = {}
 
     for _, row in snapshot["market"].iterrows():
 
         ticker = row["ETF"]
 
-        market[ticker] = {
-            "ohlcv": {
-                "open": float(row["Open"]),
-                "high": float(row["High"]),
-                "low": float(row["Low"]),
-                "close": float(row["Close"]),
-                "volume": int(row["Volume"]),
-            }
+        day_type = institutional_activity[ticker]["day_type"]
+
+
+        market_statistics[ticker] = {
+
+            "day_type": day_type,
+
+            "relative_volume": {
+                "20d": relative_volume["20d"][ticker],
+                "50d": relative_volume["50d"][ticker],
+            },
+
+            "returns": {
+                "1w": lookback_performance["5d"][ticker],
+                "4w": lookback_performance["20d"][ticker],
+                "10w": lookback_performance["50d"][ticker],
+                "40w": lookback_performance["200d"][ticker],
+            },
+
+            "moving_average_extension": {
+                "20dma": market_structure[ticker]["distance_to_20sma_pct"],
+                "50dma": market_structure[ticker]["distance_to_50sma_pct"],
+                "200dma": market_structure[ticker]["distance_to_200sma_pct"],
+            },
         }
 
     return {
 
-        "date": snapshot["date"],
+        "latest_market_snapshot": {
 
-        "configuration": {
-            "performance_lookbacks": PERFORMANCE_LOOKBACKS,
-            "relative_volume_lookbacks": RELATIVE_VOLUME_LOOKBACKS,
-        },
+            "market_date": snapshot["date"],
 
-        "market": market,
+            "market_statistics": {
+                "SPY": market_statistics["SPY"],
+                "QQQ": market_statistics["QQQ"],
+                "IWM": market_statistics["IWM"],
+                "DIA": market_statistics["DIA"],
+            },
 
-        "market_analytics": {
-
-            "relative_volume": relative_volume,
-
-            "lookback_performance": lookback_performance,
-
-            "relative_performance": relative_performance,
-
-            "market_structure": market_structure,
-
-            "institutional_activity": institutional_activity,
-
+            "relative_performance": {
+                "1w": relative_performance["5d"],
+                "4w": relative_performance["20d"],
+                "10w": relative_performance["50d"],
+                "40w": relative_performance["200d"],
+            },
         },
     }
 
@@ -173,8 +190,8 @@ def save_market_context_json(context):
     )
 
     filename = (
-        MARKET_CONTEXT_FOLDER /
-        f"{context['date']}_market_context.json"
+        MARKET_CONTEXT_FOLDER
+        / f"{context['latest_market_snapshot']['market_date']}_market_context.json"
     )
 
     with open(filename, "w") as f:
@@ -610,91 +627,5 @@ def run_market_context_engine(market_date):
     save_market_context_json(
         market_context,
     )
-
-    return market_context
-    """Entry point."""
-
-    df = load_market_data()
-
-    validate_market_data(df)
-
-    snapshot = build_market_snapshot(df)
-
-    latest_date = df["Date"].max()
-
-    #
-    # Relative Volume
-    #
-    relative_volume = {}
-
-    for lookback in RELATIVE_VOLUME_LOOKBACKS:
-
-        relative_volume[f"{lookback}d"] = (
-            calculate_relative_volume(
-                df,
-                latest_date,
-                lookback,
-            )
-        )
-
-    #
-    # Lookback Performance
-    #
-    lookback_performance = {}
-
-    for lookback in PERFORMANCE_LOOKBACKS:
-
-        lookback_performance[f"{lookback}d"] = (
-            calculate_lookback_performance(
-                df,
-                latest_date,
-                lookback,
-            )
-        )
-
-    #
-    # Relative Performance
-    #
-    relative_performance = {}
-
-    for lookback, performance in lookback_performance.items():
-
-        relative_performance[lookback] = (
-            calculate_relative_performance_matrix(
-                performance
-            )
-        )
-
-    #
-    # Market Structure
-    #
-    market_structure = calculate_market_structure(
-        df,
-        latest_date,
-    )
-
-    #
-    # Institutional Activity
-    #
-    institutional_activity = (
-        calculate_institutional_activity(
-            df,
-            latest_date,
-        )
-    )
-
-    market_context = build_market_context_json(
-        snapshot,
-        relative_volume,
-        lookback_performance,
-        relative_performance,
-        market_structure,
-        institutional_activity,
-    )
-
-    save_market_context_json(
-        market_context,
-    )
-
 
     return market_context
