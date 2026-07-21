@@ -103,6 +103,8 @@ def build_market_context_json(
     relative_volume,
     lookback_performance,
     relative_performance,
+    market_structure,
+    institutional_activity,
 ):
     """
     Build the daily Market Context JSON.
@@ -142,6 +144,10 @@ def build_market_context_json(
             "lookback_performance": lookback_performance,
 
             "relative_performance": relative_performance,
+
+            "market_structure": market_structure,
+
+            "institutional_activity": institutional_activity,
 
         },
     }
@@ -305,9 +311,211 @@ def calculate_relative_performance_matrix(performance):
 
     return matrix
 
+def calculate_market_structure(
+    df,
+    latest_date,
+):
+    """
+    Calculate distance from the 20, 50 and 200 SMA
+    for each market ETF.
+    """
+
+    sma_periods = MARKET_CONTEXT_CONFIG[
+        "MARKET_STRUCTURE"
+    ]["SMA_PERIODS"]
+
+    market_structure = {}
+
+    for etf in MARKET_ETFS:
+
+        etf_df = (
+            df[df["ETF"] == etf]
+            .sort_values("Date")
+            .reset_index(drop=True)
+            .copy()
+        )
+
+        latest_row = etf_df.loc[
+            etf_df["Date"] == latest_date
+        ]
+
+        if latest_row.empty:
+            raise ValueError(
+                f"{etf}: latest trading day not found."
+            )
+
+        latest_idx = latest_row.index[0]
+
+        close = float(
+            etf_df.loc[latest_idx, "Close"]
+        )
+
+        structure = {}
+
+        for period in sma_periods:
+
+            if latest_idx < (period - 1):
+
+                structure[
+                    f"distance_to_{period}sma_pct"
+                ] = None
+
+                continue
+
+            sma = (
+                etf_df.iloc[
+                    latest_idx - period + 1:
+                    latest_idx + 1
+                ]["Close"]
+                .mean()
+            )
+
+            distance = (
+                (close - sma)
+                / sma
+            ) * 100
+
+            structure[
+                f"distance_to_{period}sma_pct"
+            ] = round(
+                distance,
+                2,
+            )
+
+        market_structure[etf] = structure
+
+    return market_structure
+
+def calculate_institutional_activity(
+    df,
+    latest_date,
+):
+    """
+    Classify the latest trading day as:
+
+    - Accumulation
+    - Distribution
+    - Consolidation
+    - Neutral
+    """
+
+    config = MARKET_CONTEXT_CONFIG[
+        "INSTITUTIONAL_ACTIVITY"
+    ]
+
+    adr_lookback = config["ADR_LOOKBACK"]
+    consolidation_factor = config[
+        "CONSOLIDATION_RANGE_FACTOR"
+    ]
+
+    activity = {}
+
+    for etf in MARKET_ETFS:
+
+        etf_df = (
+            df[df["ETF"] == etf]
+            .sort_values("Date")
+            .reset_index(drop=True)
+            .copy()
+        )
+
+        latest_row = etf_df.loc[
+            etf_df["Date"] == latest_date
+        ]
+
+        if latest_row.empty:
+            raise ValueError(
+                f"{etf}: latest trading day not found."
+            )
+
+        latest_idx = latest_row.index[0]
+
+        if latest_idx < max(
+            50,
+            adr_lookback,
+        ):
+            activity[etf] = {
+                "day_type": None
+            }
+            continue
+
+        today = etf_df.iloc[latest_idx]
+        previous = etf_df.iloc[latest_idx - 1]
+
+        today_volume = today["Volume"]
+
+        avg_volume20 = (
+            etf_df.iloc[
+                latest_idx - 20:
+                latest_idx
+            ]["Volume"]
+            .mean()
+        )
+
+        avg_volume50 = (
+            etf_df.iloc[
+                latest_idx - 50:
+                latest_idx
+            ]["Volume"]
+            .mean()
+        )
+
+        today_range = (
+            today["High"]
+            - today["Low"]
+        )
+
+        adr20 = (
+            (
+                etf_df["High"]
+                - etf_df["Low"]
+            )
+            .iloc[
+                latest_idx - adr_lookback:
+                latest_idx
+            ]
+            .mean()
+        )
+
+        if (
+            today["Close"] > previous["Close"]
+            and today_volume > avg_volume20
+            and today_volume > avg_volume50
+        ):
+
+            day_type = "Accumulation"
+
+        elif (
+            today["Close"] < previous["Close"]
+            and today_volume > avg_volume20
+            and today_volume > avg_volume50
+        ):
+
+            day_type = "Distribution"
+
+        elif (
+            today_range
+            <= adr20 * consolidation_factor
+            and today_volume < avg_volume20
+            and today_volume < avg_volume50
+        ):
+
+            day_type = "Consolidation"
+
+        else:
+
+            day_type = "Neutral"
+
+        activity[etf] = {
+            "day_type": day_type
+        }
+
+    return activity
+
+
 def run_market_context_engine():
     """Entry point."""
-    
+
     df = load_market_data()
 
     validate_market_data(df)
@@ -316,16 +524,24 @@ def run_market_context_engine():
 
     latest_date = df["Date"].max()
 
+    #
+    # Relative Volume
+    #
     relative_volume = {}
 
     for lookback in RELATIVE_VOLUME_LOOKBACKS:
 
-        relative_volume[f"{lookback}d"] = calculate_relative_volume(
-            df,
-            latest_date,
-            lookback,
+        relative_volume[f"{lookback}d"] = (
+            calculate_relative_volume(
+                df,
+                latest_date,
+                lookback,
+            )
         )
 
+    #
+    # Lookback Performance
+    #
     lookback_performance = {}
 
     for lookback in PERFORMANCE_LOOKBACKS:
@@ -338,8 +554,9 @@ def run_market_context_engine():
             )
         )
 
-    
-
+    #
+    # Relative Performance
+    #
     relative_performance = {}
 
     for lookback, performance in lookback_performance.items():
@@ -350,14 +567,34 @@ def run_market_context_engine():
             )
         )
 
+    #
+    # Market Structure
+    #
+    market_structure = calculate_market_structure(
+        df,
+        latest_date,
+    )
+
+    #
+    # Institutional Activity
+    #
+    institutional_activity = (
+        calculate_institutional_activity(
+            df,
+            latest_date,
+        )
+    )
+
     market_context = build_market_context_json(
         snapshot,
         relative_volume,
         lookback_performance,
         relative_performance,
+        market_structure,
+        institutional_activity,
     )
 
-    filename = save_market_context_json(
+    save_market_context_json(
         market_context,
     )
 

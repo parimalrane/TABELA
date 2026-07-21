@@ -213,17 +213,17 @@ STOCK_TRANSITION_CONFIG = {
 
 MARKET_CONTEXT_CONFIG = {
 
-"PERFORMANCE_LOOKBACKS": [
-    5,
-    20,
-    50,
-    200,
-],
+    "PERFORMANCE_LOOKBACKS": [
+        5,
+        20,
+        50,
+        200,
+    ],
 
-"RELATIVE_VOLUME_LOOKBACKS": [
-    20,
-    50,
-],
+    "RELATIVE_VOLUME_LOOKBACKS": [
+        20,
+        50,
+    ],
 
     # Required market ETFs.
     "MARKET_ETFS": [
@@ -232,5 +232,19 @@ MARKET_CONTEXT_CONFIG = {
         "IWM",
         "DIA",
     ],
-}
 
+    # Market Structure
+    "MARKET_STRUCTURE": {
+        "SMA_PERIODS": [
+            20,
+            50,
+            200,
+        ],
+    },
+
+    # Institutional Activity
+    "INSTITUTIONAL_ACTIVITY": {
+        "ADR_LOOKBACK": 20,
+        "CONSOLIDATION_RANGE_FACTOR": 0.50,
+    },
+}

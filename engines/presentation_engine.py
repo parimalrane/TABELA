@@ -403,6 +403,23 @@ def print_market_context_summary(market_context):
     Display Market Context summary.
     """
 
+    TYPE_SYMBOL = {
+        "Accumulation": "↑",
+        "Distribution": "↓",
+        "Consolidation": "◼",
+        "Neutral": "-",
+    }
+
+    def fmt(value):
+        if value is None:
+            return "-"
+        return f"{value:+.2f}"
+
+    def fmt_rv(value):
+        if value is None:
+            return "-"
+        return f"{value:.2f}"
+
     print()
     print("==============================================")
     print("MARKET CONTEXT")
@@ -413,53 +430,69 @@ def print_market_context_summary(market_context):
 
     relative_volume = analytics["relative_volume"]
     lookback_performance = analytics["lookback_performance"]
+    relative_performance = analytics["relative_performance"]
+    market_structure = analytics["market_structure"]
+    institutional_activity = analytics["institutional_activity"]
 
     #
     # Market Statistics
     #
     print("MARKET STATISTICS")
 
-    headers = ["ETF"]
+    header = (
+        f"{'ETF':<6}"
+        f"{'RV.20':>8}"
+        f"{'RV.50':>8}"
+        f"{'5D%':>8}"
+        f"{'20D%':>8}"
+        f"{'50D%':>8}"
+        f"{'200D%':>8}"
+        f"{'20Dist':>10}"
+        f"{'50Dist':>10}"
+        f"{'200Dist':>10}"
+        f"{'Type':>6}"
+    )
 
-    for lookback in relative_volume.keys():
-        headers.append(f"RV{lookback.upper()}")
-
-    for lookback in lookback_performance.keys():
-        headers.append(f"{lookback.upper()}%")
-
-    header_line = "".join(f"{h:<10}" for h in headers)
-
-    print("-" * len(header_line))
-    print(header_line)
-    print("-" * len(header_line))
+    print("-" * len(header))
+    print(header)
+    print("-" * len(header))
 
     for etf in market_context["market"].keys():
 
-        row = [etf]
+        rv20 = relative_volume["20d"].get(etf)
+        rv50 = relative_volume["50d"].get(etf)
 
-        #
-        # Relative Volume
-        #
-        for lookback in relative_volume.keys():
+        perf5 = lookback_performance["5d"].get(etf)
+        perf20 = lookback_performance["20d"].get(etf)
+        perf50 = lookback_performance["50d"].get(etf)
+        perf200 = lookback_performance["200d"].get(etf)
 
-            value = relative_volume[lookback].get(etf)
+        structure = market_structure.get(etf, {})
 
-            row.append(
-                "-" if value is None else f"{value:.2f}"
-            )
+        dist20 = structure.get("distance_to_20sma_pct")
+        dist50 = structure.get("distance_to_50sma_pct")
+        dist200 = structure.get("distance_to_200sma_pct")
 
-        #
-        # Lookback Performance
-        #
-        for lookback in lookback_performance.keys():
+        day_type = institutional_activity.get(etf, {}).get(
+            "day_type",
+            "Neutral",
+        )
 
-            value = lookback_performance[lookback].get(etf)
+        symbol = TYPE_SYMBOL.get(day_type, "-")
 
-            row.append(
-                "-" if value is None else f"{value:.2f}"
-            )
-
-        print("".join(f"{v:<10}" for v in row))
+        print(
+            f"{etf:<6}"
+            f"{fmt_rv(rv20):>8}"
+            f"{fmt_rv(rv50):>8}"
+            f"{fmt(perf5):>8}"
+            f"{fmt(perf20):>8}"
+            f"{fmt(perf50):>8}"
+            f"{fmt(perf200):>8}"
+            f"{fmt(dist20):>10}"
+            f"{fmt(dist50):>10}"
+            f"{fmt(dist200):>10}"
+            f"{symbol:>6}"
+        )
 
     print()
 
@@ -469,14 +502,12 @@ def print_market_context_summary(market_context):
     print("RELATIVE PERFORMANCE")
     print("-" * 90)
 
-    relative_perf = analytics["relative_performance"]
-
-    first_period = next(iter(relative_perf))
-    pairs = list(relative_perf[first_period].keys())
+    first_period = next(iter(relative_performance))
+    pairs = list(relative_performance[first_period].keys())
 
     headers = ["Pair"] + [
         period.upper()
-        for period in relative_perf.keys()
+        for period in relative_performance.keys()
     ]
 
     header_line = (
@@ -493,9 +524,9 @@ def print_market_context_summary(market_context):
 
         line = f"{display_pair:<16}"
 
-        for period in relative_perf.keys():
+        for period in relative_performance.keys():
 
-            value = relative_perf[period].get(pair)
+            value = relative_performance[period].get(pair)
 
             if value is None:
                 line += f"{'-':>9}"

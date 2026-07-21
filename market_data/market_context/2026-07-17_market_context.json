@@ -124,6 +124,42 @@
                 "QQQ_vs_DIA": 3.51,
                 "IWM_vs_DIA": 9.21
             }
+        },
+        "market_structure": {
+            "SPY": {
+                "distance_to_20sma_pct": -0.23,
+                "distance_to_50sma_pct": -0.15,
+                "distance_to_200sma_pct": 6.69
+            },
+            "QQQ": {
+                "distance_to_20sma_pct": -3.2,
+                "distance_to_50sma_pct": -3.29,
+                "distance_to_200sma_pct": 8.5
+            },
+            "IWM": {
+                "distance_to_20sma_pct": -0.93,
+                "distance_to_50sma_pct": 1.29,
+                "distance_to_200sma_pct": 11.62
+            },
+            "DIA": {
+                "distance_to_20sma_pct": -0.33,
+                "distance_to_50sma_pct": 1.65,
+                "distance_to_200sma_pct": 6.77
+            }
+        },
+        "institutional_activity": {
+            "SPY": {
+                "day_type": "Distribution"
+            },
+            "QQQ": {
+                "day_type": "Distribution"
+            },
+            "IWM": {
+                "day_type": "Distribution"
+            },
+            "DIA": {
+                "day_type": "Neutral"
+            }
         }
     }
 }
