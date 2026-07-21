@@ -569,14 +569,18 @@ def print_daily_scan(
     print("\n\n")
     print("THEME BREADTH ANALYSIS")
     print("----------------------------")
-    print(
-        theme_breadth[[
-            "Mapped_Theme",
-            "Total_Stocks",
-            "Strong_Stocks",
-            "Breadth_Percent",
-            "Weighted_Breadth_Score",
-        ]].rename(
+    display_df = (
+        theme_breadth[
+            [
+                "Mapped_Theme",
+                "Total_Stocks",
+                "Strong_Stocks",
+                "Breadth_Percent",
+                "Weighted_Breadth_Score",
+                "Leaders",
+            ]
+        ]
+        .rename(
             columns={
                 "Mapped_Theme": "Theme",
                 "Total_Stocks": "Total",
@@ -584,8 +588,11 @@ def print_daily_scan(
                 "Breadth_Percent": "Breadth %",
                 "Weighted_Breadth_Score": "Breadth Score",
             }
-        ).head(20).to_string(index=False)
+        )
+        .head(20)
     )
+
+    print(display_df.to_string(index=False))
 
     print("\n\n")
     print("LONG CANDIDATE UNIVERSE")
