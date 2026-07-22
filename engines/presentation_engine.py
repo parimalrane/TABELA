@@ -673,15 +673,41 @@ def print_daily_scan(
     print("----------------------------")
     print("TRADINGVIEW WATCHLIST EXPORT")
     print("----------------------------")
-    long_list = ",".join(long_candidates["Ticker"].head(50).astype(str).tolist())
-    short_list = ",".join(distribution_watchlist["Ticker"].head(50).astype(str).tolist())
+    long_list = ",".join(
+        long_candidates["Ticker"]
+        .head(50)
+        .astype(str)
+        .tolist()
+    )
+
+    observation_list = ",".join(
+        stocks.loc[
+            stocks["Tracking_State"] == "OBSERVATION",
+            "Ticker",
+        ]
+        .astype(str)
+        .tolist()
+    )
+
+    distribution_list = ",".join(
+        distribution_watchlist["Ticker"]
+        .head(50)
+        .astype(str)
+        .tolist()
+    )
+
     print("###LONG," + long_list + ",")
-    print("###SHORT," + short_list)
+    print("###OBSERVATION," + observation_list + ",")
+    print("###DISTRIBUTION," + distribution_list + ",")
 
     compare_watchlists(
-        long_candidates["Ticker"].head(50).tolist(),
-        distribution_watchlist["Ticker"].head(50).tolist(),
-        stocks,
+        current_long=long_candidates["Ticker"].head(50).tolist(),
+        current_observation=stocks.loc[
+            stocks["Tracking_State"] == "OBSERVATION",
+            "Ticker",
+        ].tolist(),
+        current_distribution=distribution_watchlist["Ticker"].head(50).tolist(),
+        stocks=stocks,
     )
     registry = load_registry()
     transition = get_transition_summary(registry)

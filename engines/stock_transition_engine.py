@@ -332,3 +332,26 @@ def get_transition_summary(registry: Dict) -> Dict:
         "observation": observation,
         "distribution": distribution,
     }
+
+
+def get_distribution_watchlist(
+    registry,
+    stocks,
+):
+    """
+    Return all stocks that are currently in the DISTRIBUTION state.
+    The registry is the single source of truth.
+    """
+
+    distribution_tickers = {
+        ticker
+        for ticker, state in registry.items()
+        if state.get("tracking_state") == DISTRIBUTION
+    }
+
+    if not distribution_tickers:
+        return pd.DataFrame(columns=stocks.columns)
+
+    return stocks[
+        stocks["Ticker"].isin(distribution_tickers)
+    ].copy()

@@ -37,7 +37,8 @@ def build_theme_lookup(stocks):
 
 def compare_watchlists(
     current_long,
-    current_short,
+    current_observation,
+    current_distribution,
     stocks=None,
 ):
 
@@ -45,29 +46,30 @@ def compare_watchlists(
 
     current_file = os.path.join(
         WATCHLIST_DIR,
-        f"watchlist_{context.market_date}.json",
+        f"watchlist_{today}.json",
     )
 
     previous_file = get_previous_watchlist(str(today))
 
     theme_lookup = build_theme_lookup(stocks)
 
-    #
-    # Convert today's watchlists to ticker sets
-    #
-
     current_long_set = {
         str(x).replace("*", "").strip()
         for x in current_long
     }
 
-    current_short_set = {
+    current_observation_set = {
         str(x).replace("*", "").strip()
-        for x in current_short
+        for x in current_observation
+    }
+
+    current_distribution_set = {
+        str(x).replace("*", "").strip()
+        for x in current_distribution
     }
 
     #
-    # First ever run
+    # First run
     #
 
     if previous_file is None:
@@ -75,7 +77,8 @@ def compare_watchlists(
         save_watchlist(
             current_file,
             current_long_set,
-            current_short_set,
+            current_observation_set,
+            current_distribution_set,
             theme_lookup,
         )
 
@@ -87,14 +90,6 @@ def compare_watchlists(
 
     with open(previous_file, "r", encoding="utf-8") as f:
         old_data = json.load(f)
-
-    #
-    # Support both old JSON schema
-    # ["NVDA","AMD"]
-    #
-    # and new schema
-    # [{"ticker":"NVDA","theme":"Semiconductors"}]
-    #
 
     def extract_tickers(items):
 
@@ -115,65 +110,72 @@ def compare_watchlists(
         return tickers
 
     old_long = extract_tickers(old_data.get("long", []))
-    old_short = extract_tickers(old_data.get("short", []))
+    old_observation = extract_tickers(old_data.get("observation", []))
+    old_distribution = extract_tickers(old_data.get("distribution", []))
 
     new_longs = current_long_set - old_long
     removed_longs = old_long - current_long_set
 
-    new_shorts = current_short_set - old_short
-    removed_shorts = old_short - current_short_set
+    new_observation = current_observation_set - old_observation
+    left_observation = old_observation - current_observation_set
+
+    new_distribution = current_distribution_set - old_distribution
+    left_distribution = old_distribution - current_distribution_set
 
     print("\nWATCHLIST DELTA REPORT")
     print("----------------------------")
 
-    print("\nNEW LONGS ADDED TODAY")
+    print("\nNEW LONGS")
     print(",".join(sorted(new_longs)) if new_longs else "None")
 
-    print("\nLONGS REMOVED TODAY")
+    print("\nREMOVED LONGS")
     print(",".join(sorted(removed_longs)) if removed_longs else "None")
 
-    print("\nNEW SHORTS ADDED TODAY")
-    print(",".join(sorted(new_shorts)) if new_shorts else "None")
+    print("\nNEW OBSERVATION")
+    print(",".join(sorted(new_observation)) if new_observation else "None")
 
-    print("\nSHORTS REMOVED TODAY")
-    print(",".join(sorted(removed_shorts)) if removed_shorts else "None")
+    print("\nLEFT OBSERVATION")
+    print(",".join(sorted(left_observation)) if left_observation else "None")
+
+    print("\nNEW DISTRIBUTION")
+    print(",".join(sorted(new_distribution)) if new_distribution else "None")
+
+    print("\nLEFT DISTRIBUTION")
+    print(",".join(sorted(left_distribution)) if left_distribution else "None")
 
     save_watchlist(
         current_file,
         current_long_set,
-        current_short_set,
+        current_observation_set,
+        current_distribution_set,
         theme_lookup,
     )
-
 
 def save_watchlist(
     file_path,
     long_list,
-    short_list,
+    observation_list,
+    distribution_list,
     theme_lookup,
 ):
 
     def build_entries(items):
 
-        entries = []
-
-        for ticker in sorted(items):
-
-            entries.append(
-                {
-                    "ticker": ticker,
-                    "theme": theme_lookup.get(
-                        ticker,
-                        "Unknown",
-                    ),
-                }
-            )
-
-        return entries
+        return [
+            {
+                "ticker": ticker,
+                "theme": theme_lookup.get(
+                    ticker,
+                    "Unknown",
+                ),
+            }
+            for ticker in sorted(items)
+        ]
 
     data = {
         "long": build_entries(long_list),
-        "short": build_entries(short_list),
+        "observation": build_entries(observation_list),
+        "distribution": build_entries(distribution_list),
     }
 
     with open(file_path, "w", encoding="utf-8") as f:
@@ -182,7 +184,6 @@ def save_watchlist(
             f,
             indent=4,
         )
-
 
 def get_previous_watchlist(today):
 
