@@ -93,25 +93,22 @@ def _remove_recovered(
 def _expire_observation(
     registry: Dict,
 ) -> None:
+    """
+    Observation stocks are no longer expired here.
 
-    remove_list = []
+    Lifecycle:
 
-    for ticker, state in registry.items():
+        Observation 1..7
+            ↓
+        Distribution 1..N
 
-        state_days = state.get(
-            "state_days",
-            state.get("tracking_runs", 0),
-        )
+    Promotion to Distribution is handled in
+    post_distribution_update(). Recoveries are handled by
+    _remove_recovered().
 
-        if (
-            state["tracking_state"] == OBSERVATION
-            and state_days > OBSERVATION_MAX_RUNS
-        ):
-            remove_list.append(ticker)
-
-    for ticker in remove_list:
-        del registry[ticker]
-
+    Therefore no Observation stocks should be deleted here.
+    """
+    return
 
 def _add_new_observations(
     registry: Dict,
@@ -209,32 +206,66 @@ def get_distribution_candidates(
 # Registry Update After Distribution
 # ==========================================================
 
+# ==========================================================
+# Registry Update After Distribution
+# ==========================================================
+
 def post_distribution_update(
     registry: Dict,
     distribution_watchlist: pd.DataFrame,
 ) -> Dict:
+    """
+    Observation lifecycle
 
-    if distribution_watchlist is None or distribution_watchlist.empty:
-        save_registry(registry)
-        return registry
+        Observation 1..7
+            ↓
+        (next trading day)
+            ↓
+        Recovered?  -> Remove
+        Still weak? -> Distribution 1
 
-    qualified = {
-        str(ticker).strip().upper()
-        for ticker in distribution_watchlist["Ticker"]
-    }
+    Promotion is controlled by observation age,
+    NOT by whether the stock happened to qualify
+    for today's distribution watchlist.
+    """
 
-    for ticker in qualified:
+    today = str(context.market_date)
 
-        if ticker not in registry:
+    qualified = set()
+
+    if distribution_watchlist is not None and not distribution_watchlist.empty:
+        qualified = {
+            str(ticker).strip().upper()
+            for ticker in distribution_watchlist["Ticker"]
+        }
+
+    for ticker, state in list(registry.items()):
+
+        # Only Observation stocks can transition
+        if state["tracking_state"] != OBSERVATION:
             continue
 
-        registry[ticker]["tracking_state"] = DISTRIBUTION
-        registry[ticker]["last_market_date"] = str(context.market_date)
+        state_days = state.get(
+            "state_days",
+            state.get("tracking_runs", 0),
+        )
+
+        # Stay in Observation through Day 7
+        if state_days <= OBSERVATION_MAX_RUNS:
+            continue
+
+        # Day 8+
+        # Only promote AFTER completing Day 7
+        if state_days == OBSERVATION_MAX_RUNS + 1 and ticker in qualified:
+            state["tracking_state"] = DISTRIBUTION
+            state["state_days"] = 1
+            state["last_market_date"] = today
+        elif state_days > OBSERVATION_MAX_RUNS:
+            del registry[ticker]
 
     save_registry(registry)
 
     return registry
-
 
 # ==========================================================
 # Tracking State Helper
@@ -289,27 +320,6 @@ def get_transition_summary(registry: Dict) -> Dict:
         entry = {
             "ticker": ticker,
             "runs": state_days,
-        }
-
-        if state["tracking_state"] == OBSERVATION:
-            observation.append(entry)
-
-        elif state["tracking_state"] == DISTRIBUTION:
-            distribution.append(entry)
-
-    return {
-        "observation": observation,
-        "distribution": distribution,
-    }
-
-    observation = []
-    distribution = []
-
-    for ticker, state in sorted(registry.items()):
-
-        entry = {
-            "ticker": ticker,
-            "runs": state["state_days"],
         }
 
         if state["tracking_state"] == OBSERVATION:
