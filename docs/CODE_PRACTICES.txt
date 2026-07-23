@@ -1,0 +1,73 @@
+I recommend this workflow for every new TABELA feature. It is simple, safe, and lets you roll back at any point.
+
+| Step | Command                                          | Purpose                                                                               |
+| ---- | ------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| 1    | `git status`                                     | Verify the working tree is clean before starting. Never begin on a dirty workspace.   |
+| 2    | `git checkout master`                            | Switch to the latest stable code.                                                     |
+| 3    | `git pull origin master`                         | Download the latest changes from GitHub.                                              |
+| 4    | `git checkout -b feature/<feature-name>`         | Create a dedicated branch for the new feature. Example: `feature/recovering-leaders`. |
+| 5    | *(Develop code)*                                 | Implement the feature. Commit periodically if it is a large change.                   |
+| 6    | `git status`                                     | See which files changed.                                                              |
+| 7    | `git diff --stat`                                | Review which files were modified and the size of changes.                             |
+| 8    | `git diff` *(optional)*                          | Inspect the actual code changes before committing.                                    |
+| 9    | `git add .`                                      | Stage all intended changes.                                                           |
+| 10   | `git status`                                     | Confirm everything you expect is staged.                                              |
+| 11   | `git commit -m "Add recovering leaders"`         | Save a checkpoint in Git history. Use a descriptive message.                          |
+| 12   | *(Run TABELA, replay history, validate outputs)* | Verify the feature works before merging. If fixes are needed, repeat Steps 6–11.      |
+| 13   | `git checkout master`                            | Return to the stable branch.                                                          |
+| 14   | `git merge feature/<feature-name>`               | Merge the tested feature into `master`. Usually this will be a fast-forward merge.    |
+| 15   | `git push origin master`                         | Upload the merged changes to GitHub.                                                  |
+| 16   | `git branch -d feature/<feature-name>`           | Delete the local feature branch after a successful merge.                             |
+| 17   | `git branch`                                     | Confirm only the expected branches remain.                                            |
+| 18   | `git log --oneline -5`                           | Verify the latest commit is at the top of the history.                                |
+
+## If something goes wrong
+
+### See what changed
+
+```bash
+git status
+git diff
+```
+
+### Discard uncommitted changes
+
+```bash
+git restore .
+```
+
+### Restore one file
+
+```bash
+git restore path/to/file.py
+```
+
+### Undo the last commit (keep changes)
+
+```bash
+git reset --soft HEAD~1
+```
+
+### Undo the last commit (discard changes)
+
+```bash
+git reset --hard HEAD~1
+```
+
+### Return to the last stable version
+
+```bash
+git checkout master
+git pull origin master
+```
+
+## Good practices for TABELA
+
+* One feature = one branch.
+* Never develop directly on `master`.
+* Commit after each logically complete feature.
+* Validate by replaying historical market days before merging.
+* Push only after the replay is successful.
+* Use descriptive commit messages (e.g., `Add recovering leaders`, `Fix stock transition lifecycle`, `Refactor watchlist delta`).
+
+This workflow gives you a clean, reproducible development cycle and makes recovery straightforward if a feature introduces a bug.
