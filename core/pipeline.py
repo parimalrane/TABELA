@@ -1,3 +1,4 @@
+print("PIPELINE FILE:", __file__)
 import datetime
 import math
 import os
@@ -58,10 +59,12 @@ from engines.unknown_classification_engine import save_unknown_classification
 from engines.watchlist_engine import build_long_watchlist
 from engines.runtime_context import context
 from engines.stock_transition_engine import (
-    load_registry,
-    pre_distribution_update,
+    apply_tracking_state,
+    get_distribution_watchlist,
     get_distribution_candidates,
+    load_registry,
     post_distribution_update,
+    pre_distribution_update,
 )
 
 DATA_DIR = "market_data"
@@ -485,10 +488,25 @@ def score_stocks(stocks):
     stocks = calculate_short_score(stocks)
     return stocks
 
+# ==========================================================================
+# Replace build_candidates() in core/pipeline.py
+# ==========================================================================
 
 def build_candidates(stocks):
 
+    def build_candidates(stocks):
+
+        raise RuntimeError("BUILD_CANDIDATES ENTERED")
+
+    print("\n############################")
+    print("INSIDE BUILD_CANDIDATES")
+    print("############################")
+
     registry = load_registry()
+
+    print("\n=== Registry Immediately After Load ===")
+    for t, s in sorted(registry.items()):
+        print(f"{t:6} {s['tracking_state']:12} Day {s['state_days']}")
 
     long_watchlist = build_long_watchlist(stocks)
     theme_breadth = build_theme_breadth(stocks)
@@ -496,7 +514,7 @@ def build_candidates(stocks):
 
     long_watchlist = long_watchlist.sort_values(
         "Long_Score",
-        ascending=False
+        ascending=False,
     )
 
     long_tickers = set(long_watchlist["Ticker"])
@@ -505,8 +523,10 @@ def build_candidates(stocks):
         [long_watchlist, institutional_leaders]
     )
 
-    long_candidates = long_candidates.drop_duplicates(
-        subset="Ticker"
+    long_candidates = (
+        long_candidates
+        .drop_duplicates(subset="Ticker")
+        .sort_values("Long_Score", ascending=False)
     )
 
     long_candidates["Ticker"] = long_candidates.apply(
@@ -517,32 +537,70 @@ def build_candidates(stocks):
         axis=1,
     )
 
-    long_candidates = long_candidates.sort_values(
-        "Long_Score",
-        ascending=False,
-    )
 
     registry, recovered = pre_distribution_update(
         registry=registry,
         previous_long_candidates=load_previous_long_watchlist(),
         current_long_candidates=long_candidates,
     )
+    print("AFTER pre_distribution_update")
 
-    observation_candidates = get_distribution_candidates(
+    print("\n=== Registry After Pre ===")
+    for t, s in sorted(registry.items()):
+        print(f"{t:6} {s['tracking_state']:12} Day {s['state_days']}")
+    #
+    # Registry is now the single source of truth.
+    #
+    distribution_candidates = get_distribution_candidates(
         registry,
         stocks,
     )
+    print("AFTER get_distribution_candidates")
 
-    distribution_watchlist = build_distribution_watchlist(
-        observation_candidates
+
+
+    print("\n=== Distribution Candidates ===")
+    if distribution_candidates.empty:
+        print("EMPTY")
+    else:
+        print(distribution_candidates[["Ticker"]].to_string(index=False))
+
+    #
+    # Existing Distribution qualification engine.
+    #
+    qualified_distribution = build_distribution_watchlist(
+        distribution_candidates
     )
+    print("AFTER build_distribution_watchlist")
 
+
+    print("\n=== Qualified Distribution ===")
+    if qualified_distribution.empty:
+        print("EMPTY")
+    else:
+        print(qualified_distribution[["Ticker"]].to_string(index=False))
+
+    #
+    # Persist lifecycle.
+    #
     registry = post_distribution_update(
         registry,
-        distribution_watchlist,
+        qualified_distribution,
     )
+    print("AFTER post_distribution_update")
 
-    
+
+    print("\n=== Registry After Post ===")
+    for t, s in sorted(registry.items()):
+        print(f"{t:6} {s['tracking_state']:12} Day {s['state_days']}")
+
+    #
+    # Final watchlist comes only from registry.
+    #
+    distribution_watchlist = get_distribution_watchlist(
+        registry,
+        qualified_distribution,
+    )
 
     long_tickers = {
         ticker.replace("*", "")
@@ -562,7 +620,9 @@ def build_candidates(stocks):
         long_candidates["Ticker"],
         start=1,
     ):
+
         clean_ticker = ticker.replace("*", "")
+
         stocks.loc[
             stocks["Ticker"] == clean_ticker,
             "Long_Rank",
@@ -577,6 +637,7 @@ def build_candidates(stocks):
         distribution_watchlist["Ticker"],
         start=1,
     ):
+
         stocks.loc[
             stocks["Ticker"] == ticker,
             "Short_Rank",
@@ -680,7 +741,11 @@ def run_tabela_pipeline():
     )
 
     stocks = score_stocks(stocks)
+    print(">>> BEFORE build_candidates")
+
     stocks, long_candidates, distribution_watchlist, theme_breadth, recovered = build_candidates(stocks)
+
+    print(">>> AFTER build_candidates")
 
     today = context.market_date
     save_history(stocks)

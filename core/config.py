@@ -198,13 +198,12 @@ MIN_VOLUME_FILTER = 300000
 # ==========================================
 
 STOCK_TRANSITION_CONFIG = {
-    # Runtime registry
-    "REGISTRY_FILE": "market_data/stock_transition/stock_transition_registry.json",
+    # Immutable daily registry location
+    "REGISTRY_DIR": "market_data/stock_transition",
 
-    # Observation lifecycle (measured in successful TABELA runs,
-    # NOT calendar days)
+    # Observation lifecycle (measured in successful TABELA runs)
     "OBSERVATION_MIN_RUNS": 7,
-    "OBSERVATION_MAX_RUNS": 60,
+    "OBSERVATION_MAX_RUNS": 7,
 }
 
 # ============================================================================

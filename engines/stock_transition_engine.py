@@ -1,3 +1,4 @@
+print("STOCK TRANSITION FILE:", __file__)
 import json
 import os
 from typing import Dict, Set
@@ -6,8 +7,7 @@ import pandas as pd
 
 from core.config import STOCK_TRANSITION_CONFIG
 
-
-REGISTRY_FILE = STOCK_TRANSITION_CONFIG["REGISTRY_FILE"]
+REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
 OBSERVATION_MIN_RUNS = STOCK_TRANSITION_CONFIG["OBSERVATION_MIN_RUNS"]
 OBSERVATION_MAX_RUNS = STOCK_TRANSITION_CONFIG["OBSERVATION_MAX_RUNS"]
 
@@ -21,45 +21,64 @@ DISTRIBUTION = "DISTRIBUTION"
 # ==========================================================
 
 def load_registry() -> Dict:
+    """
+    Load the latest registry before the current market date.
+    """
 
-    if not os.path.exists(REGISTRY_FILE):
+    os.makedirs(REGISTRY_DIR, exist_ok=True)
+
+    registry_files = sorted(
+        f
+        for f in os.listdir(REGISTRY_DIR)
+        if f.endswith("_registry.json")
+    )
+
+    if not registry_files:
         return {}
 
-    try:
-        with open(REGISTRY_FILE, "r") as f:
-            data = json.load(f)
+    today = str(context.market_date)
 
-        if isinstance(data, dict):
-            return data
+    previous_file = None
 
+    for filename in registry_files:
+        registry_date = filename.replace("_registry.json", "")
+
+        if registry_date < today:
+            previous_file = filename
+        else:
+            break
+
+    if previous_file is None:
         return {}
 
-    except Exception:
-        return {}
+    registry_path = os.path.join(REGISTRY_DIR, previous_file)
+
+    with open(registry_path, "r") as f:
+        return json.load(f)
 
 
 def save_registry(registry: Dict) -> None:
+    """
+    Save today's immutable registry.
 
-    os.makedirs(os.path.dirname(REGISTRY_FILE), exist_ok=True)
+    File format:
+        market_data/stock_transition/YYYY-MM-DD_registry.json
+    """
 
-    with open(REGISTRY_FILE, "w") as f:
-        json.dump(registry, f, indent=4, sort_keys=True)
+    os.makedirs(REGISTRY_DIR, exist_ok=True)
 
+    registry_path = os.path.join(
+        REGISTRY_DIR,
+        f"{context.market_date}_registry.json",
+    )
 
-# ==========================================================
-# Helpers
-# ==========================================================
-
-def _long_ticker_set(long_candidates: pd.DataFrame) -> Set[str]:
-
-    if long_candidates is None or long_candidates.empty:
-        return set()
-
-    return {
-        str(ticker).replace("*", "").strip().upper()
-        for ticker in long_candidates["Ticker"]
-    }
-
+    with open(registry_path, "w") as f:
+        json.dump(
+            registry,
+            f,
+            indent=4,
+            sort_keys=True,
+        )
 
 from engines.runtime_context import context
 
@@ -149,10 +168,118 @@ def _add_new_observations(
 
             }
 
+# ==========================================================================
+# Replace these functions in engines/stock_transition_engine.py
+#
+#   _long_ticker_set()
+#   + add _load_skip_distribution_list()
+#   + add _advance_lifecycle()
+#   pre_distribution_update()
+#
+# Leave everything else unchanged for Batch 1.
+# ==========================================================================
 
-# ==========================================================
-# Public API
-# ==========================================================
+from engines.runtime_context import context
+
+
+def _long_ticker_set(long_candidates: pd.DataFrame) -> Set[str]:
+
+    if long_candidates is None or long_candidates.empty:
+        return set()
+
+    return {
+        str(ticker).replace("*", "").strip().upper()
+        for ticker in long_candidates["Ticker"]
+    }
+
+
+def _load_skip_distribution_list() -> Set[str]:
+
+    filename = os.path.join("data", "skip_distribution.csv")
+
+    if not os.path.exists(filename):
+        return set()
+
+    try:
+
+        df = pd.read_csv(filename)
+
+        if "Ticker" not in df.columns:
+            return set()
+
+        return {
+            str(t).strip().upper()
+            for t in df["Ticker"]
+            if pd.notna(t)
+        }
+
+    except Exception:
+        return set()
+
+
+def _advance_lifecycle(
+    registry: Dict,
+    previous_longs: Set[str],
+    current_longs: Set[str],
+) -> Dict:
+
+    today = str(context.market_date)
+
+    recovered = {
+        "observation": [],
+        "distribution": [],
+    }
+
+    skip_distribution = _load_skip_distribution_list()
+
+    #
+    # Existing tracked stocks
+    #
+    for ticker in list(registry.keys()):
+
+        state = registry[ticker]
+
+        #
+        # Recover immediately
+        #
+        if ticker in current_longs:
+
+            if state["tracking_state"] == OBSERVATION:
+                recovered["observation"].append(ticker)
+            else:
+                recovered["distribution"].append(ticker)
+
+            del registry[ticker]
+            continue
+
+        #
+        # Advance once per market day
+        #
+        if state.get("last_market_date") != today:
+            state["state_days"] += 1
+            state["last_market_date"] = today
+
+        
+        continue
+
+    #
+    # New Observation entries
+    #
+    removed_today = previous_longs - current_longs
+
+    for ticker in removed_today:
+
+        if ticker in registry:
+            continue
+
+        registry[ticker] = {
+            "tracking_state": OBSERVATION,
+            "state_days": 1,
+            "last_market_date": today,
+        }
+
+    return recovered
+
 
 def pre_distribution_update(
     registry: Dict,
@@ -160,32 +287,24 @@ def pre_distribution_update(
     current_long_candidates: pd.DataFrame,
 ) -> tuple[Dict, Dict]:
 
-
     previous_longs = _long_ticker_set(previous_long_candidates)
     current_longs = _long_ticker_set(current_long_candidates)
 
-    _increment_state_days(registry)
-
-    recovered = _remove_recovered(
-        registry,
-        current_longs,
-    )
-
-
-    _expire_observation(registry)
-
-    _add_new_observations(
+    recovered = _advance_lifecycle(
         registry,
         previous_longs,
         current_longs,
-        context.market_date,
     )
 
     return registry, recovered
 
-# ==========================================================
-# Distribution Candidate Selection
-# ==========================================================
+# ==========================================================================
+# Replace these functions in engines/stock_transition_engine.py
+#
+#   get_distribution_candidates()
+#   post_distribution_update()
+#
+# ==========================================================================
 
 def get_distribution_candidates(
     registry: Dict,
@@ -195,20 +314,14 @@ def get_distribution_candidates(
     if stocks is None or stocks.empty:
         return stocks.iloc[0:0].copy()
 
-    eligible = set()
-
-    for ticker, state in registry.items():
-
-        state_days = state.get(
-            "state_days",
-            state.get("tracking_runs", 0),
-        )
-
+    eligible = {
+        ticker
+        for ticker, state in registry.items()
         if (
-            state["tracking_state"] == OBSERVATION
-            and state_days >= OBSERVATION_MIN_RUNS
-        ):
-            eligible.add(ticker)
+            state.get("tracking_state") == OBSERVATION
+            and state.get("state_days", 0) > OBSERVATION_MAX_RUNS
+        )
+    }
 
     if not eligible:
         return stocks.iloc[0:0].copy()
@@ -220,74 +333,61 @@ def get_distribution_candidates(
         .isin(eligible)
     ].copy()
 
-# ==========================================================
-# Registry Update After Distribution
-# ==========================================================
-
-# ==========================================================
-# Registry Update After Distribution
-# ==========================================================
-
 def post_distribution_update(
     registry: Dict,
     distribution_watchlist: pd.DataFrame,
 ) -> Dict:
     """
-    Observation lifecycle
+    Finalize Observation lifecycle after the Distribution engine has
+    evaluated all eligible Day 8 stocks.
 
-        Observation 1..7
-            ↓
-        (next trading day)
-            ↓
-        Recovered?  -> Remove
-        Still weak? -> Distribution 1
-
-    Promotion is controlled by observation age,
-    NOT by whether the stock happened to qualify
-    for today's distribution watchlist.
+    Rules:
+      - Observation Day 1-7 : remain Observation
+      - Observation Day 8:
+            * qualified -> Distribution Day 1
+            * skip list -> remove
+            * otherwise -> remove
     """
 
     today = str(context.market_date)
+
+    skip_distribution = _load_skip_distribution_list()
 
     qualified = set()
 
     if distribution_watchlist is not None and not distribution_watchlist.empty:
         qualified = {
-            str(ticker).strip().upper()
-            for ticker in distribution_watchlist["Ticker"]
+            str(t).strip().upper()
+            for t in distribution_watchlist["Ticker"]
         }
 
-    for ticker, state in list(registry.items()):
+    for ticker in list(registry.keys()):
 
-        # Only Observation stocks can transition
+        state = registry[ticker]
+
         if state["tracking_state"] != OBSERVATION:
             continue
 
-        state_days = state.get(
-            "state_days",
-            state.get("tracking_runs", 0),
-        )
-
-        # Stay in Observation through Day 7
-        if state_days <= OBSERVATION_MAX_RUNS:
+        if state["state_days"] <= OBSERVATION_MAX_RUNS:
             continue
 
+        #
         # Day 8+
-        # Only promote AFTER completing Day 7
-        if state_days == OBSERVATION_MAX_RUNS + 1 and ticker in qualified:
+        #
+        if ticker in skip_distribution:
+            del registry[ticker]
+            continue
+
+        if ticker in qualified:
             state["tracking_state"] = DISTRIBUTION
             state["state_days"] = 1
             state["last_market_date"] = today
-        elif state_days > OBSERVATION_MAX_RUNS:
+        else:
             del registry[ticker]
 
     save_registry(registry)
 
     return registry
-
-# ==========================================================
-# Tracking State Helper
-# ==========================================================
 
 def apply_tracking_state(
     registry: Dict,
@@ -323,6 +423,15 @@ def apply_tracking_state(
     return stocks
 
 
+
+# ==========================================================================
+# Replace these functions in engines/stock_transition_engine.py
+#
+#   get_transition_summary()
+#   get_distribution_watchlist()
+#
+# ==========================================================================
+
 def get_transition_summary(registry: Dict) -> Dict:
 
     observation = []
@@ -330,19 +439,13 @@ def get_transition_summary(registry: Dict) -> Dict:
 
     for ticker, state in sorted(registry.items()):
 
-        state_days = state.get(
-            "state_days",
-            state.get("tracking_runs", 0),
-        )
-
         entry = {
             "ticker": ticker,
-            "runs": state_days,
+            "runs": state["state_days"],
         }
 
         if state["tracking_state"] == OBSERVATION:
             observation.append(entry)
-
         elif state["tracking_state"] == DISTRIBUTION:
             distribution.append(entry)
 
@@ -351,25 +454,26 @@ def get_transition_summary(registry: Dict) -> Dict:
         "distribution": distribution,
     }
 
-
 def get_distribution_watchlist(
-    registry,
-    stocks,
-):
-    """
-    Return all stocks that are currently in the DISTRIBUTION state.
-    The registry is the single source of truth.
-    """
+    registry: Dict,
+    qualified_distribution: pd.DataFrame,
+) -> pd.DataFrame:
 
-    distribution_tickers = {
+    if qualified_distribution is None or qualified_distribution.empty:
+        return qualified_distribution
+
+    distribution = {
         ticker
         for ticker, state in registry.items()
-        if state.get("tracking_state") == DISTRIBUTION
+        if state["tracking_state"] == DISTRIBUTION
     }
 
-    if not distribution_tickers:
-        return pd.DataFrame(columns=stocks.columns)
+    if not distribution:
+        return qualified_distribution.iloc[0:0].copy()
 
-    return stocks[
-        stocks["Ticker"].isin(distribution_tickers)
+    return qualified_distribution[
+        qualified_distribution["Ticker"]
+        .astype(str)
+        .str.upper()
+        .isin(distribution)
     ].copy()

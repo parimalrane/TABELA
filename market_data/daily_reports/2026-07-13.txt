@@ -25,6 +25,124 @@ QQQ vs DIA           1.08    -3.55     0.99     5.64
 IWM vs DIA          -0.16    -2.04    -0.02     7.71
 
 ETF Eligibility: Total ETFs=274, Eligible ETFs=261, Excluded ETFs (Insufficient History)=13
+>>> BEFORE build_candidates
+
+############################
+INSIDE BUILD_CANDIDATES
+############################
+
+=== Registry Immediately After Load ===
+ABX    OBSERVATION  Day 1
+BAYRY  OBSERVATION  Day 1
+DAVE   OBSERVATION  Day 1
+LQDA   OBSERVATION  Day 1
+OSCR   OBSERVATION  Day 1
+PAYS   OBSERVATION  Day 1
+PRSU   OBSERVATION  Day 1
+RELY   OBSERVATION  Day 1
+SEZL   OBSERVATION  Day 1
+SKWD   OBSERVATION  Day 1
+AFTER pre_distribution_update
+
+=== Registry After Pre ===
+ABX    OBSERVATION  Day 2
+ACMR   OBSERVATION  Day 1
+ALAB   OBSERVATION  Day 1
+ALGM   OBSERVATION  Day 1
+AMAT   OBSERVATION  Day 1
+AMBQ   OBSERVATION  Day 1
+AMD    OBSERVATION  Day 1
+ARM    OBSERVATION  Day 1
+ASX    OBSERVATION  Day 1
+BAYRY  OBSERVATION  Day 2
+COHU   OBSERVATION  Day 1
+CRDO   OBSERVATION  Day 1
+CSCO   OBSERVATION  Day 1
+DELL   OBSERVATION  Day 1
+EXTR   OBSERVATION  Day 1
+HPE    OBSERVATION  Day 1
+ICHR   OBSERVATION  Day 1
+INTC   OBSERVATION  Day 1
+KLIC   OBSERVATION  Day 1
+LQDA   OBSERVATION  Day 2
+LRCX   OBSERVATION  Day 1
+MKSI   OBSERVATION  Day 1
+MRVL   OBSERVATION  Day 1
+MXL    OBSERVATION  Day 1
+NBIS   OBSERVATION  Day 1
+NTCT   OBSERVATION  Day 1
+OUST   OBSERVATION  Day 1
+PRSU   OBSERVATION  Day 2
+RELY   OBSERVATION  Day 2
+SIMO   OBSERVATION  Day 1
+SKWD   OBSERVATION  Day 2
+STM    OBSERVATION  Day 1
+SVCO   OBSERVATION  Day 1
+SYNA   OBSERVATION  Day 1
+TOELY  OBSERVATION  Day 1
+TXN    OBSERVATION  Day 1
+UCTT   OBSERVATION  Day 1
+UMC    OBSERVATION  Day 1
+VICR   OBSERVATION  Day 1
+VIRT   OBSERVATION  Day 1
+VPG    OBSERVATION  Day 1
+VSH    OBSERVATION  Day 1
+WDC    OBSERVATION  Day 1
+AFTER get_distribution_candidates
+
+=== Distribution Candidates ===
+EMPTY
+AFTER build_distribution_watchlist
+
+=== Qualified Distribution ===
+EMPTY
+AFTER post_distribution_update
+
+=== Registry After Post ===
+ABX    OBSERVATION  Day 2
+ACMR   OBSERVATION  Day 1
+ALAB   OBSERVATION  Day 1
+ALGM   OBSERVATION  Day 1
+AMAT   OBSERVATION  Day 1
+AMBQ   OBSERVATION  Day 1
+AMD    OBSERVATION  Day 1
+ARM    OBSERVATION  Day 1
+ASX    OBSERVATION  Day 1
+BAYRY  OBSERVATION  Day 2
+COHU   OBSERVATION  Day 1
+CRDO   OBSERVATION  Day 1
+CSCO   OBSERVATION  Day 1
+DELL   OBSERVATION  Day 1
+EXTR   OBSERVATION  Day 1
+HPE    OBSERVATION  Day 1
+ICHR   OBSERVATION  Day 1
+INTC   OBSERVATION  Day 1
+KLIC   OBSERVATION  Day 1
+LQDA   OBSERVATION  Day 2
+LRCX   OBSERVATION  Day 1
+MKSI   OBSERVATION  Day 1
+MRVL   OBSERVATION  Day 1
+MXL    OBSERVATION  Day 1
+NBIS   OBSERVATION  Day 1
+NTCT   OBSERVATION  Day 1
+OUST   OBSERVATION  Day 1
+PRSU   OBSERVATION  Day 2
+RELY   OBSERVATION  Day 2
+SIMO   OBSERVATION  Day 1
+SKWD   OBSERVATION  Day 2
+STM    OBSERVATION  Day 1
+SVCO   OBSERVATION  Day 1
+SYNA   OBSERVATION  Day 1
+TOELY  OBSERVATION  Day 1
+TXN    OBSERVATION  Day 1
+UCTT   OBSERVATION  Day 1
+UMC    OBSERVATION  Day 1
+VICR   OBSERVATION  Day 1
+VIRT   OBSERVATION  Day 1
+VPG    OBSERVATION  Day 1
+VSH    OBSERVATION  Day 1
+WDC    OBSERVATION  Day 1
+>>> AFTER build_candidates
 
 ==============================================
 TABELA DAILY MARKET SCAN
@@ -38,40 +156,40 @@ Legend: [] = Top 3   () = Bottom 3
 
 Rank  Theme                               Strength        D        W        M        Q   Rank Δ   Score Δ  Transition
 ------------------------------------------------------------------------------------------------------------------------
-   1  Healthcare                            [7.22]    -0.15     1.59        —        —       -1      0.68  —
-   2  Cloud Computing                       [6.34]     1.74     0.87        —        —       +5     -1.84  Leading -> Neutral
-   3  Biotech                               [5.54]     1.54     1.44        —        —       -4      1.46  Neutral -> Leading
-   4  Insurance                               5.22    -0.65   [2.35]        —        —       +2     -1.07  —
-   5  Media                                   2.95     1.61     0.30        —        —        0      0.34  —
-   6  Pharma                                  2.27    -2.32   [2.35]        —        —       -3         2  —
-   7  Internet                                1.82     1.77     0.16        —        —        0     -0.58  —
-   8  Software                                1.76    -0.82    -0.83        —        —       +4     -2.10  —
-   9  Banking                                 1.69    -1.79    -0.63        —        —       -2     -0.19  —
-  10  Mlp                                     1.04    -3.37     0.63        —        —       +2     -1.21  —
-  11  Transportation/Shipping                 0.97    -1.11     0.93        —        —       -2      0.02  —
-  12  Regional Banks                          0.66    -3.68     0.25        —        —       -1     -0.38  —
-  13  Semiconductors                          0.50   [5.44]    -3.42        —        —       -3         3  Lagging -> Neutral
-  14  Brokers/ Capital Markets                0.23    -0.62    -1.79        —        —       +1     -0.90  —
-  15  Exploration                             0.14  (-6.88)     0.14        —        —        0      0.79  —
-  16  Telecom                                 0.03   [3.12]    -0.39        —        —       -2      1.48  —
-  17  Brent Oil                              -0.29  (-8.46)    -1.06        —        —       +1     -0.23  —
-  18  Leisure And Entertainment              -0.47    -0.84     1.16        —        —       +1     -0.62  —
-  19  Reits                                  -1.03    -3.68     0.97        —        —        0     -0.21  —
-  20  Artificial Intelligence                -1.37   [4.36]    -1.11        —        —       -2      2.15  —
-  21  Agribusiness                           -1.53    -3.80    -0.04        —        —       +1     -0.52  —
-  22  Retail                                 -1.77    -2.60     0.29        —        —       +1     -1.05  —
-  23  Crude Oil                              -2.12  (-8.59)    -0.44        —        —       +1      0.08  —
-  24  Medical Devices                        -2.13    -1.46   [4.63]        —        —        0     -0.31  —
-  25  Infrastructure                         -3.34    -0.65    -0.90        —        —       +2     -0.09  —
-  26  Copper                                 -3.47    -3.74    -1.39        —        —       -6      1.74  —
-  27  Engineering And Construction           -3.90    -0.09    -1.44        —        —       +3     -0.92  Neutral -> Lagging
-  28  Timber                                 -3.94    -3.83    -0.75        —        —        0     -0.49  —
-  29  Natural Gas                            -6.25    -4.07     0.10        —        —       +1      0.34  —
-  30  Aerospace & Defense                    -6.61    -1.90    -0.56        —        —       +1      0.45  —
-  31  Copper Mining                         -12.37    -2.99  (-6.29)        —        —        0      3.81  —
-  32  Uranium Mining                      (-12.96)     2.40  (-3.98)        —        —        0      2.50  —
-  33  Nuclear Power                       (-13.26)     2.61    -2.87        —        —        0      2.52  —
-  34  Rare Earth/Lithium                  (-17.07)     1.44  (-3.67)        —        —        0      1.21  —
+   1  Healthcare                            [7.22]    -0.83     1.68        —        —       +3     -1.72  —
+   2  Cloud Computing                       [6.34]   [3.58]   [3.78]        —        —       +4     -1.09  —
+   3  Biotech                               [5.54]     0.08     0.86        —        —       +5     -2.63  Leading -> Neutral
+   4  Insurance                               5.22     0.42   [4.29]        —        —       -1     -0.12  —
+   5  Media                                   2.95     1.27     1.28        —        —       +1     -0.93  —
+   6  Pharma                                  2.27    -4.32     0.38        —        —       +1     -1.05  —
+   7  Internet                                1.82   [2.35]     0.92        —        —       +2     -1.03  —
+   8  Software                                1.76     1.28     0.19        —        —       +8     -2.22  —
+   9  Banking                                 1.69    -1.60  (-3.62)        —        —       +1     -0.22  —
+  10  Mlp                                     1.04    -2.16     0.64        —        —       -3      1.38  Neutral -> Leading
+  11  Transportation/Shipping                 0.97    -1.13     0.22        —        —       -1     -0.02  —
+  12  Regional Banks                          0.66    -3.30    -2.94        —        —        0     -0.47  —
+  13  Semiconductors                          0.50   [2.44]     0.80        —        —       +1     -0.24  —
+  14  Brokers/ Capital Markets                0.23     0.27    -3.45        —        —       +1      0.03  —
+  15  Exploration                             0.14  (-7.67)    -0.66        —        —        0      1.12  —
+  16  Telecom                                 0.03     1.64     1.90        —        —       -2      0.51  —
+  17  Brent Oil                              -0.29  (-8.23)    -2.58        —        —       -1      2.62  —
+  18  Leisure And Entertainment              -0.47    -0.22     0.25        —        —       +1     -0.46  —
+  19  Reits                                  -1.03    -3.47    -0.29        —        —       +1     -0.41  —
+  20  Artificial Intelligence                -1.37     2.21     1.68        —        —       +3     -0.86  —
+  21  Agribusiness                           -1.53    -3.28    -1.05        —        —       -6      1.63  —
+  22  Retail                                 -1.77    -1.55    -1.51        —        —       -1      0.38  —
+  23  Crude Oil                              -2.12  (-8.67)    -2.45        —        —       -3      3.02  —
+  24  Medical Devices                        -2.13    -1.15   [2.09]        —        —       +1     -0.73  —
+  25  Infrastructure                         -3.34    -0.56    -1.12        —        —       -1      0.65  —
+  26  Copper                                 -3.47    -5.48    -2.19        —        —       +2     -1.13  —
+  27  Engineering And Construction           -3.90     0.83  (-3.47)        —        —       -1      1.52  —
+  28  Timber                                 -3.94    -3.34    -2.26        —        —       -8      2.31  —
+  29  Natural Gas                            -6.25    -4.41    -0.81        —        —       -5      1.82  —
+  30  Aerospace & Defense                    -6.61    -2.35    -1.43        —        —       -1      1.78  —
+  31  Copper Mining                         -12.37    -6.80  (-3.74)        —        —       -1      2.24  —
+  32  Uranium Mining                      (-12.96)    -0.10     0.29        —        —        0      2.35  —
+  33  Nuclear Power                       (-13.26)     0.09     0.54        —        —        0      1.75  —
+  34  Rare Earth/Lithium                  (-17.07)     0.23    -2.22        —        —        0     -0.71  —
 
 THEME BREADTH ANALYSIS
 ----------------------------
@@ -159,11 +277,8 @@ Distribution: None
 STOCK TRANSITIONS
 ========================================
 
-Observation : 43
-Day 1  (37) : ACMR, ALAB, ALGM, AMAT, AMBQ, AMD, ARM, ASX, COHU, CRDO, CSCO, DELL, EXTR, HPE,
-              ICHR, INTC, KLIC, LRCX, MKSI, MRVL, MXL, NBIS, NTCT, OUST, SIMO, STM, SVCO, SYNA,
-              TOELY, TXN, UCTT, UMC, VICR, VIRT, VPG, VSH, WDC
-Day 2  ( 6) : ABX, BAYRY, LQDA, PRSU, RELY, SKWD
+Observation : 10
+Day 1  (10) : ABX, BAYRY, DAVE, LQDA, OSCR, PAYS, PRSU, RELY, SEZL, SKWD
 
 Distribution : 0
 
