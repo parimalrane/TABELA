@@ -488,25 +488,10 @@ def score_stocks(stocks):
     stocks = calculate_short_score(stocks)
     return stocks
 
-# ==========================================================================
-# Replace build_candidates() in core/pipeline.py
-# ==========================================================================
 
 def build_candidates(stocks):
 
-    def build_candidates(stocks):
-
-        raise RuntimeError("BUILD_CANDIDATES ENTERED")
-
-    print("\n############################")
-    print("INSIDE BUILD_CANDIDATES")
-    print("############################")
-
     registry = load_registry()
-
-    print("\n=== Registry Immediately After Load ===")
-    for t, s in sorted(registry.items()):
-        print(f"{t:6} {s['tracking_state']:12} Day {s['state_days']}")
 
     long_watchlist = build_long_watchlist(stocks)
     theme_breadth = build_theme_breadth(stocks)
@@ -519,107 +504,61 @@ def build_candidates(stocks):
 
     long_tickers = set(long_watchlist["Ticker"])
 
-    long_candidates = pd.concat(
-        [long_watchlist, institutional_leaders]
-    )
-
     long_candidates = (
-        long_candidates
+        pd.concat([long_watchlist, institutional_leaders])
         .drop_duplicates(subset="Ticker")
         .sort_values("Long_Score", ascending=False)
+        .reset_index(drop=True)
     )
 
     long_candidates["Ticker"] = long_candidates.apply(
-        lambda row:
+        lambda row: (
             row["Ticker"]
             if row["Ticker"] in long_tickers
-            else row["Ticker"] + "*",
+            else row["Ticker"] + "*"
+        ),
         axis=1,
     )
 
-
     registry, recovered = pre_distribution_update(
         registry=registry,
-        previous_long_candidates=load_previous_long_watchlist(),
         current_long_candidates=long_candidates,
     )
-    print("AFTER pre_distribution_update")
 
-    print("\n=== Registry After Pre ===")
-    for t, s in sorted(registry.items()):
-        print(f"{t:6} {s['tracking_state']:12} Day {s['state_days']}")
-    #
-    # Registry is now the single source of truth.
-    #
     distribution_candidates = get_distribution_candidates(
-        registry,
-        stocks,
+        registry=registry,
+        stocks=stocks,
     )
-    print("AFTER get_distribution_candidates")
 
-
-
-    print("\n=== Distribution Candidates ===")
-    if distribution_candidates.empty:
-        print("EMPTY")
-    else:
-        print(distribution_candidates[["Ticker"]].to_string(index=False))
-
-    #
-    # Existing Distribution qualification engine.
-    #
     qualified_distribution = build_distribution_watchlist(
         distribution_candidates
     )
-    print("AFTER build_distribution_watchlist")
 
-
-    print("\n=== Qualified Distribution ===")
-    if qualified_distribution.empty:
-        print("EMPTY")
-    else:
-        print(qualified_distribution[["Ticker"]].to_string(index=False))
-
-    #
-    # Persist lifecycle.
-    #
     registry = post_distribution_update(
-        registry,
-        qualified_distribution,
+        registry=registry,
+        qualified_distribution=qualified_distribution,
     )
-    print("AFTER post_distribution_update")
 
-
-    print("\n=== Registry After Post ===")
-    for t, s in sorted(registry.items()):
-        print(f"{t:6} {s['tracking_state']:12} Day {s['state_days']}")
-
-    #
-    # Final watchlist comes only from registry.
-    #
     distribution_watchlist = get_distribution_watchlist(
-        registry,
-        qualified_distribution,
+        registry=registry,
+        qualified_distribution=qualified_distribution,
     )
 
-    long_tickers = {
+    current_long_tickers = {
         ticker.replace("*", "")
         for ticker in long_candidates["Ticker"]
     }
 
     distribution_watchlist = distribution_watchlist[
-        ~distribution_watchlist["Ticker"].isin(long_tickers)
-    ]
+        ~distribution_watchlist["Ticker"].isin(current_long_tickers)
+    ].copy()
 
     stocks["Long_Rank"] = None
     stocks["Short_Rank"] = None
     stocks["Is_Long_Candidate"] = False
     stocks["Is_Short_Candidate"] = False
 
-    for rank, ticker in enumerate(
-        long_candidates["Ticker"],
-        start=1,
-    ):
+    for rank, ticker in enumerate(long_candidates["Ticker"], start=1):
 
         clean_ticker = ticker.replace("*", "")
 
@@ -649,8 +588,8 @@ def build_candidates(stocks):
         ] = True
 
     stocks = apply_tracking_state(
-        registry,
-        stocks,
+        registry=registry,
+        stocks=stocks,
     )
 
     return (

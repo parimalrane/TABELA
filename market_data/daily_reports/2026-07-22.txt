@@ -25,6 +25,8 @@ QQQ vs DIA           0.19    -1.68    -6.39     4.97
 IWM vs DIA           0.64    -0.95    -1.31     8.70
 
 ETF Eligibility: Total ETFs=276, Eligible ETFs=262, Excluded ETFs (Insufficient History)=14
+>>> BEFORE build_candidates
+>>> AFTER build_candidates
 
 ==============================================
 TABELA DAILY MARKET SCAN
@@ -132,24 +134,21 @@ VCTR       Financial - Investment Management
 ========================================
 DISTRIBUTION WATCHLIST
 ========================================
-Ticker         Theme Theme Class RS Δ RS Trend Leadership History Composite Δ Composite Trend
-  INTC    AI Compute     Lagging  -10        -          - Confirm        -4.6       2d↓, 4/5↓
-  EXTR AI Networking     Lagging   -5        -          - Confirm        -2.6       2d↓, 3/5↓
-   EAT   Restaurants     Unknown  -10        -          - Confirm        -4.0            2/5↓
+No qualified distribution candidates today.
 
 ----------------------------
 TRADINGVIEW WATCHLIST EXPORT
 ----------------------------
 ###LONG,SEZL*,OSCR,VG,LB,PARR,OII,DK,VCTR,PAYS*,DINO,PBF,CEPL,CLMT,NESR,VLO,SM,MPC,TRV,LQDA*,DAVE*,LLY*,IBKR*,
-###OBSERVATION,BLZE,SNDK,DELL,ICHR,AMBQ,MXL,PENG,MU,APPS,VPG,UCTT,AMD,PANW,FTNT,STX,DDOG,DOCN,SNOW,HNGE,ACMR,OKTA,BB,WDC,HPE,UMC,NBIS,CRWD,SIMO,ASX,VRNS,TGTX,FA,NTAP,ALAB,FROG,AMAT,ATEN,PSX,VSH,STM,WYFI,WKC,ARM,TENB,QLYS,TOELY,EXTR,EVER,OUST,RPD,MRVL,MKSI,CARE,MUFG,NET,KLIC,COHU,SUN,MRX,INTC,EAT,SYNA,BAYRY,COMP,PRSU,KNSA,WSBC,VIRT,LRCX,RSI,SKWD,RELY,CSCO,CRDO,TXN,TWLO,BUSE,ALGM,ABX,MAMA,UMBF,PLMR,SVCO,VICR,
-###DISTRIBUTION,INTC,EXTR,EAT,
+###OBSERVATION,FTNT,DDOG,DOCN,SNOW,FA,PSX,NET,SUN,RSI,SKWD,TWLO,PLMR,
+###DISTRIBUTION,,
 
 WATCHLIST DELTA
 ----------------------------------------
 Long         (+2) : SM, TRV
 Observation  (+2) : DOCN, RSI
-Distribution (+3) : EAT, EXTR, INTC
-Left Dist    (-2) : ABX, VICR
+Distribution (+0) : None
+Left Dist    (-0) : None
 
 RECOVERING LEADERS
 ----------------------------------------
@@ -160,19 +159,9 @@ Distribution: None
 STOCK TRANSITIONS
 ========================================
 
-Observation : 85
+Observation : 12
 Day 1  ( 2) : DOCN, RSI
 Day 2  (10) : DDOG, FA, FTNT, NET, PLMR, PSX, SKWD, SNOW, SUN, TWLO
-Day 3  ( 3) : PENG, WKC, WSBC
-Day 4  (10) : BAP, BUSE, CARE, HNGE, KNSA, MRX, MUFG, RELY, TGTX, UMBF
-Day 5  ( 4) : APPS, COMP, MU, STX
-Day 6  (34) : ACMR, AMAT, AMBQ, ASX, ATEN, BB, BLZE, COHU, CRWD, EVER, FROG, ICHR, LRCX, MAMA,
-              MKSI, MXL, NTAP, OKTA, PANW, QLYS, RPD, SIMO, SNDK, STM, TENB, TOELY, TXN, UCTT,
-              UMC, VPG, VRNS, VSH, WDC, WYFI
-Day 7  ( 1) : EAT
-Day 8  (18) : ALAB, ALGM, AMD, ARM, CRDO, CSCO, DELL, EXTR, HPE, INTC, KLIC, MRVL, NBIS, OUST,
-              SVCO, SYNA, VICR, VIRT
-Day 9  ( 3) : ABX, BAYRY, PRSU
 
 Distribution : 0
 

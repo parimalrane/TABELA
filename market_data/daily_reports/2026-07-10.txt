@@ -26,46 +26,6 @@ IWM vs DIA          -0.16    -1.30     1.20     7.80
 
 ETF Eligibility: Total ETFs=277, Eligible ETFs=263, Excluded ETFs (Insufficient History)=14
 >>> BEFORE build_candidates
-
-############################
-INSIDE BUILD_CANDIDATES
-############################
-
-=== Registry Immediately After Load ===
-AFTER pre_distribution_update
-
-=== Registry After Pre ===
-ABX    OBSERVATION  Day 1
-BAYRY  OBSERVATION  Day 1
-DAVE   OBSERVATION  Day 1
-LQDA   OBSERVATION  Day 1
-OSCR   OBSERVATION  Day 1
-PAYS   OBSERVATION  Day 1
-PRSU   OBSERVATION  Day 1
-RELY   OBSERVATION  Day 1
-SEZL   OBSERVATION  Day 1
-SKWD   OBSERVATION  Day 1
-AFTER get_distribution_candidates
-
-=== Distribution Candidates ===
-EMPTY
-AFTER build_distribution_watchlist
-
-=== Qualified Distribution ===
-EMPTY
-AFTER post_distribution_update
-
-=== Registry After Post ===
-ABX    OBSERVATION  Day 1
-BAYRY  OBSERVATION  Day 1
-DAVE   OBSERVATION  Day 1
-LQDA   OBSERVATION  Day 1
-OSCR   OBSERVATION  Day 1
-PAYS   OBSERVATION  Day 1
-PRSU   OBSERVATION  Day 1
-RELY   OBSERVATION  Day 1
-SEZL   OBSERVATION  Day 1
-SKWD   OBSERVATION  Day 1
 >>> AFTER build_candidates
 
 ==============================================
@@ -206,13 +166,13 @@ No qualified distribution candidates today.
 TRADINGVIEW WATCHLIST EXPORT
 ----------------------------
 ###LONG,MU,STX,SNDK,SIMO,ALAB,CRDO,ASX,DDOG,MXL,VPG,UMC,AMAT,TOELY,ACMR,VSH,NBIS,MRVL,AMD,ICHR,DELL,WDC,LRCX,VICR,ARM,HPE,OUST,STM,UCTT,SNOW,AMBQ,DOCN,TXN,MKSI,COHU,NET,ALGM,EXTR,KLIC,NTCT,SYNA,CSCO,VIRT,MRX,TWLO,MAMA,INTC,SVCO,
-###OBSERVATION,SEZL,LQDA,OSCR,DAVE,PAYS,RELY,PRSU,BAYRY,SKWD,ABX,
+###OBSERVATION,SEZL,LQDA,OSCR,DAVE,PBF,PAYS,DK,RSI,CLMT,DINO,MPC,PARR,VLO,NESR,VCTR,OII,LB,IBKR,LLY,VG,
 ###DISTRIBUTION,,
 
 WATCHLIST DELTA
 ----------------------------------------
-Long         (+27) : ALAB, AMD, ARM, COHU, CRDO, CSCO, DDOG, DELL, DOCN, EXTR, HPE, INTC, KLIC, LRCX, MAMA, MRVL, NBIS, NET, NTCT, OUST, SNOW, SVCO, SYNA, TWLO, TXN, UCTT, VICR
-Observation  (+10) : ABX, BAYRY, DAVE, LQDA, OSCR, PAYS, PRSU, RELY, SEZL, SKWD
+Long         (+46) : ACMR, ALAB, ALGM, AMAT, AMBQ, AMD, ARM, ASX, COHU, CRDO, CSCO, DDOG, DELL, EXTR, HPE, ICHR, INTC, KLIC, LRCX, MAMA, MKSI, MRVL, MRX, MU, MXL, NBIS, NET, NTCT, OUST, SIMO, SNDK, SNOW, STM, STX, SVCO, SYNA, TOELY, TWLO, TXN, UCTT, UMC, VICR, VIRT, VPG, VSH, WDC
+Observation  (+20) : CLMT, DAVE, DINO, DK, IBKR, LB, LLY, LQDA, MPC, NESR, OII, OSCR, PARR, PAYS, PBF, RSI, SEZL, VCTR, VG, VLO
 Distribution (+0) : None
 Left Dist    (-0) : None
 
@@ -225,7 +185,9 @@ Distribution: None
 STOCK TRANSITIONS
 ========================================
 
-Observation : 0
+Observation : 21
+Day 1  (21) : CEPL, CLMT, DAVE, DINO, DK, IBKR, LB, LLY, LQDA, MPC, NESR, OII, OSCR, PARR,
+              PAYS, PBF, RSI, SEZL, VCTR, VG, VLO
 
 Distribution : 0
 
