@@ -39,6 +39,7 @@ def compare_watchlists(
     current_long,
     current_observation,
     current_distribution,
+    recovered,
     stocks=None,
 ):
 
@@ -82,9 +83,9 @@ def compare_watchlists(
             theme_lookup,
         )
 
-        print("\nWATCHLIST DELTA REPORT")
-        print("----------------------------")
-        print("No previous trading day watchlist found. Baseline created.")
+        print("\nWATCHLIST DELTA")
+        print("----------------------------------------")
+        print("Baseline created.")
 
         return
 
@@ -113,35 +114,83 @@ def compare_watchlists(
     old_observation = extract_tickers(old_data.get("observation", []))
     old_distribution = extract_tickers(old_data.get("distribution", []))
 
-    new_longs = current_long_set - old_long
+    #
+    #
+    # Watchlist deltas
+    #
+
+    new_longs = sorted(current_long_set - old_long)
+
     removed_longs = old_long - current_long_set
 
-    new_observation = current_observation_set - old_observation
-    left_observation = old_observation - current_observation_set
+    #
+    # Only stocks that moved from LONG -> OBSERVATION today
+    #
+    new_observation = sorted(
+        removed_longs & current_observation_set
+    )
 
-    new_distribution = current_distribution_set - old_distribution
-    left_distribution = old_distribution - current_distribution_set
+    new_distribution = sorted(
+        current_distribution_set - old_distribution
+    )
 
-    print("\nWATCHLIST DELTA REPORT")
-    print("----------------------------")
+    left_distribution = sorted(
+        old_distribution - current_distribution_set
+    )
 
-    print("\nNEW LONGS")
-    print(",".join(sorted(new_longs)) if new_longs else "None")
+    
+    #
+    recovering_observation = sorted(
+        recovered["observation"]
+    )
 
-    print("\nREMOVED LONGS")
-    print(",".join(sorted(removed_longs)) if removed_longs else "None")
+    recovering_distribution = sorted(
+        recovered["distribution"]
+    )
 
-    print("\nNEW OBSERVATION")
-    print(",".join(sorted(new_observation)) if new_observation else "None")
+    print("\nWATCHLIST DELTA")
+    print("----------------------------------------")
 
-    print("\nLEFT OBSERVATION")
-    print(",".join(sorted(left_observation)) if left_observation else "None")
+    print(
+        f"Long         (+{len(new_longs)}) : "
+        + (", ".join(new_longs) if new_longs else "None")
+    )
 
-    print("\nNEW DISTRIBUTION")
-    print(",".join(sorted(new_distribution)) if new_distribution else "None")
+    print(
+        f"Observation  (+{len(new_observation)}) : "
+        + (", ".join(new_observation) if new_observation else "None")
+    )
 
-    print("\nLEFT DISTRIBUTION")
-    print(",".join(sorted(left_distribution)) if left_distribution else "None")
+    print(
+        f"Distribution (+{len(new_distribution)}) : "
+        + (", ".join(new_distribution) if new_distribution else "None")
+    )
+
+    print(
+        f"Left Dist    (-{len(left_distribution)}) : "
+        + (", ".join(left_distribution) if left_distribution else "None")
+    )
+
+    print()
+    print("RECOVERING LEADERS")
+    print("----------------------------------------")
+
+    print(
+        "Observation : "
+        + (
+            ", ".join(recovering_observation)
+            if recovering_observation else "None"
+        )
+    )
+
+    print(
+        "Distribution: "
+        + (
+            ", ".join(recovering_distribution)
+            if recovering_distribution else "None"
+        )
+    )
+
 
     save_watchlist(
         current_file,

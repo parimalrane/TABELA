@@ -523,6 +523,7 @@ def print_daily_scan(
     theme_strength_settings,
     stocks,
     theme_performance,
+    recovered,
 ):
     leading_themes = theme_strength[
         theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Leading"])
@@ -707,6 +708,7 @@ def print_daily_scan(
             "Ticker",
         ].tolist(),
         current_distribution=distribution_watchlist["Ticker"].head(50).tolist(),
+        recovered=recovered,
         stocks=stocks,
     )
     registry = load_registry()
@@ -738,7 +740,7 @@ def print_daily_scan(
 
             tickers = sorted(observation_groups[runs])
 
-            prefix = f"{runs}/{OBSERVATION_MIN_RUNS:<2} ({len(tickers):>2}) : "
+            prefix = f"Day {runs:<2} ({len(tickers):>2}) : "
 
             wrapped = textwrap.fill(
                 ", ".join(tickers),
@@ -785,7 +787,7 @@ def print_daily_scan(
                 break_on_hyphens=False,
             )
 
-            prefix = f"{runs}/{max_runs:<2} ({len(tickers):>2}) : "
+            prefix = f"Day {runs:<2} ({len(tickers):>2}) : "
 
             wrapped = textwrap.fill(
                 ", ".join(tickers),
@@ -798,46 +800,4 @@ def print_daily_scan(
 
             print(wrapped)
 
-    #
-    # DISTRIBUTION
-    #
-    print("DISTRIBUTION")
-    print("----------------------------")
-    print(f"Total : {len(transition['distribution'])}")
-
-    if transition["distribution"]:
-
-        distribution_groups = {}
-
-        for item in transition["distribution"]:
-            distribution_groups.setdefault(item["runs"], []).append(
-                item["ticker"]
-            )
-
-        print()
-
-        max_runs = max(
-            item["runs"]
-            for item in transition["distribution"]
-        )
-
-        for runs in sorted(distribution_groups.keys()):
-
-            tickers = sorted(distribution_groups[runs])
-
-            print(
-            f"Progress {runs} / {max_runs} "
-            f"({len(tickers)})"
-        )
-
-        print("-" * 30)
-
-        wrapped = textwrap.fill(
-            ", ".join(tickers),
-            width=90,
-            break_long_words=False,
-            break_on_hyphens=False,
-        )
-
-        print(wrapped)
         print()

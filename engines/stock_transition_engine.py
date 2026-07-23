@@ -77,18 +77,34 @@ def _increment_state_days(registry: Dict) -> None:
 
 def _remove_recovered(
     registry: Dict,
-    long_tickers: Set[str]
-) -> None:
+    long_tickers: Set[str],
+) -> Dict:
+
+    recovered = {
+        "observation": [],
+        "distribution": [],
+    }
 
     remove_list = []
 
-    for ticker in registry:
+    for ticker, state in registry.items():
 
-        if ticker in long_tickers:
-            remove_list.append(ticker)
+        if ticker not in long_tickers:
+            continue
+
+        if state["tracking_state"] == OBSERVATION:
+            recovered["observation"].append(ticker)
+
+        elif state["tracking_state"] == DISTRIBUTION:
+            recovered["distribution"].append(ticker)
+
+        remove_list.append(ticker)
+
 
     for ticker in remove_list:
         del registry[ticker]
+
+    return recovered
 
 def _expire_observation(
     registry: Dict,
@@ -142,17 +158,19 @@ def pre_distribution_update(
     registry: Dict,
     previous_long_candidates: pd.DataFrame,
     current_long_candidates: pd.DataFrame,
-) -> Dict:
+) -> tuple[Dict, Dict]:
+
 
     previous_longs = _long_ticker_set(previous_long_candidates)
     current_longs = _long_ticker_set(current_long_candidates)
 
     _increment_state_days(registry)
 
-    _remove_recovered(
+    recovered = _remove_recovered(
         registry,
         current_longs,
     )
+
 
     _expire_observation(registry)
 
@@ -163,7 +181,7 @@ def pre_distribution_update(
         context.market_date,
     )
 
-    return registry
+    return registry, recovered
 
 # ==========================================================
 # Distribution Candidate Selection

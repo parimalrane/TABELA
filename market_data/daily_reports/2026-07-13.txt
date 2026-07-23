@@ -1,5 +1,29 @@
 
 
+==============================================
+MARKET CONTEXT
+==============================================
+
+MARKET STATISTICS
+------------------------------------------------------------------------------------------------
+ETF           Type     5D%    20D%    50D%   200D%   RV.20   RV.50    20Dist    50Dist   200Dist
+------------------------------------------------------------------------------------------------
+SPY            N/A   +0.20   +1.00   +4.25  +13.32    0.75    0.82     +0.64     +0.97     +7.81
+QQQ            N/A   +0.33   -1.33   +6.59  +19.40    0.80    0.82     -1.46     -0.62    +11.46
+IWM            N/A   -0.91   +0.18   +5.58  +21.47    0.74    0.72     -0.95     +1.53    +11.86
+DIA            N/A   -0.75   +2.22   +5.60  +13.76    0.56    0.56     +0.63     +2.85     +7.80
+
+RELATIVE PERFORMANCE
+------------------------------------------------------------------------------------------
+Pair                   1W       4W      10W      40W
+----------------------------------------------------
+SPY vs QQQ          -0.13     2.33    -2.34    -6.08
+SPY vs IWM           1.11     0.82    -1.33    -8.15
+SPY vs DIA           0.95    -1.22    -1.35    -0.44
+QQQ vs IWM           1.24    -1.51     1.01    -2.07
+QQQ vs DIA           1.08    -3.55     0.99     5.64
+IWM vs DIA          -0.16    -2.04    -0.02     7.71
+
 ETF Eligibility: Total ETFs=274, Eligible ETFs=261, Excluded ETFs (Insufficient History)=13
 
 ==============================================
@@ -8,151 +32,70 @@ MARKET DATE: 2026-07-13
 ==============================================
 
 ==============================================
-MARKET ROTATION SUMMARY
+THEME PERFORMANCE
+Legend: [] = Top 3   () = Bottom 3
 ==============================================
 
-LEADING THEMES
------------------------------------------------------------------
-Rank   Theme                                    ETF Strength
------------------------------------------------------------------
-1      Healthcare                                       7.22
-2      Cloud Computing                                  6.34
-3      Biotech                                          5.54
-4      Insurance                                        5.22
-5      Media                                            2.95
-6      Pharma                                           2.27
-7      Internet                                         1.82
-
-NEUTRAL THEMES
------------------------------------------------------------------
-Rank   Theme                                    ETF Strength
------------------------------------------------------------------
-8      Software                                         1.76
-9      Banking                                          1.69
-10     Mlp                                              1.04
-11     Transportation/Shipping                          0.97
-12     Regional Banks                                   0.66
-13     Semiconductors                                   0.50
-14     Brokers/ Capital Markets                         0.23
-15     Exploration                                      0.14
-16     Telecom                                          0.03
-17     Brent Oil                                       -0.29
-18     Leisure And Entertainment                       -0.47
-19     Reits                                           -1.03
-20     Artificial Intelligence                         -1.37
-21     Agribusiness                                    -1.53
-22     Retail                                          -1.77
-23     Crude Oil                                       -2.12
-24     Medical Devices                                 -2.13
-25     Infrastructure                                  -3.34
-26     Copper                                          -3.47
-27     Engineering And Construction                    -3.90
-
-LAGGING THEMES
------------------------------------------------------------------
-Rank   Theme                                    ETF Strength
------------------------------------------------------------------
-28     Timber                                          -3.94
-29     Natural Gas                                     -6.25
-30     Aerospace & Defense                             -6.61
-31     Copper Mining                                  -12.37
-32     Uranium Mining                                 -12.96
-33     Nuclear Power                                  -13.26
-34     Rare Earth/Lithium                             -17.07
+Rank  Theme                               Strength        D        W        M        Q   Rank Δ   Score Δ  Transition
+------------------------------------------------------------------------------------------------------------------------
+   1  Healthcare                            [7.22]    -0.15     1.59        —        —       -1      0.68  —
+   2  Cloud Computing                       [6.34]     1.74     0.87        —        —       +5     -1.84  Leading -> Neutral
+   3  Biotech                               [5.54]     1.54     1.44        —        —       -4      1.46  Neutral -> Leading
+   4  Insurance                               5.22    -0.65   [2.35]        —        —       +2     -1.07  —
+   5  Media                                   2.95     1.61     0.30        —        —        0      0.34  —
+   6  Pharma                                  2.27    -2.32   [2.35]        —        —       -3         2  —
+   7  Internet                                1.82     1.77     0.16        —        —        0     -0.58  —
+   8  Software                                1.76    -0.82    -0.83        —        —       +4     -2.10  —
+   9  Banking                                 1.69    -1.79    -0.63        —        —       -2     -0.19  —
+  10  Mlp                                     1.04    -3.37     0.63        —        —       +2     -1.21  —
+  11  Transportation/Shipping                 0.97    -1.11     0.93        —        —       -2      0.02  —
+  12  Regional Banks                          0.66    -3.68     0.25        —        —       -1     -0.38  —
+  13  Semiconductors                          0.50   [5.44]    -3.42        —        —       -3         3  Lagging -> Neutral
+  14  Brokers/ Capital Markets                0.23    -0.62    -1.79        —        —       +1     -0.90  —
+  15  Exploration                             0.14  (-6.88)     0.14        —        —        0      0.79  —
+  16  Telecom                                 0.03   [3.12]    -0.39        —        —       -2      1.48  —
+  17  Brent Oil                              -0.29  (-8.46)    -1.06        —        —       +1     -0.23  —
+  18  Leisure And Entertainment              -0.47    -0.84     1.16        —        —       +1     -0.62  —
+  19  Reits                                  -1.03    -3.68     0.97        —        —        0     -0.21  —
+  20  Artificial Intelligence                -1.37   [4.36]    -1.11        —        —       -2      2.15  —
+  21  Agribusiness                           -1.53    -3.80    -0.04        —        —       +1     -0.52  —
+  22  Retail                                 -1.77    -2.60     0.29        —        —       +1     -1.05  —
+  23  Crude Oil                              -2.12  (-8.59)    -0.44        —        —       +1      0.08  —
+  24  Medical Devices                        -2.13    -1.46   [4.63]        —        —        0     -0.31  —
+  25  Infrastructure                         -3.34    -0.65    -0.90        —        —       +2     -0.09  —
+  26  Copper                                 -3.47    -3.74    -1.39        —        —       -6      1.74  —
+  27  Engineering And Construction           -3.90    -0.09    -1.44        —        —       +3     -0.92  Neutral -> Lagging
+  28  Timber                                 -3.94    -3.83    -0.75        —        —        0     -0.49  —
+  29  Natural Gas                            -6.25    -4.07     0.10        —        —       +1      0.34  —
+  30  Aerospace & Defense                    -6.61    -1.90    -0.56        —        —       +1      0.45  —
+  31  Copper Mining                         -12.37    -2.99  (-6.29)        —        —        0      3.81  —
+  32  Uranium Mining                      (-12.96)     2.40  (-3.98)        —        —        0      2.50  —
+  33  Nuclear Power                       (-13.26)     2.61    -2.87        —        —        0      2.52  —
+  34  Rare Earth/Lithium                  (-17.07)     1.44  (-3.67)        —        —        0      1.21  —
 
 THEME BREADTH ANALYSIS
 ----------------------------
-                          Theme  Total  Qualified Stocks  Breadth %  Breadth Score
-                  Cybersecurity     10               8.0      80.00         184.88
-                         Memory      4               4.0     100.00         158.53
-           Cloud Infrastructure      4               4.0     100.00         150.08
-        Semiconductor Equipment     21               8.0      38.10         107.32
-                     AI Servers      2               2.0     100.00         106.57
-                      Insurance     70              19.0      27.14          94.26
-                     AI Compute      3               2.0      66.67          89.19
-       Developer Infrastructure      3               2.0      66.67          82.26
-                       Software    178              28.0      15.73          74.98
-       Fuel Cell Infrastructure      1               1.0     100.00          68.62
-   Communication Infrastructure      1               1.0     100.00          68.62
-Private Wireless Infrastructure      1               1.0     100.00          68.62
-                   Data Storage      1               1.0     100.00          67.24
-           Communications Cloud      1               1.0     100.00          62.38
-                        AI ASIC      1               1.0     100.00          62.38
-                    Diagnostics      1               1.0     100.00          62.38
-              AI Infrastructure      5               2.0      40.00          60.92
-         Optical Infrastructure      1               1.0     100.00          55.45
-                AI Connectivity      2               1.0      50.00          53.83
-                        Foundry      3               1.0      33.33          45.74
-====================================
-HISTORICAL INTELLIGENCE REPORT
-====================================
-
-DAILY ROTATION INTELLIGENCE
----------------------------------------------------------------------------
-Source Rotation Date: 2026-07-13
-
-TOP RANK MOVERS
----------------------------------------------------------------------------
-Theme                              Movement
-Mlp                                ↑ 24 → 10
-Copper                             ↓ 17 → 26
-Engineering And Construction       ↓ 19 → 27
-Infrastructure                     ↓ 20 → 25
-Software                           ↑ 13 → 8
-Nuclear Power                      ↓ 29 → 33
-Retail                             ↓ 18 → 22
-Copper Mining                      ↓ 28 → 31
-Healthcare                         ↑ 4 → 1
-Reits                              ↑ 22 → 19
-
-TOP SCORE MOVERS
----------------------------------------------------------------------------
-Theme                              Score Change
-Mlp                                +6.51
-Natural Gas                        +6.05
-Healthcare                         +4.48
-Nuclear Power                      -4.45
-Reits                              +4.10
-Copper Mining                      -4.01
-Medical Devices                    +3.78
-Agribusiness                       +3.62
-Rare Earth/Lithium                 -3.46
-Retail                             +2.73
-
-STRENGTHENING THEMES (TOP 5)
----------------------------------------------------------------------------
-Mlp                                score +6.51
-Natural Gas                        score +6.05
-Healthcare                         score +4.48
-Reits                              score +4.10
-Medical Devices                    score +3.78
-
-WEAKENING THEMES (TOP 5)
----------------------------------------------------------------------------
-Nuclear Power                      score -4.45
-Copper Mining                      score -4.01
-Rare Earth/Lithium                 score -3.46
-
-STRUCTURAL ROTATION
----------------------------------------------------------------------------
-Theme                                Rank Chg  Score Chg   Transition
----------------------------------------------------------------------------
-Aerospace & Defense                    +4     +0.13   Neutral -> Lagging
-Artificial Intelligence               +14     -3.01   Leading -> Neutral
-Brent Oil                             -16    +14.58   Lagging -> Neutral
-Crude Oil                             -11    +13.65   Lagging -> Neutral
-Exploration                           -15     +8.98   Lagging -> Neutral
-Insurance                              -7     +5.27   Neutral -> Leading
-Internet                               -2     +1.66   Neutral -> Leading
-Pharma                                 -6     +2.76   Neutral -> Leading
-Semiconductors                        +12     -5.92   Leading -> Neutral
-Telecom                                +9     -0.82   Leading -> Neutral
-Timber                                 +7     +1.14   Neutral -> Lagging
-Uranium Mining                         +5     -5.06   Neutral -> Lagging
-
-MULTI-DAY INTELLIGENCE
----------------------------------------------------------------------------
-Insufficient historical data (10/20 snapshots collected).
+                          Theme  Total  Qualified Stocks  Breadth %  Breadth Score                       Leaders
+                  Cybersecurity     10               8.0      80.00         184.88  FTNT, OKTA, QLYS, PANW, TENB
+                         Memory      4               4.0     100.00         158.53           MU, SNDK, SIMO, WDC
+           Cloud Infrastructure      4               4.0     100.00         150.08         DDOG, SNOW, DOCN, NET
+        Semiconductor Equipment     21               8.0      38.10         107.32 AMAT, ACMR, ICHR, TOELY, UCTT
+                     AI Servers      2               2.0     100.00         106.57                     DELL, HPE
+                      Insurance     70              19.0      27.14          94.26    OSCR, VOYA, SLDE, SKWD, HG
+                     AI Compute      3               2.0      66.67          89.19                      AMD, ARM
+       Developer Infrastructure      3               2.0      66.67          82.26                    FROG, GTLB
+                       Software    178              28.0      15.73          74.98    DAVE, WYFI, PENG, APPS, FA
+   Communication Infrastructure      1               1.0     100.00          68.62                          BAND
+       Fuel Cell Infrastructure      1               1.0     100.00          68.62                          FCEL
+Private Wireless Infrastructure      1               1.0     100.00          68.62                          ATEX
+                   Data Storage      1               1.0     100.00          67.24                           STX
+           Communications Cloud      1               1.0     100.00          62.38                          TWLO
+                        AI ASIC      1               1.0     100.00          62.38                          MRVL
+                    Diagnostics      1               1.0     100.00          62.38                          NTRA
+              AI Infrastructure      5               2.0      40.00          60.92                    NBIS, CRDO
+         Optical Infrastructure      1               1.0     100.00          55.45                           GLW
+                AI Connectivity      2               1.0      50.00          53.83                          ALAB
+                        Foundry      3               1.0      33.33          45.74                           UMC
 
 LONG CANDIDATE UNIVERSE
 ----------------------------
@@ -191,85 +134,47 @@ EAT      Retail - Restaurants
 ========================================
 DISTRIBUTION WATCHLIST
 ========================================
-Ticker                   Theme Theme Class RS Δ RS Trend Leadership History Composite Δ Composite Trend
-  NVTS          Semiconductors     Neutral  -30     4/5↓        -9d Confirm       -14.1       4d↓, 4/5↓
-  BNTX         Medical Devices     Neutral  -20        -          - Confirm        -7.6       4d↓, 4/5↓
-   AYI                Software     Neutral  -20        -        -9d Confirm        -1.5       4d↓, 4/5↓
-  DUOT                Software     Neutral  -20        -        -9d Confirm        -1.5       4d↓, 4/5↓
-  KROS         Medical Devices     Neutral  -10        -          - Confirm        -4.6       4d↓, 4/5↓
-   HCA         Medical Devices     Neutral  -10        -          - Confirm        -4.6       4d↓, 4/5↓
-   WGS         Medical Devices     Neutral  -10        -          - Confirm        -4.6       4d↓, 4/5↓
-  AXTI          Semiconductors     Neutral  -50     2/5↓        -2d Confirm       -19.4       3d↓, 3/5↓
-  AOSL          Semiconductors     Neutral  -30     3/5↓        -4d Confirm       -15.4       3d↓, 3/5↓
-    ON          Semiconductors     Neutral  -20        -       -12d Confirm       -13.4       3d↓, 3/5↓
-  SKYT          Semiconductors     Neutral  -20        -        -5d Confirm       -11.4       3d↓, 3/5↓
-  AMKR Semiconductor Equipment     Neutral  -20        -        -9d Confirm       -11.4       3d↓, 3/5↓
-  LPTH          Semiconductors     Neutral  -19        -        -9d Confirm       -11.1       3d↓, 3/5↓
-  ALGM          Semiconductors     Neutral  -10        -          - Confirm       -10.7       3d↓, 3/5↓
-  MTSI          Semiconductors     Neutral  -10        -        -9d Confirm       -10.2       3d↓, 3/5↓
-  SITM Semiconductor Equipment     Neutral  -10        -        -2d Confirm        -9.4       3d↓, 3/5↓
-   ROG          Semiconductors     Neutral  -10        -        -9d Confirm        -7.5       3d↓, 3/5↓
-  AMSC          Semiconductors     Neutral  -10        -          - Confirm        -7.5       3d↓, 3/5↓
-   TER   Semiconductor Testing     Neutral  -10        -        -9d Confirm        -6.0       3d↓, 3/5↓
-  IDCC                 Telecom     Neutral   -9        -          - Confirm        -3.6       3d↓, 3/5↓
-  PDYN                Software     Neutral   -9        -          - Confirm        -0.3       3d↓, 3/5↓
-   GFS                 Foundry     Neutral  -30        -        -1d Confirm       -16.2       2d↓, 2/5↓
-  MCHP          Semiconductors     Neutral  -20        -       -12d Confirm       -12.0       2d↓, 2/5↓
-  COHR      Optical Networking     Neutral  -20        -        -9d Confirm       -10.7       2d↓, 2/5↓
-  VICR          Semiconductors     Neutral  -20        -        -1d Confirm       -10.2       2d↓, 2/5↓
-  AEHR Semiconductor Equipment     Neutral  -20        -        -1d Confirm       -10.2       2d↓, 2/5↓
-  AMBA          Semiconductors     Neutral  -20        -        -1d Confirm       -10.2       2d↓, 2/5↓
-  ENTG Semiconductor Equipment     Neutral  -20        -        -9d Confirm       -10.2       2d↓, 2/5↓
-  FORM          Semiconductors     Neutral  -20        -        -9d Confirm        -8.2       2d↓, 2/5↓
-     P                Software     Neutral  -20        -          - Confirm        -5.2       2d↓, 2/5↓
-   YOU                Software     Neutral  -20        -        -3d Confirm        -3.5       2d↓, 3/5↓
-  ADEA                Software     Neutral  -20        -        -9d Confirm        -3.1       2d↓, 3/5↓
-  HAYW Semiconductor Equipment     Neutral  -10        -        -9d Confirm       -10.1       2d↓, 3/5↓
-  PHAT         Medical Devices     Neutral  -10        -          - Confirm        -9.0       2d↓, 2/5↓
-  AAOI      Optical Networking     Neutral  -10        -        -9d Confirm        -8.2       2d↓, 2/5↓
-  ASYS          Semiconductors     Neutral  -10        -        -9d Confirm        -8.2       2d↓, 2/5↓
- IFNNY          Semiconductors     Neutral  -10        -          - Confirm        -8.2       2d↓, 2/5↓
-  ASML Semiconductor Equipment     Neutral  -10        -        -1d Confirm        -6.2       2d↓, 2/5↓
-  PDFS Semiconductor Analytics     Neutral  -10        -        -1d Confirm        -6.2       2d↓, 2/5↓
-  ONTO Semiconductor Equipment     Neutral  -10        -        -1d Confirm        -6.2       2d↓, 2/5↓
-  SMTC          Semiconductors     Neutral  -10        -        -1d Confirm        -6.2       2d↓, 2/5↓
-   TSM                 Foundry     Neutral  -10        -        -1d Confirm        -6.2       2d↓, 2/5↓
-  VIAV      Optical Networking     Neutral  -10        -        -9d Confirm        -6.2       2d↓, 2/5↓
- BELFB Semiconductor Equipment     Neutral  -10        -        -9d Confirm        -6.2       2d↓, 2/5↓
-  DIOD          Semiconductors     Neutral  -10        -        -9d Confirm        -6.2       2d↓, 2/5↓
-  AEIS          Semiconductors     Neutral  -10        -        -9d Confirm        -6.2       2d↓, 2/5↓
-  NVMI          Semiconductors     Neutral  -10        -       -15d Confirm        -6.2       2d↓, 2/5↓
-  RMBS          Semiconductors     Neutral  -10        -       -15d Confirm        -6.2       2d↓, 2/5↓
-  SVCO          Semiconductors     Neutral  -10        -          - Confirm        -6.2       2d↓, 2/5↓
-  SYNA          Semiconductors     Neutral  -10        -          - Confirm        -6.2       2d↓, 2/5↓
+No qualified distribution candidates today.
 
 ----------------------------
 TRADINGVIEW WATCHLIST EXPORT
 ----------------------------
 ###LONG,DDOG,SEZL*,DAVE*,OSCR,WYFI*,MU*,PENG*,SNOW,FTNT*,STX*,APPS*,FA*,PAYS*,DOCN,TWLO,NET,SNDK*,VG,COMP*,MRX,MAMA,EAT,
-###SHORT,NVTS,BNTX,AYI,DUOT,KROS,HCA,WGS,AXTI,AOSL,ON,SKYT,AMKR,LPTH,ALGM,MTSI,SITM,ROG,AMSC,TER,IDCC,PDYN,GFS,MCHP,COHR,VICR,AEHR,AMBA,ENTG,FORM,P,YOU,ADEA,HAYW,PHAT,AAOI,ASYS,IFNNY,ASML,PDFS,ONTO,SMTC,TSM,VIAV,BELFB,DIOD,AEIS,NVMI,RMBS,SVCO,SYNA
+###OBSERVATION,MXL,SIMO,DELL,AMBQ,ICHR,UMC,AMD,ALAB,ACMR,VPG,LQDA,EXTR,WDC,UCTT,STM,ASX,ARM,HPE,INTC,VSH,AMAT,TOELY,VIRT,MRVL,NBIS,KLIC,RELY,NTCT,MKSI,PRSU,BAYRY,CSCO,SKWD,OUST,TXN,SVCO,SYNA,CRDO,ALGM,COHU,LRCX,ABX,VICR,
+###DISTRIBUTION,,
 
-WATCHLIST DELTA REPORT
-----------------------------
+WATCHLIST DELTA
+----------------------------------------
+Long         (+12) : APPS, COMP, DAVE, EAT, FA, FTNT, OSCR, PAYS, PENG, SEZL, VG, WYFI
+Observation  (+37) : ACMR, ALAB, ALGM, AMAT, AMBQ, AMD, ARM, ASX, COHU, CRDO, CSCO, DELL, EXTR, HPE, ICHR, INTC, KLIC, LRCX, MKSI, MRVL, MXL, NBIS, NTCT, OUST, SIMO, STM, SVCO, SYNA, TOELY, TXN, UCTT, UMC, VICR, VIRT, VPG, VSH, WDC
+Distribution (+0) : None
+Left Dist    (-0) : None
 
-NEW LONGS ADDED TODAY
-APPS,COMP,DAVE,EAT,FA,FTNT,OSCR,PAYS,PENG,SEZL,VG,WYFI
+RECOVERING LEADERS
+----------------------------------------
+Observation : DAVE, OSCR, PAYS, SEZL
+Distribution: None
 
-LONGS REMOVED TODAY
-ACMR,ALAB,ALGM,AMAT,AMBQ,AMD,ARM,ASX,COHU,CRDO,CSCO,DELL,EXTR,HPE,ICHR,INTC,KLIC,LRCX,MKSI,MRVL,MXL,NBIS,NTCT,OUST,SIMO,STM,SVCO,SYNA,TOELY,TXN,UCTT,UMC,VICR,VIRT,VPG,VSH,WDC
+========================================
+STOCK TRANSITIONS
+========================================
 
-NEW SHORTS ADDED TODAY
-AAOI,ADEA,AEHR,AEIS,ALGM,AMBA,AMKR,AMSC,AOSL,ASML,ASYS,AXTI,AYI,BELFB,BNTX,COHR,DIOD,DUOT,ENTG,FORM,GFS,HAYW,HCA,IDCC,IFNNY,KROS,LPTH,MCHP,MTSI,NVMI,ON,ONTO,P,PDFS,PDYN,PHAT,RMBS,ROG,SITM,SKYT,SMTC,SVCO,SYNA,TER,TSM,VIAV,VICR,WGS,YOU
+Observation : 43
+Day 1  (37) : ACMR, ALAB, ALGM, AMAT, AMBQ, AMD, ARM, ASX, COHU, CRDO, CSCO, DELL, EXTR, HPE,
+              ICHR, INTC, KLIC, LRCX, MKSI, MRVL, MXL, NBIS, NTCT, OUST, SIMO, STM, SVCO, SYNA,
+              TOELY, TXN, UCTT, UMC, VICR, VIRT, VPG, VSH, WDC
+Day 2  ( 6) : ABX, BAYRY, LQDA, PRSU, RELY, SKWD
 
-SHORTS REMOVED TODAY
-ACVA,ALKT,ARHS,AXTA,BBBY,BEAM,BFH,BKD,BRBR,CINF,DUOL,EADSY,ETOR,FSS,FSUN,FWRG,GOLD,HIMS,HROW,HTFL,IFF,IONQ,JACK,LEGN,LMND,MAA,MBI,MC,MDB,NTLA,NVCR,OSG,PAR,RDNT,RHI,RNR,RYAN,SAIL,SARO,SGRY,SPIR,SRI,TEVA,TRUP,TTWO,VLRS,VRTX,VYX,W
+Distribution : 0
 
 FILES GENERATED
 ---------------
+✓ Market Context
 ✓ Stock History
 ✓ Market Snapshot
 ✓ Rotation Delta
 ✓ Unknown Classification
+✓ Stock Transition Registry
 
 ==============================================
 END OF TABELA SCAN

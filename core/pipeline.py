@@ -522,7 +522,7 @@ def build_candidates(stocks):
         ascending=False,
     )
 
-    registry = pre_distribution_update(
+    registry, recovered = pre_distribution_update(
         registry=registry,
         previous_long_candidates=load_previous_long_watchlist(),
         current_long_candidates=long_candidates,
@@ -597,6 +597,7 @@ def build_candidates(stocks):
         long_candidates,
         distribution_watchlist,
         theme_breadth,
+        recovered,
     )
 
 def save_history(stocks):
@@ -679,7 +680,7 @@ def run_tabela_pipeline():
     )
 
     stocks = score_stocks(stocks)
-    stocks, long_candidates, distribution_watchlist, theme_breadth = build_candidates(stocks)
+    stocks, long_candidates, distribution_watchlist, theme_breadth, recovered = build_candidates(stocks)
 
     today = context.market_date
     save_history(stocks)
@@ -698,6 +699,7 @@ def run_tabela_pipeline():
         theme_strength_settings,
         stocks,
         theme_performance,
+        recovered,
     )
 
     leading_themes = theme_strength[
