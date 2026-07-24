@@ -436,7 +436,7 @@ def print_market_context_summary(market_context):
 
     header = (
         f"{'ETF':<6}"
-        f"{'Type':>12}"
+        f"{'Type':>14}"
         f"{'5D%':>8}"
         f"{'20D%':>8}"
         f"{'50D%':>8}"
@@ -462,7 +462,7 @@ def print_market_context_summary(market_context):
 
         print(
             f"{etf:<6}"
-            f"{TYPE_SYMBOL.get(data.get('day_type'),'N/A'):>12}"
+            f"{TYPE_SYMBOL.get(data.get('day_type'),'N/A'):>14}"
             f"{fmt(returns.get('1w')):>8}"
             f"{fmt(returns.get('4w')):>8}"
             f"{fmt(returns.get('10w')):>8}"
