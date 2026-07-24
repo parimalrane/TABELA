@@ -680,11 +680,9 @@ def run_tabela_pipeline():
     )
 
     stocks = score_stocks(stocks)
-    print(">>> BEFORE build_candidates")
+
 
     stocks, long_candidates, distribution_watchlist, theme_breadth, recovered = build_candidates(stocks)
-
-    print(">>> AFTER build_candidates")
 
     today = context.market_date
     save_history(stocks)

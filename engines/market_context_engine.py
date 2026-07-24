@@ -435,6 +435,10 @@ def calculate_institutional_activity(
     dist_logic = config["DISTRIBUTION_LOGIC"]
     cons_logic = config["CONSOLIDATION_LOGIC"]
 
+    accumulation_threshold = config["ACCUMULATION_VOLUME_THRESHOLD"]
+    distribution_threshold = config["DISTRIBUTION_VOLUME_THRESHOLD"]
+    consolidation_threshold = config["CONSOLIDATION_VOLUME_THRESHOLD"]
+
     rv_periods = MARKET_CONTEXT_CONFIG[
         "RELATIVE_VOLUME_LOOKBACKS"
     ]
@@ -485,38 +489,57 @@ def calculate_institutional_activity(
                 ]["Volume"].mean()
             )
 
-        volume_above = [
-            today_volume > average_volumes[p]
+        accumulation_checks = [
+            today_volume >= (
+                average_volumes[p]
+                * accumulation_threshold
+            )
             for p in rv_periods
         ]
 
-        volume_below = [
-            today_volume < average_volumes[p]
+        distribution_checks = [
+            today_volume >= (
+                average_volumes[p]
+                * distribution_threshold
+            )
             for p in rv_periods
         ]
 
-        if acc_logic == "AND":
-            accumulation_volume = all(volume_above)
-        else:
-            accumulation_volume = any(volume_above)
+        consolidation_checks = [
+            today_volume <= (
+                average_volumes[p]
+                * consolidation_threshold
+            )
+            for p in rv_periods
+        ]
 
-        if dist_logic == "AND":
-            distribution_volume = all(volume_above)
-        else:
-            distribution_volume = any(volume_above)
+        accumulation_volume = (
+            all(accumulation_checks)
+            if acc_logic == "AND"
+            else any(accumulation_checks)
+        )
 
-        if cons_logic == "AND":
-            consolidation_volume = all(volume_below)
-        else:
-            consolidation_volume = any(volume_below)
+        distribution_volume = (
+            all(distribution_checks)
+            if dist_logic == "AND"
+            else any(distribution_checks)
+        )
+
+        consolidation_volume = (
+            all(consolidation_checks)
+            if cons_logic == "AND"
+            else any(consolidation_checks)
+        )
 
         today_range = (
-            today["High"] - today["Low"]
+            today["High"]
+            - today["Low"]
         )
 
         adr = (
             (
-                etf_df["High"] - etf_df["Low"]
+                etf_df["High"]
+                - etf_df["Low"]
             )
             .iloc[
                 latest_idx - adr_lookback:
@@ -555,7 +578,6 @@ def calculate_institutional_activity(
         }
 
     return activity
-
 
 def run_market_context_engine(market_date):
     """Entry point."""
