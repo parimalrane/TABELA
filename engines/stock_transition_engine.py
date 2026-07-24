@@ -87,9 +87,13 @@ def pre_distribution_update(
     """
     Lifecycle Phase 1
 
-    1. Recover tracked stocks that returned to LONG.
-    2. Advance surviving tracked stocks.
-    3. Create Observation Day 1 for stocks that left LONG today.
+    Order of operations
+
+    1. Build FINAL current LONG universe.
+    2. Load previous LONG universe.
+    3. Recover stocks that returned to LONG.
+    4. Advance surviving tracked stocks.
+    5. Create Observation Day 1 for stocks that left LONG.
     """
 
     today = str(context.market_date)
@@ -99,11 +103,17 @@ def pre_distribution_update(
         "distribution": [],
     }
 
+    #
+    # FINAL LONG universe
+    #
     current_longs = {
         str(t).replace("*", "").strip().upper()
         for t in current_long_candidates["Ticker"]
     }
 
+    #
+    # PREVIOUS LONG universe
+    #
     previous = load_previous_long_watchlist()
 
     previous_longs = (
@@ -117,7 +127,7 @@ def pre_distribution_update(
 
     #
     # STEP 1
-    # Recover tracked stocks that returned to LONG.
+    # Recover stocks now back in LONG.
     #
     recovered_today = set()
 
@@ -137,7 +147,7 @@ def pre_distribution_update(
     #
     for state in registry.values():
 
-        if state["last_market_date"] == today:
+        if state.get("last_market_date") == today:
             continue
 
         state["state_days"] += 1
@@ -145,23 +155,17 @@ def pre_distribution_update(
 
     #
     # STEP 3
-    # Today's departures from LONG.
+    # Stocks that genuinely left LONG today.
     #
-    removed_today = previous_longs - current_longs
+    removed_today = (
+        previous_longs
+        - current_longs
+        - recovered_today
+    )
 
     for ticker in removed_today:
 
-        #
-        # Already being tracked.
-        #
         if ticker in registry:
-            continue
-
-        #
-        # Recovered earlier today.
-        # Never recreate it.
-        #
-        if ticker in recovered_today:
             continue
 
         registry[ticker] = {
