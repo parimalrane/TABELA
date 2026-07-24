@@ -139,8 +139,8 @@ def build_market_context_json(
             "day_type": day_type,
 
             "relative_volume": {
-                "20d": relative_volume["20d"][ticker],
-                "50d": relative_volume["50d"][ticker],
+                f"{lookback}d": relative_volume[f"{lookback}d"][ticker]
+                for lookback in RELATIVE_VOLUME_LOOKBACKS
             },
 
             "returns": {
@@ -426,13 +426,17 @@ def calculate_institutional_activity(
     - Neutral
     """
 
-    config = MARKET_CONTEXT_CONFIG[
-        "INSTITUTIONAL_ACTIVITY"
-    ]
+    config = MARKET_CONTEXT_CONFIG["INSTITUTIONAL_ACTIVITY"]
 
     adr_lookback = config["ADR_LOOKBACK"]
-    consolidation_factor = config[
-        "CONSOLIDATION_RANGE_FACTOR"
+    consolidation_factor = config["CONSOLIDATION_RANGE_FACTOR"]
+
+    acc_logic = config["ACCUMULATION_LOGIC"]
+    dist_logic = config["DISTRIBUTION_LOGIC"]
+    cons_logic = config["CONSOLIDATION_LOGIC"]
+
+    rv_periods = MARKET_CONTEXT_CONFIG[
+        "RELATIVE_VOLUME_LOOKBACKS"
     ]
 
     activity = {}
@@ -458,7 +462,7 @@ def calculate_institutional_activity(
         latest_idx = latest_row.index[0]
 
         if latest_idx < max(
-            50,
+            max(rv_periods),
             adr_lookback,
         ):
             activity[etf] = {
@@ -471,31 +475,48 @@ def calculate_institutional_activity(
 
         today_volume = today["Volume"]
 
-        avg_volume20 = (
-            etf_df.iloc[
-                latest_idx - 20:
-                latest_idx
-            ]["Volume"]
-            .mean()
-        )
+        average_volumes = {}
 
-        avg_volume50 = (
-            etf_df.iloc[
-                latest_idx - 50:
-                latest_idx
-            ]["Volume"]
-            .mean()
-        )
+        for period in rv_periods:
+
+            average_volumes[period] = (
+                etf_df.iloc[
+                    latest_idx - period:latest_idx
+                ]["Volume"].mean()
+            )
+
+        volume_above = [
+            today_volume > average_volumes[p]
+            for p in rv_periods
+        ]
+
+        volume_below = [
+            today_volume < average_volumes[p]
+            for p in rv_periods
+        ]
+
+        if acc_logic == "AND":
+            accumulation_volume = all(volume_above)
+        else:
+            accumulation_volume = any(volume_above)
+
+        if dist_logic == "AND":
+            distribution_volume = all(volume_above)
+        else:
+            distribution_volume = any(volume_above)
+
+        if cons_logic == "AND":
+            consolidation_volume = all(volume_below)
+        else:
+            consolidation_volume = any(volume_below)
 
         today_range = (
-            today["High"]
-            - today["Low"]
+            today["High"] - today["Low"]
         )
 
-        adr20 = (
+        adr = (
             (
-                etf_df["High"]
-                - etf_df["Low"]
+                etf_df["High"] - etf_df["Low"]
             )
             .iloc[
                 latest_idx - adr_lookback:
@@ -506,25 +527,21 @@ def calculate_institutional_activity(
 
         if (
             today["Close"] > previous["Close"]
-            and today_volume > avg_volume20
-            and today_volume > avg_volume50
+            and accumulation_volume
         ):
 
             day_type = "Accumulation"
 
         elif (
             today["Close"] < previous["Close"]
-            and today_volume > avg_volume20
-            and today_volume > avg_volume50
+            and distribution_volume
         ):
 
             day_type = "Distribution"
 
         elif (
-            today_range
-            <= adr20 * consolidation_factor
-            and today_volume < avg_volume20
-            and today_volume < avg_volume50
+            today_range <= adr * consolidation_factor
+            and consolidation_volume
         ):
 
             day_type = "Consolidation"

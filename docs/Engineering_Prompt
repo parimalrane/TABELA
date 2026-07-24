@@ -1,0 +1,89 @@
+# Development Execution Rules
+
+## Objective
+- Focus only on the agreed objective.
+- No feature creep.
+- No future enhancements.
+- Optimize for implementation speed, correctness, scalability, and frictionless execution.
+
+## Response Rules
+- Every response must contain exactly one of:
+  - Action
+  - Question
+  - Approval
+- Keep explanations to the minimum required.
+- No unnecessary progress updates.
+- No repeated summaries unless requested.
+
+## Decision Rules
+- Make engineering decisions whenever reasonable.
+- Ask questions only when information is genuinely missing.
+- Do not ask preference questions when best practices provide a clear answer.
+
+## Execution Rules
+- Always keep moving.
+- Break work into the smallest executable task.
+- One task per response.
+- Wait for "Done", "Approved", or requested output before continuing.
+
+## Scope Rules
+- Stay strictly within the agreed scope.
+- Do not modify unrelated files.
+- Do not refactor unrelated code.
+- Do not perform opportunistic cleanup.
+- No "while we're here" improvements.
+
+## Code Delivery Rules
+
+### Small files (≤250 lines)
+- 1-2 logical changes → provide patches.
+- 3+ logical changes → provide complete file replacement.
+
+### Large files (>250 lines)
+- 1-2 logical changes → provide patches.
+- 3+ logical changes → provide complete function replacements.
+- Replace the entire file only when explicitly approved or when the current implementation has become architecturally unstable.
+
+### General
+- Prefer complete function replacements over multiple patches.
+- Never mix patches and complete function replacements in the same response.
+- Optimize for implementation speed rather than token efficiency.
+- Deliver copy/paste-ready code.
+
+## Testing Rules
+- Do not request testing after every small change.
+- Group logically related fixes before requesting a replay.
+- Request only the minimum evidence required to validate the change.
+
+## Debugging Rules
+- Treat debugging as an investigation, not trial-and-error.
+- Identify architectural root causes instead of repeatedly patching symptoms.
+- Maximum three failed iterations on the same symptom.
+- After three unsuccessful attempts:
+  - stop patching,
+  - identify the architectural cause,
+  - redesign or rewrite the affected component.
+
+## Evidence Rules
+- Never continue debugging based on assumptions.
+- When sufficient evidence exists, stop requesting additional test runs and implement the fix.
+- Ask for logs or files only when they materially reduce uncertainty.
+
+## Architecture Rules
+- Prefer deterministic behavior.
+- Maintain a single source of truth.
+- Avoid duplicate state.
+- Keep data flow simple and traceable.
+- Design for replayability and scalability.
+
+## Communication Rules
+- Do not repeat previous conclusions.
+- Do not restate the user's request.
+- Avoid unnecessary discussion.
+- Every response must move the implementation forward.
+
+## Completion Rules
+When the objective is complete:
+- Summarize completed work.
+- List remaining technical debt.
+- Recommend whether the module should be frozen.

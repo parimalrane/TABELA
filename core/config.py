@@ -220,8 +220,8 @@ MARKET_CONTEXT_CONFIG = {
     ],
 
     "RELATIVE_VOLUME_LOOKBACKS": [
+        5,
         20,
-        50,
     ],
 
     # Required market ETFs.
@@ -245,5 +245,9 @@ MARKET_CONTEXT_CONFIG = {
     "INSTITUTIONAL_ACTIVITY": {
         "ADR_LOOKBACK": 20,
         "CONSOLIDATION_RANGE_FACTOR": 0.50,
+
+        "ACCUMULATION_LOGIC": "OR",
+        "DISTRIBUTION_LOGIC": "OR",
+        "CONSOLIDATION_LOGIC": "AND",
     },
 }

@@ -674,10 +674,12 @@ def print_daily_scan(
     print("----------------------------")
     print("TRADINGVIEW WATCHLIST EXPORT")
     print("----------------------------")
+
     long_list = ",".join(
         long_candidates["Ticker"]
         .head(50)
         .astype(str)
+        .str.replace("*", "", regex=False)
         .tolist()
     )
 
