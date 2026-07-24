@@ -309,7 +309,13 @@ def apply_tracking_state(
 
     tracking_state = []
 
-    for ticker in stocks["Ticker"].astype(str).str.upper():
+    for ticker in (
+        stocks["Ticker"]
+        .astype(str)
+        .str.replace("*", "", regex=False)
+        .str.strip()
+        .str.upper()
+    ):
 
         if ticker in registry_lookup:
             tracking_state.append(registry_lookup[ticker])

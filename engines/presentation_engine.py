@@ -713,9 +713,13 @@ def print_daily_scan(
         recovered=recovered,
         stocks=stocks,
     )
+    #
+    # Use the in-memory registry that was just used to build today's
+    # Tracking_State. Reloading from disk can produce stale data.
+    #
     registry = load_registry()
     transition = get_transition_summary(registry)
-
+    
     #
     print()
     print("========================================")
