@@ -1,4 +1,3 @@
-print("PIPELINE FILE:", __file__)
 import datetime
 import math
 import os
@@ -195,8 +194,18 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
         etf_theme = row["ETF_Theme"]
         mapped_theme = row["Mapped_Theme"]
 
-        if mapped_theme in THEME_PARENT_MAP:
+        #
+        # Preserve explicit company mappings.
+        # Only promote child themes when the ETF theme still matches
+        # the mapped theme.
+        #
+        if (
+            mapped_theme in THEME_PARENT_MAP
+            and etf_theme == mapped_theme
+        ):
             etf_theme = THEME_PARENT_MAP[mapped_theme]
+
+    
 
         if etf_theme in theme_class_map:
             theme_class = theme_class_map[etf_theme]
@@ -276,9 +285,6 @@ def load_inputs(theme_strength_settings):
     etf_df = filter_institutional_etfs(etf_df)
     total_etfs = len(etf_df)
     etf_df, excluded_insufficient_history = filter_etfs_with_sufficient_history(etf_df)
-
-    print_etf_eligibility(total_etfs, len(etf_df), excluded_insufficient_history)
-
     etf_df[["Sector", "Theme", "Subtheme"]] = etf_df["Investment Strategy"].apply(
     lambda x: pd.Series(parse_theme(x))
 )
@@ -447,35 +453,47 @@ def build_theme_strength(etf_master, benchmark_returns, theme_strength_settings)
     theme_strength["Theme_Rank"] = range(1, len(theme_strength) + 1)
     return theme_strength
 
-
 def map_stock_themes(stocks):
     mapped_themes = []
     etf_themes = []
 
     for _, row in stocks.iterrows():
-        ticker = row["Ticker"]
+
+        ticker = str(row["Ticker"]).strip().upper()
+        
         industry_key = str(row["Industry"]).strip().lower()
 
+        #
+        # Priority
+        # 1. Explicit stock mapping
+        # 2. Industry mapping
+        # 3. Automatic mapper
+        #
         if ticker in COMPANY_THEME:
             stock_theme = COMPANY_THEME[ticker]
+
         elif industry_key in INDUSTRY_THEME:
             stock_theme = INDUSTRY_THEME[industry_key]
-        else:
-            stock_theme = map_stock_theme(row["Industry"], row["Sector"])
 
-        if stock_theme in THEME_TRANSLATION:
-            etf_theme = THEME_TRANSLATION[stock_theme]
         else:
-            etf_theme = stock_theme
+            stock_theme = map_stock_theme(
+                row["Industry"],
+                row["Sector"],
+            )
+
+        etf_theme = THEME_TRANSLATION.get(
+            stock_theme,
+            stock_theme,
+        )
 
         mapped_themes.append(stock_theme)
-        etf_themes.append(etf_theme)
+        etf_themes.append(normalize_theme(etf_theme))
 
+    stocks = stocks.copy()
     stocks["Mapped_Theme"] = mapped_themes
     stocks["ETF_Theme"] = etf_themes
-    stocks["ETF_Theme"] = stocks["ETF_Theme"].apply(normalize_theme)
-    return stocks
 
+    return stocks
 
 def score_stocks(stocks):
     stocks = calculate_rs_raw(stocks)
@@ -487,6 +505,7 @@ def score_stocks(stocks):
     stocks = calculate_long_score(stocks)
     stocks = calculate_short_score(stocks)
     return stocks
+
 
 
 def build_candidates(stocks):
@@ -587,6 +606,7 @@ def build_candidates(stocks):
             "Is_Short_Candidate",
         ] = True
 
+
     stocks = apply_tracking_state(
         registry=registry,
         stocks=stocks,
@@ -654,6 +674,7 @@ def run_tabela_pipeline():
     theme_strength_settings = get_theme_strength_settings()
 
     stocks, etf_df, benchmark_returns = load_inputs(theme_strength_settings)
+
     etf_df = calculate_etf_rs(etf_df)
     etf_df = assign_theme_score(etf_df)
     etf_master = etf_df.copy()
@@ -666,6 +687,9 @@ def run_tabela_pipeline():
     theme_class_map, theme_score_map, theme_rank_map, theme_raw_score_map = build_theme_classification(theme_strength)
 
     stocks = map_stock_themes(stocks)
+
+
+
     stocks["Theme_Rank"] = stocks["ETF_Theme"].map(theme_rank_map)
 
     stocks = calculate_rs_raw(stocks)
@@ -680,7 +704,6 @@ def run_tabela_pipeline():
     )
 
     stocks = score_stocks(stocks)
-
 
     stocks, long_candidates, distribution_watchlist, theme_breadth, recovered = build_candidates(stocks)
 

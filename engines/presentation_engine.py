@@ -120,6 +120,7 @@ def print_scan_epilogue():
         section_texts[key] = clean_saved_messages(section_texts[key])
 
     order = [
+        "MARKET_CONTEXT",
         "THEME_PERFORMANCE",
         "THEME_BREADTH",
         "LONG_UNIVERSE",
@@ -131,9 +132,6 @@ def print_scan_epilogue():
 
     final_output = []
 
-    if "MARKET_CONTEXT" in section_texts:
-        final_output.append(section_texts["MARKET_CONTEXT"])
-
     if pre_header.strip():
         final_output.append(pre_header)
 
@@ -141,22 +139,12 @@ def print_scan_epilogue():
         final_output.append(section_texts["HEADER"])
 
     for key in order:
+        if key == "HEADER":
+            continue
+
         if key in section_texts:
             final_output.append(section_texts[key])
 
-    files_generated = (
-        "\n"
-        "FILES GENERATED\n"
-        "---------------\n"
-        "✓ Market Context\n"
-        "✓ Stock History\n"
-        "✓ Market Snapshot\n"
-        "✓ Rotation Delta\n"
-        "✓ Unknown Classification\n"
-        "✓ Stock Transition Registry\n"
-        "\n"
-    )
-    final_output.append(files_generated)
 
     if "END_BANNER" in section_texts:
         final_output.append(section_texts["END_BANNER"])
@@ -423,10 +411,6 @@ def print_market_context_summary(market_context):
         return f"{value:.2f}"
 
     print()
-    print("==============================================")
-    print("MARKET CONTEXT")
-    print("==============================================")
-    print()
 
     snapshot = market_context["latest_market_snapshot"]
     stats = snapshot["market_statistics"]
@@ -436,7 +420,7 @@ def print_market_context_summary(market_context):
 
     header = (
         f"{'ETF':<6}"
-        f"{'Type':>14}"
+        f"{'State':>14}"
         f"{'5D%':>8}"
         f"{'20D%':>8}"
         f"{'50D%':>8}"
@@ -549,9 +533,8 @@ def print_daily_scan(
     if theme_strength_settings["debug_theme_strength"]:
         print_theme_strength_diagnostics(theme_strength)
 
-    print("\n\n")
+    print()
     print("THEME BREADTH ANALYSIS")
-    print("----------------------------")
     display_df = (
         theme_breadth[
             [
@@ -577,9 +560,8 @@ def print_daily_scan(
 
     print(display_df.to_string(index=False))
 
-    print("\n\n")
+    print()
     print("LONG CANDIDATE UNIVERSE")
-    print("----------------------------")
 
     display_df = long_candidates[
         [
@@ -670,10 +652,8 @@ def print_daily_scan(
 
         print(display_df.to_string(index=False))
 
-    print("\n")
-    print("----------------------------")
+    print()
     print("TRADINGVIEW WATCHLIST EXPORT")
-    print("----------------------------")
 
     long_list = ",".join(
         long_candidates["Ticker"]
@@ -730,7 +710,7 @@ def print_daily_scan(
     # OBSERVATION
     #
     print()
-    print(f"Observation : {len(transition['observation'])}")
+    print(f"Observation ({len(transition['observation'])})")
 
     if transition["observation"]:
 
@@ -764,9 +744,10 @@ def print_daily_scan(
     #
     print()
 
-    print(f"Distribution : {len(transition['distribution'])}")
-
-    if transition["distribution"]:
+    if not transition["distribution"]:
+        print("Distribution (0): None")
+    else:
+        print(f"Distribution ({len(transition['distribution'])})")
 
         distribution_groups = {}
 

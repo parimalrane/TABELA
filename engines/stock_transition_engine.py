@@ -1,5 +1,3 @@
-print("STOCK TRANSITION FILE:", __file__)
-
 import json
 import os
 from typing import Dict, Set
