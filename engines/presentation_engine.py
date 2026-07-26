@@ -80,7 +80,7 @@ def print_scan_epilogue():
         captured_text = ""
 
     titles = [
-        ("MARKET_CONTEXT", "MARKET CONTEXT"),
+        ("MARKET_CONTEXT", "MARKET STATISTICS"),
         ("HEADER", "TABELA DAILY MARKET SCAN"),
         ("THEME_PERFORMANCE", "THEME PERFORMANCE"),
         ("THEME_BREADTH", "THEME BREADTH ANALYSIS"),
@@ -120,6 +120,7 @@ def print_scan_epilogue():
         section_texts[key] = clean_saved_messages(section_texts[key])
 
     order = [
+        "HEADER",
         "MARKET_CONTEXT",
         "THEME_PERFORMANCE",
         "THEME_BREADTH",

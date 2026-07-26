@@ -1,0 +1,9 @@
+# Tier 1 (Architect / System Analysis): Kimi K2.5 or Claude 3.7 Sonnet
+opencode --agent architect_kimi_0.37_2.02 "Analyze..."
+opencode --agent architect_sonnet_3.0_15.0 "Refactor..."
+
+# Tier 2 (Core Feature Coding): Qwen 2.5 Coder 32B / GLM
+opencode --agent coder_qwen_0.30_1.20 "Implement..."
+
+# Tier 3 (Fast Patches, Comments, Quick Inspections): Gemini 2.5 Flash
+opencode --agent patcher_flash_0.075_0.30 "Inspect..."
