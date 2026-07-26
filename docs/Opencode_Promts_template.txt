@@ -7,3 +7,23 @@ opencode --agent coder_qwen_0.30_1.20 "Implement..."
 
 # Tier 3 (Fast Patches, Comments, Quick Inspections): Gemini 2.5 Flash
 opencode --agent patcher_flash_0.075_0.30 "Inspect..."
+
+
+
+You are working on the TABELA Market Intelligence Platform codebase (`C:\TABELA`).
+
+### Task
+[Describe the specific feature enhancement, refactoring, or bug fix here]
+
+### Target Files
+- `engines/[filename].py`
+- `core/[filename].py`
+
+### Architectural & Operational Rules
+- Follow the modular single-responsibility pattern across `core/` and `engines/`.
+- Ensure all code is cleanly typed and adheres to centralized configuration (`core/config.py`).
+- **Strict Prohibition:** Do NOT introduce or write technical analysis indicators, trade execution logic, or risk management/stops parameters.
+
+### Documentation Requirement (Mandatory)
+- Update `SYSTEM_CONTEXT.md` to reflect any modified configuration defaults, data schemas, or pipeline execution flows resulting from this change.
+- Add an entry detailing this update under **Appendix C (Change Log)** in `SYSTEM_CONTEXT.md`.
