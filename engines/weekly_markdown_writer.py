@@ -17,11 +17,11 @@ class WeeklyMarkdownWriter:
         self.write_themes(lines, dataset)
 
         # Batch 2
-        # self.write_stocks(lines, dataset)
-        # self.write_review_queue(lines, dataset)
-        # self.write_taxonomy(lines, dataset)
-        # self.write_maintenance(lines, dataset)
-        # self.write_quality(lines, dataset)
+        self.write_stocks(lines, dataset)
+        self.write_review_queue(lines, dataset)
+        self.write_taxonomy(lines, dataset)
+        self.write_maintenance(lines, dataset)
+        self.write_quality(lines, dataset)
 
         output_file.write_text("\n".join(lines), encoding="utf-8")
         return output_file
@@ -73,16 +73,6 @@ class WeeklyMarkdownWriter:
             lines.append(str(theme_data))
             lines.append("```")
             lines.append("")
-
-if __name__=="__main__":
-    from engines.weekly_dataset_builder import WeeklyDatasetBuilder
-    from engines.weekly_json_writer import WeeklyJSONWriter
-    dataset=WeeklyDatasetBuilder().build()
-    WeeklyJSONWriter().write(dataset)
-    print(WeeklyMarkdownWriter().write(dataset))
-
-# ===== Batch 2 =====
-# Add these methods inside WeeklyMarkdownWriter
 
     def write_stocks(self, lines, dataset):
         lines.append("## Stocks")
@@ -139,3 +129,10 @@ if __name__=="__main__":
         lines.append(f"- Missing Days: {max(0, 5 - m.trading_days)}")
         lines.append(f"- Completeness: {round(m.trading_days / 5, 2)}")
         lines.append("")
+
+if __name__=="__main__":
+    from engines.weekly_dataset_builder import WeeklyDatasetBuilder
+    from engines.weekly_json_writer import WeeklyJSONWriter
+    dataset=WeeklyDatasetBuilder().build()
+    WeeklyJSONWriter().write(dataset)
+    print(WeeklyMarkdownWriter().write(dataset))

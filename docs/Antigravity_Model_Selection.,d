@@ -1,0 +1,9 @@
+### Antigravity Model Selection Guide
+
+Since you have transitioned to Antigravity with your Google AI Pro subscription, route tasks to the models in your dropdown as follows:
+
+| Task Category | Recommended Model | Rationale |
+| --- | --- | --- |
+| **Architectural Review & Migration Planning** | **`Claude Sonnet 4.6 (Thinking)`** | Best for multi-module dependency tracing, deep logical reasoning, and ensuring 0 breaking changes during repo restructuring. |
+| **Bulk Import Refactoring & Path Updates** | **`Gemini 3.1 Pro (High)`** | Offers a massive context window to ingest the entire codebase simultaneously, ensuring all internal imports across `core/` and `engines/` are updated accurately without missing cross-module dependencies. |
+| **Fast Fixes & Docstring Patches** | **`Gemini 3.6 Flash (High)`** | High-speed processing for localized syntax fixes, formatting, and quick script updates once structural moves are complete. |

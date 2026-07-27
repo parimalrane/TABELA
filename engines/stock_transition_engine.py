@@ -5,7 +5,7 @@ from typing import Dict, Set
 import pandas as pd
 
 from core.config import STOCK_TRANSITION_CONFIG
-from engines.runtime_context import context
+from core.runtime_context import context
 from engines.watchlist_delta_engine import load_previous_long_watchlist
 
 

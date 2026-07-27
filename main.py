@@ -3,7 +3,7 @@ from contextlib import redirect_stdout
 from pathlib import Path
 
 from core.pipeline import run_tabela_pipeline
-from engines.runtime_context import context
+from core.runtime_context import context
 
 
 if __name__ == "__main__":

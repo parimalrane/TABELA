@@ -5636,6 +5636,8 @@ Only place files here that satisfy one of the following:
 
 - licensing
 
+- scripts/ directory containing operator-facing batch scripts (scripts/weekly_run.py)
+
 Avoid placing business logic in the repository root.
 
 ---
@@ -5673,6 +5675,8 @@ Representative files:
 - config.py
 
 - runtime_context.py
+
+- weekly_pipeline.py
 
 The exact filenames may evolve.
 
@@ -9749,6 +9753,12 @@ As the platform expanded, business logic naturally diversified into multiple ind
 - Rotation
 - Stock Analysis
 - Historical Intelligence
+
+Representative files:
+
+- unknown_classification_persistence.py
+
+(Note: short_engine.py was removed)
 - Presentation
 
 A monolithic implementation would rapidly become difficult to maintain.
@@ -10981,6 +10991,12 @@ Knowledge should permanently reside within:
 - Configuration
 - Historical Intelligence
 
+Representative files:
+
+- unknown_classification_persistence.py
+
+(Note: short_engine.py was removed)
+
 rather than within AI conversations.
 
 ---
@@ -11243,6 +11259,12 @@ The following architectural characteristics should remain stable over time.
 
 - Historical Intelligence
 
+Representative files:
+
+- unknown_classification_persistence.py
+
+(Note: short_engine.py was removed)
+
 - Registry Philosophy
 
 - Documentation Governance
@@ -11384,6 +11406,19 @@ Every architectural decision should support:
 The repository should become progressively easier to understand, extend, and trust.
 
 ---
+
+
+---
+
+# Appendix G (Change Log)
+
+Date: 2026-07-27
+Component: Repository Architecture & Directory Structure
+Category: Refactoring / Architectural Reorganization
+Reason: Moved framework orchestration (runtime_context.py, weekly_pipeline.py) into core/, isolated operator scripts in scripts/, repaired weekly_markdown_writer.py, and corrected filename typo (SYSTEM_CONTEXT.md).
+Impact: Zero breaking changes to core business logic or pipeline deterministic outputs. All internal import paths synchronized.
+Constraint: Do NOT modify any business methodology rules, composite scoring parameters, or data boundary constraints in SYSTEM_CONTEXT.md.
+
 
 # END OF SYSTEM_CONTEXT.md
 

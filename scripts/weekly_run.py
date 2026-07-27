@@ -1,4 +1,4 @@
-from engines.weekly_dataset_builder import WeeklyDatasetBuilder
+from core.weekly_pipeline import WeeklyIntelligenceEngine
 from engines.weekly_json_writer import WeeklyJSONWriter
 
 
@@ -8,9 +8,9 @@ if __name__ == "__main__":
     print("TABELA WEEKLY INTELLIGENCE")
     print("=" * 70)
 
-    dataset = WeeklyDatasetBuilder().build()
+    report = WeeklyIntelligenceEngine().build()
 
-    output = WeeklyJSONWriter().write(dataset)
+    output = WeeklyJSONWriter().write(report.dataset)
 
     print()
     print(f"Weekly JSON saved to:")
