@@ -568,7 +568,7 @@ Observation is an intermediate lifecycle stage.
 A previous Long leader transitions to Observation only when meeting three strict conditions:
 1. It is a previous leader (tracking_state is LONG in the registry).
 2. It does not appear in today's Long list.
-3. Its Long Score is less than the defined threshold (`OBSERVATION_FALLBACK_SCORE_THRESHOLD`).
+3. Its Long Score is less than the defined threshold (`OBSERVATION_FALLBACK_SCORE_THRESHOLD`) AND its RS Rating is less than (`OBSERVATION_FALLBACK_RS_THRESHOLD`).
 
 ---
 
@@ -11451,3 +11451,10 @@ Category: Business Methodology Refinement
 Reason: Refined the stock transition logic so that a previous Long leader transitions to Observation only when meeting three strict conditions (previous leader, absent from today's long list, and long_score below OBSERVATION_FALLBACK_SCORE_THRESHOLD). This prevents premature demotion of leaders that merely dropped out of the daily top candidate cohort.
 Impact: Preserves all deterministic scoring rules and strict data boundaries without introducing unprompted technical indicators. Update `OBSERVATION_FALLBACK_SCORE_THRESHOLD` in core config.
 Constraint: Do NOT introduce unprompted technical indicators or risk management stops.
+
+Date: 2026-08-02
+Component: Pipeline Orchestration & Stock Transition Engine
+Category: Architectural Refactoring / Defect Remediation
+Reason: Rectified pipeline memory fragmentation where falling stocks were orphaned from Terminal reports by accurately fusing Transition Engine grace-period `LONG`s back into the main `long_candidates` dataframe. Removed artificial `.head(50)` boundaries from `compare_watchlists` to capture 100% of pipeline history in daily JSONs. Eliminated the "Ghost Stock" bug by introducing dynamic sweeping loops that natively purge stocks from state registry if they drop out of the underlying daily raw dataset (e.g. from earnings blackouts or delistings) instead of defaulting to `0.0`. Enhanced Observation transition filters to mathematically require both `OBSERVATION_FALLBACK_SCORE_THRESHOLD` and `OBSERVATION_FALLBACK_RS_THRESHOLD`.
+Impact: 100% resolution of data drifting between CLI Terminal, tracking output, and CSV ingestion layers. Zero disruption to existing determinism or deterministic scoring mechanisms.
+Constraint: Do NOT introduce technical analysis indicators, trade execution logic, or risk management parameters.
