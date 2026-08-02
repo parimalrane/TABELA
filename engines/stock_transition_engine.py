@@ -4,7 +4,11 @@ from typing import Dict, Set
 
 import pandas as pd
 
-from core.config import STOCK_TRANSITION_CONFIG, OBSERVATION_FALLBACK_SCORE_THRESHOLD
+from core.config import (
+    STOCK_TRANSITION_CONFIG,
+    OBSERVATION_FALLBACK_SCORE_THRESHOLD,
+    OBSERVATION_FALLBACK_RS_THRESHOLD,
+)
 from core.runtime_context import context
 from engines.watchlist_delta_engine import load_previous_long_watchlist
 
@@ -163,14 +167,26 @@ def pre_distribution_update(
             
         if state["tracking_state"] == "LONG":
             long_score = 0.0
+            rs_rating = 0.0
             if stocks is not None and not stocks.empty:
                 match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
+                if match.empty:
+                    # Ghost stock vanished from universe. Purge.
+                    del registry[ticker]
+                    continue
+                
                 if not match.empty:
                     val = match["Long_Score"].iloc[0]
                     if pd.notna(val):
                         long_score = float(val)
+                    val_rs = match["RS_Rating"].iloc[0]
+                    if pd.notna(val_rs):
+                        rs_rating = float(val_rs)
             
-            if long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD:
+            if (
+                long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
+                and rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
+            ):
                 state["tracking_state"] = OBSERVATION
                 state["state_days"] = 1
                 state["last_market_date"] = today
@@ -195,14 +211,25 @@ def pre_distribution_update(
             continue
             
         long_score = 0.0
+        rs_rating = 0.0
         if stocks is not None and not stocks.empty:
             match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
+            if match.empty:
+                # Ghost stock vanished from universe. Ignore transition to Observation.
+                continue
+                
             if not match.empty:
                 val = match["Long_Score"].iloc[0]
                 if pd.notna(val):
                     long_score = float(val)
+                val_rs = match["RS_Rating"].iloc[0]
+                if pd.notna(val_rs):
+                    rs_rating = float(val_rs)
                     
-        if long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD:
+        if (
+            long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
+            and rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
+        ):
             registry[ticker] = {
                 "tracking_state": OBSERVATION,
                 "state_days": 1,

@@ -542,7 +542,19 @@ def build_candidates(stocks):
     registry, recovered = pre_distribution_update(
         registry=registry,
         current_long_candidates=long_candidates,
+        stocks=stocks,
     )
+
+    grace_tickers = [t for t, s in registry.items() if s["tracking_state"] == "LONG"]
+    if grace_tickers:
+        grace_df = stocks[
+            stocks["Ticker"].astype(str).str.upper().isin(grace_tickers)
+        ].copy()
+        if not grace_df.empty:
+            temp = pd.concat([long_candidates, grace_df])
+            temp["_clean_ticker"] = temp["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper()
+            long_candidates = temp.drop_duplicates(subset=["_clean_ticker"]).drop(columns=["_clean_ticker"])
+            long_candidates = long_candidates.sort_values("Long_Score", ascending=False).reset_index(drop=True)
 
     distribution_candidates = get_distribution_candidates(
         registry=registry,

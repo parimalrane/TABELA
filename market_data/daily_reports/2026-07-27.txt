@@ -9,7 +9,7 @@ MARKET STATISTICS
 ETF            State     5D%    20D%    50D%   200D%   RV.20   RV.50    20Dist    50Dist   200Dist
 --------------------------------------------------------------------------------------------------
 SPY              N/A   -1.23   -0.26   -1.21   +9.80    0.81    0.76     -0.96     -0.77     +5.76
-QQQ     Distribution   -3.77   -5.78   -5.22  +11.58    1.11    0.95     -4.01     -4.94     +6.01
+QQQ              N/A   -3.77   -5.78   -5.22  +11.58    1.11    0.95     -4.01     -4.94     +6.01
 IWM              N/A   -1.22   -2.03   +2.97  +18.72    0.87    0.74     -0.92     +0.50    +10.57
 DIA              N/A   -0.05   -0.08   +4.09  +11.84    0.81    0.65     -0.34     +1.22     +6.51
 
@@ -100,20 +100,76 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zac
   DDOG      Cloud Infrastructure              Leading         98     90.3600          3
  VCTR*                   Banking              Neutral         95     89.5800          1
   SKWD                 Insurance              Leading         90     87.1475          3
+   OII               Exploration              Neutral         99     86.7550          3
    TRV                 Insurance              Leading         90     85.9975          2
+   PBF               Exploration              Neutral         99     85.7550          1
    VIK Leisure and Entertainment  Unclassified Leader         90     85.7500          2
   AIR*       Aerospace & Defense              Neutral         90     85.2950          1
+    DK               Exploration              Neutral         98     85.2050          1
   MRX*                   Banking              Neutral         90     85.0300          1
+   WKC               Exploration              Neutral         97     84.6550          1
+  AMTB                   Banking              Neutral         95     84.2800          3
  PAYS*                   Banking              Neutral         90     84.2300          3
+  PARR               Exploration              Neutral         97     84.2050          2
   LTH* Leisure and Entertainment              Unknown         97     84.1500          1
  DAVE*                  Software              Neutral         95     84.1475          2
+  DINO               Exploration              Neutral         97     83.9050          2
  LQDA*           Medical Devices              Neutral         99     83.2550          1
+  FTNT             Cybersecurity              Neutral         98     82.9475          1
+   VLO               Exploration              Neutral         95     82.8050          2
    HG*                 Insurance              Leading         80     82.2475          3
+  CLMT               Exploration              Neutral         95     82.2050          2
+   EAT               Restaurants              Unknown         95     81.9500          3
   NET*      Cloud Infrastructure              Leading         80     81.8600          1
  DOCN*      Cloud Infrastructure              Leading         80     81.7100          2
+    FA                  Software              Neutral         95     81.6975          3
  IBKR*                   Banking              Neutral         80     81.6300          1
+   MPC               Exploration              Neutral         95     81.5550          3
+  PENG                  Software              Neutral         97     81.4975          1
    LB*               Exploration              Neutral         80     81.1050          3
+  EVER                  Software              Neutral         95     81.0975          3
+  OKTA             Cybersecurity              Neutral         97     80.7475          2
+  MUFG                   Banking              Neutral         90     80.6300          3
+  WSBC                   Banking              Neutral         80     80.5300          3
+  CARE                   Banking              Neutral         90     80.2300         4*
+   PSX               Exploration              Neutral         90     80.0550          2
+  BLZE                  Software              Neutral         99     79.6975          3
+  PANW             Cybersecurity              Neutral         97     79.4975          3
+    MU                    Memory              Lagging         98     79.4650          1
    NP*                 Insurance              Leading         70     79.1975          2
+  APPS                  Software              Neutral         98     79.1475          3
+  NESR               Exploration              Neutral         80     77.7050          1
+  SNDK                    Memory              Lagging         99     77.6150          1
+  VRNS             Cybersecurity              Neutral         95     77.4975          3
+  NTAP       Data Infrastructure              Neutral         95     77.4975          3
+  HNGE           Medical Devices              Neutral         90     77.4050          1
+  DELL                AI Servers              Lagging         99     77.3025          1
+   AMD                AI Compute              Lagging         95     77.0525          2
+   SUN               Exploration              Neutral         80     76.9050          3
+   HPE                AI Servers              Lagging         98     76.4525          1
+  EQNR               Exploration              Neutral         80     76.0050          3
+  FROG  Developer Infrastructure              Neutral         90     75.9475          3
+    BB                  Software              Neutral         90     75.6975          2
+  CRWD             Cybersecurity              Neutral         90     75.5475         4*
+   STX              Data Storage              Lagging         90     75.0650          1
+   RSI Leisure and Entertainment              Unknown         80     74.6500          2
+  TENB             Cybersecurity              Neutral         90     74.3475         4*
+  KNSA           Medical Devices              Neutral         80     72.8050          1
+  ICHR   Semiconductor Equipment              Lagging         98     72.2650         4*
+   VPG            Semiconductors              Lagging         97     72.1150          3
+  QLYS             Cybersecurity              Neutral         80     71.0475          3
+  ATEN                  Software              Neutral         80     70.4475          3
+  UCTT   Semiconductor Equipment              Lagging         95     70.0150          1
+  ACMR   Semiconductor Equipment              Lagging         90     69.7650          3
+  AMBQ            Semiconductors              Lagging         97     69.1150          3
+   WDC                    Memory              Lagging         90     69.0650          1
+  EXTR             AI Networking              Lagging         90     68.8525          3
+   UMC                   Foundry              Lagging         90     68.4650         4*
+  SIMO                    Memory              Lagging         80     66.5650          1
+   ASX            Semiconductors              Lagging         80     65.5150          2
+  AMAT   Semiconductor Equipment              Lagging         80     65.2150          2
+   MXL            Semiconductors              Lagging         80     64.5650          3
+   VSH            Semiconductors              Lagging         80     62.7650          3
 
 UNCLASSIFIED LEADERS
 ----------------------------
@@ -123,24 +179,26 @@ VIK      Leisure and Recreation Services
 ========================================
 DISTRIBUTION WATCHLIST
 ========================================
-Ticker    Theme Theme Class RS Δ RS Trend Leadership History Composite Δ Composite Trend
-  APPS Software     Neutral   -0        -          - Confirm        -3.2            4/5↓
+Ticker             Theme Theme Class RS Δ RS Trend Leadership History Composite Δ Composite Trend
+  CRDO AI Infrastructure     Lagging    -        -          -       -           -               -
+  ALGM    Semiconductors     Lagging    -        -          -       -           -               -
+  VICR    Semiconductors     Lagging    -        -          -       -           -               -
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SEZL,OSCR,SNOW,DDOG,VCTR,SKWD,TRV,VIK,AIR,MRX,PAYS,LTH,DAVE,LQDA,HG,NET,DOCN,IBKR,LB,NP,
-###OBSERVATION,SNDK,PBF,OII,MU,DK,FTNT,PARR,WKC,DINO,MPC,FA,CLMT,AMTB,VLO,MUFG,CARE,STX,HNGE,PSX,SIMO,WSBC,RSI,SUN,EQNR,KNSA,NESR,LLY,SM,VG,BUSE,RELY,UMBF,TWLO,
-###DISTRIBUTION,APPS,
+###LONG,SEZL,OSCR,SNOW,DDOG,VCTR,SKWD,OII,TRV,PBF,VIK,AIR,DK,MRX,WKC,AMTB,PAYS,PARR,LTH,DAVE,DINO,LQDA,FTNT,VLO,HG,CLMT,EAT,NET,DOCN,FA,IBKR,MPC,PENG,LB,EVER,OKTA,MUFG,WSBC,CARE,PSX,BLZE,PANW,MU,NP,APPS,NESR,SNDK,VRNS,NTAP,HNGE,DELL,
+###OBSERVATION,COMP,ARM,VIRT,LLY,SM,SYNA,VG,KLIC,S,BUSE,RPD,NTCT,MAMA,MRVL,NBIS,ALAB,RELY,MKSI,INTC,UMBF,TXN,RBRK,PRCH,TWLO,COHU,CEVA,LRCX,PD,OUST,STM,WYFI,SVCO,
+###DISTRIBUTION,CRDO,ALGM,VICR,
 
 WATCHLIST DELTA
 ----------------------------------------
-Long         (+12) : AIR, DDOG, DOCN, HG, IBKR, LTH, NET, NP, SKWD, SNOW, TRV, VIK
-Observation  (+14) : AMTB, CLMT, DINO, DK, EQNR, LLY, MPC, OII, PARR, PBF, SM, VG, WKC, WSBC
-Distribution (+1) : APPS
-Left Dist    (-16) : ACMR, AMBQ, ASX, BB, COHU, LRCX, MXL, QLYS, RPD, STM, TENB, TOELY, TXN, UCTT, WDC, WYFI
+Long         (+6) : AIR, HG, IBKR, LTH, NP, VIK
+Observation  (+6) : ALAB, LLY, RPD, S, SM, VG
+Distribution (+0) : None
+Left Dist    (-0) : None
 
 RECOVERING LEADERS
 ----------------------------------------
-Observation : DDOG, DOCN, IBKR, NET, SKWD, SNOW, TRV
+Observation : IBKR
 Distribution: None
 
 ========================================
@@ -148,20 +206,17 @@ STOCK TRANSITIONS
 ========================================
 
 Observation (36)
-Day 1  (14) : AMTB, CLMT, DINO, DK, EQNR, LLY, MPC, OII, PARR, PBF, SM, VG, WKC, WSBC
-Day 2  ( 5) : MU, SIMO, SNDK, STX, VLO
-Day 3  ( 2) : CEPL, NESR
-Day 4  ( 1) : RSI
-Day 5  ( 6) : FA, FTNT, PLMR, PSX, SUN, TWLO
-Day 7  ( 8) : BAP, BUSE, CARE, HNGE, KNSA, MUFG, RELY, UMBF
+Day 1  ( 6) : ALAB, LLY, RPD, S, SM, VG
+Day 2  ( 4) : CEVA, INTC, RELY, TOELY
+Day 3  ( 4) : CEPL, COMP, NTCT, STM
+Day 4  ( 2) : PRCH, TWLO
+Day 5  ( 4) : PD, PLMR, RBRK, UMBF
+Day 7  (16) : ARM, BAP, BUSE, COHU, KLIC, LRCX, MAMA, MKSI, MRVL, NBIS, OUST, SVCO, SYNA, TXN,
+              VIRT, WYFI
 
-Distribution (24)
-Day 1  ( 1) : APPS
-Day 2  (16) : ACMR, AMBQ, ASX, BB, COHU, LRCX, MXL, QLYS, RPD, STM, TENB, TOELY, TXN, UCTT,
-              WDC, WYFI
-Day 3  ( 1) : EAT
-Day 4  ( 4) : EXTR, INTC, SVCO, VICR
-Day 5  ( 2) : MANH, RNG
+Distribution (3)
+Day 2  ( 2) : ALGM, CRDO
+Day 4  ( 1) : VICR
 
 ==============================================
 END OF TABELA SCAN

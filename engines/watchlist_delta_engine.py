@@ -243,7 +243,7 @@ def get_previous_watchlist(today):
 
         if f.startswith("watchlist_")
         and f.endswith(".json")
-        and today not in f
+        and f < f"watchlist_{today}.json"
 
     ]
 

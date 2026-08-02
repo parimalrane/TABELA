@@ -220,6 +220,9 @@ def print_theme_performance(theme_performance):
     for col in expected_columns:
         if col not in df.columns:
             df[col] = None
+            
+    for col in ["Rank", "Strength", "D", "W", "M", "Q"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce")
 
     def fmt_delta(value, top3=False, bottom3=False):
         if pd.isna(value):
@@ -687,12 +690,12 @@ def print_daily_scan(
     print("###DISTRIBUTION," + distribution_list + ",")
 
     compare_watchlists(
-        current_long=long_candidates["Ticker"].head(50).tolist(),
+        current_long=long_candidates["Ticker"].tolist(),
         current_observation=stocks.loc[
             stocks["Tracking_State"] == "OBSERVATION",
             "Ticker",
         ].tolist(),
-        current_distribution=distribution_watchlist["Ticker"].head(50).tolist(),
+        current_distribution=distribution_watchlist["Ticker"].tolist(),
         recovered=recovered,
         stocks=stocks,
     )
