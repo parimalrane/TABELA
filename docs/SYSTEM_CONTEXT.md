@@ -565,6 +565,11 @@ Temporary monitoring state assigned after a leadership candidate weakens.
 
 Observation is an intermediate lifecycle stage.
 
+A previous Long leader transitions to Observation only when meeting three strict conditions:
+1. It is a previous leader (tracking_state is LONG in the registry).
+2. It does not appear in today's Long list.
+3. Its Long Score is less than the defined threshold (`OBSERVATION_FALLBACK_SCORE_THRESHOLD`).
+
 ---
 
 ## Distribution
@@ -11439,3 +11444,10 @@ Category: Architectural Fix / Defect Remediation
 Reason: Remedied empty distribution watchlist and TradingView export by hydrating the active registry distribution set directly against the full stock universe instead of today's ephemeral promotion cohort. Corrected section boundary parsing in the presentation epilogue by adding STOCK_TRANSITIONS to properly enclose text-wrapping overflow and eliminate orphaned ticker formatting.
 Impact: Zero modifications to deterministic business logic, scoring algorithms, or JSON schemas. The presentation output now exactly reflects the persistent transition registry state.
 Constraint: Do NOT modify any business methodology rules, composite scoring parameters, or data boundary constraints.
+
+Date: 2026-08-02
+Component: Transition Engine
+Category: Business Methodology Refinement
+Reason: Refined the stock transition logic so that a previous Long leader transitions to Observation only when meeting three strict conditions (previous leader, absent from today's long list, and long_score below OBSERVATION_FALLBACK_SCORE_THRESHOLD). This prevents premature demotion of leaders that merely dropped out of the daily top candidate cohort.
+Impact: Preserves all deterministic scoring rules and strict data boundaries without introducing unprompted technical indicators. Update `OBSERVATION_FALLBACK_SCORE_THRESHOLD` in core config.
+Constraint: Do NOT introduce unprompted technical indicators or risk management stops.

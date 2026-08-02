@@ -4,7 +4,7 @@ from typing import Dict, Set
 
 import pandas as pd
 
-from core.config import STOCK_TRANSITION_CONFIG
+from core.config import STOCK_TRANSITION_CONFIG, OBSERVATION_FALLBACK_SCORE_THRESHOLD
 from core.runtime_context import context
 from engines.watchlist_delta_engine import load_previous_long_watchlist
 
@@ -81,6 +81,7 @@ def save_registry(registry: Dict) -> None:
 def pre_distribution_update(
     registry: Dict,
     current_long_candidates: pd.DataFrame,
+    stocks: pd.DataFrame = None,
 ):
     """
     Lifecycle Phase 1
@@ -99,6 +100,7 @@ def pre_distribution_update(
     recovered = {
         "observation": [],
         "distribution": [],
+        "long": [],
     }
 
     #
@@ -107,6 +109,7 @@ def pre_distribution_update(
     current_longs = {
         str(t).replace("*", "").strip().upper()
         for t in current_long_candidates["Ticker"]
+        if pd.notna(t) and str(t).strip()
     }
 
     #
@@ -118,6 +121,7 @@ def pre_distribution_update(
         {
             str(t).replace("*", "").strip().upper()
             for t in previous["Ticker"]
+            if pd.notna(t) and str(t).strip()
         }
         if previous is not None and not previous.empty
         else set()
@@ -130,23 +134,47 @@ def pre_distribution_update(
     recovered_today = set()
 
     for ticker in list(registry.keys()):
+    
+        if not ticker or pd.isna(ticker):
+            registry.pop(ticker)
+            continue
 
         if ticker not in current_longs:
             continue
 
         state = registry.pop(ticker)
+        
+        state_key = state["tracking_state"].lower()
+        if state_key not in recovered:
+            recovered[state_key] = []
 
-        recovered[state["tracking_state"].lower()].append(ticker)
+        recovered[state_key].append(ticker)
         recovered_today.add(ticker)
 
     #
     # STEP 2
     # Advance surviving tracked stocks exactly once.
+    # Re-evaluate LONG registry entries to prevent premature demotion
     #
-    for state in registry.values():
+    for ticker, state in list(registry.items()):
 
         if state.get("last_market_date") == today:
             continue
+            
+        if state["tracking_state"] == "LONG":
+            long_score = 0.0
+            if stocks is not None and not stocks.empty:
+                match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
+                if not match.empty:
+                    val = match["Long_Score"].iloc[0]
+                    if pd.notna(val):
+                        long_score = float(val)
+            
+            if long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD:
+                state["tracking_state"] = OBSERVATION
+                state["state_days"] = 1
+                state["last_market_date"] = today
+                continue
 
         state["state_days"] += 1
         state["last_market_date"] = today
@@ -165,12 +193,27 @@ def pre_distribution_update(
 
         if ticker in registry:
             continue
-
-        registry[ticker] = {
-            "tracking_state": OBSERVATION,
-            "state_days": 1,
-            "last_market_date": today,
-        }
+            
+        long_score = 0.0
+        if stocks is not None and not stocks.empty:
+            match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
+            if not match.empty:
+                val = match["Long_Score"].iloc[0]
+                if pd.notna(val):
+                    long_score = float(val)
+                    
+        if long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD:
+            registry[ticker] = {
+                "tracking_state": OBSERVATION,
+                "state_days": 1,
+                "last_market_date": today,
+            }
+        else:
+            registry[ticker] = {
+                "tracking_state": "LONG",
+                "state_days": 1,
+                "last_market_date": today,
+            }
 
     return registry, recovered
 

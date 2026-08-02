@@ -206,6 +206,8 @@ STOCK_TRANSITION_CONFIG = {
     "OBSERVATION_MAX_RUNS": 7,
 }
 
+OBSERVATION_FALLBACK_SCORE_THRESHOLD = 70.0
+
 # ============================================================================
 # MARKET CONTEXT ENGINE
 # ============================================================================
