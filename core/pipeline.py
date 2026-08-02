@@ -560,7 +560,7 @@ def build_candidates(stocks):
 
     distribution_watchlist = get_distribution_watchlist(
         registry=registry,
-        qualified_distribution=qualified_distribution,
+        stocks=stocks,
     )
 
     current_long_tickers = {

@@ -89,6 +89,7 @@ def print_scan_epilogue():
         ("DISTRIBUTION_WATCHLIST", "DISTRIBUTION WATCHLIST"),
         ("TRADINGVIEW_EXPORT", "TRADINGVIEW WATCHLIST EXPORT"),
         ("WATCHLIST_DELTA", "WATCHLIST DELTA REPORT"),
+        ("STOCK_TRANSITIONS", "STOCK TRANSITIONS"),
         ("END_BANNER", "END OF TABELA SCAN")
     ]
     
@@ -128,7 +129,8 @@ def print_scan_epilogue():
         "UNCLASSIFIED_LEADERS",
         "DISTRIBUTION_WATCHLIST",
         "TRADINGVIEW_EXPORT",
-        "WATCHLIST_DELTA"
+        "WATCHLIST_DELTA",
+        "STOCK_TRANSITIONS"
     ]
 
     final_output = []

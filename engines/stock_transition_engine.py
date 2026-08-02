@@ -257,14 +257,14 @@ def post_distribution_update(
 
 def get_distribution_watchlist(
     registry: Dict,
-    qualified_distribution: pd.DataFrame,
+    stocks: pd.DataFrame,
 ):
     """
     Return the active Distribution watchlist.
     """
 
-    if qualified_distribution is None or qualified_distribution.empty:
-        return qualified_distribution.iloc[0:0].copy()
+    if stocks is None or stocks.empty:
+        return stocks.iloc[0:0].copy() if stocks is not None else None
 
     distribution = {
         ticker
@@ -273,14 +273,29 @@ def get_distribution_watchlist(
     }
 
     if not distribution:
-        return qualified_distribution.iloc[0:0].copy()
+        return stocks.iloc[0:0].copy()
 
-    return qualified_distribution[
-        qualified_distribution["Ticker"]
+    df = stocks[
+        stocks["Ticker"]
         .astype(str)
+        .str.replace("*", "", regex=False)
+        .str.strip()
         .str.upper()
         .isin(distribution)
     ].copy()
+
+    for col in [
+        "RS_Delta_Val",
+        "RS_Trend_Val",
+        "Leadership_Loss_Val",
+        "History_Val",
+        "Composite_Delta_Val",
+        "Composite_Trend_Val",
+    ]:
+        if col not in df.columns:
+            df[col] = "-"
+
+    return df
 
 def apply_tracking_state(
     registry: Dict,

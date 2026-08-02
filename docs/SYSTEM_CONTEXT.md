@@ -7368,6 +7368,9 @@ Downstream consumers
 
 Implicit contracts should be avoided.
 
+**Data Hydration Contract:**
+The stock transition registry acts as the authoritative source for longitudinal tracking state (e.g., OBSERVATION, DISTRIBUTION). To ensure accurate reporting, downstream consumers (such as the presentation engine and watchlist delta engines) must hydrate active registry sets against the full stock universe rather than relying on ephemeral, daily promotion cohorts.
+
 ---
 
 # C.19 Data Ownership Matrix
@@ -11426,3 +11429,13 @@ This document represents the authoritative operating specification for the TABEL
 
 Any future architectural evolution should preserve the principles defined herein unless explicitly superseded through documented architectural decisions.
 
+---
+
+# Appendix C (Change Log)
+
+Date: 2026-08-02
+Component: Data Hydration & Presentation Engine
+Category: Architectural Fix / Defect Remediation
+Reason: Remedied empty distribution watchlist and TradingView export by hydrating the active registry distribution set directly against the full stock universe instead of today's ephemeral promotion cohort. Corrected section boundary parsing in the presentation epilogue by adding STOCK_TRANSITIONS to properly enclose text-wrapping overflow and eliminate orphaned ticker formatting.
+Impact: Zero modifications to deterministic business logic, scoring algorithms, or JSON schemas. The presentation output now exactly reflects the persistent transition registry state.
+Constraint: Do NOT modify any business methodology rules, composite scoring parameters, or data boundary constraints.

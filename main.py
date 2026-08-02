@@ -16,12 +16,15 @@ if __name__ == "__main__":
 
     output = buffer.getvalue()
 
-    # Print to terminal
-    print(output, end="")
-
     # Save daily report
     report_dir = Path("market_data") / "daily_reports"
     report_dir.mkdir(parents=True, exist_ok=True)
 
     report_file = report_dir / f"{context.market_date}.txt"
     report_file.write_text(output, encoding="utf-8")
+
+    # Print to terminal
+    try:
+        print(output, end="")
+    except UnicodeEncodeError:
+        print(output.encode('ascii', 'replace').decode('ascii'), end="")
