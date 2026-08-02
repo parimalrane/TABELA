@@ -1,17 +1,17 @@
 
 
 ==============================================
-MARKET CONTEXT
-==============================================
+TABELA DAILY MARKET SCAN
+MARKET DATE: 2026-07-14
 
 MARKET STATISTICS
-------------------------------------------------------------------------------------------------
-ETF           Type     5D%    20D%    50D%   200D%   RV.20   RV.50    20Dist    50Dist   200Dist
-------------------------------------------------------------------------------------------------
-SPY            N/A   +0.86   -0.40   +4.33  +14.25    0.62    0.65     +0.93     +1.24     +8.12
-QQQ            N/A   +1.16   -3.27   +6.76  +21.26    0.67    0.66     -0.35     +0.35    +12.59
-IWM            N/A   +0.35   -0.04   +5.45  +23.08    0.73    0.69     -0.62     +1.77    +12.14
-DIA            N/A   +0.37   +1.21   +5.99  +14.20    0.78    0.75     +0.56     +2.78     +7.77
+--------------------------------------------------------------------------------------------------
+ETF            State     5D%    20D%    50D%   200D%   RV.20   RV.50    20Dist    50Dist   200Dist
+--------------------------------------------------------------------------------------------------
+SPY              N/A   +0.86   -0.40   +4.33  +14.25    0.62    0.65     +0.93     +1.24     +8.12
+QQQ              N/A   +1.16   -3.27   +6.76  +21.26    0.67    0.66     -0.35     +0.35    +12.59
+IWM              N/A   +0.35   -0.04   +5.45  +23.08    0.73    0.69     -0.62     +1.77    +12.14
+DIA              N/A   +0.37   +1.21   +5.99  +14.20    0.78    0.75     +0.56     +2.78     +7.77
 
 RELATIVE PERFORMANCE
 ------------------------------------------------------------------------------------------
@@ -24,13 +24,6 @@ QQQ vs IWM           0.81    -3.23     1.31    -1.82
 QQQ vs DIA           0.79    -4.48     0.77     7.06
 IWM vs DIA          -0.02    -1.25    -0.54     8.88
 
-ETF Eligibility: Total ETFs=276, Eligible ETFs=262, Excluded ETFs (Insufficient History)=14
->>> BEFORE build_candidates
->>> AFTER build_candidates
-
-==============================================
-TABELA DAILY MARKET SCAN
-MARKET DATE: 2026-07-14
 ==============================================
 
 ==============================================
@@ -40,43 +33,42 @@ Legend: [] = Top 3   () = Bottom 3
 
 Rank  Theme                               Strength        D        W        M        Q   Rank Δ   Score Δ  Transition
 ------------------------------------------------------------------------------------------------------------------------
-   1  Healthcare                            [5.63]    -2.42     0.09        —        —       +3     -1.72  —
-   2  Cloud Computing                       [5.47]     2.71     2.91        —        —       +4     -1.09  —
-   3  Biotech                               [4.10]    -1.36    -0.58        —        —       +5     -2.63  Leading -> Neutral
-   4  Semiconductors                          3.92   [5.86]   [4.22]        —        —       +1     -0.24  —
-   5  Insurance                               2.87    -1.93     1.94        —        —       -1     -0.12  —
-   6  Media                                   2.65     0.97     0.98        —        —       +1     -0.93  —
-   7  Software                                2.59     2.11     1.02        —        —       +8     -2.22  —
-   8  Banking                                 2.32    -0.97  (-2.99)        —        —       +1     -0.22  —
-   9  Brokers/ Capital Markets                2.02     2.06    -1.66        —        —       +1      0.03  —
-  10  Internet                                1.66     2.19     0.76        —        —       +2     -1.03  —
-  11  Brent Oil                               0.77  (-7.17)    -1.52        —        —       -1      2.62  —
-  12  Telecom                                 0.42     2.03     2.29        —        —       -2      0.51  —
-  13  Regional Banks                          0.41    -3.55  (-3.19)        —        —        0     -0.47  —
-  14  Mlp                                     0.41    -2.79     0.01        —        —       -3      1.38  Neutral -> Leading
-  15  Transportation/Shipping                 0.04    -2.06    -0.71        —        —       -1     -0.02  —
-  16  Exploration                            -0.00  (-7.81)    -0.80        —        —        0      1.12  —
-  17  Pharma                                 -0.08    -6.67    -1.97        —        —       +1     -1.05  —
-  18  Artificial Intelligence                -0.26     3.32     2.79        —        —       +3     -0.86  —
-  19  Agribusiness                           -1.49    -3.24    -1.01        —        —       -6      1.63  —
-  20  Leisure And Entertainment              -1.63    -1.38    -0.91        —        —       +1     -0.46  —
-  21  Crude Oil                              -1.68  (-8.23)    -2.01        —        —       -3      3.02  —
-  22  Reits                                  -2.00    -4.44    -1.26        —        —       +1     -0.41  —
-  23  Retail                                 -2.06    -1.84    -1.80        —        —       -1      0.38  —
-  24  Copper                                 -2.08    -4.09    -0.80        —        —       +2     -1.13  —
-  25  Infrastructure                         -2.44     0.34    -0.22        —        —       -1      0.65  —
-  26  Engineering And Construction           -2.46     2.27    -2.03        —        —       -1      1.52  —
-  27  Timber                                 -3.19    -2.59    -1.51        —        —       -8      2.31  —
-  28  Aerospace & Defense                    -6.05    -1.79    -0.87        —        —       -1      1.78  —
-  29  Copper Mining                          -6.08    -0.51     2.55        —        —       -1      2.24  —
-  30  Natural Gas                            -6.35    -4.51    -0.91        —        —       -5      1.82  —
-  31  Medical Devices                        -6.76    -5.78  (-2.54)        —        —       +1     -0.73  —
-  32  Uranium Mining                       (-8.98)   [3.88]   [4.27]        —        —        0      2.35  —
-  33  Nuclear Power                       (-10.39)     2.96   [3.41]        —        —        0      1.75  —
-  34  Rare Earth/Lithium                  (-13.40)   [3.90]     1.45        —        —        0     -0.71  —
+   1  Healthcare                            [5.63]     1.10   -17.79        —        —       -3      2.69  —
+   2  Cloud Computing                       [5.47]     0.02    -1.28        —        —       -1      0.89  —
+   3  Biotech                               [4.10]    -2.85 (-20.96)        —        —       +1     -1.41  —
+   4  Semiconductors                          3.92  (-4.29) (-39.11)        —        —      +12     -7.71  Leading -> Neutral
+   5  Insurance                               2.87     1.13   -10.76        —        —       -7      3.48  Neutral -> Leading
+   6  Media                                   2.65    -0.98        —        —        —        0     -0.68  —
+   7  Software                                2.59     1.54    -1.31        —        —       -5      0.71  —
+   8  Banking                                 2.32     0.54   -11.65        —        —       -1     -0.09  —
+   9  Brokers/ Capital Markets                2.02     1.45    -4.40        —        —       -1     -0.34  —
+  10  Internet                                1.66    -0.29    -1.64        —        —       -2     -0.13  Neutral -> Leading
+  11  Brent Oil                               0.77  [13.86]   [6.86]        —        —      -16     12.80  Lagging -> Neutral
+  12  Telecom                                 0.42    -2.22   -19.46        —        —       +9     -2.61  Leading -> Neutral
+  13  Regional Banks                          0.41    -0.60   -13.31        —        —       -2     -0.35  —
+  14  Mlp                                     0.41     4.09    -4.73        —        —      -14      4.72  —
+  15  Transportation/Shipping                 0.04    -1.92   -16.30        —        —       +3     -0.99  —
+  16  Exploration                            -0.00   [7.05]     0.39        —        —      -15      7.19  Lagging -> Neutral
+  17  Pharma                                 -0.08    -1.38   -17.02        —        —       -6      0.97  Neutral -> Leading
+  18  Artificial Intelligence                -0.26  (-3.69)   -19.14        —        —      +14     -4.80  Leading -> Neutral
+  19  Agribusiness                           -1.49     1.87    -3.12        —        —       -2      1.83  —
+  20  Leisure And Entertainment              -1.63    -0.28    -6.70        —        —       +2      0.88  —
+  21  Crude Oil                              -1.68  [12.30]     0.03        —        —      -11     11.86  Lagging -> Neutral
+  22  Reits                                  -2.00     1.34   -11.62        —        —       -3      2.31  —
+  23  Retail                                 -2.06     0.65    -7.42        —        —       +4      0.94  —
+  24  Copper                                 -2.08     0.48    -6.43        —        —       +9     -0.91  —
+  25  Infrastructure                         -2.44     0.57   -10.59        —        —       +5     -0.33  —
+  26  Engineering And Construction           -2.46     0.27   -12.58        —        —       +8     -1.17  —
+  27  Timber                                 -3.19     0.10   [0.73]        —        —       +7     -0.65  Neutral -> Lagging
+  28  Aerospace & Defense                    -6.05    -1.10   -14.51        —        —       +4     -1.66  Neutral -> Lagging
+  29  Copper Mining                          -6.08     0.49    -9.71        —        —       +3     -5.80  —
+  30  Natural Gas                            -6.35     4.16    -2.56        —        —       -2      4.26  —
+  31  Medical Devices                        -6.76    -2.64    -3.29        —        —       -1      1.99  —
+  32  Uranium Mining                       (-8.98)    -2.87   [2.73]        —        —       +5     -6.85  Neutral -> Lagging
+  33  Nuclear Power                       (-10.39)  (-3.37)    -3.61        —        —       +4     -6.24  —
+  34  Rare Earth/Lithium                  (-13.40)    -1.58 (-23.36)        —        —       +2     -5.25  —
 
 THEME BREADTH ANALYSIS
-----------------------------
                           Theme  Total  Qualified Stocks  Breadth %  Breadth Score                       Leaders
                   Cybersecurity     10               8.0      80.00         186.32  FTNT, OKTA, QLYS, PANW, CRWD
                          Memory      4               4.0     100.00         158.53           MU, SNDK, SIMO, WDC
@@ -94,13 +86,12 @@ Private Wireless Infrastructure      1               1.0     100.00          68.
                    Data Storage      1               1.0     100.00          67.24                           STX
            Communications Cloud      1               1.0     100.00          62.38                          TWLO
                         AI ASIC      1               1.0     100.00          62.38                          MRVL
-                     AI Sensors      1               1.0     100.00          62.38                          OUST
              Alternative Energy      1               1.0     100.00          62.38                            BE
+                     AI Sensors      1               1.0     100.00          62.38                          OUST
               AI Infrastructure      5               2.0      40.00          57.34                    CRDO, NBIS
         Semiconductor Analytics      1               1.0     100.00          55.45                          PDFS
 
 LONG CANDIDATE UNIVERSE
-----------------------------
 Ticker             Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
     MU                   Memory              Leading         99     96.4325          1
    STX             Data Storage              Leading         97     95.3325          1
@@ -114,8 +105,8 @@ Ticker             Mapped_Theme Theme Classification  RS_Rating  Long_Score Zack
   PENG                 Software              Leading         99     91.3125          1
    ASX           Semiconductors              Leading         95     90.9325          1
    UMC                  Foundry              Leading         99     90.8325          3
- TOELY  Semiconductor Equipment              Leading         95     90.6325          1
   AMAT  Semiconductor Equipment              Leading         95     90.6325          1
+ TOELY  Semiconductor Equipment              Leading         95     90.6325          1
   ACMR  Semiconductor Equipment              Leading         98     90.5825          3
   SNOW     Cloud Infrastructure              Leading         95     90.4450          3
     FA                 Software              Leading         95     90.4125          3
@@ -135,14 +126,13 @@ Ticker             Mapped_Theme Theme Classification  RS_Rating  Long_Score Zack
   FROG Developer Infrastructure              Leading         97     88.5125          3
   BLZE                 Software              Leading         99     88.4125          3
   TWLO     Communications Cloud              Leading         90     88.3450          2
-  VCTR       Financial Services  Unclassified Leader         90     88.3000          1
    STM           Semiconductors              Leading         97     88.1325          1
   UCTT  Semiconductor Equipment              Leading         98     88.0825          1
   TENB            Cybersecurity              Leading         99     88.0125         4*
   VRNS            Cybersecurity              Leading         98     87.8625          3
   ATEN                 Software              Leading         95     87.4125          3
-  COMP                 Software              Leading         90     87.2625          1
    RPD                 Software              Leading         98     87.2625          3
+  COMP                 Software              Leading         90     87.2625          1
   MAMA                  Unknown  Unclassified Leader         90     87.1000          1
    TXN           Semiconductors              Leading         90     87.0825          3
   EVER                 Software              Leading         90     87.0625          3
@@ -150,7 +140,6 @@ Ticker             Mapped_Theme Theme Classification  RS_Rating  Long_Score Zack
    VSH           Semiconductors              Leading         90     86.6825          1
   AMBQ           Semiconductors              Leading         99     86.6325          3
   COHU    Semiconductor Testing              Leading         90     86.5325          2
-   MRX       Financial Services  Unclassified Leader         90     86.5000          1
   NTAP      Data Infrastructure              Leading         95     86.2125          3
      S            Cybersecurity              Leading         90     85.9125          2
   RBRK                 Software              Leading         90     85.8625          3
@@ -162,52 +151,42 @@ Ticker             Mapped_Theme Theme Classification  RS_Rating  Long_Score Zack
 UNCLASSIFIED LEADERS
 ----------------------------
 Ticker   Industry
-VCTR     Financial - Investment Management
 MAMA     Food - Miscellaneous
-MRX      Financial - Miscellaneous Services
 
 ========================================
 DISTRIBUTION WATCHLIST
 ========================================
 No qualified distribution candidates today.
 
-----------------------------
 TRADINGVIEW WATCHLIST EXPORT
-----------------------------
-###LONG,MU,STX,DAVE,SNDK,SIMO,OSCR,DDOG,FTNT,MXL,PENG,ASX,UMC,TOELY,AMAT,ACMR,SNOW,FA,APPS,ICHR,BB,OKTA,WYFI,QLYS,DOCN,LRCX,WDC,VPG,NET,PANW,CRWD,FROG,BLZE,TWLO,VCTR,STM,UCTT,TENB,VRNS,ATEN,COMP,RPD,MAMA,TXN,EVER,MKSI,VSH,AMBQ,COHU,MRX,NTAP,
-###OBSERVATION,SEZL,LQDA,PBF,DK,PARR,DINO,MPC,RSI,VLO,PAYS,CLMT,NESR,OII,LB,VG,IBKR,LLY,
+###LONG,MU,STX,DAVE,SNDK,SIMO,OSCR,DDOG,FTNT,MXL,PENG,ASX,UMC,AMAT,TOELY,ACMR,SNOW,FA,APPS,ICHR,BB,OKTA,WYFI,QLYS,DOCN,LRCX,WDC,VPG,NET,PANW,CRWD,FROG,BLZE,TWLO,STM,UCTT,TENB,VRNS,ATEN,RPD,COMP,MAMA,TXN,EVER,MKSI,VSH,AMBQ,COHU,NTAP,S,RBRK,
+###OBSERVATION,DELL,SEZL,AMD,PBF,DK,ALAB,EXTR,INTC,HPE,PARR,DINO,MPC,WKC,VLO,PAYS,CLMT,MRVL,ARM,KLIC,OUST,PSX,MRX,OII,EAT,SVCO,SYNA,VG,ALGM,VIRT,CSCO,EC,SUN,CRDO,NBIS,VICR,VIK,SM,FSLY,CBZ,RNG,EQNR,MANH,VVX,WHD,
 ###DISTRIBUTION,,
 
 WATCHLIST DELTA
 ----------------------------------------
-Long         (+46) : ACMR, AMAT, AMBQ, APPS, ASX, ATEN, BB, BLZE, COHU, COMP, CRWD, DDOG, EVER, FA, FROG, FTNT, ICHR, LRCX, MAMA, MKSI, MRX, MU, MXL, NET, NTAP, OKTA, PANW, PENG, QLYS, RPD, SIMO, SNDK, SNOW, STM, STX, TENB, TOELY, TWLO, TXN, UCTT, UMC, VPG, VRNS, VSH, WDC, WYFI
-Observation  (+17) : CLMT, DINO, DK, IBKR, LB, LLY, LQDA, MPC, NESR, OII, PARR, PAYS, PBF, RSI, SEZL, VG, VLO
+Long         (+32) : ACMR, AMAT, AMBQ, ASX, ATEN, BB, BLZE, COHU, CRWD, EVER, FROG, ICHR, LRCX, MKSI, MXL, NTAP, PANW, QLYS, RBRK, RPD, S, SIMO, STM, TENB, TOELY, TXN, UCTT, UMC, VPG, VRNS, VSH, WDC
+Observation  (+4) : EAT, MRX, PAYS, SEZL
 Distribution (+0) : None
 Left Dist    (-0) : None
 
 RECOVERING LEADERS
 ----------------------------------------
-Observation : VCTR
+Observation : ACMR, AMAT, AMBQ, ASX, BLZE, COHU, CRWD, ICHR, LRCX, MKSI, MXL, NTAP, NTCT, PANW, QLYS, SIMO, STM, TOELY, TXN, UCTT, UMC, VPG, VSH, WDC
 Distribution: None
 
 ========================================
 STOCK TRANSITIONS
 ========================================
 
-Observation : 18
-Day 1  ( 3) : PAYS, SEZL, VG
-Day 3  (15) : CEPL, CLMT, DINO, DK, IBKR, LB, LLY, LQDA, MPC, NESR, OII, PARR, PBF, RSI, VLO
+Observation (44)
+Day 1  ( 4) : EAT, MRX, PAYS, SEZL
+Day 2  (18) : ALAB, ALGM, AMD, ARM, CRDO, CSCO, DELL, EXTR, HPE, INTC, KLIC, MRVL, NBIS, OUST,
+              SVCO, SYNA, VICR, VIRT
+Day 3  (22) : CBZ, CLMT, DINO, DK, EC, EQNR, FSLY, MANH, MPC, OII, PARR, PBF, PSX, RNG, SM,
+              SUN, VG, VIK, VLO, VVX, WHD, WKC
 
-Distribution : 0
-
-FILES GENERATED
----------------
-✓ Market Context
-✓ Stock History
-✓ Market Snapshot
-✓ Rotation Delta
-✓ Unknown Classification
-✓ Stock Transition Registry
+Distribution (0): None
 
 ==============================================
 END OF TABELA SCAN
