@@ -83,11 +83,14 @@ def compare_watchlists(
             theme_lookup,
         )
 
-        print("\nWATCHLIST DELTA")
-        print("----------------------------------------")
-        print("Baseline created.")
-
-        return
+        return {
+            "new_longs": [],
+            "new_observation": [],
+            "new_distribution": [],
+            "left_distribution": [],
+            "recovering_observation": [],
+            "recovering_distribution": [],
+        }
 
     with open(previous_file, "r", encoding="utf-8") as f:
         old_data = json.load(f)
@@ -148,50 +151,6 @@ def compare_watchlists(
         recovered["distribution"]
     )
 
-    print("\nWATCHLIST DELTA")
-    print("----------------------------------------")
-
-    print(
-        f"Long         (+{len(new_longs)}) : "
-        + (", ".join(new_longs) if new_longs else "None")
-    )
-
-    print(
-        f"Observation  (+{len(new_observation)}) : "
-        + (", ".join(new_observation) if new_observation else "None")
-    )
-
-    print(
-        f"Distribution (+{len(new_distribution)}) : "
-        + (", ".join(new_distribution) if new_distribution else "None")
-    )
-
-    print(
-        f"Left Dist    (-{len(left_distribution)}) : "
-        + (", ".join(left_distribution) if left_distribution else "None")
-    )
-
-    print()
-    print("RECOVERING LEADERS")
-    print("----------------------------------------")
-
-    print(
-        "Observation : "
-        + (
-            ", ".join(recovering_observation)
-            if recovering_observation else "None"
-        )
-    )
-
-    print(
-        "Distribution: "
-        + (
-            ", ".join(recovering_distribution)
-            if recovering_distribution else "None"
-        )
-    )
-
-
     save_watchlist(
         current_file,
         current_long_set,
@@ -199,6 +158,15 @@ def compare_watchlists(
         current_distribution_set,
         theme_lookup,
     )
+
+    return {
+        "new_longs": new_longs,
+        "new_observation": new_observation,
+        "new_distribution": new_distribution,
+        "left_distribution": left_distribution,
+        "recovering_observation": recovering_observation,
+        "recovering_distribution": recovering_distribution,
+    }
 
 def save_watchlist(
     file_path,

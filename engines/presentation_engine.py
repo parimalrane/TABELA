@@ -689,7 +689,7 @@ def print_daily_scan(
     print("###OBSERVATION," + observation_list + ",")
     print("###DISTRIBUTION," + distribution_list + ",")
 
-    compare_watchlists(
+    deltas = compare_watchlists(
         current_long=long_candidates["Ticker"].tolist(),
         current_observation=stocks.loc[
             stocks["Tracking_State"] == "OBSERVATION",
@@ -699,89 +699,58 @@ def print_daily_scan(
         recovered=recovered,
         stocks=stocks,
     )
-    #
-    # Use the in-memory registry that was just used to build today's
-    # Tracking_State. Reloading from disk can produce stale data.
-    #
+
     registry = load_registry()
     transition = get_transition_summary(registry)
     
-    #
-    print()
-    print("========================================")
-    print("STOCK TRANSITIONS")
+    print("\n\n========================================")
+    print("PIPELINE TRANSITIONS & STATE")
     print("========================================")
 
-    #
-    # OBSERVATION
-    #
-    print()
-    print(f"Observation ({len(transition['observation'])})")
-
-    if transition["observation"]:
-
-        observation_groups = {}
-
-        for item in transition["observation"]:
-            observation_groups.setdefault(
-                item["runs"],
-                []
-            ).append(item["ticker"])
-
-        for runs in sorted(observation_groups):
-
-            tickers = sorted(observation_groups[runs])
-
-            prefix = f"Day {runs:<2} ({len(tickers):>2}) : "
-
-            wrapped = textwrap.fill(
-                ", ".join(tickers),
-                width=95,
-                initial_indent=prefix,
-                subsequent_indent=" " * len(prefix),
-                break_long_words=False,
-                break_on_hyphens=False,
-            )
-
-            print(wrapped)
-
-    #
-    # DISTRIBUTION
-    #
-    print()
-
-    if not transition["distribution"]:
-        print("Distribution (0): None")
-    else:
-        print(f"Distribution ({len(transition['distribution'])})")
-
-        distribution_groups = {}
-
-        for item in transition["distribution"]:
-            distribution_groups.setdefault(
-                item["runs"],
-                []
-            ).append(item["ticker"])
-
-        max_runs = max(
-            item["runs"]
-            for item in transition["distribution"]
+    print("\n--- NEW UPGRADES TODAY ---")
+    
+    new_longs = deltas.get("new_longs", [])
+    if new_longs:
+        wrapped_longs = textwrap.fill(
+            ", ".join(new_longs),
+            width=95,
+            initial_indent="New Longs       : ",
+            subsequent_indent=" " * 18,
+            break_long_words=False,
+            break_on_hyphens=False,
         )
+        print(wrapped_longs)
+    else:
+        print("New Longs       : None")
+        
+    rec_obs = deltas.get("recovering_observation", [])
+    rec_dist = deltas.get("recovering_distribution", [])
+    all_rec = sorted(list(set(rec_obs + rec_dist)))
+    if all_rec:
+        wrapped_rec = textwrap.fill(
+            ", ".join(all_rec),
+            width=95,
+            initial_indent="Recovered Longs : ",
+            subsequent_indent=" " * 18,
+            break_long_words=False,
+            break_on_hyphens=False,
+        )
+        print(wrapped_rec)
+    else:
+        print("Recovered Longs : None")
 
-        for runs in sorted(distribution_groups):
-
-            tickers = sorted(distribution_groups[runs])
-
-            wrapped = textwrap.fill(
-                ", ".join(tickers),
-                width=95,
-                subsequent_indent=" " * 11,
-                break_long_words=False,
-                break_on_hyphens=False,
-            )
-
-            prefix = f"Day {runs:<2} ({len(tickers):>2}) : "
-
+    print("\n--- OBSERVATION PURGATORY ---")
+    if not transition["observation"]:
+        print("None")
+    else:
+        observation_groups = {}
+        for item in transition["observation"]:
+            observation_groups.setdefault(item["runs"], []).append(item["ticker"])
+            
+        for runs in sorted(observation_groups):
+            tickers = sorted(observation_groups[runs])
+            day_label = "Day 1 (New)" if runs == 1 else f"Day {runs}"
+            prefix = f"{day_label:<15} : "
             wrapped = textwrap.fill(
                 ", ".join(tickers),
                 width=95,
@@ -790,7 +759,28 @@ def print_daily_scan(
                 break_long_words=False,
                 break_on_hyphens=False,
             )
-
             print(wrapped)
 
-        print()
+    print("\n--- DISTRIBUTION TRACKING ---")
+    if not transition["distribution"]:
+        print("None")
+    else:
+        distribution_groups = {}
+        for item in transition["distribution"]:
+            distribution_groups.setdefault(item["runs"], []).append(item["ticker"])
+            
+        for runs in sorted(distribution_groups):
+            tickers = sorted(distribution_groups[runs])
+            day_label = "Day 1 (New)" if runs == 1 else f"Day {runs}"
+            prefix = f"{day_label:<15} : "
+            wrapped = textwrap.fill(
+                ", ".join(tickers),
+                width=95,
+                initial_indent=prefix,
+                subsequent_indent=" " * len(prefix),
+                break_long_words=False,
+                break_on_hyphens=False,
+            )
+            print(wrapped)
+
+    print()
