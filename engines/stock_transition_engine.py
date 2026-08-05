@@ -40,7 +40,7 @@ def load_registry() -> Dict:
 
         registry_date = filename.replace("_registry.json", "")
 
-        if registry_date > today:
+        if registry_date >= today:
             continue
 
         candidates.append((registry_date, filename))
@@ -185,7 +185,7 @@ def pre_distribution_update(
             
             if (
                 long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
-                and rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
+                or rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
             ):
                 state["tracking_state"] = OBSERVATION
                 state["state_days"] = 1
@@ -228,7 +228,7 @@ def pre_distribution_update(
                     
         if (
             long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
-            and rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
+            or rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
         ):
             registry[ticker] = {
                 "tracking_state": OBSERVATION,
