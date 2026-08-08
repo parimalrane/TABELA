@@ -164,17 +164,25 @@ def pre_distribution_update(
 
         if state.get("last_market_date") == today:
             continue
-            
+
         if state["tracking_state"] == "LONG":
             long_score = 0.0
             rs_rating = 0.0
             if stocks is not None and not stocks.empty:
                 match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
                 if match.empty:
-                    # Ghost stock vanished from universe. Purge.
-                    del registry[ticker]
+                    # Ghost stock vanished from universe.
+                    # Do NOT silently purge — demote to OBSERVATION so the
+                    # ticker remains visible and auditable in output.
+                    print(
+                        f"[TRANSITION WARNING] {ticker} in LONG vanished from "
+                        f"stocks universe on {today}. Demoting to OBSERVATION."
+                    )
+                    state["tracking_state"] = OBSERVATION
+                    state["state_days"] = 1
+                    state["last_market_date"] = today
                     continue
-                
+
                 if not match.empty:
                     val = match["Long_Score"].iloc[0]
                     if pd.notna(val):
@@ -182,7 +190,7 @@ def pre_distribution_update(
                     val_rs = match["RS_Rating"].iloc[0]
                     if pd.notna(val_rs):
                         rs_rating = float(val_rs)
-            
+
             if (
                 long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
                 or rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
@@ -191,6 +199,21 @@ def pre_distribution_update(
                 state["state_days"] = 1
                 state["last_market_date"] = today
                 continue
+
+        elif state["tracking_state"] in (OBSERVATION, DISTRIBUTION):
+            if stocks is not None and not stocks.empty:
+                match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
+                if match.empty:
+                    # Ticker in OBSERVATION/DISTRIBUTION has vanished from
+                    # the stocks universe. Log explicitly — do NOT silently
+                    # drop from registry; keep advancing state_days so it
+                    # remains auditable in the transition report.
+                    print(
+                        f"[TRANSITION WARNING] {ticker} in "
+                        f"{state['tracking_state']} vanished from stocks "
+                        f"universe on {today}. Retaining in registry "
+                        f"(day {state['state_days'] + 1})."
+                    )
 
         state["state_days"] += 1
         state["last_market_date"] = today
@@ -209,25 +232,35 @@ def pre_distribution_update(
 
         if ticker in registry:
             continue
-            
+
         long_score = 0.0
         rs_rating = 0.0
+        vanished_from_universe = False
+
         if stocks is not None and not stocks.empty:
             match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
             if match.empty:
-                # Ghost stock vanished from universe. Ignore transition to Observation.
-                continue
-                
-            if not match.empty:
+                # Ticker left LONG but is also absent from today's universe.
+                # Previously this was silently ignored — that caused the
+                # disappearance bug.  Enter it as OBSERVATION Day 1 so it
+                # remains auditable.  Log an explicit warning.
+                vanished_from_universe = True
+                print(
+                    f"[TRANSITION WARNING] {ticker} left LONG but is absent "
+                    f"from stocks universe on {today}. Entering OBSERVATION "
+                    f"Day 1 to preserve audit trail."
+                )
+            else:
                 val = match["Long_Score"].iloc[0]
                 if pd.notna(val):
                     long_score = float(val)
                 val_rs = match["RS_Rating"].iloc[0]
                 if pd.notna(val_rs):
                     rs_rating = float(val_rs)
-                    
+
         if (
-            long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
+            vanished_from_universe
+            or long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
             or rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
         ):
             registry[ticker] = {
@@ -353,6 +386,23 @@ def get_distribution_watchlist(
         .str.upper()
         .isin(distribution)
     ].copy()
+
+    # Explicitly warn about DISTRIBUTION tickers absent from today's stocks
+    # universe — these were previously silently dropped from output.
+    found_in_df = set(
+        df["Ticker"]
+        .astype(str)
+        .str.replace("*", "", regex=False)
+        .str.strip()
+        .str.upper()
+    )
+    today = str(context.market_date)
+    for ticker in sorted(distribution - found_in_df):
+        print(
+            f"[DISTRIBUTION WARNING] {ticker} is in DISTRIBUTION registry "
+            f"but absent from stocks universe on {today}. "
+            f"Cannot display in watchlist until it re-enters the universe."
+        )
 
     for col in [
         "RS_Delta_Val",

@@ -141,7 +141,30 @@ def compare_watchlists(
         old_distribution - current_distribution_set
     )
 
-    
+    #
+    # RECONCILIATION INVARIANT
+    # Every ticker that was in ANY state yesterday (LONG, OBSERVATION,
+    # DISTRIBUTION) must appear in at least one of today's three sets, OR
+    # be explicitly explained.  Silently vanishing is never acceptable.
+    #
+    all_today = current_long_set | current_observation_set | current_distribution_set
+    all_yesterday = (
+        {(t, "LONG") for t in old_long}
+        | {(t, "OBSERVATION") for t in old_observation}
+        | {(t, "DISTRIBUTION") for t in old_distribution}
+    )
+
+    for ticker, prior_state in sorted(all_yesterday):
+        if ticker not in all_today:
+            # Ticker is unaccounted-for.  Emit an explicit, actionable alert.
+            print(
+                f"[RECONCILIATION ALERT] {ticker} was in {prior_state} on "
+                f"previous session but is absent from LONG, OBSERVATION, and "
+                f"DISTRIBUTION today ({today}). "
+                f"Investigate: dropped from stocks CSV, purged from registry, "
+                f"or upstream filter change."
+            )
+
     #
     recovering_observation = sorted(
         recovered["observation"]
