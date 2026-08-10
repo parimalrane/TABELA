@@ -523,23 +523,7 @@ def print_daily_scan(
 
     print()
     print("THEME BREADTH ANALYSIS")
-    theme_breadth = theme_breadth.copy()
     
-    # Add observations to Leaders
-    obs_stocks = stocks[stocks["Tracking_State"] == "OBSERVATION"]
-    if not obs_stocks.empty:
-        for theme in theme_breadth["Mapped_Theme"].unique():
-            theme_obs = obs_stocks[obs_stocks["Mapped_Theme"] == theme]["Ticker"].tolist()
-            if theme_obs:
-                theme_obs_str = ", ".join([f"*{t}" for t in theme_obs])
-                idx = theme_breadth.index[theme_breadth["Mapped_Theme"] == theme]
-                if not idx.empty:
-                    existing = theme_breadth.loc[idx[0], "Leaders"]
-                    if pd.notna(existing) and str(existing).strip() and str(existing) != "None":
-                        theme_breadth.loc[idx[0], "Leaders"] = f"{existing}, {theme_obs_str}"
-                    else:
-                        theme_breadth.loc[idx[0], "Leaders"] = theme_obs_str
-
     display_df = (
         theme_breadth[
             [
