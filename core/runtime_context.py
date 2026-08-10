@@ -38,7 +38,7 @@ def load_runtime_context() -> RuntimeContext:
 
     market_date = datetime.strptime(etf_date, "%Y%m%d").date()
 
-    market_file = data_dir / f"Market_{etf_date}.csv"
+    market_file = data_dir / f"{etf_date}_Market.csv"
 
     return RuntimeContext(
         market_date=market_date,
