@@ -1,6 +1,8 @@
 Market file not found: market_data\input_files\20260717_Market.csv. Skipping Market Context.
 
 
+[TRANSITION WARNING] PGEN in OBSERVATION vanished from stocks universe on 2026-07-17. Retaining in registry (day 5).
+
 ==============================================
 TABELA DAILY MARKET SCAN
 MARKET DATE: 2026-07-17
@@ -32,8 +34,8 @@ Theme                                       Total  Qual    Br %     Score
 Cybersecurity (Software)                       13    11   84.62    215.81
     ↳ Leaders: FTNT, OKTA, BB, QLYS, PANW
 
-Healthcare Services                            14     8   57.14    145.65
-    ↳ Leaders: OSCR, AVAH, PACS
+Healthcare Services (Healthcare)               14     9   64.29    164.82
+    ↳ Leaders: OSCR, PGNY, HUM, AVAH, DVA
 
 Healthcare                                     41    17   41.46    139.10
     ↳ Leaders: INNV, OMDA, PNTG, LFST, TDOC
@@ -47,6 +49,9 @@ Cloud Infrastructure (Cloud Computing)          5     4   80.00    130.08
 Memory (Semiconductors)                         4     3   75.00    118.29
     ↳ Leaders: MU, SNDK
 
+Biotechnology (Biotech)                         4     3   75.00    110.65
+    ↳ Leaders: AGEN, KNSA
+
 Communications Cloud (Cloud Computing)          3     2   66.67     85.49
     ↳ Leaders: FIVN, TWLO
 
@@ -54,15 +59,12 @@ Developer Infrastructure (Software)             3     2   66.67     81.80
     ↳ Leaders: FROG
 
 Biotech                                        87    18   20.69     81.57
-    ↳ Leaders: IBRX, ABCL, TGTX, NRIX, TVTX
+    ↳ Leaders: IBRX, ABCL, TGTX, TVTX, GLUE
 
 Digital Payments (Digital Assets)               4     2   50.00     76.05
     ↳ Leaders: SEZL
 
-Biotechnology                                   4     2   50.00     74.44
-    ↳ Leaders: KNSA
-
-Digital Health                                  1     1  100.00     67.93
+Digital Health (Software)                       1     1  100.00     67.93
     ↳ Leaders: HNGE
 
 Pharma                                         44     9   20.45     65.48
@@ -97,22 +99,31 @@ LONG CANDIDATE UNIVERSE
 Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
+  OSCR       Healthcare Services              Leading         97     93.9325          1
   LQDA           Pharmaceuticals  Unclassified Leader         99     93.5500          1
+  PGNY       Healthcare Services              Leading         97     93.5325          1
+   HUM       Healthcare Services              Leading         97     93.2325          1
   SEZL          Digital Payments  Unclassified Leader         99     92.9500          2
  ~DAVE           Digital Banking              Neutral         98     92.8400          1
-  HNGE            Digital Health  Unclassified Leader         98     92.1000          1
   INNV                Healthcare              Leading         97     91.7325          2
-  OSCR       Healthcare Services  Unclassified Leader         97     90.7500          1
   OMDA                Healthcare              Leading         97     90.7325          3
   URGN                    Pharma              Leading         97     90.6200          2
   PNTG                Healthcare              Leading         95     89.5325          3
+ ~AGEN             Biotechnology              Neutral         95     89.4075          2
+ ~KNSA             Biotechnology              Neutral         90     89.3575          1
   NESR               Exploration              Leading         90     89.2875          1
   LFST                Healthcare              Leading         97     89.2325          3
+  AVAH       Healthcare Services              Leading         90     88.8825          2
+   DVA       Healthcare Services              Leading         97     88.8325          3
   VCTR          Asset Management  Unclassified Leader         90     88.8000          1
-  KNSA             Biotechnology  Unclassified Leader         90     88.6000          1
+ ~HNGE            Digital Health              Neutral         98     88.6150          1
+  PACS       Healthcare Services              Leading         90     88.5825          2
  ~FTNT             Cybersecurity              Neutral         98     88.3150          1
+   CON       Healthcare Services              Leading         90     88.1825          2
+  BTSG       Healthcare Services              Leading         95     88.1325          3
  ~PENG                  Software              Neutral         99     87.9650          1
   TDOC                Healthcare              Leading         95     87.9325          2
+   AGL       Healthcare Services              Leading         99     87.6325          3
    CNC                Healthcare              Leading         95     87.5325          3
   ASTH                Healthcare              Leading         90     87.4825          3
  ~DDOG      Cloud Infrastructure              Neutral         98     87.4525          3
@@ -124,10 +135,8 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zac
  ~TGTX                   Biotech              Neutral         90     86.2575          3
    OGN                Healthcare              Leading         95     86.0325          3
  ~OKTA             Cybersecurity              Neutral         98     85.9150          2
-  AVAH       Healthcare Services  Unclassified Leader         90     85.7000          2
    TOI                Healthcare              Leading         90     85.4825          3
    RSI Leisure and Entertainment  Unclassified Leader         90     85.4000          2
-  PACS       Healthcare Services  Unclassified Leader         90     85.4000          2
    ~FA                  Software              Neutral         98     85.2150          3
  ~SNOW      Cloud Infrastructure              Neutral         95     85.2025          3
    CRL                Healthcare              Leading         90     85.1825          2
@@ -135,9 +144,9 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zac
   ~NET      Cloud Infrastructure              Neutral         90     84.9525          2
  ~TWLO      Communications Cloud              Neutral         90     84.8525          2
    ~BB             Cybersecurity              Neutral         97     84.6650          2
- ~NRIX                   Biotech              Neutral         90     84.4575          3
  ~TVTX                   Biotech              Neutral         90     84.4575          3
  ~GLUE                   Biotech              Neutral         90     84.4575          3
+ ~NRIX                   Biotech              Neutral         90     84.4575          3
  ~FTRE                   Biotech              Neutral         95     84.4075          3
  ~QLYS             Cybersecurity              Neutral         98     84.3150          3
  ~PANW             Cybersecurity              Neutral         99     83.9650          3
@@ -236,7 +245,7 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,SEZL,DAVE,HNGE,INNV,OSCR,OMDA,URGN,PNTG,NESR,LFST,VCTR,KNSA,FTNT,PENG,TDOC,CNC,ASTH,DDOG,CYRX,IBRX,ABCL,CVS,COMP,TGTX,OGN,OKTA,AVAH,TOI,RSI,PACS,FA,SNOW,CRL,FIVN,NET,TWLO,BB,NRIX,TVTX,GLUE,FTRE,QLYS,PANW,ALKS,AGIO,EVER,VCEL,BLZE,PTGX,APPS,FROG,VRNS,RPD,RELY,CRWD,TENB,ACRS,MGTX,S,MU,SNDK,KYMR,
+###LONG,OSCR,LQDA,PGNY,HUM,SEZL,DAVE,INNV,OMDA,URGN,PNTG,AGEN,KNSA,NESR,LFST,AVAH,DVA,VCTR,HNGE,PACS,FTNT,CON,BTSG,PENG,TDOC,AGL,CNC,ASTH,DDOG,CYRX,IBRX,ABCL,CVS,COMP,TGTX,OGN,OKTA,TOI,RSI,FA,SNOW,CRL,FIVN,NET,TWLO,BB,TVTX,GLUE,NRIX,FTRE,QLYS,PANW,ALKS,AGIO,EVER,VCEL,BLZE,PTGX,APPS,FROG,VRNS,RPD,RELY,CRWD,TENB,ACRS,MGTX,S,MU,SNDK,KYMR,
 ###OBSERVATION,MXL,DELL,AMBQ,SIMO,ICHR,UMC,VPG,EXTR,AMD,ALIT,HPE,UCTT,ATEN,ASX,CARE,NTAP,INTC,STX,ACMR,EAT,PD,MIRM,TOELY,VG,AMAT,STM,DTIL,MOH,KRYS,ALAB,NTCT,MRNA,VSH,WDC,MUFG,DOCN,CYTK,ARM,KLIC,CSCO,MKSI,MRX,SYNA,LRCX,OUST,RARE,COHU,VIRT,MAMA,WYFI,ANAB,TXN,IFNNY,MRVL,NBIS,ALGM,RGNX,VICR,CRDO,SVCO,
 ###DISTRIBUTION,,
 

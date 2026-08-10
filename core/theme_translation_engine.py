@@ -128,5 +128,18 @@ THEME_TRANSLATION = {
     "Internet": "Internet",
     "Telecom": "Telecom",
     "Infrastructure": "Infrastructure",
-    "Cloud Computing": "Cloud Computing"
+    "Cloud Computing": "Cloud Computing",
+    
+    # ==========================================
+    # HEALTHCARE / MEDICAL MISSING MAPPINGS 
+    # ==========================================
+    "Biotechnology": "Biotech",
+    "Diagnostics": "Medical Devices",
+    "Life Sciences Tools": "Medical Devices",
+    "Healthcare Services": "Healthcare",
+    "Digital Health": "Software",
+    "Restaurants": "Broad",
+    "Professional Services": "Broad",
+    "Specialty Finance / Debt Collection": "Financial Services",
+    "IT Services": "Software"
 }

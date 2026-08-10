@@ -23,6 +23,9 @@ Rank  Theme                               Strength        D        W        M   
 THEME BREADTH ANALYSIS
 Theme                                       Total  Qual    Br %     Score
 -------------------------------------------------------------------------
+Healthcare Services (Healthcare)               13     9   69.23    167.07
+    ↳ Leaders: HUM, PGNY, OSCR, AVAH, DVA
+
 Memory (Semiconductors)                         4     4  100.00    158.53
     ↳ Leaders: MU, SNDK, SIMO, WDC
 
@@ -35,20 +38,17 @@ Cloud Infrastructure (Cloud Computing)          5     4   80.00    133.67
 Biotech                                        87    29   33.33    130.81
     ↳ Leaders: TGTX, ABCL, IBRX, AGIO, KRYS
 
+Biotechnology (Biotech)                         5     4   80.00    125.06
+    ↳ Leaders: KNSA, AGEN
+
 Healthcare                                     41    15   36.59    125.00
     ↳ Leaders: INNV, ASTH, OMDA, TOI, CNC
-
-Healthcare Services                            13     6   46.15    115.30
-    ↳ Leaders: AVAH
 
 Semiconductor Equipment (Semiconductors)       21     8   38.10    107.32
     ↳ Leaders: AMAT, UCTT, ACMR, TOELY, ICHR
 
 AI Servers (Artificial Intelligence)            2     2  100.00    106.57
     ↳ Leaders: DELL, HPE
-
-Biotechnology                                   5     3   60.00     96.40
-    ↳ Leaders: KNSA
 
 AI Compute (Artificial Intelligence)            3     2   66.67     89.19
     ↳ Leaders: AMD
@@ -65,17 +65,14 @@ Communications Cloud (Cloud Computing)          3     2   66.67     85.49
 Digital Payments (Digital Assets)               4     2   50.00     78.46
     ↳ Leaders: SEZL
 
-Digital Health                                  1     1  100.00     68.62
-    ↳ Leaders: HNGE
-
 Data Storage (Semiconductors)                   1     1  100.00     67.24
     ↳ Leaders: STX
 
-LNG / Natural Gas Export Infrastructure         1     1  100.00     62.38
-    ↳ Leaders: VG
-
 Real Estate Technology                          1     1  100.00     62.38
     ↳ Leaders: COMP
+
+LNG / Natural Gas Export Infrastructure         1     1  100.00     62.38
+    ↳ Leaders: VG
 
 Mobile Adtech (Internet)                        2     1   50.00     54.38
     ↳ Leaders: APPS
@@ -92,7 +89,7 @@ Semiconductors                                 48     6   12.50     45.57
 AI Networking (Artificial Intelligence)         3     1   33.33     41.58
     ↳ Leaders: CSCO
 
-Restaurants                                    28     2    7.14     22.24
+Restaurants (Broad)                            28     2    7.14     22.24
     ↳ Leaders: EAT
 
 Financial Services                             69     4    5.80     20.95
@@ -107,17 +104,23 @@ Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker                            Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
   DDOG                    Cloud Infrastructure              Leading         98     95.6950          1
+   HUM                     Healthcare Services              Leading         98     95.6000          1
+  PGNY                     Healthcare Services              Leading         95     94.2500          1
   INNV                              Healthcare              Leading         97     93.5500          2
   ASTH                              Healthcare              Leading         97     93.1500          3
   LQDA                         Pharmaceuticals  Unclassified Leader         98     93.0000          1
-  HNGE                          Digital Health  Unclassified Leader         99     92.6500          1
   OMDA                              Healthcare              Leading         97     92.5500          3
   SEZL                        Digital Payments  Unclassified Leader         98     92.4000          2
+  KNSA                           Biotechnology              Leading         90     92.3875          1
+  OSCR                     Healthcare Services              Leading         98     92.3000          3
+  AGEN                           Biotechnology              Leading         99     92.1375          3
   TGTX                                 Biotech              Leading         95     92.0375          3
   APPS                           Mobile Adtech              Leading         99     91.9125          1
    TOI                              Healthcare              Leading         98     91.7000          3
    ~MU                                  Memory              Neutral         99     91.4775          1
   ABCL                                 Biotech              Leading         97     91.3375          3
+  AVAH                     Healthcare Services              Leading         90     90.7000          2
+   DVA                     Healthcare Services              Leading         97     90.6500          3
   URGN                                  Pharma              Leading         97     90.6200          2
   TWLO                    Communications Cloud              Leading         90     90.5950          1
    CNC                              Healthcare              Leading         97     90.4500          3
@@ -125,8 +128,9 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
   DOCN                    Cloud Infrastructure              Leading         90     90.2950          2
   IBRX                                 Biotech              Leading         95     90.2375          3
  ~SNDK                                  Memory              Neutral         99     90.0775          1
-  LFST                              Healthcare              Leading         95     89.9500          3
+   CON                     Healthcare Services              Leading         90     90.0000          2
    MOH                              Healthcare              Leading         95     89.9500          3
+  LFST                              Healthcare              Leading         95     89.9500          3
   TDOC                              Healthcare              Leading         95     89.7500          2
   AGIO                                 Biotech              Leading         95     89.5375          3
  ~SIMO                                  Memory              Neutral         99     89.4775          1
@@ -135,9 +139,9 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
    NET                    Cloud Infrastructure              Leading         90     89.1950          2
    CVS                              Healthcare              Leading         90     89.0000          2
   PNTG                              Healthcare              Leading         90     88.6000          3
-  KNSA                           Biotechnology  Unclassified Leader         90     88.6000          1
   KRYS                                 Biotech              Leading         90     88.5875          3
   RGNX                                 Biotech              Leading         95     88.2375         4*
+  BTSG                     Healthcare Services              Leading         95     87.9500         4*
    MRX                      Financial Services  Unclassified Leader         90     87.5000          1
   NRIX                                 Biotech              Leading         90     87.4875          3
   TVTX                                 Biotech              Leading         90     87.4875          3
@@ -153,10 +157,9 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
   VCEL                                 Biotech              Leading         90     86.2875          3
   MAMA                                 Unknown  Unclassified Leader         90     86.1000          2
   RARE                                 Biotech              Leading         90     86.0875          3
-  DTIL                                 Biotech              Leading         95     86.0375          3
   MRNA                                 Biotech              Leading         95     86.0375          3
+  DTIL                                 Biotech              Leading         95     86.0375          3
   ~VSH                          Semiconductors              Neutral         95     85.9775          1
-  AVAH                     Healthcare Services  Unclassified Leader         90     85.7000          2
    EAT                             Restaurants  Unclassified Leader         90     85.7000          2
   ANAB                                 Biotech              Leading         90     85.4875         4*
   ~UMC                                 Foundry              Neutral         99     85.3775          3
@@ -183,7 +186,7 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
  ~CSCO                           AI Networking              Neutral         90     80.1850          1
 
 --- NEW LONG PIPELINE ENTRIES ---
-New Longs       : ACRS, ANAB, APPS, COMP, CVS, EAT, OGN, URGN, VG
+New Longs       : ACRS, AGEN, ANAB, APPS, COMP, CVS, EAT, OGN, URGN, VG
 Recovered Longs : None
 
 ========================================
@@ -191,14 +194,15 @@ OBSERVATION WATCHLIST
 ========================================
  Days Ticker            Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
     1   EXTR           AI Networking              Neutral         98     79.3850          3
+    1   LRCX Semiconductor Equipment              Neutral         80     78.8275          2
     1   COHU   Semiconductor Testing              Neutral         80     76.3275          2
     1   ALGM          Semiconductors              Neutral         80     74.5275          3
     1   CRDO       AI Infrastructure              Neutral         80     77.4850          1
     1  IFNNY          Semiconductors              Neutral         80     72.6275          3
     1   SYNA          Semiconductors              Neutral         80     73.8275          3
     1   SVCO          Semiconductors              Neutral         80     73.1275          3
+    1   PGEN           Biotechnology              Leading         80     79.9875         4*
     1    TXN          Semiconductors              Neutral         80     75.6275          3
-    1   OUST              AI Sensors              Neutral         80     71.6850          3
     1   NTCT      Optical Networking              Neutral         90     79.8275          3
     1   KLIC Semiconductor Equipment              Neutral         90     78.1275          3
     1   NBIS       AI Infrastructure              Neutral         90     78.9850          3
@@ -206,7 +210,7 @@ OBSERVATION WATCHLIST
     1   VIRT      Financial Services              Unknown         90     78.5000          3
     1   INTC              AI Compute              Neutral         95     79.7350          1
     1    ARM              AI Compute              Neutral         95     79.7350          3
-    1   LRCX Semiconductor Equipment              Neutral         80     78.8275          2
+    1   OUST              AI Sensors              Neutral         80     71.6850          3
     1   VICR          Semiconductors              Neutral         70     73.3275          2
 
 ========================================
@@ -215,8 +219,8 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,DDOG,INNV,ASTH,LQDA,HNGE,OMDA,SEZL,TGTX,APPS,TOI,MU,ABCL,URGN,TWLO,CNC,STX,DOCN,IBRX,SNDK,LFST,MOH,TDOC,AGIO,SIMO,SNOW,FIVN,NET,CVS,PNTG,KNSA,KRYS,RGNX,MRX,NRIX,TVTX,MIRM,VG,PTGX,AMAT,ASX,ALKS,COMP,WDC,CYRX,VCEL,MAMA,RARE,DTIL,MRNA,VSH,AVAH,EAT,ANAB,UMC,OGN,UCTT,MXL,DELL,FTRE,ACMR,AMD,STM,TOELY,ICHR,ACRS,VPG,MKSI,ALAB,KYMR,HPE,AMBQ,WYFI,MGTX,CYTK,CSCO,
-###OBSERVATION,EXTR,ARM,INTC,VIRT,MRVL,NBIS,KLIC,NTCT,OUST,TXN,SVCO,SYNA,IFNNY,CRDO,ALGM,COHU,LRCX,VICR,
+###LONG,DDOG,HUM,PGNY,INNV,ASTH,LQDA,OMDA,SEZL,KNSA,OSCR,AGEN,TGTX,APPS,TOI,MU,ABCL,AVAH,DVA,URGN,TWLO,CNC,STX,DOCN,IBRX,SNDK,CON,MOH,LFST,TDOC,AGIO,SIMO,SNOW,FIVN,NET,CVS,PNTG,KRYS,RGNX,BTSG,MRX,NRIX,TVTX,MIRM,VG,PTGX,AMAT,ASX,ALKS,COMP,WDC,CYRX,VCEL,MAMA,RARE,MRNA,DTIL,VSH,EAT,ANAB,UMC,OGN,UCTT,MXL,DELL,FTRE,ACMR,AMD,STM,TOELY,ICHR,ACRS,VPG,MKSI,ALAB,KYMR,HPE,AMBQ,WYFI,MGTX,CYTK,CSCO,
+###OBSERVATION,EXTR,ARM,INTC,VIRT,MRVL,NBIS,KLIC,NTCT,OUST,TXN,SVCO,SYNA,IFNNY,CRDO,ALGM,COHU,LRCX,PGEN,VICR,
 ###DISTRIBUTION,,
 
 ==============================================

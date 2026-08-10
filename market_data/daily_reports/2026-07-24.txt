@@ -39,17 +39,17 @@ Theme                                       Total  Qual    Br %     Score
 Refining & Marketing                            8     8  100.00    209.56
     ↳ Leaders: PBF, DK, PARR, DINO, CLMT
 
-Healthcare Services                            14     9   64.29    163.27
-    ↳ Leaders: OSCR, AVAH, PACS
+Healthcare Services (Healthcare)               14    11   78.57    199.81
+    ↳ Leaders: OSCR, PGNY, HUM, BTSG, AVAH
+
+Biotechnology (Biotech)                         5     5  100.00    156.24
+    ↳ Leaders: AGEN, XNCR, KNSA
 
 Pharmaceuticals                                 3     3  100.00    137.24
     ↳ Leaders: LQDA
 
 Cloud Infrastructure (Cloud Computing)          5     4   80.00    136.53
     ↳ Leaders: DDOG, SNOW
-
-Diagnostics                                     9     4   44.44     98.23
-    ↳ Leaders: ADPT
 
 Healthcare                                     38    10   26.32     85.05
     ↳ Leaders: INNV, MEDP, LFST, CVS, PNTG
@@ -62,9 +62,6 @@ Digital Payments (Digital Assets)               4     2   50.00     76.05
 
 Biotech                                        80    15   18.75     71.25
     ↳ Leaders: TGTX, HALO, IBRX, ALKS, TVTX
-
-Digital Health                                  1     1  100.00     65.85
-    ↳ Leaders: HNGE
 
 LNG / Natural Gas Export Infrastructure         1     1  100.00     65.85
     ↳ Leaders: VG
@@ -103,34 +100,42 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
   SEZL                        Digital Payments  Unclassified Leader         99     92.9500          2
    PBF                    Refining & Marketing              Leading         99     92.8725          1
     DK                    Refining & Marketing              Leading         98     92.3225          1
+  OSCR                     Healthcare Services              Leading         95     92.2975          1
   PARR                    Refining & Marketing              Leading         97     92.0725          1
+  PGNY                     Healthcare Services              Leading         95     91.8975          1
+   HUM                     Healthcare Services              Leading         95     91.5975          1
   URGN                                  Pharma              Leading         98     91.2600          2
   INNV                              Healthcare              Leading         97     90.5975          2
-  HNGE                          Digital Health  Unclassified Leader         95     90.4500          1
   DINO                    Refining & Marketing              Leading         97     90.2725          2
     VG LNG / Natural Gas Export Infrastructure  Unclassified Leader         95     90.1500          2
   CLMT                    Refining & Marketing              Leading         97     89.6725          2
-  OSCR                     Healthcare Services  Unclassified Leader         95     89.6500          1
   VCTR                        Asset Management  Unclassified Leader         90     88.8000          1
+  BTSG                     Healthcare Services              Leading         97     88.6975          3
   NBIX                                  Pharma              Leading         90     88.6600          2
+  AVAH                     Healthcare Services              Leading         90     88.3475          2
+   DVA                     Healthcare Services              Leading         97     88.2975          3
+   VVX                     Healthcare Services              Leading         90     88.1475          1
+  PACS                     Healthcare Services              Leading         90     88.0475          2
   MEDP                              Healthcare              Leading         90     87.9475          2
+   CON                     Healthcare Services              Leading         95     87.8975          3
   LFST                              Healthcare              Leading         95     87.5975          3
    MRX                      Financial Services  Unclassified Leader         90     87.5000          1
  ~TGTX                                 Biotech              Neutral         97     87.2900          3
+   AGL                     Healthcare Services              Leading         99     87.0975          3
    MPC                    Refining & Marketing              Leading         95     86.6725          3
    CVS                              Healthcare              Leading         90     86.6475          2
    VLO                    Refining & Marketing              Leading         90     86.4225          2
    PSX                    Refining & Marketing              Leading         90     86.4225          2
+ ~AGEN                           Biotechnology              Neutral         99     86.2900          3
   PNTG                              Healthcare              Leading         90     86.2475          3
    TRV                               Insurance              Leading         90     86.0700          2
-  AVAH                     Healthcare Services  Unclassified Leader         90     85.7000          2
     SM                             Exploration              Leading         90     85.4350          3
-  PACS                     Healthcare Services  Unclassified Leader         90     85.4000          2
  ~HALO                                 Biotech              Neutral         90     85.2400          2
  ~IBRX                                 Biotech              Neutral         95     84.3900          3
  ~DDOG                    Cloud Infrastructure              Neutral         98     84.0650          3
  ~CYRX                              Healthcare              Leading         90     83.9475          3
  ~SNOW                    Cloud Infrastructure              Neutral         98     83.4650          3
+ ~XNCR                           Biotechnology              Neutral         97     83.3900          3
  ~FTNT                           Cybersecurity              Neutral         98     83.2700          1
  ~NESR                             Exploration              Leading         80     83.2350          1
  ~PENG                                Software              Neutral         98     82.3700          1
@@ -141,9 +146,9 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
  ~NRIX                                 Biotech              Neutral         90     81.6400          3
  ~FTRE                                 Biotech              Neutral         95     81.5900          3
  ~ACRS                                  Pharma              Leading         90     81.5600          3
- ~ADPT                             Diagnostics              Unknown         95     81.4500          3
  ~PTGX                                 Biotech              Neutral         90     81.4400          1
  ~NVCR                                 Biotech              Neutral         90     81.3400          2
+ ~KNSA                           Biotechnology              Neutral         80     81.0400          1
  ~OMDA                              Healthcare              Leading         80     80.8475          3
  ~SNDK                                  Memory              Lagging         99     80.2900          1
 [RECONCILIATION ALERT] HPE was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-24). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
@@ -154,51 +159,51 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
 [RECONCILIATION ALERT] WYFI was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-24). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
 
 --- NEW LONG PIPELINE ENTRIES ---
-New Longs       : AVAH, CLMT, DINO, DK, MPC, MRX, PARR, PBF, PSX, VLO
-Recovered Longs : AVAH, MRX
+New Longs       : CLMT, DINO, DK, MPC, MRX, PARR, PBF, PSX, VLO
+Recovered Longs : MRX
 
 ========================================
 OBSERVATION WATCHLIST
 ========================================
  Days Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
     1   GLUE                   Biotech              Neutral         80     76.1400          3
-    1   KNSA             Biotechnology              Unknown         80     78.1000          1
+    1    HPK               Exploration              Leading         80     79.7350          2
     1   ABCL                   Biotech              Neutral         60     65.1400          3
     1   ASTH                Healthcare              Leading         70     75.9475          3
-    1    HPK               Exploration              Leading         80     79.7350          2
-    2   APPS             Mobile Adtech              Lagging         99     79.0800          1
+    2   HNGE            Digital Health              Neutral         95     81.9200          1
     2    NET      Cloud Infrastructure              Neutral         90     81.5650          2
+    2   APPS             Mobile Adtech              Lagging         99     79.0800          1
+    3   BLZE                  Software              Neutral         99     78.0200          3
+    3    CRL                Healthcare              Leading         90     84.6475          2
     3    MOH                Healthcare              Leading         40     59.8475          2
     3   FIVN      Communications Cloud              Neutral         80     73.4650          3
     3   MGTX                   Biotech              Neutral         80     78.6400          2
     3    CNC                Healthcare              Leading         80     78.7475          3
     3   QLYS             Cybersecurity              Neutral         90     74.8700          3
     3    RSI Leisure and Entertainment              Unknown         80     74.9000          2
-    3   FROG  Developer Infrastructure              Neutral         95     76.5200          3
-    3   EVER                  Software              Neutral         95     78.4200          3
-    3    CRL                Healthcare              Leading         90     84.6475          2
-    3   PANW             Cybersecurity              Neutral         98     78.3700          3
-    3   BLZE                  Software              Neutral         99     78.0200          3
     3   OKTA             Cybersecurity              Neutral         98     80.8700          2
-    3     BB             Cybersecurity              Neutral         95     78.5200          2
-    3   AGIO                   Biotech              Neutral         70     69.9400          3
     3     FA                  Software              Neutral         95     78.5200          3
+    3   FROG  Developer Infrastructure              Neutral         95     76.5200          3
+    3   AGIO                   Biotech              Neutral         70     69.9400          3
+    3     BB             Cybersecurity              Neutral         95     78.5200          2
+    3   EVER                  Software              Neutral         95     78.4200          3
+    3   PANW             Cybersecurity              Neutral         98     78.3700          3
+    4   COMP    Real Estate Technology              Unknown         80     72.4000          3
+    4    RPD             Cybersecurity              Neutral         80     65.4700         4*
+    4   TWLO      Communications Cloud              Neutral         80     75.9650          2
     4   TENB             Cybersecurity              Neutral         90     71.0700         4*
     4   CRWD             Cybersecurity              Neutral         95     77.1200          3
-    4   COMP    Real Estate Technology              Unknown         80     72.4000          3
-    4   RELY                   Banking              Neutral         70     71.9050          3
-    4   SKWD                 Insurance              Leading         80     79.4700          3
-    4   TWLO      Communications Cloud              Neutral         80     75.9650          2
     4      S             Cybersecurity              Neutral         80     70.7700          2
-    4    RPD             Cybersecurity              Neutral         80     65.4700         4*
     4   VRNS             Cybersecurity              Neutral         97     76.9200          3
-    5   VCEL                   Biotech              Neutral         80     74.9400          3
-    5    OGN                Healthcare              Leading         80     77.2475          3
+    4   SKWD                 Insurance              Leading         80     79.4700          3
+    4   RELY                   Banking              Neutral         70     71.9050          3
     5   KYMR                   Biotech              Neutral         90     77.4400          3
+    5    OGN                Healthcare              Leading         80     77.2475          3
+    5   VCEL                   Biotech              Neutral         80     74.9400          3
     6   CYTK                   Biotech              Neutral         80     76.1400          3
+    6   KRYS                   Biotech              Neutral         80     75.2400         4*
     6   MRNA                   Biotech              Neutral         70     66.4400          3
     6   MIRM                   Biotech              Neutral         70     73.1400          2
-    6   KRYS                   Biotech              Neutral         80     75.2400         4*
     6   RGNX                   Biotech              Neutral         20     41.1400         4*
     6    STX              Data Storage              Lagging         97     80.5900          1
     6   MUFG                   Banking              Neutral         90     81.8050          3
@@ -242,8 +247,8 @@ DISTRIBUTION WATCHLIST
     3   SVCO          Semiconductors              Lagging         20      30.340          3
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,DAVE,SEZL,PBF,DK,PARR,URGN,INNV,HNGE,DINO,VG,CLMT,OSCR,VCTR,NBIX,MEDP,LFST,MRX,TGTX,MPC,CVS,VLO,PSX,PNTG,TRV,AVAH,SM,PACS,HALO,IBRX,DDOG,CYRX,SNOW,FTNT,NESR,PENG,ALKS,TDOC,MU,TVTX,NRIX,FTRE,ACRS,ADPT,PTGX,NVCR,OMDA,SNDK,
-###OBSERVATION,DELL,BLZE,ICHR,APPS,MXL,OKTA,VPG,PANW,AMD,UCTT,STX,VRNS,CRWD,SIMO,NTAP,BB,EVER,FROG,FA,UMC,DOCN,CARE,TENB,QLYS,MUFG,ATEN,ASX,VSH,AMAT,NET,CRL,KYMR,SKWD,KNSA,S,RPD,OGN,GLUE,FIVN,VCEL,MGTX,CNC,CYTK,RSI,HPK,MKSI,COMP,KRYS,TWLO,AGIO,MRNA,TOELY,ASTH,MIRM,RELY,ABCL,ALIT,STM,RARE,MOH,RGNX,
+###LONG,LQDA,DAVE,SEZL,PBF,DK,OSCR,PARR,PGNY,HUM,URGN,INNV,DINO,VG,CLMT,VCTR,BTSG,NBIX,AVAH,DVA,VVX,PACS,MEDP,CON,LFST,MRX,TGTX,AGL,MPC,CVS,VLO,PSX,AGEN,PNTG,TRV,SM,HALO,IBRX,DDOG,CYRX,SNOW,XNCR,FTNT,NESR,PENG,ALKS,TDOC,MU,TVTX,NRIX,FTRE,ACRS,PTGX,NVCR,KNSA,OMDA,SNDK,
+###OBSERVATION,DELL,BLZE,ICHR,APPS,MXL,OKTA,VPG,PANW,AMD,UCTT,STX,VRNS,CRWD,SIMO,HNGE,NTAP,BB,EVER,FROG,FA,UMC,DOCN,CARE,TENB,QLYS,MUFG,ATEN,ASX,VSH,AMAT,NET,CRL,KYMR,SKWD,S,RPD,OGN,GLUE,FIVN,VCEL,MGTX,CNC,CYTK,RSI,HPK,MKSI,COMP,KRYS,TWLO,AGIO,MRNA,TOELY,ASTH,MIRM,RELY,ABCL,ALIT,STM,RARE,MOH,RGNX,
 ###DISTRIBUTION,AMBQ,ACMR,WDC,ALAB,COHU,LRCX,TXN,PD,EAT,EXTR,INTC,VICR,SVCO,
 
 ==============================================
