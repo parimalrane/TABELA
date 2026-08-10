@@ -40,8 +40,8 @@ Healthcare Services (Healthcare)               14     9   64.29    164.82
 Healthcare                                     41    17   41.46    139.10
     ↳ Leaders: INNV, OMDA, PNTG, LFST, TDOC
 
-Pharmaceuticals                                 3     3  100.00    137.24
-    ↳ Leaders: LQDA
+Pharmaceuticals (Pharma)                        3     3  100.00    137.24
+    ↳ Leaders: LQDA, ETON, CORT
 
 Cloud Infrastructure (Cloud Computing)          5     4   80.00    130.08
     ↳ Leaders: DDOG, SNOW, NET
@@ -59,10 +59,10 @@ Developer Infrastructure (Software)             3     2   66.67     81.80
     ↳ Leaders: FROG
 
 Biotech                                        87    18   20.69     81.57
-    ↳ Leaders: IBRX, ABCL, TGTX, TVTX, GLUE
+    ↳ Leaders: IBRX, ABCL, TGTX, TVTX, NRIX
 
-Digital Payments (Digital Assets)               4     2   50.00     76.05
-    ↳ Leaders: SEZL
+Digital Payments (Software)                     4     2   50.00     76.05
+    ↳ Leaders: SEZL, PAYS
 
 Digital Health (Software)                       1     1  100.00     67.93
     ↳ Leaders: HNGE
@@ -73,7 +73,7 @@ Pharma                                         44     9   20.45     65.48
 Real Estate Technology                          1     1  100.00     62.38
     ↳ Leaders: COMP
 
-Asset Management                                1     1  100.00     62.38
+Asset Management (Financial Services)           1     1  100.00     62.38
     ↳ Leaders: VCTR
 
 Mobile Adtech (Internet)                        2     1   50.00     53.83
@@ -85,11 +85,14 @@ Digital Banking (Banking)                       3     1   33.33     45.28
 Software                                      169    15    8.88     41.53
     ↳ Leaders: PENG, FA, EVER, BLZE
 
-Leisure and Entertainment                      39     4   10.26     35.01
+Leisure and Entertainment (Broad)              39     4   10.26     35.01
     ↳ Leaders: RSI
 
 Banking                                       155    12    7.74     32.25
     ↳ Leaders: RELY
+
+Financial Services (Banking)                   69     4    5.80     21.56
+    ↳ Leaders: AAMI
 
 Exploration                                    84     4    4.76     17.45
     ↳ Leaders: NESR
@@ -99,16 +102,18 @@ LONG CANDIDATE UNIVERSE
 Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
+  LQDA           Pharmaceuticals              Leading         99     95.5200          1
   OSCR       Healthcare Services              Leading         97     93.9325          1
-  LQDA           Pharmaceuticals  Unclassified Leader         99     93.5500          1
   PGNY       Healthcare Services              Leading         97     93.5325          1
    HUM       Healthcare Services              Leading         97     93.2325          1
-  SEZL          Digital Payments  Unclassified Leader         99     92.9500          2
  ~DAVE           Digital Banking              Neutral         98     92.8400          1
   INNV                Healthcare              Leading         97     91.7325          2
   OMDA                Healthcare              Leading         97     90.7325          3
+  ETON           Pharmaceuticals              Leading         99     90.6200          3
   URGN                    Pharma              Leading         97     90.6200          2
   PNTG                Healthcare              Leading         95     89.5325          3
+ ~SEZL          Digital Payments              Neutral         99     89.4650          2
+  CORT           Pharmaceuticals              Leading         99     89.4200          3
  ~AGEN             Biotechnology              Neutral         95     89.4075          2
  ~KNSA             Biotechnology              Neutral         90     89.3575          1
   NESR               Exploration              Leading         90     89.2875          1
@@ -135,6 +140,7 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zac
  ~TGTX                   Biotech              Neutral         90     86.2575          3
    OGN                Healthcare              Leading         95     86.0325          3
  ~OKTA             Cybersecurity              Neutral         98     85.9150          2
+ ~AAMI        Financial Services              Neutral         90     85.7400          1
    TOI                Healthcare              Leading         90     85.4825          3
    RSI Leisure and Entertainment  Unclassified Leader         90     85.4000          2
    ~FA                  Software              Neutral         98     85.2150          3
@@ -145,8 +151,8 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zac
  ~TWLO      Communications Cloud              Neutral         90     84.8525          2
    ~BB             Cybersecurity              Neutral         97     84.6650          2
  ~TVTX                   Biotech              Neutral         90     84.4575          3
- ~GLUE                   Biotech              Neutral         90     84.4575          3
  ~NRIX                   Biotech              Neutral         90     84.4575          3
+ ~GLUE                   Biotech              Neutral         90     84.4575          3
  ~FTRE                   Biotech              Neutral         95     84.4075          3
  ~QLYS             Cybersecurity              Neutral         98     84.3150          3
  ~PANW             Cybersecurity              Neutral         99     83.9650          3
@@ -168,6 +174,7 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zac
     ~S             Cybersecurity              Neutral         90     81.3150          2
    ~MU                    Memory              Lagging         97     81.2875          1
  ~SNDK                    Memory              Lagging         99     80.9875          1
+ ~PAYS          Digital Payments              Neutral         90     80.7150          3
  ~KYMR                   Biotech              Neutral         90     80.2575          3
 
 --- NEW LONG PIPELINE ENTRIES ---
@@ -184,7 +191,7 @@ OBSERVATION WATCHLIST
     1   KRYS                                 Biotech              Neutral         80     78.0575         4*
     1    MOH                              Healthcare              Leading         80     79.8825          3
     1   DTIL                                 Biotech              Neutral         80     74.7575          3
-    1    MRX                      Financial Services              Unknown         70     71.5000          1
+    1    MRX                      Financial Services              Neutral         70     75.4400          1
     1   MIRM                                 Biotech              Neutral         80     78.9575          3
     1   CARE                                 Banking              Neutral         90     79.6400         4*
     1   MUFG                                 Banking              Neutral         80     75.5400          3
@@ -229,7 +236,6 @@ OBSERVATION WATCHLIST
     5   NBIS                       AI Infrastructure              Lagging         50     54.9250          1
     5   MRVL                                 AI ASIC              Lagging         50     50.2250          3
     5  IFNNY                          Semiconductors              Lagging         50     47.0375          3
-    5   VIRT                      Financial Services              Unknown         60     62.0000          3
     5   INTC                              AI Compute              Lagging         90     70.9250          1
     5   OUST                              AI Sensors              Lagging         70     62.6250          2
     5   SYNA                          Semiconductors              Lagging         70     59.2375          3
@@ -245,8 +251,8 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,OSCR,LQDA,PGNY,HUM,SEZL,DAVE,INNV,OMDA,URGN,PNTG,AGEN,KNSA,NESR,LFST,AVAH,DVA,VCTR,HNGE,PACS,FTNT,CON,BTSG,PENG,TDOC,AGL,CNC,ASTH,DDOG,CYRX,IBRX,ABCL,CVS,COMP,TGTX,OGN,OKTA,TOI,RSI,FA,SNOW,CRL,FIVN,NET,TWLO,BB,TVTX,GLUE,NRIX,FTRE,QLYS,PANW,ALKS,AGIO,EVER,VCEL,BLZE,PTGX,APPS,FROG,VRNS,RPD,RELY,CRWD,TENB,ACRS,MGTX,S,MU,SNDK,KYMR,
-###OBSERVATION,MXL,DELL,AMBQ,SIMO,ICHR,UMC,VPG,EXTR,AMD,ALIT,HPE,UCTT,ATEN,ASX,CARE,NTAP,INTC,STX,ACMR,EAT,PD,MIRM,TOELY,VG,AMAT,STM,DTIL,MOH,KRYS,ALAB,NTCT,MRNA,VSH,WDC,MUFG,DOCN,CYTK,ARM,KLIC,CSCO,MKSI,MRX,SYNA,LRCX,OUST,RARE,COHU,VIRT,MAMA,WYFI,ANAB,TXN,IFNNY,MRVL,NBIS,ALGM,RGNX,VICR,CRDO,SVCO,
+###LONG,LQDA,OSCR,PGNY,HUM,DAVE,INNV,OMDA,ETON,URGN,PNTG,SEZL,CORT,AGEN,KNSA,NESR,LFST,AVAH,DVA,VCTR,HNGE,PACS,FTNT,CON,BTSG,PENG,TDOC,AGL,CNC,ASTH,DDOG,CYRX,IBRX,ABCL,CVS,COMP,TGTX,OGN,OKTA,AAMI,TOI,RSI,FA,SNOW,CRL,FIVN,NET,TWLO,BB,TVTX,NRIX,GLUE,FTRE,QLYS,PANW,ALKS,AGIO,EVER,VCEL,BLZE,PTGX,APPS,FROG,VRNS,RPD,RELY,CRWD,TENB,ACRS,MGTX,S,MU,SNDK,PAYS,KYMR,
+###OBSERVATION,MXL,DELL,AMBQ,SIMO,ICHR,UMC,VPG,EXTR,AMD,ALIT,HPE,UCTT,ATEN,ASX,CARE,NTAP,INTC,STX,ACMR,EAT,PD,MIRM,TOELY,VG,AMAT,STM,DTIL,MOH,KRYS,ALAB,NTCT,MRNA,VSH,WDC,MUFG,DOCN,CYTK,ARM,KLIC,CSCO,MKSI,MRX,SYNA,LRCX,OUST,RARE,COHU,MAMA,WYFI,ANAB,TXN,IFNNY,MRVL,NBIS,ALGM,RGNX,VICR,CRDO,SVCO,
 ###DISTRIBUTION,,
 
 ==============================================

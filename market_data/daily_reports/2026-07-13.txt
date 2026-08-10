@@ -29,8 +29,8 @@ Healthcare Services (Healthcare)               13     9   69.23    167.07
 Memory (Semiconductors)                         4     4  100.00    158.53
     ↳ Leaders: MU, SNDK, SIMO, WDC
 
-Pharmaceuticals                                 3     3  100.00    135.39
-    ↳ Leaders: LQDA
+Pharmaceuticals (Pharma)                        3     3  100.00    135.39
+    ↳ Leaders: LQDA, CORT, ETON
 
 Cloud Infrastructure (Cloud Computing)          5     4   80.00    133.67
     ↳ Leaders: DDOG, DOCN, SNOW, NET
@@ -62,9 +62,6 @@ Pharma                                         44    12   27.27     86.68
 Communications Cloud (Cloud Computing)          3     2   66.67     85.49
     ↳ Leaders: TWLO, FIVN
 
-Digital Payments (Digital Assets)               4     2   50.00     78.46
-    ↳ Leaders: SEZL
-
 Data Storage (Semiconductors)                   1     1  100.00     67.24
     ↳ Leaders: STX
 
@@ -92,9 +89,6 @@ AI Networking (Artificial Intelligence)         3     1   33.33     41.58
 Restaurants (Broad)                            28     2    7.14     22.24
     ↳ Leaders: EAT
 
-Financial Services                             69     4    5.80     20.95
-    ↳ Leaders: MRX
-
 Unknown                                       382     5    1.31      7.15
     ↳ Leaders: MAMA
 
@@ -105,12 +99,11 @@ Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 Ticker                            Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
   DDOG                    Cloud Infrastructure              Leading         98     95.6950          1
    HUM                     Healthcare Services              Leading         98     95.6000          1
+  LQDA                         Pharmaceuticals              Leading         98     94.9700          1
   PGNY                     Healthcare Services              Leading         95     94.2500          1
   INNV                              Healthcare              Leading         97     93.5500          2
   ASTH                              Healthcare              Leading         97     93.1500          3
-  LQDA                         Pharmaceuticals  Unclassified Leader         98     93.0000          1
   OMDA                              Healthcare              Leading         97     92.5500          3
-  SEZL                        Digital Payments  Unclassified Leader         98     92.4000          2
   KNSA                           Biotechnology              Leading         90     92.3875          1
   OSCR                     Healthcare Services              Leading         98     92.3000          3
   AGEN                           Biotechnology              Leading         99     92.1375          3
@@ -138,14 +131,14 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
   FIVN                    Communications Cloud              Leading         95     89.3450          3
    NET                    Cloud Infrastructure              Leading         90     89.1950          2
    CVS                              Healthcare              Leading         90     89.0000          2
+  CORT                         Pharmaceuticals              Leading         98     88.8700          3
   PNTG                              Healthcare              Leading         90     88.6000          3
   KRYS                                 Biotech              Leading         90     88.5875          3
   RGNX                                 Biotech              Leading         95     88.2375         4*
   BTSG                     Healthcare Services              Leading         95     87.9500         4*
-   MRX                      Financial Services  Unclassified Leader         90     87.5000          1
+  MIRM                                 Biotech              Leading         90     87.4875          3
   NRIX                                 Biotech              Leading         90     87.4875          3
   TVTX                                 Biotech              Leading         90     87.4875          3
-  MIRM                                 Biotech              Leading         90     87.4875          3
     VG LNG / Natural Gas Export Infrastructure  Unclassified Leader         90     87.4000          2
   PTGX                                 Biotech              Leading         90     87.2875          1
  ~AMAT                 Semiconductor Equipment              Neutral         95     87.1775          1
@@ -161,6 +154,7 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
   DTIL                                 Biotech              Leading         95     86.0375          3
   ~VSH                          Semiconductors              Neutral         95     85.9775          1
    EAT                             Restaurants  Unclassified Leader         90     85.7000          2
+  ETON                         Pharmaceuticals              Leading         97     85.5200         5*
   ANAB                                 Biotech              Leading         90     85.4875         4*
   ~UMC                                 Foundry              Neutral         99     85.3775          3
    OGN                              Healthcare              Leading         90     85.1000          3
@@ -186,7 +180,7 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
  ~CSCO                           AI Networking              Neutral         90     80.1850          1
 
 --- NEW LONG PIPELINE ENTRIES ---
-New Longs       : ACRS, AGEN, ANAB, APPS, COMP, CVS, EAT, OGN, URGN, VG
+New Longs       : ACRS, AGEN, ANAB, APPS, COMP, CORT, CVS, EAT, ETON, LQDA, OGN, URGN, VG
 Recovered Longs : None
 
 ========================================
@@ -201,16 +195,15 @@ OBSERVATION WATCHLIST
     1  IFNNY          Semiconductors              Neutral         80     72.6275          3
     1   SYNA          Semiconductors              Neutral         80     73.8275          3
     1   SVCO          Semiconductors              Neutral         80     73.1275          3
-    1   PGEN           Biotechnology              Leading         80     79.9875         4*
     1    TXN          Semiconductors              Neutral         80     75.6275          3
+    1   OUST              AI Sensors              Neutral         80     71.6850          3
     1   NTCT      Optical Networking              Neutral         90     79.8275          3
     1   KLIC Semiconductor Equipment              Neutral         90     78.1275          3
     1   NBIS       AI Infrastructure              Neutral         90     78.9850          3
     1   MRVL                 AI ASIC              Neutral         90     78.2850          3
-    1   VIRT      Financial Services              Unknown         90     78.5000          3
     1   INTC              AI Compute              Neutral         95     79.7350          1
     1    ARM              AI Compute              Neutral         95     79.7350          3
-    1   OUST              AI Sensors              Neutral         80     71.6850          3
+    1   PGEN           Biotechnology              Leading         80     79.9875         4*
     1   VICR          Semiconductors              Neutral         70     73.3275          2
 
 ========================================
@@ -219,8 +212,8 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,DDOG,HUM,PGNY,INNV,ASTH,LQDA,OMDA,SEZL,KNSA,OSCR,AGEN,TGTX,APPS,TOI,MU,ABCL,AVAH,DVA,URGN,TWLO,CNC,STX,DOCN,IBRX,SNDK,CON,MOH,LFST,TDOC,AGIO,SIMO,SNOW,FIVN,NET,CVS,PNTG,KRYS,RGNX,BTSG,MRX,NRIX,TVTX,MIRM,VG,PTGX,AMAT,ASX,ALKS,COMP,WDC,CYRX,VCEL,MAMA,RARE,MRNA,DTIL,VSH,EAT,ANAB,UMC,OGN,UCTT,MXL,DELL,FTRE,ACMR,AMD,STM,TOELY,ICHR,ACRS,VPG,MKSI,ALAB,KYMR,HPE,AMBQ,WYFI,MGTX,CYTK,CSCO,
-###OBSERVATION,EXTR,ARM,INTC,VIRT,MRVL,NBIS,KLIC,NTCT,OUST,TXN,SVCO,SYNA,IFNNY,CRDO,ALGM,COHU,LRCX,PGEN,VICR,
+###LONG,DDOG,HUM,LQDA,PGNY,INNV,ASTH,OMDA,KNSA,OSCR,AGEN,TGTX,APPS,TOI,MU,ABCL,AVAH,DVA,URGN,TWLO,CNC,STX,DOCN,IBRX,SNDK,CON,MOH,LFST,TDOC,AGIO,SIMO,SNOW,FIVN,NET,CVS,CORT,PNTG,KRYS,RGNX,BTSG,MIRM,NRIX,TVTX,VG,PTGX,AMAT,ASX,ALKS,COMP,WDC,CYRX,VCEL,MAMA,RARE,MRNA,DTIL,VSH,EAT,ETON,ANAB,UMC,OGN,UCTT,MXL,DELL,FTRE,ACMR,AMD,STM,TOELY,ICHR,ACRS,VPG,MKSI,ALAB,KYMR,HPE,AMBQ,WYFI,MGTX,CYTK,CSCO,
+###OBSERVATION,EXTR,ARM,INTC,MRVL,NBIS,KLIC,NTCT,OUST,TXN,SVCO,SYNA,IFNNY,CRDO,ALGM,COHU,LRCX,PGEN,VICR,
 ###DISTRIBUTION,,
 
 ==============================================

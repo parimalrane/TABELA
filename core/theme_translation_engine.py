@@ -138,8 +138,18 @@ THEME_TRANSLATION = {
     "Life Sciences Tools": "Medical Devices",
     "Healthcare Services": "Healthcare",
     "Digital Health": "Software",
-    "Restaurants": "Broad",
-    "Professional Services": "Broad",
-    "Specialty Finance / Debt Collection": "Financial Services",
-    "IT Services": "Software"
+    "Restaurants": "Consumer Staples",
+    "Professional Services": "Software",
+    "Specialty Finance / Debt Collection": "Banking",
+    "Asset Management": "Banking",
+    "Financial Services": "Banking",
+    "IT Services": "Software",
+    "Pharmaceuticals": "Pharma",
+    "Refining & Marketing": "Energy",
+    "Digital Payments": "Software",
+    "Digital Assets": "Software",
+    "Digital Assets Infrastructure": "Software",
+    "Sports Betting Data & Technology": "Internet",
+    "Leisure and Entertainment": "Internet",
+    "Oilfield Chemicals & Data Analytics": "Energy"
 }

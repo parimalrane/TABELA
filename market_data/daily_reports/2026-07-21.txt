@@ -36,8 +36,8 @@ Biotechnology (Biotech)                         5     5  100.00    155.88
 Cybersecurity (Software)                       13     8   61.54    155.10
     ↳ Leaders: FTNT, OKTA, BB, PANW, QLYS
 
-Pharmaceuticals                                 3     3  100.00    136.78
-    ↳ Leaders: LQDA
+Pharmaceuticals (Pharma)                        3     3  100.00    136.78
+    ↳ Leaders: LQDA, CORT, ETON
 
 Cloud Infrastructure (Cloud Computing)          5     4   80.00    136.17
     ↳ Leaders: DDOG, SNOW, NET
@@ -49,7 +49,7 @@ Healthcare                                     41    14   34.15    113.69
     ↳ Leaders: INNV, OMDA, LFST, ASTH, CYRX
 
 Biotech                                        85    22   25.88     99.56
-    ↳ Leaders: IBRX, IOVA, MGTX, TGTX, TVTX
+    ↳ Leaders: IBRX, IOVA, MGTX, TGTX, NRIX
 
 Developer Infrastructure (Software)             3     2   66.67     80.87
     ↳ Leaders: FROG
@@ -57,8 +57,8 @@ Developer Infrastructure (Software)             3     2   66.67     80.87
 Communications Cloud (Cloud Computing)          3     2   66.67     78.56
     ↳ Leaders: FIVN
 
-Digital Payments (Digital Assets)               4     2   50.00     78.06
-    ↳ Leaders: SEZL
+Digital Payments (Software)                     4     2   50.00     78.06
+    ↳ Leaders: SEZL, PAYS
 
 Pharma                                         43     9   20.93     68.91
     ↳ Leaders: URGN, NBIX, ACRS
@@ -66,7 +66,7 @@ Pharma                                         43     9   20.93     68.91
 Digital Health (Software)                       1     1  100.00     67.93
     ↳ Leaders: HNGE
 
-Asset Management                                1     1  100.00     62.38
+Asset Management (Financial Services)           1     1  100.00     62.38
     ↳ Leaders: VCTR
 
 LNG / Natural Gas Export Infrastructure         1     1  100.00     62.38
@@ -78,11 +78,14 @@ Mobile Adtech (Internet)                        2     1   50.00     54.38
 Digital Banking (Banking)                       3     1   33.33     44.82
     ↳ Leaders: DAVE
 
-Leisure and Entertainment                      39     4   10.26     34.06
+Leisure and Entertainment (Broad)              39     4   10.26     34.06
     ↳ Leaders: RSI
 
 Exploration                                    85     6    7.06     26.21
     ↳ Leaders: NESR, CEPL
+
+Financial Services (Banking)                   70     5    7.14     26.17
+    ↳ Leaders: AAMI
 
 Software                                      170     6    3.53     16.85
     ↳ Leaders: PENG, FA, EVER, BLZE
@@ -92,15 +95,16 @@ LONG CANDIDATE UNIVERSE
 Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker                            Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
+  LQDA                         Pharmaceuticals              Leading         99     96.7325          1
   OSCR                     Healthcare Services              Leading         97     95.7500          1
    HUM                     Healthcare Services              Leading         97     95.0500          1
   PGNY                     Healthcare Services              Leading         95     94.2500          1
-  LQDA                         Pharmaceuticals  Unclassified Leader         99     93.5500          1
   INNV                              Healthcare              Leading         97     93.5500          2
-  SEZL                        Digital Payments  Unclassified Leader         99     92.9500          2
+  CORT                         Pharmaceuticals              Leading         99     93.1325          2
   URGN                                  Pharma              Leading         98     92.3825          2
  ~DAVE                         Digital Banking              Neutral         97     92.0025          2
   OMDA                              Healthcare              Leading         95     91.4500          3
+  ETON                         Pharmaceuticals              Leading         98     91.2825          3
   NBIX                                  Pharma              Leading         90     91.2825          1
   AVAH                     Healthcare Services              Leading         90     90.7000          2
    DVA                     Healthcare Services              Leading         97     90.6500          3
@@ -117,6 +121,7 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
    CVS                              Healthcare              Leading         90     89.0000          2
   VCTR                        Asset Management  Unclassified Leader         90     88.8000          1
   PNTG                              Healthcare              Leading         90     88.6000          3
+ ~SEZL                        Digital Payments              Neutral         99     88.2525          2
   MGTX                                 Biotech              Leading         90     88.1700          2
    CON                     Healthcare Services              Leading         90     87.5000          3
   TGTX                                 Biotech              Leading         90     87.4700          3
@@ -125,14 +130,15 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
     VG LNG / Natural Gas Export Infrastructure  Unclassified Leader         90     87.4000          2
    TOI                              Healthcare              Leading         90     87.3000          3
   TDOC                              Healthcare              Leading         95     87.2500          3
+ ~AAMI                      Financial Services              Neutral         90     86.9525          1
   CEPL                             Exploration              Leading         90     86.6875          3
    CNC                              Healthcare              Leading         90     86.6000          3
  ~FTNT                           Cybersecurity              Neutral         97     86.5525          1
  ~DDOG                    Cloud Infrastructure              Neutral         98     86.2400          3
  ~PENG                                Software              Neutral         98     86.2025          1
-  TVTX                                 Biotech              Leading         90     85.6700          3
   NRIX                                 Biotech              Leading         90     85.6700          3
   ABCL                                 Biotech              Leading         90     85.6700          3
+  TVTX                                 Biotech              Leading         90     85.6700          3
   ACRS                                  Pharma              Leading         95     85.4325          3
    RSI               Leisure and Entertainment  Unclassified Leader         90     85.4000          2
   ALKS                                 Biotech              Leading         95     85.1200          3
@@ -147,6 +153,7 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating  
  ~FTRE                                 Biotech              Leading         90     82.8700          3
    ~FA                                Software              Neutral         95     82.3525          3
  ~EVER                                Software              Neutral         95     82.2525          3
+ ~PAYS                        Digital Payments              Neutral         95     82.2525          3
  ~PANW                           Cybersecurity              Neutral         98     82.2025          3
  ~SNDK                                  Memory              Neutral         99     82.1975          1
  ~BLZE                                Software              Neutral         99     81.8525          3
@@ -165,77 +172,76 @@ Recovered Longs : AGEN
 OBSERVATION WATCHLIST
 ========================================
  Days Ticker            Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
-    1      S           Cybersecurity              Neutral         80     74.6025          2
-    1   TWLO    Communications Cloud              Neutral         80     79.6400          1
     1   SKWD               Insurance              Leading         80     79.3625          3
-    1    RPD           Cybersecurity              Neutral         95     77.5525         4*
-    1   TENB           Cybersecurity              Neutral         95     78.2525         4*
+    1      S           Cybersecurity              Neutral         80     74.6025          2
     1   RELY                 Banking              Neutral         80     77.8525          3
+    1    RPD           Cybersecurity              Neutral         95     77.5525         4*
     1   COMP  Real Estate Technology              Unknown         80     72.4000          3
-    1   CRWD           Cybersecurity              Neutral         95     78.9525         4*
+    1   TENB           Cybersecurity              Neutral         95     78.2525         4*
     1   VRNS           Cybersecurity              Neutral         95     79.6525          3
-    2   PTGX                 Biotech              Leading         90     81.4700          3
+    1   TWLO    Communications Cloud              Neutral         80     79.6400          1
+    1   CRWD           Cybersecurity              Neutral         95     78.9525         4*
     2   KYMR                 Biotech              Leading         90     81.4700          3
-    2    OGN              Healthcare              Leading         80     79.6000          3
     2   VCEL                 Biotech              Leading         80     78.9700          3
-    3   RGNX                 Biotech              Leading         40     56.1700         4*
-    3   CYTK                 Biotech              Leading         80     80.1700          3
-    3    STX            Data Storage              Neutral         97     82.4975          1
+    2    OGN              Healthcare              Leading         80     79.6000          3
+    2   PTGX                 Biotech              Leading         90     81.4700          3
     3   MRNA                 Biotech              Leading         80     75.9700          3
     3   MUFG                 Banking              Neutral         80     76.7525          3
-    3   SIMO                  Memory              Neutral         98     81.0475          1
-    3   MIRM                 Biotech              Leading         80     82.6700          2
-    3   KRYS                 Biotech              Leading         80     79.2700         4*
     3   CARE                 Banking              Neutral         90     80.8525         4*
-    3    MRX      Financial Services              Unknown         80     77.0000          1
+    3    STX            Data Storage              Neutral         97     82.4975          1
+    3    MRX      Financial Services              Neutral         80     82.1525          1
+    3   CYTK                 Biotech              Leading         80     80.1700          3
+    3   SIMO                  Memory              Neutral         98     81.0475          1
+    3   KRYS                 Biotech              Leading         80     79.2700         4*
+    3   RGNX                 Biotech              Leading         40     56.1700         4*
+    3   MIRM                 Biotech              Leading         80     82.6700          2
     4   ALIT                Software              Neutral         80     69.3025          3
     4   MKSI Semiconductor Equipment              Neutral         80     70.1475          1
+    4   RARE                 Biotech              Leading         50     64.7700          2
     4  TOELY Semiconductor Equipment              Neutral         90     76.5475          1
     4    VSH          Semiconductors              Neutral         90     71.3475          3
-    4   NTAP     Data Infrastructure              Neutral         90     77.4025          3
     4   ICHR Semiconductor Equipment              Neutral         99     74.3975         4*
-    4   ATEN           Cybersecurity              Neutral         90     78.1025          3
-    4    MXL          Semiconductors              Neutral         99     77.0975          3
-    4   DELL              AI Servers              Lagging         99     80.0875          1
-    4    VPG          Semiconductors              Neutral         98     75.7475          3
-    4   UCTT Semiconductor Equipment              Neutral         98     77.7475          1
+    4    STM          Semiconductors              Neutral         90     73.9475          1
     4    AMD              AI Compute              Lagging         98     79.7375          2
     4    UMC                 Foundry              Neutral         97     74.3975         4*
-    4    STM          Semiconductors              Neutral         90     73.9475          1
-    4   RARE                 Biotech              Leading         50     64.7700          2
+    4   NTAP     Data Infrastructure              Neutral         90     77.4025          3
     4   DOCN    Cloud Infrastructure              Neutral         95     87.5900          2
+    4   UCTT Semiconductor Equipment              Neutral         98     77.7475          1
     4    ASX          Semiconductors              Neutral         95     77.5975          2
+    4    VPG          Semiconductors              Neutral         98     75.7475          3
+    4   DELL              AI Servers              Lagging         99     80.0875          1
     4   AMAT Semiconductor Equipment              Neutral         90     75.0475          2
-    5   WYFI       AI Infrastructure              Lagging         80     66.8375          3
-    5   COHU   Semiconductor Testing              Neutral         90     73.9475          2
-    5    WDC                  Memory              Neutral         95     77.8975          1
-    5     PD                Software              Neutral         60     64.0025          2
-    5   ACMR Semiconductor Equipment              Neutral         98     76.7475          3
+    4    MXL          Semiconductors              Neutral         99     77.0975          3
+    4   ATEN           Cybersecurity              Neutral         90     78.1025          3
     5   ALAB         AI Connectivity              Lagging         90     74.1375          3
-    5   NTCT      Optical Networking              Neutral         80     66.4475          3
+    5   WYFI       AI Infrastructure              Lagging         80     66.8375          3
+    5   ACMR Semiconductor Equipment              Neutral         98     76.7475          3
+    5   COHU   Semiconductor Testing              Neutral         90     73.9475          2
     5    TXN          Semiconductors              Neutral         70     64.7475          2
-    5   AMBQ          Semiconductors              Neutral         99     74.2975          3
-    5   MAMA                 Unknown              Unknown         60     64.6000          2
     5    HPE              AI Servers              Lagging         95     77.5875          1
+    5   MAMA                 Unknown              Unknown         60     64.6000          2
+    5     PD                Software              Neutral         60     64.0025          2
+    5    WDC                  Memory              Neutral         95     77.8975          1
+    5   NTCT      Optical Networking              Neutral         80     66.4475          3
+    5   AMBQ          Semiconductors              Neutral         99     74.2975          3
     5   LRCX Semiconductor Equipment              Neutral         80     70.9475          2
     6   CSCO           AI Networking              Lagging         70     62.8375          2
     6   ANAB                 Biotech              Leading         20     47.1700          3
     6    EAT             Restaurants              Unknown         90     78.2000          3
+    7   NBIS       AI Infrastructure              Lagging         95     76.8875          3
     7   PGEN           Biotechnology              Leading         80     78.1700         4*
     7   MRVL                 AI ASIC              Lagging         80     67.9375          3
-    7   VICR          Semiconductors              Neutral         20     37.9475          2
-    7   KLIC Semiconductor Equipment              Neutral         90     70.2475          3
-    7   VIRT      Financial Services              Unknown         70     67.5000          3
     7   ALGM          Semiconductors              Neutral         70     61.1475          3
     7   CRDO       AI Infrastructure              Lagging         70     67.1375          1
     7  IFNNY          Semiconductors              Neutral         70     59.2475          3
-    7   INTC              AI Compute              Lagging         90     72.1375          1
+    7   OUST              AI Sensors              Lagging         90     74.8375          2
+    7   VICR          Semiconductors              Neutral         20     37.9475          2
+    7   KLIC Semiconductor Equipment              Neutral         90     70.2475          3
     7    ARM              AI Compute              Lagging         90     72.1375          3
-    7   NBIS       AI Infrastructure              Lagging         95     76.8875          3
-    7   EXTR           AI Networking              Lagging         95     72.8875          3
+    7   INTC              AI Compute              Lagging         90     72.1375          1
     7   SVCO          Semiconductors              Neutral         40     43.2475          3
     7   SYNA          Semiconductors              Neutral         80     65.9475          3
-    7   OUST              AI Sensors              Lagging         90     74.8375          2
+    7   EXTR           AI Networking              Lagging         95     72.8875          3
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -243,8 +249,8 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,OSCR,HUM,PGNY,LQDA,INNV,SEZL,URGN,DAVE,OMDA,NBIX,AVAH,DVA,PACS,IBRX,BTSG,LFST,AGEN,IOVA,AGL,ASTH,NESR,CYRX,CVS,VCTR,PNTG,MGTX,CON,TGTX,XNCR,HNGE,VG,TOI,TDOC,CEPL,CNC,FTNT,DDOG,PENG,TVTX,NRIX,ABCL,ACRS,RSI,ALKS,SNOW,KNSA,AGIO,OKTA,NET,MU,BB,APPS,FTRE,FA,EVER,PANW,SNDK,BLZE,MOH,CRL,QLYS,FIVN,FROG,GLUE,
-###OBSERVATION,ICHR,MXL,AMBQ,DELL,VPG,SIMO,UCTT,ACMR,AMD,STX,UMC,VRNS,EXTR,WDC,CRWD,DOCN,NBIS,TENB,HPE,RPD,ASX,AMAT,EAT,ALAB,ARM,ATEN,PTGX,STM,NTAP,VSH,TOELY,INTC,KYMR,KLIC,CARE,OUST,COHU,S,MKSI,MRVL,WYFI,RELY,PGEN,VCEL,COMP,MRNA,MUFG,SKWD,NTCT,TWLO,MIRM,MRX,CYTK,SYNA,LRCX,OGN,ALIT,KRYS,CSCO,VIRT,ALGM,CRDO,IFNNY,TXN,MAMA,PD,RARE,RGNX,SVCO,VICR,ANAB,
+###LONG,LQDA,OSCR,HUM,PGNY,INNV,CORT,URGN,DAVE,OMDA,ETON,NBIX,AVAH,DVA,PACS,IBRX,BTSG,LFST,AGEN,IOVA,AGL,ASTH,NESR,CYRX,CVS,VCTR,PNTG,SEZL,MGTX,CON,TGTX,XNCR,HNGE,VG,TOI,TDOC,AAMI,CEPL,CNC,FTNT,DDOG,PENG,NRIX,ABCL,TVTX,ACRS,RSI,ALKS,SNOW,KNSA,AGIO,OKTA,NET,MU,BB,APPS,FTRE,FA,EVER,PAYS,PANW,SNDK,BLZE,MOH,CRL,QLYS,FIVN,FROG,GLUE,
+###OBSERVATION,ICHR,MXL,AMBQ,DELL,VPG,SIMO,UCTT,ACMR,AMD,STX,UMC,VRNS,EXTR,WDC,CRWD,DOCN,NBIS,TENB,HPE,RPD,ASX,AMAT,EAT,ALAB,ARM,ATEN,PTGX,STM,NTAP,VSH,TOELY,INTC,KYMR,KLIC,CARE,OUST,COHU,S,MKSI,MRVL,WYFI,RELY,PGEN,VCEL,COMP,MRNA,MUFG,SKWD,NTCT,TWLO,MIRM,MRX,CYTK,SYNA,LRCX,OGN,ALIT,KRYS,CSCO,ALGM,CRDO,IFNNY,TXN,MAMA,PD,RARE,RGNX,SVCO,VICR,ANAB,
 ###DISTRIBUTION,,
 
 ==============================================
