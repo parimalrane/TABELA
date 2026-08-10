@@ -1,8 +1,13 @@
 Market file not found: market_data\input_files\20260731_Market.csv. Skipping Market Context.
 
 
-[TRANSITION WARNING] LB in OBSERVATION vanished from stocks universe on 2026-07-31. Retaining in registry (day 5).
+[TRANSITION WARNING] INNV in OBSERVATION vanished from stocks universe on 2026-07-31. Retaining in registry (day 4).
+[TRANSITION WARNING] IOVA in OBSERVATION vanished from stocks universe on 2026-07-31. Retaining in registry (day 6).
+[TRANSITION WARNING] PNTG in OBSERVATION vanished from stocks universe on 2026-07-31. Retaining in registry (day 5).
+[TRANSITION WARNING] RGNX in DISTRIBUTION vanished from stocks universe on 2026-07-31. Retaining in registry (day 4).
+[TRANSITION WARNING] TOI in OBSERVATION vanished from stocks universe on 2026-07-31. Retaining in registry (day 7).
 [TRANSITION WARNING] BFLY left LONG but is absent from stocks universe on 2026-07-31. Entering OBSERVATION Day 1 to preserve audit trail.
+[DISTRIBUTION WARNING] RGNX is in DISTRIBUTION registry but absent from stocks universe on 2026-07-31. Cannot display in watchlist until it re-enters the universe.
 
 ==============================================
 TABELA DAILY MARKET SCAN
@@ -60,14 +65,17 @@ Communications Cloud (Cloud Computing)          3     2   66.67     86.88
 Healthcare Services                            14     4   28.57     71.95
     ↳ Leaders: OSCR, AVAH, PACS
 
+Exploration                                    73    14   19.18     70.46
+    ↳ Leaders: EC, SM, EOG
+
 Professional Services                           1     1  100.00     68.62
     ↳ Leaders: CBZ
 
 Asset Management                                1     1  100.00     62.38
     ↳ Leaders: VCTR
 
-Exploration                                    86    14   16.28     62.06
-    ↳ Leaders: EC, SM, EOG
+Medical Devices                                80    11   13.75     54.33
+    ↳ Leaders: BVS, BAX, GKOS, ATRC, HAE
 
 Data Infrastructure (Software)                  3     1   33.33     45.28
     ↳ Leaders: NTAP
@@ -78,16 +86,13 @@ Digital Banking (Banking)                       3     1   33.33     41.58
 Leisure and Entertainment                      33     4   12.12     40.39
     ↳ Leaders: VIK
 
-Software                                      154    14    9.09     37.95
+Software                                      163    14    8.59     36.27
     ↳ Leaders: BLZE, PENG, MANH
-
-Medical Devices                               215    16    7.44     35.22
-    ↳ Leaders: BVS, BAX, GKOS, ATRC, HAE
 
 Insurance                                      65     5    7.69     25.77
     ↳ Leaders: TRV
 
-Pharma                                         11     1    9.09     20.33
+Pharma                                         38     1    2.63      8.67
     ↳ Leaders: URGN
 
 ========================================
@@ -141,8 +146,13 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zac
   ~HAE           Medical Devices              Neutral         95     80.8550         4*
 [RECONCILIATION ALERT] BB was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
 [RECONCILIATION ALERT] BFLY was in LONG on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+[RECONCILIATION ALERT] CNC was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+[RECONCILIATION ALERT] CRL was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
 [RECONCILIATION ALERT] EVER was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
 [RECONCILIATION ALERT] FA was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+[RECONCILIATION ALERT] MOH was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+[RECONCILIATION ALERT] RGNX was in DISTRIBUTION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+[RECONCILIATION ALERT] TOI was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-31). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
 
 --- NEW LONG PIPELINE ENTRIES ---
 New Longs       : BLZE, CRWD, EOG, MANH, NET, NTAP, OKTA, PANW, PENG, QLYS, SM
@@ -152,72 +162,92 @@ Recovered Longs : BLZE, NET, OKTA, PANW, PENG, QLYS, SM
 OBSERVATION WATCHLIST
 ========================================
  Days Ticker                            Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
+    1   MEDP                              Healthcare              Neutral         80     78.3300          2
     1   GSHD                               Insurance              Neutral         80     77.2950          3
-    1   SOLV                         Medical Devices              Neutral         80     78.8050          2
+    1   NBIX                                  Pharma              Neutral         50     62.5400          2
     1   AMRX                                  Pharma              Neutral         90     79.4400          3
-    1   SKWD                               Insurance              Neutral         80     78.2950          3
     1    MRX                      Financial Services              Unknown         80     77.0000          1
-    2   RYAN                               Insurance              Neutral         70     72.4950          3
+    1   SKWD                               Insurance              Neutral         80     78.2950          3
     2   ENOV                         Medical Devices              Neutral         80     75.1050          3
+    2   LFST                              Healthcare              Neutral         90     80.7300          3
     2    ALL                               Insurance              Neutral         80     76.8950          3
+    2   RYAN                               Insurance              Neutral         70     72.4950          3
     2    CNA                               Insurance              Neutral         70     71.0950          3
-    4   HNGE                          Digital Health              Unknown         80     77.2000          1
+    4   CYRX                              Healthcare              Neutral         80     74.3300          3
     4   TGTX                                 Biotech              Neutral         80     71.4700          3
-    5   NESR                             Exploration              Leading         80     83.8225          1
+    4   HNGE                          Digital Health              Unknown         80     77.2000          1
+    4    CVS                              Healthcare              Neutral         70     71.5300          2
+    4   ACRS                                  Pharma              Neutral         70     66.4400          3
+    5   OMDA                              Healthcare              Neutral         70     71.2300          3
+    5   NVCR                                 Biotech              Neutral         10     30.8700          2
     5   SNDK                                  Memory              Lagging         98     78.5650          1
-    5   NRIX                                 Biotech              Neutral         90     75.1700          3
-    5   TVTX                                 Biotech              Neutral         90     75.1700          3
+    5   TDOC                              Healthcare              Neutral         10     36.5300          2
+    5   PTGX                                 Biotech              Neutral         95     76.2200          2
+    5     VG LNG / Natural Gas Export Infrastructure              Unknown         90     79.9000          3
+    5   FTRE                                 Biotech              Neutral         80     66.8700          3
+    5   ALKS                                 Biotech              Neutral         90     71.5700          3
     5   IBRX                                 Biotech              Neutral         90     75.1700          3
     5     MU                                  Memory              Lagging         90     75.5650          1
-    5     VG LNG / Natural Gas Export Infrastructure              Unknown         90     79.9000          3
-    5   PTGX                                 Biotech              Neutral         95     76.2200          2
+    5   NRIX                                 Biotech              Neutral         90     75.1700          3
     5   HALO                                 Biotech              Neutral         80     73.2700          2
+    5   NESR                             Exploration              Leading         80     83.8225          1
+    5   TVTX                                 Biotech              Neutral         90     75.1700          3
     6    HPK                             Exploration              Leading         80     80.3225          2
-    7   APPS                           Mobile Adtech              Neutral         95     79.9375          3
+    6   ABCL                                 Biotech              Neutral         40     47.6700          3
+    6   ASTH                              Healthcare              Neutral         20     44.3300          3
+    6   GLUE                                 Biotech              Neutral         10     31.1700          3
     7   CEPL                             Exploration              Leading         20     48.2225          3
+    7   APPS                           Mobile Adtech              Neutral         95     79.9375          3
 
 ========================================
 DISTRIBUTION WATCHLIST
 ========================================
  Days Ticker              Mapped_Theme Theme Classification  RS_Rating  Long_Score Zacks Rank
-    1   FROG  Developer Infrastructure              Leading         50     62.3600          3
+    1   MGTX                   Biotech              Neutral         60     61.1700          2
+    1   AGIO                   Biotech              Neutral         20     35.9700          3
     1    RSI Leisure and Entertainment              Unknown         30     47.4000          2
-    2   TWLO      Communications Cloud              Leading         50     67.1125          2
+    1   FROG  Developer Infrastructure              Leading         50     62.3600          3
     2    RPD             Cybersecurity              Leading         50     59.5600         4*
+    2   TWLO      Communications Cloud              Leading         50     67.1125          2
+    3   KYMR                   Biotech              Neutral         70     59.9700          3
+    4   CYTK                   Biotech              Neutral         40     47.6700          3
+    4   MRNA                   Biotech              Neutral         40     43.4700          3
+    4   SIMO                    Memory              Lagging         80     68.6650          1
+    4   MIRM                   Biotech              Neutral         40     50.1700          2
     4    STX              Data Storage              Lagging         97     79.4150          1
     4   MUFG                   Banking              Neutral         90     78.8650          3
-    4   SIMO                    Memory              Lagging         80     68.6650          1
-    5    ASX            Semiconductors              Lagging         70     62.2650          1
+    5    VSH            Semiconductors              Lagging         60     51.7650          3
+    5   MKSI   Semiconductor Equipment              Lagging         50     49.0650          2
     5   ATEN             Cybersecurity              Leading         50     62.8600          3
     5   DOCN      Cloud Infrastructure              Leading         50     68.3125          2
-    5    VSH            Semiconductors              Lagging         60     51.7650          3
     5    STM            Semiconductors              Lagging         40     43.3650          1
+    5   RARE                   Biotech              Neutral         10     32.2700          2
+    5   UCTT   Semiconductor Equipment              Lagging         90     70.2650          1
+    5    ASX            Semiconductors              Lagging         70     62.2650          1
     5   AMAT   Semiconductor Equipment              Lagging         80     66.4650          2
     5    MXL            Semiconductors              Lagging         80     66.0650          2
-    5   MKSI   Semiconductor Equipment              Lagging         50     49.0650          2
     5    AMD                AI Compute              Lagging         80     69.1400          2
     5    UMC                   Foundry              Lagging         90     73.4650          1
-    5   UCTT   Semiconductor Equipment              Lagging         90     70.2650          1
     5    VPG            Semiconductors              Lagging         90     68.2650          3
     5   ICHR   Semiconductor Equipment              Lagging         97     70.2150         4*
-    6     PD                  Software              Leading         70     76.2600          2
     6   COHU     Semiconductor Testing              Lagging         50     48.8650          2
     6    TXN            Semiconductors              Lagging         50     52.1650          1
+    6   ACMR   Semiconductor Equipment              Lagging         80     63.7650          3
+    6   LRCX   Semiconductor Equipment              Lagging         50     52.8650          1
+    6     PD                  Software              Leading         70     76.2600          2
+    6    WDC                    Memory              Lagging         97     75.9150          1
     6   ALAB           AI Connectivity              Lagging         90     73.4400          3
     6   AMBQ            Semiconductors              Lagging         90     66.2650          3
-    6    WDC                    Memory              Lagging         97     75.9150          1
-    6   LRCX   Semiconductor Equipment              Lagging         50     52.8650          1
-    6   ACMR   Semiconductor Equipment              Lagging         80     63.7650          3
     7    EAT               Restaurants              Unknown         98     82.6000          3
     8   VICR            Semiconductors              Lagging         20     34.8650          2
-    8   EXTR             AI Networking              Lagging         90     69.4400          3
     8   INTC                AI Compute              Lagging         40     39.9400          3
+    8   EXTR             AI Networking              Lagging         90     69.4400          3
     8   SVCO            Semiconductors              Lagging         10     23.6650          3
 
 TRADINGVIEW WATCHLIST EXPORT
 ###LONG,PBF,DK,LQDA,RNG,DDOG,SEZL,NET,CBZ,DINO,VLO,CLMT,SNOW,OKTA,OSCR,PARR,ADPT,FTNT,MPC,VCTR,FSLY,BLZE,PENG,PANW,PSX,EC,MANH,FIVN,NTAP,BVS,SM,VIK,AVAH,QLYS,PACS,EOG,CRWD,DAVE,BAX,URGN,GKOS,KNSA,ATRC,TRV,HAE,
-###OBSERVATION,SNDK,APPS,PTGX,AMRX,VG,MU,IBRX,TVTX,NRIX,MRX,HALO,GSHD,TGTX,HNGE,NESR,ALL,SKWD,HPK,ENOV,SOLV,RYAN,CNA,CEPL,
-###DISTRIBUTION,FROG,RSI,TWLO,RPD,STX,MUFG,SIMO,ASX,ATEN,DOCN,VSH,STM,AMAT,MXL,MKSI,AMD,UMC,UCTT,VPG,ICHR,PD,COHU,TXN,ALAB,AMBQ,WDC,LRCX,ACMR,EAT,VICR,EXTR,INTC,SVCO,
+###OBSERVATION,SNDK,APPS,PTGX,AMRX,VG,MU,ALKS,IBRX,TVTX,LFST,NRIX,MRX,HALO,GSHD,TGTX,HNGE,NESR,ALL,FTRE,MEDP,SKWD,HPK,ENOV,CYRX,ACRS,CVS,RYAN,CNA,OMDA,NBIX,ABCL,CEPL,ASTH,NVCR,TDOC,GLUE,
+###DISTRIBUTION,MGTX,AGIO,RSI,FROG,RPD,TWLO,KYMR,CYTK,MRNA,SIMO,MIRM,STX,MUFG,VSH,MKSI,ATEN,DOCN,STM,RARE,UCTT,ASX,AMAT,MXL,AMD,UMC,VPG,ICHR,COHU,TXN,ACMR,LRCX,PD,WDC,ALAB,AMBQ,EAT,VICR,INTC,EXTR,SVCO,
 
 ==============================================
 END OF TABELA SCAN
