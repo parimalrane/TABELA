@@ -696,7 +696,8 @@ def run_tabela_pipeline():
         context.market_date
     )
     print_scan_preamble()
-    print_market_context_summary(market_context)
+    if market_context:
+        print_market_context_summary(market_context)
 
 
     theme_strength_settings = get_theme_strength_settings()

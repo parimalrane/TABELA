@@ -609,11 +609,8 @@ def run_market_context_engine(market_date):
     market_file = context.market_file
 
     if not market_file.exists():
-        raise FileNotFoundError(
-            f"Market file not found: {market_file}. "
-            f"Expected Market_YYYYMMDD.csv in market_data/input_files/ "
-            f"for date {market_date}."
-        )
+        print(f"Market file not found: {market_file}. Skipping Market Context.")
+        return None
 
     df = pd.read_csv(market_file)
     df["ETF"] = df["ETF"].astype(str).str.upper().str.strip()
