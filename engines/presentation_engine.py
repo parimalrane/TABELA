@@ -551,23 +551,36 @@ def print_daily_scan(
                 "Leaders",
             ]
         ]
-        .rename(
-            columns={
-                "Mapped_Theme": "Theme",
-                "Total_Stocks": "Total",
-                "Strong_Stocks": "Qualified Stocks",
-                "Breadth_Percent": "Breadth %",
-                "Weighted_Breadth_Score": "Breadth Score",
-            }
-        )
     )
-    # Filter for valid leaders
+
     def has_valid_leaders(leaders_val):
         return pd.notna(leaders_val) and str(leaders_val).strip() != "" and str(leaders_val).strip() != "None"
         
-    display_df = display_df[display_df["Leaders"].apply(has_valid_leaders)].head(20)
+    display_df = display_df[display_df["Leaders"].apply(has_valid_leaders)]
 
-    print(display_df.to_string(index=False))
+    print(f"{'Theme':<35}  {'Total':>6}  {'Qual':>5}  {'Br %':>7}  {'Score':>8}")
+    print("-" * 70)
+    
+    for _, row in display_df.iterrows():
+        theme = str(row['Mapped_Theme'])[:35]
+        total = int(row['Total_Stocks']) if pd.notna(row['Total_Stocks']) else 0
+        qual = int(row['Strong_Stocks']) if pd.notna(row['Strong_Stocks']) else 0
+        br_pct = float(row['Breadth_Percent']) if pd.notna(row['Breadth_Percent']) else 0.0
+        score = float(row['Weighted_Breadth_Score']) if pd.notna(row['Weighted_Breadth_Score']) else 0.0
+        
+        print(f"{theme:<35}  {total:>6}  {qual:>5}  {br_pct:>7.2f}  {score:>8.2f}")
+        
+        leaders_str = str(row['Leaders']).strip()
+        wrapped = textwrap.fill(
+            leaders_str,
+            width=95,
+            initial_indent="    ↳ Leaders: ",
+            subsequent_indent="               ",
+            break_long_words=False,
+            break_on_hyphens=False
+        )
+        print(wrapped)
+        print()
 
     print()
     print("LONG CANDIDATE UNIVERSE")
