@@ -118,9 +118,9 @@ LONG_WEIGHTS = {
 
     "THEME_WEIGHT": 0.25,
 
-    "SALES_WEIGHT": 0.12,
+    "SALES_WEIGHT": 0.07,
 
-    "ZACKS_WEIGHT": 0.05,
+    "ZACKS_WEIGHT": 0.10,
 
     "MARGIN_WEIGHT": 0.03
 
