@@ -629,17 +629,24 @@ def print_daily_scan(
     if distribution_watchlist.empty:
         print("No qualified distribution candidates today.")
     else:
+        registry = load_registry()
+        
+        # Add Days column from registry
+        days_col = []
+        for ticker in distribution_watchlist["Ticker"]:
+            t = ticker.replace("*", "").strip().upper()
+            days = registry.get(t, {}).get("state_days", 1) if registry.get(t, {}).get("tracking_state") == "DISTRIBUTION" else 1
+            days_col.append(days)
+            
+        distribution_watchlist["Days"] = days_col
+        distribution_watchlist = distribution_watchlist.sort_values("Days", ascending=True)
+
         display_df = distribution_watchlist[
             [
                 "Ticker",
                 "Mapped_Theme",
                 "Theme_Class",
-                "RS_Delta_Val",
-                "RS_Trend_Val",
-                "Leadership_Loss_Val",
-                "History_Val",
-                "Composite_Delta_Val",
-                "Composite_Trend_Val",
+                "Days"
             ]
         ].copy()
 
@@ -647,12 +654,6 @@ def print_daily_scan(
             columns={
                 "Mapped_Theme": "Theme",
                 "Theme_Class": "Theme Class",
-                "RS_Delta_Val": "RS \u0394",
-                "RS_Trend_Val": "RS Trend",
-                "Leadership_Loss_Val": "Leadership",
-                "History_Val": "History",
-                "Composite_Delta_Val": "Composite \u0394",
-                "Composite_Trend_Val": "Composite Trend",
             }
         )
 
