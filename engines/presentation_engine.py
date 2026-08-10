@@ -646,14 +646,32 @@ def print_daily_scan(
                 "Ticker",
                 "Mapped_Theme",
                 "Theme_Class",
-                "Days"
+                "Days",
+                "RS_Rating",
+                "Long_Score",
+                "Zacks Rank"
             ]
         ].copy()
+
+        # Format Zacks Rank identical to Long Candidates
+        if "Zacks Rank" in display_df.columns:
+            display_df["Zacks Rank"] = (
+                display_df["Zacks Rank"]
+                .fillna(0)
+                .astype(int)
+                .astype(str)
+            )
+            display_df.loc[
+                display_df["Zacks Rank"].isin(["4", "5"]),
+                "Zacks Rank"
+            ] += "*"
 
         display_df = display_df.rename(
             columns={
                 "Mapped_Theme": "Theme",
                 "Theme_Class": "Theme Class",
+                "RS_Rating": "RS Rating",
+                "Long_Score": "Long Score"
             }
         )
 
