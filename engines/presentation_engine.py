@@ -596,6 +596,32 @@ def print_daily_scan(
         ]
     ].copy()
 
+    def identify_grace_ticker(row):
+        ticker_val = str(row["Ticker"])
+        clean_ticker = ticker_val.replace("*", "").strip().upper()
+        
+        match = stocks[stocks["Ticker"].astype(str).str.upper() == clean_ticker]
+        if not match.empty:
+            stk = match.iloc[0]
+            theme_class = stk.get("Theme_Class", "")
+            rs_rating = stk.get("RS_Rating", 0)
+            long_score = stk.get("Long_Score", 0)
+            composite_score = stk.get("Composite_Score", 0)
+            
+            # Condition 1: Standard Entry
+            if theme_class in ["Leading", "Unclassified Leader"] and rs_rating >= 90 and long_score >= 85:
+                return ticker_val
+                
+            # Condition 2: Elite Institutional
+            if theme_class == "Leading" and (composite_score >= 90 or rs_rating >= 95):
+                return ticker_val
+                
+            # Fails both native entries but is still in candidates -> Grace
+            return f"~{ticker_val}"
+            
+        return ticker_val
+
+    display_df["Ticker"] = display_df.apply(identify_grace_ticker, axis=1)
 
     display_df["Zacks Rank"] = (
         display_df["Zacks Rank"]
