@@ -90,7 +90,6 @@ def print_scan_epilogue():
         ("DISTRIBUTION_WATCHLIST", "DISTRIBUTION WATCHLIST"),
         ("TRADINGVIEW_EXPORT", "TRADINGVIEW WATCHLIST EXPORT"),
         ("WATCHLIST_DELTA", "WATCHLIST DELTA REPORT"),
-        ("STOCK_TRANSITIONS", "STOCK TRANSITIONS"),
         ("END_BANNER", "END OF TABELA SCAN")
     ]
     
@@ -130,8 +129,7 @@ def print_scan_epilogue():
         "OBSERVATION_WATCHLIST",
         "DISTRIBUTION_WATCHLIST",
         "TRADINGVIEW_EXPORT",
-        "WATCHLIST_DELTA",
-        "STOCK_TRANSITIONS"
+        "WATCHLIST_DELTA"
     ]
 
     final_output = []
@@ -590,8 +588,11 @@ def print_daily_scan(
         print(wrapped)
         print()
 
-    print()
+    print("\n\n")
+    print("========================================")
     print("LONG CANDIDATE UNIVERSE")
+    print("Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)")
+    print("========================================")
 
     display_df = long_candidates[
         [
@@ -650,6 +651,35 @@ def print_daily_scan(
     )
 
     print(display_df.to_string(index=False))
+
+    deltas = compare_watchlists(
+        current_long=long_candidates["Ticker"].tolist(),
+        current_observation=stocks.loc[
+            stocks["Tracking_State"] == "OBSERVATION",
+            "Ticker",
+        ].tolist(),
+        current_distribution=distribution_watchlist["Ticker"].tolist(),
+        recovered=recovered,
+        stocks=stocks,
+    )
+
+    new_longs = deltas.get("new_longs", [])
+    rec_obs = deltas.get("recovering_observation", [])
+    rec_dist = deltas.get("recovering_distribution", [])
+    all_rec = sorted(list(set(rec_obs + rec_dist)))
+
+    print("\n--- NEW LONG PIPELINE ENTRIES ---")
+    prefix1 = "New Longs       : "
+    if new_longs:
+        print(textwrap.fill(", ".join(new_longs), width=95, initial_indent=prefix1, subsequent_indent=" " * len(prefix1)))
+    else:
+        print(f"{prefix1}None")
+        
+    prefix2 = "Recovered Longs : "
+    if all_rec:
+        print(textwrap.fill(", ".join(all_rec), width=95, initial_indent=prefix2, subsequent_indent=" " * len(prefix2)))
+    else:
+        print(f"{prefix2}None")
 
 
     print("\n\n")
@@ -786,39 +816,5 @@ def print_daily_scan(
     print("###LONG," + long_list + ",")
     print("###OBSERVATION," + observation_list + ",")
     print("###DISTRIBUTION," + distribution_list + ",")
-
-    deltas = compare_watchlists(
-        current_long=long_candidates["Ticker"].tolist(),
-        current_observation=stocks.loc[
-            stocks["Tracking_State"] == "OBSERVATION",
-            "Ticker",
-        ].tolist(),
-        current_distribution=distribution_watchlist["Ticker"].tolist(),
-        recovered=recovered,
-        stocks=stocks,
-    )
-
-    registry = load_todays_registry()
-    transition = get_transition_summary(registry)
-    
-    print("\n\n========================================")
-    print("DAILY PIPELINE TRANSITIONS")
-    print("========================================")
-
-    new_longs = deltas.get("new_longs", [])
-    prefix1 = "New Longs       : "
-    if new_longs:
-        print(textwrap.fill(", ".join(new_longs), width=95, initial_indent=prefix1, subsequent_indent=" " * len(prefix1)))
-    else:
-        print(f"{prefix1}None")
-        
-    rec_obs = deltas.get("recovering_observation", [])
-    rec_dist = deltas.get("recovering_distribution", [])
-    all_rec = sorted(list(set(rec_obs + rec_dist)))
-    prefix2 = "Recovered Longs : "
-    if all_rec:
-        print(textwrap.fill(", ".join(all_rec), width=95, initial_indent=prefix2, subsequent_indent=" " * len(prefix2)))
-    else:
-        print(f"{prefix2}None")
 
     print()
