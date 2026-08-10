@@ -45,9 +45,12 @@ def main():
         # Copy files for this date
         etf_src = backup_dir / f"{d}_ETF.csv"
         stock_src = backup_dir / f"{d}_stocks.csv"
+        market_src = backup_dir / f"{d}_Market.csv"
         
         shutil.copy2(etf_src, input_dir / etf_src.name)
         shutil.copy2(stock_src, input_dir / stock_src.name)
+        if market_src.exists():
+            shutil.copy2(market_src, input_dir / market_src.name)
 
         # Run pipeline
         subprocess.run(["python", "main.py"], cwd=base_dir, check=True)
