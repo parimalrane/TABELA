@@ -643,10 +643,10 @@ def print_daily_scan(
 
         display_df = distribution_watchlist[
             [
+                "Days",
                 "Ticker",
                 "Mapped_Theme",
                 "Theme_Class",
-                "Days",
                 "RS_Rating",
                 "Long_Score",
                 "Zacks Rank"
@@ -668,10 +668,7 @@ def print_daily_scan(
 
         display_df = display_df.rename(
             columns={
-                "Mapped_Theme": "Theme",
-                "Theme_Class": "Theme Class",
-                "RS_Rating": "RS Rating",
-                "Long_Score": "Long Score"
+                "Theme_Class": "Theme Classification",
             }
         )
 
@@ -682,7 +679,6 @@ def print_daily_scan(
 
     long_list = ",".join(
         long_candidates["Ticker"]
-        .head(50)
         .astype(str)
         .str.replace("*", "", regex=False)
         .tolist()
@@ -699,7 +695,6 @@ def print_daily_scan(
 
     distribution_list = ",".join(
         distribution_watchlist["Ticker"]
-        .head(50)
         .astype(str)
         .tolist()
     )

@@ -2,10 +2,10 @@
 import math
 
 
-def build_theme_breadth(stocks):
+def build_theme_breadth(stocks, long_candidates):
 
     # ==========================================
-    # DEFINE STRONG STOCKS
+    # DEFINE STRONG STOCKS (For aggregate breadth stats only)
     # ==========================================
 
     strong_stocks = stocks[
@@ -19,12 +19,12 @@ def build_theme_breadth(stocks):
     ].copy()
 
     # ==========================================
-    # TOP LEADERS PER THEME
+    # TOP LEADERS PER THEME (Sourced from shared state long_candidates)
     # ==========================================
 
     leaders_by_theme = (
 
-        strong_stocks
+        long_candidates
 
         .sort_values(
 
@@ -36,7 +36,7 @@ def build_theme_breadth(stocks):
 
         .groupby("Mapped_Theme")["Ticker"]
 
-        .apply(lambda s: ", ".join(s.head(5)))
+        .apply(lambda s: ", ".join(s.astype(str).str.replace("*", "", regex=False).head(5)))
 
         .reset_index(name="Leaders")
 
