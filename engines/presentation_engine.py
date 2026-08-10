@@ -126,7 +126,6 @@ def print_scan_epilogue():
         "THEME_PERFORMANCE",
         "THEME_BREADTH",
         "LONG_UNIVERSE",
-        "UNCLASSIFIED_LEADERS",
         "DISTRIBUTION_WATCHLIST",
         "TRADINGVIEW_EXPORT",
         "WATCHLIST_DELTA",
@@ -279,7 +278,13 @@ def print_theme_performance(theme_performance):
     top3_w = set(df.nlargest(3, "W")["Theme"])
     bottom3_w = set(df.nsmallest(3, "W")["Theme"])
 
+    top3_rank = set(df.nsmallest(3, "Rank")["Theme"])
+    bottom3_rank = set(df.nlargest(3, "Rank")["Theme"])
+
     for _, row in df.sort_values("Rank").iterrows():
+        is_transition = pd.notna(row['Transition']) and str(row['Transition']).strip() != "" and str(row['Transition']).strip() != "—"
+        if row['Theme'] not in top3_rank and row['Theme'] not in bottom3_rank and not is_transition:
+            continue
 
         print(
             f"{int(row['Rank']):>4}  "
@@ -422,85 +427,62 @@ def print_market_context_summary(market_context):
     stats = snapshot["market_statistics"]
     relative_performance = snapshot["relative_performance"]
 
-    print("MARKET STATISTICS")
-
-    header = (
-        f"{'ETF':<6}"
-        f"{'State':>14}"
-        f"{'5D%':>8}"
-        f"{'20D%':>8}"
-        f"{'50D%':>8}"
-        f"{'200D%':>8}"
-        f"{'RV.20':>8}"
-        f"{'RV.50':>8}"
-        f"{'20Dist':>10}"
-        f"{'50Dist':>10}"
-        f"{'200Dist':>10}"
-    )
-
-    print("-" * len(header))
-    print(header)
-    print("-" * len(header))
-
+    has_valid_etfs = False
     for etf in ["SPY", "QQQ", "IWM", "DIA"]:
-
         data = stats[etf]
-
-        returns = data["returns"]
-        rv = data["relative_volume"]
-        ma = data["moving_average_extension"]
-
-        print(
-            f"{etf:<6}"
-            f"{TYPE_SYMBOL.get(data.get('day_type'),'N/A'):>14}"
-            f"{fmt(returns.get('1w')):>8}"
-            f"{fmt(returns.get('4w')):>8}"
-            f"{fmt(returns.get('10w')):>8}"
-            f"{fmt(returns.get('40w')):>8}"
-            f"{fmt_rv(rv.get('20d')):>8}"
-            f"{fmt_rv(rv.get('50d')):>8}"
-            f"{fmt(ma.get('20dma')):>10}"
-            f"{fmt(ma.get('50dma')):>10}"
-            f"{fmt(ma.get('200dma')):>10}"
+        day_type = data.get('day_type')
+        if day_type in ["Accumulation", "Distribution", "Consolidation"]:
+            has_valid_etfs = True
+            break
+            
+    if has_valid_etfs:
+        print("MARKET STATISTICS")
+    
+        header = (
+            f"{'ETF':<6}"
+            f"{'State':>14}"
+            f"{'5D%':>8}"
+            f"{'20D%':>8}"
+            f"{'50D%':>8}"
+            f"{'200D%':>8}"
+            f"{'RV.20':>8}"
+            f"{'RV.50':>8}"
+            f"{'20Dist':>10}"
+            f"{'50Dist':>10}"
+            f"{'200Dist':>10}"
         )
-
-    print()
-
-    print("RELATIVE PERFORMANCE")
-    print("-" * 90)
-
-    period_order = ["1w", "4w", "10w", "40w"]
-
-    first_period = period_order[0]
-    pairs = list(relative_performance[first_period].keys())
-
-    header_line = (
-        f"{'Pair':<16}"
-        + "".join(
-            f"{period.upper():>9}"
-            for period in period_order
-        )
-    )
-
-    print(header_line)
-    print("-" * len(header_line))
-
-    for pair in pairs:
-
-        line = f"{pair.replace('_vs_', ' vs '):<16}"
-
-        for period in period_order:
-
-            value = relative_performance[period].get(pair)
-
-            if value is None:
-                line += f"{'-':>9}"
-            else:
-                line += f"{value:>9.2f}"
-
-        print(line)
-
-    print()
+    
+        print("-" * len(header))
+        print(header)
+        print("-" * len(header))
+    
+        for etf in ["SPY", "QQQ", "IWM", "DIA"]:
+    
+            data = stats[etf]
+            day_type = data.get('day_type')
+            
+            if day_type not in ["Accumulation", "Distribution", "Consolidation"]:
+                continue
+    
+            returns = data["returns"]
+            rv = data["relative_volume"]
+            ma = data["moving_average_extension"]
+    
+            print(
+                f"{etf:<6}"
+                f"{TYPE_SYMBOL.get(data.get('day_type'),'N/A'):>14}"
+                f"{fmt(returns.get('1w')):>8}"
+                f"{fmt(returns.get('4w')):>8}"
+                f"{fmt(returns.get('10w')):>8}"
+                f"{fmt(returns.get('40w')):>8}"
+                f"{fmt_rv(rv.get('20d')):>8}"
+                f"{fmt_rv(rv.get('50d')):>8}"
+                f"{fmt(ma.get('20dma')):>10}"
+                f"{fmt(ma.get('50dma')):>10}"
+                f"{fmt(ma.get('200dma')):>10}"
+            )
+    
+        print()
 
 
 def print_daily_scan(
@@ -541,6 +523,23 @@ def print_daily_scan(
 
     print()
     print("THEME BREADTH ANALYSIS")
+    theme_breadth = theme_breadth.copy()
+    
+    # Add observations to Leaders
+    obs_stocks = stocks[stocks["Tracking_State"] == "OBSERVATION"]
+    if not obs_stocks.empty:
+        for theme in theme_breadth["Mapped_Theme"].unique():
+            theme_obs = obs_stocks[obs_stocks["Mapped_Theme"] == theme]["Ticker"].tolist()
+            if theme_obs:
+                theme_obs_str = ", ".join([f"*{t}" for t in theme_obs])
+                idx = theme_breadth.index[theme_breadth["Mapped_Theme"] == theme]
+                if not idx.empty:
+                    existing = theme_breadth.loc[idx[0], "Leaders"]
+                    if pd.notna(existing) and str(existing).strip() and str(existing) != "None":
+                        theme_breadth.loc[idx[0], "Leaders"] = f"{existing}, {theme_obs_str}"
+                    else:
+                        theme_breadth.loc[idx[0], "Leaders"] = theme_obs_str
+
     display_df = (
         theme_breadth[
             [
@@ -561,8 +560,12 @@ def print_daily_scan(
                 "Weighted_Breadth_Score": "Breadth Score",
             }
         )
-        .head(20)
     )
+    # Filter for valid leaders
+    def has_valid_leaders(leaders_val):
+        return pd.notna(leaders_val) and str(leaders_val).strip() != "" and str(leaders_val).strip() != "None"
+        
+    display_df = display_df[display_df["Leaders"].apply(has_valid_leaders)].head(20)
 
     print(display_df.to_string(index=False))
 
@@ -600,25 +603,6 @@ def print_daily_scan(
     )
 
     print(display_df.to_string(index=False))
-
-    unclassified = long_candidates[
-        long_candidates["Theme_Class"] == "Unclassified Leader"
-    ].copy()
-
-    if not unclassified.empty:
-        print("\n")
-        print("UNCLASSIFIED LEADERS")
-        print("----------------------------")
-        unclassified["Ticker_Display"] = unclassified.apply(
-            lambda row: f"★★★★★ {row['Ticker']}" if row.get("Long_Score", 0) >= 90 else row["Ticker"],
-            axis=1
-        )
-        col_width = max(unclassified["Ticker_Display"].astype(str).map(len).max(), len("Ticker")) + 3
-        print(f"{'Ticker':<{col_width}}{'Industry'}")
-        for _, row in unclassified.iterrows():
-            ticker_disp = row["Ticker_Display"]
-            industry = row["Industry"]
-            print(f"{ticker_disp:<{col_width}}{industry}")
 
 
     print("\n\n")
@@ -718,83 +702,37 @@ def print_daily_scan(
     transition = get_transition_summary(registry)
     
     print("\n\n========================================")
-    print("PIPELINE TRANSITIONS & STATE")
+    print("DAILY PIPELINE TRANSITIONS")
     print("========================================")
 
-    print("\n--- NEW UPGRADES TODAY ---")
-    
     new_longs = deltas.get("new_longs", [])
+    prefix1 = "New Longs       : "
     if new_longs:
-        wrapped_longs = textwrap.fill(
-            ", ".join(new_longs),
-            width=95,
-            initial_indent="New Longs       : ",
-            subsequent_indent=" " * 18,
-            break_long_words=False,
-            break_on_hyphens=False,
-        )
-        print(wrapped_longs)
+        print(textwrap.fill(", ".join(new_longs), width=95, initial_indent=prefix1, subsequent_indent=" " * len(prefix1)))
     else:
-        print("New Longs       : None")
+        print(f"{prefix1}None")
         
     rec_obs = deltas.get("recovering_observation", [])
     rec_dist = deltas.get("recovering_distribution", [])
     all_rec = sorted(list(set(rec_obs + rec_dist)))
+    prefix2 = "Recovered Longs : "
     if all_rec:
-        wrapped_rec = textwrap.fill(
-            ", ".join(all_rec),
-            width=95,
-            initial_indent="Recovered Longs : ",
-            subsequent_indent=" " * 18,
-            break_long_words=False,
-            break_on_hyphens=False,
-        )
-        print(wrapped_rec)
+        print(textwrap.fill(", ".join(all_rec), width=95, initial_indent=prefix2, subsequent_indent=" " * len(prefix2)))
     else:
-        print("Recovered Longs : None")
+        print(f"{prefix2}None")
 
-    print("\n--- OBSERVATION PURGATORY ---")
-    if not transition["observation"]:
-        print("None")
+    obs_day1 = sorted([item["ticker"] for item in transition.get("observation", []) if item["runs"] == 1])
+    prefix3 = "New Observation : "
+    if obs_day1:
+        print(textwrap.fill(", ".join(obs_day1), width=95, initial_indent=prefix3, subsequent_indent=" " * len(prefix3)))
     else:
-        observation_groups = {}
-        for item in transition["observation"]:
-            observation_groups.setdefault(item["runs"], []).append(item["ticker"])
-            
-        for runs in sorted(observation_groups):
-            tickers = sorted(observation_groups[runs])
-            day_label = "Day 1 (New)" if runs == 1 else f"Day {runs}"
-            prefix = f"{day_label:<15} : "
-            wrapped = textwrap.fill(
-                ", ".join(tickers),
-                width=95,
-                initial_indent=prefix,
-                subsequent_indent=" " * len(prefix),
-                break_long_words=False,
-                break_on_hyphens=False,
-            )
-            print(wrapped)
+        print(f"{prefix3}None")
 
-    print("\n--- DISTRIBUTION TRACKING ---")
-    if not transition["distribution"]:
-        print("None")
+    dist_day1 = sorted([item["ticker"] for item in transition.get("distribution", []) if item["runs"] == 1])
+    prefix4 = "New Distribution: "
+    if dist_day1:
+        print(textwrap.fill(", ".join(dist_day1), width=95, initial_indent=prefix4, subsequent_indent=" " * len(prefix4)))
     else:
-        distribution_groups = {}
-        for item in transition["distribution"]:
-            distribution_groups.setdefault(item["runs"], []).append(item["ticker"])
-            
-        for runs in sorted(distribution_groups):
-            tickers = sorted(distribution_groups[runs])
-            day_label = "Day 1 (New)" if runs == 1 else f"Day {runs}"
-            prefix = f"{day_label:<15} : "
-            wrapped = textwrap.fill(
-                ", ".join(tickers),
-                width=95,
-                initial_indent=prefix,
-                subsequent_indent=" " * len(prefix),
-                break_long_words=False,
-                break_on_hyphens=False,
-            )
-            print(wrapped)
+        print(f"{prefix4}None")
 
     print()
