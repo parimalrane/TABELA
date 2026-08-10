@@ -4,7 +4,6 @@ import io
 import re
 import engines.rotation_engine
 from engines.stock_transition_engine import (
-    load_registry,
     get_transition_summary,
     OBSERVATION_MIN_RUNS,
 )
@@ -488,6 +487,19 @@ def print_market_context_summary(market_context):
         print()
 
 
+def load_todays_registry():
+    import os
+    import json
+    from core.runtime_context import context
+    from core.config import STOCK_TRANSITION_CONFIG
+    REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
+    today = str(context.market_date)
+    path = os.path.join(REGISTRY_DIR, f"{today}_registry.json")
+    if os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
 def print_daily_scan(
     today,
     theme_strength,
@@ -649,7 +661,7 @@ def print_daily_scan(
     if obs_stocks.empty:
         print("No observation candidates today.")
     else:
-        registry = load_registry()
+        registry = load_todays_registry()
         
         days_col = []
         for ticker in obs_stocks["Ticker"]:
@@ -701,7 +713,7 @@ def print_daily_scan(
     if distribution_watchlist.empty:
         print("No qualified distribution candidates today.")
     else:
-        registry = load_registry()
+        registry = load_todays_registry()
         
         # Add Days column from registry
         days_col = []
@@ -786,7 +798,7 @@ def print_daily_scan(
         stocks=stocks,
     )
 
-    registry = load_registry()
+    registry = load_todays_registry()
     transition = get_transition_summary(registry)
     
     print("\n\n========================================")
@@ -808,19 +820,5 @@ def print_daily_scan(
         print(textwrap.fill(", ".join(all_rec), width=95, initial_indent=prefix2, subsequent_indent=" " * len(prefix2)))
     else:
         print(f"{prefix2}None")
-
-    obs_day1 = sorted([item["ticker"] for item in transition.get("observation", []) if item["runs"] == 1])
-    prefix3 = "New Observation : "
-    if obs_day1:
-        print(textwrap.fill(", ".join(obs_day1), width=95, initial_indent=prefix3, subsequent_indent=" " * len(prefix3)))
-    else:
-        print(f"{prefix3}None")
-
-    dist_day1 = sorted([item["ticker"] for item in transition.get("distribution", []) if item["runs"] == 1])
-    prefix4 = "New Distribution: "
-    if dist_day1:
-        print(textwrap.fill(", ".join(dist_day1), width=95, initial_indent=prefix4, subsequent_indent=" " * len(prefix4)))
-    else:
-        print(f"{prefix4}None")
 
     print()
