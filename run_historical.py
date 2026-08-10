@@ -7,8 +7,8 @@ import re
 def main():
     base_dir = Path("c:/TABELA")
     data_dir = base_dir / "market_data"
-    input_dir = data_dir / "zacks_input_data"
-    backup_dir = data_dir / "zacks_input_data_all"
+    input_dir = data_dir / "input_files"
+    backup_dir = data_dir / "input_files_all"
 
     # 1. Cleanup all generated JSON files and daily reports
     count = 0

@@ -11,11 +11,12 @@ class RuntimeContext:
     market_date: str
     etf_file: Path
     stocks_file: Path
+    market_file: Path
 
 
 def load_runtime_context() -> RuntimeContext:
 
-    data_dir = Path("market_data") / "zacks_input_data"
+    data_dir = Path("market_data") / "input_files"
 
     etf_files = sorted(data_dir.glob("*_ETF.csv"))
     stock_files = sorted(data_dir.glob("*_stocks.csv"))
@@ -37,10 +38,13 @@ def load_runtime_context() -> RuntimeContext:
 
     market_date = datetime.strptime(etf_date, "%Y%m%d").date()
 
+    market_file = data_dir / f"Market_{etf_date}.csv"
+
     return RuntimeContext(
         market_date=market_date,
         etf_file=etf_file,
         stocks_file=stocks_file,
+        market_file=market_file,
     )
 
 
