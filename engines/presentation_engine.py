@@ -13,6 +13,7 @@ import textwrap
 engines.rotation_engine.print_rotation_report = lambda *args, **kwargs: None
 
 from engines.watchlist_delta_engine import compare_watchlists
+from core.theme_translation_engine import THEME_TRANSLATION
 
 
 class OutputCapturer:
@@ -85,6 +86,7 @@ def print_scan_epilogue():
         ("THEME_PERFORMANCE", "THEME PERFORMANCE"),
         ("THEME_BREADTH", "THEME BREADTH ANALYSIS"),
         ("LONG_UNIVERSE", "LONG CANDIDATE UNIVERSE"),
+        ("OBSERVATION_WATCHLIST", "OBSERVATION WATCHLIST"),
         ("UNCLASSIFIED_LEADERS", "UNCLASSIFIED LEADERS"),
         ("DISTRIBUTION_WATCHLIST", "DISTRIBUTION WATCHLIST"),
         ("TRADINGVIEW_EXPORT", "TRADINGVIEW WATCHLIST EXPORT"),
@@ -126,6 +128,7 @@ def print_scan_epilogue():
         "THEME_PERFORMANCE",
         "THEME_BREADTH",
         "LONG_UNIVERSE",
+        "OBSERVATION_WATCHLIST",
         "DISTRIBUTION_WATCHLIST",
         "TRADINGVIEW_EXPORT",
         "WATCHLIST_DELTA",
@@ -542,17 +545,26 @@ def print_daily_scan(
         
     display_df = display_df[display_df["Leaders"].apply(has_valid_leaders)]
 
-    print(f"{'Theme':<35}  {'Total':>6}  {'Qual':>5}  {'Br %':>7}  {'Score':>8}")
-    print("-" * 70)
+    print(f"{'Theme':<42}  {'Total':>5}  {'Qual':>4}  {'Br %':>6}  {'Score':>8}")
+    print("-" * 73)
     
     for _, row in display_df.iterrows():
-        theme = str(row['Mapped_Theme'])[:35]
+        mapped_theme = str(row['Mapped_Theme'])
+        parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
+        
+        if parent_theme != mapped_theme:
+            theme_display = f"{mapped_theme} ({parent_theme})"
+        else:
+            theme_display = mapped_theme
+            
+        theme_display = theme_display[:42]
+        
         total = int(row['Total_Stocks']) if pd.notna(row['Total_Stocks']) else 0
         qual = int(row['Strong_Stocks']) if pd.notna(row['Strong_Stocks']) else 0
         br_pct = float(row['Breadth_Percent']) if pd.notna(row['Breadth_Percent']) else 0.0
         score = float(row['Weighted_Breadth_Score']) if pd.notna(row['Weighted_Breadth_Score']) else 0.0
         
-        print(f"{theme:<35}  {total:>6}  {qual:>5}  {br_pct:>7.2f}  {score:>8.2f}")
+        print(f"{theme_display:<42}  {total:>5}  {qual:>4}  {br_pct:>6.2f}  {score:>8.2f}")
         
         leaders_str = str(row['Leaders']).strip()
         wrapped = textwrap.fill(
@@ -626,6 +638,59 @@ def print_daily_scan(
     )
 
     print(display_df.to_string(index=False))
+
+
+    print("\n\n")
+    print("========================================")
+    print("OBSERVATION WATCHLIST")
+    print("========================================")
+
+    obs_stocks = stocks[stocks["Tracking_State"] == "OBSERVATION"].copy()
+    if obs_stocks.empty:
+        print("No observation candidates today.")
+    else:
+        registry = load_registry()
+        
+        days_col = []
+        for ticker in obs_stocks["Ticker"]:
+            t = str(ticker).replace("*", "").strip().upper()
+            days = registry.get(t, {}).get("state_days", 1) if registry.get(t, {}).get("tracking_state") == "OBSERVATION" else 1
+            days_col.append(days)
+            
+        obs_stocks["Days"] = days_col
+        obs_stocks = obs_stocks.sort_values("Days", ascending=True)
+
+        display_obs = obs_stocks[
+            [
+                "Days",
+                "Ticker",
+                "Mapped_Theme",
+                "Theme_Class",
+                "RS_Rating",
+                "Long_Score",
+                "Zacks Rank"
+            ]
+        ].copy()
+
+        if "Zacks Rank" in display_obs.columns:
+            display_obs["Zacks Rank"] = (
+                display_obs["Zacks Rank"]
+                .fillna(0)
+                .astype(int)
+                .astype(str)
+            )
+            display_obs.loc[
+                display_obs["Zacks Rank"].isin(["4", "5"]),
+                "Zacks Rank"
+            ] += "*"
+
+        display_obs = display_obs.rename(
+            columns={
+                "Theme_Class": "Theme Classification",
+            }
+        )
+
+        print(display_obs.to_string(index=False))
 
 
     print("\n\n")
