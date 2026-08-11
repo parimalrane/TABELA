@@ -580,8 +580,8 @@ def print_daily_scan(
         wrapped = textwrap.fill(
             leaders_str,
             width=95,
-            initial_indent="    ↳ Leaders: ",
-            subsequent_indent="               ",
+            initial_indent="    ↳ Stocks: ",
+            subsequent_indent="              ",
             break_long_words=False,
             break_on_hyphens=False
         )

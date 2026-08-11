@@ -623,7 +623,7 @@ def build_candidates(stocks):
         ] = True
 
 
-    theme_breadth = build_theme_breadth(stocks, long_candidates)
+    theme_breadth = build_theme_breadth(stocks, long_candidates, distribution_watchlist)
 
     stocks = apply_tracking_state(
         registry=registry,
@@ -634,15 +634,19 @@ def build_candidates(stocks):
     # VALIDATE CROSS-SECTION INVARIANTS
     # ==========================
     long_table_tickers = set(long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper())
+    dist_table_tickers = set(distribution_watchlist["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper())
     
     breadth_leaders = set()
     for leaders_str in theme_breadth["Leaders"]:
         if pd.notna(leaders_str) and leaders_str != "":
             for t in leaders_str.split(","):
-                breadth_leaders.add(t.strip().upper())
+                val = t.strip().upper()
+                if val.startswith("#"):
+                    val = val[1:]
+                breadth_leaders.add(val)
                 
-    if not breadth_leaders.issubset(long_table_tickers):
-        diff = breadth_leaders - long_table_tickers
+    if not breadth_leaders.issubset(long_table_tickers | dist_table_tickers):
+        diff = breadth_leaders - (long_table_tickers | dist_table_tickers)
         raise ValueError(f"Build validation failed: Tickers {diff} found in THEME BREADTH leaders but missing from LONG CANDIDATE UNIVERSE shared state.")
 
     return (
