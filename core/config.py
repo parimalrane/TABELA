@@ -18,14 +18,6 @@ LONG_FILTERS = {
 
 
 
-SHORT_FILTERS = {
-
-   "MIN_SHORT_SCORE": 70,
-
-   "USE_LEGACY_WEAKNESS_FILTER": True
-
-}
-
 
 MIN_HISTORY_DAYS = 20
 
@@ -142,54 +134,6 @@ SHORT_WEIGHTS = {
 }
 
 
-# ==========================================
-# FILE PATHS
-# ==========================================
-
-DATA_FOLDER = "market_data"
-
-# ==========================================
-# LONG SCORING WEIGHTS
-# ==========================================
-
-RS_WEIGHT = 40
-
-THEME_WEIGHT = 25
-
-MARGIN_WEIGHT = 15
-
-SALES_WEIGHT = 10
-
-ZACKS_WEIGHT = 10
-
-
-
-
-
-# ==========================================
-# UNKNOWN EMERGING LEADERS
-# ==========================================
-
-UNKNOWN_RS_THRESHOLD = 85
-
-UNKNOWN_LONG_SCORE_THRESHOLD = 80
-
-UNKNOWN_PRICE_POSITION_THRESHOLD = 80
-
-UNKNOWN_MARKET_CAP_THRESHOLD = 500
-
-
-
-# ==========================================
-# WEEKLY REVIEW PARAMETERS
-# ==========================================
-
-MIN_MARKET_CAP = 300
-
-MIN_PRICE_FILTER = 5
-
-MIN_VOLUME_FILTER = 300000
-
 
 
 
@@ -209,52 +153,3 @@ STOCK_TRANSITION_CONFIG = {
 OBSERVATION_FALLBACK_SCORE_THRESHOLD = 80.0
 OBSERVATION_FALLBACK_RS_THRESHOLD = 80.0
 
-# ============================================================================
-# MARKET CONTEXT ENGINE
-# ============================================================================
-
-MARKET_CONTEXT_CONFIG = {
-
-    "PERFORMANCE_LOOKBACKS": [
-        5,
-        20,
-        50,
-        200,
-    ],
-
-    "RELATIVE_VOLUME_LOOKBACKS": [
-        20,
-        50,
-    ],
-
-    # Required market ETFs.
-    "MARKET_ETFS": [
-        "SPY",
-        "QQQ",
-        "IWM",
-        "DIA",
-    ],
-
-    # Market Structure
-    "MARKET_STRUCTURE": {
-        "SMA_PERIODS": [
-            20,
-            50,
-            200,
-        ],
-    },
-
-    # Institutional Activity
-    "INSTITUTIONAL_ACTIVITY": {
-    "ADR_LOOKBACK": 20,
-    "CONSOLIDATION_RANGE_FACTOR": 0.50,
-
-    "ACCUMULATION_LOGIC": "AND",
-    "DISTRIBUTION_LOGIC": "AND",
-    "CONSOLIDATION_LOGIC": "AND",
-
-    "ACCUMULATION_VOLUME_THRESHOLD": 1.00,
-    "DISTRIBUTION_VOLUME_THRESHOLD": 1.00,
-    "CONSOLIDATION_VOLUME_THRESHOLD": 1.00,
-},
-}
