@@ -51,7 +51,7 @@ from engines.scoring_engine import (
     calculate_zacks_score,
 )
 from engines.distribution_engine import build_distribution_watchlist
-from engines.short_scoring_engine import calculate_short_score
+
 from engines.snapshot_engine import save_daily_snapshot
 from engines.stock_history_engine import save_stock_history
 from engines.unknown_classification_persistence import save_unknown_classification
@@ -503,7 +503,6 @@ def score_stocks(stocks):
     stocks = calculate_margin_score(stocks)
     stocks = calculate_composite_score(stocks)
     stocks = calculate_long_score(stocks)
-    stocks = calculate_short_score(stocks)
     return stocks
 
 

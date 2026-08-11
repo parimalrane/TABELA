@@ -119,24 +119,6 @@ LONG_WEIGHTS = {
 }
 
 
-SHORT_WEIGHTS = {
-
-    "RS_WEIGHT": 0.45,
-
-    "THEME_WEIGHT": 0.42,
-
-    "SALES_WEIGHT": 0.00,
-
-    "ZACKS_WEIGHT": 0.10,
-
-    "MARGIN_WEIGHT": 0.03
-
-}
-
-
-
-
-
 # ==========================================
 # STOCK TRANSITION ENGINE
 # ==========================================
