@@ -94,7 +94,6 @@ Exploration                                    75     4    5.33     19.04
 
 ========================================
 LONG CANDIDATE UNIVERSE
-Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
   SEZL              Digital Payments              Leading         98      95.05          2
@@ -114,7 +113,6 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
   BLFS           Life Sciences Tools              Leading         95      89.82          1
   PAYS              Digital Payments              Leading         95      89.60          3
   FSLY          Cloud Infrastructure              Leading         95      89.35          3
- ~DAVE               Digital Banking              Neutral         97      89.20          2
   BLZE                      Software              Leading         99      89.20          3
   PENG                      Software              Leading         90      89.15          1
   PANW                 Cybersecurity              Leading         97      89.00          3
@@ -126,34 +124,38 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
   ITGR               Medical Devices              Leading         98      87.67          3
   DXCM               Medical Devices              Leading         95      87.62          3
      S                 Cybersecurity              Leading         90      87.45          2
- ~AAMI            Financial Services              Neutral         95      86.90          1
   CNMD               Medical Devices              Leading         97      86.82          3
    BVS               Medical Devices              Leading         95      86.82          2
    BAX               Medical Devices              Leading         98      86.77          3
   NTAP           Data Infrastructure              Leading         97      86.60         4*
- ~OSCR           Healthcare Services              Neutral         95      86.42          1
   CRWD                 Cybersecurity              Leading         95      86.30         4*
   ILMN                   Diagnostics              Leading         90      86.17          1
- ~VCTR              Asset Management              Neutral         90      86.15          1
- ~LQDA               Pharmaceuticals              Neutral         98      85.65          1
    HUT Digital Assets Infrastructure              Leading         90      85.65          3
     GH                   Diagnostics              Leading         95      85.22         4*
- ~GKOS               Medical Devices              Leading         90      84.47          3
  PSNL*                   Diagnostics              Leading         99      83.92         4*
  MRVI*           Life Sciences Tools              Leading         95      83.72          3
   HAE*               Medical Devices              Leading         97      83.72         4*
- ~ATRC               Medical Devices              Leading         90      83.67          3
-   ~EC                   Exploration              Leading         90      83.64          3
- ~AVAH           Healthcare Services              Neutral         90      82.47          2
- ~MANH                      Software              Leading         80      81.75          2
- ~ETON               Pharmaceuticals              Neutral         99      81.30          3
-  ~AGL           Healthcare Services              Neutral         99      81.22          3
-  ~THC           Healthcare Services              Neutral         90      81.07          2
-  ~PAY              Digital Payments              Leading         80      81.05          3
-  ~DGX                   Diagnostics              Leading         80      80.97          2
- ~CORT               Pharmaceuticals              Neutral         99      80.10          3
-[RECONCILIATION ALERT] APPS was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-03). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] CEPL was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-03). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+
+========================================
+PRE-OBSERVATION WATCHLIST
+========================================
+Ticker        Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
+  DAVE     Digital Banking              Neutral         97      89.20          2
+  AAMI  Financial Services              Neutral         95      86.90          1
+  OSCR Healthcare Services              Neutral         95      86.42          1
+  VCTR    Asset Management              Neutral         90      86.15          1
+  LQDA     Pharmaceuticals              Neutral         98      85.65          1
+  GKOS     Medical Devices              Leading         90      84.47          3
+  ATRC     Medical Devices              Leading         90      83.67          3
+    EC         Exploration              Leading         90      83.64          3
+  AVAH Healthcare Services              Neutral         90      82.47          2
+  MANH            Software              Leading         80      81.75          2
+  ETON     Pharmaceuticals              Neutral         99      81.30          3
+   AGL Healthcare Services              Neutral         99      81.22          3
+   THC Healthcare Services              Neutral         90      81.07          2
+   PAY    Digital Payments              Leading         80      81.05          3
+   DGX         Diagnostics              Leading         80      80.97          2
+  CORT     Pharmaceuticals              Neutral         99      80.10          3
 
 --- NEW LONG PIPELINE ENTRIES ---
 New Longs       : BFLY, CNMD, DXCM, HNGE, ITGR, S
@@ -258,7 +260,8 @@ DISTRIBUTION WATCHLIST
     9   VICR           Semiconductors              Lagging         20      35.45          2
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SEZL,CBZ,RNG,DDOG,NET,SNOW,ADPT,OKTA,FTNT,HNGE,NEO,FIVN,TXG,CDNA,BLFS,PAYS,FSLY,DAVE,BLZE,PENG,PANW,QLYS,TWST,BFLY,EFOR,AVTR,ITGR,DXCM,S,AAMI,CNMD,BVS,BAX,NTAP,OSCR,CRWD,ILMN,VCTR,LQDA,HUT,GH,GKOS,PSNL,MRVI,HAE,ATRC,EC,AVAH,MANH,ETON,AGL,THC,PAY,DGX,CORT,
+###LONG,SEZL,CBZ,RNG,DDOG,NET,SNOW,ADPT,OKTA,FTNT,HNGE,NEO,FIVN,TXG,CDNA,BLFS,PAYS,FSLY,BLZE,PENG,PANW,QLYS,TWST,BFLY,EFOR,AVTR,ITGR,DXCM,S,CNMD,BVS,BAX,NTAP,CRWD,ILMN,HUT,GH,PSNL,MRVI,HAE,
+###PRE_OBSERVATION,DAVE,AAMI,OSCR,VCTR,LQDA,GKOS,ATRC,EC,AVAH,MANH,ETON,AGL,THC,PAY,DGX,CORT,
 ###OBSERVATION,AGEN,SNDK,XNCR,AMRX,KNSA,GSHD,DVA,VVX,IBRX,ALKS,VG,MU,PGNY,ENOV,LFST,CON,NRIX,HUM,PTGX,ACRS,SM,URGN,PACS,CYRX,TRV,SKWD,NESR,TVTX,HALO,ALL,EOG,FTRE,MEDP,CNA,OMDA,CVS,HPK,RYAN,BTSG,ABCL,NBIX,TGTX,VCYT,ASTH,NVCR,TDOC,GLUE,
 ###DISTRIBUTION,TOI,AGIO,FROG,MGTX,RPD,TWLO,KYMR,MIRM,MRNA,CYTK,SIMO,RGNX,MUFG,STX,ICHR,STM,UCTT,ATEN,AMD,VPG,VSH,MKSI,MXL,UMC,ASX,AMAT,DOCN,RARE,TXN,WDC,PD,AMBQ,COHU,ALAB,ACMR,LRCX,EAT,INTC,EXTR,SVCO,VICR,
 

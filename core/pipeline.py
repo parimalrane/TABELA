@@ -586,20 +586,26 @@ def build_candidates(stocks):
     stocks["Short_Rank"] = None
     stocks["Is_Long_Candidate"] = False
     stocks["Is_Short_Candidate"] = False
+    stocks["Is_Pre_Observation_Candidate"] = False
 
-    for rank, ticker in enumerate(long_candidates["Ticker"], start=1):
+    def is_pre_obs(row):
+        t_class = row.get("Theme_Class", "")
+        rs = row.get("RS_Rating", 0)
+        ls = row.get("Long_Score", 0)
+        cs = row.get("Composite_Score", 0)
+        
+        if t_class in ["Leading", "Unclassified Leader"] and rs >= 90 and ls >= 85:
+            return False
+        if t_class == "Leading" and (cs >= 90 or rs >= 95):
+            return False
+        return True
 
-        clean_ticker = ticker.replace("*", "")
+    for rank, (idx, candidate_row) in enumerate(long_candidates.iterrows(), start=1):
+        clean_ticker = candidate_row["Ticker"].replace("*", "")
 
-        stocks.loc[
-            stocks["Ticker"] == clean_ticker,
-            "Long_Rank",
-        ] = rank
-
-        stocks.loc[
-            stocks["Ticker"] == clean_ticker,
-            "Is_Long_Candidate",
-        ] = True
+        stocks.loc[stocks["Ticker"] == clean_ticker, "Long_Rank"] = rank
+        stocks.loc[stocks["Ticker"] == clean_ticker, "Is_Long_Candidate"] = True
+        stocks.loc[stocks["Ticker"] == clean_ticker, "Is_Pre_Observation_Candidate"] = is_pre_obs(candidate_row)
 
     for rank, ticker in enumerate(
         distribution_watchlist["Ticker"],

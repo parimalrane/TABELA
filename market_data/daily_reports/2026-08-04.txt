@@ -103,7 +103,6 @@ Healthcare Services (Healthcare)               14     1    7.14     18.37
 
 ========================================
 LONG CANDIDATE UNIVERSE
-Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
   SEZL              Digital Payments              Leading         98      96.81          2
@@ -115,7 +114,6 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
   DDOG          Cloud Infrastructure              Leading         95      93.15          2
    NET          Cloud Infrastructure              Leading         95      92.55          2
   SNOW          Cloud Infrastructure              Leading         99      92.25          3
- ~DAVE               Digital Banking              Neutral         97      92.15          2
   HNGE                Digital Health              Leading         90      92.11          1
   PAYS              Digital Payments              Leading         95      91.36          3
   EFOR                   IT Services              Leading         95      91.26          1
@@ -124,9 +122,7 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
   QLYS                 Cybersecurity              Leading         95      90.56          3
   LIND     Leisure and Entertainment              Leading         99      90.52          2
   FIVN          Communications Cloud              Leading         95      89.95          3
- ~AAMI            Financial Services              Neutral         95      89.85          1
   FSLY          Cloud Infrastructure              Leading         95      89.35          3
- ~VCTR              Asset Management              Neutral         90      89.10          1
   CRSR     Leisure and Entertainment              Leading         95      88.92          2
   NTAP           Data Infrastructure              Leading         97      88.36         4*
    LTH     Leisure and Entertainment              Leading         90      88.27          1
@@ -134,33 +130,37 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
   APPS                 Mobile Adtech              Leading         98      87.47          3
    VIK     Leisure and Entertainment              Leading         90      87.47          2
    HUT Digital Assets Infrastructure              Leading         90      87.41          3
- ~ADPT                   Diagnostics              Neutral         97      86.82          2
   TENB                 Cybersecurity              Leading         90      86.61          3
- ~BFLY               Medical Devices              Neutral         99      85.82          2
-  ~NEO                   Diagnostics              Neutral         98      85.27          2
   GRPN                      Internet              Leading         95      85.12          3
- ~BLFS           Life Sciences Tools              Neutral         95      85.12          1
-  ~TXG           Life Sciences Tools              Neutral         99      85.12          2
- ~CDNA                   Diagnostics              Neutral         99      85.12          3
- ~LQDA               Pharmaceuticals              Neutral         98      84.47          1
- ~TWST           Life Sciences Tools              Neutral         99      84.02          3
- ~MANH                      Software              Leading         80      83.51          2
- ~AVTR           Life Sciences Tools              Neutral         98      83.17          2
- ~ITGR               Medical Devices              Neutral         98      82.97          3
- ~DXCM               Medical Devices              Neutral         95      82.92          3
-  ~PAY              Digital Payments              Leading         80      82.81          3
-  ~BVS               Medical Devices              Neutral         95      82.12          2
- ~CNMD               Medical Devices              Neutral         97      82.12          3
-  ~BAX               Medical Devices              Neutral         98      82.07          3
- ~ILMN                   Diagnostics              Neutral         90      81.47          1
-    ~S                 Cybersecurity              Leading         80      81.21          3
- ~OSCR           Healthcare Services              Neutral         95      80.53          1
-   ~GH                   Diagnostics              Neutral         95      80.52         4*
- ~ETON               Pharmaceuticals              Neutral         99      80.12          3
-[RECONCILIATION ALERT] ABCL was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-04). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] EC was in LONG on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-04). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] HPK was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-04). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] TOI was in DISTRIBUTION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-04). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+
+========================================
+PRE-OBSERVATION WATCHLIST
+========================================
+Ticker        Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
+  DAVE     Digital Banking              Neutral         97      92.15          2
+  AAMI  Financial Services              Neutral         95      89.85          1
+  VCTR    Asset Management              Neutral         90      89.10          1
+  ADPT         Diagnostics              Neutral         97      86.82          2
+  BFLY     Medical Devices              Neutral         99      85.82          2
+   NEO         Diagnostics              Neutral         98      85.27          2
+  BLFS Life Sciences Tools              Neutral         95      85.12          1
+   TXG Life Sciences Tools              Neutral         99      85.12          2
+  CDNA         Diagnostics              Neutral         99      85.12          3
+  LQDA     Pharmaceuticals              Neutral         98      84.47          1
+  TWST Life Sciences Tools              Neutral         99      84.02          3
+  MANH            Software              Leading         80      83.51          2
+  AVTR Life Sciences Tools              Neutral         98      83.17          2
+  ITGR     Medical Devices              Neutral         98      82.97          3
+  DXCM     Medical Devices              Neutral         95      82.92          3
+   PAY    Digital Payments              Leading         80      82.81          3
+   BVS     Medical Devices              Neutral         95      82.12          2
+  CNMD     Medical Devices              Neutral         97      82.12          3
+   BAX     Medical Devices              Neutral         98      82.07          3
+  ILMN         Diagnostics              Neutral         90      81.47          1
+     S       Cybersecurity              Leading         80      81.21          3
+  OSCR Healthcare Services              Neutral         95      80.53          1
+    GH         Diagnostics              Neutral         95      80.52         4*
+  ETON     Pharmaceuticals              Neutral         99      80.12          3
 
 --- NEW LONG PIPELINE ENTRIES ---
 New Longs       : APPS, CRSR, GRPN, LIND, LTH, TENB, VIK
@@ -272,7 +272,8 @@ DISTRIBUTION WATCHLIST
    10   VICR           Semiconductors              Neutral         20      45.45          2
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SEZL,CBZ,FTNT,RNG,PANW,OKTA,DDOG,NET,SNOW,DAVE,HNGE,PAYS,EFOR,BLZE,PENG,QLYS,LIND,FIVN,AAMI,FSLY,VCTR,CRSR,NTAP,LTH,CRWD,APPS,VIK,HUT,ADPT,TENB,BFLY,NEO,GRPN,BLFS,TXG,CDNA,LQDA,TWST,MANH,AVTR,ITGR,DXCM,PAY,BVS,CNMD,BAX,ILMN,S,OSCR,GH,ETON,
+###LONG,SEZL,CBZ,FTNT,RNG,PANW,OKTA,DDOG,NET,SNOW,HNGE,PAYS,EFOR,BLZE,PENG,QLYS,LIND,FIVN,FSLY,CRSR,NTAP,LTH,CRWD,APPS,VIK,HUT,TENB,GRPN,
+###PRE_OBSERVATION,DAVE,AAMI,VCTR,ADPT,BFLY,NEO,BLFS,TXG,CDNA,LQDA,TWST,MANH,AVTR,ITGR,DXCM,PAY,BVS,CNMD,BAX,ILMN,S,OSCR,GH,ETON,
 ###OBSERVATION,AGEN,CORT,AGL,PSNL,SNDK,HAE,XNCR,AMRX,MRVI,KNSA,GSHD,GKOS,DVA,ATRC,THC,VVX,IBRX,ALKS,VG,AVAH,MU,PGNY,ENOV,LFST,CON,NRIX,HUM,PTGX,ACRS,SM,URGN,PACS,DGX,CYRX,TRV,SKWD,NESR,TVTX,HALO,ALL,EOG,FTRE,MEDP,CNA,OMDA,CVS,RYAN,BTSG,NBIX,TGTX,VCYT,NVCR,TDOC,
 ###DISTRIBUTION,GLUE,ASTH,MGTX,AGIO,FROG,TWLO,RPD,KYMR,MIRM,MRNA,CYTK,RGNX,MUFG,SIMO,STX,ATEN,MKSI,RARE,STM,VSH,DOCN,ICHR,UCTT,AMD,UMC,VPG,ASX,AMAT,MXL,LRCX,PD,ACMR,TXN,ALAB,AMBQ,WDC,COHU,EAT,EXTR,INTC,SVCO,VICR,
 

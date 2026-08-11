@@ -591,7 +591,6 @@ def print_daily_scan(
     print("\n\n")
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
-    print("Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)")
     print("========================================")
 
     display_df = long_candidates[
@@ -608,32 +607,14 @@ def print_daily_scan(
     if "Long_Score" in display_df.columns:
         display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
 
-    def identify_grace_ticker(row):
-        ticker_val = str(row["Ticker"])
-        clean_ticker = ticker_val.replace("*", "").strip().upper()
-        
-        match = stocks[stocks["Ticker"].astype(str).str.upper() == clean_ticker]
+    def is_grace(row):
+        clean = str(row["Ticker"]).replace("*", "").strip().upper()
+        match = stocks[stocks["Ticker"].astype(str).str.upper() == clean]
         if not match.empty:
-            stk = match.iloc[0]
-            theme_class = stk.get("Theme_Class", "")
-            rs_rating = stk.get("RS_Rating", 0)
-            long_score = stk.get("Long_Score", 0)
-            composite_score = stk.get("Composite_Score", 0)
-            
-            # Condition 1: Standard Entry
-            if theme_class in ["Leading", "Unclassified Leader"] and rs_rating >= 90 and long_score >= 85:
-                return ticker_val
-                
-            # Condition 2: Elite Institutional
-            if theme_class == "Leading" and (composite_score >= 90 or rs_rating >= 95):
-                return ticker_val
-                
-            # Fails both native entries but is still in candidates -> Grace
-            return f"~{ticker_val}"
-            
-        return ticker_val
+            return match.iloc[0].get("Is_Pre_Observation_Candidate", False)
+        return False
 
-    display_df["Ticker"] = display_df.apply(identify_grace_ticker, axis=1)
+    display_df["is_pre_obs"] = display_df.apply(is_grace, axis=1)
 
     display_df["Zacks Rank"] = (
         display_df["Zacks Rank"]
@@ -653,7 +634,23 @@ def print_daily_scan(
         }
     )
 
-    print(display_df.to_string(index=False))
+    true_longs = display_df[~display_df["is_pre_obs"]].drop(columns=["is_pre_obs"])
+    grace_longs = display_df[display_df["is_pre_obs"]].drop(columns=["is_pre_obs"])
+
+    if true_longs.empty:
+        print("No active candidates in Long Candidate Universe.")
+    else:
+        print(true_longs.to_string(index=False))
+
+    print("\n\n")
+    print("========================================")
+    print("PRE-OBSERVATION WATCHLIST")
+    print("========================================")
+    
+    if grace_longs.empty:
+        print("No candidates in Pre-Observation today.")
+    else:
+        print(grace_longs.to_string(index=False))
 
     deltas = compare_watchlists(
         current_long=long_candidates["Ticker"].tolist(),
@@ -800,11 +797,12 @@ def print_daily_scan(
     print()
     print("TRADINGVIEW WATCHLIST EXPORT")
 
-    long_list = ",".join(
-        long_candidates["Ticker"]
-        .astype(str)
-        .str.replace("*", "", regex=False)
-        .tolist()
+    long_list_true = ",".join(
+        [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
+    )
+    
+    pre_obs_list = ",".join(
+        [t for t in grace_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
     )
 
     observation_list = ",".join(
@@ -822,7 +820,8 @@ def print_daily_scan(
         .tolist()
     )
 
-    print("###LONG," + long_list + ",")
+    print("###LONG," + long_list_true + ",")
+    print("###PRE_OBSERVATION," + pre_obs_list + ",")
     print("###OBSERVATION," + observation_list + ",")
     print("###DISTRIBUTION," + distribution_list + ",")
 

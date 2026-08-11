@@ -81,13 +81,11 @@ Software                                      167     1    0.60      3.04
 
 ========================================
 LONG CANDIDATE UNIVERSE
-Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker                            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
   LQDA                         Pharmaceuticals              Leading         99      96.73          1
   OSCR                     Healthcare Services              Leading         97      93.32          1
   CORT                         Pharmaceuticals              Leading         99      93.13          2
- ~DAVE                         Digital Banking              Neutral         97      92.90          1
    HUM                     Healthcare Services              Leading         97      92.62          1
   URGN                                  Pharma              Leading         98      92.38          2
   ETON                         Pharmaceuticals              Leading         99      91.83          3
@@ -96,13 +94,10 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
     VG LNG / Natural Gas Export Infrastructure  Unclassified Leader         97      91.25          2
   KNSA                           Biotechnology              Leading         90      90.57          1
   AGEN                           Biotechnology              Leading         99      90.32          3
-   ~MU                                  Memory              Neutral         99      90.27          1
   IOVA                                 Biotech              Leading         97      89.52          3
   INNV                              Healthcare              Leading         95      89.43          2
   HALO                                 Biotech              Leading         90      89.27          2
- ~SNDK                                  Memory              Neutral         99      88.87          1
   IBRX                                 Biotech              Leading         95      88.42          3
- ~VCTR                        Asset Management              Neutral         90      88.35          1
    DVA                     Healthcare Services              Leading         97      88.22          3
    VVX                     Healthcare Services              Leading         90      88.08          1
   PACS                     Healthcare Services              Leading         90      87.97          2
@@ -111,37 +106,43 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
   XNCR                           Biotechnology              Leading         97      87.42          3
    AGL                     Healthcare Services              Leading         99      87.03          3
   CYRX                              Healthcare              Leading         95      86.62          3
- ~AAMI                      Financial Services              Neutral         90      86.35          1
   OMDA                              Healthcare              Leading         90      86.28          3
   PNTG                              Healthcare              Leading         90      86.17          3
     SM                             Exploration              Leading         90      85.99          3
    HPK                             Exploration              Leading         90      85.79          2
- ~NBIX                                  Pharma              Leading         80      85.78          1
   NRIX                                 Biotech              Leading         90      85.67          3
   TVTX                                 Biotech              Leading         90      85.67          3
   FTRE                                 Biotech              Leading         95      85.62          3
   PTGX                                 Biotech              Leading         90      85.47          1
   ALKS                                 Biotech              Leading         95      85.12          3
    CON                     Healthcare Services              Leading         90      85.08          3
- ~LFST                              Healthcare              Leading         90      84.78          3
- ~NESR                             Exploration              Leading         80      83.79          1
  NVCR*                                 Biotech              Leading         95      83.62         4*
-  ~TRV                               Insurance              Neutral         90      82.86          3
- ~AVAH                     Healthcare Services              Leading         80      82.77          2
- ~ACRS                                  Pharma              Leading         90      82.68          3
- ~SEZL                        Digital Payments              Neutral         99      82.19          2
- ~TDOC                              Healthcare              Leading         90      82.08          3
- ~DDOG                    Cloud Infrastructure              Neutral         98      81.39          3
- ~ASTH                              Healthcare              Leading         80      81.38          3
-  ~CVS                              Healthcare              Leading         80      81.08          2
- ~FTNT                           Cybersecurity              Neutral         98      81.04          1
- ~SNOW                    Cloud Infrastructure              Neutral         98      80.79          3
- ~PENG                                Software              Neutral         99      80.69          1
- ~GLUE                                 Biotech              Leading         80      80.17          3
- ~ABCL                                 Biotech              Leading         80      80.17          3
-[RECONCILIATION ALERT] ANAB was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-23). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] CEPL was in LONG on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-23). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] CSCO was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-23). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+
+========================================
+PRE-OBSERVATION WATCHLIST
+========================================
+Ticker         Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
+  DAVE      Digital Banking              Neutral         97      92.90          1
+    MU               Memory              Neutral         99      90.27          1
+  SNDK               Memory              Neutral         99      88.87          1
+  VCTR     Asset Management              Neutral         90      88.35          1
+  AAMI   Financial Services              Neutral         90      86.35          1
+  NBIX               Pharma              Leading         80      85.78          1
+  LFST           Healthcare              Leading         90      84.78          3
+  NESR          Exploration              Leading         80      83.79          1
+   TRV            Insurance              Neutral         90      82.86          3
+  AVAH  Healthcare Services              Leading         80      82.77          2
+  ACRS               Pharma              Leading         90      82.68          3
+  SEZL     Digital Payments              Neutral         99      82.19          2
+  TDOC           Healthcare              Leading         90      82.08          3
+  DDOG Cloud Infrastructure              Neutral         98      81.39          3
+  ASTH           Healthcare              Leading         80      81.38          3
+   CVS           Healthcare              Leading         80      81.08          2
+  FTNT        Cybersecurity              Neutral         98      81.04          1
+  SNOW Cloud Infrastructure              Neutral         98      80.79          3
+  PENG             Software              Neutral         99      80.69          1
+  GLUE              Biotech              Leading         80      80.17          3
+  ABCL              Biotech              Leading         80      80.17          3
 
 --- NEW LONG PIPELINE ENTRIES ---
 New Longs       : HALO, HPK, MEDP, NVCR, PTGX, VVX
@@ -237,7 +238,8 @@ DISTRIBUTION WATCHLIST
     2   SVCO Semiconductors              Neutral         20      38.92          3
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,OSCR,CORT,DAVE,HUM,URGN,ETON,PGNY,TGTX,VG,KNSA,AGEN,MU,IOVA,INNV,HALO,SNDK,IBRX,VCTR,DVA,VVX,PACS,MEDP,BTSG,XNCR,AGL,CYRX,AAMI,OMDA,PNTG,SM,HPK,NBIX,NRIX,TVTX,FTRE,PTGX,ALKS,CON,LFST,NESR,NVCR,TRV,AVAH,ACRS,SEZL,TDOC,DDOG,ASTH,CVS,FTNT,SNOW,PENG,GLUE,ABCL,
+###LONG,LQDA,OSCR,CORT,HUM,URGN,ETON,PGNY,TGTX,VG,KNSA,AGEN,IOVA,INNV,HALO,IBRX,DVA,VVX,PACS,MEDP,BTSG,XNCR,AGL,CYRX,OMDA,PNTG,SM,HPK,NRIX,TVTX,FTRE,PTGX,ALKS,CON,NVCR,
+###PRE_OBSERVATION,DAVE,MU,SNDK,VCTR,AAMI,NBIX,LFST,NESR,TRV,AVAH,ACRS,SEZL,TDOC,DDOG,ASTH,CVS,FTNT,SNOW,PENG,GLUE,ABCL,
 ###OBSERVATION,BLZE,DELL,ICHR,MXL,AMBQ,VPG,UCTT,PANW,STX,APPS,AMD,OKTA,SIMO,HPE,WDC,ACMR,UMC,HNGE,DOCN,CRWD,LTH,VRNS,FROG,BB,ALAB,ASX,LIND,NTAP,VSH,EVER,AMAT,FA,CARE,WYFI,ATEN,TENB,PAYS,MUFG,QLYS,CRL,NET,KYMR,MKSI,RPD,MGTX,MRX,TOELY,OGN,COHU,MRNA,CYTK,VCEL,CNC,TOI,SKWD,RSI,S,LRCX,RELY,AGIO,MIRM,NTCT,COMP,KRYS,TWLO,FIVN,MAMA,TXN,ALIT,STM,MOH,RARE,PD,RGNX,
 ###DISTRIBUTION,EAT,EXTR,INTC,VICR,SVCO,
 

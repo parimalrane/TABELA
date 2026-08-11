@@ -102,7 +102,6 @@ Financial Services (Banking)                   69     4    5.80     20.95
 
 ========================================
 LONG CANDIDATE UNIVERSE
-Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker                            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
   OSCR                     Healthcare Services              Leading         97      95.14          1
@@ -111,17 +110,13 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
   PGNY                     Healthcare Services              Leading         95      93.65          1
   OMDA                              Healthcare              Leading         97      91.95          3
   INNV                              Healthcare              Leading         95      91.85          2
- ~DAVE                         Digital Banking              Neutral         98      91.34          2
   CORT                         Pharmaceuticals              Leading         99      91.31          2
- ~SEZL                        Digital Payments              Neutral         99      90.68          2
   URGN                                  Pharma              Leading         98      90.56          2
- ~HNGE                          Digital Health              Neutral         99      90.38          1
   AVAH                     Healthcare Services              Leading         90      90.09          2
    DVA                     Healthcare Services              Leading         97      90.05          3
   ETON                         Pharmaceuticals              Leading         99      90.01          3
   DDOG                    Cloud Infrastructure              Leading         99      89.82          3
   PACS                     Healthcare Services              Leading         90      89.80          2
- ~FTNT                           Cybersecurity              Neutral         98      89.53          1
    TOI                              Healthcare              Leading         95      89.45          3
    CON                     Healthcare Services              Leading         90      89.40          2
   BTSG                     Healthcare Services              Leading         95      89.35          3
@@ -135,49 +130,56 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
    CVS                              Healthcare              Leading         90      88.40          2
    NET                    Cloud Infrastructure              Leading         90      88.27          1
   TWLO                    Communications Cloud              Leading         90      88.17          1
- ~KNSA                           Biotechnology              Neutral         90      88.15          1
- ~PENG                                Software              Neutral         97      88.08          1
   PNTG                              Healthcare              Leading         90      88.00          3
- ~TGTX                                 Biotech              Neutral         95      87.80          3
   TDOC                              Healthcare              Leading         97      87.75          3
- ~VCTR                        Asset Management              Neutral         90      87.74          1
- ~OKTA                           Cybersecurity              Neutral         99      87.68          2
   FIVN                    Communications Cloud              Leading         95      86.92          3
   COMP                  Real Estate Technology  Unclassified Leader         90      86.90          1
    MOH                              Healthcare              Leading         90      86.60          3
-   ~FA                                Software              Neutral         98      86.43          3
   SKWD                               Insurance              Leading         90      86.08          3
- ~IBRX                                 Biotech              Neutral         95      86.00          3
- ~EVER                                Software              Neutral         97      85.78          3
- ~AAMI                      Financial Services              Neutral         90      85.74          1
- ~QLYS                           Cybersecurity              Neutral         98      85.53          3
- ~AGIO                                 Biotech              Neutral         95      85.30          3
-   ~BB                           Cybersecurity              Neutral         95      84.78          2
- ~PAYS                        Digital Payments              Neutral         95      84.68          3
- ~PANW                           Cybersecurity              Neutral         98      84.63          3
- ~FROG                Developer Infrastructure              Neutral         98      84.43          3
- ~BLZE                                Software              Neutral         99      84.28          3
- ~NESR                             Exploration              Leading         80      83.79          1
- ~VRNS                           Cybersecurity              Neutral         98      83.73          3
-  ~RPD                           Cybersecurity              Neutral         98      83.63          3
- ~GLUE                                 Biotech              Neutral         90      83.25          3
- ~NRIX                                 Biotech              Neutral         90      83.25          3
- ~TVTX                                 Biotech              Neutral         90      83.25          3
- ~ABCL                                 Biotech              Neutral         90      83.25          3
- ~FTRE                                 Biotech              Neutral         95      83.20          3
- ~APPS                           Mobile Adtech              Neutral         98      82.88          1
- ~ALKS                                 Biotech              Neutral         95      82.70          3
-    ~S                           Cybersecurity              Neutral         90      82.53          2
- ~CRWD                           Cybersecurity              Neutral         97      82.48         4*
- ~TENB                           Cybersecurity              Neutral         98      82.33         4*
- ~RELY                                 Banking              Neutral         90      82.14          3
-  ~CRL                              Healthcare              Leading         80      80.89          2
- ~ACRS                                  Pharma              Leading         90      80.86          3
-   ~MU                                  Memory              Lagging         97      80.68          1
- ~SNDK                                  Memory              Lagging         99      80.38          1
- ~MGTX                                 Biotech              Neutral         80      80.25          2
-[RECONCILIATION ALERT] AGEN was in LONG on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-20). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] DTIL was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-20). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+
+========================================
+PRE-OBSERVATION WATCHLIST
+========================================
+Ticker             Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
+  DAVE          Digital Banking              Neutral         98      91.34          2
+  SEZL         Digital Payments              Neutral         99      90.68          2
+  HNGE           Digital Health              Neutral         99      90.38          1
+  FTNT            Cybersecurity              Neutral         98      89.53          1
+  KNSA            Biotechnology              Neutral         90      88.15          1
+  PENG                 Software              Neutral         97      88.08          1
+  TGTX                  Biotech              Neutral         95      87.80          3
+  VCTR         Asset Management              Neutral         90      87.74          1
+  OKTA            Cybersecurity              Neutral         99      87.68          2
+    FA                 Software              Neutral         98      86.43          3
+  IBRX                  Biotech              Neutral         95      86.00          3
+  EVER                 Software              Neutral         97      85.78          3
+  AAMI       Financial Services              Neutral         90      85.74          1
+  QLYS            Cybersecurity              Neutral         98      85.53          3
+  AGIO                  Biotech              Neutral         95      85.30          3
+    BB            Cybersecurity              Neutral         95      84.78          2
+  PAYS         Digital Payments              Neutral         95      84.68          3
+  PANW            Cybersecurity              Neutral         98      84.63          3
+  FROG Developer Infrastructure              Neutral         98      84.43          3
+  BLZE                 Software              Neutral         99      84.28          3
+  NESR              Exploration              Leading         80      83.79          1
+  VRNS            Cybersecurity              Neutral         98      83.73          3
+   RPD            Cybersecurity              Neutral         98      83.63          3
+  GLUE                  Biotech              Neutral         90      83.25          3
+  NRIX                  Biotech              Neutral         90      83.25          3
+  TVTX                  Biotech              Neutral         90      83.25          3
+  ABCL                  Biotech              Neutral         90      83.25          3
+  FTRE                  Biotech              Neutral         95      83.20          3
+  APPS            Mobile Adtech              Neutral         98      82.88          1
+  ALKS                  Biotech              Neutral         95      82.70          3
+     S            Cybersecurity              Neutral         90      82.53          2
+  CRWD            Cybersecurity              Neutral         97      82.48         4*
+  TENB            Cybersecurity              Neutral         98      82.33         4*
+  RELY                  Banking              Neutral         90      82.14          3
+   CRL               Healthcare              Leading         80      80.89          2
+  ACRS                   Pharma              Leading         90      80.86          3
+    MU                   Memory              Lagging         97      80.68          1
+  SNDK                   Memory              Lagging         99      80.38          1
+  MGTX                  Biotech              Neutral         80      80.25          2
 
 --- NEW LONG PIPELINE ENTRIES ---
 New Longs       : MOH, SKWD, VG
@@ -258,7 +260,8 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,OSCR,LQDA,HUM,PGNY,OMDA,INNV,DAVE,CORT,SEZL,URGN,HNGE,AVAH,DVA,ETON,DDOG,PACS,FTNT,TOI,CON,BTSG,LFST,VG,AGL,CNC,ASTH,SNOW,CYRX,CVS,NET,TWLO,KNSA,PENG,PNTG,TGTX,TDOC,VCTR,OKTA,FIVN,COMP,MOH,FA,SKWD,IBRX,EVER,AAMI,QLYS,AGIO,BB,PAYS,PANW,FROG,BLZE,NESR,VRNS,RPD,GLUE,NRIX,TVTX,ABCL,FTRE,APPS,ALKS,S,CRWD,TENB,RELY,CRL,ACRS,MU,SNDK,MGTX,
+###LONG,OSCR,LQDA,HUM,PGNY,OMDA,INNV,CORT,URGN,AVAH,DVA,ETON,DDOG,PACS,TOI,CON,BTSG,LFST,VG,AGL,CNC,ASTH,SNOW,CYRX,CVS,NET,TWLO,PNTG,TDOC,FIVN,COMP,MOH,SKWD,
+###PRE_OBSERVATION,DAVE,SEZL,HNGE,FTNT,KNSA,PENG,TGTX,VCTR,OKTA,FA,IBRX,EVER,AAMI,QLYS,AGIO,BB,PAYS,PANW,FROG,BLZE,NESR,VRNS,RPD,GLUE,NRIX,TVTX,ABCL,FTRE,APPS,ALKS,S,CRWD,TENB,RELY,CRL,ACRS,MU,SNDK,MGTX,
 ###OBSERVATION,AMBQ,DELL,MXL,ICHR,SIMO,VPG,LTH,UMC,EXTR,LIND,AMD,RSI,EAT,UCTT,STX,ATEN,PTGX,ALIT,HPE,CARE,ACMR,NTAP,KYMR,WDC,ASX,MIRM,MRNA,ALAB,STM,NTCT,TOELY,PD,VCEL,AMAT,OGN,VSH,DOCN,INTC,WYFI,MUFG,KLIC,CYTK,MRX,ARM,KRYS,PGEN,MKSI,NBIS,CSCO,MRVL,COHU,LRCX,SYNA,MAMA,RARE,TXN,OUST,IFNNY,RGNX,ALGM,CRDO,VICR,SVCO,ANAB,
 ###DISTRIBUTION,,
 

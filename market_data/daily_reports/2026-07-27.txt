@@ -83,7 +83,6 @@ Software                                      159     4    2.52     12.05
 
 ========================================
 LONG CANDIDATE UNIVERSE
-Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker         Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
   LQDA      Pharmaceuticals              Leading         99      96.78          1
@@ -94,14 +93,11 @@ Ticker         Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Ran
   PGNY  Healthcare Services              Leading         95      90.72          1
   CORT      Pharmaceuticals              Leading         99      90.69          3
    HUM  Healthcare Services              Leading         95      90.42          1
- ~VCTR     Asset Management              Neutral         95      90.08          1
   INNV           Healthcare              Leading         97      90.02          2
    VVX  Healthcare Services              Leading         95      89.72          1
   PACS  Healthcare Services              Leading         95      89.62          2
   DDOG Cloud Infrastructure              Leading         98      89.36          3
- ~DAVE      Digital Banking              Neutral         95      89.28          2
    RNG Communications Cloud              Leading         95      88.81          2
- ~AAMI   Financial Services              Neutral         95      88.08          1
    DVA  Healthcare Services              Leading         98      87.67          3
    TRV            Insurance              Leading         90      87.25          2
   AVAH  Healthcare Services              Leading         90      87.17          2
@@ -112,23 +108,23 @@ Ticker         Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Ran
   SKWD            Insurance              Leading         90      86.15          3
    THC  Healthcare Services              Leading         95      86.02          3
    AGL  Healthcare Services              Leading         99      85.92          3
- ~SEZL     Digital Payments              Neutral         99      85.60          2
    CVS           Healthcare              Leading         90      85.47          2
- ~FTNT        Cybersecurity              Neutral         98      84.45          1
- ~NBIX               Pharma              Leading         80      84.33          2
- ~TGTX              Biotech              Neutral         97      83.76          3
- ~PENG             Software              Neutral         97      83.00          1
- ~CYRX           Healthcare              Leading         90      82.77          3
- ~AGEN        Biotechnology              Neutral         99      82.76          3
- ~ACRS               Pharma              Leading         90      82.74          3
-[RECONCILIATION ALERT] ALIT was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-27). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] DELL was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-27). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] LIND was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-27). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] LTH was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-27). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] NTAP was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-27). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] PNTG was in LONG on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-27). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] RSI was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-27). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] TOELY was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-07-27). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+
+========================================
+PRE-OBSERVATION WATCHLIST
+========================================
+Ticker       Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
+  VCTR   Asset Management              Neutral         95      90.08          1
+  DAVE    Digital Banking              Neutral         95      89.28          2
+  AAMI Financial Services              Neutral         95      88.08          1
+  SEZL   Digital Payments              Neutral         99      85.60          2
+  FTNT      Cybersecurity              Neutral         98      84.45          1
+  NBIX             Pharma              Leading         80      84.33          2
+  TGTX            Biotech              Neutral         97      83.76          3
+  PENG           Software              Neutral         97      83.00          1
+  CYRX         Healthcare              Leading         90      82.77          3
+  AGEN      Biotechnology              Neutral         99      82.76          3
+  ACRS             Pharma              Leading         90      82.74          3
 
 --- NEW LONG PIPELINE ENTRIES ---
 New Longs       : RNG, SKWD, THC
@@ -233,7 +229,8 @@ DISTRIBUTION WATCHLIST
     4   SVCO          Semiconductors              Lagging         10      23.66          3
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,URGN,ETON,SNOW,OSCR,PGNY,CORT,HUM,VCTR,INNV,VVX,PACS,DDOG,DAVE,RNG,AAMI,DVA,TRV,AVAH,MEDP,CON,LFST,BTSG,SKWD,THC,AGL,SEZL,CVS,FTNT,NBIX,TGTX,PENG,CYRX,AGEN,ACRS,
+###LONG,LQDA,URGN,ETON,SNOW,OSCR,PGNY,CORT,HUM,INNV,VVX,PACS,DDOG,RNG,DVA,TRV,AVAH,MEDP,CON,LFST,BTSG,SKWD,THC,AGL,CVS,
+###PRE_OBSERVATION,VCTR,DAVE,AAMI,SEZL,FTNT,NBIX,TGTX,PENG,CYRX,AGEN,ACRS,
 ###OBSERVATION,BLZE,SNDK,MU,APPS,OKTA,PANW,ALKS,VRNS,EVER,XNCR,FA,FTRE,PTGX,MUFG,CARE,STX,PAYS,CRWD,COMP,HNGE,IBRX,MRX,BB,TENB,FROG,KYMR,NRIX,TVTX,TDOC,HALO,OGN,CNC,QLYS,SIMO,NET,MGTX,CRL,KNSA,KRYS,NESR,AGIO,VCEL,FIVN,TOI,SM,VG,GLUE,S,CYTK,OMDA,RPD,MRNA,MIRM,RELY,NVCR,TWLO,ASTH,HPK,ABCL,MOH,RGNX,
 ###DISTRIBUTION,ICHR,RARE,STM,MKSI,MXL,VSH,DOCN,ASX,ATEN,AMAT,UMC,UCTT,AMD,VPG,WDC,AMBQ,ALAB,ACMR,TXN,COHU,LRCX,PD,EAT,EXTR,INTC,VICR,SVCO,
 

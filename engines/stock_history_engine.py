@@ -147,6 +147,11 @@ def save_stock_history(stocks):
                 False
             ),
 
+            "is_pre_observation_candidate": row.get(
+                "Is_Pre_Observation_Candidate",
+                False
+            ),
+
             "stock_days_long": stock_days_long,
 
             "stock_days_short": stock_days_short,

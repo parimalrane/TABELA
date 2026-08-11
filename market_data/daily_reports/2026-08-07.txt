@@ -111,7 +111,6 @@ Banking                                       147     5    3.40     14.27
 
 ========================================
 LONG CANDIDATE UNIVERSE
-Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker                        Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
   SEZL                    Digital Payments              Leading         98      96.22          2
@@ -121,7 +120,6 @@ Ticker                        Mapped_Theme Theme Classification  RS_Rating Long_
   PAYC                            Software              Leading         98      93.42          2
   HNGE                      Digital Health              Leading         90      92.72          1
     FA                            Software              Leading         98      92.52          3
- ~CDNA                         Diagnostics              Neutral         99      92.06          1
   EFOR                         IT Services              Leading         97      91.77          1
   QLYS                       Cybersecurity              Leading         98      91.62          3
   OKTA                       Cybersecurity              Leading         95      91.57          2
@@ -133,14 +131,12 @@ Ticker                        Mapped_Theme Theme Classification  RS_Rating Long_
    RNG                Communications Cloud              Leading         99      90.86          3
   APPS                       Mobile Adtech              Leading         99      90.52          2
   BLZE                            Software              Leading         99      90.37          3
- ~BLFS                 Life Sciences Tools              Neutral         95      89.86          1
   PRGS                            Software              Leading         90      89.52          2
    VAC           Leisure and Entertainment              Leading         98      89.27          2
    NET                Cloud Infrastructure              Leading         90      89.21          2
    ATI                 Aerospace & Defense              Leading         95      89.11          2
   CRWD                       Cybersecurity              Leading         95      88.87          3
   TENB                       Cybersecurity              Leading         95      88.77          3
- ~BFLY                     Medical Devices              Neutral         99      88.76          2
   MGNI                 Digital Advertising              Leading         98      88.57          3
    AIR                 Aerospace & Defense              Leading         90      88.56          1
   FSLY                Cloud Infrastructure              Leading         90      88.51          2
@@ -151,36 +147,43 @@ Ticker                        Mapped_Theme Theme Classification  RS_Rating Long_
   LIND           Leisure and Entertainment              Leading         99      88.02          3
    GCT           E Commerce Infrastructure              Leading         97      87.82          3
   NTAP                 Data Infrastructure              Leading         97      87.77         4*
-  ~NEO                         Diagnostics              Neutral         97      87.66          2
- ~ADPT                         Diagnostics              Neutral         97      87.26          3
      U                            Software              Leading         90      87.22          2
   GENI    Sports Betting Data & Technology              Leading         95      87.22          3
   ZETA                 Digital Advertising              Leading         95      87.12          3
   BLKB                            Software              Leading         90      87.02          2
- ~TWST                 Life Sciences Tools              Neutral         99      86.95          3
- ~LQDA                     Pharmaceuticals              Neutral         98      86.82          1
   PCTY                            Software              Leading         90      86.62          3
  MOG.A                 Aerospace & Defense              Leading         90      86.36          2
   CRSR           Leisure and Entertainment              Leading         90      86.17          2
-  ~TXG                 Life Sciences Tools              Neutral         99      85.56          3
- ~ITGR                     Medical Devices              Neutral         97      85.36          3
- ~PENG                            Software              Leading         80      84.82          1
- ~FIVN                Communications Cloud              Leading         90      84.61         4*
- ~AAMI                  Financial Services              Neutral         95      84.55          1
- ~AVTR                 Life Sciences Tools              Neutral         95      84.46          2
- ~VCTR                    Asset Management              Neutral         90      83.80          1
-  ~BAX                     Medical Devices              Neutral         95      83.36          3
- ~ETSY                            Internet              Leading         90      83.27          3
- ~DAVE                     Digital Banking              Neutral         90      83.00          2
-  ~LTH           Leisure and Entertainment              Leading         80      82.77          1
-   ~GH                         Diagnostics              Neutral         90      82.71          3
-    ~W                            Internet              Leading         90      82.37          3
-  ~VIK           Leisure and Entertainment              Leading         80      81.97          2
- ~ETON                     Pharmaceuticals              Neutral         98      81.92          3
- ~AMTB                             Banking              Neutral         90      81.50          1
-   ~DT                            Software              Leading         80      80.82          3
-    ~S                       Cybersecurity              Leading         80      80.62          3
-[RECONCILIATION ALERT] CYTK was in DISTRIBUTION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-07). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+
+========================================
+PRE-OBSERVATION WATCHLIST
+========================================
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
+  CDNA               Diagnostics              Neutral         99      92.06          1
+  BLFS       Life Sciences Tools              Neutral         95      89.86          1
+  BFLY           Medical Devices              Neutral         99      88.76          2
+   NEO               Diagnostics              Neutral         97      87.66          2
+  ADPT               Diagnostics              Neutral         97      87.26          3
+  TWST       Life Sciences Tools              Neutral         99      86.95          3
+  LQDA           Pharmaceuticals              Neutral         98      86.82          1
+   TXG       Life Sciences Tools              Neutral         99      85.56          3
+  ITGR           Medical Devices              Neutral         97      85.36          3
+  PENG                  Software              Leading         80      84.82          1
+  FIVN      Communications Cloud              Leading         90      84.61         4*
+  AAMI        Financial Services              Neutral         95      84.55          1
+  AVTR       Life Sciences Tools              Neutral         95      84.46          2
+  VCTR          Asset Management              Neutral         90      83.80          1
+   BAX           Medical Devices              Neutral         95      83.36          3
+  ETSY                  Internet              Leading         90      83.27          3
+  DAVE           Digital Banking              Neutral         90      83.00          2
+   LTH Leisure and Entertainment              Leading         80      82.77          1
+    GH               Diagnostics              Neutral         90      82.71          3
+     W                  Internet              Leading         90      82.37          3
+   VIK Leisure and Entertainment              Leading         80      81.97          2
+  ETON           Pharmaceuticals              Neutral         98      81.92          3
+  AMTB                   Banking              Neutral         90      81.50          1
+    DT                  Software              Leading         80      80.82          3
+     S             Cybersecurity              Leading         80      80.62          3
 
 --- NEW LONG PIPELINE ENTRIES ---
 New Longs       : AIR, AMPL, ATI, DCO, FA, GCT, MCS, MGNI, MOG.A, PAYC, PCTY, U, ZETA
@@ -292,7 +295,8 @@ DISTRIBUTION WATCHLIST
    13   VICR           Semiconductors              Neutral         20      44.87          2
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SEZL,PAYS,CBZ,PAY,PAYC,HNGE,FA,CDNA,EFOR,QLYS,OKTA,PANW,MCS,FTNT,SNOW,FTK,RNG,APPS,BLZE,BLFS,PRGS,VAC,NET,ATI,CRWD,TENB,BFLY,MGNI,AIR,FSLY,MANH,DCO,AMPL,BB,LIND,GCT,NTAP,NEO,ADPT,U,GENI,ZETA,BLKB,TWST,LQDA,PCTY,MOG.A,CRSR,TXG,ITGR,PENG,FIVN,AAMI,AVTR,VCTR,BAX,ETSY,DAVE,LTH,GH,W,VIK,ETON,AMTB,DT,S,
+###LONG,SEZL,PAYS,CBZ,PAY,PAYC,HNGE,FA,EFOR,QLYS,OKTA,PANW,MCS,FTNT,SNOW,FTK,RNG,APPS,BLZE,PRGS,VAC,NET,ATI,CRWD,TENB,MGNI,AIR,FSLY,MANH,DCO,AMPL,BB,LIND,GCT,NTAP,U,GENI,ZETA,BLKB,PCTY,MOG.A,CRSR,
+###PRE_OBSERVATION,CDNA,BLFS,BFLY,NEO,ADPT,TWST,LQDA,TXG,ITGR,PENG,FIVN,AAMI,AVTR,VCTR,BAX,ETSY,DAVE,LTH,GH,W,VIK,ETON,AMTB,DT,S,
 ###OBSERVATION,AGEN,CORT,AGL,URGN,PSNL,GSHD,MRVI,BVS,EC,CNMD,AMRX,SKWD,DXCM,HAE,THC,DGX,TRV,ALL,GKOS,LFST,ILMN,ATRC,VVX,MEDP,GRPN,PACS,PGNY,CON,HUM,CDW,RYAN,OSCR,CNA,AVAH,DDOG,BTSG,EOG,SM,HUT,VCYT,ENOV,NBIX,DVA,
 ###DISTRIBUTION,CVS,CYRX,XNCR,KNSA,TDOC,PTGX,IBRX,OMDA,FTRE,HALO,ALKS,GLUE,ASTH,AGIO,MGTX,FROG,TWLO,RPD,KYMR,MIRM,STX,RGNX,SIMO,MRNA,MUFG,AMAT,MKSI,STM,ATEN,RARE,MXL,VSH,ASX,UCTT,DOCN,VPG,ICHR,AMD,UMC,LRCX,TXN,WDC,PD,ACMR,AMBQ,COHU,ALAB,EAT,INTC,SVCO,EXTR,VICR,
 

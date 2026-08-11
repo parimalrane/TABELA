@@ -1,7 +1,9 @@
+Market file not found: market_data\input_files\20260810_Market.csv. Skipping Market Context.
 
 
 [TRANSITION WARNING] CYTK in DISTRIBUTION vanished from stocks universe on 2026-08-10. Retaining in registry (day 10).
 [TRANSITION WARNING] TOI in DISTRIBUTION vanished from stocks universe on 2026-08-10. Retaining in registry (day 6).
+[TRANSITION WARNING] GENI left LONG but is absent from stocks universe on 2026-08-10. Entering OBSERVATION Day 1 to preserve audit trail.
 [DISTRIBUTION WARNING] CYTK is in DISTRIBUTION registry but absent from stocks universe on 2026-08-10. Cannot display in watchlist until it re-enters the universe.
 [DISTRIBUTION WARNING] TOI is in DISTRIBUTION registry but absent from stocks universe on 2026-08-10. Cannot display in watchlist until it re-enters the universe.
 
@@ -17,81 +19,79 @@ Legend: [] = Top 3   () = Bottom 3
 
 Rank  Theme                               Strength        D        W        M        Q   Rank Δ   Score Δ  Transition
 ------------------------------------------------------------------------------------------------------------------------
-   1  Copper Mining                         [9.24]     4.85     9.10        —        —       -1      4.85  —
-   2  Cloud Computing                       [9.12]     2.27     0.24        —        —       +1      2.27  —
-   3  Software                              [5.05]     2.00     0.44        —        —       -1         2  —
-   6  Aerospace & Defense                     1.88     1.66     3.05        —        —       -6      1.66  Neutral -> Leading
-   7  Internet                                1.60     1.09    -0.15        —        —       -3      1.09  Neutral -> Leading
-  12  Copper                                  0.73    -2.42    -2.86        —        —       +9     -2.42  Leading -> Neutral
-  15  Semiconductors                          0.21     3.73     9.80        —        —      -16      3.73  Lagging -> Neutral
-  19  Nuclear Power                          -0.05   [6.22]  [12.09]        —        —      -15      6.22  Lagging -> Neutral
-  22  Uranium Mining                         -0.36   [5.86]  [10.77]        —        —      -11      5.86  Lagging -> Neutral
-  27  Infrastructure                         -2.47     0.64     1.13        —        —       -3      0.64  Lagging -> Neutral
-  29  Brent Oil                              -3.06  (-4.85)  (-8.59)        —        —      +23     -4.85  Leading -> Lagging
-  31  Mlp                                    -3.45    -3.21    -4.88        —        —      +17     -3.21  Neutral -> Lagging
-  33  Crude Oil                            (-5.02)  (-4.09)  (-9.49)        —        —      +14     -4.09  Neutral -> Lagging
-  34  Rare Earth/Lithium                   (-5.69)   [5.16]  [10.48]        —        —       -1      5.16  —
-  35  Natural Gas                          (-7.87)  (-7.01)    -5.09        —        —      +17     -7.01  Neutral -> Lagging
+   1  Cloud Computing                      [11.97]     5.12     3.09        —        —       +1      2.27  —
+   2  Copper Mining                         [9.70]     5.31   [9.56]        —        —       -1      4.85  —
+   3  Software                              [7.82]     4.77     3.21        —        —       -1         2  —
+   4  Brent Oil                               6.44     4.65     0.91        —        —      +23     -4.85  Leading -> Lagging
+   6  Crude Oil                               4.54   [5.47]     0.07        —        —      +14     -4.09  Neutral -> Lagging
+  10  Aerospace & Defense                     3.80     3.58     4.97        —        —       -6      1.66  Neutral -> Leading
+  13  Internet                                2.43     1.92     0.68        —        —       -3      1.09  Neutral -> Leading
+  15  Copper                                  1.34  (-1.81)    -2.25        —        —       +9     -2.42  Leading -> Neutral
+  20  Natural Gas                             0.12     0.98     2.90        —        —      +17     -7.01  Neutral -> Lagging
+  23  Mlp                                    -0.53    -0.29    -1.96        —        —      +17     -3.21  Neutral -> Lagging
+  30  Uranium Mining                         -2.53     3.69     8.60        —        —      -11      5.86  Lagging -> Neutral
+  31  Infrastructure                         -2.53     0.58     1.07        —        —       -3      0.64  Lagging -> Neutral
+  32  Nuclear Power                          -2.65     3.62   [9.49]        —        —      -15      6.22  Lagging -> Neutral
+  33  Rare Earth/Lithium                   (-3.13)   [7.72]  [13.04]        —        —       -1      5.16  —
+  34  Reits                                (-3.29)    -0.30    -2.91        —        —       +1     -0.30  —
+  35  Semiconductors                       (-4.83)  (-1.31)     4.76        —        —      -16      3.73  Lagging -> Neutral
 
 THEME BREADTH ANALYSIS
 Theme                                       Total  Qual    Br %     Score
 -------------------------------------------------------------------------
-Cybersecurity (Software)                       13     9   69.23    165.45
-    ↳ Leaders: OKTA, QLYS, PANW, FTNT, CRWD
+Cloud Infrastructure (Cloud Computing)          5     5  100.00    161.62
+    ↳ Leaders: FSLY, SNOW, NET
+
+Cybersecurity (Software)                       13     8   61.54    149.01
+    ↳ Leaders: PANW, OKTA, FTNT, QLYS, CRWD
 
 Diagnostics (Medical Devices)                   9     6   66.67    144.56
-    ↳ Leaders: CDNA, NEO, ADPT, GH
+    ↳ Leaders: CDNA, NEO, ADPT, NTRA, GH
 
 Life Sciences Tools (Medical Devices)           5     4   80.00    139.04
-    ↳ Leaders: BLFS, TWST, TXG, AVTR
+    ↳ Leaders: BLFS, TXG, TWST, AVTR
 
-Pharmaceuticals (Pharma)                        3     3  100.00    135.86
+Pharmaceuticals (Pharma)                        3     3  100.00    134.93
     ↳ Leaders: LQDA, ETON
 
 Communications Cloud (Cloud Computing)          3     3  100.00    131.70
-    ↳ Leaders: TWLO, RNG, FIVN
+    ↳ Leaders: FIVN, RNG, TWLO
 
-Developer Infrastructure (Software)             3     3  100.00    123.38
-    ↳ Leaders: TEAM, GTLB
-
-Digital Payments (Software)                     4     3   75.00    110.25
-    ↳ Leaders: PAYS, PAY
-
-Cloud Infrastructure (Cloud Computing)          5     3   60.00     99.62
-    ↳ Leaders: SNOW, NET, FSLY
-
-Digital Advertising (Internet)                  3     2   66.67     86.88
-    ↳ Leaders: MGNI, ZETA
-
-Software                                      164    31   18.90     82.21
-    ↳ Leaders: PAYC, APPN, FA, BLZE, PENG
-
-E Commerce Infrastructure (Internet)            3     2   66.67     81.80
-    ↳ Leaders: GCT
-
-Data Infrastructure (Software)                  3     2   66.67     80.87
+Data Infrastructure (Software)                  3     3  100.00    118.76
     ↳ Leaders: NTAP
 
-Medical Devices                                86    16   18.60     74.71
-    ↳ Leaders: BFLY, ITGR, BAX
+Medical Devices                                88    23   26.14    103.81
+    ↳ Leaders: DCTH, BFLY, VREX, SOPH, SMTI
 
-Aerospace & Defense                            39     9   23.08     72.84
-    ↳ Leaders: ATI, AIR, DCO, MOG.A
+Developer Infrastructure (Software)             3     2   66.67     86.42
+    ↳ Leaders: TEAM, GTLB
 
-Leisure and Entertainment (Internet)           32     7   21.88     69.29
-    ↳ Leaders: MCS, CRSR, VAC, LIND, LTH
+Digital Advertising (Internet)                  3     2   66.67     86.42
+    ↳ Leaders: MGNI, ZETA
+
+E Commerce Infrastructure (Internet)            3     2   66.67     83.18
+    ↳ Leaders: GCT
+
+Digital Payments (Software)                     4     2   50.00     78.06
+    ↳ Leaders: PAYS, PAY
+
+Software                                      163    29   17.79     76.62
+    ↳ Leaders: PAYC, FA, BLZE, U, APPN
+
+Leisure and Entertainment (Internet)           31     7   22.58     71.55
+    ↳ Leaders: MCS, CRSR, VAC, LIND
 
 Oilfield Chemicals & Data Analytics (Energ      1     1  100.00     68.62
     ↳ Leaders: FTK
 
-Internet                                       19     5   26.32     68.60
-    ↳ Leaders: W, ETSY
+Digital Health (Software)                       1     1  100.00     67.24
+    ↳ Leaders: HNGE
 
-Professional Services (Software)                1     1  100.00     67.24
+Professional Services (Software)                1     1  100.00     65.85
     ↳ Leaders: CBZ
 
-Digital Health (Software)                       1     1  100.00     65.85
-    ↳ Leaders: HNGE
+Aerospace & Defense                            39     8   20.51     64.97
+    ↳ Leaders: ATI, AIR, DCO
 
 Asset Management (Banking)                      1     1  100.00     62.38
     ↳ Leaders: VCTR
@@ -99,203 +99,218 @@ Asset Management (Banking)                      1     1  100.00     62.38
 Mobile Adtech (Internet)                        2     1   50.00     54.38
     ↳ Leaders: APPS
 
-IT Services (Software)                          2     1   50.00     53.28
+IT Services (Software)                          2     1   50.00     52.18
     ↳ Leaders: EFOR
 
-Financial Services (Banking)                   61     3    4.92     17.94
+Gold Mining                                    36     5   13.89     46.14
+    ↳ Leaders: MTA
+
+Financial Services (Banking)                   61     3    4.92     18.07
     ↳ Leaders: AAMI
 
 ========================================
 LONG CANDIDATE UNIVERSE
-Legend: ~ = Grace Period (Failed Native Criteria, Potential Observation)
 ========================================
 Ticker                        Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
-  HNGE                      Digital Health              Leading         95      95.47          1
+  HNGE                      Digital Health              Leading         97      96.57          1
   PAYS                    Digital Payments              Leading         99      95.47          2
-   CBZ               Professional Services              Leading         97      94.47          2
+  CDNA                         Diagnostics              Leading         99      93.82          1
+  FSLY                Cloud Infrastructure              Leading         98      93.50          2
+   CBZ               Professional Services              Leading         95      93.37          2
+  PAYC                            Software              Leading         95      93.27          1
    PAY                    Digital Payments              Leading         95      92.97          2
-  PAYC                            Software              Leading         97      92.87          2
-  OKTA                       Cybersecurity              Leading         97      92.67          2
-  APPN                            Software              Leading         95      92.17          1
- ~CDNA                         Diagnostics              Neutral         99      92.06          1
-    FA                            Software              Leading         97      91.97          3
-  EFOR                         IT Services              Leading         97      91.77          1
-  QLYS                       Cybersecurity              Leading         98      91.62          3
-  PANW                       Cybersecurity              Leading         95      91.57          2
-   MCS           Leisure and Entertainment              Leading         98      91.37          1
+  PANW                       Cybersecurity              Leading         97      92.67          2
+  DCTH                     Medical Devices              Leading         95      92.52          1
+  SNOW                Cloud Infrastructure              Leading         98      91.70          3
+  BLFS                 Life Sciences Tools              Leading         95      91.62          1
+  OKTA                       Cybersecurity              Leading         95      91.57          2
   FTNT                       Cybersecurity              Leading         90      91.22          1
-  CRSR           Leisure and Entertainment              Leading         99      91.12          2
-  SNOW                Cloud Infrastructure              Leading         98      91.11          3
+  QLYS                       Cybersecurity              Leading         97      91.07          3
+  FIVN                Communications Cloud              Leading         97      91.05          3
    FTK Oilfield Chemicals & Data Analytics  Unclassified Leader         99      90.95          2
-  APPS                       Mobile Adtech              Leading         99      90.52          2
+   RNG                Communications Cloud              Leading         98      90.90          3
+  TWLO                Communications Cloud              Leading         90      90.90          2
+    FA                            Software              Leading         95      90.87          3
+  BFLY                     Medical Devices              Leading         99      90.52          2
   BLZE                            Software              Leading         99      90.37          3
-  PENG                            Software              Leading         90      90.32          1
-  TWLO                Communications Cloud              Leading         90      90.31          2
-   RNG                Communications Cloud              Leading         98      90.31          3
- ~BLFS                 Life Sciences Tools              Neutral         95      89.86          1
+   NET                Cloud Infrastructure              Leading         95      90.05          3
+     U                            Software              Leading         95      89.97          2
+   NEO                         Diagnostics              Leading         98      89.97          2
+  ADPT                         Diagnostics              Leading         98      89.57          3
   CRWD                       Cybersecurity              Leading         95      89.47          3
-   VAC           Leisure and Entertainment              Leading         98      89.27          2
-   NET                Cloud Infrastructure              Leading         90      89.21          2
-   ATI                 Aerospace & Defense              Leading         95      89.11          2
- ~BFLY                     Medical Devices              Neutral         99      88.76          2
+  APPN                            Software              Leading         90      89.42          1
+  AMPL                            Software              Leading         97      89.27          3
+  EFOR                         IT Services              Leading         95      89.17          2
   TEAM            Developer Infrastructure              Leading         97      88.57         4*
-  MGNI                 Digital Advertising              Leading         98      88.57          3
-   AIR                 Aerospace & Defense              Leading         90      88.56          1
-  FSLY                Cloud Infrastructure              Leading         90      88.51          2
-  FIVN                Communications Cloud              Leading         97      88.46         4*
-  MANH                            Software              Leading         90      88.42          2
-   DCO                 Aerospace & Defense              Leading         95      88.21          2
-  ~NEO                         Diagnostics              Neutral         98      88.21          2
-  AMPL                            Software              Leading         95      88.17          3
-    BB                       Cybersecurity              Leading         90      88.12          2
-  LIND           Leisure and Entertainment              Leading         99      88.02          3
-   GCT           E Commerce Infrastructure              Leading         97      87.82          3
- ~ADPT                         Diagnostics              Neutral         98      87.81          3
+  VREX                     Medical Devices              Leading         99      87.92          3
+  NTAP                 Data Infrastructure              Leading         97      87.77         4*
   PUBM                            Software              Leading         98      87.72          3
-     U                            Software              Leading         90      87.22          2
-  BLKB                            Software              Leading         90      87.02          2
- ~TWST                 Life Sciences Tools              Neutral         99      86.95          3
- ~LQDA                     Pharmaceuticals              Neutral         98      86.82          1
-  NTAP                 Data Infrastructure              Leading         95      86.67         4*
+   TXG                 Life Sciences Tools              Leading         99      87.32          3
+  NTRA                         Diagnostics              Leading         95      87.22          3
+    GH                         Diagnostics              Leading         95      87.22          3
+  SOPH                     Medical Devices              Leading         97      86.92          3
+  RBRK                            Software              Leading         90      86.82          3
+  TWST                 Life Sciences Tools              Leading         99      86.72         4*
+  AVTR                 Life Sciences Tools              Leading         95      86.22          2
+   MTA                         Gold Mining  Unclassified Leader         90      86.20          2
+     S                       Cybersecurity              Leading         90      86.12          3
   GTLB            Developer Infrastructure              Leading         90      86.12          3
   TENB                       Cybersecurity              Leading         90      86.02          3
-  ~TXG                 Life Sciences Tools              Neutral         99      85.56          3
-   ~GH                         Diagnostics              Neutral         95      85.46          3
-   SPT                            Software              Leading         90      85.42          3
-     W                            Internet              Leading         95      85.12          3
-   MAX                            Software              Leading         90      85.02         4*
- ~AVTR                 Life Sciences Tools              Neutral         95      84.46          2
- ~ZETA                 Digital Advertising              Leading         90      84.37          3
- ~ITGR                     Medical Devices              Neutral         95      84.26          3
- ~PRGS                            Software              Leading         80      84.02          2
- ~VCTR                    Asset Management              Neutral         90      83.80          1
-  ~BAX                     Medical Devices              Neutral         95      83.36          3
- ~ETSY                            Internet              Leading         90      83.27          3
-  ~LTH           Leisure and Entertainment              Leading         80      82.77          1
-  ~VIK           Leisure and Entertainment              Leading         80      81.97          2
- ~AAMI                  Financial Services              Neutral         90      81.80          1
- ~ETON                     Pharmaceuticals              Neutral         97      81.37          3
- ~PCTY                            Software              Leading         80      81.12          3
-~MOG.A                 Aerospace & Defense              Leading         80      80.86          2
-   ~DT                            Software              Leading         80      80.82          3
-    ~S                       Cybersecurity              Leading         80      80.62          3
-[RECONCILIATION ALERT] CNA was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-10). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
-[RECONCILIATION ALERT] LFST was in OBSERVATION on previous session but is absent from LONG, OBSERVATION, and DISTRIBUTION today (2026-08-10). Investigate: dropped from stocks CSV, purged from registry, or upstream filter change.
+  SMTI                     Medical Devices              Leading         95      85.82          3
+  KMTS                     Medical Devices              Leading         90      85.17          3
+  SENS                     Medical Devices              Leading         90      85.17          3
+  TNDM                     Medical Devices              Leading         95      85.12          3
+   BAX                     Medical Devices              Leading         95      85.12          3
+ PSNL*                         Diagnostics              Leading         98      83.37         4*
+
+========================================
+PRE-OBSERVATION WATCHLIST
+========================================
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
+  LQDA           Pharmaceuticals              Neutral         98      92.12          1
+   ATI       Aerospace & Defense              Neutral         97      87.86          2
+   MCS Leisure and Entertainment              Neutral         98      87.84          1
+  CRSR Leisure and Entertainment              Neutral         99      87.59          2
+  APPS             Mobile Adtech              Neutral         99      86.99          2
+   AIR       Aerospace & Defense              Neutral         90      86.21          1
+   VAC Leisure and Entertainment              Neutral         95      85.59          1
+  ETON           Pharmaceuticals              Neutral         95      85.57          3
+  VCTR          Asset Management              Neutral         90      84.98          1
+  PENG                  Software              Leading         80      84.82          1
+   DCO       Aerospace & Defense              Neutral         90      84.61          1
+  MGNI       Digital Advertising              Neutral         97      84.49          3
+  PRGS                  Software              Leading         80      84.02          2
+  LIND Leisure and Entertainment              Neutral         98      83.94          3
+  ITGR           Medical Devices              Leading         90      83.27          3
+  AAMI        Financial Services              Neutral         90      82.98          1
+  MANH                  Software              Leading         80      82.92          2
+    BB             Cybersecurity              Leading         80      82.62          2
+  BLKB                  Software              Leading         80      81.52          2
+  ZETA       Digital Advertising              Neutral         90      80.84          3
+    DT                  Software              Leading         80      80.82          3
+   GCT E Commerce Infrastructure              Neutral         90      80.44          3
 
 --- NEW LONG PIPELINE ENTRIES ---
-New Longs       : APPN, GTLB, MAX, PUBM, SPT, TEAM, TWLO
-Recovered Longs : TWLO
+New Longs       : APPN, DCTH, GTLB, KMTS, MTA, NTRA, PSNL, PUBM, RBRK, SENS, SMTI, SOPH, TEAM,
+                  TNDM, TWLO, VREX
+Recovered Longs : PSNL, TWLO
 
 ========================================
 OBSERVATION WATCHLIST
 ========================================
- Days Ticker                     Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
-    1   SEZL                 Digital Payments              Leading         40      64.32          2
-    1   AMTB                          Banking              Neutral         80      76.00          1
-    1   DAVE                  Digital Banking              Neutral         50      61.00          2
-    1   GENI Sports Betting Data & Technology              Leading         80      78.97          3
-    2   DDOG             Cloud Infrastructure              Leading         60      73.31          2
-    2   GRPN                         Internet              Leading         70      71.37          3
-    3    CDW                      IT Services              Leading         50      63.32          3
-    3   OSCR              Healthcare Services              Neutral         80      74.64          1
-    4    BVS                  Medical Devices              Neutral         90      82.61          2
-    4   ILMN                      Diagnostics              Neutral         80      77.41          2
-    4    HUT    Digital Assets Infrastructure              Leading         30      53.82          3
-    4   DXCM                  Medical Devices              Neutral         80      77.61          3
-    4   CNMD                  Medical Devices              Neutral         80      75.70          3
-    5   AVAH              Healthcare Services              Neutral         60      62.44          2
-    5    DGX                      Diagnostics              Neutral         80      79.20          2
-    5     EC                      Exploration              Neutral         80      62.02         4*
-    5   ATRC                  Medical Devices              Neutral         90      81.91          3
-    5   CORT                  Pharmaceuticals              Neutral         99      81.27          3
-    5    AGL              Healthcare Services              Neutral         99      77.69          3
-    5    THC              Healthcare Services              Neutral         90      75.03          3
-    5   PSNL                      Diagnostics              Neutral         98      81.61         4*
-    5   MRVI              Life Sciences Tools              Neutral         90      79.21          3
-    5    HAE                  Medical Devices              Neutral         90      78.11         4*
-    5   GKOS                  Medical Devices              Neutral         90      82.71          3
-    6   URGN                           Pharma              Neutral         97      82.47          2
-    6    VVX              Healthcare Services              Neutral         80      69.23          3
-    6    TRV                        Insurance              Neutral         80      72.66          1
-    6   PACS              Healthcare Services              Neutral         80      73.14          2
-    6     SM                      Exploration              Neutral         40      44.42          3
-    6    EOG                      Exploration              Neutral         30      37.42          3
-    6    CON              Healthcare Services              Neutral         90      78.23          2
-    6    DVA              Healthcare Services              Neutral         20      36.54          3
-    7   PGNY              Healthcare Services              Neutral         50      57.73          1
-    7   VCYT                      Diagnostics              Neutral         40      59.60          1
-    7   AGEN                    Biotechnology              Neutral         99      87.47          3
-    7    HUM              Healthcare Services              Neutral         80      69.93          3
-    7   MEDP                       Healthcare              Neutral         80      73.03          2
-    7   NBIX                           Pharma              Neutral         30      44.92          3
-    7   GSHD                        Insurance              Neutral         90      74.56          3
-    7   AMRX                           Pharma              Neutral         90      79.32          1
-    7   BTSG              Healthcare Services              Neutral         60      62.93          1
-    7   SKWD                        Insurance              Neutral         80      70.06          3
+ Days Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
+    1   ETSY                      Internet              Neutral         80      74.24          3
+    1  MOG.A           Aerospace & Defense              Neutral         80      78.50          2
+    1   SEZL              Digital Payments              Leading         40      64.32          2
+    1   DAVE               Digital Banking              Neutral         50      59.68          3
+    1      W                      Internet              Neutral         90      78.84          3
+    1    LTH     Leisure and Entertainment              Neutral         80      79.24          1
+    1    VIK     Leisure and Entertainment              Neutral         80      78.44          2
+    1   PCTY                      Software              Leading         70      79.62          1
+    1   AMTB                       Banking              Neutral         80      77.18          1
+    2   DDOG          Cloud Infrastructure              Leading         80      84.90          2
+    2   GRPN                      Internet              Neutral         60      62.34          3
+    3    CDW                   IT Services              Leading         50      63.32          3
+    3   OSCR           Healthcare Services              Neutral         70      71.49          1
+    4    BVS               Medical Devices              Leading         90      84.37          2
+    4    HUT Digital Assets Infrastructure              Leading         30      53.82          3
+    4   DXCM               Medical Devices              Leading         80      79.37          3
+    4   CNMD               Medical Devices              Leading         80      77.47          3
+    4   ILMN                   Diagnostics              Leading         80      79.17          2
+    5   AVAH           Healthcare Services              Neutral         60      62.29          3
+    5   CORT               Pharmaceuticals              Neutral         99      86.57          3
+    5    AGL           Healthcare Services              Neutral         98      79.49          3
+    5     EC                   Exploration              Neutral         80      73.78         4*
+    5    HAE               Medical Devices              Leading         90      81.87          3
+    5    THC           Healthcare Services              Neutral         90      77.39          3
+    5   GKOS               Medical Devices              Leading         90      84.47          3
+    5   MRVI           Life Sciences Tools              Leading         90      80.97          3
+    5    DGX                   Diagnostics              Leading         80      80.97          2
+    5   ATRC               Medical Devices              Leading         90      83.67          3
+    6   PACS           Healthcare Services              Neutral         80      76.99          1
+    6   URGN                        Pharma              Neutral         97      87.77          2
+    6    EOG                   Exploration              Neutral         50      60.18          3
+    6     SM                   Exploration              Neutral         60      67.18          3
+    6    CON           Healthcare Services              Neutral         90      80.59          2
+    6    VVX           Healthcare Services              Neutral         70      66.09          3
+    6    TRV                     Insurance              Neutral         70      69.51          1
+    6    DVA           Healthcare Services              Neutral         20      38.89          3
+    7    HUM           Healthcare Services              Neutral         80      72.29          3
+    7   BTSG           Healthcare Services              Neutral         60      65.29          1
+    7   AMRX                        Pharma              Neutral         90      84.62          1
+    7   GSHD                     Insurance              Neutral         80      71.41          3
+    7   VCYT                   Diagnostics              Leading         30      55.87          1
+    7   MEDP                    Healthcare              Neutral         80      75.39          2
+    7   PGNY           Healthcare Services              Neutral         40      54.59          1
+    7   NBIX                        Pharma              Neutral         40      55.72          3
+    7   AGEN                 Biotechnology              Neutral         99      86.65         4*
+    7   SKWD                     Insurance              Neutral         70      66.91          3
 
 ========================================
 DISTRIBUTION WATCHLIST
 ========================================
  Days Ticker             Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
-    1   RYAN                Insurance              Neutral         50      53.26          3
-    1   ENOV          Medical Devices              Neutral         30      47.61          3
-    1    ALL                Insurance              Neutral         70      63.16          3
-    3    CVS               Healthcare              Neutral         30      41.73          3
-    3   CYRX               Healthcare              Neutral         60      56.23          3
-    4   FTRE                  Biotech              Neutral         70      69.02          3
-    4   ALKS                  Biotech              Neutral         80      73.72          3
-    4   OMDA               Healthcare              Neutral         80      72.03          3
-    4   XNCR            Biotechnology              Neutral         97      84.57          3
-    4   TDOC               Healthcare              Neutral         20      34.23          3
-    4   PTGX                  Biotech              Neutral         90      80.42          3
-    4   KNSA            Biotechnology              Neutral         90      83.72          3
-    4   IBRX                  Biotech              Neutral         90      82.82          3
-    4   HALO                  Biotech              Neutral         95      86.67          3
-    5   ASTH               Healthcare              Neutral         20      39.03          3
-    5   GLUE                  Biotech              Neutral          1      33.87          3
-    7   MGTX                  Biotech              Neutral         80      79.82          2
-    7   FROG Developer Infrastructure              Leading         80      80.62          3
-    7   AGIO                  Biotech              Neutral         20      43.62          3
+    1   ENOV          Medical Devices              Leading         10      38.37          3
+    1    CNA                Insurance              Neutral         50      54.21          3
+    1   RYAN                Insurance              Neutral         40      50.11          3
+    1    ALL                Insurance              Neutral         70      65.51          3
+    3   CYRX               Healthcare              Neutral         60      61.09          2
+    3    CVS               Healthcare              Neutral         30      44.09          3
+    4   FTRE                  Biotech              Neutral         80      75.70          3
+    4   ALKS                  Biotech              Neutral         80      74.89          3
+    4   TDOC               Healthcare              Neutral         20      36.59          3
+    4   XNCR            Biotechnology              Neutral         98      86.30          3
+    4   IBRX                  Biotech              Neutral         90      84.00          3
+    4   PTGX                  Biotech              Neutral         95      84.35          3
+    4   HALO                  Biotech              Neutral         95      87.85          3
+    4   KNSA            Biotechnology              Neutral         95      87.65          3
+    4   OMDA               Healthcare              Neutral         90      79.89          3
+    5   GLUE                  Biotech              Neutral          1      35.05          3
+    5   ASTH               Healthcare              Neutral         30      46.89          3
+    7   AGIO                  Biotech              Neutral         30      50.30          3
+    7   MGTX                  Biotech              Neutral         80      78.50          3
+    7   FROG Developer Infrastructure              Leading         70      77.62          2
     8    RPD            Cybersecurity              Leading         80      77.82         4*
-    9   KYMR                  Biotech              Neutral         70      65.62         4*
-   10   MIRM                  Biotech              Neutral         20      44.32          3
-   10   MRNA                  Biotech              Neutral         70      67.62          3
-   10   MUFG                  Banking              Neutral         70      68.60          2
-   10   SIMO                   Memory              Neutral         70      73.16          1
-   10    STX             Data Storage              Neutral         80      80.06          1
-   10   RGNX                  Biotech              Neutral         80      77.32          3
-   11   UCTT  Semiconductor Equipment              Neutral         80      74.77          1
-   11   MKSI  Semiconductor Equipment              Neutral         50      59.07          2
-   11   ICHR  Semiconductor Equipment              Neutral         80      76.87          1
-   11    VSH           Semiconductors              Neutral         50      56.27          3
-   11    STM           Semiconductors              Neutral         40      49.36          3
-   11    VPG           Semiconductors              Neutral          1      27.32         4*
-   11    UMC                  Foundry              Neutral         60      66.97          1
-   11   AMAT  Semiconductor Equipment              Neutral         80      76.47          2
-   11    ASX           Semiconductors              Neutral         80      77.77          1
-   11   ATEN            Cybersecurity              Leading         10      42.62          3
-   11   RARE                  Biotech              Neutral         10      37.42          3
-   11    AMD               AI Compute              Neutral         80      80.05          1
-   11   DOCN     Cloud Infrastructure              Leading         60      73.81          2
-   11    MXL           Semiconductors              Neutral         90      81.57          2
+    9   KYMR                  Biotech              Neutral         80      72.30         4*
+   10   SIMO                   Memory              Lagging         60      55.90          1
+   10    STX             Data Storage              Lagging         80      68.30          1
+   10   MRNA                  Biotech              Neutral         80      74.30          3
+   10   RGNX                  Biotech              Neutral         70      73.00          3
+   10   MIRM                  Biotech              Neutral         20      45.50          3
+   10   MUFG                  Banking              Neutral         70      69.78          2
+   11   RARE                  Biotech              Neutral         20      44.10          3
+   11    STM           Semiconductors              Lagging         40      37.60          3
+   11    VSH           Semiconductors              Lagging         40      39.00          3
+   11   MKSI  Semiconductor Equipment              Lagging         40      43.30          1
+   11   ATEN            Cybersecurity              Leading         30      53.62          3
+   11    VPG           Semiconductors              Lagging          1      15.55         4*
+   11    MXL           Semiconductors              Lagging         80      64.30          2
+   11    UMC                  Foundry              Lagging         70      60.70          1
+   11   UCTT  Semiconductor Equipment              Lagging         80      63.60          1
+   11    ASX           Semiconductors              Lagging         80      66.00          1
+   11    AMD               AI Compute              Neutral         70      63.49          3
+   11   AMAT  Semiconductor Equipment              Lagging         80      64.70          2
+   11   DOCN     Cloud Infrastructure              Leading         80      85.40          2
+   11   ICHR  Semiconductor Equipment              Lagging         80      65.10          1
    12     PD                 Software              Leading         80      81.02          3
-   12   COHU    Semiconductor Testing              Neutral         80      72.87          3
-   12    WDC                   Memory              Neutral         50      63.56          1
-   12   AMBQ           Semiconductors              Neutral         60      59.77          3
-   12   LRCX  Semiconductor Equipment              Neutral         60      68.37          1
-   12   ACMR  Semiconductor Equipment              Neutral         80      74.07          3
-   12   ALAB          AI Connectivity              Neutral         80      77.35          3
-   12    TXN           Semiconductors              Neutral         40      55.16          2
-   13    EAT              Restaurants              Unknown         95      80.95          3
-   14   VICR           Semiconductors              Neutral         30      50.37          2
-   14   INTC               AI Compute              Neutral         80      71.35          3
-   14   EXTR            AI Networking              Neutral         10      35.55          3
-   14   SVCO           Semiconductors              Neutral         10      33.67          3
+   12   ALAB          AI Connectivity              Neutral         80      70.30          3
+   12    WDC                   Memory              Lagging         60      55.80          2
+   12   COHU    Semiconductor Testing              Lagging         70      55.60          3
+   12    TXN           Semiconductors              Lagging         40      44.90          1
+   12   AMBQ           Semiconductors              Lagging         50      42.50          3
+   12   LRCX  Semiconductor Equipment              Lagging         60      55.10          2
+   12   ACMR  Semiconductor Equipment              Lagging         70      56.80          3
+   13    EAT              Restaurants              Unknown         97      82.05          3
+   14   VICR           Semiconductors              Lagging         30      38.60          2
+   14   INTC               AI Compute              Neutral         70      58.80          3
+   14   EXTR            AI Networking              Neutral         10      28.50          3
+   14   SVCO           Semiconductors              Lagging         10      21.90          3
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,HNGE,PAYS,CBZ,PAY,PAYC,OKTA,APPN,CDNA,FA,EFOR,QLYS,PANW,MCS,FTNT,CRSR,SNOW,FTK,APPS,BLZE,PENG,TWLO,RNG,BLFS,CRWD,VAC,NET,ATI,BFLY,TEAM,MGNI,AIR,FSLY,FIVN,MANH,DCO,NEO,AMPL,BB,LIND,GCT,ADPT,PUBM,U,BLKB,TWST,LQDA,NTAP,GTLB,TENB,TXG,GH,SPT,W,MAX,AVTR,ZETA,ITGR,PRGS,VCTR,BAX,ETSY,LTH,VIK,AAMI,ETON,PCTY,MOG.A,DT,S,
-###OBSERVATION,AGEN,CORT,AGL,PSNL,URGN,BVS,MRVI,HAE,AMRX,THC,GSHD,CON,ATRC,GKOS,GENI,CNMD,EC,DXCM,DGX,AMTB,SKWD,PACS,TRV,MEDP,VVX,HUM,ILMN,OSCR,GRPN,AVAH,DDOG,BTSG,DAVE,CDW,PGNY,SEZL,VCYT,SM,EOG,HUT,NBIX,DVA,
-###DISTRIBUTION,RYAN,ENOV,ALL,CVS,CYRX,FTRE,ALKS,OMDA,XNCR,TDOC,PTGX,KNSA,IBRX,HALO,ASTH,GLUE,MGTX,FROG,AGIO,RPD,KYMR,MIRM,MRNA,MUFG,SIMO,STX,RGNX,UCTT,MKSI,ICHR,VSH,STM,VPG,UMC,AMAT,ASX,ATEN,RARE,AMD,DOCN,MXL,PD,COHU,WDC,AMBQ,LRCX,ACMR,ALAB,TXN,EAT,VICR,INTC,EXTR,SVCO,
+###LONG,HNGE,PAYS,CDNA,FSLY,CBZ,PAYC,PAY,PANW,DCTH,SNOW,BLFS,OKTA,FTNT,QLYS,FIVN,FTK,RNG,TWLO,FA,BFLY,BLZE,NET,U,NEO,ADPT,CRWD,APPN,AMPL,EFOR,TEAM,VREX,NTAP,PUBM,TXG,NTRA,GH,SOPH,RBRK,TWST,AVTR,MTA,S,GTLB,TENB,SMTI,KMTS,SENS,TNDM,BAX,PSNL,
+###PRE_OBSERVATION,LQDA,ATI,MCS,CRSR,APPS,AIR,VAC,ETON,VCTR,PENG,DCO,MGNI,PRGS,LIND,ITGR,AAMI,MANH,BB,BLKB,ZETA,DT,GCT,
+###OBSERVATION,CORT,AGEN,AGL,URGN,W,THC,BVS,GKOS,MRVI,CON,ATRC,AMRX,HAE,MOG.A,DXCM,EC,MEDP,PACS,DDOG,DGX,AMTB,ILMN,ETSY,CNMD,LTH,GSHD,VIK,HUM,TRV,VVX,SKWD,PCTY,OSCR,GRPN,SM,AVAH,BTSG,EOG,CDW,DAVE,SEZL,PGNY,NBIX,HUT,VCYT,DVA,
+###DISTRIBUTION,ENOV,CNA,RYAN,ALL,CYRX,CVS,FTRE,ALKS,TDOC,XNCR,IBRX,PTGX,HALO,KNSA,OMDA,GLUE,ASTH,AGIO,MGTX,FROG,RPD,KYMR,SIMO,STX,MRNA,RGNX,MIRM,MUFG,RARE,STM,VSH,MKSI,ATEN,VPG,MXL,UMC,UCTT,ASX,AMD,AMAT,DOCN,ICHR,PD,ALAB,WDC,COHU,TXN,AMBQ,LRCX,ACMR,EAT,VICR,INTC,EXTR,SVCO,
 
 ==============================================
 END OF TABELA SCAN
