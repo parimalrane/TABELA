@@ -605,6 +605,9 @@ def print_daily_scan(
         ]
     ].copy()
 
+    if "Long_Score" in display_df.columns:
+        display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
+
     def identify_grace_ticker(row):
         ticker_val = str(row["Ticker"])
         clean_ticker = ticker_val.replace("*", "").strip().upper()
@@ -714,6 +717,9 @@ def print_daily_scan(
             ]
         ].copy()
 
+        if "Long_Score" in display_obs.columns:
+            display_obs["Long_Score"] = display_obs["Long_Score"].map("{:.2f}".format)
+
         if "Zacks Rank" in display_obs.columns:
             display_obs["Zacks Rank"] = (
                 display_obs["Zacks Rank"]
@@ -766,6 +772,9 @@ def print_daily_scan(
                 "Zacks Rank"
             ]
         ].copy()
+
+        if "Long_Score" in display_df.columns:
+            display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
 
         # Format Zacks Rank identical to Long Candidates
         if "Zacks Rank" in display_df.columns:

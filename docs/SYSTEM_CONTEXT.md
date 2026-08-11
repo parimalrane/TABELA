@@ -11458,3 +11458,10 @@ Category: Architectural Refactoring / Defect Remediation
 Reason: Rectified pipeline memory fragmentation where falling stocks were orphaned from Terminal reports by accurately fusing Transition Engine grace-period `LONG`s back into the main `long_candidates` dataframe. Removed artificial `.head(50)` boundaries from `compare_watchlists` to capture 100% of pipeline history in daily JSONs. Eliminated the "Ghost Stock" bug by introducing dynamic sweeping loops that natively purge stocks from state registry if they drop out of the underlying daily raw dataset (e.g. from earnings blackouts or delistings) instead of defaulting to `0.0`. Enhanced Observation transition filters to mathematically require both `OBSERVATION_FALLBACK_SCORE_THRESHOLD` and `OBSERVATION_FALLBACK_RS_THRESHOLD`.
 Impact: 100% resolution of data drifting between CLI Terminal, tracking output, and CSV ingestion layers. Zero disruption to existing determinism or deterministic scoring mechanisms.
 Constraint: Do NOT introduce technical analysis indicators, trade execution logic, or risk management parameters.
+
+Date: 2026-08-11
+Component: Theme Translation & Presentation Engine
+Category: Architectural Reorganization / Formatting Refinement
+Reason: Extracted hardcoded Python dictionary (THEME_TRANSLATION) into a dynamic user-facing CSV configuration file (data/macro_theme_mapping.csv) to allow flexible, strictly deterministic tracking of granular narratives natively against broad ETF proxies without Python code intervention. Enforced 2-decimal formatting constraints on Long_Score displays within Observation, Long, and Distribution terminal presentations.
+Impact: Zero breaking changes to core algorithms. Complete decoupling of display narrative from benchmark scoring, and clean numerical output bounding.
+Constraint: Maintain absolute dynamic decoupling of theme translation strings ensuring all mappings occur inside data/macro_theme_mapping.csv.
