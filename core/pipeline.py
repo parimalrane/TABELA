@@ -151,7 +151,7 @@ def build_theme_classification(theme_strength):
     leading_count = 1 if total_themes > 0 else 0
 
     if total_themes > 1:
-        leading_count = max(1, math.ceil(total_themes * 0.20))
+        leading_count = max(1, math.ceil(total_themes * 0.16))
     lagging_start = total_themes - leading_count + 1
 
     for i, row in theme_strength.iterrows():
@@ -162,7 +162,7 @@ def build_theme_classification(theme_strength):
 
         if total_themes == 1:
             theme_class = "Leading"
-        elif rank_position <= leading_count:
+        elif rank_position <= leading_count and row["ETF_RS_Raw"] > 0:
             theme_class = "Leading"
         elif rank_position >= lagging_start:
             theme_class = "Lagging"

@@ -558,8 +558,8 @@ def print_daily_scan(
         
     display_df = display_df[display_df["Leaders"].apply(has_valid_leaders)]
 
-    print(f"{'Theme':<42}  {'Total':>5}  {'Qual':>4}  {'Br %':>6}  {'Score':>8}")
-    print("-" * 73)
+    print(f"{'Theme':<42}  {'Total':>5}  {'Qual':>4}  {'Br %':>6}  {'Score':>8}  {'Macro State':>17}")
+    print("-" * 92)
     
     for _, row in display_df.iterrows():
         mapped_theme = str(row['Mapped_Theme'])
@@ -577,7 +577,14 @@ def print_daily_scan(
         br_pct = float(row['Breadth_Percent']) if pd.notna(row['Breadth_Percent']) else 0.0
         score = float(row['Weighted_Breadth_Score']) if pd.notna(row['Weighted_Breadth_Score']) else 0.0
         
-        print(f"{theme_display:<42}  {total:>5}  {qual:>4}  {br_pct:>6.2f}  {score:>8.2f}")
+        macro_state = theme_class_map.get(parent_theme, "Unknown")
+        macro_rank = "?"
+        if not theme_strength[theme_strength["Theme"] == parent_theme].empty:
+            macro_rank = theme_strength[theme_strength["Theme"] == parent_theme].iloc[0]["Theme_Rank"]
+            
+        macro_str = f"{macro_state} (#{macro_rank})"
+        
+        print(f"{theme_display:<42}  {total:>5}  {qual:>4}  {br_pct:>6.2f}  {score:>8.2f}  {macro_str:>17}")
         
         leaders_str = str(row['Leaders']).strip()
         wrapped = textwrap.fill(
