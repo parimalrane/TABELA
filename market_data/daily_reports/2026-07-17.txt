@@ -5,74 +5,70 @@ TABELA DAILY MARKET SCAN
 MARKET DATE: 2026-07-17
 ==============================================
 
-==============================================
-THEME PERFORMANCE
-Legend: [] = Top 3   () = Bottom 3
-==============================================
-
-Rank  Theme                               Strength        D        W        M        Q   Rank Δ   Score Δ  Transition
-------------------------------------------------------------------------------------------------------------------------
-   1  Brent Oil                            [10.95]   [8.66]        —        —        —       -1      1.41  Neutral -> Leading
-   2  Crude Oil                             [8.76]   [8.43]        —        —        —       -3      1.49  —
-   3  Exploration                           [7.53]   [6.73]        —        —        —       -5      2.06  —
-   6  Pharma                                  5.61     3.72        —        —        —       -3      2.08  Neutral -> Leading
-   9  Cloud Computing                         4.33     1.77        —        —        —       +5     -0.34  Leading -> Neutral
-  18  Brokers/ Capital Markets                0.65    -3.03        —        —        —       +8     -1.78  Leading -> Neutral
-  24  Natural Gas                            -1.24     4.20        —        —        —       -2      0.70  Lagging -> Neutral
-  30  Artificial Intelligence                -5.98    -2.93        —        —        —       +2     -2.33  Neutral -> Lagging
-  32  Nuclear Power                       (-16.91)    -3.11        —        —        —        0     -3.33  —
-  33  Uranium Mining                      (-17.04)  (-3.79)        —        —        —        0     -3.62  —
-  34  Rare Earth/Lithium                  (-17.47)    -2.62        —        —        —        0     -3.42  —
-
 ========================================
 THEME BREADTH ANALYSIS
 Legend: # = Distribution Watchlist Candidate
 ========================================
-Theme                                       Total  Qual    Br %     Score        Macro State
---------------------------------------------------------------------------------------------
-Healthcare Services (Healthcare)               14     9   64.29    164.82       Leading (#4)
+Theme                                       Total  Qual     Score        Macro State
+-----------------------------------------------------------------------------------
+Cybersecurity (Software)                       13    11    215.81      Neutral (#15)
+    ↳ Stocks: FTNT, OKTA, BB
+
+Healthcare Services (Healthcare)               14     9    164.82       Leading (#4)
     ↳ Stocks: OSCR, PGNY, HUM, AVAH, DVA
 
-Healthcare                                     41    17   41.46    139.10       Leading (#4)
+Healthcare                                     41    17    139.10       Leading (#4)
     ↳ Stocks: INNV, OMDA, PNTG, LFST, TDOC
 
-Pharmaceuticals (Pharma)                        3     3  100.00    137.24       Leading (#6)
+Pharmaceuticals (Pharma)                        3     3    137.24       Leading (#6)
     ↳ Stocks: LQDA, ETON, CORT
 
-Cloud Infrastructure (Cloud Computing)          5     4   80.00    130.08       Neutral (#9)
+Cloud Infrastructure (Cloud Computing)          5     4    130.08       Neutral (#9)
     ↳ Stocks: DDOG, SNOW, NET
 
-Memory (Semiconductors)                         4     3   75.00    118.29      Neutral (#28)
+Memory (Semiconductors)                         4     3    118.29      Neutral (#28)
     ↳ Stocks: MU, SNDK
 
-Biotechnology (Biotech)                         4     3   75.00    110.65       Neutral (#8)
+Biotechnology (Biotech)                         4     3    110.65       Neutral (#8)
     ↳ Stocks: AGEN, KNSA
 
-Communications Cloud (Cloud Computing)          3     2   66.67     85.49       Neutral (#9)
+Communications Cloud (Cloud Computing)          3     2     85.49       Neutral (#9)
     ↳ Stocks: FIVN, TWLO
 
-Biotech                                        87    18   20.69     81.57       Neutral (#8)
-    ↳ Stocks: ABCL, IBRX, TGTX, TVTX, NRIX
+Biotech                                        87    18     81.57       Neutral (#8)
+    ↳ Stocks: IBRX, ABCL, TGTX, TVTX, NRIX
 
-Pharma                                         44     9   20.45     65.48       Leading (#6)
+Digital Payments (Software)                     4     2     76.05      Neutral (#15)
+    ↳ Stocks: SEZL
+
+Digital Health (Software)                       1     1     67.93      Neutral (#15)
+    ↳ Stocks: HNGE
+
+Pharma                                         44     9     65.48       Leading (#6)
     ↳ Stocks: URGN, ACRS
 
-Asset Management (Banking)                      1     1  100.00     62.38      Neutral (#11)
+Asset Management (Banking)                      1     1     62.38      Neutral (#11)
     ↳ Stocks: VCTR
 
-Real Estate Technology                          1     1  100.00     62.38       Unknown (#?)
+Real Estate Technology                          1     1     62.38       Unknown (#?)
     ↳ Stocks: COMP
 
-Digital Banking (Banking)                       3     1   33.33     45.28      Neutral (#11)
+Mobile Adtech (Internet)                        2     1     53.83      Neutral (#21)
+    ↳ Stocks: APPS
+
+Digital Banking (Banking)                       3     1     45.28      Neutral (#11)
     ↳ Stocks: DAVE
 
-Banking                                       155    12    7.74     32.25      Neutral (#11)
+Software                                      169    15     41.53      Neutral (#15)
+    ↳ Stocks: PENG
+
+Banking                                       155    12     32.25      Neutral (#11)
     ↳ Stocks: RELY
 
-Financial Services (Banking)                   69     4    5.80     21.56      Neutral (#11)
+Financial Services (Banking)                   69     4     21.56      Neutral (#11)
     ↳ Stocks: AAMI
 
-Exploration                                    84     4    4.76     17.45       Leading (#3)
+Exploration                                    84     4     17.45       Leading (#3)
     ↳ Stocks: NESR
 
 ========================================
@@ -84,6 +80,7 @@ Ticker           Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks R
   OSCR    Healthcare Services              Leading         97      93.93          1
   PGNY    Healthcare Services              Leading         97      93.53          1
    HUM    Healthcare Services              Leading         97      93.23          1
+  DAVE        Digital Banking              Neutral         98      92.84          1
   INNV             Healthcare              Leading         97      91.73          2
   OMDA             Healthcare              Leading         97      90.73          3
   ETON        Pharmaceuticals              Leading         99      90.62          3
@@ -113,19 +110,24 @@ PRE-OBSERVATION WATCHLIST
 Legend: * = Zacks Rank 4 or 5
 ========================================
 Ticker         Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
-  DAVE      Digital Banking              Neutral         98      92.84          1
+  SEZL     Digital Payments              Neutral         99      89.47          2
   AGEN        Biotechnology              Neutral         95      89.41          2
   KNSA        Biotechnology              Neutral         90      89.36          1
+  HNGE       Digital Health              Neutral         98      88.62          1
+  FTNT        Cybersecurity              Neutral         98      88.32          1
+  PENG             Software              Neutral         99      87.97          1
   VCTR     Asset Management              Neutral         90      87.74          1
   DDOG Cloud Infrastructure              Neutral         98      87.45          3
-  ABCL              Biotech              Neutral         95      87.21          3
   IBRX              Biotech              Neutral         95      87.21          3
+  ABCL              Biotech              Neutral         95      87.21          3
   TGTX              Biotech              Neutral         90      86.26          3
+  OKTA        Cybersecurity              Neutral         98      85.92          2
   AAMI   Financial Services              Neutral         90      85.74          1
   SNOW Cloud Infrastructure              Neutral         95      85.20          3
   FIVN Communications Cloud              Neutral         95      85.10          3
    NET Cloud Infrastructure              Neutral         90      84.95          2
   TWLO Communications Cloud              Neutral         90      84.85          2
+    BB        Cybersecurity              Neutral         97      84.67          2
   TVTX              Biotech              Neutral         90      84.46          3
   NRIX              Biotech              Neutral         90      84.46          3
   GLUE              Biotech              Neutral         90      84.46          3
@@ -134,6 +136,7 @@ Ticker         Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Ran
   AGIO              Biotech              Neutral         90      83.76          3
   VCEL              Biotech              Neutral         90      83.26          3
   PTGX              Biotech              Neutral         95      83.01          3
+  APPS        Mobile Adtech              Neutral         98      82.88          1
   RELY              Banking              Neutral         90      82.14          3
   ACRS               Pharma              Leading         90      81.47          3
   MGTX              Biotech              Neutral         80      81.46          2
@@ -212,8 +215,8 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,OSCR,PGNY,HUM,INNV,OMDA,ETON,URGN,PNTG,CORT,NESR,LFST,AVAH,DVA,PACS,CON,BTSG,TDOC,AGL,CNC,ASTH,CYRX,CVS,COMP,OGN,TOI,CRL,
-###PRE_OBSERVATION,DAVE,AGEN,KNSA,VCTR,DDOG,ABCL,IBRX,TGTX,AAMI,SNOW,FIVN,NET,TWLO,TVTX,NRIX,GLUE,FTRE,ALKS,AGIO,VCEL,PTGX,RELY,ACRS,MGTX,MU,SNDK,KYMR,
+###LONG,LQDA,OSCR,PGNY,HUM,DAVE,INNV,OMDA,ETON,URGN,PNTG,CORT,NESR,LFST,AVAH,DVA,PACS,CON,BTSG,TDOC,AGL,CNC,ASTH,CYRX,CVS,COMP,OGN,TOI,CRL,
+###PRE_OBSERVATION,SEZL,AGEN,KNSA,HNGE,FTNT,PENG,VCTR,DDOG,IBRX,ABCL,TGTX,OKTA,AAMI,SNOW,FIVN,NET,TWLO,BB,TVTX,NRIX,GLUE,FTRE,ALKS,AGIO,VCEL,PTGX,APPS,RELY,ACRS,MGTX,MU,SNDK,KYMR,
 ###OBSERVATION,MXL,DELL,AMBQ,SIMO,ICHR,UMC,VPG,EXTR,AMD,HPE,UCTT,ASX,CARE,INTC,STX,ACMR,EAT,MIRM,TOELY,VG,AMAT,STM,DTIL,MOH,KRYS,ALAB,NTCT,MRNA,VSH,WDC,MUFG,DOCN,CYTK,ARM,KLIC,CSCO,MKSI,MRX,SYNA,LRCX,OUST,RARE,COHU,MAMA,WYFI,ANAB,TXN,IFNNY,MRVL,NBIS,ALGM,RGNX,VICR,CRDO,SVCO,
 ###DISTRIBUTION,,
 

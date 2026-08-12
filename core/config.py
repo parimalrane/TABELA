@@ -11,8 +11,11 @@ COMPOSITE_WEIGHTS = {
 LONG_FILTERS = {
 
    "MIN_RS": 90,
+   "MIN_LONG_SCORE": 85,
 
-   "MIN_LONG_SCORE": 85
+   # Idiosyncratic Exemption overrides
+   "IDIOSYNCRATIC_MIN_RS": 95,
+   "IDIOSYNCRATIC_MIN_LONG_SCORE": 90
 
 }
 
