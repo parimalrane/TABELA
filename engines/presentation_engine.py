@@ -558,44 +558,55 @@ def print_daily_scan(
         
     display_df = display_df[display_df["Leaders"].apply(has_valid_leaders)]
 
-    print(f"{'Theme':<42}  {'Total':>5}  {'Qual':>4}  {'Score':>8}  {'Macro State':>17}")
-    print("-" * 83)
+    print(f"{'Micro Theme'.ljust(30)} {'Macro Theme'.ljust(18)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'Score'.rjust(7)}   {'Macro State'.ljust(14)}   {'Stocks'}")
+    print("-" * 125)
     
     for _, row in display_df.iterrows():
         mapped_theme = str(row['Mapped_Theme'])
         parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
         
-        if parent_theme != mapped_theme:
-            theme_display = f"{mapped_theme} ({parent_theme})"
-        else:
-            theme_display = mapped_theme
-            
-        theme_display = theme_display[:42]
+        # Format columns
+        micro = (mapped_theme[:28] + "..") if len(mapped_theme) > 30 else mapped_theme.ljust(30)
+        macro = (parent_theme[:16] + "..") if len(parent_theme) > 18 else parent_theme.ljust(18)
         
         total = int(row['Total_Stocks']) if pd.notna(row['Total_Stocks']) else 0
         qual = int(row['Strong_Stocks']) if pd.notna(row['Strong_Stocks']) else 0
         score = float(row['Weighted_Breadth_Score']) if pd.notna(row['Weighted_Breadth_Score']) else 0.0
+        
+        tot_str = str(total).rjust(3)
+        q_str = str(qual).rjust(4)
+        s_str = f"{score:>.2f}".rjust(7)
         
         macro_state = theme_class_map.get(parent_theme, "Unknown")
         macro_rank = "?"
         if not theme_strength[theme_strength["Theme"] == parent_theme].empty:
             macro_rank = theme_strength[theme_strength["Theme"] == parent_theme].iloc[0]["Theme_Rank"]
             
-        macro_str = f"{macro_state} (#{macro_rank})"
+        mac_state_str = f"{macro_state} (#{macro_rank})".ljust(14)
         
-        print(f"{theme_display:<42}  {total:>5}  {qual:>4}  {score:>8.2f}  {macro_str:>17}")
+        prefix = f"{micro} {macro} {tot_str} {q_str} {s_str}   {mac_state_str}   "
+        prefix_len = len(prefix)
         
         leaders_str = str(row['Leaders']).strip()
-        wrapped = textwrap.fill(
-            leaders_str,
-            width=95,
-            initial_indent="    ↳ Stocks: ",
-            subsequent_indent="              ",
+        
+        if not leaders_str:
+            print(prefix)
+            continue
+            
+        wrapped = textwrap.wrap(
+            leaders_str, 
+            width=(125 - prefix_len),
             break_long_words=False,
             break_on_hyphens=False
         )
-        print(wrapped)
-        print()
+        
+        for i, line in enumerate(wrapped):
+            if i == 0:
+                print(f"{prefix}{line}")
+            else:
+                print(" " * prefix_len + line)
+                
+    print()
 
     print("\n\n")
     print("========================================")
