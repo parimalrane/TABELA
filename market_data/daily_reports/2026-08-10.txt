@@ -1,11 +1,4 @@
-Market file not found: market_data\input_files\20260810_Market.csv. Skipping Market Context.
 
-
-[TRANSITION WARNING] CYTK in DISTRIBUTION vanished from stocks universe on 2026-08-10. Retaining in registry (day 10).
-[TRANSITION WARNING] TOI in DISTRIBUTION vanished from stocks universe on 2026-08-10. Retaining in registry (day 6).
-[TRANSITION WARNING] GENI left LONG but is absent from stocks universe on 2026-08-10. Entering OBSERVATION Day 1 to preserve audit trail.
-[DISTRIBUTION WARNING] CYTK is in DISTRIBUTION registry but absent from stocks universe on 2026-08-10. Cannot display in watchlist until it re-enters the universe.
-[DISTRIBUTION WARNING] TOI is in DISTRIBUTION registry but absent from stocks universe on 2026-08-10. Cannot display in watchlist until it re-enters the universe.
 
 ==============================================
 TABELA DAILY MARKET SCAN
@@ -19,24 +12,28 @@ Legend: [] = Top 3   () = Bottom 3
 
 Rank  Theme                               Strength        D        W        M        Q   Rank Δ   Score Δ  Transition
 ------------------------------------------------------------------------------------------------------------------------
-   1  Cloud Computing                      [11.97]     5.12     3.09        —        —       +1      2.27  —
-   2  Copper Mining                         [9.70]     5.31   [9.56]        —        —       -1      4.85  —
-   3  Software                              [7.82]     4.77     3.21        —        —       -1         2  —
-   4  Brent Oil                               6.44     4.65     0.91        —        —      +23     -4.85  Leading -> Lagging
-   6  Crude Oil                               4.54   [5.47]     0.07        —        —      +14     -4.09  Neutral -> Lagging
-  10  Aerospace & Defense                     3.80     3.58     4.97        —        —       -6      1.66  Neutral -> Leading
-  13  Internet                                2.43     1.92     0.68        —        —       -3      1.09  Neutral -> Leading
-  15  Copper                                  1.34  (-1.81)    -2.25        —        —       +9     -2.42  Leading -> Neutral
-  20  Natural Gas                             0.12     0.98     2.90        —        —      +17     -7.01  Neutral -> Lagging
-  23  Mlp                                    -0.53    -0.29    -1.96        —        —      +17     -3.21  Neutral -> Lagging
-  30  Uranium Mining                         -2.53     3.69     8.60        —        —      -11      5.86  Lagging -> Neutral
-  31  Infrastructure                         -2.53     0.58     1.07        —        —       -3      0.64  Lagging -> Neutral
-  32  Nuclear Power                          -2.65     3.62   [9.49]        —        —      -15      6.22  Lagging -> Neutral
-  33  Rare Earth/Lithium                   (-3.13)   [7.72]  [13.04]        —        —       -1      5.16  —
-  34  Reits                                (-3.29)    -0.30    -2.91        —        —       +1     -0.30  —
-  35  Semiconductors                       (-4.83)  (-1.31)     4.76        —        —      -16      3.73  Lagging -> Neutral
+   1  Cloud Computing                      [11.97]     2.85     3.47     6.52        —       -1      2.85  —
+   2  Copper Mining                         [9.70]     0.46  [10.04]    16.27        —       +1      0.46  —
+   3  Software                              [7.82]     2.77     4.33     6.77        —        0      2.77  —
+   4  Brent Oil                               6.44   [9.50]     3.97    19.53        —      -25      9.50  Lagging -> Leading
+   6  Crude Oil                               4.54   [9.56]     3.10    18.52        —      -27      9.56  Lagging -> Leading
+   7  Medical Devices                         4.35     3.45     1.69     8.47        —       -3      3.45  Neutral -> Leading
+  10  Aerospace & Defense                     3.80     1.92     5.42     8.75        —       +4      1.92  Leading -> Neutral
+  12  Timber                                  2.51    -0.18    -1.37     5.80        —       +7     -0.18  Leading -> Neutral
+  13  Internet                                2.43     0.83     0.54     0.48        —       +6      0.83  Leading -> Neutral
+  20  Natural Gas                             0.12   [7.99]  (-1.72)    10.63        —      -15      7.99  Lagging -> Neutral
+  23  Mlp                                    -0.53     2.92    -0.66     3.15        —       -8      2.92  Lagging -> Neutral
+  30  Uranium Mining                         -2.53    -2.17     6.45     3.58        —       +8     -2.17  Neutral -> Lagging
+  31  Infrastructure                         -2.53    -0.06     0.36     0.48        —       +4     -0.06  Neutral -> Lagging
+  32  Nuclear Power                          -2.65  (-2.60)     6.74     4.37        —      +13     -2.60  Neutral -> Lagging
+  33  Rare Earth/Lithium                   (-3.13)     2.56  [12.98]     8.69        —       -1      2.56  —
+  34  Reits                                (-3.29)     0.00    -1.26     0.05        —       +4         0  —
+  35  Semiconductors                       (-4.83)  (-5.04)     0.67   -13.04        —      +20     -5.04  Neutral -> Lagging
 
+========================================
 THEME BREADTH ANALYSIS
+Legend: # = Distribution Watchlist Candidate
+========================================
 Theme                                       Total  Qual    Br %     Score
 -------------------------------------------------------------------------
 Cloud Infrastructure (Cloud Computing)          5     5  100.00    161.62
@@ -152,10 +149,11 @@ AI Compute (Artificial Intelligence)            3     0    0.00      0.00
     ↳ Stocks: #AMD, #INTC
 
 Insurance                                      67     0    0.00      0.00
-    ↳ Stocks: #ALL, #CNA, #RYAN
+    ↳ Stocks: #CNA, #RYAN
 
 ========================================
 LONG CANDIDATE UNIVERSE
+Legend: * = Zacks Rank 4 or 5
 ========================================
 Ticker                        Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
   HNGE                      Digital Health              Leading         97      96.57          1
@@ -211,6 +209,7 @@ Ticker                        Mapped_Theme Theme Classification  RS_Rating Long_
 
 ========================================
 PRE-OBSERVATION WATCHLIST
+Legend: * = Zacks Rank 4 or 5
 ========================================
 Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
   LQDA           Pharmaceuticals              Neutral         98      92.12          1
@@ -237,12 +236,13 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
    GCT E Commerce Infrastructure              Neutral         90      80.44          3
 
 --- NEW LONG PIPELINE ENTRIES ---
-New Longs       : APPN, DCTH, GTLB, KMTS, MTA, NTRA, PSNL, PUBM, RBRK, SENS, SMTI, SOPH, TEAM,
-                  TNDM, TWLO, VREX
-Recovered Longs : PSNL, TWLO
+Legend: + = Recovered from Observation/Distribution
+New Longs       : APPN, DCTH, GTLB, KMTS, MTA, NTRA, PSNL+, PUBM, RBRK, SENS, SMTI, SOPH, TEAM,
+                  TNDM, TWLO+, VREX
 
 ========================================
 OBSERVATION WATCHLIST
+Legend: * = Zacks Rank 4 or 5
 ========================================
  Days Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
     1   ETSY                      Internet              Neutral         80      74.24          3
@@ -299,36 +299,35 @@ DISTRIBUTION WATCHLIST
     1   ENOV          Medical Devices              Leading         10      38.37          3
     1    CNA                Insurance              Neutral         50      54.21          3
     1   RYAN                Insurance              Neutral         40      50.11          3
-    1    ALL                Insurance              Neutral         70      65.51          3
     3   CYRX               Healthcare              Neutral         60      61.09          2
     3    CVS               Healthcare              Neutral         30      44.09          3
     4   FTRE                  Biotech              Neutral         80      75.70          3
     4   ALKS                  Biotech              Neutral         80      74.89          3
     4   TDOC               Healthcare              Neutral         20      36.59          3
     4   XNCR            Biotechnology              Neutral         98      86.30          3
+    4   HALO                  Biotech              Neutral         95      87.85          3
+    4   OMDA               Healthcare              Neutral         90      79.89          3
+    4   KNSA            Biotechnology              Neutral         95      87.65          3
     4   IBRX                  Biotech              Neutral         90      84.00          3
     4   PTGX                  Biotech              Neutral         95      84.35          3
-    4   HALO                  Biotech              Neutral         95      87.85          3
-    4   KNSA            Biotechnology              Neutral         95      87.65          3
-    4   OMDA               Healthcare              Neutral         90      79.89          3
-    5   GLUE                  Biotech              Neutral          1      35.05          3
     5   ASTH               Healthcare              Neutral         30      46.89          3
+    5   GLUE                  Biotech              Neutral          1      35.05          3
     7   AGIO                  Biotech              Neutral         30      50.30          3
     7   MGTX                  Biotech              Neutral         80      78.50          3
     7   FROG Developer Infrastructure              Leading         70      77.62          2
     8    RPD            Cybersecurity              Leading         80      77.82         4*
     9   KYMR                  Biotech              Neutral         80      72.30         4*
-   10   SIMO                   Memory              Lagging         60      55.90          1
-   10    STX             Data Storage              Lagging         80      68.30          1
-   10   MRNA                  Biotech              Neutral         80      74.30          3
-   10   RGNX                  Biotech              Neutral         70      73.00          3
-   10   MIRM                  Biotech              Neutral         20      45.50          3
    10   MUFG                  Banking              Neutral         70      69.78          2
-   11   RARE                  Biotech              Neutral         20      44.10          3
+   10   RGNX                  Biotech              Neutral         70      73.00          3
+   10    STX             Data Storage              Lagging         80      68.30          1
+   10   SIMO                   Memory              Lagging         60      55.90          1
+   10   MIRM                  Biotech              Neutral         20      45.50          3
+   10   MRNA                  Biotech              Neutral         80      74.30          3
    11    STM           Semiconductors              Lagging         40      37.60          3
-   11    VSH           Semiconductors              Lagging         40      39.00          3
-   11   MKSI  Semiconductor Equipment              Lagging         40      43.30          1
    11   ATEN            Cybersecurity              Leading         30      53.62          3
+   11   MKSI  Semiconductor Equipment              Lagging         40      43.30          1
+   11   RARE                  Biotech              Neutral         20      44.10          3
+   11    VSH           Semiconductors              Lagging         40      39.00          3
    11    VPG           Semiconductors              Lagging          1      15.55         4*
    11    MXL           Semiconductors              Lagging         80      64.30          2
    11    UMC                  Foundry              Lagging         70      60.70          1
@@ -356,7 +355,7 @@ TRADINGVIEW WATCHLIST EXPORT
 ###LONG,HNGE,PAYS,CDNA,FSLY,CBZ,PAYC,PAY,PANW,DCTH,SNOW,BLFS,OKTA,FTNT,QLYS,FIVN,FTK,RNG,TWLO,FA,BFLY,BLZE,NET,U,NEO,ADPT,CRWD,APPN,AMPL,EFOR,TEAM,VREX,NTAP,PUBM,TXG,NTRA,GH,SOPH,RBRK,TWST,AVTR,MTA,S,GTLB,TENB,SMTI,KMTS,SENS,TNDM,BAX,PSNL,
 ###PRE_OBSERVATION,LQDA,ATI,MCS,CRSR,APPS,AIR,VAC,ETON,VCTR,PENG,DCO,MGNI,PRGS,LIND,ITGR,AAMI,MANH,BB,BLKB,ZETA,DT,GCT,
 ###OBSERVATION,CORT,AGEN,AGL,URGN,W,THC,BVS,GKOS,MRVI,CON,ATRC,AMRX,HAE,MOG.A,DXCM,EC,MEDP,PACS,DDOG,DGX,AMTB,ILMN,ETSY,CNMD,LTH,GSHD,VIK,HUM,TRV,VVX,SKWD,PCTY,OSCR,GRPN,SM,AVAH,BTSG,EOG,CDW,DAVE,SEZL,PGNY,NBIX,HUT,VCYT,DVA,
-###DISTRIBUTION,ENOV,CNA,RYAN,ALL,CYRX,CVS,FTRE,ALKS,TDOC,XNCR,IBRX,PTGX,HALO,KNSA,OMDA,GLUE,ASTH,AGIO,MGTX,FROG,RPD,KYMR,SIMO,STX,MRNA,RGNX,MIRM,MUFG,RARE,STM,VSH,MKSI,ATEN,VPG,MXL,UMC,UCTT,ASX,AMD,AMAT,DOCN,ICHR,PD,ALAB,WDC,COHU,TXN,AMBQ,LRCX,ACMR,EAT,VICR,INTC,EXTR,SVCO,
+###DISTRIBUTION,ENOV,CNA,RYAN,CYRX,CVS,FTRE,ALKS,TDOC,XNCR,HALO,OMDA,KNSA,IBRX,PTGX,ASTH,GLUE,AGIO,MGTX,FROG,RPD,KYMR,MUFG,RGNX,STX,SIMO,MIRM,MRNA,STM,ATEN,MKSI,RARE,VSH,VPG,MXL,UMC,UCTT,ASX,AMD,AMAT,DOCN,ICHR,PD,ALAB,WDC,COHU,TXN,AMBQ,LRCX,ACMR,EAT,VICR,INTC,EXTR,SVCO,
 
 ==============================================
 END OF TABELA SCAN

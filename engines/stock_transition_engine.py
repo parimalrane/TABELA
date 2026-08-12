@@ -174,10 +174,11 @@ def pre_distribution_update(
                     # Ghost stock vanished from universe.
                     # Do NOT silently purge — demote to OBSERVATION so the
                     # ticker remains visible and auditable in output.
-                    print(
-                        f"[TRANSITION WARNING] {ticker} in LONG vanished from "
-                        f"stocks universe on {today}. Demoting to OBSERVATION."
-                    )
+                    pass
+                    # print(
+                    #     f"[TRANSITION WARNING] {ticker} in LONG vanished from "
+                    #     f"stocks universe on {today}. Demoting to OBSERVATION."
+                    # )
                     state["tracking_state"] = OBSERVATION
                     state["state_days"] = 1
                     state["last_market_date"] = today
@@ -208,12 +209,13 @@ def pre_distribution_update(
                     # the stocks universe. Log explicitly — do NOT silently
                     # drop from registry; keep advancing state_days so it
                     # remains auditable in the transition report.
-                    print(
-                        f"[TRANSITION WARNING] {ticker} in "
-                        f"{state['tracking_state']} vanished from stocks "
-                        f"universe on {today}. Retaining in registry "
-                        f"(day {state['state_days'] + 1})."
-                    )
+                    pass
+                    # print(
+                    #     f"[TRANSITION WARNING] {ticker} in "
+                    #     f"{state['tracking_state']} vanished from stocks "
+                    #     f"universe on {today}. Retaining in registry "
+                    #     f"(day {state['state_days'] + 1})."
+                    # )
 
         state["state_days"] += 1
         state["last_market_date"] = today
@@ -245,11 +247,12 @@ def pre_distribution_update(
                 # disappearance bug.  Enter it as OBSERVATION Day 1 so it
                 # remains auditable.  Log an explicit warning.
                 vanished_from_universe = True
-                print(
-                    f"[TRANSITION WARNING] {ticker} left LONG but is absent "
-                    f"from stocks universe on {today}. Entering OBSERVATION "
-                    f"Day 1 to preserve audit trail."
-                )
+                pass
+                # print(
+                #     f"[TRANSITION WARNING] {ticker} left LONG but is absent "
+                #     f"from stocks universe on {today}. Entering OBSERVATION "
+                #     f"Day 1 to preserve audit trail."
+                # )
             else:
                 val = match["Long_Score"].iloc[0]
                 if pd.notna(val):
@@ -398,11 +401,12 @@ def get_distribution_watchlist(
     )
     today = str(context.market_date)
     for ticker in sorted(distribution - found_in_df):
-        print(
-            f"[DISTRIBUTION WARNING] {ticker} is in DISTRIBUTION registry "
-            f"but absent from stocks universe on {today}. "
-            f"Cannot display in watchlist until it re-enters the universe."
-        )
+        pass
+        # print(
+        #     f"[DISTRIBUTION WARNING] {ticker} is in DISTRIBUTION registry "
+        #     f"but absent from stocks universe on {today}. "
+        #     f"Cannot display in watchlist until it re-enters the universe."
+        # )
 
     for col in [
         "RS_Delta_Val",

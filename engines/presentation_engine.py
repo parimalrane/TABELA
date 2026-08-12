@@ -535,7 +535,10 @@ def print_daily_scan(
         print_theme_strength_diagnostics(theme_strength)
 
     print()
+    print("========================================")
     print("THEME BREADTH ANALYSIS")
+    print("Legend: # = Distribution Watchlist Candidate")
+    print("========================================")
     
     display_df = (
         theme_breadth[
@@ -591,6 +594,7 @@ def print_daily_scan(
     print("\n\n")
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
+    print("Legend: * = Zacks Rank 4 or 5")
     print("========================================")
 
     display_df = long_candidates[
@@ -645,6 +649,7 @@ def print_daily_scan(
     print("\n\n")
     print("========================================")
     print("PRE-OBSERVATION WATCHLIST")
+    print("Legend: * = Zacks Rank 4 or 5")
     print("========================================")
     
     if grace_longs.empty:
@@ -667,24 +672,26 @@ def print_daily_scan(
     rec_obs = deltas.get("recovering_observation", [])
     rec_dist = deltas.get("recovering_distribution", [])
     all_rec = sorted(list(set(rec_obs + rec_dist)))
+    all_rec_set = set(all_rec)
+    formatted_new_longs = [
+        f"{ticker}+" if ticker in all_rec_set else ticker
+        for ticker in new_longs
+    ]
 
     print("\n--- NEW LONG PIPELINE ENTRIES ---")
+    print("Legend: + = Recovered from Observation/Distribution")
+    
     prefix1 = "New Longs       : "
-    if new_longs:
-        print(textwrap.fill(", ".join(new_longs), width=95, initial_indent=prefix1, subsequent_indent=" " * len(prefix1)))
+    if formatted_new_longs:
+        print(textwrap.fill(", ".join(formatted_new_longs), width=95, initial_indent=prefix1, subsequent_indent=" " * len(prefix1)))
     else:
         print(f"{prefix1}None")
-        
-    prefix2 = "Recovered Longs : "
-    if all_rec:
-        print(textwrap.fill(", ".join(all_rec), width=95, initial_indent=prefix2, subsequent_indent=" " * len(prefix2)))
-    else:
-        print(f"{prefix2}None")
 
 
     print("\n\n")
     print("========================================")
     print("OBSERVATION WATCHLIST")
+    print("Legend: * = Zacks Rank 4 or 5")
     print("========================================")
 
     obs_stocks = stocks[stocks["Tracking_State"] == "OBSERVATION"].copy()

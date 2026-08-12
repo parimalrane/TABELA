@@ -62,7 +62,7 @@ def run_market_context_engine(market_date):
     market_file = context.market_file
 
     if not market_file.exists():
-        print(f"Market file not found: {market_file}. Skipping Market Context.")
+        # print(f"Market file not found: {market_file}. Skipping Market Context.")
         return None
 
     df = pd.read_csv(market_file)
