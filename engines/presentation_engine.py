@@ -529,7 +529,7 @@ def print_daily_scan(
     print("==============================================")
     print("\n")
 
-    print_theme_performance(theme_performance)
+    # print_theme_performance(theme_performance)
 
     if theme_strength_settings["debug_theme_strength"]:
         print_theme_strength_diagnostics(theme_strength)
@@ -558,8 +558,8 @@ def print_daily_scan(
         
     display_df = display_df[display_df["Leaders"].apply(has_valid_leaders)]
 
-    print(f"{'Theme':<42}  {'Total':>5}  {'Qual':>4}  {'Br %':>6}  {'Score':>8}  {'Macro State':>17}")
-    print("-" * 92)
+    print(f"{'Theme':<42}  {'Total':>5}  {'Qual':>4}  {'Score':>8}  {'Macro State':>17}")
+    print("-" * 83)
     
     for _, row in display_df.iterrows():
         mapped_theme = str(row['Mapped_Theme'])
@@ -574,7 +574,6 @@ def print_daily_scan(
         
         total = int(row['Total_Stocks']) if pd.notna(row['Total_Stocks']) else 0
         qual = int(row['Strong_Stocks']) if pd.notna(row['Strong_Stocks']) else 0
-        br_pct = float(row['Breadth_Percent']) if pd.notna(row['Breadth_Percent']) else 0.0
         score = float(row['Weighted_Breadth_Score']) if pd.notna(row['Weighted_Breadth_Score']) else 0.0
         
         macro_state = theme_class_map.get(parent_theme, "Unknown")
@@ -584,7 +583,7 @@ def print_daily_scan(
             
         macro_str = f"{macro_state} (#{macro_rank})"
         
-        print(f"{theme_display:<42}  {total:>5}  {qual:>4}  {br_pct:>6.2f}  {score:>8.2f}  {macro_str:>17}")
+        print(f"{theme_display:<42}  {total:>5}  {qual:>4}  {score:>8.2f}  {macro_str:>17}")
         
         leaders_str = str(row['Leaders']).strip()
         wrapped = textwrap.fill(
