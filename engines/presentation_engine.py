@@ -624,6 +624,7 @@ def print_daily_scan(
             "Zacks Rank",
         ]
     ].copy()
+    display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
 
     if "Long_Score" in display_df.columns:
         display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
@@ -737,6 +738,7 @@ def print_daily_scan(
                 "Zacks Rank"
             ]
         ].copy()
+        display_obs["Ticker"] = display_obs["Ticker"].astype(str).str.replace("*", "", regex=False)
 
         if "Long_Score" in display_obs.columns:
             display_obs["Long_Score"] = display_obs["Long_Score"].map("{:.2f}".format)
@@ -793,6 +795,7 @@ def print_daily_scan(
                 "Zacks Rank"
             ]
         ].copy()
+        display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
 
         if "Long_Score" in display_df.columns:
             display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
