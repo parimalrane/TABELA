@@ -36,7 +36,8 @@ def build_theme_lookup(stocks):
 
 
 def compare_watchlists(
-    current_long,
+    current_true_long,
+    current_pre_obs,
     current_observation,
     current_distribution,
     recovered,
@@ -54,10 +55,18 @@ def compare_watchlists(
 
     theme_lookup = build_theme_lookup(stocks)
 
-    current_long_set = {
+    current_true_long_set = {
         str(x).replace("*", "").strip()
-        for x in current_long
+        for x in current_true_long
     }
+
+    current_pre_obs_set = {
+        str(x).replace("*", "").strip()
+        for x in current_pre_obs
+    }
+    
+    # Combined for legacy operations
+    current_long_set = current_true_long_set | current_pre_obs_set
 
     current_observation_set = {
         str(x).replace("*", "").strip()
@@ -77,7 +86,8 @@ def compare_watchlists(
 
         save_watchlist(
             current_file,
-            current_long_set,
+            current_true_long_set,
+            current_pre_obs_set,
             current_observation_set,
             current_distribution_set,
             theme_lookup,
@@ -85,6 +95,7 @@ def compare_watchlists(
 
         return {
             "new_longs": [],
+            "new_pre_observation": [],
             "new_observation": [],
             "new_distribution": [],
             "left_distribution": [],
@@ -114,6 +125,8 @@ def compare_watchlists(
         return tickers
 
     old_long = extract_tickers(old_data.get("long", []))
+    old_true_long = extract_tickers(old_data.get("true_long", old_data.get("long", [])))
+    old_pre_obs = extract_tickers(old_data.get("pre_observation", []))
     old_observation = extract_tickers(old_data.get("observation", []))
     old_distribution = extract_tickers(old_data.get("distribution", []))
 
@@ -121,13 +134,16 @@ def compare_watchlists(
     #
     # Watchlist deltas
     #
-
+    # New longs are completely new to both true longs and pre-obs
     new_longs = sorted(current_long_set - old_long)
+
+    # Demoted to Pre-Observation today (was a True Long yesterday, is Pre-Obs today)
+    new_pre_observation = sorted(current_pre_obs_set - old_pre_obs)
 
     removed_longs = old_long - current_long_set
 
     #
-    # Only stocks that moved from LONG -> OBSERVATION today
+    # Only stocks that moved from pipeline memory -> OBSERVATION today
     #
     new_observation = sorted(
         removed_longs & current_observation_set
@@ -154,7 +170,8 @@ def compare_watchlists(
 
     save_watchlist(
         current_file,
-        current_long_set,
+        current_true_long_set,
+        current_pre_obs_set,
         current_observation_set,
         current_distribution_set,
         theme_lookup,
@@ -162,6 +179,7 @@ def compare_watchlists(
 
     return {
         "new_longs": new_longs,
+        "new_pre_observation": new_pre_observation,
         "new_observation": new_observation,
         "new_distribution": new_distribution,
         "left_distribution": left_distribution,
@@ -171,7 +189,8 @@ def compare_watchlists(
 
 def save_watchlist(
     file_path,
-    long_list,
+    true_long_list,
+    pre_obs_list,
     observation_list,
     distribution_list,
     theme_lookup,
@@ -191,7 +210,9 @@ def save_watchlist(
         ]
 
     data = {
-        "long": build_entries(long_list),
+        "true_long": build_entries(true_long_list),
+        "pre_observation": build_entries(pre_obs_list),
+        "long": build_entries(list(set(true_long_list) | set(pre_obs_list))),  # maintain legacy format
         "observation": build_entries(observation_list),
         "distribution": build_entries(distribution_list),
     }

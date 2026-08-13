@@ -706,7 +706,8 @@ def print_daily_scan(
         print(grace_longs.to_string(index=False))
 
     deltas = compare_watchlists(
-        current_long=long_candidates["Ticker"].tolist(),
+        current_true_long=list(true_long_tickers),
+        current_pre_obs=grace_longs["Ticker"].tolist(),
         current_observation=stocks.loc[
             stocks["Tracking_State"] == "OBSERVATION",
             "Ticker",
@@ -717,6 +718,7 @@ def print_daily_scan(
     )
 
     new_longs = deltas.get("new_longs", [])
+    new_pre_obs = deltas.get("new_pre_observation", [])
     rec_obs = deltas.get("recovering_observation", [])
     rec_dist = deltas.get("recovering_distribution", [])
     all_rec = sorted(list(set(rec_obs + rec_dist)))
@@ -734,6 +736,12 @@ def print_daily_scan(
         print(textwrap.fill(", ".join(formatted_new_longs), width=95, initial_indent=prefix1, subsequent_indent=" " * len(prefix1)))
     else:
         print(f"{prefix1}None")
+        
+    prefix2 = "New Pre-Obs     : "
+    if new_pre_obs:
+        print(textwrap.fill(", ".join(new_pre_obs), width=95, initial_indent=prefix2, subsequent_indent=" " * len(prefix2)))
+    else:
+        print(f"{prefix2}None")
 
 
     print("\n\n")
