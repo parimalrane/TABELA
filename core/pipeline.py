@@ -266,6 +266,9 @@ def resolve_unclassified_leaders(stocks, theme_class_map):
             pass
     
     for ticker, theme in overrides.items():
+        parent_theme = THEME_TRANSLATION.get(theme, theme)
+        if parent_theme not in theme_class_map:
+            theme_class_map[parent_theme] = "Leading"
         if theme not in theme_class_map:
             theme_class_map[theme] = "Leading"
 

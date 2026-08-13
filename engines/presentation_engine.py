@@ -553,10 +553,40 @@ def print_daily_scan(
         ]
     )
 
-    def has_valid_leaders(leaders_val):
-        return pd.notna(leaders_val) and str(leaders_val).strip() != "" and str(leaders_val).strip() != "None"
+    true_long_tickers = set()
+    for clean_ticker in long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper():
+        match = stocks[stocks["Ticker"].astype(str).str.upper() == clean_ticker]
+        if not match.empty and not match.iloc[0].get("Is_Pre_Observation_Candidate", False):
+            true_long_tickers.add(clean_ticker)
+
+    def should_display(row):
+        leaders_val = row.get("Leaders")
+        if pd.isna(leaders_val) or str(leaders_val).strip() == "" or str(leaders_val).strip() == "None":
+            return False
+            
+        mapped_theme = str(row['Mapped_Theme'])
+        parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
+        macro_state = theme_class_map.get(parent_theme, "Unknown")
         
-    display_df = display_df[display_df["Leaders"].apply(has_valid_leaders)]
+        if macro_state == "Neutral":
+            has_valid_swing_signal = False
+            for item in str(leaders_val).split(","):
+                item_clean = item.strip()
+                if item_clean.startswith("#"):
+                    # Distribution candidate - critical for short setups and risk management
+                    has_valid_swing_signal = True
+                    break
+                elif item_clean.upper() in true_long_tickers:
+                    # True Long institutional leader
+                    has_valid_swing_signal = True
+                    break
+                    
+            if not has_valid_swing_signal:
+                return False
+            
+        return True
+        
+    display_df = display_df[display_df.apply(should_display, axis=1)]
 
     print(f"{'Micro Theme'.ljust(30)} {'Macro Theme'.ljust(18)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'Score'.rjust(7)}   {'Macro State'.ljust(14)}   {'Stocks'}")
     print("-" * 125)
