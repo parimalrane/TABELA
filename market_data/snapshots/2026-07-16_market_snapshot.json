@@ -2,8 +2,8 @@
     "date": "2026-07-16",
     "metadata": {
         "total_stock_count": 2221,
-        "classified_stock_count": 1447,
-        "unclassified_stock_count": 774,
+        "classified_stock_count": 1515,
+        "unclassified_stock_count": 706,
         "total_themes_detected": 109
     },
     "leading_themes": [
@@ -36,14 +36,14 @@
             "theme": "Brent Oil",
             "rank": 6,
             "score": 3.7
-        }
-    ],
-    "neutral_themes": [
+        },
         {
             "theme": "Insurance",
             "rank": 7,
             "score": 3.37
-        },
+        }
+    ],
+    "neutral_themes": [
         {
             "theme": "Exploration",
             "rank": 8,
@@ -143,14 +143,14 @@
             "theme": "Telecom",
             "rank": 27,
             "score": -2.8
-        },
+        }
+    ],
+    "lagging_themes": [
         {
             "theme": "Natural Gas",
             "rank": 28,
             "score": -4.74
-        }
-    ],
-    "lagging_themes": [
+        },
         {
             "theme": "Artificial Intelligence",
             "rank": 29,
@@ -401,11 +401,32 @@
             "Weighted_Breadth_Score": 45.28
         },
         {
+            "Mapped_Theme": "Restaurants",
+            "Total_Stocks": 28,
+            "Strong_Stocks": 4.0,
+            "Breadth_Percent": 14.29,
+            "Weighted_Breadth_Score": 42.34
+        },
+        {
             "Mapped_Theme": "Life Sciences Tools",
             "Total_Stocks": 5,
             "Strong_Stocks": 1.0,
             "Breadth_Percent": 20.0,
             "Weighted_Breadth_Score": 35.12
+        },
+        {
+            "Mapped_Theme": "Consumer Staples",
+            "Total_Stocks": 36,
+            "Strong_Stocks": 4.0,
+            "Breadth_Percent": 11.11,
+            "Weighted_Breadth_Score": 34.1
+        },
+        {
+            "Mapped_Theme": "Oil Services",
+            "Total_Stocks": 5,
+            "Strong_Stocks": 1.0,
+            "Breadth_Percent": 20.0,
+            "Weighted_Breadth_Score": 32.25
         },
         {
             "Mapped_Theme": "Business Software",
@@ -420,13 +441,6 @@
             "Strong_Stocks": 8.0,
             "Breadth_Percent": 4.73,
             "Weighted_Breadth_Score": 22.32
-        },
-        {
-            "Mapped_Theme": "Restaurants",
-            "Total_Stocks": 28,
-            "Strong_Stocks": 2.0,
-            "Breadth_Percent": 7.14,
-            "Weighted_Breadth_Score": 21.04
         },
         {
             "Mapped_Theme": "Medical Devices",
@@ -458,10 +472,10 @@
         },
         {
             "Mapped_Theme": "Unknown",
-            "Total_Stocks": 380,
+            "Total_Stocks": 379,
             "Strong_Stocks": 7.0,
-            "Breadth_Percent": 1.84,
-            "Weighted_Breadth_Score": 9.79
+            "Breadth_Percent": 1.85,
+            "Weighted_Breadth_Score": 9.84
         },
         {
             "Mapped_Theme": "REITs",
@@ -478,13 +492,6 @@
             "Weighted_Breadth_Score": 9.33
         },
         {
-            "Mapped_Theme": "Consumer Staples",
-            "Total_Stocks": 35,
-            "Strong_Stocks": 1.0,
-            "Breadth_Percent": 2.86,
-            "Weighted_Breadth_Score": 9.22
-        },
-        {
             "Mapped_Theme": "Semiconductors",
             "Total_Stocks": 48,
             "Strong_Stocks": 1.0,
@@ -499,8 +506,15 @@
             "Weighted_Breadth_Score": 4.76
         },
         {
-            "Mapped_Theme": "Materials/Metals",
-            "Total_Stocks": 1,
+            "Mapped_Theme": "Semiconductor Equipment",
+            "Total_Stocks": 21,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Semiconductor Testing",
+            "Total_Stocks": 2,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -513,8 +527,8 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Silver Mining",
-            "Total_Stocks": 5,
+            "Mapped_Theme": "Travel Platform",
+            "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -527,22 +541,8 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Oil Services",
-            "Total_Stocks": 5,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
             "Mapped_Theme": "Optical Networking",
             "Total_Stocks": 8,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Travel Platform",
-            "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -555,7 +555,35 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
+            "Mapped_Theme": "Silver Mining",
+            "Total_Stocks": 5,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
             "Mapped_Theme": "Transportation Platform",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Telecom",
+            "Total_Stocks": 11,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Telecom Infrastructure",
+            "Total_Stocks": 4,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Semiconductor IP",
             "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
@@ -569,22 +597,8 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Telecom Infrastructure",
-            "Total_Stocks": 4,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Telecom",
-            "Total_Stocks": 11,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Semiconductor IP",
-            "Total_Stocks": 1,
+            "Mapped_Theme": "Solar Infrastructure",
+            "Total_Stocks": 5,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -606,6 +620,13 @@
         {
             "Mapped_Theme": "Refining & Marketing",
             "Total_Stocks": 8,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Materials/Metals",
+            "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -634,27 +655,6 @@
         {
             "Mapped_Theme": "Space Infrastructure",
             "Total_Stocks": 4,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Semiconductor Testing",
-            "Total_Stocks": 2,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Solar Infrastructure",
-            "Total_Stocks": 5,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Semiconductor Equipment",
-            "Total_Stocks": 21,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0

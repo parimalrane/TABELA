@@ -10,13 +10,7 @@ THEME_PARENT_MAP = {
 
     "Electronics Manufacturing": "Infrastructure",
 
-    "Footwear/Apparel": "Broad",
 
-    "Restaurants": "Broad",
-
-    "Discount Retail": "Broad",
-
-    "Consumer Staples": "Broad",
 
     "Homebuilders": "Infrastructure",
 
@@ -28,7 +22,7 @@ THEME_PARENT_MAP = {
 
     "Telecom Infrastructure": "Telecom",
 
-    "Media Distribution": "Broad",
+
 
     "Travel Platform": "Transportation/Shipping"
 

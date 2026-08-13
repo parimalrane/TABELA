@@ -151,7 +151,7 @@ def build_theme_classification(theme_strength):
     leading_count = 1 if total_themes > 0 else 0
 
     if total_themes > 1:
-        leading_count = max(1, math.ceil(total_themes * 0.16))
+        leading_count = max(1, math.ceil(total_themes * 0.20))
     lagging_start = total_themes - leading_count + 1
 
     for i, row in theme_strength.iterrows():
@@ -191,14 +191,18 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
     etf_raw_scores = []
 
     for _, row in stocks.iterrows():
+        # Respect manually injected overrides to prevent overwriting
+        if row.get("Is_Unclassified_Leader") == False and row.get("Theme_Class") == "Leading":
+            theme_classes.append(row["Theme_Class"])
+            theme_scores.append(row["Theme_Score"])
+            theme_states.append(row["Theme_State"])
+            etf_raw_scores.append(row.get("ETF_Raw_Score"))
+            is_unclassified_leaders.append(False)
+            continue
+            
         etf_theme = row["ETF_Theme"]
         mapped_theme = row["Mapped_Theme"]
 
-        #
-        # Preserve explicit company mappings.
-        # Only promote child themes when the ETF theme still matches
-        # the mapped theme.
-        #
         if (
             mapped_theme in THEME_PARENT_MAP
             and etf_theme == mapped_theme
@@ -209,7 +213,7 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
 
         if etf_theme in theme_class_map:
             theme_class = theme_class_map[etf_theme]
-            theme_score = theme_score_map[etf_theme]
+            theme_score = theme_score_map.get(etf_theme, 80) # Fallback incase it was injected without score
             theme_state = theme_class_map.get(etf_theme)
             etf_raw_score = theme_raw_score_map.get(etf_theme)
             is_unclassified = False
@@ -780,14 +784,14 @@ def run_tabela_pipeline():
     stocks = calculate_rs_rating(stocks)
     stocks = calculate_sales_score(stocks)
     stocks = calculate_zacks_score(stocks)
+    stocks = resolve_unclassified_leaders(stocks, theme_class_map)
+
     stocks = assign_stock_theme_classification(
         stocks,
         theme_class_map,
         theme_score_map,
         theme_raw_score_map,
     )
-
-    stocks = resolve_unclassified_leaders(stocks, theme_class_map)
 
     stocks = score_stocks(stocks)
 

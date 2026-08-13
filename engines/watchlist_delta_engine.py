@@ -134,8 +134,8 @@ def compare_watchlists(
     #
     # Watchlist deltas
     #
-    # New longs are completely new to both true longs and pre-obs
-    new_longs = sorted(current_long_set - old_long)
+    # New True Longs (Includes brand new entries, and upgrades from Pre-Obs)
+    new_longs = sorted(current_true_long_set - old_true_long)
 
     # Demoted to Pre-Observation today (was a True Long yesterday, is Pre-Obs today)
     new_pre_observation = sorted(current_pre_obs_set - old_pre_obs)

@@ -608,11 +608,11 @@ def print_daily_scan(
         s_str = f"{score:>.2f}".rjust(7)
         
         macro_state = theme_class_map.get(parent_theme, "Unknown")
-        macro_rank = "?"
         if not theme_strength[theme_strength["Theme"] == parent_theme].empty:
             macro_rank = theme_strength[theme_strength["Theme"] == parent_theme].iloc[0]["Theme_Rank"]
-            
-        mac_state_str = f"{macro_state} (#{macro_rank})".ljust(14)
+            mac_state_str = f"{macro_state} (#{macro_rank})".ljust(16)
+        else:
+            mac_state_str = macro_state.ljust(16)
         
         prefix = f"{micro} {macro} {tot_str} {q_str} {s_str}   {mac_state_str}   "
         prefix_len = len(prefix)

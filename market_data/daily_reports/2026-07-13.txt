@@ -11,30 +11,32 @@ Legend: [No Prefix] = True Long / ~ = Pre-Obs / - = Observation / # = Distributi
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State      Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Cybersecurity                  Software            13   11  215.81   Neutral (#8)     FTNT, BB
-Healthcare Services            Healthcare          13    9  167.07   Leading (#1)     HUM, PGNY, OSCR, AVAH, DVA, CON, BTSG
-Memory                         Semiconductors       4    4  158.53   Neutral (#13)    MU, SNDK, ~SIMO, ~WDC
-Pharmaceuticals                Pharma               3    3  135.39   Leading (#6)     LQDA, CORT, ETON
-Cloud Infrastructure           Cloud Computing      5    4  133.67   Leading (#2)     DDOG, DOCN, SNOW, NET
-Biotech                        Biotech             87   29  130.81   Leading (#3)     TGTX, ABCL, IBRX, AGIO, KRYS, RGNX,
-                                                                                      TVTX, MIRM, NRIX, PTGX, ALKS, VCEL,
-                                                                                      RARE, DTIL, MRNA, ANAB, ~FTRE, ~KYMR,
-                                                                                      ~MGTX, ~CYTK
-Biotechnology                  Biotech              5    4  125.06   Leading (#3)     KNSA, AGEN, -PGEN
-Healthcare                     Healthcare          41   15  125.00   Leading (#1)     INNV, ASTH, OMDA, TOI, CNC, MOH, LFST,
-                                                                                      TDOC, CVS, PNTG, CYRX, OGN
-Pharma                         Pharma              44   12   86.68   Leading (#6)     URGN, ~ACRS
-Communications Cloud           Cloud Computing      3    2   85.49   Leading (#2)     TWLO, FIVN
-Digital Payments               Software             4    2   78.46   Neutral (#8)     SEZL
-Digital Health                 Software             1    1   68.62   Neutral (#8)     HNGE
-Data Storage                   Semiconductors       1    1   67.24   Neutral (#13)    STX
-Real Estate Technology         Real Estate Tech..   1    1   62.38   Unknown (#?)     COMP
-LNG / Natural Gas Export Inf.. LNG / Natural Ga..   1    1   62.38   Unknown (#?)     VG
-Mobile Adtech                  Internet             2    1   54.38   Neutral (#7)     APPS
-Software                       Software           171   17   45.84   Neutral (#8)     PENG
-Digital Banking                Banking              3    1   43.89   Neutral (#9)     DAVE
-Restaurants                    Consumer Staples    28    2   22.24   Leading (#?)     EAT
-Unknown                        Unknown            382    5    7.15   Unknown (#?)     MAMA
+Cybersecurity                  Software            13   11  215.81   Neutral (#8)       FTNT, BB
+Healthcare Services            Healthcare          13    9  167.07   Leading (#1)       HUM, PGNY, OSCR, AVAH, DVA, CON, BTSG
+Memory                         Semiconductors       4    4  158.53   Neutral (#13)      MU, SNDK, ~SIMO, ~WDC
+Pharmaceuticals                Pharma               3    3  135.39   Leading (#6)       LQDA, CORT, ETON
+Cloud Infrastructure           Cloud Computing      5    4  133.67   Leading (#2)       DDOG, DOCN, SNOW, NET
+Biotech                        Biotech             87   29  130.81   Leading (#3)       TGTX, ABCL, IBRX, AGIO, KRYS, RGNX,
+                                                                                        MIRM, NRIX, TVTX, PTGX, ALKS, VCEL,
+                                                                                        RARE, MRNA, DTIL, ANAB, ~FTRE, ~KYMR,
+                                                                                        ~MGTX, ~CYTK
+Biotechnology                  Biotech              5    4  125.06   Leading (#3)       KNSA, AGEN, -PGEN
+Healthcare                     Healthcare          41   15  125.00   Leading (#1)       INNV, ASTH, OMDA, TOI, CNC, MOH,
+                                                                                        LFST, TDOC, CVS, PNTG, CYRX, OGN
+Pharma                         Pharma              44   12   86.68   Leading (#6)       URGN, ~ACRS
+Communications Cloud           Cloud Computing      3    2   85.49   Leading (#2)       TWLO, FIVN
+Digital Payments               Software             4    2   78.46   Neutral (#8)       SEZL
+Digital Health                 Software             1    1   68.62   Neutral (#8)       HNGE
+Data Storage                   Semiconductors       1    1   67.24   Neutral (#13)      STX
+Leisure and Entertainment      Internet            39    8   67.15   Leading (#7)       LTH, RSI, LIND
+Restaurants                    Consumer Staples    28    6   65.19   Leading            BJRI, EAT, CBRL
+LNG / Natural Gas Export Inf.. LNG / Natural Ga..   1    1   62.38   Unknown            VG
+Real Estate Technology         Real Estate Tech..   1    1   62.38   Unknown            COMP
+Mobile Adtech                  Internet             2    1   54.38   Leading (#7)       APPS
+Software                       Software           171   17   45.84   Neutral (#8)       PENG
+Digital Banking                Banking              3    1   43.89   Neutral (#9)       DAVE
+Consumer Staples               Consumer Staples    36    3   25.07   Leading            COCO
+Unknown                        Unknown            381    5    7.15   Unknown            MAMA
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -56,7 +58,7 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
   PENG                                Software              Neutral         99      92.21          1
   AGEN                           Biotechnology              Leading         99      92.14          3
   TGTX                                 Biotech              Leading         95      92.04          3
-  APPS                           Mobile Adtech              Neutral         99      91.91          1
+  APPS                           Mobile Adtech              Leading         99      91.91          1
    TOI                              Healthcare              Leading         98      91.70          3
     MU                                  Memory              Neutral         99      91.48          1
   ABCL                                 Biotech              Leading         97      91.34          3
@@ -77,6 +79,7 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
   TDOC                              Healthcare              Leading         95      89.75          2
   AGIO                                 Biotech              Leading         95      89.54          3
   SNOW                    Cloud Infrastructure              Leading         95      89.45          3
+   LTH               Leisure and Entertainment              Leading         95      89.41          2
   FIVN                    Communications Cloud              Leading         95      89.35          3
    NET                    Cloud Infrastructure              Leading         90      89.20          2
    CVS                              Healthcare              Leading         90      89.00          2
@@ -85,22 +88,27 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
   KRYS                                 Biotech              Leading         90      88.59          3
   RGNX                                 Biotech              Leading         95      88.24         4*
   BTSG                     Healthcare Services              Leading         95      87.95         4*
-  TVTX                                 Biotech              Leading         90      87.49          3
   MIRM                                 Biotech              Leading         90      87.49          3
   NRIX                                 Biotech              Leading         90      87.49          3
+  TVTX                                 Biotech              Leading         90      87.49          3
     VG LNG / Natural Gas Export Infrastructure  Unclassified Leader         90      87.40          2
   PTGX                                 Biotech              Leading         90      87.29          1
+   RSI               Leisure and Entertainment              Leading         95      87.01          3
+  LIND               Leisure and Entertainment              Leading         90      86.96          1
   ALKS                                 Biotech              Leading         95      86.94          3
   COMP                  Real Estate Technology  Unclassified Leader         90      86.90          1
+  BJRI                             Restaurants              Leading         95      86.75          2
   CYRX                              Healthcare              Leading         90      86.30          3
   VCEL                                 Biotech              Leading         90      86.29          3
   MAMA                                 Unknown  Unclassified Leader         90      86.10          2
   RARE                                 Biotech              Leading         90      86.09          3
-  DTIL                                 Biotech              Leading         95      86.04          3
   MRNA                                 Biotech              Leading         95      86.04          3
+  DTIL                                 Biotech              Leading         95      86.04          3
    EAT                             Restaurants              Leading         90      85.70          2
   ETON                         Pharmaceuticals              Leading         97      85.52         5*
   ANAB                                 Biotech              Leading         90      85.49         4*
+  CBRL                             Restaurants              Leading         97      85.35          3
+  COCO                        Consumer Staples              Leading         90      85.30          2
    OGN                              Healthcare              Leading         90      85.10          3
 
 ========================================
@@ -137,8 +145,8 @@ Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks 
 
 --- NEW LONG PIPELINE ENTRIES ---
 Legend: + = Recovered from Observation/Distribution
-New Longs       : ACRS, AGEN, ANAB, BB, COMP, CORT, CVS, EAT, ETON, FTNT, HNGE, OGN, PENG,
-                  URGN, VG
+New Longs       : AGEN, ANAB, BB, CBRL, COCO, COMP, CORT, CVS, EAT, ETON, FTNT, HNGE, LIND,
+                  LTH, OGN, PENG, RSI, URGN, VG
 New Pre-Obs     : ACMR, ACRS, ALAB, AMAT, AMBQ, AMD, ASX, CSCO, CYTK, DELL, FTRE, HPE, ICHR,
                   KYMR, MGTX, MKSI, MXL, SIMO, STM, TOELY, UCTT, UMC, VPG, VSH, WDC, WYFI
 
@@ -172,7 +180,7 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,DDOG,HUM,LQDA,PGNY,INNV,HNGE,SEZL,ASTH,OMDA,DAVE,KNSA,OSCR,PENG,AGEN,TGTX,APPS,TOI,MU,ABCL,FTNT,AVAH,DVA,URGN,TWLO,CNC,STX,DOCN,IBRX,SNDK,BB,CON,MOH,LFST,TDOC,AGIO,SNOW,FIVN,NET,CVS,CORT,PNTG,KRYS,RGNX,BTSG,TVTX,MIRM,NRIX,VG,PTGX,ALKS,COMP,CYRX,VCEL,MAMA,RARE,DTIL,MRNA,EAT,ETON,ANAB,OGN,
+###LONG,DDOG,HUM,LQDA,PGNY,INNV,HNGE,SEZL,ASTH,OMDA,DAVE,KNSA,OSCR,PENG,AGEN,TGTX,APPS,TOI,MU,ABCL,FTNT,AVAH,DVA,URGN,TWLO,CNC,STX,DOCN,IBRX,SNDK,BB,CON,MOH,LFST,TDOC,AGIO,SNOW,LTH,FIVN,NET,CVS,CORT,PNTG,KRYS,RGNX,BTSG,MIRM,NRIX,TVTX,VG,PTGX,RSI,LIND,ALKS,COMP,BJRI,CYRX,VCEL,MAMA,RARE,MRNA,DTIL,EAT,ETON,ANAB,CBRL,COCO,OGN,
 ###PRE_OBSERVATION,SIMO,AMAT,ASX,WDC,VSH,UMC,UCTT,MXL,DELL,FTRE,ACMR,AMD,STM,TOELY,ICHR,ACRS,VPG,MKSI,ALAB,KYMR,HPE,AMBQ,WYFI,MGTX,CYTK,CSCO,
 ###OBSERVATION,EXTR,ARM,INTC,MRVL,NBIS,KLIC,NTCT,OUST,TXN,SVCO,SYNA,IFNNY,CRDO,ALGM,COHU,LRCX,PGEN,VICR,
 ###DISTRIBUTION,,

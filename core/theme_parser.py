@@ -55,7 +55,6 @@ def parse_theme(strategy):
     # ---------------------------------
 
     if theme in INVALID_THEMES:
-
         theme = "Filtered"
 
 
