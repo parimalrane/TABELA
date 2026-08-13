@@ -537,7 +537,7 @@ def print_daily_scan(
     print()
     print("========================================")
     print("THEME BREADTH ANALYSIS")
-    print("Legend: # = Distribution Watchlist Candidate")
+    print("Legend: [No Prefix] = True Long / ~ = Pre-Obs / - = Observation / # = Distribution")
     print("========================================")
     
     display_df = (

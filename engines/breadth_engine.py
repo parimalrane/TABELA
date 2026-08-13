@@ -22,16 +22,36 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     # TOP LEADERS PER THEME (Sourced from shared state long_candidates)
     # ==========================================
 
-    leaders_series = (
-        long_candidates
-        .sort_values(
-            ["Long_Score", "RS_Rating"],
-            ascending=[False, False],
-        )
+    # True Longs
+    true_long_tickers = set(stocks[stocks["Is_Long_Candidate"] & ~stocks["Is_Pre_Observation_Candidate"]]["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper())
+    true_longs_series = (
+        long_candidates[long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(true_long_tickers)]
+        .sort_values(["Long_Score", "RS_Rating"], ascending=[False, False])
         .groupby("Mapped_Theme")["Ticker"]
-        .apply(lambda s: ", ".join(s.astype(str).str.replace("*", "", regex=False).head(5)))
+        .apply(lambda s: ", ".join(s.astype(str).str.replace("*", "", regex=False)))
     )
 
+    # Pre-Observation
+    pre_obs_series = (
+        long_candidates[~long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(true_long_tickers)]
+        .sort_values(["Long_Score", "RS_Rating"], ascending=[False, False])
+        .groupby("Mapped_Theme")["Ticker"]
+        .apply(lambda s: ", ".join(f"~{t}" for t in s.astype(str).str.replace("*", "", regex=False)))
+    )
+
+    # Observation
+    obs_df = stocks[stocks["Tracking_State"] == "OBSERVATION"].copy()
+    if not obs_df.empty:
+        obs_series = (
+            obs_df
+            .sort_values(["Long_Score", "RS_Rating"], ascending=[False, False])
+            .groupby("Mapped_Theme")["Ticker"]
+            .apply(lambda s: ", ".join(f"-{t}" for t in s.astype(str).str.replace("*", "", regex=False)))
+        )
+    else:
+        obs_series = pd.Series(dtype=str)
+        
+    # Distribution
     if not distribution_watchlist.empty:
         dist_series = (
             distribution_watchlist
@@ -39,21 +59,22 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
             .groupby("Mapped_Theme")["Ticker"]
             .apply(lambda s: ", ".join(f"#{t}" for t in s.astype(str).str.replace("*", "", regex=False)))
         )
-        # Combine
-        combined_leaders = {}
-        all_themes = set(leaders_series.index) | set(dist_series.index)
-        for t in all_themes:
-            parts = []
-            if t in leaders_series and leaders_series[t]:
-                parts.append(leaders_series[t])
-            if t in dist_series and dist_series[t]:
-                parts.append(dist_series[t])
-            combined_leaders[t] = ", ".join(parts)
-            
-        import pandas as pd
-        leaders_by_theme = pd.Series(combined_leaders).rename_axis("Mapped_Theme").reset_index(name="Leaders")
     else:
-        leaders_by_theme = leaders_series.reset_index(name="Leaders")
+        dist_series = pd.Series(dtype=str)
+
+    # Combine All States
+    all_themes = set(true_longs_series.index) | set(pre_obs_series.index) | set(obs_series.index) | set(dist_series.index)
+    combined_leaders = {}
+    for t in all_themes:
+        parts = []
+        if t in true_longs_series and true_longs_series[t]: parts.append(true_longs_series[t])
+        if t in pre_obs_series and pre_obs_series[t]: parts.append(pre_obs_series[t])
+        if t in obs_series and obs_series[t]: parts.append(obs_series[t])
+        if t in dist_series and dist_series[t]: parts.append(dist_series[t])
+        combined_leaders[t] = ", ".join(parts)
+        
+    import pandas as pd
+    leaders_by_theme = pd.Series(combined_leaders).rename_axis("Mapped_Theme").reset_index(name="Leaders")
 
     # ==========================================
     # TOTAL STOCKS PER THEME
