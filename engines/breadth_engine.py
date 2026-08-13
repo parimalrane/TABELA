@@ -1,6 +1,5 @@
-
 import math
-
+import pandas as pd
 
 def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
 
@@ -73,7 +72,6 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
         if t in dist_series and dist_series[t]: parts.append(dist_series[t])
         combined_leaders[t] = ", ".join(parts)
         
-    import pandas as pd
     leaders_by_theme = pd.Series(combined_leaders).rename_axis("Mapped_Theme").reset_index(name="Leaders")
 
     # ==========================================
