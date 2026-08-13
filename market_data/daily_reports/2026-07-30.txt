@@ -25,7 +25,7 @@ Data Storage                   Semiconductors       1    1   67.24   Lagging (#3
 Insurance                      Insurance           62   12   66.14   Leading (#6)     GSHD, TRV, SKWD
 Asset Management               Banking              1    1   62.38   Neutral (#15)    VCTR
 Medical Devices                Medical Devices     79   12   59.57   Leading (#5)     BFLY, BVS, BAX, GKOS, HAE
-Restaurants                    Consumer Staples    24    4   52.59   Unknown (#?)     #EAT
+Restaurants                    Consumer Staples    24    4   52.59   Unknown (#?)     EAT
 Healthcare                     Healthcare          39    6   45.39   Neutral (#9)     MEDP
 Digital Banking                Banking              3    1   43.89   Neutral (#15)    DAVE
 Memory                         Semiconductors       4    1   39.03   Lagging (#33)    #SIMO, #WDC
@@ -35,11 +35,11 @@ Biotech                        Biotech             78    7   33.87   Neutral (#2
 Banking                        Banking            144    9   25.92   Neutral (#15)    #MUFG
 Pharma                         Pharma              40    3   24.79   Neutral (#8)     URGN, AMRX, NBIX
 Financial Services             Banking             61    3   17.94   Neutral (#15)    AAMI
+Semiconductor Equipment        Semiconductors      19    0    0.00   Lagging (#33)    #ACMR, #AMAT, #ICHR, #LRCX, #MKSI,
+                                                                                      #UCTT
 Semiconductors                 Semiconductors      45    0    0.00   Lagging (#33)    #AMBQ, #ASX, #MXL, #STM, #SVCO, #TXN,
                                                                                       #VICR, #VPG, #VSH
 Semiconductor Testing          Semiconductors       2    0    0.00   Lagging (#33)    #COHU
-Semiconductor Equipment        Semiconductors      19    0    0.00   Lagging (#33)    #ACMR, #AMAT, #ICHR, #LRCX, #MKSI,
-                                                                                      #UCTT
 AI Networking                  Artificial Intel..   3    0    0.00   Lagging (#30)    #EXTR
 AI Connectivity                Artificial Intel..   2    0    0.00   Lagging (#30)    #ALAB
 AI Compute                     Artificial Intel..   3    0    0.00   Lagging (#30)    #AMD, #INTC
@@ -75,6 +75,7 @@ Ticker          Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Ra
     EC           Exploration              Leading         95      86.39          3
    BAX       Medical Devices              Leading         95      86.30          3
   FSLY  Cloud Infrastructure              Leading         90      86.01          3
+   EAT           Restaurants              Leading         95      85.95          3
   GKOS       Medical Devices              Leading         90      85.65          3
 
 ========================================
@@ -97,8 +98,8 @@ Ticker        Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
    DVA Healthcare Services              Neutral         95      84.85          3
    AGL Healthcare Services              Neutral         99      84.75          3
   GSHD           Insurance              Leading         90      84.56          3
- PSNL*         Diagnostics              Leading         98      84.55         4*
-  HAE*     Medical Devices              Leading         95      83.80         4*
+  PSNL         Diagnostics              Leading         98      84.55         4*
+   HAE     Medical Devices              Leading         95      83.80         4*
    CON Healthcare Services              Neutral         90      82.80          3
   AMRX              Pharma              Neutral         90      82.68          3
    TRV           Insurance              Leading         80      82.66          1
@@ -142,24 +143,25 @@ Legend: * = Zacks Rank 4 or 5
     4   ALKS                                 Biotech              Neutral         90      73.92          3
     4   TDOC                              Healthcare              Neutral         10      35.80          3
     4   TVTX                                 Biotech              Neutral         90      77.52          3
-    4   NRIX                                 Biotech              Neutral         90      77.52          3
     4     VG LNG / Natural Gas Export Infrastructure              Unknown         90      79.90          3
-    5   GLUE                                 Biotech              Neutral         70      66.52          3
-    5   ASTH                              Healthcare              Neutral         30      51.59          3
+    4   NRIX                                 Biotech              Neutral         90      77.52          3
+    4    FTK                         Energy Services              Leading         90      83.50          3
     5    HPK                             Exploration              Leading         60      68.73          2
+    5   ASTH                              Healthcare              Neutral         30      51.59          3
     5   ABCL                                 Biotech              Neutral         50      55.52          3
+    5   GLUE                                 Biotech              Neutral         70      66.52          3
+    6   CEPL                             Exploration              Leading         30      53.13          3
+    6   HNGE                          Digital Health              Neutral         80      81.91          1
     6   APPS                           Mobile Adtech              Neutral         95      75.82          3
     6    TOI                              Healthcare              Neutral         80      77.09          3
     6    NET                    Cloud Infrastructure              Leading         80      83.71          2
-    6   CEPL                             Exploration              Leading         30      53.13          3
-    6   HNGE                          Digital Health              Neutral         80      81.91          1
-    7    MOH                              Healthcare              Neutral         30      51.99          2
-    7    CNC                              Healthcare              Neutral         60      69.39          1
     7    CRL                              Healthcare              Neutral         80      76.80          2
     7   MGTX                                 Biotech              Neutral         70      69.02          2
-    7   OKTA                           Cybersecurity              Neutral         97      88.56          2
-    7   AGIO                                 Biotech              Neutral         40      49.32          3
     7     BB                           Cybersecurity              Neutral         90      84.01          2
+    7   AGIO                                 Biotech              Neutral         40      49.32          3
+    7   OKTA                           Cybersecurity              Neutral         97      88.56          2
+    7    MOH                              Healthcare              Neutral         30      51.99          2
+    7    CNC                              Healthcare              Neutral         60      69.39          1
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -169,9 +171,9 @@ DISTRIBUTION WATCHLIST
     2   KYMR                 Biotech              Neutral         80      67.82          3
     3   RGNX                 Biotech              Neutral         10      31.52         4*
     3    STX            Data Storage              Lagging         97      78.83          1
-    3   CYTK                 Biotech              Neutral         60      61.02          3
     3   MUFG                 Banking              Neutral         90      78.87          3
     3   SIMO                  Memory              Lagging         90      73.58          1
+    3   CYTK                 Biotech              Neutral         60      61.02          3
     3   MIRM                 Biotech              Neutral         60      63.52          2
     3   MRNA                 Biotech              Neutral         70      62.32          3
     4   RARE                 Biotech              Neutral         20      40.12          2
@@ -179,32 +181,31 @@ DISTRIBUTION WATCHLIST
     4    STM          Semiconductors              Lagging         50      48.28          1
     4    VSH          Semiconductors              Lagging         60      51.18          3
     4   DOCN    Cloud Infrastructure              Leading         70      79.31          2
-    4    ASX          Semiconductors              Lagging         70      61.68          1
-    4   ICHR Semiconductor Equipment              Lagging         97      69.63         4*
     4   AMAT Semiconductor Equipment              Lagging         80      65.88          2
+    4   ICHR Semiconductor Equipment              Lagging         97      69.63         4*
+    4    ASX          Semiconductors              Lagging         70      61.68          1
     4    UMC                 Foundry              Lagging         80      67.38          1
     4    MXL          Semiconductors              Lagging         80      65.48          2
     4    VPG          Semiconductors              Lagging         90      67.68          3
     4   UCTT Semiconductor Equipment              Lagging         90      69.68          1
     4    AMD              AI Compute              Lagging         90      74.64          2
+    5   ALAB         AI Connectivity              Lagging         80      67.94          3
     5    WDC                  Memory              Lagging         95      74.23          1
-    5   AMBQ          Semiconductors              Lagging         95      68.43          3
-    5   COHU   Semiconductor Testing              Lagging         50      49.78          1
+    5    TXN          Semiconductors              Lagging         60      57.08          1
     5   LRCX Semiconductor Equipment              Lagging         50      50.78          2
     5   ACMR Semiconductor Equipment              Lagging         80      63.18          3
-    5    TXN          Semiconductors              Lagging         60      57.08          1
-    5   ALAB         AI Connectivity              Lagging         80      67.94          3
-    6    EAT             Restaurants              Unknown         95      80.95          3
+    5   COHU   Semiconductor Testing              Lagging         50      49.78          1
+    5   AMBQ          Semiconductors              Lagging         95      68.43          3
+    7   SVCO          Semiconductors              Lagging         10      23.08          3
     7   EXTR           AI Networking              Lagging         90      69.44          3
     7   VICR          Semiconductors              Lagging         20      34.28          2
     7   INTC              AI Compute              Lagging         50      47.94          2
-    7   SVCO          Semiconductors              Lagging         10      23.08          3
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,DDOG,ADPT,SEZL,RNG,SNOW,OSCR,CDNA,CBZ,TWST,BFLY,AVTR,NEO,ILMN,TXG,BLFS,BVS,DGX,VCYT,FIVN,MRVI,GH,EC,BAX,FSLY,GKOS,
+###LONG,LQDA,DDOG,ADPT,SEZL,RNG,SNOW,OSCR,CDNA,CBZ,TWST,BFLY,AVTR,NEO,ILMN,TXG,BLFS,BVS,DGX,VCYT,FIVN,MRVI,GH,EC,BAX,FSLY,EAT,GKOS,
 ###PRE_OBSERVATION,PGNY,ETON,URGN,CORT,DAVE,HUM,AAMI,AVAH,FTNT,PACS,VCTR,BTSG,DVA,AGL,GSHD,PSNL,HAE,CON,AMRX,TRV,AGEN,NBIX,VVX,MEDP,SKWD,
-###OBSERVATION,XNCR,SNDK,MU,KNSA,OKTA,APPS,IBRX,PTGX,PENG,ALKS,TVTX,NRIX,VG,TGTX,BB,NET,SM,HALO,HNGE,CYRX,ALL,CRL,LFST,ACRS,FTRE,CVS,NESR,TOI,CNA,GLUE,MGTX,RYAN,CNC,HPK,OMDA,ABCL,AGIO,ASTH,CEPL,MOH,NVCR,TDOC,
-###DISTRIBUTION,TWLO,KYMR,RGNX,STX,CYTK,MUFG,SIMO,MIRM,MRNA,RARE,MKSI,STM,VSH,DOCN,ASX,ICHR,AMAT,UMC,MXL,VPG,UCTT,AMD,WDC,AMBQ,COHU,LRCX,ACMR,TXN,ALAB,EAT,EXTR,VICR,INTC,SVCO,
+###OBSERVATION,XNCR,SNDK,MU,KNSA,OKTA,APPS,IBRX,PTGX,PENG,ALKS,TVTX,FTK,NRIX,VG,TGTX,BB,NET,SM,HALO,HNGE,CYRX,ALL,CRL,LFST,ACRS,FTRE,CVS,NESR,TOI,CNA,GLUE,MGTX,RYAN,CNC,HPK,OMDA,ABCL,AGIO,ASTH,CEPL,MOH,NVCR,TDOC,
+###DISTRIBUTION,TWLO,KYMR,RGNX,STX,MUFG,SIMO,CYTK,MIRM,MRNA,RARE,MKSI,STM,VSH,DOCN,AMAT,ICHR,ASX,UMC,MXL,VPG,UCTT,AMD,ALAB,WDC,TXN,LRCX,ACMR,COHU,AMBQ,SVCO,EXTR,VICR,INTC,
 
 ==============================================
 END OF TABELA SCAN

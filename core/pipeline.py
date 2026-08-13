@@ -247,6 +247,37 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
     return stocks
 
 
+def resolve_unclassified_leaders(stocks):
+    """
+    Targeted Override Layer (Whitelist)
+    Fixes classification for specific known leaders whose ETFs are structurally filtered.
+    Ensures they are accurately mapped without opening floodgates for broad ETFs.
+    """
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    override_file = os.path.join(base_dir, "data", "unclassified_overrides.csv")
+    
+    overrides = {}
+    if os.path.exists(override_file):
+        try:
+            df_overrides = pd.read_csv(override_file)
+            for _, row in df_overrides.iterrows():
+                overrides[str(row["Ticker"]).strip().upper()] = str(row["Theme"]).strip()
+        except Exception:
+            pass
+    
+    for ticker, theme in overrides.items():
+        mask = stocks["Ticker"] == ticker
+        if mask.any():
+            # Apply strict override
+            stocks.loc[mask, "Mapped_Theme"] = theme
+            stocks.loc[mask, "ETF_Theme"] = theme
+            stocks.loc[mask, "Theme_Class"] = "Leading"
+            stocks.loc[mask, "Theme_Score"] = 80
+            stocks.loc[mask, "Theme_State"] = "Leading"
+            stocks.loc[mask, "Is_Unclassified_Leader"] = False
+            
+    return stocks
+
 def extract_benchmark_returns(raw_etf_df, theme_strength_settings):
     benchmark_ticker = theme_strength_settings["benchmark_ticker"]
     period_weights = theme_strength_settings["period_weights"]
@@ -747,6 +778,8 @@ def run_tabela_pipeline():
         theme_score_map,
         theme_raw_score_map,
     )
+
+    stocks = resolve_unclassified_leaders(stocks)
 
     stocks = score_stocks(stocks)
 

@@ -5,7 +5,8 @@ from pathlib import Path
 import re
 
 def main():
-    base_dir = Path(os.path.abspath(__file__)).parent
+    script_dir = Path(os.path.abspath(__file__)).parent
+    base_dir = script_dir.parent
     data_dir = base_dir / "market_data"
     input_dir = data_dir / "input_files"
     backup_dir = data_dir / "input_files_all"
@@ -18,7 +19,7 @@ def main():
         except:
             pass
     
-    for txt_file in (data_dir / "daily_reports").rglob("*.txt"):
+    for txt_file in (base_dir / "market_data" / "daily_reports").rglob("*.txt"):
         try:
             os.remove(txt_file)
         except:

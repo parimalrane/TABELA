@@ -19,20 +19,20 @@ Healthcare                     Healthcare          38   10   85.05   Leading (#5
 Memory                         Semiconductors       4    2   79.67   Lagging (#30)    MU, SNDK, #WDC
 Digital Payments               Software             4    2   76.05   Neutral (#24)    SEZL
 Biotech                        Biotech             80   15   71.25   Neutral (#13)    TGTX, HALO, IBRX, ALKS, TVTX
+Energy Services                Energy Services      1    1   65.85   Unknown (#?)     FTK
 LNG / Natural Gas Export Inf.. LNG / Natural Ga..   1    1   65.85   Unknown (#?)     VG
 Pharma                         Pharma              40    8   62.95   Leading (#6)     URGN, NBIX, ACRS
 Asset Management               Banking              1    1   62.38   Neutral (#10)    VCTR
-AI Compute                     Artificial Intel..   3    1   44.82   Lagging (#32)    #INTC
 Digital Banking                Banking              3    1   44.82   Neutral (#10)    DAVE
+AI Compute                     Artificial Intel..   3    1   44.82   Lagging (#32)    #INTC
 Cybersecurity                  Software            13    2   39.78   Neutral (#24)    FTNT
 Financial Services             Banking             63    6   34.31   Neutral (#10)    AAMI
 Insurance                      Insurance           66    6   31.21   Neutral (#7)     TRV
 Exploration                    Exploration         77    6   28.28   Leading (#4)     SM, NESR
-Restaurants                    Consumer Staples    24    2   26.28   Unknown (#?)     #EAT
 Software                       Software           161    3    9.08   Neutral (#24)    PENG
+Semiconductor Equipment        Semiconductors      20    0    0.00   Lagging (#30)    #ACMR, #LRCX
 Semiconductors                 Semiconductors      47    0    0.00   Lagging (#30)    #AMBQ, #SVCO, #TXN, #VICR
 Semiconductor Testing          Semiconductors       2    0    0.00   Lagging (#30)    #COHU
-Semiconductor Equipment        Semiconductors      20    0    0.00   Lagging (#30)    #ACMR, #LRCX
 AI Networking                  Artificial Intel..   3    0    0.00   Lagging (#32)    #EXTR
 AI Connectivity                Artificial Intel..   2    0    0.00   Lagging (#32)    #ALAB
 
@@ -62,6 +62,7 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
   LFST                              Healthcare              Leading         95      87.60          3
    AGL                     Healthcare Services              Leading         99      87.10          3
    CVS                              Healthcare              Leading         90      86.65          2
+   FTK                         Energy Services              Leading         95      86.25          3
   PNTG                              Healthcare              Leading         90      86.25          3
     SM                             Exploration              Leading         90      85.44          3
 
@@ -121,18 +122,19 @@ Legend: * = Zacks Rank 4 or 5
     3   FIVN    Communications Cloud              Neutral         80      73.47          3
     3     BB           Cybersecurity              Neutral         95      78.52          2
     3   MGTX                 Biotech              Neutral         80      78.64          2
+    3    EAT             Restaurants              Leading         80      77.70          3
     3    CNC              Healthcare              Leading         80      78.75          3
     4   SKWD               Insurance              Neutral         80      79.47          3
-    4   COMP  Real Estate Technology              Unknown         80      72.40          3
     4   TWLO    Communications Cloud              Neutral         80      75.97          2
     4   RELY                 Banking              Neutral         70      71.91          3
-    5    OGN              Healthcare              Leading         80      77.25          3
+    4   COMP  Real Estate Technology              Unknown         80      72.40          3
     5   VCEL                 Biotech              Neutral         80      74.94          3
     5   KYMR                 Biotech              Neutral         90      77.44          3
+    5    OGN              Healthcare              Leading         80      77.25          3
+    6   KRYS                 Biotech              Neutral         80      75.24         4*
     6   MRNA                 Biotech              Neutral         70      66.44          3
     6   MIRM                 Biotech              Neutral         70      73.14          2
     6   CYTK                 Biotech              Neutral         80      76.14          3
-    6   KRYS                 Biotech              Neutral         80      75.24         4*
     6   RGNX                 Biotech              Neutral         20      41.14         4*
     6    STX            Data Storage              Lagging         97      80.59          1
     6   MUFG                 Banking              Neutral         90      81.81          3
@@ -166,17 +168,16 @@ DISTRIBUTION WATCHLIST
     1   COHU   Semiconductor Testing              Lagging         70      61.04          2
     1   LRCX Semiconductor Equipment              Lagging         70      63.54          2
     1    TXN          Semiconductors              Lagging         50      53.34          1
-    2    EAT             Restaurants              Unknown         80      72.70          3
     3   EXTR           AI Networking              Lagging         90      68.27          3
     3   INTC              AI Compute              Lagging         70      59.27          1
     3   VICR          Semiconductors              Lagging         30      41.54          2
     3   SVCO          Semiconductors              Lagging         20      30.34          3
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,DAVE,OSCR,CORT,PGNY,HUM,URGN,ETON,INNV,VG,BTSG,NBIX,AVAH,DVA,VVX,PACS,MEDP,CON,LFST,AGL,CVS,PNTG,SM,
+###LONG,LQDA,DAVE,OSCR,CORT,PGNY,HUM,URGN,ETON,INNV,VG,BTSG,NBIX,AVAH,DVA,VVX,PACS,MEDP,CON,LFST,AGL,CVS,FTK,PNTG,SM,
 ###PRE_OBSERVATION,VCTR,TGTX,AAMI,AGEN,TRV,HALO,SEZL,IBRX,DDOG,CYRX,SNOW,XNCR,FTNT,NESR,PENG,ALKS,TDOC,MU,TVTX,NRIX,FTRE,ACRS,PTGX,NVCR,KNSA,OMDA,SNDK,
-###OBSERVATION,DELL,ICHR,APPS,MXL,OKTA,VPG,AMD,UCTT,STX,SIMO,HNGE,BB,UMC,DOCN,CARE,MUFG,ASX,VSH,AMAT,MRX,NET,CRL,KYMR,SKWD,OGN,GLUE,FIVN,VCEL,MGTX,CNC,CYTK,HPK,MKSI,COMP,KRYS,TWLO,AGIO,MRNA,TOELY,ASTH,MIRM,RELY,ABCL,STM,RARE,MOH,RGNX,
-###DISTRIBUTION,AMBQ,ACMR,WDC,ALAB,COHU,LRCX,TXN,EAT,EXTR,INTC,VICR,SVCO,
+###OBSERVATION,DELL,ICHR,APPS,MXL,OKTA,VPG,AMD,UCTT,STX,SIMO,HNGE,BB,UMC,DOCN,CARE,MUFG,ASX,VSH,AMAT,MRX,NET,CRL,KYMR,SKWD,OGN,EAT,GLUE,FIVN,VCEL,MGTX,CNC,CYTK,HPK,MKSI,COMP,KRYS,TWLO,AGIO,MRNA,TOELY,ASTH,MIRM,RELY,ABCL,STM,RARE,MOH,RGNX,
+###DISTRIBUTION,AMBQ,ACMR,WDC,ALAB,COHU,LRCX,TXN,EXTR,INTC,VICR,SVCO,
 
 ==============================================
 END OF TABELA SCAN

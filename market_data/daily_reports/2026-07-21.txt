@@ -29,6 +29,7 @@ Mobile Adtech                  Internet             2    1   54.38   Neutral (#2
 Digital Banking                Banking              3    1   44.82   Neutral (#9)     DAVE
 Exploration                    Exploration         85    6   26.21   Leading (#3)     NESR, CEPL
 Financial Services             Banking             70    5   26.17   Neutral (#9)     AAMI
+Restaurants                    Consumer Staples    28    2   22.60   Unknown (#?)     EAT
 Software                       Software           170    6   16.85   Neutral (#17)    PENG
 
 ========================================
@@ -96,6 +97,7 @@ Ticker         Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Ran
     MU               Memory              Neutral         99      83.60          1
     BB        Cybersecurity              Neutral         97      83.45          2
   APPS        Mobile Adtech              Neutral         99      83.43          1
+   EAT          Restaurants              Leading         90      83.20          3
   FTRE              Biotech              Leading         90      82.87          3
   SNDK               Memory              Neutral         99      82.20          1
    MOH           Healthcare              Leading         80      81.70          3
@@ -112,29 +114,29 @@ OBSERVATION WATCHLIST
 Legend: * = Zacks Rank 4 or 5
 ========================================
  Days Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank
-    1   TWLO    Communications Cloud              Neutral         80      79.64          1
-    1   RELY                 Banking              Neutral         80      77.85          3
     1   COMP  Real Estate Technology              Unknown         80      72.40          3
+    1   RELY                 Banking              Neutral         80      77.85          3
+    1   TWLO    Communications Cloud              Neutral         80      79.64          1
     1   SKWD               Insurance              Neutral         80      79.36          3
+    2   VCEL                 Biotech              Leading         80      78.97          3
     2    OGN              Healthcare              Leading         80      79.60          3
     2   KYMR                 Biotech              Leading         90      81.47          3
-    2   VCEL                 Biotech              Leading         80      78.97          3
     2   PTGX                 Biotech              Leading         90      81.47          3
     3   SIMO                  Memory              Neutral         98      81.05          1
-    3   CARE                 Banking              Neutral         90      80.85         4*
     3    STX            Data Storage              Neutral         97      82.50          1
-    3    MRX      Financial Services              Neutral         80      82.15          1
-    3   MUFG                 Banking              Neutral         80      76.75          3
-    3   MIRM                 Biotech              Leading         80      82.67          2
-    3   KRYS                 Biotech              Leading         80      79.27         4*
-    3   MRNA                 Biotech              Leading         80      75.97          3
-    3   RGNX                 Biotech              Leading         40      56.17         4*
     3   CYTK                 Biotech              Leading         80      80.17          3
+    3   MIRM                 Biotech              Leading         80      82.67          2
+    3   MUFG                 Banking              Neutral         80      76.75          3
+    3    MRX      Financial Services              Neutral         80      82.15          1
+    3   KRYS                 Biotech              Leading         80      79.27         4*
+    3   RGNX                 Biotech              Leading         40      56.17         4*
+    3   MRNA                 Biotech              Leading         80      75.97          3
+    3   CARE                 Banking              Neutral         90      80.85         4*
     4  TOELY Semiconductor Equipment              Neutral         90      76.55          1
     4    VSH          Semiconductors              Neutral         90      71.35          3
-    4    STM          Semiconductors              Neutral         90      73.95          1
     4   MKSI Semiconductor Equipment              Neutral         80      70.15          1
     4   ICHR Semiconductor Equipment              Neutral         99      74.40         4*
+    4   AMAT Semiconductor Equipment              Neutral         90      75.05          2
     4    ASX          Semiconductors              Neutral         95      77.60          2
     4   DOCN    Cloud Infrastructure              Neutral         95      87.59          2
     4    UMC                 Foundry              Neutral         97      74.40         4*
@@ -144,7 +146,7 @@ Legend: * = Zacks Rank 4 or 5
     4    VPG          Semiconductors              Neutral         98      75.75          3
     4   DELL              AI Servers              Neutral         99      80.09          1
     4    MXL          Semiconductors              Neutral         99      77.10          3
-    4   AMAT Semiconductor Equipment              Neutral         90      75.05          2
+    4    STM          Semiconductors              Neutral         90      73.95          1
     5    TXN          Semiconductors              Neutral         70      64.75          2
     5   MAMA                 Unknown              Unknown         60      64.60          2
     5   NTCT      Optical Networking              Neutral         80      66.45          3
@@ -157,7 +159,6 @@ Legend: * = Zacks Rank 4 or 5
     5    HPE              AI Servers              Neutral         95      77.59          1
     5   ALAB         AI Connectivity              Neutral         90      74.14          3
     6   CSCO           AI Networking              Neutral         70      62.84          2
-    6    EAT             Restaurants              Unknown         90      78.20          3
     6   ANAB                 Biotech              Leading         20      47.17          3
     7    ARM              AI Compute              Neutral         90      72.14          3
     7   INTC              AI Compute              Neutral         90      72.14          1
@@ -181,8 +182,8 @@ No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
 ###LONG,LQDA,OSCR,HUM,PGNY,INNV,CORT,URGN,DAVE,OMDA,ETON,NBIX,AVAH,DVA,PACS,IBRX,LFST,BTSG,AGEN,IOVA,AGL,ASTH,NESR,CYRX,CVS,PNTG,MGTX,CON,TGTX,XNCR,VG,TOI,TDOC,CEPL,CNC,NRIX,TVTX,ABCL,ACRS,ALKS,
-###PRE_OBSERVATION,VCTR,SEZL,HNGE,AAMI,FTNT,DDOG,PENG,SNOW,KNSA,AGIO,OKTA,NET,MU,BB,APPS,FTRE,SNDK,MOH,CRL,FIVN,GLUE,
-###OBSERVATION,ICHR,MXL,AMBQ,DELL,VPG,SIMO,UCTT,ACMR,AMD,STX,UMC,EXTR,WDC,DOCN,NBIS,HPE,ASX,AMAT,EAT,ALAB,ARM,PTGX,STM,VSH,TOELY,INTC,KYMR,KLIC,CARE,OUST,COHU,MKSI,MRVL,WYFI,RELY,PGEN,VCEL,COMP,MRNA,MUFG,SKWD,NTCT,TWLO,MIRM,MRX,CYTK,SYNA,LRCX,OGN,KRYS,CSCO,ALGM,CRDO,IFNNY,TXN,MAMA,RARE,RGNX,SVCO,VICR,ANAB,
+###PRE_OBSERVATION,VCTR,SEZL,HNGE,AAMI,FTNT,DDOG,PENG,SNOW,KNSA,AGIO,OKTA,NET,MU,BB,APPS,EAT,FTRE,SNDK,MOH,CRL,FIVN,GLUE,
+###OBSERVATION,ICHR,MXL,AMBQ,DELL,VPG,SIMO,UCTT,ACMR,AMD,STX,UMC,EXTR,WDC,DOCN,NBIS,HPE,ASX,AMAT,ALAB,ARM,PTGX,STM,VSH,TOELY,INTC,KYMR,KLIC,CARE,OUST,COHU,MKSI,MRVL,WYFI,RELY,PGEN,VCEL,COMP,MRNA,MUFG,SKWD,NTCT,TWLO,MIRM,MRX,CYTK,SYNA,LRCX,OGN,KRYS,CSCO,ALGM,CRDO,IFNNY,TXN,MAMA,RARE,RGNX,SVCO,VICR,ANAB,
 ###DISTRIBUTION,,
 
 ==============================================
