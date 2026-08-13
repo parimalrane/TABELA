@@ -247,7 +247,7 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
     return stocks
 
 
-def resolve_unclassified_leaders(stocks):
+def resolve_unclassified_leaders(stocks, theme_class_map):
     """
     Targeted Override Layer (Whitelist)
     Fixes classification for specific known leaders whose ETFs are structurally filtered.
@@ -266,6 +266,9 @@ def resolve_unclassified_leaders(stocks):
             pass
     
     for ticker, theme in overrides.items():
+        if theme not in theme_class_map:
+            theme_class_map[theme] = "Leading"
+
         mask = stocks["Ticker"] == ticker
         if mask.any():
             # Apply strict override
@@ -779,7 +782,7 @@ def run_tabela_pipeline():
         theme_raw_score_map,
     )
 
-    stocks = resolve_unclassified_leaders(stocks)
+    stocks = resolve_unclassified_leaders(stocks, theme_class_map)
 
     stocks = score_stocks(stocks)
 
