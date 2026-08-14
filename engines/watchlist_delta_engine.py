@@ -83,13 +83,18 @@ def compare_watchlists(
     #
 
     if previous_file is None:
+    
+        current_true_long_ordered = [str(x).replace("*", "").strip().upper() for x in current_true_long]
+        current_pre_obs_ordered = [str(x).replace("*", "").strip().upper() for x in current_pre_obs]
+        current_observation_ordered = [str(x).replace("*", "").strip().upper() for x in current_observation]
+        current_distribution_ordered = [str(x).replace("*", "").strip().upper() for x in current_distribution]
 
         save_watchlist(
             current_file,
-            current_true_long_set,
-            current_pre_obs_set,
-            current_observation_set,
-            current_distribution_set,
+            current_true_long_ordered,
+            current_pre_obs_ordered,
+            current_observation_ordered,
+            current_distribution_ordered,
             theme_lookup,
         )
 
@@ -101,36 +106,34 @@ def compare_watchlists(
             "left_distribution": [],
             "recovering_observation": [],
             "recovering_distribution": [],
+            "movements": {},
         }
 
     with open(previous_file, "r", encoding="utf-8") as f:
         old_data = json.load(f)
 
-    def extract_tickers(items):
-
-        tickers = set()
-
+    def extract_ordered_tickers(items):
+        tickers = []
         for item in items:
-
             if isinstance(item, str):
-                tickers.add(item.replace("*", "").strip())
-
+                t = item.replace("*", "").strip().upper()
             else:
-                tickers.add(
-                    item["ticker"]
-                    .replace("*", "")
-                    .strip()
-                )
-
+                t = item["ticker"].replace("*", "").strip().upper()
+            if t not in tickers:
+                tickers.append(t)
         return tickers
 
-    old_long = extract_tickers(old_data.get("long", []))
-    old_true_long = extract_tickers(old_data.get("true_long", old_data.get("long", [])))
-    old_pre_obs = extract_tickers(old_data.get("pre_observation", []))
-    old_observation = extract_tickers(old_data.get("observation", []))
-    old_distribution = extract_tickers(old_data.get("distribution", []))
+    old_true_long_list = extract_ordered_tickers(old_data.get("true_long", old_data.get("long", [])))
+    old_pre_obs_list = extract_ordered_tickers(old_data.get("pre_observation", []))
+    old_observation_list = extract_ordered_tickers(old_data.get("observation", []))
+    old_distribution_list = extract_ordered_tickers(old_data.get("distribution", []))
+    
+    old_long = set(old_true_long_list) | set(old_pre_obs_list)
+    old_true_long = set(old_true_long_list)
+    old_pre_obs = set(old_pre_obs_list)
+    old_observation = set(old_observation_list)
+    old_distribution = set(old_distribution_list)
 
-    #
     #
     # Watchlist deltas
     #
@@ -168,12 +171,41 @@ def compare_watchlists(
         recovered["distribution"]
     )
 
+    def calculate_movements(old_ord, cur_ordered, new_s):
+        movs = {}
+        for new_idx, t in enumerate(cur_ordered):
+            if t in new_s:
+                movs[t] = "NA"
+            elif t in old_ord:
+                old_idx = old_ord.index(t)
+                diff = old_idx - new_idx
+                if diff > 0:
+                    movs[t] = f"+{diff}"
+                elif diff < 0:
+                    movs[t] = str(diff)
+                else:
+                    movs[t] = "0"
+            else:
+                movs[t] = "NA"
+        return movs
+        
+    current_true_long_ordered = [str(x).replace("*", "").strip().upper() for x in current_true_long]
+    current_pre_obs_ordered = [str(x).replace("*", "").strip().upper() for x in current_pre_obs]
+    current_observation_ordered = [str(x).replace("*", "").strip().upper() for x in current_observation]
+    current_distribution_ordered = [str(x).replace("*", "").strip().upper() for x in current_distribution]
+
+    movements = {}
+    movements.update(calculate_movements(old_true_long_list, current_true_long_ordered, new_longs))
+    movements.update(calculate_movements(old_pre_obs_list, current_pre_obs_ordered, new_pre_observation))
+    movements.update(calculate_movements(old_observation_list, current_observation_ordered, new_observation))
+    movements.update(calculate_movements(old_distribution_list, current_distribution_ordered, new_distribution))
+
     save_watchlist(
         current_file,
-        current_true_long_set,
-        current_pre_obs_set,
-        current_observation_set,
-        current_distribution_set,
+        current_true_long_ordered,
+        current_pre_obs_ordered,
+        current_observation_ordered,
+        current_distribution_ordered,
         theme_lookup,
     )
 
@@ -185,6 +217,7 @@ def compare_watchlists(
         "left_distribution": left_distribution,
         "recovering_observation": recovering_observation,
         "recovering_distribution": recovering_distribution,
+        "movements": movements,
     }
 
 def save_watchlist(
@@ -197,22 +230,19 @@ def save_watchlist(
 ):
 
     def build_entries(items):
-
+        # Do not sort! Keep sequential rank order!
         return [
             {
                 "ticker": ticker,
-                "theme": theme_lookup.get(
-                    ticker,
-                    "Unknown",
-                ),
+                "theme": theme_lookup.get(ticker, "Unknown"),
             }
-            for ticker in sorted(items)
+            for ticker in items
         ]
 
     data = {
         "true_long": build_entries(true_long_list),
         "pre_observation": build_entries(pre_obs_list),
-        "long": build_entries(list(set(true_long_list) | set(pre_obs_list))),  # maintain legacy format
+        "long": build_entries(true_long_list + pre_obs_list),  # maintain legacy format
         "observation": build_entries(observation_list),
         "distribution": build_entries(distribution_list),
     }

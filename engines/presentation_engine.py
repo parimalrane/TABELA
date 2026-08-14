@@ -553,11 +553,12 @@ def print_daily_scan(
         ]
     )
 
-    true_long_tickers = set()
+    true_long_tickers = []
     for clean_ticker in long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper():
         match = stocks[stocks["Ticker"].astype(str).str.upper() == clean_ticker]
         if not match.empty and not match.iloc[0].get("Is_Pre_Observation_Candidate", False):
-            true_long_tickers.add(clean_ticker)
+            if clean_ticker not in true_long_tickers:
+                true_long_tickers.append(clean_ticker)
 
     def should_display(row):
         leaders_val = row.get("Leaders")
@@ -689,6 +690,24 @@ def print_daily_scan(
     true_longs = display_df[~display_df["is_pre_obs"]].drop(columns=["is_pre_obs"])
     grace_longs = display_df[display_df["is_pre_obs"]].drop(columns=["is_pre_obs"])
 
+    deltas = compare_watchlists(
+        current_true_long=true_long_tickers,
+        current_pre_obs=grace_longs["Ticker"].tolist(),
+        current_observation=stocks.loc[
+            stocks["Tracking_State"] == "OBSERVATION",
+            "Ticker",
+        ].tolist(),
+        current_distribution=distribution_watchlist["Ticker"].tolist(),
+        recovered=recovered,
+        stocks=stocks,
+    )
+
+    movements = deltas.get("movements", {})
+    if not true_longs.empty:
+        true_longs["Movement"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
+    if not grace_longs.empty:
+        grace_longs["Movement"] = grace_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
+
     if true_longs.empty:
         print("No active candidates in Long Candidate Universe.")
     else:
@@ -705,17 +724,7 @@ def print_daily_scan(
     else:
         print(grace_longs.to_string(index=False))
 
-    deltas = compare_watchlists(
-        current_true_long=list(true_long_tickers),
-        current_pre_obs=grace_longs["Ticker"].tolist(),
-        current_observation=stocks.loc[
-            stocks["Tracking_State"] == "OBSERVATION",
-            "Ticker",
-        ].tolist(),
-        current_distribution=distribution_watchlist["Ticker"].tolist(),
-        recovered=recovered,
-        stocks=stocks,
-    )
+    # Deltas already calculated above
 
     new_longs = deltas.get("new_longs", [])
     new_pre_obs = deltas.get("new_pre_observation", [])
@@ -799,6 +808,7 @@ def print_daily_scan(
             }
         )
 
+        display_obs["Movement"] = display_obs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         print(display_obs.to_string(index=False))
 
 
@@ -857,6 +867,7 @@ def print_daily_scan(
             }
         )
 
+        display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         print(display_df.to_string(index=False))
 
     print()
