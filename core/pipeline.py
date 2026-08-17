@@ -24,7 +24,6 @@ from engines.watchlist_delta_engine import (
 )
 
 from engines.historical_intelligence_engine import build_theme_performance_table
-from engines.institutional_leaders_engine import build_institutional_leaders
 from engines.long_scoring_engine import calculate_long_score
 from engines.presentation_engine import (
     print_daily_scan,
@@ -218,10 +217,15 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
             etf_raw_score = theme_raw_score_map.get(etf_theme)
             is_unclassified = False
         else:
+            from core.config import UNCLASSIFIED_LEADER_FILTERS
+            u_rs = UNCLASSIFIED_LEADER_FILTERS.get("MIN_RS", 90)
+            u_sales = UNCLASSIFIED_LEADER_FILTERS.get("MIN_SALES", 80)
+            u_zacks = UNCLASSIFIED_LEADER_FILTERS.get("MIN_ZACKS", 85)
+
             if (
-                row["RS_Rating"] >= 90
-                and row["Sales_Score"] >= 80
-                and row["Zacks_Score"] >= 85
+                row["RS_Rating"] >= u_rs
+                and row["Sales_Score"] >= u_sales
+                and row["Zacks_Score"] >= u_zacks
             ):
                 theme_class = "Unclassified Leader"
                 theme_score = 80
@@ -549,33 +553,15 @@ def score_stocks(stocks):
 
 
 def build_candidates(stocks):
-
     registry = load_registry()
 
     long_watchlist = build_long_watchlist(stocks)
-    institutional_leaders = build_institutional_leaders(stocks)
-
-    long_watchlist = long_watchlist.sort_values(
-        "Long_Score",
-        ascending=False,
-    )
-
-    long_tickers = set(long_watchlist["Ticker"])
 
     long_candidates = (
-        pd.concat([long_watchlist, institutional_leaders])
+        long_watchlist
         .drop_duplicates(subset="Ticker")
         .sort_values("Long_Score", ascending=False)
         .reset_index(drop=True)
-    )
-
-    long_candidates["Ticker"] = long_candidates.apply(
-        lambda row: (
-            row["Ticker"]
-            if row["Ticker"] in long_tickers
-            else row["Ticker"] + "*"
-        ),
-        axis=1,
     )
 
     registry, recovered = pre_distribution_update(

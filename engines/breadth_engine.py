@@ -7,13 +7,17 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     # DEFINE STRONG STOCKS (For aggregate breadth stats only)
     # ==========================================
 
+    from core.config import BREADTH_FILTERS
+    s_rs = BREADTH_FILTERS.get("STRONG_STOCK_MIN_RS", 80)
+    s_comp = BREADTH_FILTERS.get("STRONG_STOCK_MIN_COMPOSITE", 75)
+
     strong_stocks = stocks[
 
-        (stocks["RS_Rating"] >= 80)
+        (stocks["RS_Rating"] >= s_rs)
 
         &
 
-        (stocks["Composite_Score"] >= 75)
+        (stocks["Composite_Score"] >= s_comp)
 
     ].copy()
 
@@ -193,129 +197,5 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
         ascending=False,
 
     )
-
-    return breadth
-
-    # ==========================================
-    # DEFINE STRONG STOCKS
-    # ==========================================
-
-    strong_stocks = stocks[
-
-        (stocks["RS_Rating"] >= 80) &
-
-        (stocks["Composite_Score"] >= 75)
-
-    ]
-
-
-    # ==========================================
-    # TOTAL STOCKS PER THEME
-    # ==========================================
-
-    total_by_theme = (
-
-        stocks
-
-        .groupby("Mapped_Theme")
-
-        .size()
-
-        .reset_index(name="Total_Stocks")
-
-    )
-
-
-    # ==========================================
-    # STRONG STOCKS PER THEME
-    # ==========================================
-
-    strong_by_theme = (
-
-        strong_stocks
-
-        .groupby("Mapped_Theme")
-
-        .agg(
-
-            Strong_Stocks=("Mapped_Theme", "size"),
-
-            Avg_Strong_RS=("RS_Rating", "mean")
-
-        )
-        .reset_index()
-
-    )
-
-
-    # ==========================================
-    # MERGE
-    # ==========================================
-
-    breadth = total_by_theme.merge(
-
-        strong_by_theme,
-
-        on="Mapped_Theme",
-
-        how="left"
-
-    )
-
-
-    breadth["Strong_Stocks"] = breadth["Strong_Stocks"].fillna(0)
-    breadth["Avg_Strong_RS"] = breadth["Avg_Strong_RS"].fillna(0)
-
-
-    # ==========================================
-    # STANDARD BREADTH %
-    # ==========================================
-
-    breadth["Breadth_Percent"] = round(
-
-        (breadth["Strong_Stocks"] / breadth["Total_Stocks"]) * 100,
-
-        2
-
-    )
-
-
-    # ==========================================
-    # WEIGHTED BREADTH SCORE
-    # ==========================================
-
-    breadth["Weighted_Breadth_Score"] = round(
-
-        breadth["Breadth_Percent"]
-
-        *
-
-        (breadth["Avg_Strong_RS"] / 100)
-
-        *
-
-        breadth["Total_Stocks"].apply(
-
-            lambda x: math.log(x + 1)
-
-        ),
-
-        2
-
-    )
-
-
-    # ==========================================
-    # SORT BY WEIGHTED SCORE
-    # ==========================================
-
-    breadth = breadth.sort_values(
-
-        "Weighted_Breadth_Score",
-
-        ascending=False
-
-    )
-
 
     return breadth
