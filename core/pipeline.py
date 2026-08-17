@@ -634,12 +634,15 @@ def build_candidates(stocks):
         rs = row.get("RS_Rating", 0)
         ls = row.get("Long_Score", 0)
 
+        from core.config import LONG_FILTERS
+        std_rs = LONG_FILTERS.get("MIN_RS", 90)
+        std_score = LONG_FILTERS.get("MIN_LONG_SCORE", 85)
+
         # Standard Macro-backed entry
-        if t_class in ["Leading", "Unclassified Leader"] and rs >= 90 and ls >= 85:
+        if t_class in ["Leading", "Unclassified Leader"] and rs >= std_rs and ls >= std_score:
             return False
             
         # Idiosyncratic Exemption Rule (Option B)
-        from core.config import LONG_FILTERS
         idio_min_rs = LONG_FILTERS.get("IDIOSYNCRATIC_MIN_RS", 95)
         idio_min_score = LONG_FILTERS.get("IDIOSYNCRATIC_MIN_LONG_SCORE", 90)
         
