@@ -25,8 +25,15 @@ def generate_market_csv():
             print(f"Warning: No data for {etf}")
             continue
             
-        close = df["Close"].squeeze()
-        vol = df["Volume"].squeeze()
+        close_raw = df["Close"].squeeze()
+        vol_raw = df["Volume"].squeeze()
+
+        # Drop NaN values (like current incomplete day on weekends)
+        close = close_raw.dropna()
+        if close.empty:
+            continue
+            
+        vol = vol_raw.loc[close.index]
         
         last_px = close.iloc[-1]
         last_vol = vol.iloc[-1]
@@ -40,6 +47,7 @@ def generate_market_csv():
         v_sma_50 = vol.rolling(50).mean().iloc[-1]
         
         # Calculate trailing performance (close to close)
+        perf_1d = get_perf(close, 1)
         perf_5d = get_perf(close, 5)
         perf_20d = get_perf(close, 20)
         perf_50d = get_perf(close, 50)
@@ -51,10 +59,6 @@ def generate_market_csv():
         dist_50d = ((last_px - sma_50) / sma_50) * 100
         dist_200d = ((last_px - sma_200) / sma_200) * 100
         
-        # Calculate true Relative Volume vs historical averages
-        rv_20d = (last_vol / v_sma_20) * 100
-        rv_50d = (last_vol / v_sma_50) * 100
-        
         # Use the actual last trading date from Yahoo Finance for stamping
         market_date_obj = close.index[-1]
         
@@ -63,12 +67,12 @@ def generate_market_csv():
             "ETF": etf,
             "Derived Price": round(last_px, 2),
             "Volume": int(last_vol),
+            "20D Avg Vol": int(v_sma_20),
+            "1D Perf %": round(perf_1d, 2),
             "5D Perf %": round(perf_5d, 2),
             "20D Perf %": round(perf_20d, 2),
             "50D Perf %": round(perf_50d, 2),
             "200D Perf %": round(perf_200d, 2),
-            "RV 20D %": round(rv_20d, 2),
-            "RV 50D %": round(rv_50d, 2),
             "5D Dist %": round(dist_5d, 2),
             "20D Dist %": round(dist_20d, 2),
             "50D Dist %": round(dist_50d, 2),

@@ -29,6 +29,18 @@ UNCLASSIFIED_LEADER_FILTERS = {
     "MIN_ZACKS": 85
 }
 
+MARKET_CONTEXT_CONFIG = {
+    "ACCUMULATION_MIN_PRICE_CHANGE": 1.0,  
+    "ACCUMULATION_MIN_RV": 100.0,          
+
+    "DISTRIBUTION_MAX_PRICE_CHANGE": -1.0,  # Price is down by 1% -> mathematically < -1.0
+    "DISTRIBUTION_MAX_RV": 100.0,          
+
+    "CONSOLIDATION_MIN_PRICE_CHANGE": -0.5,
+    "CONSOLIDATION_MAX_PRICE_CHANGE": 0.5,
+    "CONSOLIDATION_MAX_RV": 70.0           
+}
+
 DISTRIBUTION_ENGINE_CONFIG = {
     # Universe and file windows.
     "MAX_HISTORY_DAYS": 21,

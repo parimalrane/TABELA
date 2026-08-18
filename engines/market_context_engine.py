@@ -69,9 +69,8 @@ def run_market_context_engine(market_date):
     df["ETF"] = df["ETF"].astype(str).str.upper().str.strip()
 
     required = [
-        "Market Date", "ETF", "Volume",
-        "5D Perf %", "20D Perf %", "50D Perf %", "200D Perf %",
-        "RV 20D %", "RV 50D %",
+        "Market Date", "ETF", "Volume", "20D Avg Vol",
+        "1D Perf %", "5D Perf %", "20D Perf %", "50D Perf %", "200D Perf %",
         "20D Dist %", "50D Dist %", "200D Dist %",
     ]
     missing = [c for c in required if c not in df.columns]
@@ -84,16 +83,41 @@ def run_market_context_engine(market_date):
     # Build market_statistics from pre-calculated values
     market_statistics = {}
 
+    from core.config import MARKET_CONTEXT_CONFIG
+
     for _, row in df.iterrows():
         ticker = row["ETF"]
+        
+        # Pre-calculated performance pulled strictly from CSV
+        returns_1d = round(float(row.get("1D Perf %", 0.0)), 2)
+
+        # Raw volume columns directly from CSV
+        vol = int(row["Volume"])
+        
+        # Failsafe for legacy CSVs without 20D Avg Vol
+        rv_str = row.get("RV 20D %", 100.0)
+        avg_vol = int(row.get("20D Avg Vol", int(vol / (float(rv_str)/100.0) if float(rv_str) > 0 else vol)))
+
+        rv_20d = round(float(rv_str), 2)
+
+        # User defined logic mapping directly to config parameters
+        if returns_1d > MARKET_CONTEXT_CONFIG["ACCUMULATION_MIN_PRICE_CHANGE"] and vol > avg_vol:
+            day_type = "Accumulation"
+        elif (MARKET_CONTEXT_CONFIG["CONSOLIDATION_MIN_PRICE_CHANGE"] <= returns_1d <= MARKET_CONTEXT_CONFIG["CONSOLIDATION_MAX_PRICE_CHANGE"]) and vol < (avg_vol * (MARKET_CONTEXT_CONFIG["CONSOLIDATION_MAX_RV"] / 100.0)):
+            day_type = "Consolidation"
+        elif returns_1d < MARKET_CONTEXT_CONFIG["DISTRIBUTION_MAX_PRICE_CHANGE"] and vol < avg_vol:
+            day_type = "Distribution"
+        else:
+            day_type = "Neutral"
 
         market_statistics[ticker] = {
-            "day_type": "Neutral",
-            "relative_volume": {
-                "20d": round(float(row["RV 20D %"]), 2),
-                "50d": round(float(row["RV 50D %"]), 2),
+            "day_type": day_type,
+            "volume_data": {
+                "volume": vol,
+                "avg_20d_vol": avg_vol
             },
             "returns": {
+                "1d":  round(returns_1d, 2),
                 "1w":  round(float(row["5D Perf %"]),   2),
                 "4w":  round(float(row["20D Perf %"]),  2),
                 "10w": round(float(row["50D Perf %"]),  2),

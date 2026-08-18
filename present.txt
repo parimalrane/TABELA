@@ -427,54 +427,51 @@ def print_market_context_summary(market_context):
     relative_performance = snapshot["relative_performance"]
 
     has_valid_etfs = True
-    print("MARKET STATISTICS")
-    header = (
-        f"{'ETF':<6}"
-        f"{'State':>14}"
-        f"{'1D%':>8}"
-        f"{'5D%':>8}"
-        f"{'20D%':>8}"
-        f"{'50D%':>8}"
-        f"{'200D%':>8}"
-        f"{'Vol(M)':>8}"
-        f"{'AvgV(M)':>8}"
-        f"{'20Dist':>10}"
-        f"{'50Dist':>10}"
-        f"{'200Dist':>10}"
-    )
-
-    print("-" * len(header))
-    print(header)
-    print("-" * len(header))
-
-    for etf in ["SPY", "QQQ", "IWM", "DIA"]:
-
-        data = stats[etf]
-
-        returns = data["returns"]
-        vols = data.get("volume_data", {})
-        ma = data["moving_average_extension"]
-
-        # Format volumes in millions
-        vol_m = f"{vols.get('volume', 0) / 1000000:.1f}"
-        avg_m = f"{vols.get('avg_20d_vol', 0) / 1000000:.1f}"
-
-        print(
-            f"{etf:<6}"
-            f"{TYPE_SYMBOL.get(data.get('day_type'),'N/A'):>14}"
-            f"{fmt(returns.get('1d')):>8}"
-            f"{fmt(returns.get('1w')):>8}"
-            f"{fmt(returns.get('4w')):>8}"
-            f"{fmt(returns.get('10w')):>8}"
-            f"{fmt(returns.get('40w')):>8}"
-            f"{vol_m:>8}"
-            f"{avg_m:>8}"
-            f"{fmt(ma.get('20dma')):>10}"
-            f"{fmt(ma.get('50dma')):>10}"
-            f"{fmt(ma.get('200dma')):>10}"
+        print("MARKET STATISTICS")
+    
+        header = (
+            f"{'ETF':<6}"
+            f"{'State':>14}"
+            f"{'1D%':>8}"
+            f"{'5D%':>8}"
+            f"{'20D%':>8}"
+            f"{'50D%':>8}"
+            f"{'200D%':>8}"
+            f"{'RV.20':>8}"
+            f"{'RV.50':>8}"
+            f"{'20Dist':>10}"
+            f"{'50Dist':>10}"
+            f"{'200Dist':>10}"
         )
+    
+        print("-" * len(header))
+        print(header)
+        print("-" * len(header))
+    
+        for etf in ["SPY", "QQQ", "IWM", "DIA"]:
+    
+            data = stats[etf]
 
-    print()
+            returns = data["returns"]
+            rv = data["relative_volume"]
+            ma = data["moving_average_extension"]
+    
+            print(
+                f"{etf:<6}"
+                f"{TYPE_SYMBOL.get(data.get('day_type'),'N/A'):>14}"
+                f"{fmt(returns.get('1d')):>8}"
+                f"{fmt(returns.get('1w')):>8}"
+                f"{fmt(returns.get('4w')):>8}"
+                f"{fmt(returns.get('10w')):>8}"
+                f"{fmt(returns.get('40w')):>8}"
+                f"{fmt_rv(rv.get('20d')):>8}"
+                f"{fmt_rv(rv.get('50d')):>8}"
+                f"{fmt(ma.get('20dma')):>10}"
+                f"{fmt(ma.get('50dma')):>10}"
+                f"{fmt(ma.get('200dma')):>10}"
+            )
+    
+        print()
 
 
 def load_todays_registry():
