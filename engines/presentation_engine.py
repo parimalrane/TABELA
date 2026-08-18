@@ -5,7 +5,6 @@ import re
 import engines.rotation_engine
 from engines.stock_transition_engine import (
     get_transition_summary,
-    OBSERVATION_MIN_RUNS,
 )
 import textwrap
 
@@ -531,8 +530,7 @@ def print_daily_scan(
 
     # print_theme_performance(theme_performance)
 
-    if theme_strength_settings["debug_theme_strength"]:
-        print_theme_strength_diagnostics(theme_strength)
+
 
     print()
     print("========================================")
@@ -687,12 +685,12 @@ def print_daily_scan(
         }
     )
 
-    true_longs = display_df[~display_df["is_pre_obs"]].drop(columns=["is_pre_obs"])
-    grace_longs = display_df[display_df["is_pre_obs"]].drop(columns=["is_pre_obs"])
+    true_longs = display_df.drop(columns=["is_pre_obs"])
+    true_long_tickers = true_longs["Ticker"].tolist()
 
     deltas = compare_watchlists(
         current_true_long=true_long_tickers,
-        current_pre_obs=grace_longs["Ticker"].tolist(),
+        current_pre_obs=[],
         current_observation=stocks.loc[
             stocks["Tracking_State"] == "OBSERVATION",
             "Ticker",
@@ -705,24 +703,11 @@ def print_daily_scan(
     movements = deltas.get("movements", {})
     if not true_longs.empty:
         true_longs["Movement"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
-    if not grace_longs.empty:
-        grace_longs["Movement"] = grace_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
 
     if true_longs.empty:
         print("No active candidates in Long Candidate Universe.")
     else:
         print(true_longs.to_string(index=False))
-
-    print("\n\n")
-    print("========================================")
-    print("PRE-OBSERVATION WATCHLIST")
-    print("Legend: * = Zacks Rank 4 or 5")
-    print("========================================")
-    
-    if grace_longs.empty:
-        print("No candidates in Pre-Observation today.")
-    else:
-        print(grace_longs.to_string(index=False))
 
     # Deltas already calculated above
 
@@ -876,10 +861,6 @@ def print_daily_scan(
     long_list_true = ",".join(
         [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
     )
-    
-    pre_obs_list = ",".join(
-        [t for t in grace_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
-    )
 
     observation_list = ",".join(
         stocks.loc[
@@ -897,7 +878,6 @@ def print_daily_scan(
     )
 
     print("###LONG," + long_list_true + ",")
-    print("###PRE_OBSERVATION," + pre_obs_list + ",")
     print("###OBSERVATION," + observation_list + ",")
     print("###DISTRIBUTION," + distribution_list + ",")
 

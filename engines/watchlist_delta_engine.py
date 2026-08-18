@@ -92,7 +92,6 @@ def compare_watchlists(
         save_watchlist(
             current_file,
             current_true_long_ordered,
-            current_pre_obs_ordered,
             current_observation_ordered,
             current_distribution_ordered,
             theme_lookup,
@@ -203,7 +202,6 @@ def compare_watchlists(
     save_watchlist(
         current_file,
         current_true_long_ordered,
-        current_pre_obs_ordered,
         current_observation_ordered,
         current_distribution_ordered,
         theme_lookup,
@@ -223,7 +221,6 @@ def compare_watchlists(
 def save_watchlist(
     file_path,
     true_long_list,
-    pre_obs_list,
     observation_list,
     distribution_list,
     theme_lookup,
@@ -241,8 +238,7 @@ def save_watchlist(
 
     data = {
         "true_long": build_entries(true_long_list),
-        "pre_observation": build_entries(pre_obs_list),
-        "long": build_entries(true_long_list + pre_obs_list),  # maintain legacy format
+        "long": build_entries(true_long_list),  # maintain legacy format
         "observation": build_entries(observation_list),
         "distribution": build_entries(distribution_list),
     }

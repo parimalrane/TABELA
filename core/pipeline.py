@@ -113,7 +113,6 @@ def get_theme_strength_settings():
     period_weights = dict(config.get("PERIOD_WEIGHTS", {}))
     aggregation_mode = str(config.get("AGGREGATION_MODE", "")).strip().lower()
     enable_normalization = bool(config.get("ENABLE_NORMALIZATION", True))
-    debug_theme_strength = bool(config.get("DEBUG_THEME_STRENGTH", False))
 
     if not benchmark_ticker:
         raise ValueError("THEME_STRENGTH_CONFIG.BENCHMARK_TICKER must be set.")
@@ -137,7 +136,6 @@ def get_theme_strength_settings():
         "period_labels": period_labels,
         "aggregation_mode": aggregation_mode,
         "enable_normalization": enable_normalization,
-        "debug_theme_strength": debug_theme_strength,
     }
 
 
@@ -613,36 +611,12 @@ def build_candidates(stocks):
     stocks["Short_Rank"] = None
     stocks["Is_Long_Candidate"] = False
     stocks["Is_Short_Candidate"] = False
-    stocks["Is_Pre_Observation_Candidate"] = False
-
-    def is_pre_obs(row):
-        t_class = row.get("Theme_Class", "")
-        rs = row.get("RS_Rating", 0)
-        ls = row.get("Long_Score", 0)
-
-        from core.config import LONG_FILTERS
-        std_rs = LONG_FILTERS.get("MIN_RS", 90)
-        std_score = LONG_FILTERS.get("MIN_LONG_SCORE", 85)
-
-        # Standard Macro-backed entry
-        if t_class in ["Leading", "Unclassified Leader"] and rs >= std_rs and ls >= std_score:
-            return False
-            
-        # Idiosyncratic Exemption Rule (Option B)
-        idio_min_rs = LONG_FILTERS.get("IDIOSYNCRATIC_MIN_RS", 95)
-        idio_min_score = LONG_FILTERS.get("IDIOSYNCRATIC_MIN_LONG_SCORE", 90)
-        
-        if rs >= idio_min_rs and ls >= idio_min_score:
-            return False
-            
-        return True
 
     for rank, (idx, candidate_row) in enumerate(long_candidates.iterrows(), start=1):
         clean_ticker = candidate_row["Ticker"].replace("*", "")
 
         stocks.loc[stocks["Ticker"] == clean_ticker, "Long_Rank"] = rank
         stocks.loc[stocks["Ticker"] == clean_ticker, "Is_Long_Candidate"] = True
-        stocks.loc[stocks["Ticker"] == clean_ticker, "Is_Pre_Observation_Candidate"] = is_pre_obs(candidate_row)
 
     for rank, ticker in enumerate(
         distribution_watchlist["Ticker"],

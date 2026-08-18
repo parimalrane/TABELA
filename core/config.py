@@ -3,10 +3,10 @@ COMPOSITE_WEIGHTS = {
     "RS_WEIGHT": 0.40,
     "THEME_WEIGHT": 0.25,
     "MARGIN_WEIGHT": 0.05,
-    "ZACKS_WEIGHT": 0.10
+    "ZACKS_WEIGHT": 0.10,
+    "SALES_WEIGHT": 0.20
 
 }
-
 
 LONG_FILTERS = {
 
@@ -31,13 +31,16 @@ UNCLASSIFIED_LEADER_FILTERS = {
 
 MIN_HISTORY_DAYS = 20
 
-
 DISTRIBUTION_ENGINE_CONFIG = {
     # Universe and file windows.
     "DEFAULT_TOP_N": 50,
     "MAX_HISTORY_DAYS": 21,
     "SNAPSHOT_MAX_DAYS": 21,
     "ROTATION_MAX_FILES": 3,
+    
+    # New Architectural Constraints
+    "DISTRIBUTION_MAX_CAP": 15,
+    "DISTRIBUTION_MIN_RS": 40,
 
     # Trend/baseline lookbacks.
     "RECENT_BASELINE_LOOKBACK_DAYS": 5,
@@ -81,13 +84,11 @@ DISTRIBUTION_ENGINE_CONFIG = {
     "SORT_LEADERSHIP_MISSING_SENTINEL": 9999,
 }
 
-
 ETF_FILTERS = {
 
     "MIN_MARKET_VALUE": 200
 
 }
-
 
 THEME_STRENGTH_CONFIG = {
     # Benchmark ETF used for relative-return subtraction.
@@ -105,14 +106,8 @@ THEME_STRENGTH_CONFIG = {
     "AGGREGATION_MODE": "aum_weighted",
 
     # Controls whether the 0-100 normalized diagnostic score is computed.
-    "ENABLE_NORMALIZATION": True,
-
-    # Enables temporary terminal diagnostics for Theme Strength.
-    "DEBUG_THEME_STRENGTH": True,
+    "ENABLE_NORMALIZATION": True
 }
-
-
-
 
 LONG_WEIGHTS = {
 
@@ -128,7 +123,6 @@ LONG_WEIGHTS = {
 
 }
 
-
 # ==========================================
 # STOCK TRANSITION ENGINE
 # ==========================================
@@ -138,10 +132,6 @@ STOCK_TRANSITION_CONFIG = {
     "REGISTRY_DIR": "market_data/stock_transition",
 
     # Observation lifecycle (measured in successful TABELA runs)
-    "OBSERVATION_MIN_RUNS": 7,
-    "OBSERVATION_MAX_RUNS": 7,
+    "OBSERVATION_MAX_RUNS": 7
 }
-
-OBSERVATION_FALLBACK_SCORE_THRESHOLD = 85.0
-OBSERVATION_FALLBACK_RS_THRESHOLD = 85.0
 

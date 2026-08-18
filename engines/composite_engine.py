@@ -7,14 +7,7 @@ def calculate_composite_score(stocks):
     theme_weight = COMPOSITE_WEIGHTS["THEME_WEIGHT"]
     margin_weight = COMPOSITE_WEIGHTS["MARGIN_WEIGHT"]
     zacks_weight = COMPOSITE_WEIGHTS["ZACKS_WEIGHT"]
-
-    # Remaining weight automatically goes to Sales Score
-    sales_weight = 1 - (
-        rs_weight +
-        theme_weight +
-        margin_weight +
-        zacks_weight
-    )
+    sales_weight = COMPOSITE_WEIGHTS["SALES_WEIGHT"]
 
     stocks["Composite_Score"] = (
 

@@ -5,16 +5,14 @@ from typing import Dict, Set
 import pandas as pd
 
 from core.config import (
+    DISTRIBUTION_ENGINE_CONFIG,
     STOCK_TRANSITION_CONFIG,
-    OBSERVATION_FALLBACK_SCORE_THRESHOLD,
-    OBSERVATION_FALLBACK_RS_THRESHOLD,
 )
 from core.runtime_context import context
 from engines.watchlist_delta_engine import load_previous_long_watchlist
 
 
 REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
-OBSERVATION_MIN_RUNS = STOCK_TRANSITION_CONFIG["OBSERVATION_MIN_RUNS"]
 OBSERVATION_MAX_RUNS = STOCK_TRANSITION_CONFIG["OBSERVATION_MAX_RUNS"]
 
 OBSERVATION = "OBSERVATION"
@@ -166,40 +164,14 @@ def pre_distribution_update(
             continue
 
         if state["tracking_state"] == "LONG":
-            long_score = 0.0
-            rs_rating = 0.0
             if stocks is not None and not stocks.empty:
                 match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
                 if match.empty:
                     # Ghost stock vanished from universe.
-                    # Do NOT silently purge — demote to OBSERVATION so the
-                    # ticker remains visible and auditable in output.
-                    pass
-                    # print(
-                    #     f"[TRANSITION WARNING] {ticker} in LONG vanished from "
-                    #     f"stocks universe on {today}. Demoting to OBSERVATION."
-                    # )
                     state["tracking_state"] = OBSERVATION
                     state["state_days"] = 1
                     state["last_market_date"] = today
                     continue
-
-                if not match.empty:
-                    val = match["Long_Score"].iloc[0]
-                    if pd.notna(val):
-                        long_score = float(val)
-                    val_rs = match["RS_Rating"].iloc[0]
-                    if pd.notna(val_rs):
-                        rs_rating = float(val_rs)
-
-            if (
-                long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
-                or rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
-            ):
-                state["tracking_state"] = OBSERVATION
-                state["state_days"] = 1
-                state["last_market_date"] = today
-                continue
 
         elif state["tracking_state"] in (OBSERVATION, DISTRIBUTION):
             if stocks is not None and not stocks.empty:
@@ -235,48 +207,21 @@ def pre_distribution_update(
         if ticker in registry:
             continue
 
-        long_score = 0.0
-        rs_rating = 0.0
         vanished_from_universe = False
 
         if stocks is not None and not stocks.empty:
             match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
             if match.empty:
                 # Ticker left LONG but is also absent from today's universe.
-                # Previously this was silently ignored — that caused the
-                # disappearance bug.  Enter it as OBSERVATION Day 1 so it
-                # remains auditable.  Log an explicit warning.
                 vanished_from_universe = True
                 pass
-                # print(
-                #     f"[TRANSITION WARNING] {ticker} left LONG but is absent "
-                #     f"from stocks universe on {today}. Entering OBSERVATION "
-                #     f"Day 1 to preserve audit trail."
-                # )
-            else:
-                val = match["Long_Score"].iloc[0]
-                if pd.notna(val):
-                    long_score = float(val)
-                val_rs = match["RS_Rating"].iloc[0]
-                if pd.notna(val_rs):
-                    rs_rating = float(val_rs)
 
-        if (
-            vanished_from_universe
-            or long_score < OBSERVATION_FALLBACK_SCORE_THRESHOLD
-            or rs_rating < OBSERVATION_FALLBACK_RS_THRESHOLD
-        ):
-            registry[ticker] = {
-                "tracking_state": OBSERVATION,
-                "state_days": 1,
-                "last_market_date": today,
-            }
-        else:
-            registry[ticker] = {
-                "tracking_state": "LONG",
-                "state_days": 1,
-                "last_market_date": today,
-            }
+        # Unconditionally drop to OBSERVATION since it was removed from LONG
+        registry[ticker] = {
+            "tracking_state": OBSERVATION,
+            "state_days": 1,
+            "last_market_date": today,
+        }
 
     return registry, recovered
 
@@ -372,11 +317,38 @@ def get_distribution_watchlist(
     if stocks is None or stocks.empty:
         return stocks.iloc[0:0].copy() if stocks is not None else None
 
-    distribution = {
-        ticker
-        for ticker, state in registry.items()
-        if state["tracking_state"] == DISTRIBUTION
-    }
+    from core.config import DISTRIBUTION_ENGINE_CONFIG
+    dist_min_rs = float(DISTRIBUTION_ENGINE_CONFIG.get("DISTRIBUTION_MIN_RS", 40))
+    dist_max_days = 20 # Drop short candidates after a month
+
+    distribution = set()
+    for ticker in list(registry.keys()):
+        state = registry[ticker]
+        if state["tracking_state"] == DISTRIBUTION:
+            # Check continuous requirements via stocks dataframe
+            match = stocks[
+                stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker
+            ]
+            if not match.empty:
+                theme = match.iloc[0].get("Theme_Class", "")
+                rs = float(match.iloc[0].get("RS_Rating", 0) or 0)
+                
+                # Rule 2: Cannot short in a Leading theme
+                if theme in ["Leading", "Unclassified Leader"]:
+                    del registry[ticker]
+                    continue
+                    
+                # Rule 3: The RS Trapdoor
+                if rs < dist_min_rs:
+                    del registry[ticker]
+                    continue
+            
+            # Rule 4: The Duration Expiration
+            if state["state_days"] > dist_max_days:
+                del registry[ticker]
+                continue
+                
+            distribution.add(ticker)
 
     if not distribution:
         return stocks.iloc[0:0].copy()

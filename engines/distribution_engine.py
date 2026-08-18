@@ -548,7 +548,7 @@ def build_distribution_watchlist(
 ) -> pd.DataFrame:
 
     config = DISTRIBUTION_CFG
-    effective_top_n = int(top_n or config["DEFAULT_TOP_N"])
+    effective_top_n = int(top_n or config.get("DISTRIBUTION_MAX_CAP", config.get("DEFAULT_TOP_N", 15)))
     if observation_candidates is None or observation_candidates.empty:
         return pd.DataFrame(columns=[
             "Ticker",
@@ -583,6 +583,16 @@ def build_distribution_watchlist(
 
         mapped_theme = row.get("Mapped_Theme", "Unknown")
         theme_class = row.get("Theme_Class", "Unknown")
+        rs_rating = _safe_float(row.get("RS_Rating")) or 0.0
+
+        # Protect hot sectors (Rule 2)
+        if theme_class in ["Leading", "Unclassified Leader"]:
+            continue
+
+        # Drop dead short candidates (Rule 3 Trapdoor)
+        dist_min_rs = float(config.get("DISTRIBUTION_MIN_RS", 40))
+        if rs_rating < dist_min_rs:
+            continue
 
         history_records = stock_history_index.get(ticker, [])
 

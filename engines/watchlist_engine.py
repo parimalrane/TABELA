@@ -16,7 +16,11 @@ def build_long_watchlist(stocks):
         & (stocks["Long_Score"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_LONG_SCORE"])
     )
 
-    long_watchlist = stocks[standard_entry | idiosyncratic_entry].copy()
+    # Combine and ban Lagging themes (Rule 1)
+    long_watchlist = stocks[
+        (standard_entry | idiosyncratic_entry) & 
+        ~stocks["Theme_Class"].str.contains("Lagging", na=False)
+    ].copy()
 
 
     long_watchlist = long_watchlist.sort_values(

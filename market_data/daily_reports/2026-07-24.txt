@@ -12,12 +12,12 @@ Legend: [No Prefix] = True Long / ~ = Pre-Obs / - = Observation / # = Distributi
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State      Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Healthcare Services            Healthcare          14   11  199.81   Leading (#5)       OSCR, PGNY, HUM, BTSG, DVA, CON, AGL,
-                                                                                        ~PACS, -AVAH
+                                                                                        -AVAH, -PACS
 Biotechnology                  Biotech              5    5  156.24   Neutral (#13)      AGEN, -XNCR, -KNSA
 Pharmaceuticals                Pharma               3    3  137.24   Leading (#6)       LQDA, CORT, ETON
 Cloud Infrastructure           Cloud Computing      5    4  136.53   Neutral (#15)      DOCN, -DDOG, -SNOW
-Healthcare                     Healthcare          38   10   85.05   Leading (#5)       INNV, LFST, ~PNTG, -CYRX, -TDOC,
-                                                                                        -OMDA, -CNC, -OGN, -ASTH, -MOH
+Healthcare                     Healthcare          38   10   85.05   Leading (#5)       INNV, LFST, -PNTG, -CYRX, -TDOC,
+                                                                                        -OMDA, -CNC, -OGN, -ASTH
 Memory                         Semiconductors       4    2   79.67   Lagging (#30)      -MU, -SNDK, -SIMO, -WDC
 Digital Payments               Software             4    2   76.05   Neutral (#24)      -SEZL, #PAYS
 Biotech                        Biotech             80   15   71.25   Neutral (#13)      TGTX, -IBRX, -ALKS, -NRIX, -FTRE,
@@ -30,12 +30,13 @@ Pharma                         Pharma              40    8   62.95   Leading (#6
 Restaurants                    Consumer Staples    24    5   61.15   Leading            BJRI, CBRL, -CAKE, -EAT
 AI Compute                     Artificial Intel..   3    1   44.82   Lagging (#32)      #AMD, #INTC
 Digital Banking                Banking              3    1   44.82   Neutral (#10)      DAVE
+Communications Cloud           Cloud Computing      3    1   43.89   Neutral (#15)      -FIVN, #TWLO
 Cybersecurity                  Software            13    2   39.78   Neutral (#24)      -FTNT, -OKTA, -BB, -PANW, -VRNS,
                                                                                         -QLYS, -RPD, #TENB
 Oil Services                   Energy Services      5    1   35.12   Leading            OII
 Mobile Adtech                  Internet             2    0    0.00   Lagging (#29)      -APPS
 Real Estate Technology         Real Estate Tech..   1    0    0.00   Unknown            -COMP
-Semiconductors                 Semiconductors      47    0    0.00   Lagging (#30)      #AMBQ, #ASX, #MXL, #STM, #VICR
+Semiconductors                 Semiconductors      47    0    0.00   Lagging (#30)      #AMBQ, #ASX, #MXL, #STM
 Semiconductor Equipment        Semiconductors      20    0    0.00   Lagging (#30)      #ACMR, #TOELY, #UCTT
 Leisure and Entertainment      Internet            35    0    0.00   Lagging (#29)      -LTH, #RSI
 AI Networking                  Artificial Intel..   3    0    0.00   Lagging (#32)      #EXTR
@@ -69,19 +70,9 @@ Ticker                            Mapped_Theme Theme Classification  RS_Rating L
   BAND            Communication Infrastructure              Unknown         99      85.45          1       +7
   DOCN                    Cloud Infrastructure              Neutral         95      85.42          2       NA
 
-========================================
-PRE-OBSERVATION WATCHLIST
-Legend: * = Zacks Rank 4 or 5
-========================================
-Ticker        Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
-  VCTR    Asset Management              Neutral         90      88.51          1        0
-  PACS Healthcare Services              Leading         90      88.05          2        0
-  AAMI  Financial Services              Neutral         90      86.51          1        0
-  PNTG          Healthcare              Leading         90      86.25          3       +1
-
 --- NEW LONG PIPELINE ENTRIES ---
 Legend: + = Recovered from Observation/Distribution
-New Longs       : CON, DOCN+, LFST+, OII
+New Longs       : CON+, DOCN+, LFST+, OII
 New Pre-Obs     : None
 
 ========================================
@@ -97,47 +88,49 @@ Legend: * = Zacks Rank 4 or 5
     1   FTRE                   Biotech              Neutral         95      81.59          3       NA
     1   ALKS                   Biotech              Neutral         97      82.19          3       NA
     1    STX              Data Storage              Lagging         97      80.59          1       NA
-    1   OMDA                Healthcare              Leading         80      80.85          3       NA
     1   XNCR             Biotechnology              Neutral         97      83.39          3       NA
     1   CYRX                Healthcare              Leading         90      83.95          3       NA
     1     MU                    Memory              Lagging         99      81.69          1       NA
-    2   AVAH       Healthcare Services              Leading         90      88.35          2      +13
     3   FTNT             Cybersecurity              Neutral         98      83.27          1       +5
-    3   SNOW      Cloud Infrastructure              Neutral         98      83.47          3       +4
-    3   PENG                  Software              Neutral         98      82.37          1        0
-    3   TDOC                Healthcare              Leading         90      82.15          3      +10
-    3   DDOG      Cloud Infrastructure              Neutral         98      84.06          3       +4
-    3   ACRS                    Pharma              Leading         90      81.56          3       -1
-    3   SEZL          Digital Payments              Neutral         99      84.42          2       +1
-    3   HNGE            Digital Health              Neutral         95      81.92          1       -1
-    3   ASTH                Healthcare              Leading         70      75.95          3       +6
-    3    CNC                Healthcare              Leading         80      78.75          3       +6
+    3   ACRS                    Pharma              Leading         90      81.56          3       -5
+    3   AVAH       Healthcare Services              Leading         90      88.35          2      +13
     3   NBIX                    Pharma              Leading         90      88.66          2       +8
-    4   FIVN      Communications Cloud              Neutral         80      73.47          3      +15
-    4   COMP    Real Estate Technology              Unknown         80      72.40          3      +11
-    4   AGIO                   Biotech              Neutral         70      69.94          3       +8
+    3   OMDA                Healthcare              Leading         80      80.85          3       +1
+    3   HNGE            Digital Health              Neutral         95      81.92          1       -1
+    3   TDOC                Healthcare              Leading         90      82.15          3       +8
+    3   SEZL          Digital Payments              Neutral         99      84.42          2       +1
+    3   DDOG      Cloud Infrastructure              Neutral         98      84.06          3       +4
+    3   PENG                  Software              Neutral         98      82.37          1        0
+    3   SNOW      Cloud Infrastructure              Neutral         98      83.47          3       +4
+    3   PACS       Healthcare Services              Leading         90      88.05          2      +16
+    4   FIVN      Communications Cloud              Neutral         80      73.47          3      +14
+    4    CNC                Healthcare              Leading         80      78.75          3       +6
+    4   AGIO                   Biotech              Neutral         70      69.94          3       +9
     4    EAT               Restaurants              Leading         80      77.70          3       +9
-    4   QLYS             Cybersecurity              Neutral         90      74.87          3      +12
-    4     FA                  Software              Neutral         95      78.52          3      +11
+    4   QLYS             Cybersecurity              Neutral         90      74.87          3      +13
+    4   EVER                  Software              Neutral         95      78.42          3       +9
     4   CAKE               Restaurants              Leading         90      81.50          3       +7
     4   OKTA             Cybersecurity              Neutral         98      80.87          2       +6
-    4   EVER                  Software              Neutral         95      78.42          3       +9
+    4     FA                  Software              Neutral         95      78.52          3      +11
     5    OGN                Healthcare              Leading         80      77.25          3       +8
-    5   ABCL                   Biotech              Neutral         60      65.14          3       +4
     5   ARCB   Transportation/Shipping              Neutral         90      77.92          1       +4
+    5   ABCL                   Biotech              Neutral         60      65.14          3       +5
+    5   PNTG                Healthcare              Leading         90      86.25          3      +13
+    6   COMP    Real Estate Technology              Unknown         80      72.40          3      +11
+    6   VCTR          Asset Management              Neutral         90      88.51          1       +7
     6     BB             Cybersecurity              Neutral         95      78.52          2       +4
-    6    RXO   Transportation/Shipping              Neutral         90      76.12          3       -8
+    6   ASTH                Healthcare              Leading         70      75.95          3       +7
     6    MRX        Financial Services              Neutral         90      87.21          1      +10
-    6   NRIX                   Biotech              Neutral         90      81.64          3       +5
-    6    MOH                Healthcare              Leading         40      59.85          2      +10
-    7    RPD             Cybersecurity              Neutral         80      65.47         4*       +4
+    6   NRIX                   Biotech              Neutral         90      81.64          3       +2
+    6   AAMI        Financial Services              Neutral         90      86.51          1       +6
+    6    RXO   Transportation/Shipping              Neutral         90      76.12          3       -8
+    7   BLZE                  Software              Neutral         99      78.02          3       -1
+    7   FROG  Developer Infrastructure              Neutral         95      76.52          3       +1
+    7   APPS             Mobile Adtech              Lagging         99      79.08          1       +8
     7    LTH Leisure and Entertainment              Lagging         95      78.08          1       +6
     7   VRNS             Cybersecurity              Neutral         97      76.92          3       +9
     7   PANW             Cybersecurity              Neutral         98      78.37          3       +1
-    7   TWLO      Communications Cloud              Neutral         80      75.97          2      +11
-    7   APPS             Mobile Adtech              Lagging         99      79.08          1       +8
-    7   BLZE                  Software              Neutral         99      78.02          3       -1
-    7   FROG  Developer Infrastructure              Neutral         95      76.52          3       +1
+    7    RPD             Cybersecurity              Neutral         80      65.47         4*       +4
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -148,21 +141,20 @@ DISTRIBUTION WATCHLIST
     1    AMD                AI Compute              Lagging         97      77.32          2       NA
     1   UCTT   Semiconductor Equipment              Lagging         97      75.29          1       NA
     1   ACMR   Semiconductor Equipment              Lagging         95      73.19          3       NA
-    1   PAYS          Digital Payments              Neutral         90      75.67          3       NA
     1   TENB             Cybersecurity              Neutral         90      71.07         4*       NA
     1    ASX            Semiconductors              Lagging         90      72.94          2       NA
     1  TOELY   Semiconductor Equipment              Lagging         70      63.64          1       NA
     1    STM            Semiconductors              Lagging         40      44.54          1       NA
-    2    RSI Leisure and Entertainment              Lagging         80      68.43          2       -7
-    3   EXTR             AI Networking              Lagging         90      68.27          3       -8
+    2   PAYS          Digital Payments              Neutral         90      75.67          3       -5
+    2    RSI Leisure and Entertainment              Lagging         80      68.43          2       -6
+    2   TWLO      Communications Cloud              Neutral         80      75.97          2       -6
+    3   EXTR             AI Networking              Lagging         90      68.27          3       -7
     3   INTC                AI Compute              Lagging         70      59.27          1      -10
-    3   VICR            Semiconductors              Lagging         30      41.54          2      -10
 
 TRADINGVIEW WATCHLIST EXPORT
 ###LONG,LQDA,DAVE,OSCR,CORT,PGNY,HUM,URGN,ETON,INNV,VG,BTSG,BJRI,DVA,CON,LFST,TGTX,AGL,OII,AGEN,FTK,CBRL,BAND,DOCN,
-###PRE_OBSERVATION,VCTR,PACS,AAMI,PNTG,
-###OBSERVATION,SNDK,BLZE,MU,SEZL,APPS,DDOG,PENG,SNOW,OKTA,PANW,FTNT,XNCR,STX,ALKS,VRNS,FTRE,LTH,SIMO,IBRX,HNGE,WDC,BB,EVER,FROG,FA,CYRX,CAKE,RXO,ARCB,QLYS,TDOC,ACRS,AVAH,NRIX,MRX,NBIX,OMDA,KNSA,RPD,OGN,EAT,FIVN,CNC,COMP,TWLO,AGIO,ASTH,ABCL,MOH,
-###DISTRIBUTION,MXL,AMBQ,AMD,UCTT,ACMR,PAYS,TENB,ASX,TOELY,STM,RSI,EXTR,INTC,VICR,
+###OBSERVATION,SNDK,BLZE,MU,SEZL,APPS,DDOG,PENG,SNOW,OKTA,PANW,FTNT,XNCR,STX,ALKS,VRNS,FTRE,LTH,SIMO,IBRX,HNGE,WDC,BB,EVER,FROG,FA,CYRX,CAKE,RXO,ARCB,PACS,QLYS,PNTG,AAMI,VCTR,TDOC,ACRS,AVAH,NRIX,MRX,NBIX,OMDA,KNSA,RPD,OGN,EAT,FIVN,CNC,COMP,AGIO,ASTH,ABCL,
+###DISTRIBUTION,MXL,AMBQ,AMD,UCTT,ACMR,TENB,ASX,TOELY,STM,PAYS,RSI,TWLO,EXTR,INTC,
 
 ==============================================
 END OF TABELA SCAN

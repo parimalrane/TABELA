@@ -18,10 +18,10 @@ Memory                         Semiconductors       4    4  158.53   Neutral (#1
 Pharmaceuticals                Pharma               3    3  135.39   Leading (#6)       LQDA, CORT, ETON
 Cloud Infrastructure           Cloud Computing      5    4  133.67   Leading (#2)       DDOG, DOCN, SNOW
 Biotech                        Biotech             87   29  130.81   Leading (#3)       TGTX, ABCL, IBRX, AGIO, RGNX, ALKS,
-                                                                                        DTIL, MRNA, ~NRIX, -KYMR
+                                                                                        MRNA, DTIL, -NRIX, -KYMR
 Biotechnology                  Biotech              5    4  125.06   Leading (#3)       KNSA, AGEN
 Healthcare                     Healthcare          41   15  125.00   Leading (#1)       INNV, ASTH, OMDA, TOI, CNC, MOH,
-                                                                                        LFST, TDOC, ~CYRX
+                                                                                        LFST, TDOC, -CYRX
 Semiconductor Equipment        Semiconductors      21    8  107.32   Neutral (#13)      AMAT, UCTT, -ACMR, -TOELY, -ICHR,
                                                                                         -MKSI, -LRCX, -KLIC
 Pharma                         Pharma              44   12   86.68   Leading (#6)       URGN
@@ -104,8 +104,8 @@ Ticker                 Mapped_Theme Theme Classification  RS_Rating Long_Score Z
    RPD                Cybersecurity              Neutral         98      86.66          3       NA
   ATEN                Cybersecurity              Neutral         95      86.31          3       NA
   VRNS                Cybersecurity              Neutral         97      86.21          3       NA
-  DTIL                      Biotech              Leading         95      86.04          3       +6
-  MRNA                      Biotech              Leading         95      86.04          3       +6
+  MRNA                      Biotech              Leading         95      86.04          3       +7
+  DTIL                      Biotech              Leading         95      86.04          3       +5
    VSH               Semiconductors              Neutral         95      85.98          1      -50
   TENB                Cybersecurity              Neutral         99      85.91         4*       NA
   ETON              Pharmaceuticals              Leading         97      85.52         5*       NA
@@ -114,19 +114,11 @@ Ticker                 Mapped_Theme Theme Classification  RS_Rating Long_Score Z
   CBRL                  Restaurants              Leading         97      85.35          3       NA
   UCTT      Semiconductor Equipment              Neutral         97      85.08          1      -49
 
-========================================
-PRE-OBSERVATION WATCHLIST
-Legend: * = Zacks Rank 4 or 5
-========================================
-Ticker Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
-  NRIX      Biotech              Leading         90      87.49          3       NA
-  CYRX   Healthcare              Leading         90      86.30          3       NA
-
 --- NEW LONG PIPELINE ENTRIES ---
 Legend: + = Recovered from Observation/Distribution
 New Longs       : AGEN, AGIO, ATEN, AVAH, BLZE, CBRL, CON, DOCN, ETON, FA, FIVN, FROG, MOH,
                   OKTA, PANW, PAYS, QLYS, RPD, TENB, TWLO, VRNS
-New Pre-Obs     : CYRX, NRIX
+New Pre-Obs     : None
 
 ========================================
 OBSERVATION WATCHLIST
@@ -140,12 +132,14 @@ Legend: * = Zacks Rank 4 or 5
     1   KLIC Semiconductor Equipment              Neutral         90      78.13          3       NA
     1   NBIS       AI Infrastructure              Neutral         90      78.99          3       NA
     1   KYMR                 Biotech              Leading         90      83.29          3       NA
+    1   NRIX                 Biotech              Leading         90      87.49          3       NA
     1   MRVL                 AI ASIC              Neutral         90      78.29          3       NA
+    1   CYRX              Healthcare              Leading         90      86.30          3       NA
     1   GRPN                Internet              Leading         90      82.26          3       NA
     1  TOELY Semiconductor Equipment              Neutral         90      84.43          1       NA
-    1   INTC              AI Compute              Neutral         95      79.74          1       NA
     1   LRCX Semiconductor Equipment              Neutral         80      78.83          2       NA
-    1    HPE              AI Servers              Neutral         95      82.44          1       NA
+    1   INTC              AI Compute              Neutral         95      79.74          1       NA
+    1    ARM              AI Compute              Neutral         95      79.74          3       NA
     1    STM          Semiconductors              Neutral         95      84.58          1       NA
     1   EXTR           AI Networking              Neutral         98      79.39          3       NA
     1    VPG          Semiconductors              Neutral         98      83.63          3       NA
@@ -156,7 +150,7 @@ Legend: * = Zacks Rank 4 or 5
     1   ICHR Semiconductor Equipment              Neutral         99      84.28          3       NA
     1   AMBQ          Semiconductors              Neutral         99      82.18          3       NA
     1   DELL              AI Servers              Neutral         99      84.94          1       NA
-    1    ARM              AI Compute              Neutral         95      79.74          3       NA
+    1    HPE              AI Servers              Neutral         95      82.44          1       NA
     1   VICR          Semiconductors              Neutral         70      73.33          2       NA
 
 ========================================
@@ -165,9 +159,8 @@ DISTRIBUTION WATCHLIST
 No qualified distribution candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,DDOG,HUM,LQDA,PGNY,INNV,HNGE,SEZL,ASTH,OMDA,DAVE,KNSA,OSCR,PENG,AGEN,TGTX,APPS,TOI,MU,ABCL,FTNT,AVAH,DVA,URGN,TWLO,CNC,STX,DOCN,IBRX,SNDK,BB,CON,MOH,LFST,TDOC,OKTA,AGIO,SIMO,SNOW,LTH,FIVN,CORT,PAYS,RGNX,QLYS,BTSG,FA,PANW,FROG,BLZE,AMAT,RSI,ASX,ALKS,WDC,BJRI,RPD,ATEN,VRNS,DTIL,MRNA,VSH,TENB,ETON,BAND,UMC,CBRL,UCTT,
-###PRE_OBSERVATION,NRIX,CYRX,
-###OBSERVATION,MXL,DELL,AMBQ,ICHR,WYFI,AMD,ALAB,ACMR,VPG,EXTR,STM,ARM,HPE,INTC,TOELY,GRPN,MRVL,KYMR,NBIS,KLIC,MKSI,OUST,CRDO,LRCX,VICR,
+###LONG,DDOG,HUM,LQDA,PGNY,INNV,HNGE,SEZL,ASTH,OMDA,DAVE,KNSA,OSCR,PENG,AGEN,TGTX,APPS,TOI,MU,ABCL,FTNT,AVAH,DVA,URGN,TWLO,CNC,STX,DOCN,IBRX,SNDK,BB,CON,MOH,LFST,TDOC,OKTA,AGIO,SIMO,SNOW,LTH,FIVN,CORT,PAYS,RGNX,QLYS,BTSG,FA,PANW,FROG,BLZE,AMAT,RSI,ASX,ALKS,WDC,BJRI,RPD,ATEN,VRNS,MRNA,DTIL,VSH,TENB,ETON,BAND,UMC,CBRL,UCTT,
+###OBSERVATION,MXL,DELL,AMBQ,ICHR,WYFI,AMD,ALAB,ACMR,VPG,EXTR,STM,ARM,HPE,INTC,TOELY,GRPN,CYRX,MRVL,NRIX,KYMR,NBIS,KLIC,MKSI,OUST,CRDO,LRCX,VICR,
 ###DISTRIBUTION,,
 
 ==============================================

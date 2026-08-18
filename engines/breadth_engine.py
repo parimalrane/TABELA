@@ -26,7 +26,8 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     # ==========================================
 
     # True Longs
-    true_long_tickers = set(stocks[stocks["Is_Long_Candidate"] & ~stocks["Is_Pre_Observation_Candidate"]]["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper())
+    # True Longs
+    true_long_tickers = set(stocks[stocks["Is_Long_Candidate"]]["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper())
     true_longs_series = (
         long_candidates[long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(true_long_tickers)]
         .sort_values(["Long_Score", "RS_Rating"], ascending=[False, False])
@@ -34,13 +35,8 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
         .apply(lambda s: ", ".join(s.astype(str).str.replace("*", "", regex=False)))
     )
 
-    # Pre-Observation
-    pre_obs_series = (
-        long_candidates[~long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(true_long_tickers)]
-        .sort_values(["Long_Score", "RS_Rating"], ascending=[False, False])
-        .groupby("Mapped_Theme")["Ticker"]
-        .apply(lambda s: ", ".join(f"~{t}" for t in s.astype(str).str.replace("*", "", regex=False)))
-    )
+    # Pre-Observation (Deprecated)
+    pre_obs_series = pd.Series(dtype=str)
 
     # Observation
     obs_df = stocks[stocks["Tracking_State"] == "OBSERVATION"].copy()
