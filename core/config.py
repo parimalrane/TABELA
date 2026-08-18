@@ -29,17 +29,14 @@ UNCLASSIFIED_LEADER_FILTERS = {
     "MIN_ZACKS": 85
 }
 
-MIN_HISTORY_DAYS = 20
-
 DISTRIBUTION_ENGINE_CONFIG = {
     # Universe and file windows.
-    "DEFAULT_TOP_N": 50,
     "MAX_HISTORY_DAYS": 21,
     "SNAPSHOT_MAX_DAYS": 21,
     "ROTATION_MAX_FILES": 3,
     
     # New Architectural Constraints
-    "DISTRIBUTION_MAX_CAP": 15,
+    "DISTRIBUTION_MAX_CAP": 21,
     "DISTRIBUTION_MIN_RS": 40,
 
     # Trend/baseline lookbacks.

@@ -1,9 +1,6 @@
 from engines.historical_query_engine import load_history
 from engines.historical_queries import HistoricalQueries
 from datetime import datetime
-from core.config import MIN_HISTORY_DAYS
-
-
 history = load_history()
 queries = HistoricalQueries(history)
 
