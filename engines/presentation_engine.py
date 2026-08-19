@@ -528,7 +528,7 @@ def print_daily_scan(
     print()
     print("========================================")
     print("THEME BREADTH ANALYSIS")
-    print("Legend: [No Prefix] = True Long / - = Observation / # = Distribution")
+    print("Legend: [No Prefix] = True Long / - = Observation / # = Distribution | ▲ ▼ = 1D Rank Delta")
     print("========================================")
     
     display_df = (
@@ -611,9 +611,9 @@ def print_daily_scan(
                     if pd.notna(rank_delta):
                         r_d = int(rank_delta)
                         if r_d > 0:
-                            movement_str = f" -> +{r_d}"
+                            movement_str = f" ▲ {r_d}"
                         elif r_d < 0:
-                            movement_str = f" -> {r_d}"
+                            movement_str = f" ▼ {abs(r_d)}"
                             
             mac_state_str = f"{macro_state} (#{macro_rank}{movement_str})".ljust(29)
         else:
