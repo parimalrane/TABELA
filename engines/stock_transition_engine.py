@@ -7,13 +7,13 @@ import pandas as pd
 from core.config import (
     DISTRIBUTION_ENGINE_CONFIG,
     STOCK_TRANSITION_CONFIG,
+    OBSERVATION_MAX_DAYS,
 )
 from core.runtime_context import context
 from engines.watchlist_delta_engine import load_previous_long_watchlist
 
 
 REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
-OBSERVATION_MAX_RUNS = STOCK_TRANSITION_CONFIG["OBSERVATION_MAX_RUNS"]
 
 OBSERVATION = "OBSERVATION"
 DISTRIBUTION = "DISTRIBUTION"
@@ -236,14 +236,25 @@ def get_distribution_candidates(
     if stocks.empty:
         return stocks.iloc[0:0].copy()
 
-    eligible = {
-        ticker
-        for ticker, state in registry.items()
-        if (
-            state["tracking_state"] == OBSERVATION
-            and state["state_days"] == OBSERVATION_MAX_RUNS + 1
-        )
-    }
+    from core.config import FAIL_FAST_MIN_LONG_SCORE, OBSERVATION_MAX_DAYS
+    
+    eligible = set()
+    for ticker, state in registry.items():
+        if state["tracking_state"] != OBSERVATION:
+            continue
+            
+        time_expired = state["state_days"] > OBSERVATION_MAX_DAYS
+        
+        # Check fast failure
+        fast_fail = False
+        match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
+        if not match.empty:
+            long_score = match.iloc[0].get("Long_Score", 100)
+            if long_score < FAIL_FAST_MIN_LONG_SCORE:
+                fast_fail = True
+                
+        if time_expired or fast_fail:
+            eligible.add(ticker)
 
     if not eligible:
         return stocks.iloc[0:0].copy()
@@ -259,6 +270,7 @@ def get_distribution_candidates(
 def post_distribution_update(
     registry: Dict,
     qualified_distribution: pd.DataFrame,
+    stocks: pd.DataFrame,
 ):
     """
     Finalize Observation lifecycle and persist registry.
@@ -274,6 +286,16 @@ def post_distribution_update(
             for t in qualified_distribution["Ticker"]
         }
 
+    from core.config import FAIL_FAST_MIN_LONG_SCORE, OBSERVATION_MAX_DAYS
+    
+    # We do not have direct access to stocks here unless we pass it, but we can rely
+    # on the fact that if it was in 'qualified', it passed distribution requirements.
+    # What about dropping fast_fail stocks that aren't in qualified?
+    # We need to drop them from registry. Since they hit OBSERVATION_MAX_DAYS
+    # or they were sent as candidates due to fast fail, we need to identify them.
+    # Actually, we should check registry dates again if we want to drop them. 
+    # But wait, post_distribution_update doesn't receive `stocks` directly. 
+    # I will modify the loop.
     for ticker in list(registry.keys()):
 
         state = registry[ticker]
@@ -281,26 +303,23 @@ def post_distribution_update(
         if state["tracking_state"] != OBSERVATION:
             continue
 
-        #
-        # Still in Observation window
-        #
-        if state["state_days"] <= OBSERVATION_MAX_RUNS:
-            continue
+        time_expired = state["state_days"] > OBSERVATION_MAX_DAYS
+        
+        fast_fail = False
+        match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
+        if not match.empty:
+            if match.iloc[0].get("Long_Score", 100) < FAIL_FAST_MIN_LONG_SCORE:
+                fast_fail = True
 
-        #
-        # Promote to Distribution
-        #
         if ticker in qualified:
-
             state["tracking_state"] = DISTRIBUTION
             state["state_days"] = 1
             state["last_market_date"] = today
             continue
 
-        #
-        # Observation expired
-        #
-        del registry[ticker]
+        if time_expired or fast_fail:
+            del registry[ticker]
+            continue
 
     save_registry(registry)
 

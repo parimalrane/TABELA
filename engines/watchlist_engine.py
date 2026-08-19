@@ -1,7 +1,7 @@
 from core.config import LONG_FILTERS
 
 
-def build_long_watchlist(stocks):
+def build_long_watchlist(stocks, registry):
 
     # Standard Macro-backed entry
     standard_entry = (
@@ -17,11 +17,37 @@ def build_long_watchlist(stocks):
         & (stocks["Long_Score"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_LONG_SCORE"])
     )
 
+    from core.config import RE_ENTRY_MIN_RS, RE_ENTRY_MIN_LONG_SCORE
+    
+    observation_tickers = {
+        ticker for ticker, state in registry.items()
+        if state["tracking_state"] == "OBSERVATION"
+    }
+    
+    is_in_observation = stocks["Ticker"].astype(str).str.upper().str.replace("*", "", regex=False).isin(observation_tickers)
+
+    re_entry = (
+        is_in_observation
+        & stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
+        & (stocks["RS_Rating"] >= RE_ENTRY_MIN_RS)
+        & (stocks["Long_Score"] >= RE_ENTRY_MIN_LONG_SCORE)
+    )
+
+    idiosyncratic_re_entry = (
+        is_in_observation
+        & ~stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
+        & (stocks["RS_Rating"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_RS"])
+        & (stocks["Long_Score"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_LONG_SCORE"])
+    )
+
     # Combine and ban Lagging themes (Rule 1)
     long_watchlist = stocks[
-        (standard_entry | idiosyncratic_entry) & 
+        (standard_entry | idiosyncratic_entry | re_entry | idiosyncratic_re_entry) & 
         ~stocks["Theme_Class"].str.contains("Lagging", na=False)
     ].copy()
+    
+    # Mark which ones are re-entries to flag in the UI
+    long_watchlist["Is_Reentry"] = re_entry | idiosyncratic_re_entry
 
 
     long_watchlist = long_watchlist.sort_values(

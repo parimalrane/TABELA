@@ -26,10 +26,15 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     # ==========================================
 
     # True Longs
-    # True Longs
     true_long_tickers = set(stocks[stocks["Is_Long_Candidate"]]["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper())
+    
+    # Apply re-entry prefix to Ticker strings first
+    formatted_longs = long_candidates[long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(true_long_tickers)].copy()
+    if "Is_Reentry" in formatted_longs.columns:
+        formatted_longs.loc[formatted_longs["Is_Reentry"] == True, "Ticker"] = "^" + formatted_longs["Ticker"].astype(str).str.replace("*", "", regex=False)
+    
     true_longs_series = (
-        long_candidates[long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(true_long_tickers)]
+        formatted_longs
         .sort_values(["Long_Score", "RS_Rating"], ascending=[False, False])
         .groupby("Mapped_Theme")["Ticker"]
         .apply(lambda s: ", ".join(s.astype(str).str.replace("*", "", regex=False)))

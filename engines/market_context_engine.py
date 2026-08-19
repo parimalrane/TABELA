@@ -69,8 +69,8 @@ def run_market_context_engine(market_date):
     df["ETF"] = df["ETF"].astype(str).str.upper().str.strip()
 
     required = [
-        "Market Date", "ETF", "Volume", "20D Avg Vol",
-        "1D Perf %", "5D Perf %", "20D Perf %", "50D Perf %", "200D Perf %",
+        "Market Date", "ETF", "Volume",
+        "5D Perf %", "20D Perf %", "50D Perf %", "200D Perf %",
         "20D Dist %", "50D Dist %", "200D Dist %",
     ]
     missing = [c for c in required if c not in df.columns]

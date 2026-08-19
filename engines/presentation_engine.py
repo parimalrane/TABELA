@@ -528,7 +528,8 @@ def print_daily_scan(
     print()
     print("========================================")
     print("THEME BREADTH ANALYSIS")
-    print("Legend: [No Prefix] = True Long / - = Observation / # = Distribution | ▲ ▼ = 1D Rank Delta")
+    print("Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-Entry")
+    print("        + - = 1D Rank Delta")
     print("========================================")
     
     display_df = (
@@ -611,9 +612,9 @@ def print_daily_scan(
                     if pd.notna(rank_delta):
                         r_d = int(rank_delta)
                         if r_d > 0:
-                            movement_str = f" ▲ {r_d}"
+                            movement_str = f" -> +{r_d}"
                         elif r_d < 0:
-                            movement_str = f" ▼ {abs(r_d)}"
+                            movement_str = f" -> -{abs(r_d)}"
                             
             mac_state_str = f"{macro_state} ({macro_rank}{movement_str})".ljust(29)
         else:
@@ -646,7 +647,7 @@ def print_daily_scan(
     print("\n\n")
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
-    print("Legend: * = Zacks Rank 4 or 5")
+    print("Legend: * = Zacks Rank 4 or 5 | ^ = Re-Entry")
     print("========================================")
 
     display_df = long_candidates[
@@ -657,9 +658,14 @@ def print_daily_scan(
             "RS_Rating",
             "Long_Score",
             "Zacks Rank",
+            "Is_Reentry",
         ]
     ].copy()
     display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
+    
+    # Flag re-entries explicitly with a prefix
+    display_df.loc[display_df["Is_Reentry"] == True, "Ticker"] = "^" + display_df["Ticker"]
+    display_df = display_df.drop(columns=["Is_Reentry"])
 
     if "Long_Score" in display_df.columns:
         display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
@@ -841,7 +847,7 @@ def print_daily_scan(
     print("TRADINGVIEW WATCHLIST EXPORT")
 
     long_list_true = ",".join(
-        [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
+        [t.lstrip('^') for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
     )
 
     observation_list = ",".join(

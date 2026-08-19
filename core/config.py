@@ -132,15 +132,27 @@ LONG_WEIGHTS = {
 
 }
 
+# ==========================
+# OBSERVATION LIFECYCLE
+# ==========================
+
+# Maximum days a stock can stay in Observation before being forced out
+OBSERVATION_MAX_DAYS = 21
+
+# Fast failure threshold: If an Observation stock drops below this Long Score,
+# it immediately loses its 21-day grace period.
+FAIL_FAST_MIN_LONG_SCORE = 60.0
+
+# Re-entry threshold: An Observation stock can be reinstated to the Long list
+# if it recovers to these minimums (does not require 95/90 fresh criteria).
+RE_ENTRY_MIN_RS = 85
+RE_ENTRY_MIN_LONG_SCORE = 85.0
+
 # ==========================================
 # STOCK TRANSITION ENGINE
 # ==========================================
 
 STOCK_TRANSITION_CONFIG = {
     # Immutable daily registry location
-    "REGISTRY_DIR": "market_data/stock_transition",
-
-    # Observation lifecycle (measured in successful TABELA runs)
-    "OBSERVATION_MAX_RUNS": 7
+    "REGISTRY_DIR": "market_data/stock_transition"
 }
-

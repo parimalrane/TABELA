@@ -553,7 +553,7 @@ def score_stocks(stocks):
 def build_candidates(stocks):
     registry = load_registry()
 
-    long_watchlist = build_long_watchlist(stocks)
+    long_watchlist = build_long_watchlist(stocks, registry)
 
     long_candidates = (
         long_watchlist
@@ -591,6 +591,7 @@ def build_candidates(stocks):
     registry = post_distribution_update(
         registry=registry,
         qualified_distribution=qualified_distribution,
+        stocks=stocks,
     )
 
     distribution_watchlist = get_distribution_watchlist(
@@ -653,7 +654,7 @@ def build_candidates(stocks):
         if pd.notna(leaders_str) and leaders_str != "":
             for t in leaders_str.split(","):
                 val = t.strip().upper()
-                while val and val[0] in ["#", "~", "-"]:
+                while val and val[0] in ["#", "~", "-", "^"]:
                     val = val[1:]
                 breadth_leaders.add(val)
                 
