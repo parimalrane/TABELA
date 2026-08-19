@@ -615,7 +615,7 @@ def print_daily_scan(
                         elif r_d < 0:
                             movement_str = f" ▼ {abs(r_d)}"
                             
-            mac_state_str = f"{macro_state} (#{macro_rank}{movement_str})".ljust(29)
+            mac_state_str = f"{macro_state} ({macro_rank}{movement_str})".ljust(29)
         else:
             mac_state_str = macro_state.ljust(29)
         
