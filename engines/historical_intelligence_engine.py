@@ -527,7 +527,7 @@ def build_theme_performance_table(theme_strength, max_days=63):
 
             rank_delta = None
             if previous_rank is not None and latest_rank is not None:
-                rank_delta = latest_rank - previous_rank
+                rank_delta = previous_rank - latest_rank
 
             score_delta = None
             if previous_score is not None and latest_score is not None:
