@@ -528,7 +528,7 @@ def print_daily_scan(
     print()
     print("========================================")
     print("THEME BREADTH ANALYSIS")
-    print("Legend: [No Prefix] = True Long / ~ = Pre-Obs / - = Observation / # = Distribution")
+    print("Legend: [No Prefix] = True Long / - = Observation / # = Distribution")
     print("========================================")
     
     display_df = (
@@ -580,7 +580,7 @@ def print_daily_scan(
         
     display_df = display_df[display_df.apply(should_display, axis=1)]
 
-    print(f"{'Micro Theme'.ljust(30)} {'Macro Theme'.ljust(18)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'Score'.rjust(7)}   {'Macro State'.ljust(14)}   {'Stocks'}")
+    print(f"{'Micro Theme'.ljust(30)} {'Macro Theme'.ljust(18)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'Score'.rjust(7)}   {'Macro State & Movement'.ljust(29)}   {'Stocks'}")
     print("-" * 125)
     
     for _, row in display_df.iterrows():
@@ -602,9 +602,22 @@ def print_daily_scan(
         macro_state = theme_class_map.get(parent_theme, "Unknown")
         if not theme_strength[theme_strength["Theme"] == parent_theme].empty:
             macro_rank = theme_strength[theme_strength["Theme"] == parent_theme].iloc[0]["Theme_Rank"]
-            mac_state_str = f"{macro_state} (#{macro_rank})".ljust(16)
+            
+            movement_str = ""
+            if theme_performance is not None and not theme_performance.empty:
+                perf_row = theme_performance[theme_performance["Theme"] == parent_theme]
+                if not perf_row.empty:
+                    rank_delta = perf_row.iloc[0].get("Rank Δ")
+                    if pd.notna(rank_delta):
+                        r_d = int(rank_delta)
+                        if r_d > 0:
+                            movement_str = f" -> +{r_d}"
+                        elif r_d < 0:
+                            movement_str = f" -> {r_d}"
+                            
+            mac_state_str = f"{macro_state} (#{macro_rank}{movement_str})".ljust(29)
         else:
-            mac_state_str = macro_state.ljust(16)
+            mac_state_str = macro_state.ljust(29)
         
         prefix = f"{micro} {macro} {tot_str} {q_str} {s_str}   {mac_state_str}   "
         prefix_len = len(prefix)

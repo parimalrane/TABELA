@@ -105,7 +105,7 @@ def run_market_context_engine(market_date):
             day_type = "Accumulation"
         elif (MARKET_CONTEXT_CONFIG["CONSOLIDATION_MIN_PRICE_CHANGE"] <= returns_1d <= MARKET_CONTEXT_CONFIG["CONSOLIDATION_MAX_PRICE_CHANGE"]) and vol < (avg_vol * (MARKET_CONTEXT_CONFIG["CONSOLIDATION_MAX_RV"] / 100.0)):
             day_type = "Consolidation"
-        elif returns_1d < MARKET_CONTEXT_CONFIG["DISTRIBUTION_MAX_PRICE_CHANGE"] and vol < avg_vol:
+        elif returns_1d < MARKET_CONTEXT_CONFIG["DISTRIBUTION_MAX_PRICE_CHANGE"] and vol > avg_vol:
             day_type = "Distribution"
         else:
             day_type = "Neutral"

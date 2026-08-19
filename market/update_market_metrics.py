@@ -88,11 +88,6 @@ def generate_market_csv():
     file_date_str = final_market_date_obj.strftime("%Y%m%d")
     csv_file = os.path.join(output_dir, f"{file_date_str}_Market.csv")
 
-    if os.path.exists(csv_file):
-        print(f"\nFile {csv_file} already exists. Skipping write.")
-        # If they already have it, we don't overwrite it blindly unless requested
-        return
-        
     out_df = pd.DataFrame(rows)
     out_df.to_csv(csv_file, index=False)
     print(f"\nSuccessfully created true market file: {csv_file} with {len(rows)} ETFs!")
