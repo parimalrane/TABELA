@@ -19,22 +19,22 @@ def build_long_watchlist(stocks, registry):
 
     from core.config import RE_ENTRY_MIN_RS, RE_ENTRY_MIN_LONG_SCORE
     
-    observation_tickers = {
+    reentry_eligible_tickers = {
         ticker for ticker, state in registry.items()
-        if state["tracking_state"] == "OBSERVATION"
+        if state["tracking_state"] in ["OBSERVATION", "DISTRIBUTION"]
     }
     
-    is_in_observation = stocks["Ticker"].astype(str).str.upper().str.replace("*", "", regex=False).isin(observation_tickers)
+    is_reentry_eligible = stocks["Ticker"].astype(str).str.upper().str.replace("*", "", regex=False).isin(reentry_eligible_tickers)
 
     re_entry = (
-        is_in_observation
+        is_reentry_eligible
         & stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
         & (stocks["RS_Rating"] >= RE_ENTRY_MIN_RS)
         & (stocks["Long_Score"] >= RE_ENTRY_MIN_LONG_SCORE)
     )
 
     idiosyncratic_re_entry = (
-        is_in_observation
+        is_reentry_eligible
         & ~stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
         & (stocks["RS_Rating"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_RS"])
         & (stocks["Long_Score"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_LONG_SCORE"])
