@@ -15,8 +15,7 @@ Micro Theme                    Macro Theme        Tot Qual   Score   Macro State
 Diagnostics                    Medical Devices      9    8  188.81   Leading (7 -> -5)               ADPT, -NEO, -CDNA, -ILMN
 Life Sciences Tools            Medical Devices      5    5  174.16   Leading (7 -> -5)               -TXG, -BLFS, -TWST,
                                                                                                      -AVTR
-Cybersecurity                  Software            13    8  150.02   Leading (5 -> +4)               OKTA, FTNT, ^PANW,
-                                                                                                     -TENB, -BB
+Cybersecurity                  Software            13    8  150.02   Leading (5 -> +4)               OKTA, FTNT, ^PANW, ^TENB
 Digital Payments               Software             4    4  142.03   Leading (5 -> +4)               SEZL
 Cloud Infrastructure           Cloud Computing      5    4  137.61   Leading (1)                     DDOG, NET, SNOW
 Pharmaceuticals                Pharma               3    3  136.78   Neutral (22 -> -5)              LQDA, -ETON, -CORT
@@ -25,12 +24,12 @@ AI Connectivity                Artificial Intel..   2    2   93.38   Neutral (25
 Communications Cloud           Cloud Computing      3    2   89.19   Leading (1)                     RNG
 Medical Devices                Medical Devices     82   16   79.69   Leading (7 -> -5)               -ITGR, -BVS
 Professional Services          Software             1    1   67.93   Leading (5 -> +4)               CBZ
-Digital Health                 Software             1    1   62.38   Leading (5 -> +4)               ^HNGE
+Digital Health                 Software             1    1   62.38   Leading (5 -> +4)               HNGE
 LNG / Natural Gas Export Inf.. LNG / Natural Ga..   1    1   62.38   Unknown                         -VG
 Restaurants                    Consumer Staples    25    4   51.35   Leading                         CAKE
 Leisure and Entertainment      Internet            33    5   49.58   Neutral (9 -> +7)               LIND, CRSR
 Digital Banking                Banking              3    1   44.82   Neutral (14)                    DAVE
-Software                       Software           164   17   43.26   Leading (5 -> +4)               ^BLZE, -FA, -EVER
+Software                       Software           164   17   43.26   Leading (5 -> +4)               ^BLZE, -EVER
 Biotechnology                  Biotech              5    1   35.12   Lagging (29 -> -4)              -AGEN, -KNSA
 AI Infrastructure              Artificial Intel..   6    1   29.19   Neutral (25)                    #NBIS
 Financial Services             Banking             62    5   29.05   Neutral (14)                    AAMI, -MRX
@@ -58,7 +57,7 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
   FTNT             Cybersecurity              Leading         95      91.30          2       NA
   LIND Leisure and Entertainment              Neutral         99      90.85          1       NA
   CAKE               Restaurants              Leading         99      90.45          1       -2
- ^HNGE            Digital Health              Leading         90      90.35          1       NA
+  HNGE            Digital Health              Leading         90      90.35          1       NA
   DAVE           Digital Banking              Neutral         97      89.20          2       NA
  ^BLZE                  Software              Leading         99      89.20          3       NA
  ^PANW             Cybersecurity              Leading         97      89.00          3       NA
@@ -69,6 +68,7 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
   LQDA           Pharmaceuticals              Neutral         98      85.65          1      -14
   VSXY          Footwear/Apparel              Unknown         99      85.45          1       +4
   ENVA                   Unknown              Unknown         97      85.35          1       NA
+ ^TENB             Cybersecurity              Leading         90      84.85          3       NA
 
 ========================================
 OBSERVATION WATCHLIST
@@ -88,21 +88,18 @@ Legend: * = Zacks Rank 4 or 5
     1   BLFS                     Life Sciences Tools              Leading         95      89.82          1       NA
     2   BTSG                     Healthcare Services              Neutral         60      66.46          1       -5
     2   PGNY                     Healthcare Services              Neutral         90      83.27          1       -5
-    2   URGN                                  Pharma              Neutral         80      71.95          2      -12
+    2   URGN                                  Pharma              Neutral         80      71.95          2      -10
+    3   GSHD                               Insurance              Neutral         90      77.50          3       -1
+    3    TRV                               Insurance              Neutral         80      75.60          1       -6
+    3   HURN                                 Unknown              Unknown         90      81.50          1       -9
     3   KNSA                           Biotechnology              Lagging         90      73.13          3       -7
-    3   HURN                                 Unknown              Unknown         90      81.50          1      -10
-    3    TRV                               Insurance              Neutral         80      75.60          1       -7
-    3   GSHD                               Insurance              Neutral         90      77.50          3        0
     5    HUM                     Healthcare Services              Neutral         80      73.47          3       -2
     6   AGEN                           Biotechnology              Lagging         99      76.88          3        0
-    6     VG LNG / Natural Gas Export Infrastructure              Unknown         90      79.90          3      -11
-    8   IBRX                                 Biotech              Lagging         90      72.23          3       -8
-   10     FA                                Software              Leading         80      81.45          3       -4
+    6     VG LNG / Natural Gas Export Infrastructure              Unknown         90      79.90          3      -10
+    8   IBRX                                 Biotech              Lagging         90      72.23          3       -7
    10   EVER                                Software              Leading         50      64.85          3       -7
-   11   ARCB                 Transportation/Shipping              Neutral         80      68.57          2      -17
-   12     BB                           Cybersecurity              Leading         80      81.45          2       -9
-   12    MRX                      Financial Services              Neutral         80      79.35          1      -14
-   15   TENB                           Cybersecurity              Leading         90      84.85          3       +3
+   11   ARCB                 Transportation/Shipping              Neutral         80      68.57          2      -14
+   12    MRX                      Financial Services              Neutral         80      79.35          1      -12
    16   GRPN                                Internet              Neutral         95      83.95          3       -8
    16    HPE                              AI Servers              Neutral         98      77.48          3       -4
 
@@ -119,8 +116,8 @@ DISTRIBUTION WATCHLIST
    12   MRVL                 AI ASIC              Neutral         70      64.68          3        0
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SEZL,CBZ,RNG,DDOG,NET,SNOW,ADPT,OKTA,FTNT,LIND,CAKE,HNGE,DAVE,BLZE,PANW,CRSR,AAMI,OSCR,APPS,LQDA,VSXY,ENVA,
-###OBSERVATION,AGEN,CDNA,CORT,TXG,TWST,ETON,HPE,NEO,ITGR,AVTR,BVS,BLFS,GRPN,KNSA,GSHD,ILMN,TENB,HURN,IBRX,VG,PGNY,BB,HUM,URGN,TRV,FA,ARCB,MRX,BTSG,EVER,
+###LONG,SEZL,CBZ,RNG,DDOG,NET,SNOW,ADPT,OKTA,FTNT,LIND,CAKE,HNGE,DAVE,BLZE,PANW,CRSR,AAMI,OSCR,APPS,LQDA,VSXY,ENVA,TENB,
+###OBSERVATION,AGEN,CDNA,CORT,TXG,TWST,ETON,HPE,NEO,ITGR,AVTR,BVS,BLFS,GRPN,KNSA,GSHD,ILMN,HURN,IBRX,VG,PGNY,HUM,URGN,TRV,ARCB,MRX,BTSG,EVER,
 ###DISTRIBUTION,TGTX,UCTT,UMC,ASX,ALAB,NBIS,MRVL,
 
 ==============================================

@@ -17,7 +17,7 @@ Cybersecurity                  Software            13   11  214.99   Neutral (13
 Healthcare Services            Healthcare          14    9  164.43   Leading (2 -> -2)               OSCR, HUM, PGNY, ^AVAH,
                                                                                                      DVA
 Pharmaceuticals                Pharma               3    3  137.24   Leading (7 -> -1)               LQDA, ^CORT, ETON
-Cloud Infrastructure           Cloud Computing      5    4  131.52   Leading (6 -> +2)               -DDOG, -SNOW, -DOCN
+Cloud Infrastructure           Cloud Computing      5    4  131.52   Leading (6 -> +2)               ^DOCN, -DDOG, -SNOW
 Healthcare                     Healthcare          41   13  108.40   Leading (2 -> -2)               OMDA, INNV, ^LFST,
                                                                                                      ^ASTH, ^TDOC
 Biotech                        Biotech             86   19   86.19   Neutral (10 -> -4)              ^TGTX, IOVA, IBRX, AGIO,
@@ -72,6 +72,7 @@ Ticker                 Mapped_Theme Theme Classification  RS_Rating Long_Score Z
   QLYS                Cybersecurity              Neutral         98      85.53          3       NA
   BAND Communication Infrastructure              Unknown         99      85.45          1       -3
   AGIO                      Biotech              Neutral         95      85.30          3       NA
+ ^DOCN         Cloud Infrastructure              Leading         80      82.37          2       NA
 
 ========================================
 OBSERVATION WATCHLIST
@@ -83,7 +84,7 @@ Legend: * = Zacks Rank 4 or 5
     1   SNOW      Cloud Infrastructure              Leading         98      88.67          3       NA
     1   ARCB   Transportation/Shipping              Neutral         90      80.62          1       NA
     1   FIVN      Communications Cloud              Leading         95      86.92          3       NA
-    2    MRX        Financial Services              Neutral         80      80.94          1       +1
+    2    MRX        Financial Services              Neutral         80      80.94          1       +2
     2   AAMI        Financial Services              Neutral         90      85.74          1       +3
     2    RXO   Transportation/Shipping              Neutral         97      82.67          3       +2
     2   VCTR          Asset Management              Neutral         90      87.74          1       +3
@@ -101,7 +102,6 @@ Legend: * = Zacks Rank 4 or 5
     4    WDC                    Memory              Lagging         80      67.83          1       +5
     4   UCTT   Semiconductor Equipment              Lagging         95      74.28          1       -1
     4    UMC                   Foundry              Lagging         95      73.48          3       -5
-    4   DOCN      Cloud Infrastructure              Leading         80      82.37          2       +1
     5   TENB             Cybersecurity              Neutral         98      82.33         4*       -1
     5   ATEN             Cybersecurity              Neutral         90      80.53          3       -2
     5    VSH            Semiconductors              Lagging         80      64.03          3        0
@@ -120,8 +120,8 @@ DISTRIBUTION WATCHLIST
     2   MRVL           AI ASIC              Lagging         70      61.22          3       -1
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,OSCR,LQDA,HUM,PGNY,OMDA,INNV,DAVE,CORT,SEZL,URGN,HNGE,AVAH,DVA,ETON,FTNT,LFST,ASTH,PENG,TGTX,TDOC,OKTA,FA,IOVA,IBRX,EVER,QLYS,BAND,AGIO,
-###OBSERVATION,SNDK,GRPN,DDOG,TENB,APPS,SNOW,RXO,MU,SIMO,BB,LTH,UMC,FIVN,RSI,PAYS,UCTT,STX,ARCB,ATEN,HPE,KNSA,VCTR,AAMI,NRIX,ABCL,WDC,ASX,ALAB,AMAT,VSH,DOCN,MRX,
+###LONG,OSCR,LQDA,HUM,PGNY,OMDA,INNV,DAVE,CORT,SEZL,URGN,HNGE,AVAH,DVA,ETON,FTNT,LFST,ASTH,PENG,TGTX,TDOC,OKTA,FA,IOVA,IBRX,EVER,QLYS,BAND,AGIO,DOCN,
+###OBSERVATION,SNDK,GRPN,DDOG,TENB,APPS,SNOW,RXO,MU,SIMO,BB,LTH,UMC,FIVN,RSI,PAYS,UCTT,STX,ARCB,ATEN,HPE,KNSA,VCTR,AAMI,NRIX,ABCL,WDC,ASX,ALAB,AMAT,VSH,MRX,
 ###DISTRIBUTION,WYFI,NBIS,MRVL,
 
 ==============================================

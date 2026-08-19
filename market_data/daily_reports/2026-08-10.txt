@@ -12,7 +12,7 @@ Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-En
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Cloud Infrastructure           Cloud Computing      5    5  161.62   Leading (1 -> -1)               ^FSLY, SNOW, NET, -DDOG
+Cloud Infrastructure           Cloud Computing      5    5  161.62   Leading (1 -> -1)               ^FSLY, SNOW, NET, ^DDOG
 Biotechnology                  Biotech              4    4  156.52   Neutral (9 -> +13)              PGEN, ^KNSA, AGEN, XNCR
 Cybersecurity                  Software            13    8  149.01   Leading (3 -> +1)               PANW, OKTA, FTNT, QLYS
 Diagnostics                    Medical Devices      9    6  144.56   Leading (7 -> -1)               CDNA, ^GH, -NEO, -ADPT,
@@ -24,7 +24,7 @@ Medical Devices                Medical Devices     88   23  103.81   Leading (7 
 Biotech                        Biotech             81   20   94.28   Neutral (9 -> +13)              IOVA, ABCL, HALO, NRIX,
                                                                                                      -IBRX, #TGTX
 Digital Payments               Software             4    2   78.06   Leading (3 -> +1)               PAYS, PAY, -SEZL
-Software                       Software           163   29   76.62   Leading (3 -> +1)               PAYC, FA, BLZE, -PENG
+Software                       Software           163   29   76.62   Leading (3 -> +1)               PAYC, FA, BLZE
 Leisure and Entertainment      Internet            31    7   71.55   Neutral (13 -> +3)              MCS, ^CRSR, VAC
 Energy Services                Energy Services      1    1   68.62   Leading                         FTK
 Digital Health                 Software             1    1   67.24   Leading (3 -> +1)               HNGE
@@ -60,13 +60,13 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
    CBZ     Professional Services              Leading         95      93.37          2       -2
   PAYC                  Software              Leading         95      93.27          1       -1
    PAY          Digital Payments              Leading         95      92.97          2       -3
-  PANW             Cybersecurity              Leading         97      92.67          2       +4
+  PANW             Cybersecurity              Leading         97      92.67          2       +3
   DCTH           Medical Devices              Leading         95      92.52          1       NA
   LQDA           Pharmaceuticals              Neutral         98      92.12          1      +23
   PGEN             Biotechnology              Neutral         97      91.85          1       +7
   SNOW      Cloud Infrastructure              Leading         98      91.70          3       +3
   BLFS       Life Sciences Tools              Leading         95      91.62          1      +11
-  OKTA             Cybersecurity              Leading         95      91.57          2       -3
+  OKTA             Cybersecurity              Leading         95      91.57          2       -2
   IOVA                   Biotech              Neutral         99      91.45          2       +8
   FTNT             Cybersecurity              Leading         90      91.22          1       -2
   QLYS             Cybersecurity              Leading         97      91.07          3       -7
@@ -74,7 +74,7 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
    FTK           Energy Services              Leading         99      90.95          2       -3
   TWLO      Communications Cloud              Leading         90      90.90          2       NA
    RNG      Communications Cloud              Leading         98      90.90          3       -4
-    FA                  Software              Leading         95      90.87          3       NA
+    FA                  Software              Leading         95      90.87          3      -15
   NESR               Exploration              Neutral         97      90.53          1       NA
   BFLY           Medical Devices              Leading         99      90.52          2       +2
   BLZE                  Software              Leading         99      90.37          3       NA
@@ -95,6 +95,7 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
   XNCR             Biotechnology              Neutral         98      86.30          3       NA
    VAC Leisure and Entertainment              Neutral         95      85.59          1       NA
   ETON           Pharmaceuticals              Neutral         95      85.57          3       NA
+ ^DDOG      Cloud Infrastructure              Leading         80      84.90          2       NA
 
 ========================================
 OBSERVATION WATCHLIST
@@ -108,26 +109,24 @@ Legend: * = Zacks Rank 4 or 5
     1    NEO             Diagnostics              Leading         98      89.97          2       NA
     1   SEZL        Digital Payments              Leading         40      64.32          2       NA
     1   CAKE             Restaurants              Leading         98      89.90          1       NA
-    1   TWST     Life Sciences Tools              Leading         99      86.72         4*       NA
     1   ADPT             Diagnostics              Leading         98      89.57          3       NA
-    2   DDOG    Cloud Infrastructure              Leading         80      84.90          2       +9
-    2   ZETA     Digital Advertising              Neutral         90      80.84          3       -6
+    1   TWST     Life Sciences Tools              Leading         99      86.72         4*       NA
     2   AAMI      Financial Services              Neutral         90      82.98          1      -11
-    3    HPE              AI Servers              Neutral         97      76.34          3       -5
-    3   PENG                Software              Leading         80      84.82          1       +1
-    3   OUST              AI Sensors              Neutral         80      66.50         4*        0
+    2   ZETA     Digital Advertising              Neutral         90      80.84          3       -6
     3     MU                  Memory              Lagging         90      73.80          1       -1
-    4   GRMN Semiconductor Equipment              Lagging         90      72.40          1       +2
-    4   VSXY        Footwear/Apparel              Unknown         99      83.95          2       -2
-    4   CARE                 Banking              Neutral         70      67.88          3       -6
+    3   OUST              AI Sensors              Neutral         80      66.50         4*        0
+    3    HPE              AI Servers              Neutral         97      76.34          3       -5
     4   ENVA                 Unknown              Unknown         90      80.00          2      -11
-    5   OSCR     Healthcare Services              Neutral         70      71.49          1       -1
-    6   ILMN             Diagnostics              Leading         80      79.17          2       -1
-    8   HURN                 Unknown              Unknown         80      76.00          1       -5
-    8   GSHD               Insurance              Neutral         80      71.41          3      -18
-    8    TRV               Insurance              Neutral         70      69.51          1       -4
+    4   VSXY        Footwear/Apparel              Unknown         99      83.95          2       -2
+    4   CARE                 Banking              Neutral         70      67.88          3       -4
+    4   GRMN Semiconductor Equipment              Lagging         90      72.40          1       +2
+    5   OSCR     Healthcare Services              Neutral         70      71.49          1        0
+    6   ILMN             Diagnostics              Leading         80      79.17          2       +1
+    8   HURN                 Unknown              Unknown         80      76.00          1       -4
+    8   GSHD               Insurance              Neutral         80      71.41          3      -16
+    8    TRV               Insurance              Neutral         70      69.51          1       -2
    13   IBRX                 Biotech              Neutral         90      84.00          3       +1
-   17    MRX      Financial Services              Neutral         60      65.68          2        0
+   17    MRX      Financial Services              Neutral         60      65.68          2       +1
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -148,8 +147,8 @@ DISTRIBUTION WATCHLIST
    17   MRVL                                 AI ASIC              Neutral         80      72.09          2        0
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,HNGE,PAYS,CDNA,FSLY,CBZ,PAYC,PAY,PANW,DCTH,LQDA,PGEN,SNOW,BLFS,OKTA,IOVA,FTNT,QLYS,FIVN,FTK,TWLO,RNG,FA,NESR,BFLY,BLZE,NET,ABCL,RCEL,ATI,HALO,MCS,URGN,KNSA,CRSR,GH,APPS,NRIX,AGEN,CORT,XNCR,VAC,ETON,
-###OBSERVATION,TXG,TWST,VSXY,CAKE,ADPT,NEO,HPE,SMTI,EFOR,ITGR,GRMN,MU,ZETA,ENVA,IBRX,AAMI,OUST,DDOG,HURN,PENG,ILMN,GSHD,TRV,CARE,OSCR,MRX,SEZL,
+###LONG,HNGE,PAYS,CDNA,FSLY,CBZ,PAYC,PAY,PANW,DCTH,LQDA,PGEN,SNOW,BLFS,OKTA,IOVA,FTNT,QLYS,FIVN,FTK,TWLO,RNG,FA,NESR,BFLY,BLZE,NET,ABCL,RCEL,ATI,HALO,MCS,URGN,KNSA,CRSR,GH,APPS,NRIX,AGEN,CORT,XNCR,VAC,ETON,DDOG,
+###OBSERVATION,TXG,TWST,VSXY,CAKE,ADPT,NEO,HPE,SMTI,EFOR,ITGR,GRMN,MU,ZETA,ENVA,IBRX,AAMI,OUST,HURN,ILMN,GSHD,TRV,CARE,OSCR,MRX,SEZL,
 ###DISTRIBUTION,ARCB,WDC,DAVE,PGNY,BTSG,VG,HUM,TGTX,UCTT,ASX,UMC,RXO,MRVL,
 
 ==============================================

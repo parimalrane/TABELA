@@ -24,9 +24,9 @@ Micro Theme                    Macro Theme        Tot Qual   Score   Macro State
 -----------------------------------------------------------------------------------------------------------------------------
 Biotechnology                  Biotech              5    5  169.14   Neutral (11 -> -1)              SEPN, AGEN, XNCR, -PGEN,
                                                                                                      -KNSA
-Cloud Infrastructure           Cloud Computing      5    5  159.82   Leading (1)                     FSLY, SNOW, -NET, -DDOG
-Diagnostics                    Medical Devices      9    7  157.09   Leading (3 -> +1)               CDNA, ^ADPT, -NEO, -ILMN
-Cybersecurity                  Software            13    9  156.31   Leading (5 -> +5)               QLYS, PANW
+Cloud Infrastructure           Cloud Computing      5    5  159.82   Leading (1)                     FSLY, SNOW, -NET
+Diagnostics                    Medical Devices      9    7  157.09   Leading (3 -> +1)               CDNA, ^ADPT, -NEO
+Cybersecurity                  Software            13    9  156.31   Leading (5 -> +5)               QLYS, PANW, -FTNT
 Life Sciences Tools            Medical Devices      5    4  135.46   Leading (3 -> +1)               BLFS
 Data Infrastructure            Software             3    3  129.39   Leading (5 -> +5)               -NTAP, -MDB
 Communications Cloud           Cloud Computing      3    3  123.84   Leading (1)                     FIVN, RNG, -TWLO
@@ -40,7 +40,7 @@ Aerospace & Defense            Aerospace & Defe..  38    9   74.41   Leading (6 
 Financial Services             Banking             62   13   73.31   Neutral (8 -> +4)               CHYM, -MRX, -AAMI
 Restaurants                    Consumer Staples    26    6   69.98   Leading                         ^CAKE
 Software                       Software           170   26   68.28   Leading (5 -> +5)               PAYC, PENG, -P, -RBRK,
-                                                                                                     -APPN, -AMPL, -FA
+                                                                                                     -APPN, -AMPL
 Energy Services                Energy Services      1    1   67.93   Leading                         ^FTK
 Digital Health                 Software             1    1   65.85   Leading (5 -> +5)               HNGE
 Leisure and Entertainment      Internet            31    6   63.60   Neutral (13 -> +8)              MCS, CRSR, VAC
@@ -75,7 +75,7 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
   BFLY           Medical Devices              Leading         99      92.87          2       +5
   QLYS             Cybersecurity              Leading         95      92.80          1       -7
   PAYC                  Software              Leading         95      92.10          1       -6
-  PENG                  Software              Leading         95      91.90          1       NA
+  PENG                  Software              Leading         95      91.90          1      +13
   ATRO       Aerospace & Defense              Leading         97      91.71          1       +9
   BLFS       Life Sciences Tools              Leading         90      91.22          1      +15
   FIVN      Communications Cloud              Leading         90      91.20          1       NA
@@ -119,34 +119,32 @@ Legend: * = Zacks Rank 4 or 5
     1   AMPL                         Software              Leading         97      88.10          3       NA
     1   TWLO             Communications Cloud              Leading         80      85.40          2       NA
     1    NET             Cloud Infrastructure              Leading         90      85.30         4*       NA
+    1   APPN                         Software              Leading         90      88.25          1       NA
     1    CBZ            Professional Services              Leading         90      89.45          2       NA
-    1    MDB              Data Infrastructure              Leading         90      84.95          3       NA
+    1   FTNT                    Cybersecurity              Leading         80      84.55          1       NA
     1   KNSA                    Biotechnology              Neutral         90      83.72          3       NA
     1    NEO                      Diagnostics              Leading         90      87.92          2       NA
-    1   RBRK                         Software              Leading         95      88.40          3       NA
-    1   APPN                         Software              Leading         90      88.25          1       NA
-    1   NTAP              Data Infrastructure              Leading         95      87.50          3       NA
+    1    MDB              Data Infrastructure              Leading         90      84.95          3       NA
     1      P                         Software              Leading         97      89.00          3       NA
+    1   NTAP              Data Infrastructure              Leading         95      87.50          3       NA
+    1   RBRK                         Software              Leading         95      88.40          3       NA
+    2   LQDA                  Pharmaceuticals              Neutral         80      77.70         4*       -5
     2   NRIX                          Biotech              Neutral         90      82.82          3        0
-    2   HALO                          Biotech              Neutral         90      86.42          2       -6
     2   PGEN                    Biotechnology              Neutral         90      86.82          1      -11
-    2   LQDA                  Pharmaceuticals              Neutral         80      77.70         4*       -2
-    4     FA                         Software              Leading         80      81.45          3       -8
-    5   SEZL                 Digital Payments              Leading         60      75.65          1       -3
-    6   DDOG             Cloud Infrastructure              Leading         80      84.90          2       -3
+    2   HALO                          Biotech              Neutral         90      86.42          2       -6
+    5   SEZL                 Digital Payments              Leading         60      75.65          1       -4
+    6   GENI Sports Betting Data & Technology              Neutral         80      73.44         4*       -3
     6   AAMI               Financial Services              Neutral         90      87.68          1       -3
-    6   GENI Sports Betting Data & Technology              Neutral         80      73.44         4*       -2
-    7     MU                           Memory              Lagging         97      78.24          1       +2
     7   OUST                       AI Sensors              Neutral         95      80.63         4*       +7
-    8   VSXY                 Footwear/Apparel              Unknown         95      81.75          2       -1
-    8   CARE                          Banking              Neutral         70      72.58          3       -5
+    7     MU                           Memory              Lagging         97      78.24          1       +2
     8   GRMN          Semiconductor Equipment              Lagging         90      72.99          1       -4
+    8   CARE                          Banking              Neutral         70      72.58          3       -5
+    8   VSXY                 Footwear/Apparel              Unknown         95      81.75          2       -1
     8   ENVA                          Unknown              Unknown         95      82.75          2       +3
     9   OSCR              Healthcare Services              Neutral         95      81.71          1       +7
-   10   ILMN                      Diagnostics              Leading         80      81.52          2       -5
-   12   GSHD                        Insurance              Neutral         80      71.41          3       -2
-   12   HURN                          Unknown              Unknown         80      76.00          1       -5
-   12    TRV                        Insurance              Neutral         60      64.01          1       -5
+   12    TRV                        Insurance              Neutral         60      64.01          1       -6
+   12   GSHD                        Insurance              Neutral         80      71.41          3       -3
+   12   HURN                          Unknown              Unknown         80      76.00          1       -7
    21    MRX               Financial Services              Neutral         90      88.38          1       -1
 
 ========================================
@@ -160,15 +158,15 @@ DISTRIBUTION WATCHLIST
     7     VG LNG / Natural Gas Export Infrastructure              Unknown         70      69.50          3       +1
     8    HUM                     Healthcare Services              Neutral         80      68.76          3       +1
    10   TGTX                                 Biotech              Neutral         70      73.62          3       +1
-   12   AGIO                                 Biotech              Neutral         40      54.62          3       +3
+   12   AGIO                                 Biotech              Neutral         40      54.62          3       +2
    14    ASX                          Semiconductors              Lagging         90      72.09          1       +1
    14   UCTT                 Semiconductor Equipment              Lagging         80      63.59          1       -2
    14    UMC                                 Foundry              Lagging         70      61.29          1       +2
-   14    RXO                 Transportation/Shipping              Neutral         40      46.27          3       +3
+   14    RXO                 Transportation/Shipping              Neutral         40      46.27          3       +2
 
 TRADINGVIEW WATCHLIST EXPORT
 ###LONG,CDNA,DCTH,PAYS,FSLY,PAY,NESR,BFLY,QLYS,PAYC,PENG,ATRO,BLFS,FIVN,SNOW,RNG,HTFL,ATI,FTK,PANW,NLST,HNGE,ADPT,VREX,IOVA,CAKE,URGN,CHYM,RCEL,ABCL,DELL,ETON,MCS,CORT,CRSR,APPS,MGNI,VAC,SEPN,IBRX,AGEN,NBIS,UMAC,HPE,XNCR,
-###OBSERVATION,AMPL,P,MU,NTAP,ENVA,OSCR,VSXY,OUST,RBRK,NEO,KNSA,NRIX,MDB,CBZ,MRX,APPN,HALO,NET,AAMI,PGEN,GRMN,TWLO,GSHD,GENI,HURN,LQDA,FA,ILMN,DDOG,CARE,SEZL,TRV,
+###OBSERVATION,AMPL,P,MU,NTAP,ENVA,OSCR,VSXY,OUST,RBRK,NEO,KNSA,NRIX,MDB,CBZ,MRX,APPN,HALO,NET,AAMI,PGEN,GRMN,TWLO,GSHD,GENI,FTNT,HURN,LQDA,CARE,SEZL,TRV,
 ###DISTRIBUTION,WDC,DAVE,ARCB,BTSG,VG,HUM,TGTX,AGIO,ASX,UCTT,UMC,RXO,
 
 ==============================================

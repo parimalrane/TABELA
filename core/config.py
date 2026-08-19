@@ -145,8 +145,8 @@ FAIL_FAST_MIN_LONG_SCORE = 60.0
 
 # Re-entry threshold: An Observation stock can be reinstated to the Long list
 # if it recovers to these minimums (does not require 95/90 fresh criteria).
-RE_ENTRY_MIN_RS = 85
-RE_ENTRY_MIN_LONG_SCORE = 85.0
+RE_ENTRY_MIN_RS = 80
+RE_ENTRY_MIN_LONG_SCORE = 80
 
 # ==========================================
 # STOCK TRANSITION ENGINE

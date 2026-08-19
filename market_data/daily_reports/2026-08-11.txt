@@ -28,10 +28,10 @@ Cybersecurity                  Software            13    9  159.76   Neutral (8)
 Diagnostics                    Medical Devices      9    6  143.02   Leading (6 -> +3)               CDNA, ^ADPT, ^NEO, -ILMN
 Life Sciences Tools            Medical Devices      5    4  137.25   Leading (6 -> +3)               ^TXG, ^TWST, -BLFS
 Communications Cloud           Cloud Computing      3    3  128.46   Leading (1 -> +1)               RNG, TWLO, -FIVN
-Medical Devices                Medical Devices     88   28  125.33   Leading (6 -> +3)               DCTH, ^SMTI, -BFLY,
-                                                                                                     -ITGR
+Medical Devices                Medical Devices     88   28  125.33   Leading (6 -> +3)               DCTH, ^SMTI, ^ITGR,
+                                                                                                     -BFLY
 Pharmaceuticals                Pharma               2    2  107.66   Neutral (11 -> +9)              LQDA, CORT
-Cloud Infrastructure           Cloud Computing      5    3  102.85   Leading (1 -> +1)               FSLY, SNOW, -NET, -DDOG
+Cloud Infrastructure           Cloud Computing      5    3  102.85   Leading (1 -> +1)               FSLY, SNOW, -NET
 Biotech                        Biotech             80   20   95.47   Neutral (9 -> +2)               IOVA, HALO, ABCL, NRIX,
                                                                                                      -IBRX, #TGTX
 Developer Infrastructure       Software             3    2   86.88   Neutral (8)                     TEAM
@@ -41,8 +41,7 @@ Energy Services                Energy Services      1    1   68.62   Leading    
 Aerospace & Defense            Aerospace & Defe..  39    8   66.20   Neutral (10 -> -4)              ATI, DCO
 Digital Health                 Software             1    1   65.85   Neutral (8)                     HNGE
 Professional Services          Software             1    1   65.85   Neutral (8)                     CBZ
-Software                       Software           166   24   63.43   Neutral (8)                     PAYC, BLZE, U, -PENG,
-                                                                                                     -FA
+Software                       Software           166   24   63.43   Neutral (8)                     PAYC, BLZE, U, -FA
 Mobile Adtech                  Internet             2    1   54.38   Neutral (15 -> -6)              APPS
 Leisure and Entertainment      Internet            31    5   52.32   Neutral (15 -> -6)              CRSR, VAC, MCS
 Pharma                         Pharma              41    5   39.76   Neutral (11 -> +9)              RCEL, URGN
@@ -113,6 +112,7 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
    VAC Leisure and Entertainment              Neutral         97      85.52          1       -3
   CHYM        Financial Services              Neutral         98      85.35          3       NA
    MCS Leisure and Entertainment              Neutral         95      85.02          1      -15
+ ^ITGR           Medical Devices              Leading         90      83.86          3       NA
 
 ========================================
 OBSERVATION WATCHLIST
@@ -125,26 +125,23 @@ Legend: * = Zacks Rank 4 or 5
     1    NET    Cloud Infrastructure              Leading         90      87.30          3       NA
     1   BLFS     Life Sciences Tools              Leading         90      89.46          1       NA
     1   FIVN    Communications Cloud              Leading         90      87.20          3       NA
-    2   SEZL        Digital Payments              Neutral         50      68.38          1       +1
-    2   ITGR         Medical Devices              Leading         90      83.86          3       +3
-    3   DDOG    Cloud Infrastructure              Leading         70      79.40          2       -6
-    3   AAMI      Financial Services              Neutral         90      84.15          1       +5
+    2   SEZL        Digital Payments              Neutral         50      68.38          1       +2
+    3   AAMI      Financial Services              Neutral         90      84.15          1       +6
     3   ZETA     Digital Advertising              Neutral         95      82.42          3       +9
-    4   PENG                Software              Neutral         80      81.88          1       +3
+    4   OUST              AI Sensors              Lagging         90      68.47         4*       +8
     4    HPE              AI Servers              Lagging         97      75.31          2       +4
-    4     MU                  Memory              Lagging         90      74.39          1       -1
-    4   OUST              AI Sensors              Lagging         90      68.47         4*       +7
-    5   GRMN Semiconductor Equipment              Lagging         90      72.99          1       -1
+    4     MU                  Memory              Lagging         90      74.39          1        0
+    5   GRMN Semiconductor Equipment              Lagging         90      72.99          1        0
     5   VSXY        Footwear/Apparel              Unknown         98      83.40          2       +1
     5   CARE                 Banking              Neutral         70      69.05          3       +2
     5   ENVA                 Unknown              Unknown         95      82.75          2       +9
     6   OSCR     Healthcare Services              Neutral         70      67.96          1       +2
     7   ILMN             Diagnostics              Leading         80      79.76          2       +1
-    9   GSHD               Insurance              Neutral         80      70.82          3       +6
-    9   HURN                 Unknown              Unknown         80      76.00          1       +1
+    9   GSHD               Insurance              Neutral         80      70.82          3       +5
+    9   HURN                 Unknown              Unknown         80      76.00          1       +2
     9    TRV               Insurance              Neutral         70      68.92          1       +2
-   14   IBRX                 Biotech              Neutral         90      84.00          3       +6
-   18    MRX      Financial Services              Neutral         50      61.35          2       +1
+   14   IBRX                 Biotech              Neutral         90      84.00          3       +7
+   18    MRX      Financial Services              Neutral         50      61.35          2       +2
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -163,8 +160,8 @@ DISTRIBUTION WATCHLIST
    18   MRVL                                 AI ASIC              Lagging         80      68.56          2       -2
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,CDNA,DCTH,FSLY,PAYS,QLYS,PGEN,SNOW,LQDA,IOVA,NESR,FTK,TWLO,RNG,CAKE,CBZ,HALO,PAYC,ADPT,PAY,NEO,ABCL,EFOR,OKTA,PANW,HNGE,ATI,RCEL,TXG,URGN,KNSA,BLZE,DCO,TWST,U,XNCR,NRIX,AGEN,CORT,SMTI,SEPN,TEAM,CRSR,APPS,VAC,CHYM,MCS,
-###OBSERVATION,BFLY,VSXY,HPE,ZETA,ENVA,FIVN,ITGR,BLFS,IBRX,OUST,AAMI,GRMN,MU,NET,FTNT,GSHD,PENG,HURN,FA,ILMN,TRV,CARE,OSCR,DDOG,MRX,SEZL,
+###LONG,CDNA,DCTH,FSLY,PAYS,QLYS,PGEN,SNOW,LQDA,IOVA,NESR,FTK,TWLO,RNG,CAKE,CBZ,HALO,PAYC,ADPT,PAY,NEO,ABCL,EFOR,OKTA,PANW,HNGE,ATI,RCEL,TXG,URGN,KNSA,BLZE,DCO,TWST,U,XNCR,NRIX,AGEN,CORT,SMTI,SEPN,TEAM,CRSR,APPS,VAC,CHYM,MCS,ITGR,
+###OBSERVATION,BFLY,VSXY,HPE,ZETA,ENVA,FIVN,BLFS,IBRX,OUST,AAMI,GRMN,MU,NET,FTNT,GSHD,HURN,FA,ILMN,TRV,CARE,OSCR,MRX,SEZL,
 ###DISTRIBUTION,ARCB,WDC,DAVE,BTSG,VG,HUM,TGTX,UCTT,ASX,UMC,MRVL,
 
 ==============================================
