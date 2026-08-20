@@ -9,8 +9,9 @@ from config.config import (
     STOCK_TRANSITION_CONFIG,
     OBSERVATION_MAX_DAYS,
 )
-from config.runtime_context import context
+from config.runtime_context import context, get_monthly_path
 from reporting.watchlist_delta_engine import load_previous_long_watchlist
+from pathlib import Path
 
 
 REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
@@ -24,32 +25,30 @@ def load_registry() -> Dict:
     Load the latest registry strictly before today's market date.
     Supports replay, weekends and holidays.
     """
-
-    os.makedirs(REGISTRY_DIR, exist_ok=True)
+    registry_path = Path(REGISTRY_DIR)
+    if not registry_path.exists():
+        registry_path.mkdir(parents=True, exist_ok=True)
 
     today = str(context.market_date)
 
     candidates = []
 
-    for filename in os.listdir(REGISTRY_DIR):
-
-        if not filename.endswith("_registry.json"):
-            continue
-
+    for filepath in registry_path.rglob("*_registry.json"):
+        filename = filepath.name
         registry_date = filename.replace("_registry.json", "")
 
         if registry_date >= today:
             continue
 
-        candidates.append((registry_date, filename))
+        candidates.append((registry_date, filepath))
 
     if not candidates:
         return {}
 
-    _, latest = max(candidates)
+    _, latest_path = max(candidates, key=lambda x: x[0])
 
     with open(
-        os.path.join(REGISTRY_DIR, latest),
+        latest_path,
         "r",
         encoding="utf-8",
     ) as f:
@@ -61,10 +60,10 @@ def save_registry(registry: Dict) -> None:
     Save today's immutable registry.
     """
 
-    os.makedirs(REGISTRY_DIR, exist_ok=True)
+    target_dir = get_monthly_path(REGISTRY_DIR, context.market_date)
 
     filename = os.path.join(
-        REGISTRY_DIR,
+        target_dir,
         f"{context.market_date}_registry.json",
     )
 

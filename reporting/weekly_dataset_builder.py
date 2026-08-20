@@ -1062,7 +1062,7 @@ class WeeklyDatasetBuilder:
         market_context_dir = Path("market_data") / "market_context"
 
         files = sorted(
-            market_context_dir.glob("*_market_context.json")
+            market_context_dir.rglob("*_market_context.json")
         )
 
         if not files:

@@ -1,11 +1,9 @@
 import os
 import json
-from config.runtime_context import context
+from config.runtime_context import context, get_monthly_path
+from pathlib import Path
 
-
-WATCHLIST_DIR = "market_data/watchlist_history"
-os.makedirs(WATCHLIST_DIR, exist_ok=True)
-
+WATCHLIST_DIR = Path("market_data/watchlist_history")
 
 def build_theme_lookup(stocks):
     """
@@ -46,8 +44,10 @@ def compare_watchlists(
 
     today = context.market_date
 
+    target_dir = get_monthly_path(WATCHLIST_DIR, str(today))
+
     current_file = os.path.join(
-        WATCHLIST_DIR,
+        target_dir,
         f"watchlist_{today}.json",
     )
 
@@ -251,27 +251,22 @@ def save_watchlist(
         )
 
 def get_previous_watchlist(today):
+    
+    if not WATCHLIST_DIR.exists():
+        return None
 
     files = [
-
-        f
-        for f in os.listdir(WATCHLIST_DIR)
-
-        if f.startswith("watchlist_")
-        and f.endswith(".json")
-        and f < f"watchlist_{today}.json"
-
+        filepath
+        for filepath in WATCHLIST_DIR.rglob("watchlist_*.json")
+        if filepath.name < f"watchlist_{today}.json"
     ]
 
     if not files:
         return None
 
-    files.sort(reverse=True)
+    files.sort(key=lambda p: p.name, reverse=True)
 
-    return os.path.join(
-        WATCHLIST_DIR,
-        files[0],
-    )
+    return str(files[0])
 
 def load_previous_long_watchlist():
     """

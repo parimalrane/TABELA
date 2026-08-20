@@ -3,7 +3,18 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 import re
+
+def get_monthly_path(base_dir, date_str):
+    date_clean = str(date_str).replace("-", "")
+    if len(date_clean) >= 6:
+        month_folder = f"{date_clean[:4]}-{date_clean[4:6]}"
+    else:
+        month_folder = "unknown"
+    p = Path(base_dir) / month_folder
+    p.mkdir(parents=True, exist_ok=True)
+    return p
 
 
 @dataclass(frozen=True)
@@ -18,8 +29,8 @@ def load_runtime_context() -> RuntimeContext:
 
     data_dir = Path("market_data") / "input_files"
 
-    etf_files = sorted(data_dir.glob("*_ETF.csv"))
-    stock_files = sorted(data_dir.glob("*_stocks.csv"))
+    etf_files = sorted(data_dir.rglob("*_ETF.csv"))
+    stock_files = sorted(data_dir.rglob("*_stocks.csv"))
 
     if not etf_files:
         raise RuntimeError("No *_ETF.csv file found.")
@@ -38,7 +49,7 @@ def load_runtime_context() -> RuntimeContext:
 
     market_date = datetime.strptime(etf_date, "%Y%m%d").date()
 
-    market_file = data_dir / f"{etf_date}_Market.csv"
+    market_file = get_monthly_path(data_dir, etf_date) / f"{etf_date}_Market.csv"
 
     return RuntimeContext(
         market_date=market_date,

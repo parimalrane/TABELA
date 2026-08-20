@@ -1,11 +1,9 @@
 import os
 import json
 
-from config.runtime_context import context
-
+from config.runtime_context import context, get_monthly_path
 
 SNAPSHOT_DIR = "market_data/snapshots"
-os.makedirs(SNAPSHOT_DIR, exist_ok=True)
 
 
 def save_daily_snapshot(
@@ -79,8 +77,10 @@ def save_daily_snapshot(
 
     }
 
+    target_dir = get_monthly_path(SNAPSHOT_DIR, context.market_date)
+
     filename = os.path.join(
-        SNAPSHOT_DIR,
+        target_dir,
         f"{context.market_date}_market_snapshot.json"
     )
 

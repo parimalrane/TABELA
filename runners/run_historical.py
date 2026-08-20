@@ -8,6 +8,16 @@ import subprocess
 from pathlib import Path
 import re
 
+def get_monthly_path(base_dir, date_str):
+    date_clean = str(date_str).replace("-", "")
+    if len(date_clean) >= 6:
+        month_folder = f"{date_clean[:4]}-{date_clean[4:6]}"
+    else:
+        month_folder = "unknown"
+    p = Path(base_dir) / month_folder
+    p.mkdir(parents=True, exist_ok=True)
+    return p
+
 def main():
     script_dir = Path(os.path.abspath(__file__)).parent
     base_dir = script_dir.parent
@@ -32,20 +42,27 @@ def main():
     print(f"Removed {count} JSON files (including registry).")
 
     if backup_dir.exists():
-        for f in input_dir.glob("*.*"):
-            dest = backup_dir / f.name
-            if dest.exists():
-                os.remove(dest)
-            shutil.copy2(f, dest)
-        for f in input_dir.glob("*"):
-            os.remove(f)
+        for f in input_dir.rglob("*.*"):
+            if f.is_file():
+                match = re.search(r"(\d{8})", f.name)
+                d_str = match.group(1) if match else "unknown"
+                dest_dir = get_monthly_path(backup_dir, d_str)
+                dest = dest_dir / f.name
+                if dest.exists():
+                    os.remove(dest)
+                shutil.copy2(f, dest)
+        # Clear existing input directory entirely for a fresh run
+        for f in input_dir.rglob("*"):
+            if f.is_file():
+                try: os.remove(f)
+                except: pass
     else:
         os.rename(input_dir, backup_dir)
         os.makedirs(input_dir)
 
-    etf_files = sorted(backup_dir.glob("*_ETF.csv"))
+    etf_files = sorted(backup_dir.rglob("*_ETF.csv"))
     if not etf_files:
-        etf_files = sorted(backup_dir.glob("*_etf.csv")) # fallback for lowercase
+        etf_files = sorted(backup_dir.rglob("*_etf.csv")) # fallback for lowercase
 
     dates = []
     for f in etf_files:
@@ -64,23 +81,30 @@ def main():
     for d in dates:
         print(f"Running pipeline for date: {d}")
         # Clear input_dir for this specific date
-        for f in input_dir.glob("*"):
-            try:
-                os.remove(f)
-            except:
-                pass
-
-        etf_src = backup_dir / f"{d}_ETF.csv"
-        if not etf_src.exists():
-            etf_src = backup_dir / f"{d}_etf.csv"
-
-        stock_src = backup_dir / f"{d}_stocks.csv"
-        market_src = backup_dir / f"{d}_Market.csv"
-
+        for f in input_dir.rglob("*"):
+            if f.is_file():
+                try:
+                    os.remove(f)
+                except:
+                    pass
         
-        if etf_src.exists(): shutil.copy2(etf_src, input_dir / etf_src.name)
-        if stock_src.exists(): shutil.copy2(stock_src, input_dir / stock_src.name)
-        if market_src.exists(): shutil.copy2(market_src, input_dir / market_src.name)
+        # Locate exact files from backup_dir dynamically
+        etf_src = None
+        for f in backup_dir.rglob(f"{d}_etf.csv"): etf_src = f
+        if not etf_src:
+            for f in backup_dir.rglob(f"{d}_ETF.csv"): etf_src = f
+            
+        stock_src = None
+        for f in backup_dir.rglob(f"{d}_stocks.csv"): stock_src = f
+        
+        market_src = None
+        for f in backup_dir.rglob(f"{d}_Market.csv"): market_src = f
+
+        dest_dir = get_monthly_path(input_dir, d)
+
+        if etf_src is not None and etf_src.exists(): shutil.copy2(etf_src, dest_dir / etf_src.name)
+        if stock_src is not None and stock_src.exists(): shutil.copy2(stock_src, dest_dir / stock_src.name)
+        if market_src is not None and market_src.exists(): shutil.copy2(market_src, dest_dir / market_src.name)
 
         try:
             main_script = base_dir / "runners" / "main.py"

@@ -2,11 +2,9 @@ import os
 import json
 
 from config.config import *
-from config.runtime_context import context
-
+from config.runtime_context import context, get_monthly_path
 
 UNKNOWN_DIR = "market_data/unknown_classification"
-os.makedirs(UNKNOWN_DIR, exist_ok=True)
 
 
 def save_unknown_classification(stocks):
@@ -57,8 +55,9 @@ def save_unknown_classification(stocks):
 
     }
 
+    target_dir = get_monthly_path(UNKNOWN_DIR, str(today))
     filename = os.path.join(
-        UNKNOWN_DIR,
+        target_dir,
         f"{context.market_date}_unknown_classification.json"
     )
 

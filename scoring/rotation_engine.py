@@ -1,13 +1,12 @@
 import os
 import json
 from datetime import datetime
+from pathlib import Path
 
+from config.runtime_context import get_monthly_path
 
-SNAPSHOT_DIR = "market_data/snapshots"
-ROTATION_DIR = "market_data/rotation_delta"
-
-os.makedirs(ROTATION_DIR, exist_ok=True)
-
+SNAPSHOT_DIR = Path("market_data/snapshots")
+ROTATION_DIR = Path("market_data/rotation_delta")
 
 # ==========================================
 # LOAD LAST TWO AVAILABLE SNAPSHOTS
@@ -15,24 +14,20 @@ os.makedirs(ROTATION_DIR, exist_ok=True)
 
 def load_last_two_snapshots():
 
-    if not os.path.exists(SNAPSHOT_DIR):
+    if not SNAPSHOT_DIR.exists():
         return None, None
 
-    files = sorted([
-        f for f in os.listdir(SNAPSHOT_DIR)
-        if f.endswith(".json")
-    ])
+    files = sorted(SNAPSHOT_DIR.rglob("*.json"), key=lambda x: x.name)
 
     valid_snapshots = []
 
-    for filename in reversed(files):
-        path = os.path.join(SNAPSHOT_DIR, filename)
+    for path in reversed(files):
         try:
             with open(path, "r") as f:
                 snapshot = json.load(f)
             valid_snapshots.append(snapshot)
         except Exception as e:
-            print(f"WARNING: Skipping invalid snapshot: {filename} ({e})")
+            print(f"WARNING: Skipping invalid snapshot: {path.name} ({e})")
             continue
 
         if len(valid_snapshots) == 2:
@@ -256,12 +251,10 @@ def save_rotation_delta(rotation_data):
     if rotation_data is None:
         return
 
+    target_dir = get_monthly_path(ROTATION_DIR, rotation_data['date'])
     filename = os.path.join(
-
-        ROTATION_DIR,
-
+        target_dir,
         f"{rotation_data['date']}_rotation_delta.json"
-
     )
 
     with open(filename, "w") as f:

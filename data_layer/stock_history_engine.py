@@ -1,13 +1,13 @@
 import os
 import json
+from pathlib import Path
 
 import pandas as pd
 
-from config.runtime_context import context
+from config.runtime_context import context, get_monthly_path
 
 
-STOCK_HISTORY_DIR = "market_data/stock_universe"
-os.makedirs(STOCK_HISTORY_DIR, exist_ok=True)
+STOCK_HISTORY_DIR = Path("market_data/stock_universe")
 
 
 def safe_float(value, default=0.0):
@@ -24,18 +24,18 @@ def safe_int(value, default=0):
 
 def load_previous_stock_history():
 
-    files = sorted([
-        f for f in os.listdir(STOCK_HISTORY_DIR)
-        if f.endswith(".json")
-    ])
+    if not STOCK_HISTORY_DIR.exists():
+        return {}
+
+    files = sorted(
+        STOCK_HISTORY_DIR.rglob("*.json"),
+        key=lambda x: x.name
+    )
 
     if len(files) < 2:
         return {}
 
-    previous_file = os.path.join(
-        STOCK_HISTORY_DIR,
-        files[-2]
-    )
+    previous_file = files[-2]
 
     with open(previous_file, "r") as f:
         data = json.load(f)
@@ -195,8 +195,9 @@ def save_stock_history(stocks):
 
         })
 
+    target_dir = get_monthly_path(STOCK_HISTORY_DIR, context.market_date)
     filename = os.path.join(
-        STOCK_HISTORY_DIR,
+        target_dir,
         f"{context.market_date}_stock_history.json"
     )
 

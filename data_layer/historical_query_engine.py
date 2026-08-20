@@ -218,7 +218,7 @@ class FileDiscovery:
             if not folder.exists():
                 continue
 
-            for file in sorted(folder.glob("*.json")):
+            for file in sorted(folder.rglob("*.json")):
 
                 run_date = self._extract_date(file.name)
 

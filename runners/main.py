@@ -20,9 +20,8 @@ if __name__ == "__main__":
 
     output = buffer.getvalue()
 
-    # Save daily report
-    report_dir = Path("market_data") / "daily_reports"
-    report_dir.mkdir(parents=True, exist_ok=True)
+    from config.runtime_context import get_monthly_path
+    report_dir = get_monthly_path(Path("market_data") / "daily_reports", context.market_date)
 
     report_file = report_dir / f"{context.market_date}.txt"
     report_file.write_text(output, encoding="utf-8")

@@ -7,18 +7,17 @@ MARKET_ETFS = ["SPY", "QQQ", "IWM", "DIA"]
 MARKET_CONTEXT_FOLDER = Path("market_data/market_context")
 
 
+from config.runtime_context import get_monthly_path
+
 def save_market_context_json(context):
     """
     Save Market Context JSON.
     """
 
-    MARKET_CONTEXT_FOLDER.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    target_dir = get_monthly_path(MARKET_CONTEXT_FOLDER, context['latest_market_snapshot']['market_date'])
 
     filename = (
-        MARKET_CONTEXT_FOLDER
+        target_dir
         / f"{context['latest_market_snapshot']['market_date']}_market_context.json"
     )
 

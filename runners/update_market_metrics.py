@@ -87,10 +87,13 @@ def generate_market_csv():
         print("No data fetched. Exiting.")
         return
 
-    # Use the date from the last processed ETF to name the file
     final_market_date_obj = market_date_obj 
     file_date_str = final_market_date_obj.strftime("%Y%m%d")
-    csv_file = os.path.join(output_dir, f"{file_date_str}_Market.csv")
+    
+    from config.runtime_context import get_monthly_path
+    target_dir = get_monthly_path(output_dir, file_date_str)
+    
+    csv_file = os.path.join(target_dir, f"{file_date_str}_Market.csv")
 
     out_df = pd.DataFrame(rows)
     out_df.to_csv(csv_file, index=False)
