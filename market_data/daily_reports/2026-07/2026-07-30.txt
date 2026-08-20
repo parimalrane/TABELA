@@ -18,7 +18,7 @@ Diagnostics                    Medical Devices      9    8  196.49   Leading (5)
 Pharmaceuticals                Pharma               3    3  137.24   Neutral (8)                     LQDA, ETON, CORT
 Cloud Infrastructure           Cloud Computing      5    4  130.08   Leading (2)                     DDOG, SNOW
 Cybersecurity                  Software            13    7  127.70   Neutral (10)                    OKTA, PANW, ^FTNT, -BB,
-                                                                                                     -TENB, -QLYS
+                                                                                                     -TENB, -QLYS, #ATEN
 Digital Payments               Software             4    3  113.47   Neutral (10)                    SEZL, ^PAYS
 Communications Cloud           Cloud Computing      3    2   85.49   Leading (2)                     RNG
 Restaurants                    Consumer Staples    24    6   76.72   Leading                         CAKE
@@ -26,11 +26,18 @@ Professional Services          Software             1    1   67.93   Neutral (10
 Insurance                      Insurance           62   12   66.14   Leading (6)                     -GSHD, -TRV
 LNG / Natural Gas Export Inf.. LNG / Natural Ga..   1    1   62.38   Unknown                         -VG
 AI Servers                     Artificial Intel..   2    1   54.38   Lagging (30)                    -HPE
+Biotech                        Biotech             78    7   33.87   Neutral (20)                    -IBRX, -TGTX, #AGIO
 Software                       Software           160   10   26.93   Neutral (10)                    BLZE, -PENG, -FA, -EVER
 Pharma                         Pharma              40    3   24.79   Neutral (8)                     URGN
 Financial Services             Banking             61    3   17.94   Neutral (15)                    AAMI, -MRX
 Unknown                        Unknown            339    9   14.73   Unknown                         -HURN
 Footwear/Apparel               Footwear/Apparel    36    1    9.94   Unknown                         VSXY
+Semiconductor Equipment        Semiconductors      19    0    0.00   Lagging (33)                    #UCTT
+Semiconductors                 Semiconductors      45    0    0.00   Lagging (33)                    #ASX
+AI ASIC                        Artificial Intel..   1    0    0.00   Lagging (30)                    #MRVL
+AI Infrastructure              Artificial Intel..   6    0    0.00   Lagging (30)                    #NBIS, #WYFI
+AI Connectivity                Artificial Intel..   2    0    0.00   Lagging (30)                    #ALAB
+Foundry                        Semiconductors       3    0    0.00   Lagging (33)                    #UMC
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -93,12 +100,21 @@ Legend: * = Zacks Rank 4 or 5
 ========================================
 DISTRIBUTION WATCHLIST
 ========================================
-No qualified distribution candidates today.
+ Days Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
+    1   UCTT Semiconductor Equipment              Lagging         90      69.68          1       +4
+    1    UMC                 Foundry              Lagging         80      67.38          1        0
+    1   ALAB         AI Connectivity              Lagging         80      67.94          3       NA
+    1    ASX          Semiconductors              Lagging         70      61.68          1        0
+    1   NBIS       AI Infrastructure              Lagging         70      62.44          3       NA
+    1   WYFI       AI Infrastructure              Lagging         70      60.64          3       NA
+    1   MRVL                 AI ASIC              Lagging         70      61.74          3       NA
+    1   ATEN           Cybersecurity              Neutral         60      66.00          3       -5
+    1   AGIO                 Biotech              Neutral         40      49.32          3       NA
 
 TRADINGVIEW WATCHLIST EXPORT
 ###LONG,LQDA,DDOG,ADPT,SEZL,RNG,SNOW,OSCR,CDNA,CBZ,CAKE,PGNY,ETON,URGN,OKTA,CORT,DAVE,PAYS,AAMI,PANW,FTNT,BLZE,VSXY,BTSG,
 ###OBSERVATION,AGEN,GRPN,HPE,KNSA,HURN,APPS,IBRX,LTH,THC,PENG,MRX,HUM,VG,TGTX,GSHD,BB,ARCB,HNGE,TRV,QLYS,TENB,FA,EVER,
-###DISTRIBUTION,,
+###DISTRIBUTION,UCTT,UMC,ALAB,ASX,NBIS,WYFI,MRVL,ATEN,AGIO,
 
 ==============================================
 END OF TABELA SCAN

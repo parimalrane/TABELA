@@ -44,25 +44,27 @@ def _ordered_reason_tokens(tokens: List[str]) -> List[str]:
     return grouped
 
 
+from pathlib import Path
+
 def _load_recent_json_payloads(directory: str, suffix: str, max_files: int) -> List[dict]:
-    if not os.path.exists(directory):
+    dir_path = Path(directory)
+    if not dir_path.exists():
         return []
 
-    files = sorted([f for f in os.listdir(directory) if f.endswith(suffix)])
+    files = sorted(dir_path.rglob(f"*{suffix}"), key=lambda x: x.name)
     if not files:
         return []
 
     selected_files = files[-max_files:]
     payloads: List[dict] = []
 
-    for filename in selected_files:
-        file_path = os.path.join(directory, filename)
+    for file_path in selected_files:
         try:
             with open(file_path, "r") as handle:
                 payload = json.load(handle)
             payloads.append(payload)
         except Exception as error:
-            print(f"WARNING: Skipping invalid JSON file: {filename} ({error})")
+            print(f"WARNING: Skipping invalid JSON file: {file_path.name} ({error})")
 
     return payloads
 
