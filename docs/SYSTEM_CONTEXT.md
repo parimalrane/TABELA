@@ -5601,27 +5601,25 @@ A developer should understand the repository structure before reading any implem
 
 # A.2 High-Level Repository Layout
 
-```
+```text
 TABELA/
 
-├── core/
-├── engines/
+├── runners/
+├── config/
+├── pipeline/
+├── themes/
+├── scoring/
+├── lifecycle/
+├── data_layer/
+├── reporting/
 ├── market_data/
 ├── data/
 ├── docs/
-├── scripts/
 ├── tests/
-├── output/
-├── logs/
-├── cache/
-├── config/
-├── tools/
-└── main.py
+└── (batch files at root)
 ```
 
-Individual folders may evolve.
-
-Their responsibilities should remain stable.
+Individual folders may evolve, but the core Domain-Driven Design (DDD) partitions must remain strictly adhered to.
 
 ---
 
@@ -5631,119 +5629,75 @@ The repository root should remain intentionally lightweight.
 
 Only place files here that satisfy one of the following:
 
-- application entry point
-
+- batch execution controllers (`main.bat`, `regression.bat`, `market.bat`)
 - repository configuration
-
 - project metadata
-
 - developer tooling
-
 - licensing
 
-- scripts/ directory containing operator-facing batch scripts (scripts/weekly_run.py)
-
-Avoid placing business logic in the repository root.
+No Python business logic files should ever exist at the repository root.
 
 ---
 
-# A.4 core/
+# A.4 runners/
 
 ## Responsibility
 
-Repository orchestration.
+Execution Entry Points.
 
-Core coordinates the platform.
-
-Core does **not** perform business intelligence.
-
-Representative responsibilities:
-
-- execution pipeline
-
-- runtime initialization
-
-- configuration loading
-
-- dependency coordination
-
-- shared utilities
-
-- execution context
+Runners contain the literal script controllers that the user or cron jobs trigger. They establish absolute path contexts and invoke pipelines.
 
 Representative files:
-
-- main.py
-
-- pipeline.py
-
-- config.py
-
-- runtime_context.py
-
-- weekly_pipeline.py
-
-The exact filenames may evolve.
-
-The responsibilities should not.
+- `main.py`
+- `run_historical.py`
+- `update_market_metrics.py`
 
 ---
 
-# A.5 engines/
+# A.5 config/ & pipeline/
 
 ## Responsibility
 
-Business Intelligence.
+System Setup and Macro Orchestration.
 
-This is the primary business layer of TABELA.
-
-Representative engine categories include:
-
-Market
-
-↓
-
-Theme
-
-↓
-
-ETF
-
-↓
-
-Stock
-
-↓
-
-Scoring
-
-↓
-
-Breadth
-
-↓
-
-Rotation
-
-↓
-
-Transition
-
-↓
-
-Presentation
-
-↓
-
-Historical Intelligence
-
-Each engine should own one business responsibility.
-
-Avoid cross-engine ownership.
+**`config/`** handles environment integration and static parameter logic (`config.py`).
+**`pipeline/`** handles the daily/weekly sequential execution flow of the system. Pipelines coordinate engines, but do not perform math themselves.
 
 ---
 
-# A.6 market_data/
+# A.6 themes/ & scoring/
+
+## Responsibility
+
+Mathematical & Classification Engines.
+
+**`themes/`** owns all logic for ETF parsing, industry mapping, dictionary normalizations, and company assignment.
+**`scoring/`** owns all logic for calculating Relative Strength, Long Scores, Component Scoring, and ETF Breadth. 
+
+---
+
+# A.7 lifecycle/ & data_layer/
+
+## Responsibility
+
+State Memory, Screening, and Persistence.
+
+**`lifecycle/`** dictates the physical routing of stocks. It owns the logic for Promotion, Observation Grace periods, Re-Entry thresholds, and Distribution failures.
+**`data_layer/`** owns all disk I/O for historical snapshots, memory registries, JSON serializers, and intelligence persistence.
+
+---
+
+# A.8 reporting/
+
+## Responsibility
+
+Output Formatting.
+
+The reporting domain is isolated from calculation. It formats the outputs for terminal displays, constructs Markdown reports, and generates TradingView text exports.
+
+---
+
+# A.9 market_data/
 
 ## Responsibility
 
@@ -5752,86 +5706,23 @@ Persistent generated intelligence.
 Representative contents include:
 
 - historical snapshots
-
 - transition registry
-
 - watchlist history
-
 - historical outputs
-
 - weekly intelligence
 
 This directory represents accumulated market knowledge.
 
-Avoid deleting historical information.
+Avoid deleting historical information (except during intentional pure regression resets).
 
 ---
 
-# A.7 data/
+# A.10 data/ & docs/
 
 ## Responsibility
 
-Reference data.
-
-Examples include:
-
-- mappings
-
-- normalization tables
-
-- industry information
-
-- ETF relationships
-
-- static lookup tables
-
-Reference data should change infrequently.
-
-Avoid placing generated intelligence here.
-
----
-
-# A.8 docs/
-
-## Responsibility
-
-Permanent engineering knowledge.
-
-Representative documentation:
-
-SYSTEM_CONTEXT.md
-
-Architecture
-
-Business methodology
-
-Engineering standards
-
-Migration guides
-
-Repository documentation should become the long-term memory of the project.
-
----
-
-# A.9 scripts/
-
-## Responsibility
-
-Operational utilities.
-
-Examples include:
-
-- migrations
-
-- maintenance
-
-- repair
-
-- validation
-
-- one-time conversion
-
-Scripts should not become permanent business engines.
+**`data/`**: Reference data (mappings, normalization tables, static lookup tables).
+**`docs/`**: Permanent engineering knowledge (SYSTEM_CONTEXT.md, ARCHITECTURE.md).
 
 ---
 
@@ -10421,6 +10312,69 @@ Every future architectural decision should move the repository closer to this st
 
 ---
 
+# ADR-016 — Domain-Driven Architecture
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+The repository originally suffered from an overcrowded `core/` and `engines/` separation. The architecture lacked strict context boundaries, making the location of system controllers vs. calculation engines ambiguous. Loose scripts were scattered in `weekly/`, `regression/`, and `market/` directories.
+
+---
+
+## Decision
+
+The entire codebase was migrated to a strict **Domain-Driven Design (DDD)** structure.
+1. `runners/`: Entrypoints.
+2. `config/`: Parameters.
+3. `pipeline/`: Orchestrators.
+4. `themes/`: ETF & taxonomic mapping.
+5. `scoring/`: Math and momentum calculation.
+6. `lifecycle/`: State tracking and watchlist assignments.
+7. `data_layer/`: Persistence and historical snapshots.
+8. `reporting/`: UI and markdown output.
+
+---
+
+## Consequences
+
+Zero Python logic files remain at the repository root. All dependencies are functionally cohesive. AI agents and engineers have explicit boundaries for where to inject new logic.
+
+---
+
+# ADR-017 — Lifecycle Thresholds & Re-Entry Trapdoors
+
+## Status
+
+Accepted
+
+---
+
+## Context
+
+Institutional candidates were lagging on Observation logs indefinitely, and stocks triggering major shakeout recoveries were not being organically captured to re-enter the active candidate lists. 
+
+---
+
+## Decision
+
+- Observation strictly expires at **21 Days**, or fast-fails immediately if Long Score drops below **60.0**. 
+- Any stock currently residing in `OBSERVATION` or `DISTRIBUTION` that recovers to **RS >= 85** and **Long Score >= 85** without belonging to a Lagging theme triggers the Re-Entry trapdoor.
+- Re-Entry stocks are surgically removed from their persistence registries, destroying their penalty history, and are promoted freshly to the Long Universe appended with a `^` prefix (e.g. `^WDC`).
+- **Safety Mechanism:** Stocks mapped to `DISTRIBUTION` immediately vanish from tracking if their Theme transitions to `Leading` to prevent short squeezes.
+
+---
+
+## Consequences
+
+The active lifecycle acts precisely as an institutional swing trading desk, natively clearing broken configurations and aggressively securing bouncing leaders.
+
+---
+
 # ADR Governance Rules
 
 Every future ADR should include:
@@ -11465,3 +11419,14 @@ Category: Architectural Reorganization / Formatting Refinement
 Reason: Extracted hardcoded Python dictionary (THEME_TRANSLATION) into a dynamic user-facing CSV configuration file (data/macro_theme_mapping.csv) to allow flexible, strictly deterministic tracking of granular narratives natively against broad ETF proxies without Python code intervention. Enforced 2-decimal formatting constraints on Long_Score displays within Observation, Long, and Distribution terminal presentations.
 Impact: Zero breaking changes to core algorithms. Complete decoupling of display narrative from benchmark scoring, and clean numerical output bounding.
 Constraint: Maintain absolute dynamic decoupling of theme translation strings ensuring all mappings occur inside data/macro_theme_mapping.csv.
+Date: 2026-08-20
+Component: File System Architecture & Directory Structure
+Category: Refactoring / Architectural Reorganization
+Reason: Deep structural migration from ambiguous 'core' and 'engines' folders to a Domain-Driven Design (DDD). Grouped modules conceptually into config/, data_layer/, lifecycle/, pipeline/, reporting/, runners/, scoring/, and themes/ directories. Isolated .bat execution files to the root level.
+Impact: Zero functional breaking changes; massive improvement for AI agent boundaries and human navigability.
+
+Date: 2026-08-20
+Component: Lifecycle Engines
+Category: Business Methodology Refinement
+Reason: Replaced rigid 8-day observation limit with a 21-day timeline constraint supplemented by a 60.0 Long Score fast-fail. Installed native re-entry trapdoors requiring an 85 RS and 85 Long Score to intercept recovering stocks out of the Observation and Distribution boards perfectly. Implemented Leading theme safety net on Distribution lists to instantly delete short candidates and block squeezes.
+Impact: Institutional lifecycle mapping is now completely biologically reactive to the market, protecting perfectly against dead money, whilst remaining strictly deterministic.

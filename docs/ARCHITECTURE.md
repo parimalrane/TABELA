@@ -60,35 +60,40 @@ The architecture is intentionally linear to simplify debugging, testing, and fut
 
 # 3. Directory Structure
 
-```
+```text
 TABELA/
 
 │
-├── core/
-│   ├── pipeline.py
-│   ├── config.py
-│   ├── theme mapping
-│   └── utility modules
+├── runners/
+│   ├── main.py
+│   └── run_historical.py
 │
-├── engines/
-│   ├── etf_engine.py
-│   ├── composite_engine.py
-│   ├── breadth_engine.py
-│   ├── institutional_leader.py
-│   ├── distribution_engine.py
-│   ├── short_engine.py
-│   ├── rotation_engine.py
-│   ├── snapshot_engine.py
-│   ├── historical_intelligence_engine.py
-│   └── supporting engines
+├── pipeline/
+│   └── pipeline.py
+│
+├── config/
+│   └── config.py
+│
+├── themes/
+│   └── company_theme_engine.py
+│
+├── scoring/
+│   └── long_scoring_engine.py
+│
+├── lifecycle/
+│   └── stock_transition_engine.py
+│
+├── data_layer/
+│   └── snapshot_engine.py
+│
+├── reporting/
+│   └── presentation_engine.py
 │
 ├── data/
 │
 ├── market_data/
 │
-├── reports/
-│
-└── main.py
+└── main.bat
 ```
 
 ---
