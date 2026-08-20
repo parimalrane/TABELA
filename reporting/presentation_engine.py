@@ -500,6 +500,44 @@ def print_daily_scan(
     theme_performance,
     recovered,
 ):
+    import os
+    ignore_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "ignore_stocks.csv")
+    ignore_tickers = set()
+    if os.path.exists(ignore_file):
+        try:
+            with open(ignore_file, "r") as f:
+                for line in f:
+                    ticker = line.strip().upper()
+                    if ticker and not ticker.startswith(","):
+                        # Handling possible csv format
+                        ticker = ticker.split(",")[0].strip()
+                        ignore_tickers.add(ticker)
+        except:
+            pass
+
+    if ignore_tickers:
+        if not long_candidates.empty:
+            long_candidates = long_candidates[~long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(ignore_tickers)].copy()
+        if not distribution_watchlist.empty:
+            distribution_watchlist = distribution_watchlist[~distribution_watchlist["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(ignore_tickers)].copy()
+        if not stocks.empty:
+            stocks = stocks[~stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(ignore_tickers)].copy()
+            
+        # Scrub Breadth Leaders safely
+        theme_breadth = theme_breadth.copy()
+        def scrub_leaders(leaders_str):
+            if pd.isna(leaders_str) or not str(leaders_str).strip():
+                return leaders_str
+            tokens = []
+            for t in str(leaders_str).split(","):
+                clean = t.strip()
+                bare_ticker = clean.replace("^", "").replace("-", "").replace("#", "").replace("~", "").upper()
+                if bare_ticker not in ignore_tickers:
+                    tokens.append(clean)
+            return ", ".join(tokens)
+            
+        theme_breadth["Leaders"] = theme_breadth["Leaders"].apply(scrub_leaders)
+
     leading_themes = theme_strength[
         theme_strength["Theme"].isin([k for k, v in theme_class_map.items() if v == "Leading"])
     ][["Theme", "Theme_Rank", "ETF_RS_Raw"]].to_dict("records")
