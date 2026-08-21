@@ -57,8 +57,11 @@ def main():
                 try: os.remove(f)
                 except: pass
     else:
-        os.rename(input_dir, backup_dir)
-        os.makedirs(input_dir)
+        shutil.copytree(input_dir, backup_dir)
+        for f in input_dir.rglob("*"):
+            if f.is_file():
+                try: os.remove(f)
+                except: pass
 
     etf_files = sorted(backup_dir.rglob("*_ETF.csv"))
     if not etf_files:
@@ -72,8 +75,9 @@ def main():
 
     if not dates:
         print(f"WARNING: No matching CSV date files found in {backup_dir}.")
-        shutil.rmtree(input_dir)
-        os.rename(backup_dir, input_dir)
+        shutil.copytree(backup_dir, input_dir, dirs_exist_ok=True)
+        try: shutil.rmtree(backup_dir)
+        except: pass
         return
 
     dates = sorted(list(set(dates)))
@@ -116,9 +120,14 @@ def main():
     print("Historical pipeline run complete.")
     
     if input_dir.exists():
-        shutil.rmtree(input_dir)
+        for f in input_dir.rglob("*"):
+            if f.is_file():
+                try: os.remove(f)
+                except: pass
     if backup_dir.exists():
-        os.rename(backup_dir, input_dir)
+        shutil.copytree(backup_dir, input_dir, dirs_exist_ok=True)
+        try: shutil.rmtree(backup_dir)
+        except: pass
 
 if __name__ == "__main__":
     main()

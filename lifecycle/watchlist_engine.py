@@ -10,13 +10,6 @@ def build_long_watchlist(stocks, registry):
         & (stocks["Long_Score"] >= LONG_FILTERS["MIN_LONG_SCORE"])
     )
 
-    # Idiosyncratic Exemption override - Strictly for Non-Leading Themes
-    idiosyncratic_entry = (
-        ~stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
-        & (stocks["RS_Rating"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_RS"])
-        & (stocks["Long_Score"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_LONG_SCORE"])
-    )
-
     from config.config import RE_ENTRY_MIN_RS, RE_ENTRY_MIN_LONG_SCORE
     
     reentry_eligible_tickers = {
@@ -26,6 +19,15 @@ def build_long_watchlist(stocks, registry):
     
     is_reentry_eligible = stocks["Ticker"].astype(str).str.upper().str.replace("*", "", regex=False).isin(reentry_eligible_tickers)
 
+    # Idiosyncratic Exemption override - Strictly for Non-Leading Themes (and brand new entries)
+    # Re-entry candidates are explicitly blocked from this path.
+    idiosyncratic_entry = (
+        ~is_reentry_eligible
+        & ~stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
+        & (stocks["RS_Rating"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_RS"])
+        & (stocks["Long_Score"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_LONG_SCORE"])
+    )
+
     re_entry = (
         is_reentry_eligible
         & stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
@@ -33,21 +35,16 @@ def build_long_watchlist(stocks, registry):
         & (stocks["Long_Score"] >= RE_ENTRY_MIN_LONG_SCORE)
     )
 
-    idiosyncratic_re_entry = (
-        is_reentry_eligible
-        & ~stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
-        & (stocks["RS_Rating"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_RS"])
-        & (stocks["Long_Score"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_LONG_SCORE"])
-    )
+
 
     # Combine and ban Lagging themes (Rule 1)
     long_watchlist = stocks[
-        (standard_entry | idiosyncratic_entry | re_entry | idiosyncratic_re_entry) & 
+        (standard_entry | idiosyncratic_entry | re_entry) & 
         ~stocks["Theme_Class"].str.contains("Lagging", na=False)
     ].copy()
     
     # Mark which ones are re-entries to flag in the UI
-    long_watchlist["Is_Reentry"] = re_entry | idiosyncratic_re_entry
+    long_watchlist["Is_Reentry"] = re_entry
 
 
     long_watchlist = long_watchlist.sort_values(

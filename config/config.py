@@ -49,7 +49,7 @@ DISTRIBUTION_ENGINE_CONFIG = {
     
     # New Architectural Constraints
     "DISTRIBUTION_MAX_CAP": 21,
-    "DISTRIBUTION_MIN_RS": 40,
+    "DISTRIBUTION_MIN_RS": 20,
 
     # Trend/baseline lookbacks.
     "RECENT_BASELINE_LOOKBACK_DAYS": 5,
