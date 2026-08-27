@@ -478,11 +478,14 @@ def print_market_context_summary(market_context):
 def load_todays_registry():
     import os
     import json
-    from config.runtime_context import context
+    from config.runtime_context import context, get_monthly_path
     from config.config import STOCK_TRANSITION_CONFIG
     REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
     today = str(context.market_date)
-    path = os.path.join(REGISTRY_DIR, f"{today}_registry.json")
+    
+    target_dir = get_monthly_path(REGISTRY_DIR, today)
+    path = os.path.join(target_dir, f"{today}_registry.json")
+    
     if os.path.exists(path):
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
