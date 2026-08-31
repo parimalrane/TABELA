@@ -686,37 +686,22 @@ def print_daily_scan(
     print("\n\n")
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
-    print("Legend: * = Zacks Rank 4 or 5 | ^ = Re-Entry")
+    print("Legend: * = Zacks Rank 4 or 5")
     print("========================================")
 
     display_df = long_candidates[
         [
             "Ticker",
             "Mapped_Theme",
-            "Theme_Class",
             "RS_Rating",
             "Long_Score",
-            "Zacks Rank",
-            "Is_Reentry",
+            "Zacks Rank"
         ]
     ].copy()
     display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
-    
-    # Flag re-entries explicitly with a prefix
-    display_df.loc[display_df["Is_Reentry"] == True, "Ticker"] = "^" + display_df["Ticker"]
-    display_df = display_df.drop(columns=["Is_Reentry"])
 
     if "Long_Score" in display_df.columns:
         display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
-
-    def is_grace(row):
-        clean = str(row["Ticker"]).replace("*", "").strip().upper()
-        match = stocks[stocks["Ticker"].astype(str).str.upper() == clean]
-        if not match.empty:
-            return match.iloc[0].get("Is_Pre_Observation_Candidate", False)
-        return False
-
-    display_df["is_pre_obs"] = display_df.apply(is_grace, axis=1)
 
     display_df["Zacks Rank"] = (
         display_df["Zacks Rank"]
@@ -736,16 +721,13 @@ def print_daily_scan(
         }
     )
 
-    true_longs = display_df.drop(columns=["is_pre_obs"])
+    true_longs = display_df
     true_long_tickers = true_longs["Ticker"].tolist()
 
     deltas = compare_watchlists(
         current_true_long=true_long_tickers,
         current_pre_obs=[],
-        current_observation=stocks.loc[
-            stocks["Tracking_State"] == "OBSERVATION",
-            "Ticker",
-        ].tolist(),
+        current_observation=[],
         current_distribution=distribution_watchlist["Ticker"].tolist(),
         recovered=recovered,
         stocks=stocks,
@@ -765,88 +747,14 @@ def print_daily_scan(
 
 
 
-    print("\n\n")
-    print("========================================")
-    print("OBSERVATION WATCHLIST")
-    print("Legend: * = Zacks Rank 4 or 5")
-    print("========================================")
-
-    obs_stocks = stocks[stocks["Tracking_State"] == "OBSERVATION"].copy()
-    if obs_stocks.empty:
-        print("No observation candidates today.")
-    else:
-        registry = load_todays_registry()
-        
-        days_col = []
-        for ticker in obs_stocks["Ticker"]:
-            t = str(ticker).replace("*", "").strip().upper()
-            days = registry.get(t, {}).get("state_days", 1) if registry.get(t, {}).get("tracking_state") == "OBSERVATION" else 1
-            days_col.append(days)
-            
-        obs_stocks["Days"] = days_col
-        obs_stocks = obs_stocks.sort_values("Days", ascending=True)
-
-        display_obs = obs_stocks[
-            [
-                "Days",
-                "Ticker",
-                "Mapped_Theme",
-                "Theme_Class",
-                "RS_Rating",
-                "Long_Score",
-                "Zacks Rank"
-            ]
-        ].copy()
-        display_obs["Ticker"] = display_obs["Ticker"].astype(str).str.replace("*", "", regex=False)
-
-        if "Long_Score" in display_obs.columns:
-            display_obs["Long_Score"] = display_obs["Long_Score"].map("{:.2f}".format)
-
-        if "Zacks Rank" in display_obs.columns:
-            display_obs["Zacks Rank"] = (
-                display_obs["Zacks Rank"]
-                .fillna(0)
-                .astype(int)
-                .astype(str)
-            )
-            display_obs.loc[
-                display_obs["Zacks Rank"].isin(["4", "5"]),
-                "Zacks Rank"
-            ] += "*"
-
-        display_obs = display_obs.rename(
-            columns={
-                "Theme_Class": "Theme Classification",
-            }
-        )
-
-        display_obs["Movement"] = display_obs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
-        print(display_obs.to_string(index=False))
-
-
-    print("\n\n")
-    print("========================================")
     print("DISTRIBUTION WATCHLIST")
     print("========================================")
 
     if distribution_watchlist.empty:
         print("No qualified distribution candidates today.")
     else:
-        registry = load_todays_registry()
-        
-        # Add Days column from registry
-        days_col = []
-        for ticker in distribution_watchlist["Ticker"]:
-            t = ticker.replace("*", "").strip().upper()
-            days = registry.get(t, {}).get("state_days", 1) if registry.get(t, {}).get("tracking_state") == "DISTRIBUTION" else 1
-            days_col.append(days)
-            
-        distribution_watchlist["Days"] = days_col
-        distribution_watchlist = distribution_watchlist.sort_values("Days", ascending=True)
-
         display_df = distribution_watchlist[
             [
-                "Days",
                 "Ticker",
                 "Mapped_Theme",
                 "Theme_Class",
@@ -886,17 +794,10 @@ def print_daily_scan(
     print("TRADINGVIEW WATCHLIST EXPORT")
 
     long_list_true = ",".join(
-        [t.lstrip('^') for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
+        [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
     )
 
-    observation_list = ",".join(
-        stocks.loc[
-            stocks["Tracking_State"] == "OBSERVATION",
-            "Ticker",
-        ]
-        .astype(str)
-        .tolist()
-    )
+
 
     distribution_list = ",".join(
         distribution_watchlist["Ticker"]
@@ -905,7 +806,6 @@ def print_daily_scan(
     )
 
     print("###LONG," + long_list_true + ",")
-    print("###OBSERVATION," + observation_list + ",")
     print("###DISTRIBUTION," + distribution_list + ",")
 
     print()

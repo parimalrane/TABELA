@@ -49,7 +49,6 @@ from scoring.scoring_engine import (
     calculate_sales_score,
     calculate_zacks_score,
 )
-from lifecycle.distribution_engine import build_distribution_watchlist
 
 from data_layer.snapshot_engine import save_daily_snapshot
 from data_layer.stock_history_engine import save_stock_history
@@ -215,10 +214,9 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
             etf_raw_score = theme_raw_score_map.get(etf_theme)
             is_unclassified = False
         else:
-            from config.config import UNCLASSIFIED_LEADER_FILTERS
-            u_rs = UNCLASSIFIED_LEADER_FILTERS.get("MIN_RS", 90)
-            u_sales = UNCLASSIFIED_LEADER_FILTERS.get("MIN_SALES", 80)
-            u_zacks = UNCLASSIFIED_LEADER_FILTERS.get("MIN_ZACKS", 85)
+            u_rs = 90
+            u_sales = 80
+            u_zacks = 85
 
             if (
                 row["RS_Rating"] >= u_rs
@@ -453,7 +451,7 @@ def build_theme_strength(etf_master, benchmark_returns, theme_strength_settings)
         })
 
     theme_strength = (
-        etf_master.groupby("Theme").apply(aggregate_theme_relative_score).reset_index()
+        etf_master.groupby("Theme").apply(aggregate_theme_relative_score, include_groups=False).reset_index()
     )
     theme_strength = theme_strength[theme_strength["Theme"] != "Filtered"].copy()
 
@@ -551,9 +549,8 @@ def score_stocks(stocks):
 
 
 def build_candidates(stocks):
-    registry = load_registry()
 
-    long_watchlist = build_long_watchlist(stocks, registry)
+    long_watchlist = build_long_watchlist(stocks)
 
     long_candidates = (
         long_watchlist
@@ -562,42 +559,18 @@ def build_candidates(stocks):
         .reset_index(drop=True)
     )
 
-    registry, recovered = pre_distribution_update(
-        registry=registry,
-        current_long_candidates=long_candidates,
-        stocks=stocks,
-    )
-
-    grace_tickers = [t for t, s in registry.items() if s["tracking_state"] == "LONG"]
-    if grace_tickers:
-        grace_df = stocks[
-            stocks["Ticker"].astype(str).str.upper().isin(grace_tickers)
-        ].copy()
-        if not grace_df.empty:
-            temp = pd.concat([long_candidates, grace_df])
-            temp["_clean_ticker"] = temp["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper()
-            long_candidates = temp.drop_duplicates(subset=["_clean_ticker"]).drop(columns=["_clean_ticker"])
-            long_candidates = long_candidates.sort_values("Long_Score", ascending=False).reset_index(drop=True)
-
+    from lifecycle.stock_transition_engine import get_distribution_candidates
     distribution_candidates = get_distribution_candidates(
-        registry=registry,
+        registry={},
         stocks=stocks,
     )
+    
+    from config.config import DIST_ENTRY
+    if not distribution_candidates.empty:
+        max_dist_size = DIST_ENTRY.get("MAX_LIST_SIZE", 21)
+        distribution_candidates = distribution_candidates.sort_values("Long_Score", ascending=True).head(max_dist_size)
 
-    qualified_distribution = build_distribution_watchlist(
-        distribution_candidates
-    )
-
-    registry = post_distribution_update(
-        registry=registry,
-        qualified_distribution=qualified_distribution,
-        stocks=stocks,
-    )
-
-    distribution_watchlist = get_distribution_watchlist(
-        registry=registry,
-        stocks=stocks,
-    )
+    distribution_watchlist = distribution_candidates
 
     current_long_tickers = {
         ticker.replace("*", "")
@@ -612,12 +585,14 @@ def build_candidates(stocks):
     stocks["Short_Rank"] = None
     stocks["Is_Long_Candidate"] = False
     stocks["Is_Short_Candidate"] = False
+    stocks["Tracking_State"] = "UNTRACKED"
 
     for rank, (idx, candidate_row) in enumerate(long_candidates.iterrows(), start=1):
         clean_ticker = candidate_row["Ticker"].replace("*", "")
 
         stocks.loc[stocks["Ticker"] == clean_ticker, "Long_Rank"] = rank
         stocks.loc[stocks["Ticker"] == clean_ticker, "Is_Long_Candidate"] = True
+        stocks.loc[stocks["Ticker"] == clean_ticker, "Tracking_State"] = "LONG"
 
     for rank, ticker in enumerate(
         distribution_watchlist["Ticker"],
@@ -633,12 +608,13 @@ def build_candidates(stocks):
             stocks["Ticker"] == ticker,
             "Is_Short_Candidate",
         ] = True
+        
+        stocks.loc[
+            stocks["Ticker"] == ticker,
+            "Tracking_State",
+        ] = "DISTRIBUTION"
 
-
-    stocks = apply_tracking_state(
-        registry=registry,
-        stocks=stocks,
-    )
+    recovered = {"observation": [], "distribution": [], "long": []}
 
     theme_breadth = build_theme_breadth(stocks, long_candidates, distribution_watchlist)
 

@@ -1,58 +1,22 @@
-from config.config import LONG_FILTERS
+from config.config import LONG_ENTRY
 
-
-def build_long_watchlist(stocks, registry):
-
-    # Standard Macro-backed entry
+def build_long_watchlist(stocks, registry=None):
+    # Pure Cross-Sectional Entry
     standard_entry = (
-        stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
-        & (stocks["RS_Rating"] >= LONG_FILTERS["MIN_RS"])
-        & (stocks["Long_Score"] >= LONG_FILTERS["MIN_LONG_SCORE"])
+        stocks["Theme_Class"].isin(["Leading", "Unclassified Leader", "Unknown"])
+        & (stocks["RS_Rating"] >= LONG_ENTRY["MIN_RS"])
+        & (stocks["Long_Score"] >= LONG_ENTRY["MIN_LONG_SCORE"])
     )
 
-    from config.config import RE_ENTRY_MIN_RS, RE_ENTRY_MIN_LONG_SCORE
+    long_watchlist = stocks[standard_entry].copy()
     
-    reentry_eligible_tickers = {
-        ticker for ticker, state in registry.items()
-        if state["tracking_state"] in ["OBSERVATION", "DISTRIBUTION"]
-    }
-    
-    is_reentry_eligible = stocks["Ticker"].astype(str).str.upper().str.replace("*", "", regex=False).isin(reentry_eligible_tickers)
-
-    # Idiosyncratic Exemption override - Strictly for Non-Leading Themes (and brand new entries)
-    # Re-entry candidates are explicitly blocked from this path.
-    idiosyncratic_entry = (
-        ~is_reentry_eligible
-        & ~stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
-        & (stocks["RS_Rating"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_RS"])
-        & (stocks["Long_Score"] >= LONG_FILTERS["IDIOSYNCRATIC_MIN_LONG_SCORE"])
-    )
-
-    re_entry = (
-        is_reentry_eligible
-        & stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])
-        & (stocks["RS_Rating"] >= RE_ENTRY_MIN_RS)
-        & (stocks["Long_Score"] >= RE_ENTRY_MIN_LONG_SCORE)
-    )
-
-
-
-    # Combine and ban Lagging themes (Rule 1)
-    long_watchlist = stocks[
-        (standard_entry | idiosyncratic_entry | re_entry) & 
-        ~stocks["Theme_Class"].str.contains("Lagging", na=False)
-    ].copy()
-    
-    # Mark which ones are re-entries to flag in the UI
-    long_watchlist["Is_Reentry"] = re_entry
-
-
+    if long_watchlist.empty:
+        return long_watchlist
+        
     long_watchlist = long_watchlist.sort_values(
-
-        "Long_Score",
-        ascending=False
-
+        ["Long_Score", "RS_Rating"],
+        ascending=[False, False]
     )
 
-
-    return long_watchlist
+    max_size = LONG_ENTRY.get("MAX_LIST_SIZE", 21)
+    return long_watchlist.head(max_size)

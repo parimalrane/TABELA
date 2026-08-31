@@ -6,96 +6,7 @@ COMPOSITE_WEIGHTS = {
     "ZACKS_WEIGHT": 0.10,
     "SALES_WEIGHT": 0.20
 
-}
 
-LONG_FILTERS = {
-
-   "MIN_RS": 90,
-   "MIN_LONG_SCORE": 90,
-
-   # Idiosyncratic Exemption overrides
-   "IDIOSYNCRATIC_MIN_RS": 95,
-   "IDIOSYNCRATIC_MIN_LONG_SCORE": 85
-}
-
-BREADTH_FILTERS = {
-    "STRONG_STOCK_MIN_RS": 80,
-    "STRONG_STOCK_MIN_COMPOSITE": 75
-}
-
-UNCLASSIFIED_LEADER_FILTERS = {
-    "MIN_RS": 90,
-    "MIN_SALES": 80,
-    "MIN_ZACKS": 85
-}
-
-MARKET_CONTEXT_CONFIG = {
-    "ACCUMULATION_MIN_PRICE_CHANGE": 1.0,  
-    "ACCUMULATION_MIN_RV": 100.0,          
-
-    "DISTRIBUTION_MAX_PRICE_CHANGE": -1.0,  # Price is down by 1% -> mathematically < -1.0
-    "DISTRIBUTION_MAX_RV": 100.0,          
-
-    "CONSOLIDATION_MIN_PRICE_CHANGE": -0.5,
-    "CONSOLIDATION_MAX_PRICE_CHANGE": 0.5,
-    "CONSOLIDATION_MAX_RV": 70.0           
-}
-
-DISTRIBUTION_ENGINE_CONFIG = {
-    # Universe and file windows.
-    "MAX_HISTORY_DAYS": 21,
-    "SNAPSHOT_MAX_DAYS": 21,
-    "ROTATION_MAX_FILES": 3,
-    
-    # New Architectural Constraints
-    "DISTRIBUTION_MAX_CAP": 21,
-    "DISTRIBUTION_MIN_RS": 20,
-
-    # Trend/baseline lookbacks.
-    "RECENT_BASELINE_LOOKBACK_DAYS": 5,
-    "DOWNTREND_WINDOW_DAYS": 5,
-
-    # RS deterioration thresholds.
-    "MIN_RS_DROP_1D": 0.0,
-    "MIN_RS_DROP_RECENT": 0.0,
-
-    # Composite deterioration thresholds.
-    "MIN_COMPOSITE_DROP_1D": -0.001,
-    "MIN_COMPOSITE_DROP_RECENT": -0.001,
-
-    # Persistence and down-day confirmation.
-    "MIN_RS_PERSISTENCE_DAYS": 2,
-    "MIN_COMPOSITE_PERSISTENCE_DAYS": 2,
-    "MIN_RS_DOWN_DAYS_IN_WINDOW": 2,
-    "MIN_COMPOSITE_DOWN_DAYS_IN_WINDOW": 2,
-    "MIN_RS_DROP_RECENT_FOR_DOWN_DAYS": 25.0,
-    "MIN_COMPOSITE_DROP_RECENT_FOR_DOWN_DAYS": 0.0,
-
-    # Sparse-history handling.
-    "SPARSE_COMPOSITE_HISTORY_MAX_POINTS": 1,
-    "USE_COMPOSITE_MEDIAN_CONFIRMATION_WHEN_HISTORY_SPARSE": True,
-    "MIN_COMPOSITE_MEDIAN_CONFIRMATION_GAP": 0.0,
-
-    # Leadership-based historical confirmation.
-    "LEADERSHIP_RS_THRESHOLD": 80.0,
-    "USE_LEADERSHIP_AS_HISTORY_CONFIRMATION": True,
-    "MIN_RS_DROP_RECENT_FOR_LEADERSHIP_CONFIRMATION": 25.0,
-
-    # Theme context thresholds (context only, not classifier).
-    "MIN_THEME_LAGGING_STREAK_DAYS": 3,
-    "MIN_THEME_WEAKENING_TRANSITIONS": 2,
-
-    # Output/readability controls.
-    "MAX_REASON_TOKENS": 6,
-    "EVIDENCE_MIN_ABS_DELTA": 0.05,
-
-    # Ranking defaults.
-    "SORT_LEADERSHIP_MISSING_SENTINEL": 9999,
-}
-
-ETF_FILTERS = {
-
-    "MIN_MARKET_VALUE": 200
 
 }
 
@@ -133,20 +44,22 @@ LONG_WEIGHTS = {
 }
 
 # ==========================
-# OBSERVATION LIFECYCLE
+# THRESHOLDS (STATE-BASED)
 # ==========================
 
-# Maximum days a stock can stay in Observation before being forced out
-OBSERVATION_MAX_DAYS = 21
+LONG_ENTRY = {
+    "MIN_RS": 90.0,
+    "MIN_LONG_SCORE": 90.0,
+    "THEMES": ["Leading", "Unclassified Leader", "Unknown"],
+    "MAX_LIST_SIZE": 21
+}
 
-# Fast failure threshold: If an Observation stock drops below this Long Score,
-# it immediately loses its 21-day grace period.
-FAIL_FAST_MIN_LONG_SCORE = 60.0
-
-# Re-entry threshold: An Observation stock can be reinstated to the Long list
-# if it recovers to these minimums (does not require 95/90 fresh criteria).
-RE_ENTRY_MIN_RS = 80
-RE_ENTRY_MIN_LONG_SCORE = 80
+DIST_ENTRY = {
+    "MAX_RS": 50.0,
+    "MAX_LONG_SCORE": 50.0,
+    "THEMES": ["Lagging"],
+    "MAX_LIST_SIZE": 21
+}
 
 # ==========================================
 # STOCK TRANSITION ENGINE

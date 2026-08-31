@@ -30,11 +30,11 @@ The architecture is intentionally linear to simplify debugging, testing, and fut
                    ▼
          Stock Evaluation
                    │
-        ┌──────────┼──────────┐
-        ▼          ▼          ▼
-     Long      Distribution  Short
-        │          │          │
-        └──────────┼──────────┘
+        ┌──────────┴──────────┐
+        ▼                     ▼
+      Long               Distribution
+        │                     │
+        └──────────┬──────────┘
                    ▼
           Rotation Analysis
                    ▼
@@ -216,15 +216,13 @@ The expected execution sequence is:
 
 8 Distribution
 
-9 Structural Weakness
+9 Rotation
 
-10 Rotation
+10 Snapshot Save
 
-11 Snapshot Save
+11 Historical Intelligence
 
-12 Historical Intelligence
-
-13 Report Generation
+12 Report Generation
 ```
 
 Execution order is significant.
@@ -250,11 +248,10 @@ Breadth Engine
         ▼
 Institutional Leader
         │
-        ├─────────────┐
-        ▼             ▼
-Distribution     Structural Weakness
-        │             │
-        └──────┬──────┘
+        ▼
+   Distribution 
+        │
+        ▼
                ▼
       Rotation Engine
                ▼
@@ -306,8 +303,7 @@ No engine should modify upstream data.
 | Composite               | Calculate theme strength                  |
 | Breadth                 | Measure participation                     |
 | Institutional Leader    | Identify strongest stocks                 |
-| Distribution            | Detect weakening leaders                  |
-| Short                   | Detect structural weakness                |
+| Distribution            | Detect structurally weak shorts and breakdowns|
 | Rotation                | Compare current and previous market state |
 | Snapshot                | Persist current market state              |
 | Historical Intelligence | Multi-day trend analysis                  |
@@ -458,10 +454,9 @@ If rebuilding TABELA, implement modules in this order:
 5. Breadth Engine
 6. Institutional Leader
 7. Distribution
-8. Structural Weakness
-9. Rotation
-10. Snapshot
-11. Historical Intelligence
-12. Reporting
+8. Rotation
+9. Snapshot
+10. Historical Intelligence
+11. Reporting
 
 Each stage should be validated before proceeding to the next.

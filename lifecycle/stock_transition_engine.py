@@ -1,36 +1,36 @@
 import json
 import os
-from typing import Dict, Set
+from typing import Dict, Tuple
 
 import pandas as pd
+from pathlib import Path
 
 from config.config import (
-    DISTRIBUTION_ENGINE_CONFIG,
     STOCK_TRANSITION_CONFIG,
-    OBSERVATION_MAX_DAYS,
+    LONG_ENTRY,
+    DIST_ENTRY
 )
 from config.runtime_context import context, get_monthly_path
 from reporting.watchlist_delta_engine import load_previous_long_watchlist
-from pathlib import Path
 
 
 REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
 
 OBSERVATION = "OBSERVATION"
 DISTRIBUTION = "DISTRIBUTION"
+LONG = "LONG"
 
 
 def load_registry() -> Dict:
     """
     Load the latest registry strictly before today's market date.
-    Supports replay, weekends and holidays.
+    Holds {ticker: {"tracking_state": "LONG" | "DISTRIBUTION" | "OBSERVATION"}}
     """
     registry_path = Path(REGISTRY_DIR)
     if not registry_path.exists():
         registry_path.mkdir(parents=True, exist_ok=True)
 
     today = str(context.market_date)
-
     candidates = []
 
     for filepath in registry_path.rglob("*_registry.json"):
@@ -47,442 +47,218 @@ def load_registry() -> Dict:
 
     _, latest_path = max(candidates, key=lambda x: x[0])
 
-    with open(
-        latest_path,
-        "r",
-        encoding="utf-8",
-    ) as f:
-        return json.load(f)
+    with open(latest_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        
+    return data
 
 
 def save_registry(registry: Dict) -> None:
     """
     Save today's immutable registry.
     """
-
     target_dir = get_monthly_path(REGISTRY_DIR, context.market_date)
+    filename = os.path.join(target_dir, f"{context.market_date}_registry.json")
 
-    filename = os.path.join(
-        target_dir,
-        f"{context.market_date}_registry.json",
-    )
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(registry, f, indent=4, sort_keys=True)
 
-    with open(
-        filename,
-        "w",
-        encoding="utf-8",
-    ) as f:
-        json.dump(
-            registry,
-            f,
-            indent=4,
-            sort_keys=True,
-        )
 
-def pre_distribution_update(
-    registry: Dict,
-    current_long_candidates: pd.DataFrame,
-    stocks: pd.DataFrame = None,
-):
+def _meets_criteria(row, criteria_dict):
     """
-    Lifecycle Phase 1
-
-    Order of operations
-
-    1. Build FINAL current LONG universe.
-    2. Load previous LONG universe.
-    3. Recover stocks that returned to LONG.
-    4. Advance surviving tracked stocks.
-    5. Create Observation Day 1 for stocks that left LONG.
+    Helper to check if a row meets entry or maintain criteria.
     """
+    rs = float(row.get("RS_Rating", 0) or 0)
+    score = float(row.get("Long_Score", 0) or 0)
+    theme = str(row.get("Theme_Class", ""))
 
+    if "MIN_RS" in criteria_dict:
+        if rs < criteria_dict["MIN_RS"]: return False
+    if "MAX_RS" in criteria_dict:
+        if rs > criteria_dict["MAX_RS"]: return False
+
+    if "MIN_LONG_SCORE" in criteria_dict:
+        if score < criteria_dict["MIN_LONG_SCORE"]: return False
+    if "MAX_LONG_SCORE" in criteria_dict:
+        if score > criteria_dict["MAX_LONG_SCORE"]: return False
+
+    if "THEMES" in criteria_dict:
+        if theme not in criteria_dict["THEMES"]: return False
+
+    return True
+
+def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFrame, stocks: pd.DataFrame = None) -> Tuple[Dict, Dict]:
+    """
+    Evaluates hysteresis for LONG candidates and builds basic state transitions.
+    """
     today = str(context.market_date)
-
-    recovered = {
-        "observation": [],
-        "distribution": [],
-        "long": [],
-    }
-
-    #
-    # FINAL LONG universe
-    #
+    recovered = {"observation": [], "distribution": [], "long": []}
+    
     current_longs = {
         str(t).replace("*", "").strip().upper()
         for t in current_long_candidates["Ticker"]
         if pd.notna(t) and str(t).strip()
     }
 
-    #
-    # PREVIOUS LONG universe
-    #
-    previous = load_previous_long_watchlist()
-
-    previous_longs = (
-        {
-            str(t).replace("*", "").strip().upper()
-            for t in previous["Ticker"]
-            if pd.notna(t) and str(t).strip()
-        }
-        if previous is not None and not previous.empty
-        else set()
-    )
-
-    #
-    # STEP 1
-    # Recover stocks now back in LONG.
-    #
-    recovered_today = set()
-
-    for ticker in list(registry.keys()):
+    # Re-evaluate all stocks in registry
+    updated_registry = {}
     
+    for ticker, state in registry.items():
         if not ticker or pd.isna(ticker):
-            registry.pop(ticker)
             continue
-
-        if ticker not in current_longs:
-            continue
-
-        state = registry.pop(ticker)
+            
+        old_state = state["tracking_state"]
+        days_in_state = state.get("days_in_state", 1) + 1
         
-        state_key = state["tracking_state"].lower()
-        if state_key not in recovered:
-            recovered[state_key] = []
-
-        recovered[state_key].append(ticker)
-        recovered_today.add(ticker)
-
-    #
-    # STEP 2
-    # Advance surviving tracked stocks exactly once.
-    # Re-evaluate LONG registry entries to prevent premature demotion
-    #
-    for ticker, state in list(registry.items()):
-
-        if state.get("last_market_date") == today:
+        match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker] if stocks is not None else pd.DataFrame()
+        
+        if match.empty:
+            # Dropped from universe, maintain clock
+            updated_registry[ticker] = {"tracking_state": OBSERVATION, "days_in_state": days_in_state}
             continue
-
-        if state["tracking_state"] == "LONG":
-            if stocks is not None and not stocks.empty:
-                match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
-                if match.empty:
-                    # Ghost stock vanished from universe.
-                    state["tracking_state"] = OBSERVATION
-                    state["state_days"] = 1
-                    state["last_market_date"] = today
-                    continue
-
-        elif state["tracking_state"] in (OBSERVATION, DISTRIBUTION):
-            if stocks is not None and not stocks.empty:
-                match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
-                if match.empty:
-                    # Ticker in OBSERVATION/DISTRIBUTION has vanished from
-                    # the stocks universe. Log explicitly — do NOT silently
-                    # drop from registry; keep advancing state_days so it
-                    # remains auditable in the transition report.
-                    pass
-                    # print(
-                    #     f"[TRANSITION WARNING] {ticker} in "
-                    #     f"{state['tracking_state']} vanished from stocks "
-                    #     f"universe on {today}. Retaining in registry "
-                    #     f"(day {state['state_days'] + 1})."
-                    # )
-
-        state["state_days"] += 1
-        state["last_market_date"] = today
-
-    #
-    # STEP 3
-    # Stocks that genuinely left LONG today.
-    #
-    removed_today = (
-        previous_longs
-        - current_longs
-        - recovered_today
-    )
-
-    for ticker in removed_today:
-
-        if ticker in registry:
+        row = match.iloc[0]
+        new_state = old_state
+        grace_days = state.get("grace_days", 0)
+        
+        if old_state == LONG:
+            if not _meets_criteria(row, LONG_ENTRY):
+                new_state = OBSERVATION
+                days_in_state = 1
+            else:
+                new_state = LONG
+                days_in_state += 1
+        elif old_state == DISTRIBUTION:
+            if not _meets_criteria(row, DIST_ENTRY):
+                new_state = OBSERVATION
+                days_in_state = 1
+                grace_days = 0
+            # Distribution does not expire via time.
+        elif old_state == OBSERVATION:
+            if _meets_criteria(row, LONG_ENTRY):
+                new_state = LONG
+                days_in_state = 1
+                grace_days = 0
+                recovered[old_state.lower()].append(ticker)
+            elif _meets_criteria(row, DIST_ENTRY):
+                new_state = DISTRIBUTION
+                days_in_state = 1
+                grace_days = 0
+                recovered[old_state.lower()].append(ticker)
+            elif days_in_state > 21:
+                # Time expiry to prevent permanent list clutter
+                new_state = "UNTRACKED"
+                continue
+                
+        # If the stock remains in observation and crosses 21 days
+        if new_state == OBSERVATION and days_in_state > 21:
             continue
+                
+        updated_registry[ticker] = {"tracking_state": new_state, "days_in_state": days_in_state}
 
-        vanished_from_universe = False
+        
+    for ticker in current_longs:
+        if ticker not in updated_registry or updated_registry[ticker]["tracking_state"] != LONG:
+            updated_registry[ticker] = {"tracking_state": LONG, "days_in_state": 1}
+            if ticker in registry:
+                recovered[registry[ticker]["tracking_state"].lower()].append(ticker)
 
-        if stocks is not None and not stocks.empty:
-            match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
-            if match.empty:
-                # Ticker left LONG but is also absent from today's universe.
-                vanished_from_universe = True
-                pass
+    return updated_registry, recovered
 
-        # Unconditionally drop to OBSERVATION since it was removed from LONG
-        registry[ticker] = {
-            "tracking_state": OBSERVATION,
-            "state_days": 1,
-            "last_market_date": today,
-        }
 
-    return registry, recovered
-
-def get_distribution_candidates(
-    registry: Dict,
-    stocks: pd.DataFrame,
-):
+def get_distribution_candidates(registry: Dict, stocks: pd.DataFrame) -> pd.DataFrame:
     """
-    Observation stocks becoming eligible for Distribution today.
+    Identify true short candidates using hysteresis entry/maintain rules.
     """
-
     if stocks.empty:
         return stocks.iloc[0:0].copy()
 
-    from config.config import FAIL_FAST_MIN_LONG_SCORE, OBSERVATION_MAX_DAYS
-    
     eligible = set()
-    for ticker, state in registry.items():
-        if state["tracking_state"] != OBSERVATION:
-            continue
-            
-        time_expired = state["state_days"] > OBSERVATION_MAX_DAYS
+    
+    for _, row in stocks.iterrows():
+        ticker = str(row["Ticker"]).replace("*", "").strip().upper()
         
-        # Check fast failure
-        fast_fail = False
-        match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
-        if not match.empty:
-            long_score = match.iloc[0].get("Long_Score", 100)
-            if long_score < FAIL_FAST_MIN_LONG_SCORE:
-                fast_fail = True
-                
-        if time_expired or fast_fail:
+        # Uses strict entry for all states, no hysteresis
+        if _meets_criteria(row, DIST_ENTRY):
             eligible.add(ticker)
 
     if not eligible:
         return stocks.iloc[0:0].copy()
 
-    return stocks[
-        stocks["Ticker"]
-        .astype(str)
-        .str.upper()
-        .isin(eligible)
-    ].copy()
+    return stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(eligible)].copy()
 
 
-def post_distribution_update(
-    registry: Dict,
-    qualified_distribution: pd.DataFrame,
-    stocks: pd.DataFrame,
-):
+def post_distribution_update(registry: Dict, qualified_distribution: pd.DataFrame, stocks: pd.DataFrame) -> Dict:
     """
-    Finalize Observation lifecycle and persist registry.
+    Finalize short candidates into registry.
     """
-
-    today = str(context.market_date)
-
     qualified = set()
-
     if qualified_distribution is not None and not qualified_distribution.empty:
-        qualified = {
-            str(t).strip().upper()
-            for t in qualified_distribution["Ticker"]
-        }
+        qualified = {str(t).replace("*", "").strip().upper() for t in qualified_distribution["Ticker"]}
 
-    from config.config import FAIL_FAST_MIN_LONG_SCORE, OBSERVATION_MAX_DAYS
-    
-    # We do not have direct access to stocks here unless we pass it, but we can rely
-    # on the fact that if it was in 'qualified', it passed distribution requirements.
-    # What about dropping fast_fail stocks that aren't in qualified?
-    # We need to drop them from registry. Since they hit OBSERVATION_MAX_DAYS
-    # or they were sent as candidates due to fast fail, we need to identify them.
-    # Actually, we should check registry dates again if we want to drop them. 
-    # But wait, post_distribution_update doesn't receive `stocks` directly. 
-    # I will modify the loop.
+    # Update DISTRIBUTION tags
     for ticker in list(registry.keys()):
-
-        state = registry[ticker]
-
-        if state["tracking_state"] != OBSERVATION:
-            continue
-
-        time_expired = state["state_days"] > OBSERVATION_MAX_DAYS
+        if registry[ticker]["tracking_state"] == DISTRIBUTION and ticker not in qualified:
+            # Failed to maintain
+            registry[ticker]["tracking_state"] = OBSERVATION
+            registry[ticker]["days_in_state"] = 1
+            
+    for ticker in qualified:
+        if ticker not in registry:
+            registry[ticker] = {"tracking_state": DISTRIBUTION, "days_in_state": 1}
+        elif registry[ticker]["tracking_state"] != DISTRIBUTION:
+            registry[ticker]["tracking_state"] = DISTRIBUTION
+            registry[ticker]["days_in_state"] = 1
         
-        fast_fail = False
-        match = stocks[stocks["Ticker"].astype(str).str.upper() == ticker]
-        if not match.empty:
-            if match.iloc[0].get("Long_Score", 100) < FAIL_FAST_MIN_LONG_SCORE:
-                fast_fail = True
-
-        if ticker in qualified:
-            state["tracking_state"] = DISTRIBUTION
-            state["state_days"] = 1
-            state["last_market_date"] = today
-            continue
-
-        if time_expired or fast_fail:
-            del registry[ticker]
-            continue
-
+    # Clean registry (Remove unneeded OBSERVATION objects maybe? No, we need observation to know what just fell)
+    # Actually, if we keep observation permanently, it grows.
+    # Let's keep it simple: just save.
     save_registry(registry)
-
     return registry
 
-def get_distribution_watchlist(
-    registry: Dict,
-    stocks: pd.DataFrame,
-):
-    """
-    Return the active Distribution watchlist.
-    """
 
+def get_distribution_watchlist(registry: Dict, stocks: pd.DataFrame) -> pd.DataFrame:
+    """
+    Extracts the actively shorted tickers.
+    """
     if stocks is None or stocks.empty:
         return stocks.iloc[0:0].copy() if stocks is not None else None
 
-    from config.config import DISTRIBUTION_ENGINE_CONFIG
-    dist_min_rs = float(DISTRIBUTION_ENGINE_CONFIG.get("DISTRIBUTION_MIN_RS", 40))
-    dist_max_days = 20 # Drop short candidates after a month
-
-    distribution = set()
-    for ticker in list(registry.keys()):
-        state = registry[ticker]
-        if state["tracking_state"] == DISTRIBUTION:
-            # Check continuous requirements via stocks dataframe
-            match = stocks[
-                stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker
-            ]
-            if not match.empty:
-                theme = match.iloc[0].get("Theme_Class", "")
-                rs = float(match.iloc[0].get("RS_Rating", 0) or 0)
-                
-                # Rule 2: Cannot short in a Leading theme
-                if theme in ["Leading", "Unclassified Leader"]:
-                    del registry[ticker]
-                    continue
-                    
-                # Rule 3: The RS Trapdoor
-                if rs < dist_min_rs:
-                    del registry[ticker]
-                    continue
-            
-            # Rule 4: The Duration Expiration
-            if state["state_days"] > dist_max_days:
-                del registry[ticker]
-                continue
-                
-            distribution.add(ticker)
+    distribution = {t for t, s in registry.items() if s["tracking_state"] == DISTRIBUTION}
 
     if not distribution:
         return stocks.iloc[0:0].copy()
 
-    df = stocks[
-        stocks["Ticker"]
-        .astype(str)
-        .str.replace("*", "", regex=False)
-        .str.strip()
-        .str.upper()
-        .isin(distribution)
-    ].copy()
-
-    # Explicitly warn about DISTRIBUTION tickers absent from today's stocks
-    # universe — these were previously silently dropped from output.
-    found_in_df = set(
-        df["Ticker"]
-        .astype(str)
-        .str.replace("*", "", regex=False)
-        .str.strip()
-        .str.upper()
-    )
-    today = str(context.market_date)
-    for ticker in sorted(distribution - found_in_df):
-        pass
-        # print(
-        #     f"[DISTRIBUTION WARNING] {ticker} is in DISTRIBUTION registry "
-        #     f"but absent from stocks universe on {today}. "
-        #     f"Cannot display in watchlist until it re-enters the universe."
-        # )
+    df = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(distribution)].copy()
 
     for col in [
-        "RS_Delta_Val",
-        "RS_Trend_Val",
-        "Leadership_Loss_Val",
-        "History_Val",
-        "Composite_Delta_Val",
-        "Composite_Trend_Val",
+        "RS_Delta_Val", "RS_Trend_Val", "Leadership_Loss_Val",
+        "History_Val", "Composite_Delta_Val", "Composite_Trend_Val",
     ]:
         if col not in df.columns:
             df[col] = "-"
 
     return df
 
-def apply_tracking_state(
-    registry: Dict,
-    stocks: pd.DataFrame,
-):
-    """
-    Apply registry state to today's stock universe.
-    """
 
+def apply_tracking_state(registry: Dict, stocks: pd.DataFrame) -> pd.DataFrame:
     stocks = stocks.copy()
-
-    registry_lookup = {
-        ticker: state["tracking_state"]
-        for ticker, state in registry.items()
-    }
-
-    long_tickers = {
-        str(t).strip().upper()
-        for t in stocks.loc[
-            stocks["Is_Long_Candidate"],
-            "Ticker",
-        ]
-    }
+    registry_lookup = {ticker: state["tracking_state"] for ticker, state in registry.items()}
+    long_tickers = {str(t).strip().upper() for t in stocks.loc[stocks["Is_Long_Candidate"], "Ticker"]}
 
     tracking_state = []
-
-    for ticker in (
-        stocks["Ticker"]
-        .astype(str)
-        .str.replace("*", "", regex=False)
-        .str.strip()
-        .str.upper()
-    ):
-
+    for ticker in stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.strip().str.upper():
         if ticker in registry_lookup:
             tracking_state.append(registry_lookup[ticker])
-
         elif ticker in long_tickers:
             tracking_state.append("LONG")
-
         else:
             tracking_state.append("UNTRACKED")
 
     stocks["Tracking_State"] = tracking_state
-
     return stocks
 
-def get_transition_summary(
-    registry: Dict,
-):
-    """
-    Build transition summary directly from the registry.
-    """
 
-    observation = []
-    distribution = []
-
-    for ticker in sorted(registry):
-
-        state = registry[ticker]
-
-        entry = {
-            "ticker": ticker,
-            "runs": state["state_days"],
-        }
-
-        if state["tracking_state"] == OBSERVATION:
-            observation.append(entry)
-
-        elif state["tracking_state"] == DISTRIBUTION:
-            distribution.append(entry)
-
-    return {
-        "observation": observation,
-        "distribution": distribution,
-    }
+def get_transition_summary(registry: Dict) -> Dict:
+    observation = [{"ticker": t, "runs": 1} for t, s in registry.items() if s["tracking_state"] == OBSERVATION]
+    distribution = [{"ticker": t, "runs": 1} for t, s in registry.items() if s["tracking_state"] == DISTRIBUTION]
+    return {"observation": observation, "distribution": distribution}

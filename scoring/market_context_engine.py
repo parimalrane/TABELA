@@ -82,8 +82,6 @@ def run_market_context_engine(market_date):
     # Build market_statistics from pre-calculated values
     market_statistics = {}
 
-    from config.config import MARKET_CONTEXT_CONFIG
-
     for _, row in df.iterrows():
         ticker = row["ETF"]
         
@@ -99,12 +97,12 @@ def run_market_context_engine(market_date):
 
         rv_20d = round(float(rv_str), 2)
 
-        # User defined logic mapping directly to config parameters
-        if returns_1d > MARKET_CONTEXT_CONFIG["ACCUMULATION_MIN_PRICE_CHANGE"] and vol > avg_vol:
+        # Basic Accumulation/Distribution day logic mapped directly
+        if returns_1d > 1.0 and vol > avg_vol:
             day_type = "Accumulation"
-        elif (MARKET_CONTEXT_CONFIG["CONSOLIDATION_MIN_PRICE_CHANGE"] <= returns_1d <= MARKET_CONTEXT_CONFIG["CONSOLIDATION_MAX_PRICE_CHANGE"]) and vol < (avg_vol * (MARKET_CONTEXT_CONFIG["CONSOLIDATION_MAX_RV"] / 100.0)):
+        elif (-0.5 <= returns_1d <= 0.5) and vol < (avg_vol * 0.70):
             day_type = "Consolidation"
-        elif returns_1d < MARKET_CONTEXT_CONFIG["DISTRIBUTION_MAX_PRICE_CHANGE"] and vol > avg_vol:
+        elif returns_1d < -1.0 and vol > avg_vol:
             day_type = "Distribution"
         else:
             day_type = "Neutral"

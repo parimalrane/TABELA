@@ -7,9 +7,8 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     # DEFINE STRONG STOCKS (For aggregate breadth stats only)
     # ==========================================
 
-    from config.config import BREADTH_FILTERS
-    s_rs = BREADTH_FILTERS.get("STRONG_STOCK_MIN_RS", 80)
-    s_comp = BREADTH_FILTERS.get("STRONG_STOCK_MIN_COMPOSITE", 75)
+    s_rs = 80
+    s_comp = 75
 
     strong_stocks = stocks[
 

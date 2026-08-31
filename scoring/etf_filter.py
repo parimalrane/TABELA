@@ -1,4 +1,4 @@
-from config.config import ETF_FILTERS
+
 
 # ==========================================
 # ETF FILTER ENGINE
@@ -151,13 +151,10 @@ def filter_valid_etfs(etf_df):
 
 
 def filter_institutional_etfs(df):
-
     df = df[
-
-        df["Market Value (mil)"] >= ETF_FILTERS["MIN_MARKET_VALUE"]
-
+        df["Market Value (mil)"] >= 200
     ].copy()
-
+    
     return df
 
 
