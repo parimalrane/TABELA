@@ -12,20 +12,19 @@ Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-En
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Diagnostics                    Medical Devices      9    8  188.81   Leading (7 -> -5)               ADPT
 Cybersecurity                  Software            13    8  150.02   Leading (5 -> +4)               OKTA, FTNT
 Digital Payments               Software             4    4  142.03   Leading (5 -> +4)               SEZL
 Cloud Infrastructure           Cloud Computing      5    4  137.61   Leading (1)                     DDOG, NET, SNOW
 Communications Cloud           Cloud Computing      3    2   89.19   Leading (1)                     RNG
 Digital Health                 Software             1    1   62.38   Leading (5 -> +4)               HNGE
 Restaurants                    Consumer Staples    25    4   51.35   Leading                         CAKE
-Semiconductors                 Semiconductors      44    0    0.00   Lagging (31 -> +1)              #AMSC, #CRUS, #FN,
-                                                                                                     #NVTS, #NXPI, #OLED
-Biotech                        Biotech             77    0    0.00   Lagging (29 -> -4)              #ARVN, #AZN, #BEAM,
-                                                                                                     #GLUE, #INSM, #LEGN,
-                                                                                                     #NTLA, #PHAT, #PRTA,
-                                                                                                     #RGNX, #SRPT, #VNDA,
-                                                                                                     #WVE
+Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
+Semiconductor Equipment        Semiconductors      20    0    0.00   Lagging (31 -> +1)              #AMKR, #ELVA, #SITM
+Semiconductors                 Semiconductors      44    0    0.00   Lagging (31 -> +1)              #AMSC, #ASYS, #CRUS,
+                                                                                                     #FN, #HIMX, #LPTH,
+                                                                                                     #MCHP, #MTSI, #NVTS,
+                                                                                                     #NXPI, #OLED, #ON,
+                                                                                                     #QRVO, #RMBS, #SWKS
 Foundry                        Semiconductors       3    0    0.00   Lagging (31 -> +1)              #GFS
 Wireless Chips                 Semiconductors       2    0    0.00   Lagging (31 -> +1)              #QCOM
 
@@ -39,39 +38,46 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
   DDOG Cloud Infrastructure         95      93.15          2        0
    NET Cloud Infrastructure         95      92.55          2        0
   SNOW Cloud Infrastructure         99      92.25          3        0
-  ADPT          Diagnostics         97      91.52          2       NA
-  OKTA        Cybersecurity         97      91.50          2       -1
+  OKTA        Cybersecurity         97      91.50          2        0
   FTNT        Cybersecurity         95      91.30          2       NA
-  CAKE          Restaurants         99      90.45          1       -2
+  CAKE          Restaurants         99      90.45          1       -1
   HNGE       Digital Health         90      90.35          1       NA
 DISTRIBUTION WATCHLIST
 ========================================
-Ticker   Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
-    FN Semiconductors              Lagging          1      18.90         4*       +1
-  ARVN        Biotech              Lagging          1      19.08          3       NA
-   WVE        Biotech              Lagging          1      19.08          3       NA
-  PRTA        Biotech              Lagging          1      19.08          3       NA
-  OLED Semiconductors              Lagging          1      19.10         4*       -2
-  CRUS Semiconductors              Lagging          1      19.10         4*       NA
-  SRPT        Biotech              Lagging          1      19.18         4*       NA
-  NTLA        Biotech              Lagging          1      19.18         4*       NA
-  NXPI Semiconductors              Lagging          1      19.70          3        0
-  NVTS Semiconductors              Lagging          1      20.40          2       +2
-  VNDA        Biotech              Lagging          1      20.48          3       NA
-   GFS        Foundry              Lagging          1      20.50          3       +1
-  RGNX        Biotech              Lagging          1      21.28         4*       NA
-   AZN        Biotech              Lagging          1      21.68          3       NA
-  QCOM Wireless Chips              Lagging          1      21.80          3       +5
-  AMSC Semiconductors              Lagging          1      23.20          3       NA
-  BEAM        Biotech              Lagging          1      23.28          3       NA
-  INSM        Biotech              Lagging          1      23.28          3       NA
-  LEGN        Biotech              Lagging          1      23.28          3       NA
-  PHAT        Biotech              Lagging          1      23.28          3       NA
-  GLUE        Biotech              Lagging          1      23.28          3       NA
+Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
+    FN          Semiconductors              Lagging          1      18.90         4*        0
+  OLED          Semiconductors              Lagging          1      19.10         4*        0
+  CRUS          Semiconductors              Lagging          1      19.10         4*       +8
+  NXPI          Semiconductors              Lagging          1      19.70          3        0
+  NVTS          Semiconductors              Lagging          1      20.40          2        0
+   GFS                 Foundry              Lagging          1      20.50          3        0
+  QCOM          Wireless Chips              Lagging          1      21.80          3        0
+  AMSC          Semiconductors              Lagging          1      23.20          3       +1
+  HIMX          Semiconductors              Lagging         10      23.45          3       NA
+  ASYS          Semiconductors              Lagging         10      23.45          3        0
+  SWKS          Semiconductors              Lagging         10      23.75          3       NA
+    ON          Semiconductors              Lagging         10      23.75          3       NA
+  AMKR Semiconductor Equipment              Lagging          1      24.20          1       -1
+  LPTH          Semiconductors              Lagging         10      24.95          3        0
+  RMBS          Semiconductors              Lagging          1      25.00          2        0
+  ELVA Semiconductor Equipment              Lagging         10      25.25         4*        0
+   GLW  Optical Infrastructure              Lagging         10      26.15          3        0
+  SITM Semiconductor Equipment              Lagging         10      27.05          3       +1
+  MCHP          Semiconductors              Lagging         10      27.35          2       +1
+  MTSI          Semiconductors              Lagging         10      27.55          3       +1
+  QRVO          Semiconductors              Lagging         20      27.55         4*       NA
+
+========================================
+WATCHLIST DELTAS (TODAY)
+========================================
+New Longs: FTNT, HNGE
+Dropped Longs: None
+New Distributions: HIMX, ON, QRVO, SWKS
+Dropped Distributions: AAON, ENTG, SVCO, TSLA
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SEZL,RNG,DDOG,NET,SNOW,ADPT,OKTA,FTNT,CAKE,HNGE,
-###DISTRIBUTION,FN,ARVN,WVE,PRTA,OLED,CRUS,SRPT,NTLA,NXPI,NVTS,VNDA,GFS,RGNX,AZN,QCOM,AMSC,BEAM,INSM,LEGN,PHAT,GLUE,
+###LONG,SEZL,RNG,DDOG,NET,SNOW,OKTA,FTNT,CAKE,HNGE,
+###DISTRIBUTION,FN,OLED,CRUS,NXPI,NVTS,GFS,QCOM,AMSC,HIMX,ASYS,SWKS,ON,AMKR,LPTH,RMBS,ELVA,GLW,SITM,MCHP,MTSI,QRVO,
 
 ==============================================
 END OF TABELA SCAN

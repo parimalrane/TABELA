@@ -209,6 +209,7 @@ def compare_watchlists(
 
     return {
         "new_longs": new_longs,
+        "dropped_longs": sorted(removed_longs),
         "new_pre_observation": new_pre_observation,
         "new_observation": new_observation,
         "new_distribution": new_distribution,

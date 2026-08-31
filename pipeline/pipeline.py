@@ -147,7 +147,8 @@ def build_theme_classification(theme_strength):
     leading_count = 1 if total_themes > 0 else 0
 
     if total_themes > 1:
-        leading_count = max(1, math.ceil(total_themes * 0.20))
+        # 16% targets +1 Standard Deviation on a normal bell curve
+        leading_count = max(1, math.ceil(total_themes * 0.16))
     lagging_start = total_themes - leading_count + 1
 
     for i, row in theme_strength.iterrows():

@@ -23,11 +23,9 @@ Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-En
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Biotechnology                  Biotech              5    5  169.14   Leading (3 -> -1)               PGEN, KNSA, XNCR, AGEN
-Diagnostics                    Medical Devices      9    7  165.28   Leading (7 -> -1)               CDNA
 Communications Cloud           Cloud Computing      3    3  126.15   Leading (2 -> -1)               FIVN, RNG
 Biotech                        Biotech             86   27  122.47   Leading (3 -> -1)               IOVA, HALO, ABCL, RGEN,
                                                                                                      IBRX
-Medical Devices                Medical Devices     87   26  121.94   Leading (7 -> -1)               DCTH, BFLY
 Cloud Infrastructure           Cloud Computing      5    3   94.96   Leading (2 -> -1)               FSLY
 Pharma                         Pharma              43    8   63.08   Leading (6)                     RCEL, FDMT
 Semiconductors                 Semiconductors      43    0    0.00   Lagging (34)                    #ALGM, #AOSL, #NXPI,
@@ -47,20 +45,17 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
   PGEN        Biotechnology         97      95.34          1        0
   IOVA              Biotech         99      94.94          2        0
   HALO              Biotech         97      94.94          2        0
-  CDNA          Diagnostics         99      93.71          1        0
-  DCTH      Medical Devices         97      93.51          1       +4
-  FIVN Communications Cloud         95      93.35          1       +1
-  ABCL              Biotech         99      92.44          3       -2
-  KNSA        Biotechnology         97      92.24          3       -2
+  FIVN Communications Cloud         95      93.35          1       +2
+  ABCL              Biotech         99      92.44          3       -1
+  KNSA        Biotechnology         97      92.24          3       -1
   FSLY Cloud Infrastructure         95      91.25          2       NA
   RCEL               Pharma         99      91.02          2       NA
-  BFLY      Medical Devices         99      90.41          2       NA
-  XNCR        Biotechnology         99      90.34          3        0
-   RNG Communications Cloud         98      90.30          3       +4
-  RGEN              Biotech         90      90.29          1       -1
-  IBRX              Biotech         95      90.24          3       -1
-  AGEN        Biotechnology         99      90.14         4*       -1
-  FDMT               Pharma         98      90.07          3       -6
+  XNCR        Biotechnology         99      90.34          3       +1
+   RNG Communications Cloud         98      90.30          3       +5
+  RGEN              Biotech         90      90.29          1        0
+  IBRX              Biotech         95      90.24          3        0
+  AGEN        Biotechnology         99      90.14         4*        0
+  FDMT               Pharma         98      90.07          3       -5
 DISTRIBUTION WATCHLIST
 ========================================
 Ticker          Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
@@ -86,8 +81,16 @@ Ticker          Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Ra
    ROL    Building Materials              Lagging          1      17.45         4*       NA
    GFS               Foundry              Lagging          1      17.85          3       -4
 
+========================================
+WATCHLIST DELTAS (TODAY)
+========================================
+New Longs: FSLY, RCEL
+Dropped Longs: CORT, ETON, MGTX, MTA, URGN
+New Distributions: LII, MEC, PRIM, ROL, RRX, TAC, WSO
+Dropped Distributions: CHRW, CX, ELVA, FN, POWI, QCOM, VLRS
+
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,PGEN,IOVA,HALO,CDNA,DCTH,FIVN,ABCL,KNSA,FSLY,RCEL,BFLY,XNCR,RNG,RGEN,IBRX,AGEN,FDMT,
+###LONG,PGEN,IOVA,HALO,FIVN,ABCL,KNSA,FSLY,RCEL,XNCR,RNG,RGEN,IBRX,AGEN,FDMT,
 ###DISTRIBUTION,TU,BW,HE,AOSL,VPG,JKS,TAC,LUMN,CSIQ,ORN,MEC,ON,LOMA,PRIM,ALGM,WSO,RRX,NXPI,LII,ROL,GFS,
 
 ==============================================

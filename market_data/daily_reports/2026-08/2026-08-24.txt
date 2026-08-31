@@ -23,11 +23,9 @@ Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-En
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Biotechnology                  Biotech              5    5  169.14   Leading (3 -> -1)               PGEN, KNSA, XNCR, AGEN
-Diagnostics                    Medical Devices      9    7  164.00   Leading (7)                     CDNA
 Biotech                        Biotech             87   28  126.48   Leading (3 -> -1)               IOVA, HALO, ABCL, RGEN,
                                                                                                      IBRX
 Communications Cloud           Cloud Computing      3    3  126.15   Leading (2 -> +1)               FIVN, RNG
-Medical Devices                Medical Devices     87   27  126.12   Leading (7)                     DCTH
 Cloud Infrastructure           Cloud Computing      5    3   94.96   Leading (2 -> +1)               FSLY
 Pharmaceuticals                Pharma               3    2   91.50   Leading (6 -> -1)               ETON
 Pharma                         Pharma              43    9   70.31   Leading (6 -> -1)               RCEL, URGN, FDMT
@@ -48,8 +46,6 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
   PGEN        Biotechnology         97      95.34          1        0
   IOVA              Biotech         99      94.94          2        0
   HALO              Biotech         97      94.94          2        0
-  CDNA          Diagnostics         99      93.71          1        0
-  DCTH      Medical Devices         97      93.51          1        0
   FIVN Communications Cloud         95      93.35          1        0
   ABCL              Biotech         99      92.44          3        0
   KNSA        Biotechnology         97      92.24          3        0
@@ -57,12 +53,12 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
   FSLY Cloud Infrastructure         95      91.25          2       -1
   RCEL               Pharma         99      91.02          2       -1
   URGN               Pharma         97      90.62          2       NA
-  XNCR        Biotechnology         99      90.34          3       -1
-   RNG Communications Cloud         98      90.30          3       -1
-  RGEN              Biotech         90      90.29          1       -1
-  IBRX              Biotech         95      90.24          3       -1
-  AGEN        Biotechnology         99      90.14         4*       -1
-  FDMT               Pharma         98      90.07          3       -1
+  XNCR        Biotechnology         99      90.34          3       -2
+   RNG Communications Cloud         98      90.30          3       -2
+  RGEN              Biotech         90      90.29          1       -2
+  IBRX              Biotech         95      90.24          3       -2
+  AGEN        Biotechnology         99      90.14         4*       -2
+  FDMT               Pharma         98      90.07          3       -2
 DISTRIBUTION WATCHLIST
 ========================================
 Ticker          Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
@@ -88,8 +84,16 @@ Ticker          Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Ra
    GFS               Foundry              Lagging          1      17.85          3       +1
     FN        Semiconductors              Lagging          1      17.95         4*       NA
 
+========================================
+WATCHLIST DELTAS (TODAY)
+========================================
+New Longs: ETON, URGN
+Dropped Longs: None
+New Distributions: CMS, CRUS, FN
+Dropped Distributions: ALGM, PRIM, ROL
+
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,PGEN,IOVA,HALO,CDNA,DCTH,FIVN,ABCL,KNSA,ETON,FSLY,RCEL,URGN,XNCR,RNG,RGEN,IBRX,AGEN,FDMT,
+###LONG,PGEN,IOVA,HALO,FIVN,ABCL,KNSA,ETON,FSLY,RCEL,URGN,XNCR,RNG,RGEN,IBRX,AGEN,FDMT,
 ###DISTRIBUTION,TU,BW,HE,AOSL,VPG,CSIQ,TAC,JKS,ORN,MEC,LUMN,ON,CRUS,LOMA,RRX,WSO,NXPI,LII,CMS,GFS,FN,
 
 ==============================================

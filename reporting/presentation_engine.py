@@ -790,6 +790,15 @@ def print_daily_scan(
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         print(display_df.to_string(index=False))
 
+    print("\n\n")
+    print("========================================")
+    print("WATCHLIST DELTAS (TODAY)")
+    print("========================================")
+    print(f"New Longs: {', '.join(deltas.get('new_longs', [])) or 'None'}")
+    print(f"Dropped Longs: {', '.join(deltas.get('dropped_longs', [])) or 'None'}")
+    print(f"New Distributions: {', '.join(deltas.get('new_distribution', [])) or 'None'}")
+    print(f"Dropped Distributions: {', '.join(deltas.get('left_distribution', [])) or 'None'}")
+
     print()
     print("TRADINGVIEW WATCHLIST EXPORT")
 
