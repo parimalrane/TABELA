@@ -12,19 +12,13 @@ Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-En
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Pharmaceuticals                Pharma               3    3  136.78   Leading (4 -> -2)               LQDA, ETON, CORT
+Pharmaceuticals                Pharma               3    3  136.78   Leading (4 -> -2)               LQDA, ETON
 Cloud Infrastructure           Cloud Computing      5    4  127.57   Leading (6 -> +4)               SNOW
 Pharma                         Pharma              39    6   49.08   Leading (4 -> -2)               URGN
-Optical Networking             Semiconductors       8    0    0.00   Lagging (32 -> -15)             #COHR, #LTRX
 Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
-Semiconductors                 Semiconductors      46    0    0.00   Lagging (32 -> -15)             #AMSC, #AOSL, #ASYS,
-                                                                                                     #AXTI, #FN, #FORM,
-                                                                                                     #LPTH, #NVTS, #OLED,
-                                                                                                     #PI, #QUIK, #RMBS,
-                                                                                                     #SVCO, #SWKS
-Semiconductor Equipment        Semiconductors      19    0    0.00   Lagging (32 -> -15)             #ELVA, #HAYW
+Semiconductors                 Semiconductors      46    0    0.00   Lagging (32 -> -15)             #FN, #NVTS, #OLED
 Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (31 -> -6)              #TSLA
-Foundry                        Semiconductors       3    0    0.00   Lagging (32 -> -15)             #GFS
+AI Platform                    Artificial Intel..   3    0    0.00   Lagging (31 -> -6)              #GOOG, #META
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -33,45 +27,30 @@ Legend: * = Zacks Rank 4 or 5
 Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
   LQDA      Pharmaceuticals         99      96.78          1        0
   URGN               Pharma         99      92.98          2       +4
-  ETON      Pharmaceuticals         98      91.34          3       +4
+  ETON      Pharmaceuticals         98      91.34          3       NA
   SNOW Cloud Infrastructure         98      91.26          2       NA
-  CORT      Pharmaceuticals         99      90.69          3       -2
 DISTRIBUTION WATCHLIST
 ========================================
-Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
-  NVTS          Semiconductors              Lagging          1      17.32          3       +1
-    FN          Semiconductors              Lagging          1      18.32         4*       +6
-  TSLA   Autonomous Driving AI              Lagging          1      18.50          3       -2
-  OLED          Semiconductors              Lagging          1      18.52         4*       -1
-  RMBS          Semiconductors              Lagging          1      21.91          3       +9
-    PI          Semiconductors              Lagging         10      22.27          3       -2
-  LTRX      Optical Networking              Lagging         10      22.27          3       -2
-  AMSC          Semiconductors              Lagging          1      22.62          3       -2
-  AOSL          Semiconductors              Lagging         10      23.66          3       +1
-  SVCO          Semiconductors              Lagging         10      23.66          3       +9
-  LPTH          Semiconductors              Lagging         10      24.36          3        0
-  FORM          Semiconductors              Lagging         10      24.57          3       NA
-  ELVA Semiconductor Equipment              Lagging         10      24.67         4*       +8
-   GFS                 Foundry              Lagging         10      24.86          3       -2
-  QUIK          Semiconductors              Lagging         20      27.77          3       NA
-  AXTI          Semiconductors              Lagging         20      27.77          3       NA
-   GLW  Optical Infrastructure              Lagging         10      28.06          2       NA
-  HAYW Semiconductor Equipment              Lagging         20      28.36         4*       -3
-  ASYS          Semiconductors              Lagging         20      28.37          3       -3
-  COHR      Optical Networking              Lagging         10      28.47          2       NA
-  SWKS          Semiconductors              Lagging         20      28.67          3      -14
+Ticker           Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
+  NVTS         Semiconductors              Lagging          1      17.32          3       +1
+    FN         Semiconductors              Lagging          1      18.32         4*       NA
+  TSLA  Autonomous Driving AI              Lagging          1      18.50          3       -2
+  OLED         Semiconductors              Lagging          1      18.52         4*       -1
+   GLW Optical Infrastructure              Lagging         10      28.06          2       +1
+  META            AI Platform              Lagging         20      32.95          3       NA
+  GOOG            AI Platform              Lagging         20      34.75          2        0
 
 ========================================
 WATCHLIST DELTAS (TODAY)
 ========================================
-New Longs: SNOW
-Dropped Longs: HUM, INNV, OSCR, PGNY, VG
-New Distributions: AXTI, COHR, FORM, GLW, QUIK
-Dropped Distributions: CRUS, ON, PLTR, QCOM, QRVO
+New Longs: ETON, SNOW
+Dropped Longs: CORT, HUM, OSCR, PGNY, VG
+New Distributions: FN, META
+Dropped Distributions: LTRX, PLTR
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,URGN,ETON,SNOW,CORT,
-###DISTRIBUTION,NVTS,FN,TSLA,OLED,RMBS,PI,LTRX,AMSC,AOSL,SVCO,LPTH,FORM,ELVA,GFS,QUIK,AXTI,GLW,HAYW,ASYS,COHR,SWKS,
+###LONG,LQDA,URGN,ETON,SNOW,
+###DISTRIBUTION,NVTS,FN,TSLA,OLED,GLW,META,GOOG,
 
 ==============================================
 END OF TABELA SCAN

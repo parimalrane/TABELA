@@ -13,15 +13,13 @@ Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-En
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Healthcare Services            Healthcare          14   10  179.12   Leading (4 -> +1)               OSCR, PGNY, HUM
-Pharmaceuticals                Pharma               3    3  137.24   Leading (5 -> +3)               LQDA, CORT, ETON
-Healthcare                     Healthcare          41   11   88.16   Leading (4 -> +1)               INNV
+Pharmaceuticals                Pharma               3    3  137.24   Leading (5 -> +3)               LQDA, CORT
 LNG / Natural Gas Export Inf.. LNG / Natural Ga..   1    1   65.85   Unknown                         VG
 Pharma                         Pharma              43    7   51.75   Leading (5 -> +3)               URGN
-AI Infrastructure              Artificial Intel..   6    1   30.82   Lagging (31 -> +2)              #AVGO, #SMCI
-Copper Mining                  Copper Mining        9    0    0.00   Lagging (30)                    #CLF, #CMC, #MTUS, #WS
+AI Infrastructure              Artificial Intel..   6    1   30.82   Lagging (31 -> +2)              #SMCI
+Copper Mining                  Copper Mining        9    0    0.00   Lagging (30)                    #CLF, #CMC, #WS
 Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (31 -> +2)              #TSLA
-AI Power Infrastructure        Artificial Intel..   4    0    0.00   Lagging (31 -> +2)              #AAON
-AI Platform                    Artificial Intel..   3    0    0.00   Lagging (31 -> +2)              #GOOG, #META, #PLTR
+AI Platform                    Artificial Intel..   3    0    0.00   Lagging (31 -> +2)              #PLTR
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -30,39 +28,32 @@ Legend: * = Zacks Rank 4 or 5
 Ticker                            Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
   LQDA                         Pharmaceuticals         99      96.12          1        0
   OSCR                     Healthcare Services         97      93.93          1        0
-  CORT                         Pharmaceuticals         99      92.53          2       +3
+  CORT                         Pharmaceuticals         99      92.53          2       +2
   PGNY                     Healthcare Services         95      92.43          1        0
    HUM                     Healthcare Services         95      92.13          1       -2
-  URGN                                  Pharma         98      91.78          2       +1
-  INNV                              Healthcare         97      91.73          2       -2
-  ETON                         Pharmaceuticals         99      91.23          3       +1
+  URGN                                  Pharma         98      91.78          2        0
     VG LNG / Natural Gas Export Infrastructure         95      90.15          2       NA
 DISTRIBUTION WATCHLIST
 ========================================
-Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
-   CLF           Copper Mining              Lagging          1      20.47          2       +4
-  TSLA   Autonomous Driving AI              Lagging         20      28.42          3       NA
-  PLTR             AI Platform              Lagging         10      30.82          2       NA
-   CMC           Copper Mining              Lagging         30      34.83          3       NA
-    WS           Copper Mining              Lagging         20      35.12          1       NA
-  SMCI       AI Infrastructure              Lagging         30      37.42          3       NA
-  META             AI Platform              Lagging         30      37.92          3       NA
-  AVGO       AI Infrastructure              Lagging         40      45.92          2       NA
-  GOOG             AI Platform              Lagging         40      46.72          1       NA
-  MTUS           Copper Mining              Lagging         50      46.93          3       NA
-  AAON AI Power Infrastructure              Lagging         50      48.02          3       NA
+Ticker          Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
+   CLF         Copper Mining              Lagging          1      20.47          2       +3
+  TSLA Autonomous Driving AI              Lagging         20      28.42          3       NA
+  PLTR           AI Platform              Lagging         10      30.82          2       NA
+   CMC         Copper Mining              Lagging         30      34.83          3       +1
+    WS         Copper Mining              Lagging         20      35.12          1       +1
+  SMCI     AI Infrastructure              Lagging         30      37.42          3       NA
 
 ========================================
 WATCHLIST DELTAS (TODAY)
 ========================================
 New Longs: VG
-Dropped Longs: AVAH, DVA, IBRX, NBIX, OMDA, PACS
-New Distributions: AAON, AVGO, CMC, GOOG, META, MTUS, PLTR, SMCI, TSLA, WS
-Dropped Distributions: AIRO, ASLE, ASTS, AVAV, BA, BWXT, CAE, EH, FLY, HII, KRMN, KTOS, LHX, LUNR, NOC, PL, RDW, RKLB, SPIR, VOYG
+Dropped Longs: IBRX
+New Distributions: PLTR, SMCI, TSLA
+Dropped Distributions: EH, KTOS, LUNR
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,OSCR,CORT,PGNY,HUM,URGN,INNV,ETON,VG,
-###DISTRIBUTION,CLF,TSLA,PLTR,CMC,WS,SMCI,META,AVGO,GOOG,MTUS,AAON,
+###LONG,LQDA,OSCR,CORT,PGNY,HUM,URGN,VG,
+###DISTRIBUTION,CLF,TSLA,PLTR,CMC,WS,SMCI,
 
 ==============================================
 END OF TABELA SCAN

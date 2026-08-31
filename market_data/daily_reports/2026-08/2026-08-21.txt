@@ -22,20 +22,19 @@ Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-En
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Biotechnology                  Biotech              5    5  169.14   Leading (3 -> -1)               PGEN, KNSA, XNCR, AGEN
+Biotechnology                  Biotech              5    5  169.14   Leading (3 -> -1)               PGEN
 Communications Cloud           Cloud Computing      3    3  126.15   Leading (2 -> -1)               FIVN, RNG
-Biotech                        Biotech             86   27  122.47   Leading (3 -> -1)               IOVA, HALO, ABCL, RGEN,
-                                                                                                     IBRX
+Biotech                        Biotech             86   27  122.47   Leading (3 -> -1)               IOVA, HALO
 Cloud Infrastructure           Cloud Computing      5    3   94.96   Leading (2 -> -1)               FSLY
 Pharma                         Pharma              43    8   63.08   Leading (6)                     RCEL, FDMT
-Semiconductors                 Semiconductors      43    0    0.00   Lagging (34)                    #ALGM, #AOSL, #NXPI,
-                                                                                                     #ON, #VPG
-Foundry                        Semiconductors       3    0    0.00   Lagging (34)                    #GFS
+Transportation/Shipping        Transportation/S..  57    0    0.00   Lagging (30 -> -5)              #CHRW, #GXO, #VLRS
+Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
+Semiconductors                 Semiconductors      43    0    0.00   Lagging (34)                    #AOSL, #ON, #VPG
 Building Materials             Building Materials  38    0    0.00   Unknown                         #LII, #LOMA, #ROL
-Infrastructure                 Infrastructure     102    0    0.00   Lagging (33 -> +1)              #BW, #CSIQ, #HE, #JKS,
-                                                                                                     #LUMN, #MEC, #ORN,
-                                                                                                     #PRIM, #TAC, #TU
-Industrial Automation          Infrastructure      43    0    0.00   Lagging (33 -> +1)              #RRX, #WSO
+Banking                        Banking            139    0    0.00   Lagging (29 -> -4)              #BBAR, #RBA, #SUPV
+Infrastructure                 Infrastructure     102    0    0.00   Lagging (33 -> +1)              #BW, #HE, #TU
+Homebuilders                   Homebuilders         3    0    0.00   Unknown                         #DHI, #KBH, #PHM
+Electrical Infrastructure      Electrical Infra..   4    0    0.00   Unknown                         #GEV, #POWL, #PWR
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -45,53 +44,48 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
   PGEN        Biotechnology         97      95.34          1        0
   IOVA              Biotech         99      94.94          2        0
   HALO              Biotech         97      94.94          2        0
-  FIVN Communications Cloud         95      93.35          1       +2
-  ABCL              Biotech         99      92.44          3       -1
-  KNSA        Biotechnology         97      92.24          3       -1
+  FIVN Communications Cloud         95      93.35          1        0
   FSLY Cloud Infrastructure         95      91.25          2       NA
   RCEL               Pharma         99      91.02          2       NA
-  XNCR        Biotechnology         99      90.34          3       +1
-   RNG Communications Cloud         98      90.30          3       +5
-  RGEN              Biotech         90      90.29          1        0
-  IBRX              Biotech         95      90.24          3        0
-  AGEN        Biotechnology         99      90.14         4*        0
-  FDMT               Pharma         98      90.07          3       -5
+   RNG Communications Cloud         98      90.30          3       +1
+  FDMT               Pharma         98      90.07          3       -3
 DISTRIBUTION WATCHLIST
 ========================================
-Ticker          Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
-    TU        Infrastructure              Lagging          1      14.15         4*        0
-    BW        Infrastructure              Lagging          1      14.15         4*        0
-    HE        Infrastructure              Lagging          1      15.05         4*       +3
-  AOSL        Semiconductors              Lagging          1      15.55          3       -1
-   VPG        Semiconductors              Lagging          1      15.55         4*       -1
-   JKS        Infrastructure              Lagging          1      16.16          3       +6
-   TAC        Infrastructure              Lagging          1      16.16          3       NA
-  LUMN        Infrastructure              Lagging          1      16.16          3       +2
-  CSIQ        Infrastructure              Lagging          1      16.16          3       +2
-   ORN        Infrastructure              Lagging          1      16.16         4*       +3
-   MEC        Infrastructure              Lagging          1      16.16          3       NA
-    ON        Semiconductors              Lagging          1      16.45          3       -5
-  LOMA    Building Materials              Lagging          1      16.75          3       +6
-  PRIM        Infrastructure              Lagging          1      16.86         4*       NA
-  ALGM        Semiconductors              Lagging          1      16.95         4*       -6
-   WSO Industrial Automation              Lagging          1      17.05          3       NA
-   RRX Industrial Automation              Lagging          1      17.05          3       NA
-  NXPI        Semiconductors              Lagging          1      17.35          3       -4
-   LII    Building Materials              Lagging          1      17.36          3       NA
-   ROL    Building Materials              Lagging          1      17.45         4*       NA
-   GFS               Foundry              Lagging          1      17.85          3       -4
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
+    TU            Infrastructure              Lagging          1      14.15         4*        0
+    BW            Infrastructure              Lagging          1      14.15         4*        0
+    HE            Infrastructure              Lagging          1      15.05         4*       +3
+  AOSL            Semiconductors              Lagging          1      15.55          3       -1
+   VPG            Semiconductors              Lagging          1      15.55         4*       -1
+    ON            Semiconductors              Lagging          1      16.45          3       +1
+  LOMA        Building Materials              Lagging          1      16.75          3       +3
+   LII        Building Materials              Lagging          1      17.36          3       +4
+   ROL        Building Materials              Lagging          1      17.45         4*       NA
+  VLRS   Transportation/Shipping              Lagging          1      17.97          3       -5
+  CHRW   Transportation/Shipping              Lagging          1      18.57          3       -3
+  SUPV                   Banking              Lagging          1      18.58          3       NA
+  BBAR                   Banking              Lagging          1      20.58          3       NA
+   GXO   Transportation/Shipping              Lagging          1      20.68          3       NA
+   RBA                   Banking              Lagging          1      20.88          3       NA
+   DHI              Homebuilders              Lagging         20      27.51          3       -2
+  POWL Electrical Infrastructure              Lagging         20      29.20          3       -2
+   KBH              Homebuilders              Lagging         30      32.70          3       -2
+   GLW    Optical Infrastructure              Lagging         30      34.80          3       -2
+   PHM              Homebuilders              Lagging         40      38.80          3       NA
+   GEV Electrical Infrastructure              Lagging         40      40.80          3       -3
+   PWR Electrical Infrastructure              Lagging         40      45.00          1       NA
 
 ========================================
 WATCHLIST DELTAS (TODAY)
 ========================================
 New Longs: FSLY, RCEL
-Dropped Longs: CORT, ETON, MGTX, MTA, URGN
-New Distributions: LII, MEC, PRIM, ROL, RRX, TAC, WSO
-Dropped Distributions: CHRW, CX, ELVA, FN, POWI, QCOM, VLRS
+Dropped Longs: ETON, MTA, URGN
+New Distributions: BBAR, GXO, PHM, PWR, RBA, ROL, SUPV
+Dropped Distributions: CX, LEN, RYAAY
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,PGEN,IOVA,HALO,FIVN,ABCL,KNSA,FSLY,RCEL,XNCR,RNG,RGEN,IBRX,AGEN,FDMT,
-###DISTRIBUTION,TU,BW,HE,AOSL,VPG,JKS,TAC,LUMN,CSIQ,ORN,MEC,ON,LOMA,PRIM,ALGM,WSO,RRX,NXPI,LII,ROL,GFS,
+###LONG,PGEN,IOVA,HALO,FIVN,FSLY,RCEL,RNG,FDMT,
+###DISTRIBUTION,TU,BW,HE,AOSL,VPG,ON,LOMA,LII,ROL,VLRS,CHRW,SUPV,BBAR,GXO,RBA,DHI,POWL,KBH,GLW,PHM,GEV,PWR,
 
 ==============================================
 END OF TABELA SCAN

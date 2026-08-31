@@ -12,18 +12,12 @@ Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-En
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Healthcare Services            Healthcare          14    9  164.43   Leading (2 -> -2)               OSCR, HUM, PGNY, AVAH,
-                                                                                                     DVA
-Healthcare                     Healthcare          41   13  108.40   Leading (2 -> -2)               OMDA, INNV
-Semiconductors                 Semiconductors      48    0    0.00   Lagging (29 -> -2)              #AEIS, #AMSC, #AOSL,
-                                                                                                     #ASYS, #CRUS, #FN,
-                                                                                                     #LPTH, #NVTS, #OLED,
-                                                                                                     #ON, #QRVO, #QUIK,
-                                                                                                     #RMBS, #SVCO, #SWKS
-Optical Networking             Semiconductors       8    0    0.00   Lagging (29 -> -2)              #LTRX
-Semiconductor Equipment        Semiconductors      21    0    0.00   Lagging (29 -> -2)              #HAYW
-Copper Mining                  Copper Mining        9    0    0.00   Lagging (31)                    #CLF, #CMC
+Healthcare Services            Healthcare          14    9  164.43   Leading (2 -> -2)               OSCR, HUM, PGNY
+Semiconductors                 Semiconductors      48    0    0.00   Lagging (29 -> -2)              #LPTH, #NVTS, #OLED
+Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
+Copper Mining                  Copper Mining        9    0    0.00   Lagging (31)                    #CLF, #CMC, #WS
 Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (30 -> -1)              #TSLA
+AI Platform                    Artificial Intel..   3    0    0.00   Lagging (30 -> -1)              #PLTR
 AI Infrastructure              Artificial Intel..   6    0    0.00   Lagging (30 -> -1)              #SMCI
 
 ========================================
@@ -34,46 +28,31 @@ Ticker        Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
   OSCR Healthcare Services         97      95.14          1       +1
    HUM Healthcare Services         97      94.45          1       +2
   PGNY Healthcare Services         95      93.65          1        0
-  OMDA          Healthcare         97      91.95          3       +2
-  INNV          Healthcare         95      91.85          2        0
-  AVAH Healthcare Services         90      90.09          2       NA
-   DVA Healthcare Services         97      90.05          3       NA
 DISTRIBUTION WATCHLIST
 ========================================
-Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
-  NVTS          Semiconductors              Lagging          1      18.58          3       NA
-  OLED          Semiconductors              Lagging          1      19.78         4*       NA
-   CLF           Copper Mining              Lagging          1      19.87          2      +15
-  SMCI       AI Infrastructure              Lagging          1      20.07         4*       +2
-  LPTH          Semiconductors              Lagging          1      20.68          3       NA
-  RMBS          Semiconductors              Lagging          1      23.18          3       NA
-  LTRX      Optical Networking              Lagging         10      23.53          3       NA
-  AMSC          Semiconductors              Lagging          1      23.88          3       NA
-  HAYW Semiconductor Equipment              Lagging         10      24.13         4*       NA
-  SWKS          Semiconductors              Lagging         10      24.43          3       NA
-    FN          Semiconductors              Lagging         10      24.53         4*       NA
-  SVCO          Semiconductors              Lagging         10      24.93          3       NA
-  AOSL          Semiconductors              Lagging         10      24.93          3       NA
-  CRUS          Semiconductors              Lagging         10      26.73          3       NA
-  AEIS          Semiconductors              Lagging         10      27.23          3       NA
-   CMC           Copper Mining              Lagging         20      28.72          3       NA
-  TSLA   Autonomous Driving AI              Lagging         20      29.03          3       NA
-  QUIK          Semiconductors              Lagging         20      29.03          3       NA
-  ASYS          Semiconductors              Lagging         20      29.63          3       NA
-  QRVO          Semiconductors              Lagging         20      29.93          3       NA
-    ON          Semiconductors              Lagging         20      29.93          3       NA
+Ticker           Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement
+  NVTS         Semiconductors              Lagging          1      18.58          3       NA
+  OLED         Semiconductors              Lagging          1      19.78         4*       NA
+   CLF          Copper Mining              Lagging          1      19.87          2       +2
+  SMCI      AI Infrastructure              Lagging          1      20.07         4*        0
+  LPTH         Semiconductors              Lagging          1      20.68          3       NA
+   CMC          Copper Mining              Lagging         20      28.72          3        0
+  TSLA  Autonomous Driving AI              Lagging         20      29.03          3        0
+    WS          Copper Mining              Lagging         20      33.02          2        0
+  PLTR            AI Platform              Lagging         20      36.92          2       NA
+   GLW Optical Infrastructure              Lagging         30      40.33          2       NA
 
 ========================================
 WATCHLIST DELTAS (TODAY)
 ========================================
-New Longs: AVAH, DVA
+New Longs: None
 Dropped Longs: ETON, LQDA, URGN
-New Distributions: AEIS, AMSC, AOSL, ASYS, CMC, CRUS, FN, HAYW, LPTH, LTRX, NVTS, OLED, ON, QRVO, QUIK, RMBS, SVCO, SWKS, TSLA
-Dropped Distributions: AIRO, ASLE, ASTS, AVAV, BWXT, CAE, EH, FLY, HII, KRMN, KTOS, LHX, LUNR, NOC, PL, RDW, RKLB, SPIR, VOYG
+New Distributions: GLW, LPTH, NVTS, OLED, PLTR
+Dropped Distributions: EH, KTOS, LUNR, MPWR
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,OSCR,HUM,PGNY,OMDA,INNV,AVAH,DVA,
-###DISTRIBUTION,NVTS,OLED,CLF,SMCI,LPTH,RMBS,LTRX,AMSC,HAYW,SWKS,FN,SVCO,AOSL,CRUS,AEIS,CMC,TSLA,QUIK,ASYS,QRVO,ON,
+###LONG,OSCR,HUM,PGNY,
+###DISTRIBUTION,NVTS,OLED,CLF,SMCI,LPTH,CMC,TSLA,WS,PLTR,GLW,
 
 ==============================================
 END OF TABELA SCAN
