@@ -18,5 +18,18 @@ def build_long_watchlist(stocks, registry=None):
         ascending=[False, False]
     )
 
-    max_size = LONG_ENTRY.get("MAX_LIST_SIZE", 21)
-    return long_watchlist.head(max_size)
+    max_per_theme = LONG_ENTRY.get("MAX_PER_THEME", 3)
+    
+    # Deduplicate before grouping to prevent a duplicate stock from eating multiple slots
+    long_watchlist = long_watchlist.drop_duplicates(subset=["Ticker"])
+    
+    # Use ETF_Theme to group, ensuring we grab the top 3 per macro bucket
+    long_watchlist = long_watchlist.groupby("ETF_Theme").head(max_per_theme)
+    
+    # Re-sort natively post-grouping to ensure it drops into presentation smoothly
+    long_watchlist = long_watchlist.sort_values(
+        ["Long_Score", "RS_Rating"],
+        ascending=[False, False]
+    )
+
+    return long_watchlist
