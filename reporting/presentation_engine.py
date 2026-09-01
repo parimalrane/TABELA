@@ -567,7 +567,7 @@ def print_daily_scan(
     print()
     print("========================================")
     print("THEME BREADTH ANALYSIS")
-    print("Legend: [No Prefix] = True Long / - = Observation / # = Distribution / ^ = Re-Entry")
+    print("Legend: [No Prefix] = Long Candidate / # = Distribution")
     print("        + - = 1D Rank Delta")
     print("========================================")
     
@@ -734,8 +734,10 @@ def print_daily_scan(
     )
 
     movements = deltas.get("movements", {})
+    days = deltas.get("days_on_list", {})
     if not true_longs.empty:
         true_longs["Movement"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
+        true_longs["Days"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
 
     if true_longs.empty:
         print("No active candidates in Long Candidate Universe.")
@@ -788,6 +790,7 @@ def print_daily_scan(
         )
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
+        display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
         print(display_df.to_string(index=False))
 
     print("\n\n")
@@ -798,6 +801,66 @@ def print_daily_scan(
     print(f"Dropped Longs: {', '.join(deltas.get('dropped_longs', [])) or 'None'}")
     print(f"New Distributions: {', '.join(deltas.get('new_distribution', [])) or 'None'}")
     print(f"Dropped Distributions: {', '.join(deltas.get('left_distribution', [])) or 'None'}")
+
+    def print_dropped_table(title, tickers, stocks):
+        if not tickers:
+            return
+        
+        print("\n" + "-" * 40)
+        print(f"{title} DETAILS")
+        print("-" * 40)
+        
+        dropped_df = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(tickers)].copy()
+        if dropped_df.empty:
+            return
+            
+        display_cols = ["Ticker", "Mapped_Theme", "Theme_Class", "RS_Rating", "Long_Score", "Zacks_Score"]
+        available_cols = [c for c in display_cols if c in dropped_df.columns]
+        
+        display_dropped = dropped_df[available_cols].rename(columns={"Theme_Class": "Theme Classification"})
+        
+        def get_exit_reason(row, is_long):
+            from config.config import LONG_ENTRY, DIST_ENTRY
+            
+            rs = float(row.get("RS_Rating", 0))
+            score = float(row.get("Long_Score", 0))
+            theme = str(row.get("Theme Classification", ""))
+            
+            if is_long:
+                themes_allowed = LONG_ENTRY.get("THEMES", ["Leading", "Unclassified Leader", "Unknown"])
+                if theme not in themes_allowed: return "Theme Downgrade"
+                if rs < LONG_ENTRY.get("MIN_RS", 90.0): return f"RS < {LONG_ENTRY.get('MIN_RS', 90)}"
+                if score < LONG_ENTRY.get("MIN_LONG_SCORE", 90.0): return f"Score < {LONG_ENTRY.get('MIN_LONG_SCORE', 90)}"
+                return "Not Top 3 (Crowded Out)"
+            else:
+                themes_allowed = DIST_ENTRY.get("THEMES", ["Lagging"])
+                if theme not in themes_allowed: return "Theme Upgrade"
+                if rs > DIST_ENTRY.get("MAX_RS", 50.0): return f"RS > {DIST_ENTRY.get('MAX_RS', 50)}"
+                if score > DIST_ENTRY.get("MAX_LONG_SCORE", 50.0): return f"Score > {DIST_ENTRY.get('MAX_LONG_SCORE', 50)}"
+                return "Not Bottom 3 (Crowded Out)"
+                
+        display_dropped["Exit_Reason"] = display_dropped.apply(lambda r: get_exit_reason(r, title == "DROPPED LONGS"), axis=1)
+
+        if "Long_Score" in display_dropped.columns:
+            display_dropped["Long_Score"] = display_dropped["Long_Score"].map("{:.2f}".format)
+            
+        display_dropped["Ticker"] = display_dropped["Ticker"].astype(str).str.replace("*", "", regex=False)
+        print(display_dropped.to_string(
+            index=False,
+            justify="right",
+            col_space={
+                "Ticker": 6,
+                "Mapped_Theme": 25,
+                "Theme Classification": 20,
+                "RS_Rating": 9,
+                "Long_Score": 10,
+                "Zacks_Score": 11,
+                "Exit_Reason": 25
+            }
+        ))
+
+    print_dropped_table("DROPPED LONGS", deltas.get('dropped_longs', []), stocks)
+    print_dropped_table("DROPPED DISTRIBUTIONS", deltas.get('left_distribution', []), stocks)
 
     print()
     print("TRADINGVIEW WATCHLIST EXPORT")

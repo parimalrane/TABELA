@@ -27,10 +27,8 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     # True Longs
     true_long_tickers = set(stocks[stocks["Is_Long_Candidate"]]["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper())
     
-    # Apply re-entry prefix to Ticker strings first
+    # Remove re-entry prefix appending (stateless rebuild)
     formatted_longs = long_candidates[long_candidates["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(true_long_tickers)].copy()
-    if "Is_Reentry" in formatted_longs.columns:
-        formatted_longs.loc[formatted_longs["Is_Reentry"] == True, "Ticker"] = "^" + formatted_longs["Ticker"].astype(str).str.replace("*", "", regex=False)
     
     true_longs_series = (
         formatted_longs
@@ -43,16 +41,7 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     pre_obs_series = pd.Series(dtype=str)
 
     # Observation
-    obs_df = stocks[stocks["Tracking_State"] == "OBSERVATION"].copy()
-    if not obs_df.empty:
-        obs_series = (
-            obs_df
-            .sort_values(["Long_Score", "RS_Rating"], ascending=[False, False])
-            .groupby("Mapped_Theme")["Ticker"]
-            .apply(lambda s: ", ".join(f"-{t}" for t in s.astype(str).str.replace("*", "", regex=False)))
-        )
-    else:
-        obs_series = pd.Series(dtype=str)
+    obs_series = pd.Series(dtype=str)
         
     # Distribution
     if not distribution_watchlist.empty:

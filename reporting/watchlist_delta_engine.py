@@ -127,6 +127,17 @@ def compare_watchlists(
     old_observation_list = extract_ordered_tickers(old_data.get("observation", []))
     old_distribution_list = extract_ordered_tickers(old_data.get("distribution", []))
     
+    def extract_days_on_list(items):
+        days_map = {}
+        for item in items:
+            if isinstance(item, dict):
+                t = item["ticker"].replace("*", "").strip().upper()
+                days_map[t] = item.get("days", 0)
+        return days_map
+    
+    old_long_days = extract_days_on_list(old_data.get("true_long", old_data.get("long", [])))
+    old_dist_days = extract_days_on_list(old_data.get("distribution", []))
+    
     old_long = set(old_true_long_list) | set(old_pre_obs_list)
     old_true_long = set(old_true_long_list)
     old_pre_obs = set(old_pre_obs_list)
@@ -199,12 +210,19 @@ def compare_watchlists(
     movements.update(calculate_movements(old_observation_list, current_observation_ordered, new_observation))
     movements.update(calculate_movements(old_distribution_list, current_distribution_ordered, new_distribution))
 
+    parsed_days = {}
+    for t in current_true_long_ordered:
+        parsed_days[t] = old_long_days.get(t, 0) + 1
+    for t in current_distribution_ordered:
+        parsed_days[t] = old_dist_days.get(t, 0) + 1
+
     save_watchlist(
         current_file,
         current_true_long_ordered,
         current_observation_ordered,
         current_distribution_ordered,
         theme_lookup,
+        parsed_days,
     )
 
     return {
@@ -217,6 +235,7 @@ def compare_watchlists(
         "recovering_observation": recovering_observation,
         "recovering_distribution": recovering_distribution,
         "movements": movements,
+        "days_on_list": parsed_days,
     }
 
 def save_watchlist(
@@ -225,7 +244,10 @@ def save_watchlist(
     observation_list,
     distribution_list,
     theme_lookup,
+    days_map=None,
 ):
+
+    if days_map is None: days_map = {}
 
     def build_entries(items):
         # Do not sort! Keep sequential rank order!
@@ -233,6 +255,7 @@ def save_watchlist(
             {
                 "ticker": ticker,
                 "theme": theme_lookup.get(ticker, "Unknown"),
+                "days": days_map.get(ticker, 1)
             }
             for ticker in items
         ]
