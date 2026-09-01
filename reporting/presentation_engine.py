@@ -749,6 +749,8 @@ def print_daily_scan(
 
 
 
+    print("\n")
+    print("========================================")
     print("DISTRIBUTION WATCHLIST")
     print("========================================")
 
