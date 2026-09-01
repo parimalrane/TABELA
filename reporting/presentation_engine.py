@@ -793,14 +793,7 @@ def print_daily_scan(
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
         print(display_df.to_string(index=False))
 
-    print("\n\n")
-    print("========================================")
-    print("WATCHLIST DELTAS (TODAY)")
-    print("========================================")
-    print(f"New Longs: {', '.join(deltas.get('new_longs', [])) or 'None'}")
-    print(f"Dropped Longs: {', '.join(deltas.get('dropped_longs', [])) or 'None'}")
-    print(f"New Distributions: {', '.join(deltas.get('new_distribution', [])) or 'None'}")
-    print(f"Dropped Distributions: {', '.join(deltas.get('left_distribution', [])) or 'None'}")
+    # Delta lists are handled natively via 'Days = 1' and the detailed Dropped Tables
 
     def print_dropped_table(title, tickers, stocks):
         if not tickers:
