@@ -686,7 +686,7 @@ def print_daily_scan(
     print("\n\n")
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
-    print("Legend: * = Zacks Rank 4 or 5")
+    print("Legend: * = Zacks Rank 4 or 5 / + = New Addition Today")
     print("========================================")
 
     display_df = long_candidates[
@@ -738,6 +738,12 @@ def print_daily_scan(
     if not true_longs.empty:
         true_longs["Movement"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         true_longs["Days"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
+        
+        # Visually align the column so the + pops out to the left of the ticker string
+        def format_ticker(row):
+            t = str(row["Ticker"])
+            return f"+{t}" if row["Days"] == 1 else f" {t}"
+        true_longs["Ticker"] = true_longs.apply(format_ticker, axis=1)
 
     if true_longs.empty:
         print("No active candidates in Long Candidate Universe.")
@@ -752,6 +758,7 @@ def print_daily_scan(
     print("\n")
     print("========================================")
     print("DISTRIBUTION WATCHLIST")
+    print("Legend: * = Zacks Rank 4 or 5 / + = New Addition Today")
     print("========================================")
 
     if distribution_watchlist.empty:
@@ -793,6 +800,12 @@ def print_daily_scan(
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
+        
+        def format_ticker(row):
+            t = str(row["Ticker"])
+            return f"+{t}" if row["Days"] == 1 else f" {t}"
+        display_df["Ticker"] = display_df.apply(format_ticker, axis=1)
+        
         print(display_df.to_string(index=False))
 
     # Delta lists are handled natively via 'Days = 1' and the detailed Dropped Tables
@@ -861,7 +874,7 @@ def print_daily_scan(
     print("TRADINGVIEW WATCHLIST EXPORT")
 
     long_list_true = ",".join(
-        [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).tolist()]
+        [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.strip().tolist()]
     )
 
 
