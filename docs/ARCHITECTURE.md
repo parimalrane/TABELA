@@ -28,7 +28,7 @@ The architecture is intentionally linear to simplify debugging, testing, and fut
           Breadth Analysis
                    │
                    ▼
-         Stock Evaluation
+          Stock Evaluation
                    │
         ┌──────────┴──────────┐
         ▼                     ▼
@@ -36,7 +36,7 @@ The architecture is intentionally linear to simplify debugging, testing, and fut
         │                     │
         └──────────┬──────────┘
                    ▼
-          Rotation Analysis
+          Watchlist Deltas (Stateless)
                    ▼
           Snapshot Creation
                    ▼
@@ -87,7 +87,8 @@ TABELA/
 │   └── snapshot_engine.py
 │
 ├── reporting/
-│   └── presentation_engine.py
+│   ├── presentation_engine.py
+│   └── watchlist_delta_engine.py
 │
 ├── data/
 │

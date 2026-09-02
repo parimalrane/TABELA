@@ -10,6 +10,7 @@ scoring.rotation_engine.print_rotation_report = lambda *args, **kwargs: None
 
 from reporting.watchlist_delta_engine import compare_watchlists
 from themes.theme_translation_engine import THEME_TRANSLATION
+from themes.theme_hierarchy import THEME_PARENT_MAP
 
 
 class OutputCapturer:
@@ -598,7 +599,12 @@ def print_daily_scan(
             
         mapped_theme = str(row['Mapped_Theme'])
         parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
-        macro_state = theme_class_map.get(parent_theme, "Unknown")
+        if parent_theme in THEME_PARENT_MAP:
+            macro_for_lookup = THEME_PARENT_MAP[parent_theme]
+        else:
+            macro_for_lookup = parent_theme
+            
+        macro_state = theme_class_map.get(macro_for_lookup, "Unknown")
         
         if macro_state == "Neutral":
             has_valid_swing_signal = False
@@ -625,7 +631,11 @@ def print_daily_scan(
     
     for _, row in display_df.iterrows():
         mapped_theme = str(row['Mapped_Theme'])
-        parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
+        parent_theme_raw = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
+        if parent_theme_raw in THEME_PARENT_MAP:
+            parent_theme = THEME_PARENT_MAP[parent_theme_raw]
+        else:
+            parent_theme = parent_theme_raw
         
         # Format columns
         micro = (mapped_theme[:28] + "..") if len(mapped_theme) > 30 else mapped_theme.ljust(30)
@@ -822,7 +832,7 @@ def print_daily_scan(
         if dropped_df.empty:
             return
             
-        display_cols = ["Ticker", "Mapped_Theme", "Theme_Class", "RS_Rating", "Long_Score", "Zacks_Score"]
+        display_cols = ["Ticker", "Mapped_Theme", "Theme_Class", "RS_Rating", "Long_Score"]
         available_cols = [c for c in display_cols if c in dropped_df.columns]
         
         display_dropped = dropped_df[available_cols].rename(columns={"Theme_Class": "Theme Classification"})
@@ -839,13 +849,13 @@ def print_daily_scan(
                 if theme not in themes_allowed: return "Theme Downgrade"
                 if rs < LONG_ENTRY.get("MIN_RS", 90.0): return f"RS < {LONG_ENTRY.get('MIN_RS', 90)}"
                 if score < LONG_ENTRY.get("MIN_LONG_SCORE", 90.0): return f"Score < {LONG_ENTRY.get('MIN_LONG_SCORE', 90)}"
-                return "Not Top 3 (Crowded Out)"
+                return "Crowded Out"
             else:
                 themes_allowed = DIST_ENTRY.get("THEMES", ["Lagging"])
                 if theme not in themes_allowed: return "Theme Upgrade"
                 if rs > DIST_ENTRY.get("MAX_RS", 50.0): return f"RS > {DIST_ENTRY.get('MAX_RS', 50)}"
                 if score > DIST_ENTRY.get("MAX_LONG_SCORE", 50.0): return f"Score > {DIST_ENTRY.get('MAX_LONG_SCORE', 50)}"
-                return "Not Bottom 3 (Crowded Out)"
+                return "Crowded Out"
                 
         display_dropped["Exit_Reason"] = display_dropped.apply(lambda r: get_exit_reason(r, title == "DROPPED LONGS"), axis=1)
 
@@ -862,7 +872,6 @@ def print_daily_scan(
                 "Theme Classification": 20,
                 "RS_Rating": 9,
                 "Long_Score": 10,
-                "Zacks_Score": 11,
                 "Exit_Reason": 25
             }
         ))
