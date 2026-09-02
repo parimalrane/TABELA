@@ -187,6 +187,24 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
     theme_states = []
     etf_raw_scores = []
 
+    from config.config import LONG_ENTRY
+    breakaway_pct = LONG_ENTRY.get("MICRO_BREAKAWAY_PERCENTILE", 0.05)
+    
+    # Pre-calculate pure micro-theme momentum to find Breakaways
+    micro_stats = stocks.groupby("Mapped_Theme").agg(
+        Avg_Mom=("RS_Rating", "mean"),
+        Count=("Ticker", "count")
+    ).reset_index()
+    
+    # Must have at least 3 stocks to prevent single-stock noise from distorting the micro-theme
+    micro_valid = micro_stats[micro_stats["Count"] >= 3].sort_values("Avg_Mom", ascending=False)
+    
+    total_valid = len(micro_valid)
+    slice_count = max(1, int(total_valid * breakaway_pct)) if total_valid > 0 else 0
+    
+    breakaway_leaders = set(micro_valid.head(slice_count)["Mapped_Theme"].tolist())
+    breakaway_laggards = set(micro_valid.tail(slice_count)["Mapped_Theme"].tolist())
+
     for _, row in stocks.iterrows():
         # Respect manually injected overrides to prevent overwriting
         if row.get("Is_Unclassified_Leader") == False and row.get("Theme_Class") == "Leading":
@@ -236,6 +254,14 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
                 theme_state = None
                 etf_raw_score = None
                 is_unclassified = False
+
+        # Apply Breakaway Micro-Theme Override
+        # If the overarching macro-theme is dead, but the micro-theme is statistically elite, decouple it
+        if theme_class not in ["Leading", "Unclassified Leader"] and mapped_theme in breakaway_leaders:
+            theme_class = "Breakaway Leader"
+            
+        if theme_class not in ["Lagging"] and mapped_theme in breakaway_laggards:
+            theme_class = "Breakaway Laggard"
 
         theme_classes.append(theme_class)
         theme_scores.append(theme_score)

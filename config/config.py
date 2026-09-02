@@ -50,15 +50,17 @@ LONG_WEIGHTS = {
 LONG_ENTRY = {
     "MIN_RS": 90.0,
     "MIN_LONG_SCORE": 90.0,
-    "THEMES": ["Leading", "Unclassified Leader", "Unknown"],
-    "MAX_PER_THEME": 3
+    "THEMES": ["Leading", "Breakaway Leader", "Unclassified Leader", "Unknown"],
+    "MAX_PER_THEME": 3,
+    "MICRO_BREAKAWAY_PERCENTILE": 0.05
 }
 
 DIST_ENTRY = {
     "MAX_RS": 50.0,
     "MAX_LONG_SCORE": 50.0,
-    "THEMES": ["Lagging"],
-    "MAX_PER_THEME": 3
+    "THEMES": ["Lagging", "Breakaway Laggard"],
+    "MAX_PER_THEME": 3,
+    "MICRO_BREAKAWAY_PERCENTILE": 0.05
 }
 
 # ==========================================
