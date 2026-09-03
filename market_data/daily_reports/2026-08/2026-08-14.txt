@@ -12,24 +12,27 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
+Diagnostics                    Medical Devices      9    8  180.12   Leading (3 -> +1)               CDNA
 Cloud Infrastructure           Cloud Computing      5    5  159.82   Leading (1)                     FSLY, SNOW
-Diagnostics                    Medical Devices      9    7  157.09   Leading (3 -> +1)               CDNA
-Cybersecurity                  Software            13    9  156.31   Leading (5 -> +5)               QLYS
 Communications Cloud           Cloud Computing      3    3  123.84   Leading (1)                     FIVN
-Medical Devices                Medical Devices     88   24  107.36   Leading (3 -> +1)               DCTH, BFLY
+Cybersecurity                  Software            13    7  123.84   Leading (5 -> +5)               QLYS
+Medical Devices                Medical Devices     88   19   86.96   Leading (3 -> +1)               DCTH, BFLY
 Digital Payments               Software             4    2   78.86   Leading (5 -> +5)               PAYS, PAY
-Aerospace & Defense            Aerospace & Defe..  38    9   74.41   Leading (6 -> +2)               ATRO, ATI
 Energy Services                Energy Services      1    1   67.93   Leading                         FTK
-Exploration                    Exploration         78    4   18.88   Leading (4 -> -1)               NESR
-Semiconductors                 Semiconductors      43    0    0.00   Lagging (34 -> +7)              #LASR, #NXPI, #VPG
-Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
+Oil Services                   Energy Services      5    2   66.30   Leading                         OII
+Materials/Metals               Materials/Metals     1    1   62.38   Leading                         MTA
+Restaurants                    Consumer Staples    26    5   59.83   Leading                         CAKE, EAT, BLMN, CBRL
+Aerospace & Defense            Aerospace & Defe..  38    7   59.00   Leading (6 -> +2)               ATRO, ATI, AIR
+Exploration                    Exploration         78    4   19.45   Leading (4 -> -1)               NESR
 Natural Gas                    Natural Gas          8    0    0.00   Neutral (29 -> -14)             #ATO, #BIPC, #UGI
-Building Materials             Building Materials  38    0    0.00   Unknown                         #JBI, #LII, #LOMA
+Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (34 -> +7)              #GLW
+Semiconductors                 Semiconductors      43    0    0.00   Lagging (34 -> +7)              #LASR, #NXPI, #VPG
+Building Materials             Infrastructure      38    0    0.00   Lagging (31 -> -5)              #JBI, #LII, #LOMA
 Digital Assets Infrastructure  Software             7    0    0.00   Leading (5 -> +5)               #BTDR, #COIN, #MARA
-Electrical Infrastructure      Electrical Infra..   4    0    0.00   Unknown                         #POWL
-Homebuilders                   Homebuilders         3    0    0.00   Unknown                         #DHI, #KBH, #PHM
-Industrial Automation          Infrastructure      43    0    0.00   Lagging (31 -> -5)              #AGCO
 Infrastructure                 Infrastructure     103    0    0.00   Lagging (31 -> -5)              #TLK, #TU
+Industrial Automation          Infrastructure      43    0    0.00   Lagging (31 -> -5)              #AGCO
+Homebuilders                   Infrastructure       3    0    0.00   Lagging (31 -> -5)              #DHI, #KBH, #PHM
+Electrical Infrastructure      Infrastructure       4    0    0.00   Lagging (31 -> -5)              #POWL
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -48,7 +51,14 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
  +FIVN Communications Cloud         90      91.20          1       NA     1
   SNOW Cloud Infrastructure         97      91.15          3       -2     7
   +ATI  Aerospace & Defense         95      90.61          1       NA     1
-  +FTK      Energy Services         98      90.40          2       NA     1
+   FTK      Energy Services         98      90.40          2       +2    10
+  CAKE          Restaurants         98      89.90          1        0    14
+  +AIR  Aerospace & Defense         90      88.56          1       NA     1
+   EAT          Restaurants         97      88.15          2       +1    15
+  +OII         Oil Services         95      87.35          2       NA     1
+  +MTA     Materials/Metals         90      86.20          2       NA     1
+  BLMN          Restaurants         90      85.50          1       -1     6
+  CBRL          Restaurants         97      85.35          3       -4     2
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -64,14 +74,14 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
    JBI            Building Materials              Lagging          1      18.50          3       -3     2
   LOMA            Building Materials              Lagging          1      18.50          3       -3     2
    LII            Building Materials              Lagging          1      19.10          3       -3     2
-  BIPC                   Natural Gas    Breakaway Laggard         10      25.43          3       -2     6
-   ATO                   Natural Gas    Breakaway Laggard         10      27.93          3       -1     4
+  BIPC                   Natural Gas        Micro Laggard         10      25.43          3       -2     6
+   ATO                   Natural Gas        Micro Laggard         10      27.93          3       -1     4
    DHI                  Homebuilders              Lagging         20      29.25          3       -3     2
-   UGI                   Natural Gas    Breakaway Laggard         20      29.83         4*       -6     6
- +COIN Digital Assets Infrastructure    Breakaway Laggard          1      32.60         4*       NA     1
+   UGI                   Natural Gas        Micro Laggard         20      29.83         4*       -6     6
+ +COIN Digital Assets Infrastructure        Micro Laggard          1      32.60         4*       NA     1
   POWL     Electrical Infrastructure              Lagging         30      36.45          3       -4     2
-  MARA Digital Assets Infrastructure    Breakaway Laggard          1      36.70          3       -4     6
-  BTDR Digital Assets Infrastructure    Breakaway Laggard          1      37.40          3       -2     6
+  MARA Digital Assets Infrastructure        Micro Laggard          1      36.70          3       -4     6
+  BTDR Digital Assets Infrastructure        Micro Laggard          1      37.40          3       -2     6
    KBH                  Homebuilders              Lagging         40      39.95          3       -4     2
    PHM                  Homebuilders              Lagging         40      40.55          3       -3     2
   +GLW        Optical Infrastructure              Lagging         50      46.39          3       NA     1
@@ -79,24 +89,24 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score               Exit_Reason
-   RNG      Communications Cloud              Leading         98      90.90           60   Not Top 3 (Crowded Out)
-  CRSR Leisure and Entertainment              Neutral         98      87.04           85           Theme Downgrade
-  MGNI       Digital Advertising              Neutral         97      86.99           85           Theme Downgrade
-   MCS Leisure and Entertainment              Neutral         97      87.29          100           Theme Downgrade
-  PAYC                  Software              Leading         95      92.10          100   Not Top 3 (Crowded Out)
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+   RNG      Communications Cloud              Leading         98      90.90               Crowded Out
+  CRSR Leisure and Entertainment              Neutral         98      87.04           Theme Downgrade
+  MGNI       Digital Advertising              Neutral         97      86.99           Theme Downgrade
+   MCS Leisure and Entertainment              Neutral         97      87.29           Theme Downgrade
+  PAYC                  Software              Leading         95      92.10               Crowded Out
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score                Exit_Reason
-  RDDT         Social Media Platform              Neutral         30      50.44           60              Theme Upgrade
-  SNAP         Social Media Platform              Neutral         10      35.54           60              Theme Upgrade
-  CORZ Digital Assets Infrastructure    Breakaway Laggard         10      38.15           60 Not Bottom 3 (Crowded Out)
-    BW                Infrastructure              Lagging         10      20.85           40 Not Bottom 3 (Crowded Out)
+Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  RDDT         Social Media Platform              Neutral         30      50.44             Theme Upgrade
+  SNAP         Social Media Platform              Neutral         10      35.54             Theme Upgrade
+  CORZ Digital Assets Infrastructure        Micro Laggard         10      38.15               Crowded Out
+    BW                Infrastructure              Lagging         10      20.85               Crowded Out
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,CDNA,DCTH,PAYS,FSLY,PAY,NESR,BFLY,QLYS,ATRO,FIVN,SNOW,ATI,FTK,
+###LONG,CDNA,DCTH,PAYS,FSLY,PAY,NESR,BFLY,QLYS,ATRO,FIVN,SNOW,ATI,FTK,CAKE,AIR,EAT,OII,MTA,BLMN,CBRL,
 ###DISTRIBUTION,TU,VPG,AGCO,TLK,LASR,NXPI,JBI,LOMA,LII,BIPC,ATO,DHI,UGI,COIN,POWL,MARA,BTDR,KBH,PHM,GLW,
 
 ==============================================

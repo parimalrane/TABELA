@@ -13,32 +13,42 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Biotechnology                  Biotech              5    5  172.37   Leading (4)                     PGEN
-Biotech                        Biotech             87   37  170.25   Leading (4)                     IOVA, HALO
+Biotech                        Biotech             87   34  157.89   Leading (4)                     IOVA, HALO
+Communications Cloud           Cloud Computing      3    2   85.49   Leading (3 -> -2)               FIVN, RNG
 Digital Payments               Software             4    2   78.06   Leading (6 -> +3)               PAYS, PAY
 Materials/Metals               Materials/Metals     1    1   67.24   Leading                         MTA
-Software                       Software           167   24   62.74   Leading (6 -> +3)               PAYC
+Restaurants                    Consumer Staples    25    4   50.57   Leading                         CAKE, CBRL, EAT, BLMN
+Software                       Software           167   17   45.87   Leading (6 -> +3)               PAYC
+Copper Mining                  Copper Mining        8    1   24.72   Leading (1)                     FCX
+Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (32 -> +2)              #GLW
 Semiconductors                 Semiconductors      43    0    0.00   Lagging (32 -> +2)              #CRUS, #ON, #VPG
-Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
-Building Materials             Building Materials  39    0    0.00   Unknown                         #LII, #LOMA, #ROL
-Infrastructure                 Infrastructure     101    0    0.00   Lagging (31 -> +3)              #BW, #CSIQ, #TU
+Building Materials             Infrastructure      39    0    0.00   Lagging (31 -> +3)              #LII, #LOMA, #ROL
 Aerospace & Defense            Aerospace & Defe..  38    0    0.00   Lagging (29 -> -8)              #ASLE, #LUNR
 Defense Drone Systems          Aerospace & Defe..   1    0    0.00   Lagging (29 -> -8)              #AVAV
 Digital Assets Infrastructure  Software             7    0    0.00   Leading (6 -> +3)               #BTDR, #CIFR, #CORZ
-Homebuilders                   Homebuilders         4    0    0.00   Unknown                         #DHI, #KBH, #LEN
-Electrical Infrastructure      Electrical Infra..   4    0    0.00   Unknown                         #GEV, #POWL, #PWR
+Infrastructure                 Infrastructure     101    0    0.00   Lagging (31 -> +3)              #BW, #CSIQ, #TU
+Homebuilders                   Infrastructure       4    0    0.00   Lagging (31 -> +3)              #DHI, #KBH, #LEN
+Electrical Infrastructure      Infrastructure       4    0    0.00   Lagging (31 -> +3)              #GEV, #POWL, #PWR
 
 ========================================
 LONG CANDIDATE UNIVERSE
 Legend: * = Zacks Rank 4 or 5 / + = New Addition Today
 ========================================
-Ticker     Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
-  PGEN    Biotechnology         98      95.28          1       +2     8
-  IOVA          Biotech         99      94.33          2       -1     8
-  HALO          Biotech         97      94.33          2       -1     8
-  PAYC         Software         97      92.52          1       +1     2
-  PAYS Digital Payments         99      91.12          3       -1     2
-  +PAY Digital Payments         95      91.12          2       NA     1
-  +MTA Materials/Metals         97      90.05          2       NA     1
+Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
+  PGEN        Biotechnology         98      95.28          1       +2     8
+  IOVA              Biotech         99      94.33          2       -1     8
+  HALO              Biotech         97      94.33          2       -1     8
+  PAYC             Software         97      92.52          1       +1     2
+  PAYS     Digital Payments         99      91.12          3       -1     2
+  +PAY     Digital Payments         95      91.12          2       NA     1
+   MTA     Materials/Metals         97      90.05          2       +3     5
+  FIVN Communications Cloud         90      89.99          1        0     5
+  CAKE          Restaurants         98      89.90          1       +3    22
+  CBRL          Restaurants         97      89.35          1       -1     3
+   EAT          Restaurants         98      88.70          2        0    23
+  BLMN          Restaurants         95      88.25          1       +1     4
+   RNG Communications Cloud         95      88.04          3       -6     6
+  +FCX        Copper Mining         90      87.10          3       NA     1
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -59,10 +69,10 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
   AVAV         Defense Drone Systems              Lagging          1      20.78         4*        0     2
    LEN                  Homebuilders              Lagging         10      20.92         4*        0     2
   POWL     Electrical Infrastructure              Lagging         20      30.42          3        0     6
-  CORZ Digital Assets Infrastructure    Breakaway Laggard          1      32.52          3       +1     6
-  CIFR Digital Assets Infrastructure    Breakaway Laggard          1      34.02         4*       +1     6
+  CORZ Digital Assets Infrastructure        Micro Laggard          1      32.52          3       +1     6
+  CIFR Digital Assets Infrastructure        Micro Laggard          1      34.02         4*       +1     6
    DHI                  Homebuilders              Lagging         30      34.22          3       -2     6
-  BTDR Digital Assets Infrastructure    Breakaway Laggard          1      36.72          3       +2     5
+  BTDR Digital Assets Infrastructure        Micro Laggard          1      36.72          3       +2     5
    KBH                  Homebuilders              Lagging         40      39.42          3       -1     6
    PWR     Electrical Infrastructure              Lagging         30      40.72          1       +4     4
    GLW        Optical Infrastructure              Lagging         40      41.51          3       -2     6
@@ -71,21 +81,21 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score               Exit_Reason
-   RNG      Communications Cloud              Leading         95      88.04           60              Score < 90.0
-  QLYS             Cybersecurity              Leading         90      89.37          100              Score < 90.0
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  QLYS             Cybersecurity              Leading         90      89.37               Crowded Out
+  FSLY      Cloud Infrastructure              Leading         80      82.39                 RS < 85.0
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score                Exit_Reason
-  SNAP     Social Media Platform              Neutral         40      54.86           60              Theme Upgrade
-  ALGM            Semiconductors              Lagging         10      23.11           40 Not Bottom 3 (Crowded Out)
-  RDDT     Social Media Platform              Neutral         10      42.26           60              Theme Upgrade
-   TAC            Infrastructure              Lagging         10      22.32           60 Not Bottom 3 (Crowded Out)
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  SNAP     Social Media Platform              Neutral         40      54.86             Theme Upgrade
+  ALGM            Semiconductors              Lagging         10      23.11               Crowded Out
+  RDDT     Social Media Platform              Neutral         10      42.26             Theme Upgrade
+   TAC            Infrastructure              Lagging         10      22.32               Crowded Out
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,PGEN,IOVA,HALO,PAYC,PAYS,PAY,MTA,
+###LONG,PGEN,IOVA,HALO,PAYC,PAYS,PAY,MTA,FIVN,CAKE,CBRL,EAT,BLMN,RNG,FCX,
 ###DISTRIBUTION,TU,BW,VPG,CSIQ,ON,CRUS,LOMA,LII,LUNR,ASLE,ROL,AVAV,LEN,POWL,CORZ,CIFR,DHI,BTDR,KBH,PWR,GLW,GEV,
 
 ==============================================

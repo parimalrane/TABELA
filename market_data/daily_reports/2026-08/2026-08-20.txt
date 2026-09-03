@@ -13,20 +13,25 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Biotechnology                  Biotech              5    5  169.50   Leading (2 -> +2)               PGEN
-Biotech                        Biotech             85   30  135.97   Leading (2 -> +2)               IOVA, HALO
 Communications Cloud           Cloud Computing      3    3  126.61   Leading (3 -> -1)               FIVN, RNG
+Biotech                        Biotech             85   27  123.39   Leading (2 -> +2)               IOVA, HALO
 Pharmaceuticals                Pharma               3    2   91.50   Leading (5 -> +1)               ETON
 Materials/Metals               Materials/Metals     1    1   67.24   Leading                         MTA
+Cloud Infrastructure           Cloud Computing      5    2   64.50   Leading (3 -> -1)               FSLY
 Pharma                         Pharma              43    8   63.35   Leading (5 -> +1)               FDMT, URGN
-Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
+Exploration                    Exploration         77   10   50.65   Leading (6 -> -1)               NESR, TALO
+Restaurants                    Consumer Staples    25    4   49.52   Leading                         CAKE, EAT
+Oil Services                   Energy Services      5    1   34.04   Leading                         OII
+Consumer Staples               Consumer Staples    33    3   29.92   Leading                         TBBB
+Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (35 -> -11)             #GLW
 Transportation/Shipping        Transportation/S..  58    0    0.00   Lagging (34 -> +1)              #CHRW, #RYAAY, #VLRS
 Social Media Platform          Internet             3    0    0.00   Neutral (16 -> +4)              #PINS, #RDDT, #SNAP
 Semiconductors                 Semiconductors      43    0    0.00   Lagging (35 -> -11)             #AOSL, #ON, #VPG
-Building Materials             Building Materials  38    0    0.00   Unknown                         #CX, #LII, #LOMA
-Digital Assets Infrastructure  Software             6    0    0.00   Neutral (9 -> +2)               #BTDR, #CIFR, #CORZ
+Building Materials             Infrastructure      38    0    0.00   Lagging (32 -> -4)              #CX, #LII, #LOMA
 Infrastructure                 Infrastructure     101    0    0.00   Lagging (32 -> -4)              #BW, #HE, #TU
-Homebuilders                   Homebuilders         4    0    0.00   Unknown                         #DHI, #KBH, #LEN
-Electrical Infrastructure      Electrical Infra..   4    0    0.00   Unknown                         #GEV, #POWL
+Homebuilders                   Infrastructure       4    0    0.00   Lagging (32 -> -4)              #DHI, #KBH, #LEN
+Electrical Infrastructure      Infrastructure       4    0    0.00   Lagging (32 -> -4)              #GEV, #POWL
+Digital Assets Infrastructure  Software             6    0    0.00   Neutral (9 -> +2)               #BTDR, #CIFR, #CORZ
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -42,6 +47,13 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
  +ETON      Pharmaceuticals         99      90.50         4*       NA     1
    RNG Communications Cloud         99      90.27          3       +4     2
   +MTA     Materials/Metals         97      90.05          2       NA     1
+  CAKE          Restaurants         98      89.90          1       +3    18
+   EAT          Restaurants         97      88.15          2       +3    19
+  FSLY Cloud Infrastructure         90      87.92          2       -5     9
+ +TBBB     Consumer Staples         95      87.55          2       NA     1
+   OII         Oil Services         95      87.35          2       +1     5
+ +NESR          Exploration         90      86.36          2       NA     1
+ +TALO          Exploration         90      85.56          1       NA     1
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -63,37 +75,39 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
    LEN                  Homebuilders              Lagging         10      20.87         4*       -3     2
    DHI                  Homebuilders              Lagging         20      28.67          3       -3     2
   POWL     Electrical Infrastructure              Lagging         20      30.36          3       -3     2
-  CORZ Digital Assets Infrastructure    Breakaway Laggard          1      30.85          3       -3     2
-  CIFR Digital Assets Infrastructure    Breakaway Laggard          1      32.35         4*       -2     2
-  RDDT         Social Media Platform    Breakaway Laggard          1      32.73          3        0     4
-  SNAP         Social Media Platform    Breakaway Laggard         10      33.78          3       -3     4
+  CORZ Digital Assets Infrastructure        Micro Laggard          1      30.85          3       -3     2
+  CIFR Digital Assets Infrastructure        Micro Laggard          1      32.35         4*       -2     2
+  RDDT         Social Media Platform        Micro Laggard          1      32.73          3        0     4
+  SNAP         Social Media Platform        Micro Laggard         10      33.78          3       -3     4
    KBH                  Homebuilders              Lagging         30      33.86          3       -6     2
    GLW        Optical Infrastructure              Lagging         30      34.80          3       -2     2
- +BTDR Digital Assets Infrastructure    Breakaway Laggard          1      35.05          3       NA     1
+ +BTDR Digital Assets Infrastructure        Micro Laggard          1      35.05          3       NA     1
    GEV     Electrical Infrastructure              Lagging         40      41.97          3       -3     2
- +PINS         Social Media Platform    Breakaway Laggard         30      45.68          3       NA     1
+ +PINS         Social Media Platform        Micro Laggard         30      45.68          3       NA     1
 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score               Exit_Reason
-  RCEL                    Pharma              Leading         99      89.20           60              Score < 90.0
-  CDNA               Diagnostics              Neutral         99      93.82          100           Theme Downgrade
-  BFLY           Medical Devices              Neutral         99      88.02           60           Theme Downgrade
-  DCTH           Medical Devices              Neutral         95      92.52          100           Theme Downgrade
-  FSLY      Cloud Infrastructure              Leading         90      87.92           85              Score < 90.0
-  SNOW      Cloud Infrastructure              Leading         90      86.12           60              Score < 90.0
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  RCEL                    Pharma              Leading         99      89.20               Crowded Out
+  CDNA               Diagnostics              Neutral         99      93.82           Theme Downgrade
+  BFLY           Medical Devices              Neutral         99      88.02           Theme Downgrade
+  DCTH           Medical Devices              Neutral         95      92.52           Theme Downgrade
+  QNST                   Unknown              Unknown         95      84.25              Score < 85.0
+  CBRL               Restaurants              Leading         95      84.25              Score < 85.0
+  BLMN               Restaurants              Leading         90      84.00              Score < 85.0
+  SNOW      Cloud Infrastructure              Leading         90      86.12               Crowded Out
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score                Exit_Reason
-  PLAB                Semiconductors              Lagging         10      21.70           60 Not Bottom 3 (Crowded Out)
-  MARA Digital Assets Infrastructure    Breakaway Laggard         10      39.30           60 Not Bottom 3 (Crowded Out)
-   TLK                Infrastructure              Lagging         10      21.46           40 Not Bottom 3 (Crowded Out)
+Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  PLAB                Semiconductors              Lagging         10      21.70               Crowded Out
+  MARA Digital Assets Infrastructure        Micro Laggard         10      39.30               Crowded Out
+   TLK                Infrastructure              Lagging         10      21.46               Crowded Out
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,PGEN,IOVA,HALO,FIVN,FDMT,URGN,ETON,RNG,MTA,
+###LONG,PGEN,IOVA,HALO,FIVN,FDMT,URGN,ETON,RNG,MTA,CAKE,EAT,FSLY,TBBB,OII,NESR,TALO,
 ###DISTRIBUTION,TU,BW,AOSL,VPG,VLRS,HE,ON,CHRW,CX,LOMA,RYAAY,LII,LEN,DHI,POWL,CORZ,CIFR,RDDT,SNAP,KBH,GLW,BTDR,GEV,PINS,
 
 ==============================================

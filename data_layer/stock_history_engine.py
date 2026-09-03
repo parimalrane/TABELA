@@ -185,7 +185,7 @@ def save_stock_history(stocks):
             ),
 
             "composite_score": round(
-                safe_float(row.get("Composite_Score", 0)), 2
+                safe_float(row.get("Long_Score", 0)), 2
             ),
 
             "tracking_state": row.get(

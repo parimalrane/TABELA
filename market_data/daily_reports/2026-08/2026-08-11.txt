@@ -12,18 +12,19 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Diagnostics                    Medical Devices      9    6  143.02   Leading (6 -> +3)               CDNA, ADPT
+Diagnostics                    Medical Devices      9    7  167.84   Leading (6 -> +3)               CDNA, ADPT
 Communications Cloud           Cloud Computing      3    3  128.46   Leading (1 -> +1)               RNG
-Medical Devices                Medical Devices     88   28  125.33   Leading (6 -> +3)               DCTH
 Cloud Infrastructure           Cloud Computing      5    3  102.85   Leading (1 -> +1)               FSLY, SNOW
-Restaurants                    Consumer Staples    25    6   72.59   Leading                         CAKE
+Medical Devices                Medical Devices     88   20   92.69   Leading (6 -> +3)               DCTH
 Energy Services                Energy Services      1    1   68.62   Leading                         FTK
+Materials/Metals               Materials/Metals     1    1   62.38   Leading                         MTA
+Restaurants                    Consumer Staples    25    5   62.16   Leading                         CAKE, BLMN, EAT, CBRL
+Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (34 -> -20)             #GLW
 Natural Gas                    Natural Gas          8    0    0.00   Neutral (18 -> +15)             #ATO, #BIPC, #UGI
-Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
 Solar Infrastructure           Infrastructure       5    0    0.00   Neutral (28 -> -4)              #ARRY, #RUN, #SEDG
 Semiconductors                 Semiconductors      43    0    0.00   Lagging (34 -> -20)             #CRUS, #LASR, #VPG
-Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (32 -> -12)             #TSLA
 Autonomous Mobility            Artificial Intel..   2    0    0.00   Lagging (32 -> -12)             #JOBY
+Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (32 -> -12)             #TSLA
 AI Power Infrastructure        Artificial Intel..   4    0    0.00   Lagging (32 -> -12)             #AAON
 Digital Assets Infrastructure  Software             6    0    0.00   Neutral (8)                     #BTDR, #CORZ, #MARA
 
@@ -36,10 +37,14 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
  +DCTH      Medical Devices         97      94.21          1       NA     1
   FSLY Cloud Infrastructure         99      94.05          2        0     2
   SNOW Cloud Infrastructure         98      91.70          3        0     4
-   FTK      Energy Services         99      90.95          2       +1     4
+   FTK      Energy Services         99      90.95          2       +1     7
   +RNG Communications Cloud         98      90.90          3       NA     1
- +CAKE          Restaurants         99      90.45          1       NA     1
+  CAKE          Restaurants         99      90.45          1        0    11
  +ADPT          Diagnostics         98      90.16          3       NA     1
+  BLMN          Restaurants         95      88.25          1       -1     3
+   MTA     Materials/Metals         90      86.20          2       +1     2
+   EAT          Restaurants         95      85.95          3       -1    12
+ +CBRL          Restaurants         98      85.90          3       NA     1
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -52,45 +57,46 @@ Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score 
  +TSLA         Autonomous Driving AI              Lagging          1      17.92          3       NA     1
  +AAON       AI Power Infrastructure              Lagging          1      21.02          3       NA     1
  +JOBY           Autonomous Mobility              Lagging          1      21.52          3       NA     1
- +ARRY          Solar Infrastructure    Breakaway Laggard          1      23.17          3       NA     1
- +SEDG          Solar Infrastructure    Breakaway Laggard          1      23.17          3       NA     1
-  +RUN          Solar Infrastructure    Breakaway Laggard          1      24.37          3       NA     1
-  BIPC                   Natural Gas    Breakaway Laggard         10      31.90          3       +2     3
-  MARA Digital Assets Infrastructure    Breakaway Laggard          1      34.93          3       +6     3
+ +ARRY          Solar Infrastructure        Micro Laggard          1      23.17          3       NA     1
+ +SEDG          Solar Infrastructure        Micro Laggard          1      23.17          3       NA     1
+  +RUN          Solar Infrastructure        Micro Laggard          1      24.37          3       NA     1
+  BIPC                   Natural Gas        Micro Laggard         10      31.90          3       +2     3
+  MARA Digital Assets Infrastructure        Micro Laggard          1      34.93          3       +6     3
    GLW        Optical Infrastructure              Lagging         30      35.39          3       +2     2
-  BTDR Digital Assets Infrastructure    Breakaway Laggard          1      35.63          3       +5     3
-   UGI                   Natural Gas    Breakaway Laggard         20      36.30         4*       -3     3
- +CORZ Digital Assets Infrastructure    Breakaway Laggard         10      36.38          3       NA     1
-  +ATO                   Natural Gas    Breakaway Laggard         10      36.90          2       NA     1
+  BTDR Digital Assets Infrastructure        Micro Laggard          1      35.63          3       +5     3
+   UGI                   Natural Gas        Micro Laggard         20      36.30         4*       -3     3
+ +CORZ Digital Assets Infrastructure        Micro Laggard         10      36.38          3       NA     1
+  +ATO                   Natural Gas        Micro Laggard         10      36.90          2       NA     1
 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score               Exit_Reason
-  PAYS          Digital Payments              Neutral         99      92.53           85           Theme Downgrade
-  HNGE            Digital Health              Neutral         95      88.53           60           Theme Downgrade
-  FIVN      Communications Cloud              Leading         90      87.20           60              Score < 90.0
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  PAYS          Digital Payments              Neutral         99      92.53           Theme Downgrade
+  HNGE            Digital Health              Neutral         95      88.53           Theme Downgrade
+  FIVN      Communications Cloud              Leading         90      87.20               Crowded Out
+  BJRI               Restaurants              Leading         90      85.50               Crowded Out
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score                Exit_Reason
-   PHM                  Homebuilders              Neutral         60      55.82           85              Theme Upgrade
-   KBH                  Homebuilders              Neutral         50      47.22           60              Theme Upgrade
-   GEV     Electrical Infrastructure              Neutral         50      49.82           60              Theme Upgrade
-   DHI                  Homebuilders              Neutral         30      36.52           60              Theme Upgrade
-  POWL     Electrical Infrastructure              Neutral         30      38.22           60              Theme Upgrade
-    SR                   Natural Gas    Breakaway Laggard         20      37.80           60 Not Bottom 3 (Crowded Out)
-  CIFR Digital Assets Infrastructure    Breakaway Laggard         10      37.88           40 Not Bottom 3 (Crowded Out)
-   KNF            Building Materials              Neutral          1      19.67           40              Theme Upgrade
-  AMRZ            Building Materials              Neutral          1      21.97           60              Theme Upgrade
-  AGCO         Industrial Automation              Neutral          1      18.27           40              Theme Upgrade
-   TLK                Infrastructure              Neutral          1      18.87           40              Theme Upgrade
-   LII            Building Materials              Neutral          1      20.87           60              Theme Upgrade
-    TU                Infrastructure              Neutral          1      17.67           40              Theme Upgrade
+Ticker                  Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+   PHM                  Homebuilders              Neutral         60      55.82             Theme Upgrade
+   KBH                  Homebuilders              Neutral         50      47.22             Theme Upgrade
+   GEV     Electrical Infrastructure              Neutral         50      49.82             Theme Upgrade
+   DHI                  Homebuilders              Neutral         30      36.52             Theme Upgrade
+  POWL     Electrical Infrastructure              Neutral         30      38.22             Theme Upgrade
+    SR                   Natural Gas        Micro Laggard         20      37.80               Crowded Out
+  CIFR Digital Assets Infrastructure        Micro Laggard         10      37.88               Crowded Out
+   KNF            Building Materials              Neutral          1      19.67             Theme Upgrade
+  AMRZ            Building Materials              Neutral          1      21.97             Theme Upgrade
+  AGCO         Industrial Automation              Neutral          1      18.27             Theme Upgrade
+   TLK                Infrastructure              Neutral          1      18.87             Theme Upgrade
+   LII            Building Materials              Neutral          1      20.87             Theme Upgrade
+    TU                Infrastructure              Neutral          1      17.67             Theme Upgrade
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,CDNA,DCTH,FSLY,SNOW,FTK,RNG,CAKE,ADPT,
+###LONG,CDNA,DCTH,FSLY,SNOW,FTK,RNG,CAKE,ADPT,BLMN,MTA,EAT,CBRL,
 ###DISTRIBUTION,VPG,CRUS,LASR,TSLA,AAON,JOBY,ARRY,SEDG,RUN,BIPC,MARA,GLW,BTDR,UGI,CORZ,ATO,
 
 ==============================================

@@ -1,15 +1,3 @@
-COMPOSITE_WEIGHTS = {
-
-    "RS_WEIGHT": 0.40,
-    "THEME_WEIGHT": 0.25,
-    "MARGIN_WEIGHT": 0.05,
-    "ZACKS_WEIGHT": 0.10,
-    "SALES_WEIGHT": 0.20
-
-
-
-}
-
 THEME_STRENGTH_CONFIG = {
     # Benchmark ETF used for relative-return subtraction.
     "BENCHMARK_TICKER": "SPY",
@@ -48,9 +36,9 @@ LONG_WEIGHTS = {
 # ==========================
 
 LONG_ENTRY = {
-    "MIN_RS": 90.0,
-    "MIN_LONG_SCORE": 90.0,
-    "THEMES": ["Leading", "Breakaway Leader", "Unclassified Leader", "Unknown"],
+    "MIN_RS": 85.0,
+    "MIN_LONG_SCORE": 85.0,
+    "THEMES": ["Leading", "Micro Leader", "Unclassified Leader", "Unknown"],
     "MAX_PER_THEME": 3,
     "MICRO_BREAKAWAY_PERCENTILE": 0.05
 }
@@ -58,7 +46,7 @@ LONG_ENTRY = {
 DIST_ENTRY = {
     "MAX_RS": 50.0,
     "MAX_LONG_SCORE": 50.0,
-    "THEMES": ["Lagging", "Breakaway Laggard"],
+    "THEMES": ["Lagging", "Micro Laggard"],
     "MAX_PER_THEME": 3,
     "MICRO_BREAKAWAY_PERCENTILE": 0.05
 }

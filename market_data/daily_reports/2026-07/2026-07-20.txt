@@ -13,10 +13,16 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Healthcare Services            Healthcare          14    9  164.43   Leading (2 -> -2)               OSCR, HUM, PGNY
+Cloud Infrastructure           Cloud Computing      5    4  131.52   Leading (6 -> +2)               DDOG, SNOW, NET
+Communication Infrastructure   Communication In..   1    1   68.62   Unknown                         BAND
+Real Estate Technology         Real Estate Tech..   1    1   62.38   Unknown                         COMP
+LNG / Natural Gas Export Inf.. LNG / Natural Ga..   1    1   62.38   Unknown                         VG
+Restaurants                    Consumer Staples    28    4   46.31   Leading                         BJRI, CAKE, EAT, CBRL
+Insurance                      Insurance           68    8   41.08   Leading (5 -> +2)               SKWD
+Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (29 -> -2)              #GLW
+Solar Infrastructure           Infrastructure       5    0    0.00   Neutral (25 -> -1)              #ARRY, #FSLR, #RUN
 Silver Mining                  Silver Mining        6    0    0.00   Unknown                         #EXK, #HL, #PAAS
 Semiconductors                 Semiconductors      48    0    0.00   Lagging (29 -> -2)              #LPTH, #NVTS, #OLED
-Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
-Solar Infrastructure           Infrastructure       5    0    0.00   Neutral (25 -> -1)              #ARRY, #FSLR, #RUN
 Copper Mining                  Copper Mining        9    0    0.00   Lagging (31)                    #CLF, #CMC, #WS
 Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (30 -> -1)              #TSLA
 AI Platform                    Artificial Intel..   3    0    0.00   Lagging (30 -> -1)              #PLTR
@@ -27,10 +33,21 @@ Gold Mining                    Gold Mining         43    0    0.00   Unknown    
 LONG CANDIDATE UNIVERSE
 Legend: * = Zacks Rank 4 or 5 / + = New Addition Today
 ========================================
-Ticker        Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
-  OSCR Healthcare Services         97      95.14          1       +1     5
-   HUM Healthcare Services         97      94.45          1       +2     6
-  PGNY Healthcare Services         95      93.65          1        0     7
+Ticker                            Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
+  OSCR                     Healthcare Services         97      95.14          1       +1     5
+   HUM                     Healthcare Services         97      94.45          1       +2     6
+  PGNY                     Healthcare Services         95      93.65          1        0     7
+ +DDOG                    Cloud Infrastructure         99      89.82          3       NA     1
+   +VG LNG / Natural Gas Export Infrastructure         90      88.90          1       NA     1
+ +SNOW                    Cloud Infrastructure         98      88.67          3       NA     1
+  BJRI                             Restaurants         98      88.40          2       +1     7
+  +NET                    Cloud Infrastructure         90      88.27          1       NA     1
+  COMP                  Real Estate Technology         90      86.90          1        0     6
+ +CAKE                             Restaurants         95      86.75          2       NA     1
+ +SKWD                               Insurance         90      86.08          3       NA     1
+  +EAT                             Restaurants         95      85.95          3       NA     1
+  BAND            Communication Infrastructure         99      85.45          1       -3     7
+  CBRL                             Restaurants         97      85.35          3       -3     6
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -42,17 +59,17 @@ Ticker           Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks R
    CLF          Copper Mining              Lagging          1      19.87          2       +3     6
   SMCI      AI Infrastructure              Lagging          1      20.07         4*       +1     3
  +LPTH         Semiconductors              Lagging          1      20.68          3       NA     1
-  +RUN   Solar Infrastructure    Breakaway Laggard          1      23.70         4*       NA     1
-   FSM            Gold Mining    Breakaway Laggard          1      25.35         4*        0     2
- +SGML            Gold Mining    Breakaway Laggard          1      25.55          3       NA     1
- +AAUC            Gold Mining    Breakaway Laggard          1      25.75         5*       NA     1
-  PAAS          Silver Mining    Breakaway Laggard          1      26.15         5*       -2     7
- +ARRY   Solar Infrastructure    Breakaway Laggard          1      28.50          1       NA     1
+  +RUN   Solar Infrastructure        Micro Laggard          1      23.70         4*       NA     1
+   FSM            Gold Mining        Micro Laggard          1      25.35         4*        0     2
+ +SGML            Gold Mining        Micro Laggard          1      25.55          3       NA     1
+ +AAUC            Gold Mining        Micro Laggard          1      25.75         5*       NA     1
+  PAAS          Silver Mining        Micro Laggard          1      26.15         5*       -2     7
+ +ARRY   Solar Infrastructure        Micro Laggard          1      28.50          1       NA     1
    CMC          Copper Mining              Lagging         20      28.72          3        0     6
   TSLA  Autonomous Driving AI              Lagging         20      29.03          3        0     3
-   EXK          Silver Mining    Breakaway Laggard          1      29.75          3        0     7
- +FSLR   Solar Infrastructure    Breakaway Laggard         10      30.55          3       NA     1
-   +HL          Silver Mining    Breakaway Laggard          1      30.95          3       NA     1
+   EXK          Silver Mining        Micro Laggard          1      29.75          3        0     7
+ +FSLR   Solar Infrastructure        Micro Laggard         10      30.55          3       NA     1
+   +HL          Silver Mining        Micro Laggard          1      30.95          3       NA     1
     WS          Copper Mining              Lagging         20      33.02          2        0     6
  +PLTR            AI Platform              Lagging         20      36.92          2       NA     1
   +GLW Optical Infrastructure              Lagging         30      40.33          2       NA     1
@@ -60,28 +77,29 @@ Ticker           Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks R
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score               Exit_Reason
-  LQDA           Pharmaceuticals     Breakaway Leader         99      94.91          100   Not Top 3 (Crowded Out)
-  ETON           Pharmaceuticals     Breakaway Leader         99      90.01           60   Not Top 3 (Crowded Out)
-  URGN                    Pharma              Neutral         98      90.56           85           Theme Downgrade
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  LQDA           Pharmaceuticals         Micro Leader         99      94.91               Crowded Out
+  ETON           Pharmaceuticals         Micro Leader         99      90.01               Crowded Out
+  URGN                    Pharma              Neutral         98      90.56           Theme Downgrade
+  NESR               Exploration              Leading         80      83.79                 RS < 85.0
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score                Exit_Reason
-  MPWR   AI Power Infrastructure              Lagging         30      41.03           85 Not Bottom 3 (Crowded Out)
-    VZ    Telecom Infrastructure              Neutral         20      33.45           60              Theme Upgrade
-     T    Telecom Infrastructure              Neutral         10      27.95           60              Theme Upgrade
-   ASM             Silver Mining    Breakaway Laggard         10      35.80           60 Not Bottom 3 (Crowded Out)
-  RGLD               Gold Mining    Breakaway Laggard          1      26.85           20 Not Bottom 3 (Crowded Out)
-   KGC               Gold Mining    Breakaway Laggard          1      26.85           20 Not Bottom 3 (Crowded Out)
-  CHTR    Telecom Infrastructure              Neutral          1      19.30           40              Theme Upgrade
-  KTOS           Defense Systems              Neutral          1      19.89           40              Theme Upgrade
-  LUNR       Aerospace & Defense              Neutral          1      19.19           60              Theme Upgrade
-    EH       Aerospace & Defense              Neutral          1      19.29           40              Theme Upgrade
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  MPWR   AI Power Infrastructure              Lagging         30      41.03               Crowded Out
+    VZ    Telecom Infrastructure              Neutral         20      33.45             Theme Upgrade
+     T    Telecom Infrastructure              Neutral         10      27.95             Theme Upgrade
+   ASM             Silver Mining        Micro Laggard         10      35.80               Crowded Out
+  RGLD               Gold Mining        Micro Laggard          1      26.85               Crowded Out
+   KGC               Gold Mining        Micro Laggard          1      26.85               Crowded Out
+  CHTR    Telecom Infrastructure              Neutral          1      19.30             Theme Upgrade
+  KTOS           Defense Systems              Neutral          1      19.89             Theme Upgrade
+  LUNR       Aerospace & Defense              Neutral          1      19.19             Theme Upgrade
+    EH       Aerospace & Defense              Neutral          1      19.29             Theme Upgrade
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,OSCR,HUM,PGNY,
+###LONG,OSCR,HUM,PGNY,DDOG,VG,SNOW,BJRI,NET,COMP,CAKE,SKWD,EAT,BAND,CBRL,
 ###DISTRIBUTION,NVTS,OLED,CLF,SMCI,LPTH,RUN,FSM,SGML,AAUC,PAAS,ARRY,CMC,TSLA,EXK,FSLR,HL,WS,PLTR,GLW,
 
 ==============================================

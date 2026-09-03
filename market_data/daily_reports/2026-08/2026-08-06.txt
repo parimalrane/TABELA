@@ -12,21 +12,21 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Cybersecurity                  Software            13    9  169.91   Leading (4 -> -1)               FTNT
+Cybersecurity                  Software            13    8  153.68   Leading (4 -> -1)               FTNT
 Cloud Infrastructure           Cloud Computing      5    4  136.53   Leading (1)                     DDOG, SNOW
 Digital Payments               Software             4    3  117.49   Leading (4 -> -1)               SEZL
 Communications Cloud           Cloud Computing      3    2   89.65   Leading (1)                     RNG
 Energy Services                Energy Services      1    1   68.62   Leading                         FTK
-Restaurants                    Consumer Staples    24    5   65.57   Leading                         CAKE
-Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
-Silver Mining                  Silver Mining        6    0    0.00   Unknown                         #AG, #HL, #PAAS
+Restaurants                    Consumer Staples    24    5   65.57   Leading                         CAKE, BJRI, EAT, CBRL
+Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (31)                    #GLW
 Semiconductors                 Semiconductors      44    0    0.00   Lagging (31)                    #CRUS, #NXPI, #ON
 Social Media Platform          Internet             3    0    0.00   Neutral (10 -> +1)              #RDDT, #SNAP
-Building Materials             Building Materials  38    0    0.00   Unknown                         #CRH, #KNF, #LII
-Electrical Infrastructure      Electrical Infra..   4    0    0.00   Unknown                         #GEV, #POWL
+Silver Mining                  Silver Mining        6    0    0.00   Unknown                         #AG, #HL, #PAAS
+Building Materials             Infrastructure      38    0    0.00   Lagging (30 -> +2)              #CRH, #KNF, #LII
 Infrastructure                 Infrastructure     107    0    0.00   Lagging (30 -> +2)              #TLK, #TU
 Industrial Automation          Infrastructure      45    0    0.00   Lagging (30 -> +2)              #AGCO
-Homebuilders                   Homebuilders         3    0    0.00   Unknown                         #DHI
+Homebuilders                   Infrastructure       3    0    0.00   Lagging (30 -> +2)              #DHI
+Electrical Infrastructure      Infrastructure       4    0    0.00   Lagging (30 -> +2)              #GEV, #POWL
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -34,12 +34,15 @@ Legend: * = Zacks Rank 4 or 5 / + = New Addition Today
 ========================================
 Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
   SEZL     Digital Payments         98      95.64          2        0     5
-   RNG Communications Cloud         99      93.95          2       +2     8
+   RNG Communications Cloud         99      93.95          2       +2     9
   FTNT        Cybersecurity         95      93.39          1       -1     3
-  DDOG Cloud Infrastructure         95      93.15          2       -1     8
+  DDOG Cloud Infrastructure         95      93.15          2       -1     9
  +SNOW Cloud Infrastructure         98      91.70          3       NA     1
-  +FTK      Energy Services         99      90.95          2       NA     1
-  CAKE          Restaurants         99      90.45          1        0     6
+   FTK      Energy Services         99      90.95          2       +5     4
+  CAKE          Restaurants         99      90.45          1        0     8
+  BJRI          Restaurants         95      88.25          1       +2    20
+   EAT          Restaurants         98      87.60          3       +3     9
+  CBRL          Restaurants         99      86.45          3       +3     2
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -57,39 +60,41 @@ Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score Zack
   +CRH        Building Materials              Lagging          1      20.79          3       NA     1
  +POWL Electrical Infrastructure              Lagging         20      31.54          3       NA     1
   +GLW    Optical Infrastructure              Lagging         20      31.65          3       NA     1
-  PAAS             Silver Mining    Breakaway Laggard         10      33.10         4*       -9     3
+  PAAS             Silver Mining        Micro Laggard         10      33.10         4*       -9     3
   +DHI              Homebuilders              Lagging         30      33.34         4*       NA     1
- +SNAP     Social Media Platform    Breakaway Laggard         10      35.30         4*       NA     1
- +RDDT     Social Media Platform    Breakaway Laggard          1      36.25          3       NA     1
-   +AG             Silver Mining    Breakaway Laggard         10      36.50          3       NA     1
-   +HL             Silver Mining    Breakaway Laggard         10      36.50          3       NA     1
+ +SNAP     Social Media Platform        Micro Laggard         10      35.30         4*       NA     1
+ +RDDT     Social Media Platform        Micro Laggard          1      36.25          3       NA     1
+   +AG             Silver Mining        Micro Laggard         10      36.50          3       NA     1
+   +HL             Silver Mining        Micro Laggard         10      36.50          3       NA     1
   +GEV Electrical Infrastructure              Lagging         50      48.64          3       NA     1
 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score               Exit_Reason
-  CRSR Leisure and Entertainment              Neutral         97      88.26           85           Theme Downgrade
-   NET      Cloud Infrastructure              Leading         90      89.80           85              Score < 90.0
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  LIND Leisure and Entertainment              Neutral         99      86.26           Theme Downgrade
+  CRSR Leisure and Entertainment              Neutral         97      88.26           Theme Downgrade
+   NET      Cloud Infrastructure              Leading         90      89.80               Crowded Out
+   LTH Leisure and Entertainment              Neutral         90      86.51           Theme Downgrade
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score                Exit_Reason
-  DUOL         Consumer Momentum              Unknown         30      46.80           60              Theme Upgrade
-  CHTR    Telecom Infrastructure              Neutral         20      35.72           60              Theme Upgrade
-   ASM             Silver Mining    Breakaway Laggard         20      39.30           40 Not Bottom 3 (Crowded Out)
-  SPOT         Consumer Momentum              Unknown         20      39.30           60              Theme Upgrade
-   OGS               Natural Gas              Neutral         20      39.30           60              Theme Upgrade
-   EXK             Silver Mining    Breakaway Laggard         20      41.10           60 Not Bottom 3 (Crowded Out)
-     T    Telecom Infrastructure              Neutral         20      37.42           60              Theme Upgrade
-  BIPC               Natural Gas              Neutral         10      31.90           60              Theme Upgrade
-    SR               Natural Gas              Neutral         10      32.30           60              Theme Upgrade
-  CELH         Consumer Momentum              Unknown          1      28.65           40              Theme Upgrade
-  TMUS    Telecom Infrastructure              Neutral          1      26.97           60              Theme Upgrade
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  DUOL         Consumer Momentum              Unknown         30      46.80             Theme Upgrade
+  CHTR    Telecom Infrastructure              Neutral         20      35.72             Theme Upgrade
+   ASM             Silver Mining        Micro Laggard         20      39.30               Crowded Out
+  SPOT         Consumer Momentum              Unknown         20      39.30             Theme Upgrade
+   OGS               Natural Gas              Neutral         20      39.30             Theme Upgrade
+   EXK             Silver Mining        Micro Laggard         20      41.10               Crowded Out
+     T    Telecom Infrastructure              Neutral         20      37.42             Theme Upgrade
+  BIPC               Natural Gas              Neutral         10      31.90             Theme Upgrade
+    SR               Natural Gas              Neutral         10      32.30             Theme Upgrade
+  CELH         Consumer Momentum              Unknown          1      28.65             Theme Upgrade
+  TMUS    Telecom Infrastructure              Neutral          1      26.97             Theme Upgrade
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SEZL,RNG,FTNT,DDOG,SNOW,FTK,CAKE,
+###LONG,SEZL,RNG,FTNT,DDOG,SNOW,FTK,CAKE,BJRI,EAT,CBRL,
 ###DISTRIBUTION,TU,AGCO,TLK,KNF,ON,CRUS,LII,NXPI,CRH,POWL,GLW,PAAS,DHI,SNAP,RDDT,AG,HL,GEV,
 
 ==============================================

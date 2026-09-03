@@ -11,7 +11,6 @@ from themes.theme_hierarchy import THEME_PARENT_MAP
 from themes.theme_parser import parse_theme
 from themes.theme_translation_engine import THEME_TRANSLATION
 from scoring.breadth_engine import build_theme_breadth
-from scoring.composite_engine import calculate_composite_score
 from scoring.etf_engine import assign_theme_score, calculate_etf_rs
 from scoring.etf_filter import (
     filter_etfs_with_sufficient_history,
@@ -258,10 +257,10 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
         # Apply Breakaway Micro-Theme Override
         # If the overarching macro-theme is dead, but the micro-theme is statistically elite, decouple it
         if theme_class not in ["Leading", "Unclassified Leader"] and mapped_theme in breakaway_leaders:
-            theme_class = "Breakaway Leader"
+            theme_class = "Micro Leader"
             
         if theme_class not in ["Lagging"] and mapped_theme in breakaway_laggards:
-            theme_class = "Breakaway Laggard"
+            theme_class = "Micro Laggard"
 
         theme_classes.append(theme_class)
         theme_scores.append(theme_score)
@@ -569,7 +568,6 @@ def score_stocks(stocks):
     stocks = calculate_sales_score(stocks)
     stocks = calculate_zacks_score(stocks)
     stocks = calculate_margin_score(stocks)
-    stocks = calculate_composite_score(stocks)
     stocks = calculate_long_score(stocks)
     return stocks
 

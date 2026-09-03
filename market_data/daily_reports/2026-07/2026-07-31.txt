@@ -12,15 +12,18 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Digital Payments               Software             4    4  146.06   Leading (6 -> +6)               SEZL
-Cybersecurity                  Software            13    8  145.35   Leading (6 -> +6)               OKTA
 Cloud Infrastructure           Cloud Computing      5    4  137.25   Leading (2 -> +2)               DDOG, NET
+Cybersecurity                  Software            13    7  129.12   Leading (6 -> +6)               OKTA
+Digital Payments               Software             4    3  113.87   Leading (6 -> +6)               SEZL
 Communications Cloud           Cloud Computing      3    2   86.88   Leading (2 -> +2)               RNG
-Restaurants                    Consumer Staples    24    5   64.90   Leading                         CAKE
-Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
+Exploration                    Exploration         73   16   79.90   Leading (3 -> +7)               EC, SM, EOG
+Oil Services                   Energy Services      5    2   69.16   Leading                         OII, WHD
+Restaurants                    Consumer Staples    24    4   52.85   Leading                         CAKE, CBRL, BJRI, EAT
+Footwear/Apparel               Footwear/Apparel    36    1    9.94   Unknown                         VSXY
+Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (32 -> +1)              #GLW
 Solar Infrastructure           Infrastructure       5    0    0.00   Neutral (29 -> +1)              #ARRY, #FSLR, #RUN
-Semiconductors                 Semiconductors      45    0    0.00   Lagging (32 -> +1)              #FN, #NXPI, #OLED
 Silver Mining                  Silver Mining        5    0    0.00   Unknown                         #ASM, #EXK, #HL
+Semiconductors                 Semiconductors      45    0    0.00   Lagging (32 -> +1)              #FN, #NXPI, #OLED
 Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (30 -> +1)              #TSLA
 AI Power Infrastructure        Artificial Intel..   4    0    0.00   Lagging (30 -> +1)              #AAON
 AI Infrastructure              Artificial Intel..   6    0    0.00   Lagging (30 -> +1)              #SMCI
@@ -32,11 +35,20 @@ Legend: * = Zacks Rank 4 or 5 / + = New Addition Today
 ========================================
 Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
  +SEZL     Digital Payments         98      94.46          2       NA     1
-   RNG Communications Cloud         98      92.81          2       +1     4
-  DDOG Cloud Infrastructure         95      92.56          2       -2     4
+   RNG Communications Cloud         98      92.81          2       +1     5
+  DDOG Cloud Infrastructure         95      92.56          2       -2     5
   +NET Cloud Infrastructure         95      91.96          2       NA     1
  +OKTA        Cybersecurity         97      90.91          2       NA     1
-  CAKE          Restaurants         99      90.45          1        0     2
+  CAKE          Restaurants         99      90.45          1        0     4
+  CBRL          Restaurants         99      88.95          2       +2    15
+  BJRI          Restaurants         98      88.40          2        0    16
+   EAT          Restaurants         98      87.60          3       +2     5
+    EC          Exploration         95      86.97          3        0     2
+  +OII         Oil Services         98      86.50          3       NA     1
+   +SM          Exploration         90      86.02          3       NA     1
+  +WHD         Oil Services         95      85.65          2       NA     1
+  VSXY     Footwear/Apparel         99      85.45          1       -2     2
+  +EOG          Exploration         90      85.12          3       NA     1
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -47,37 +59,38 @@ Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks 
   OLED          Semiconductors              Lagging          1      18.52         4*       +1     6
   TSLA   Autonomous Driving AI              Lagging          1      19.09          3       -2     6
  +NXPI          Semiconductors              Lagging          1      19.12          3       NA     1
-   RUN    Solar Infrastructure    Breakaway Laggard          1      21.78         4*       +1     6
+   RUN    Solar Infrastructure        Micro Laggard          1      21.78         4*       +1     6
   AAON AI Power Infrastructure              Lagging          1      22.19          3       -1     2
- +SGML             Gold Mining    Breakaway Laggard          1      25.55          3       NA     1
+ +SGML             Gold Mining        Micro Laggard          1      25.55          3       NA     1
    GLW  Optical Infrastructure              Lagging         10      25.56          3        0     6
-  ARRY    Solar Infrastructure    Breakaway Laggard          1      26.58          1        0     2
-  +MUX             Gold Mining    Breakaway Laggard          1      27.45         4*       NA     1
+  ARRY    Solar Infrastructure        Micro Laggard          1      26.58          1        0     2
+  +MUX             Gold Mining        Micro Laggard          1      27.45         4*       NA     1
  +SMCI       AI Infrastructure              Lagging         10      27.54          3       NA     1
-   +MP             Gold Mining    Breakaway Laggard          1      27.65          3       NA     1
-  FSLR    Solar Infrastructure    Breakaway Laggard         10      28.63          3       -3     6
-   ASM           Silver Mining    Breakaway Laggard          1      28.85         4*       -3     6
-   EXK           Silver Mining    Breakaway Laggard          1      30.65          3       -3     6
-   +HL           Silver Mining    Breakaway Laggard          1      30.95          3       NA     1
+   +MP             Gold Mining        Micro Laggard          1      27.65          3       NA     1
+  FSLR    Solar Infrastructure        Micro Laggard         10      28.63          3       -3     6
+   ASM           Silver Mining        Micro Laggard          1      28.85         4*       -3     6
+   EXK           Silver Mining        Micro Laggard          1      30.65          3       -3     6
+   +HL           Silver Mining        Micro Laggard          1      30.95          3       NA     1
 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score               Exit_Reason
-  CDNA               Diagnostics              Neutral         99      88.06           60           Theme Downgrade
-  SNOW      Cloud Infrastructure              Leading         98      91.11           60   Not Top 3 (Crowded Out)
-  ADPT               Diagnostics              Neutral         97      89.76           85           Theme Downgrade
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  CDNA               Diagnostics              Neutral         99      88.06           Theme Downgrade
+  TWST       Life Sciences Tools         Micro Leader         99      86.95               Crowded Out
+  SNOW      Cloud Infrastructure              Leading         98      91.11               Crowded Out
+  ADPT               Diagnostics              Neutral         97      89.76           Theme Downgrade
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score                Exit_Reason
-  META               AI Platform              Lagging         10      28.04           60 Not Bottom 3 (Crowded Out)
-  LPTH            Semiconductors              Lagging         10      24.36           60 Not Bottom 3 (Crowded Out)
-    AG             Silver Mining    Breakaway Laggard          1      34.05           85 Not Bottom 3 (Crowded Out)
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  META               AI Platform              Lagging         10      28.04               Crowded Out
+  LPTH            Semiconductors              Lagging         10      24.36               Crowded Out
+    AG             Silver Mining        Micro Laggard          1      34.05               Crowded Out
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SEZL,RNG,DDOG,NET,OKTA,CAKE,
+###LONG,SEZL,RNG,DDOG,NET,OKTA,CAKE,CBRL,BJRI,EAT,EC,OII,SM,WHD,VSXY,EOG,
 ###DISTRIBUTION,FN,OLED,TSLA,NXPI,RUN,AAON,SGML,GLW,ARRY,MUX,SMCI,MP,FSLR,ASM,EXK,HL,
 
 ==============================================

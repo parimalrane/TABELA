@@ -8,7 +8,7 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     # ==========================================
 
     s_rs = 80
-    s_comp = 75
+    s_long = 80
 
     strong_stocks = stocks[
 
@@ -16,7 +16,7 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
 
         &
 
-        (stocks["Composite_Score"] >= s_comp)
+        (stocks["Long_Score"] >= s_long)
 
     ].copy()
 

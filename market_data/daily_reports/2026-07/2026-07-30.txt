@@ -13,13 +13,16 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Diagnostics                    Medical Devices      9    8  196.49   Leading (5)                     ADPT, CDNA
+Life Sciences Tools            Medical Devices      5    5  173.08   Leading (5)                     TWST
 Cloud Infrastructure           Cloud Computing      5    4  130.08   Leading (2)                     DDOG, SNOW
 Communications Cloud           Cloud Computing      3    2   85.49   Leading (2)                     RNG
-Restaurants                    Consumer Staples    24    6   76.72   Leading                         CAKE
-Optical Infrastructure         Optical Infrastr..   1    0    0.00   Unknown                         #GLW
+Restaurants                    Consumer Staples    24    5   64.64   Leading                         CAKE, BJRI, CBRL, EAT
+Exploration                    Exploration         73    5   25.65   Leading (4)                     EC
+Footwear/Apparel               Footwear/Apparel    36    1    9.94   Unknown                         VSXY
+Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (33)                    #GLW
 Solar Infrastructure           Infrastructure       5    0    0.00   Neutral (28)                    #ARRY, #FSLR, #RUN
-Semiconductors                 Semiconductors      45    0    0.00   Lagging (33)                    #FN, #LPTH, #OLED
 Silver Mining                  Silver Mining        5    0    0.00   Unknown                         #AG, #ASM, #EXK
+Semiconductors                 Semiconductors      45    0    0.00   Lagging (33)                    #FN, #LPTH, #OLED
 Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (30)                    #TSLA
 AI Power Infrastructure        Artificial Intel..   4    0    0.00   Lagging (30)                    #AAON
 AI Platform                    Artificial Intel..   3    0    0.00   Lagging (30)                    #META
@@ -29,12 +32,18 @@ LONG CANDIDATE UNIVERSE
 Legend: * = Zacks Rank 4 or 5 / + = New Addition Today
 ========================================
 Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
-  DDOG Cloud Infrastructure         95      94.06          1       +1     3
+  DDOG Cloud Infrastructure         95      94.06          1       +1     4
  +ADPT          Diagnostics         98      93.25          2       NA     1
-   RNG Communications Cloud         95      91.16          2        0     3
+   RNG Communications Cloud         95      91.16          2        0     4
   SNOW Cloud Infrastructure         98      91.11          3       +4     4
  +CDNA          Diagnostics         99      91.00          3       NA     1
- +CAKE          Restaurants         99      90.45          1       NA     1
+  CAKE          Restaurants         99      90.45          1       +4     3
+ +TWST  Life Sciences Tools         98      89.35          3       NA     1
+  BJRI          Restaurants         99      88.95          2       +4    15
+  CBRL          Restaurants         99      88.95          2       +2    14
+   +EC          Exploration         95      86.39          3       NA     1
+   EAT          Restaurants         95      85.95          3       +2     4
+ +VSXY     Footwear/Apparel         99      85.45          1       NA     1
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -46,36 +55,38 @@ Ticker            Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks 
   OLED          Semiconductors              Lagging          1      17.93         4*       +1     5
  +LPTH          Semiconductors              Lagging          1      18.83          3       NA     1
  +AAON AI Power Infrastructure              Lagging          1      22.19          3       NA     1
-   RUN    Solar Infrastructure    Breakaway Laggard          1      22.37         4*        0     5
+   RUN    Solar Infrastructure        Micro Laggard          1      22.37         4*        0     5
  +META             AI Platform              Lagging          1      23.09          3       NA     1
    GLW  Optical Infrastructure              Lagging         10      24.98          3       -3     5
- +ARRY    Solar Infrastructure    Breakaway Laggard          1      27.17          1       NA     1
-  FSLR    Solar Infrastructure    Breakaway Laggard         10      27.22         4*       -1     5
-   ASM           Silver Mining    Breakaway Laggard          1      28.85         4*        0     5
-   EXK           Silver Mining    Breakaway Laggard          1      30.65          3       +1     5
-    AG           Silver Mining    Breakaway Laggard          1      34.05          2       -1     3
+ +ARRY    Solar Infrastructure        Micro Laggard          1      27.17          1       NA     1
+  FSLR    Solar Infrastructure        Micro Laggard         10      27.22         4*       -1     5
+   ASM           Silver Mining        Micro Laggard          1      28.85         4*        0     5
+   EXK           Silver Mining        Micro Laggard          1      30.65          3       +1     5
+    AG           Silver Mining        Micro Laggard          1      34.05          2       -1     3
 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score               Exit_Reason
-  LQDA           Pharmaceuticals     Breakaway Leader         99      94.43          100   Not Top 3 (Crowded Out)
-  ETON           Pharmaceuticals     Breakaway Leader         99      89.53           60              Score < 90.0
-  URGN                    Pharma              Neutral         97      89.53           85           Theme Downgrade
-  GSHD                 Insurance              Leading         90      84.56           60              Score < 90.0
-   TRV                 Insurance              Leading         80      82.66          100                 RS < 90.0
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  LQDA           Pharmaceuticals         Micro Leader         99      94.43               Crowded Out
+  ETON           Pharmaceuticals         Micro Leader         99      89.53               Crowded Out
+  URGN                    Pharma              Neutral         97      89.53           Theme Downgrade
+  HURN                   Unknown              Unknown         97      83.85              Score < 85.0
+  GSHD                 Insurance              Leading         90      84.56              Score < 85.0
+   TRV                 Insurance              Leading         80      82.66                 RS < 85.0
+   ALL                 Insurance              Leading         80      78.66                 RS < 85.0
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score  Zacks_Score                Exit_Reason
-  AXTI            Semiconductors              Lagging         30      33.28           60 Not Bottom 3 (Crowded Out)
-  ENPH      Solar Infrastructure    Breakaway Laggard         20      33.12           60 Not Bottom 3 (Crowded Out)
-  SMCI         AI Infrastructure              Lagging         10      27.54           60 Not Bottom 3 (Crowded Out)
-   VRT   AI Power Infrastructure              Lagging          1      24.99           85 Not Bottom 3 (Crowded Out)
+Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
+  AXTI            Semiconductors              Lagging         30      33.28               Crowded Out
+  ENPH      Solar Infrastructure        Micro Laggard         20      33.12               Crowded Out
+  SMCI         AI Infrastructure              Lagging         10      27.54               Crowded Out
+   VRT   AI Power Infrastructure              Lagging          1      24.99               Crowded Out
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,DDOG,ADPT,RNG,SNOW,CDNA,CAKE,
+###LONG,DDOG,ADPT,RNG,SNOW,CDNA,CAKE,TWST,BJRI,CBRL,EC,EAT,VSXY,
 ###DISTRIBUTION,TSLA,FN,OLED,LPTH,AAON,RUN,META,GLW,ARRY,FSLR,ASM,EXK,AG,
 
 ==============================================
