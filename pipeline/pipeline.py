@@ -35,7 +35,6 @@ from reporting.presentation_engine import (
     print_unknown_classification_error,
 )
 
-from lifecycle.stock_transition_engine import apply_tracking_state
 from scoring.rotation_engine import (
     calculate_rotation_delta,
     print_rotation_report,
@@ -54,14 +53,6 @@ from data_layer.stock_history_engine import save_stock_history
 from data_layer.unknown_classification_persistence import save_unknown_classification
 from lifecycle.watchlist_engine import build_long_watchlist
 from config.runtime_context import context
-from lifecycle.stock_transition_engine import (
-    apply_tracking_state,
-    get_distribution_watchlist,
-    get_distribution_candidates,
-    load_registry,
-    post_distribution_update,
-    pre_distribution_update,
-)
 
 DATA_DIR = "market_data"
 ETF_FILE = context.etf_file

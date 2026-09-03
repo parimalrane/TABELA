@@ -6,7 +6,6 @@ import pandas as pd
 from pathlib import Path
 
 from config.config import (
-    STOCK_TRANSITION_CONFIG,
     LONG_ENTRY,
     DIST_ENTRY
 )
@@ -14,7 +13,7 @@ from config.runtime_context import context, get_monthly_path
 from reporting.watchlist_delta_engine import load_previous_long_watchlist
 
 
-REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
+REGISTRY_DIR = "market_data/stock_transition"
 
 OBSERVATION = "OBSERVATION"
 DISTRIBUTION = "DISTRIBUTION"

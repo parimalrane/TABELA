@@ -51,11 +51,3 @@ DIST_ENTRY = {
     "MICRO_BREAKAWAY_PERCENTILE": 0.05
 }
 
-# ==========================================
-# STOCK TRANSITION ENGINE
-# ==========================================
-
-STOCK_TRANSITION_CONFIG = {
-    # Immutable daily registry location
-    "REGISTRY_DIR": "market_data/stock_transition"
-}

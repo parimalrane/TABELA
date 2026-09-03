@@ -3,7 +3,7 @@ import sys
 import io
 import re
 import scoring.rotation_engine
-from lifecycle.stock_transition_engine import get_transition_summary
+
 import textwrap
 
 scoring.rotation_engine.print_rotation_report = lambda *args, **kwargs: None
@@ -696,7 +696,7 @@ def print_daily_scan(
     print("\n\n")
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
-    print("Legend: * = Zacks Rank 4 or 5 / + = New Addition Today")
+    print("Legend: * = Zacks Rank 4 or 5 (Warning for Longs)")
     print("========================================")
 
     display_df = long_candidates[
@@ -748,13 +748,9 @@ def print_daily_scan(
     if not true_longs.empty:
         true_longs["Movement"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         true_longs["Days"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
+        # Just add arbitrary padding to Ticker directly if we wanted, but we leave it natively left aligned
+        true_longs["Ticker"] = true_longs["Ticker"].apply(lambda t: f" {str(t).strip()}")
         
-        # Visually align the column so the + pops out to the left of the ticker string
-        def format_ticker(row):
-            t = str(row["Ticker"])
-            return f"+{t}" if row["Days"] == 1 else f" {t}"
-        true_longs["Ticker"] = true_longs.apply(format_ticker, axis=1)
-
     if true_longs.empty:
         print("No active candidates in Long Candidate Universe.")
     else:
@@ -768,7 +764,7 @@ def print_daily_scan(
     print("\n")
     print("========================================")
     print("DISTRIBUTION WATCHLIST")
-    print("Legend: * = Zacks Rank 4 or 5 / + = New Addition Today")
+    print("Legend: * = Zacks Rank 1 or 2 (Warning for Shorts)")
     print("========================================")
 
     if distribution_watchlist.empty:
@@ -798,7 +794,7 @@ def print_daily_scan(
                 .astype(str)
             )
             display_df.loc[
-                display_df["Zacks Rank"].isin(["4", "5"]),
+                display_df["Zacks Rank"].isin(["1", "2"]),
                 "Zacks Rank"
             ] += "*"
 
@@ -810,12 +806,7 @@ def print_daily_scan(
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
-        
-        def format_ticker(row):
-            t = str(row["Ticker"])
-            return f"+{t}" if row["Days"] == 1 else f" {t}"
-        display_df["Ticker"] = display_df.apply(format_ticker, axis=1)
-        
+        display_df["Ticker"] = display_df["Ticker"].apply(lambda t: f" {str(t).strip()}")
         print(display_df.to_string(index=False))
 
     # Delta lists are handled natively via 'Days = 1' and the detailed Dropped Tables
@@ -888,13 +879,21 @@ def print_daily_scan(
 
 
 
-    distribution_list = ",".join(
-        distribution_watchlist["Ticker"]
-        .astype(str)
-        .tolist()
+    distribution_list_true = ",".join(
+        [t for t in distribution_watchlist["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.strip().tolist()]
     )
 
+    new_long_list = ",".join(
+        [t for t in true_longs[true_longs["Days"] == 1]["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.strip().tolist()]
+    ) if not true_longs.empty else ""
+
+    new_dist_list = ",".join(
+        [t for t in display_df[display_df["Days"] == 1]["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.strip().tolist()]
+    ) if not display_df.empty else ""
+
     print("###LONG," + long_list_true + ",")
-    print("###DISTRIBUTION," + distribution_list + ",")
+    print("###DISTRIBUTION," + distribution_list_true + ",")
+    print("###NEW_LONG," + new_long_list + ("," if new_long_list else ""))
+    print("###NEW_DISTRIBUTION," + new_dist_list + ("," if new_dist_list else ""))
 
     print()
