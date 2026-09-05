@@ -12,82 +12,92 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Pharmaceuticals                Pharma               3    3  136.78   Leading (4 -> -2)               LQDA, ETON
-Cloud Infrastructure           Cloud Computing      5    4  127.57   Leading (6 -> +4)               SNOW, DDOG
-Restaurants                    Consumer Staples    24    4   51.91   Leading                         BJRI, EAT, CBRL
-Pharma                         Pharma              39    6   49.08   Leading (4 -> -2)               URGN
-Communications Cloud           Cloud Computing      3    1   43.89   Leading (6 -> +4)               RNG
-Oil Services                   Energy Services      4    1   39.83   Leading                         OII
-Insurance                      Insurance           61    5   28.43   Leading (5 -> +1)               TRV, SKWD
-Optical Infrastructure         Semiconductors       1    0    0.00   Lagging (32 -> -15)             #GLW
-Solar Infrastructure           Infrastructure       5    0    0.00   Neutral (29 -> -3)              #ARRY, #FSLR, #RUN
+Healthcare Services            Healthcare          14   11  199.62   Leading (5 -> +2)               OSCR, PGNY, HUM
+Memory                         Semiconductors       4    4  156.12   Leading (1 -> -1)               MU, SNDK
+Pharmaceuticals                Pharma               3    3  136.78   Leading (7)                     LQDA, ETON
+Biotechnology                  Biotech              5    3   96.40   Leading (8 -> -4)               AGEN
+Communication Infrastructure   Communication In..   1    1   68.62   Unknown                         BAND
+Data Storage                   Semiconductors       1    1   67.24   Leading (1 -> -1)               STX
+Restaurants                    Consumer Staples    24    4   51.24   Leading                         BJRI, CBRL
+Biotech                        Biotech             80    8   39.60   Leading (8 -> -4)               TGTX, IBRX
+Oil Services                   Energy Services      4    1   39.43   Leading                         OII
+Pharma                         Pharma              39    4   33.87   Leading (7)                     URGN
+Telecom                        Telecom              8    1   24.72   Leading (6 -> -1)               UMAC
+Consumer Staples               Consumer Staples    35    2   18.93   Leading                         WEST
+Software                       Software           159    1    3.13   Lagging (28 -> -2)              #AI, #BLSH, #MIR
+Medical Devices                Medical Devices     80    0    0.00   Lagging (32 -> -1)              #BSX, #PRGO, #RXST
 Silver Mining                  Silver Mining        5    0    0.00   Unknown                         #ASM, #EXK, #HL
-Semiconductors                 Semiconductors      46    0    0.00   Lagging (32 -> -15)             #FN, #NVTS, #OLED
-Autonomous Driving AI          Artificial Intel..   1    0    0.00   Lagging (31 -> -6)              #TSLA
-AI Platform                    Artificial Intel..   3    0    0.00   Lagging (31 -> -6)              #GOOG, #META
+Solar Infrastructure           Infrastructure       5    0    0.00   Neutral (22 -> -2)              #ARRY, #FSLR, #RUN
+AI Platform                    Artificial Intel..   3    0    0.00   Neutral (17 -> -7)              #GOOG, #META, #PLTR
+Leisure and Entertainment      Internet            32    0    0.00   Lagging (31 -> -2)              #BRSL, #PLNT
+Internet                       Internet            17    0    0.00   Lagging (31 -> -2)              #CPNG
 
 ========================================
 LONG CANDIDATE UNIVERSE
-Legend: * = Zacks Rank 4 or 5 / + = New Addition Today
+Legend: * = Zacks Rank 4 or 5 (Warning for Longs)
+        ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
-  LQDA      Pharmaceuticals         99      96.78          1        0     5
-  URGN               Pharma         99      92.98          2       +4     5
- +ETON      Pharmaceuticals         98      91.34          3       NA     1
- +SNOW Cloud Infrastructure         98      91.26          2       NA     1
- +DDOG Cloud Infrastructure         98      89.36          3       NA     1
-  BJRI          Restaurants         99      88.95          2       +2    12
-  +RNG Communications Cloud         95      88.81          2       NA     1
-  +TRV            Insurance         90      87.25          2       NA     1
-   OII         Oil Services         99      87.05          3        0     2
- +SKWD            Insurance         90      86.15          3       NA     1
-  +EAT          Restaurants         95      85.95          3       NA     1
-  CBRL          Restaurants         98      85.90          3       -1    11
+Ticker                 Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
+    MU                       Memory         99      98.75          1        0    12
+   STX                 Data Storage         97      97.65          1        0     6
+  SNDK                       Memory         99      97.35          1        0    12
+  LQDA              Pharmaceuticals         99      95.02          1        0     9
+  OSCR          Healthcare Services         95      92.30          1        0    10
+  PGNY          Healthcare Services         95      91.90          1       +1     2
+   HUM          Healthcare Services         95      91.60          1       +1    11
+  URGN                       Pharma         98      90.67          2       +1     5
+  TGTX                      Biotech         97      90.23          3       +2    12
+  ETON              Pharmaceuticals         98      89.57          3       NA     1
+  AGEN                Biotechnology         99      89.23          3       +2     3
+  BJRI                  Restaurants         99      88.95          2       +2    12
+  IBRX                      Biotech         97      88.43          3       -1    11
+   OII                 Oil Services         98      86.50          3       +4     2
+  CBRL                  Restaurants         98      85.90          3       +4    11
+  UMAC                      Telecom         90      85.76          3        0     3
+  WEST             Consumer Staples         95      85.75          3       NA     1
+ BAND~ Communication Infrastructure         99      85.45          1       +2    12
 
 ========================================
 DISTRIBUTION WATCHLIST
-Legend: * = Zacks Rank 4 or 5 / + = New Addition Today
+Legend: * = Zacks Rank 1 or 2 (Warning for Shorts)
+        ^ = Micro Laggard
 ========================================
-Ticker           Mapped_Theme Theme Classification  RS_Rating Long_Score Zacks Rank Movement  Days
-  NVTS         Semiconductors              Lagging          1      17.32          3       +1     2
-   +FN         Semiconductors              Lagging          1      18.32         4*       NA     1
-  TSLA  Autonomous Driving AI              Lagging          1      18.50          3       -2     2
-  OLED         Semiconductors              Lagging          1      18.52         4*       -1     2
-   RUN   Solar Infrastructure        Micro Laggard          1      21.78         4*        0     2
-  ARRY   Solar Infrastructure        Micro Laggard          1      26.58          1        0     2
-  FSLR   Solar Infrastructure        Micro Laggard         10      26.63         4*        0     2
-   GLW Optical Infrastructure              Lagging         10      28.06          2       +2     2
- +META            AI Platform              Lagging         20      32.95          3       NA     1
-   ASM          Silver Mining        Micro Laggard         10      33.80         4*       +1     2
-   EXK          Silver Mining        Micro Laggard         10      34.70          3       +2     2
-  GOOG            AI Platform              Lagging         20      34.75          2        0     2
-    HL          Silver Mining        Micro Laggard         10      35.90          3       +1     2
+Ticker              Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
+  PRGO           Medical Devices          1      17.32          3       +1     2
+  RXST           Medical Devices          1      17.32          3       +1     9
+  BLSH                  Software          1      17.67          4       -2     4
+  CPNG                  Internet          1      18.60          4        0     2
+   BSX           Medical Devices          1      18.61          4        0     7
+  BRSL Leisure and Entertainment          1      18.80          3        0     2
+  PLNT Leisure and Entertainment          1      19.20          4       NA     1
+    AI                  Software          1      19.67          3       -1     3
+   MIR                  Software          1      19.67          4       -1     4
+  RUN^      Solar Infrastructure          1      25.90          4       NA     1
+ ARRY^      Solar Infrastructure          1      30.70         1*       NA     1
+ FSLR^      Solar Infrastructure         10      30.75          4       NA     1
+  ASM^             Silver Mining         10      33.80          4       NA     1
+  EXK^             Silver Mining         10      34.70          3       NA     1
+   HL^             Silver Mining         10      35.90          3       NA     1
+ PLTR^               AI Platform         10      39.59         2*       NA     1
+ META^               AI Platform         20      41.19          3       NA     1
+ GOOG^               AI Platform         20      42.99         2*       NA     1
 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
-Ticker                            Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
-  CORT                         Pharmaceuticals              Leading         99      90.69               Crowded Out
-  BAND            Communication Infrastructure              Unknown         98      84.90              Score < 85.0
-  PGNY                     Healthcare Services              Neutral         95      90.72           Theme Downgrade
-  OSCR                     Healthcare Services              Neutral         95      91.12           Theme Downgrade
-   HUM                     Healthcare Services              Neutral         95      90.42           Theme Downgrade
-    SM                             Exploration              Neutral         70      70.90           Theme Downgrade
-    VG LNG / Natural Gas Export Infrastructure              Unknown         70      68.90                 RS < 85.0
+Ticker                             Mapped_Theme  RS_Rating Long_Score               Exit_Reason
+  CORT                Pharmaceuticals (Leading)         99      88.92               Crowded Out
+  NESR                    Exploration (Leading)         80      80.30                 RS < 85.0
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
-Ticker              Mapped_Theme Theme Classification  RS_Rating Long_Score               Exit_Reason
-  DUOL         Consumer Momentum              Unknown         40      54.80             Theme Upgrade
-  SPOT         Consumer Momentum              Unknown         30      42.80             Theme Upgrade
-  PLTR               AI Platform              Lagging         20      36.85               Crowded Out
-  LTRX        Optical Networking              Lagging         10      22.27               Crowded Out
-  CELH         Consumer Momentum              Unknown          1      28.65             Theme Upgrade
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,LQDA,URGN,ETON,SNOW,DDOG,BJRI,RNG,TRV,OII,SKWD,EAT,CBRL,
-###DISTRIBUTION,NVTS,FN,TSLA,OLED,RUN,ARRY,FSLR,GLW,META,ASM,EXK,GOOG,HL,
+###LONG,MU,STX,SNDK,LQDA,OSCR,PGNY,HUM,URGN,TGTX,ETON,AGEN,BJRI,IBRX,OII,CBRL,UMAC,WEST,BAND,
+###DISTRIBUTION,PRGO,RXST,BLSH,CPNG,BSX,BRSL,PLNT,AI,MIR,RUN,ARRY,FSLR,ASM,EXK,HL,PLTR,META,GOOG,
+###NEW_LONG,ETON,WEST,
+###NEW_DISTRIBUTION,PLNT,RUN,ARRY,FSLR,ASM,EXK,HL,PLTR,META,GOOG,
 
 ==============================================
 END OF TABELA SCAN

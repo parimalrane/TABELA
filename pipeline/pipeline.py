@@ -135,11 +135,14 @@ def build_theme_classification(theme_strength):
     theme_rank_map = {}
     theme_raw_score_map = {}
     leading_count = 1 if total_themes > 0 else 0
+    lagging_count = 1 if total_themes > 0 else 0
 
     if total_themes > 1:
-        # 16% targets +1 Standard Deviation on a normal bell curve
-        leading_count = max(1, math.ceil(total_themes * 0.16))
-    lagging_start = total_themes - leading_count + 1
+        leading_pct = THEME_STRENGTH_CONFIG.get("CLASSIFICATION_PERCENTAGE_LEADING", 0.16)
+        lagging_pct = THEME_STRENGTH_CONFIG.get("CLASSIFICATION_PERCENTAGE_LAGGING", 0.16)
+        leading_count = max(1, math.ceil(total_themes * leading_pct))
+        lagging_count = max(1, math.ceil(total_themes * lagging_pct))
+    lagging_start = total_themes - lagging_count + 1
 
     for i, row in theme_strength.iterrows():
         theme = row["Theme"]

@@ -697,18 +697,27 @@ def print_daily_scan(
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
     print("Legend: * = Zacks Rank 4 or 5 (Warning for Longs)")
+    print("        ^ = Micro Leader | ~ = Unknown/Unclassified")
     print("========================================")
 
     display_df = long_candidates[
         [
             "Ticker",
             "Mapped_Theme",
+            "Theme_Class",
             "RS_Rating",
             "Long_Score",
             "Zacks Rank"
         ]
     ].copy()
     display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
+    
+    # Add inline tags for secondary theme classes before dropping the column
+    display_df.loc[display_df["Theme_Class"] == "Micro Leader", "Ticker"] += "^"
+    display_df.loc[display_df["Theme_Class"].isin(["Unknown", "Unclassified Leader"]), "Ticker"] += "~"
+
+    # Drop the Theme_Class column since we are tagging inline now
+    display_df = display_df.drop(columns=["Theme_Class"])
 
     if "Long_Score" in display_df.columns:
         display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
@@ -724,13 +733,7 @@ def print_daily_scan(
         display_df["Zacks Rank"].isin(["4", "5"]),
         "Zacks Rank"
     ] += "*"
-
-    display_df = display_df.rename(
-        columns={
-            "Theme_Class": "Theme Classification",
-        }
-    )
-
+    
     true_longs = display_df
     true_long_tickers = true_longs["Ticker"].tolist()
 
@@ -765,6 +768,7 @@ def print_daily_scan(
     print("========================================")
     print("DISTRIBUTION WATCHLIST")
     print("Legend: * = Zacks Rank 1 or 2 (Warning for Shorts)")
+    print("        ^ = Micro Laggard")
     print("========================================")
 
     if distribution_watchlist.empty:
@@ -782,6 +786,12 @@ def print_daily_scan(
         ].copy()
         display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
 
+        # Add inline tags for secondary theme classes before dropping the column
+        display_df.loc[display_df["Theme_Class"] == "Micro Laggard", "Ticker"] += "^"
+
+        # Drop the Theme_Class column since we are tagging inline now
+        display_df = display_df.drop(columns=["Theme_Class"])
+
         if "Long_Score" in display_df.columns:
             display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
 
@@ -797,12 +807,6 @@ def print_daily_scan(
                 display_df["Zacks Rank"].isin(["1", "2"]),
                 "Zacks Rank"
             ] += "*"
-
-        display_df = display_df.rename(
-            columns={
-                "Theme_Class": "Theme Classification",
-            }
-        )
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
@@ -850,6 +854,11 @@ def print_daily_scan(
                 
         display_dropped["Exit_Reason"] = display_dropped.apply(lambda r: get_exit_reason(r, title == "DROPPED LONGS"), axis=1)
 
+        # Merge Theme Classification into Mapped_Theme to save space
+        if "Theme Classification" in display_dropped.columns:
+            display_dropped["Mapped_Theme"] = display_dropped["Mapped_Theme"].astype(str) + " (" + display_dropped["Theme Classification"].astype(str) + ")"
+            display_dropped = display_dropped.drop(columns=["Theme Classification"])
+
         if "Long_Score" in display_dropped.columns:
             display_dropped["Long_Score"] = display_dropped["Long_Score"].map("{:.2f}".format)
             
@@ -859,8 +868,7 @@ def print_daily_scan(
             justify="right",
             col_space={
                 "Ticker": 6,
-                "Mapped_Theme": 25,
-                "Theme Classification": 20,
+                "Mapped_Theme": 40,
                 "RS_Rating": 9,
                 "Long_Score": 10,
                 "Exit_Reason": 25
@@ -874,21 +882,19 @@ def print_daily_scan(
     print("TRADINGVIEW WATCHLIST EXPORT")
 
     long_list_true = ",".join(
-        [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.strip().tolist()]
+        [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.replace("^", "", regex=False).str.replace("~", "", regex=False).str.strip().tolist()]
     )
 
-
-
     distribution_list_true = ",".join(
-        [t for t in distribution_watchlist["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.strip().tolist()]
+        [t for t in distribution_watchlist["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.replace("^", "", regex=False).str.replace("~", "", regex=False).str.strip().tolist()]
     )
 
     new_long_list = ",".join(
-        [t for t in true_longs[true_longs["Days"] == 1]["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.strip().tolist()]
+        [t for t in true_longs[true_longs["Days"] == 1]["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.replace("^", "", regex=False).str.replace("~", "", regex=False).str.strip().tolist()]
     ) if not true_longs.empty else ""
 
     new_dist_list = ",".join(
-        [t for t in display_df[display_df["Days"] == 1]["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.strip().tolist()]
+        [t for t in display_df[display_df["Days"] == 1]["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.replace("^", "", regex=False).str.replace("~", "", regex=False).str.strip().tolist()]
     ) if not display_df.empty else ""
 
     print("###LONG," + long_list_true + ",")

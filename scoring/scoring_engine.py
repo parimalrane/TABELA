@@ -9,21 +9,15 @@ import pandas as pd
 # RS RAW SCORE V2
 # ----------------------------
 
+from config.config import RS_RAW_WEIGHTS
+
 def calculate_rs_raw(stocks):
 
-    stocks["RS_Raw"] = (
-
-        stocks["% Price Change (12 Weeks)"] * 0.35 +
-
-        stocks["% Price Change (4 Weeks)"] * 0.30 +
-
-        stocks["Relative Price Change (YTD)"] * 0.15 +
-
-        stocks["Price as a % of 52 Wk H-L Range"] * 0.15 +
-
-        stocks["% Price Change (1 Week)"] * 0.05
-
-    )
+    # Start with a series of zeros
+    stocks["RS_Raw"] = 0.0
+    for column, weight in RS_RAW_WEIGHTS.items():
+        if column in stocks.columns:
+            stocks["RS_Raw"] += stocks[column].fillna(0) * weight
 
     return stocks
 
