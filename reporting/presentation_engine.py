@@ -712,11 +712,11 @@ def print_daily_scan(
     ].copy()
     display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
     
-    # Add inline tags for secondary theme classes before dropping the column
-    display_df.loc[display_df["Theme_Class"] == "Micro Leader", "Ticker"] += "^"
-    display_df.loc[display_df["Theme_Class"].isin(["Unknown", "Unclassified Leader"]), "Ticker"] += "~"
-
-    # Drop the Theme_Class column since we are tagging inline now
+    # Prepend tag directly to the Ticker string for clean left-side reading
+    display_df.loc[display_df["Theme_Class"] == "Micro Leader", "Ticker"] = "^" + display_df["Ticker"]
+    display_df.loc[display_df["Theme_Class"].isin(["Unknown", "Unclassified Leader"]), "Ticker"] = "~" + display_df["Ticker"]
+    
+    # Drop the Theme_Class column
     display_df = display_df.drop(columns=["Theme_Class"])
 
     if "Long_Score" in display_df.columns:
@@ -786,10 +786,10 @@ def print_daily_scan(
         ].copy()
         display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
 
-        # Add inline tags for secondary theme classes before dropping the column
-        display_df.loc[display_df["Theme_Class"] == "Micro Laggard", "Ticker"] += "^"
+        # Prepend tag directly to the Ticker string
+        display_df.loc[display_df["Theme_Class"] == "Micro Laggard", "Ticker"] = "^" + display_df["Ticker"]
 
-        # Drop the Theme_Class column since we are tagging inline now
+        # Drop the Theme_Class column
         display_df = display_df.drop(columns=["Theme_Class"])
 
         if "Long_Score" in display_df.columns:
