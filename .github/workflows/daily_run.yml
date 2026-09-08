@@ -2,9 +2,9 @@ name: Daily TABELA Run
 
 on:
   schedule:
-    # 7:00 AM EST is 12:00 PM UTC (or 11:00 AM EDT depending on Daylight Saving Time)
-    # The cron schedule below uses UTC. Adjust if you meant 7:00 AM UTC.
-    - cron: '0 11 * * 1-5' # Runs at 11:00 AM UTC, Monday-Friday
+    # 6:30 AM Eastern Time is roughly 10:30 AM UTC (11:30 AM EST in Winter).
+    # You can adapt the exact UTC hour here. 
+    - cron: '30 10 * * 1-5' # Runs at 10:30 AM UTC, Monday-Friday
   workflow_dispatch: # Allows triggering manually from the GitHub UI
 
 jobs:
@@ -25,11 +25,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: Run TABELA Pipeline
+      - name: Run Market Data & TABELA Pipeline
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          # Running the main entry point directly to avoid the 'pause' in main.bat
+          # 1. First, generate the market file 
+          python runners/update_market_metrics.py
+          
+          # 2. Then, run the main pipeline immediately after
           python runners/main.py
 
       - name: Upload Logs/Output as Artifact (Optional)
