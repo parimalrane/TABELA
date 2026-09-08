@@ -10,6 +10,8 @@ on:
 jobs:
   run-pipeline:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Grants permission to push code back to the repository
 
     steps:
       - name: Checkout repository
@@ -35,13 +37,14 @@ jobs:
           # 2. Then, run the main pipeline immediately after
           python runners/main.py
 
-      - name: Upload Logs/Output as Artifact (Optional)
-        uses: actions/upload-artifact@v4
-        with:
-          name: tabela-outputs
-          path: |
-            # Include paths where your reports or logs are saved, example:
-            # logs/
-            # data/reports/
-            *
-          retention-days: 7
+      - name: Commit and push generated files
+        run: |
+          # Configure git to run as the GitHub Actions bot
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Stage all new and modified files
+          git add .
+          
+          # Check if there are any changes to commit, and push them if there are
+          git diff --quiet && git diff --staged --quiet || (git commit -m "actions: automated TABELA pipeline outputs" && git push)
