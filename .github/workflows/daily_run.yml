@@ -38,7 +38,12 @@ jobs:
           python runners/main.py
 
       - name: Commit and push generated files
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
+          # Extract the exact market date from the TABELA engine
+          export MARKET_DATE=$(python -c "from config.runtime_context import context; print(context.market_date)")
+          
           # Configure git to run as the GitHub Actions bot
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -47,4 +52,4 @@ jobs:
           git add .
           
           # Check if there are any changes to commit, and push them if there are
-          git diff --quiet && git diff --staged --quiet || (git commit -m "actions: automated TABELA pipeline outputs" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "TABELA Scan: $MARKET_DATE" && git push)
