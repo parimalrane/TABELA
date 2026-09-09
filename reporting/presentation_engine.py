@@ -149,10 +149,12 @@ def print_scan_epilogue():
     if "END_BANNER" in section_texts:
         final_output.append(section_texts["END_BANNER"])
     else:
+        from config.runtime_context import context
+        market_date_str = str(context.market_date) if context.market_date else ""
         final_output.append(
             "\n"
             "==============================================\n"
-            "END OF TABELA SCAN\n"
+            f"END OF TABELA SCAN - {market_date_str}\n"
             "==============================================\n"
         )
 
