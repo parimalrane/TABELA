@@ -7,7 +7,6 @@ from themes.company_theme_engine import COMPANY_THEME
 from config.config import THEME_STRENGTH_CONFIG
 from themes.industry_theme_engine import INDUSTRY_THEME
 from themes.stock_mapper import map_stock_theme
-from themes.theme_hierarchy import THEME_PARENT_MAP
 from themes.theme_parser import parse_theme
 from themes.theme_translation_engine import THEME_TRANSLATION
 from scoring.breadth_engine import build_theme_breadth
@@ -211,13 +210,7 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
         etf_theme = row["ETF_Theme"]
         mapped_theme = row["Mapped_Theme"]
 
-        if (
-            mapped_theme in THEME_PARENT_MAP
-            and etf_theme == mapped_theme
-        ):
-            etf_theme = THEME_PARENT_MAP[mapped_theme]
 
-    
 
         if etf_theme in theme_class_map:
             theme_class = theme_class_map[etf_theme]

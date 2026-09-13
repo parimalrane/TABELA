@@ -48,15 +48,15 @@ LONG_ENTRY = {
     "MIN_RS": 85.0,
     "MIN_LONG_SCORE": 75.0,
     "THEMES": ["Leading", "Micro Leader", "Unclassified Leader", "Unknown"],
-    "MAX_PER_THEME": 3,
+    "MAX_PER_THEME": 5,
     "MICRO_BREAKAWAY_PERCENTILE": 0.05
 }
 
 DIST_ENTRY = {
-    "MAX_RS": 50.0,
-    "MAX_LONG_SCORE": 50.0,
+    "MAX_RS": 40.0,
+    "MAX_LONG_SCORE": 40.0,
     "THEMES": ["Lagging", "Micro Laggard"],
-    "MAX_PER_THEME": 3,
+    "MAX_PER_THEME": 5,
     "MICRO_BREAKAWAY_PERCENTILE": 0.05
 }
 

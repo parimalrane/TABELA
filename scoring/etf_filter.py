@@ -101,12 +101,8 @@ EXCLUDE_KEYWORDS = [
     "sugar",
     "platinum",
     "palladium",
-    "silver",
-    "gold",
 
     "nanotech",
-    "services",
-    "asset",
     "global total market",
     "digital economy",
     "marijuana",

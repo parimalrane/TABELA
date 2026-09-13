@@ -10,7 +10,6 @@ scoring.rotation_engine.print_rotation_report = lambda *args, **kwargs: None
 
 from reporting.watchlist_delta_engine import compare_watchlists
 from themes.theme_translation_engine import THEME_TRANSLATION
-from themes.theme_hierarchy import THEME_PARENT_MAP
 
 
 class OutputCapturer:
@@ -600,11 +599,7 @@ def print_daily_scan(
             return False
             
         mapped_theme = str(row['Mapped_Theme'])
-        parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
-        if parent_theme in THEME_PARENT_MAP:
-            macro_for_lookup = THEME_PARENT_MAP[parent_theme]
-        else:
-            macro_for_lookup = parent_theme
+        macro_for_lookup = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
             
         macro_state = theme_class_map.get(macro_for_lookup, "Unknown")
         
@@ -633,11 +628,7 @@ def print_daily_scan(
     
     for _, row in display_df.iterrows():
         mapped_theme = str(row['Mapped_Theme'])
-        parent_theme_raw = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
-        if parent_theme_raw in THEME_PARENT_MAP:
-            parent_theme = THEME_PARENT_MAP[parent_theme_raw]
-        else:
-            parent_theme = parent_theme_raw
+        parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
         
         # Format columns
         micro = (mapped_theme[:28] + "..") if len(mapped_theme) > 30 else mapped_theme.ljust(30)
