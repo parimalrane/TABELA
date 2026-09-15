@@ -2,16 +2,16 @@ name: Daily TABELA Run
 
 on:
   schedule:
-    # 6:30 AM Eastern Time is roughly 10:30 AM UTC (11:30 AM EST in Winter).
-    # You can adapt the exact UTC hour here. 
-    - cron: '30 10 * * 1-5' # Runs at 10:30 AM UTC, Monday-Friday
-  workflow_dispatch: # Allows triggering manually from the GitHub UI
+    # 6:00 AM Eastern Time (EDT) is 10:00 AM UTC. In winter (EST), 6:00 AM is 11:00 AM UTC.
+    # Adjust to '0 11 * * 1-5' when daylight savings ends if strict 6 AM is desired.
+    - cron: '0 10 * * 1-5'
+  workflow_dispatch:
 
 jobs:
   run-pipeline:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Grants permission to push code back to the repository
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -31,20 +31,41 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          # 1. First, generate the market file 
+          # 1. Update Market Context to generate the market_data CSV
           python runners/update_market_metrics.py
           
-          # 2. Then, run the main pipeline immediately after
-          python runners/main.py
+          # 2. Run the main pipeline and pipe the terminal output to a file
+          python runners/main.py > terminal_output.txt
+          
+          # 3. Print it to the console so GitHub Actions logs still show the output
+          cat terminal_output.txt
+
+      - name: Extract Market Date
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          export MARKET_DATE=$(python -c "from config.runtime_context import context; print(context.market_date)")
+          echo "MARKET_DATE=$MARKET_DATE" >> $GITHUB_ENV
+
+      - name: Send Terminal Output to Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: TABELA Daily Scan - ${{ env.MARKET_DATE }}
+          to: parimalrane@gmail.com
+          from: TABELA Auto-Pipeline
+          body: file://terminal_output.txt
+          ignore_cert: true
+        continue-on-error: true
 
       - name: Commit and push generated files
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          # Extract the exact market date from the TABELA engine
-          export MARKET_DATE=$(python -c "from config.runtime_context import context; print(context.market_date)")
-          
-          # Configure git to run as the GitHub Actions bot
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
