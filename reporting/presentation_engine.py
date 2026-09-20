@@ -872,27 +872,3 @@ def print_daily_scan(
     print_dropped_table("DROPPED DISTRIBUTIONS", deltas.get('left_distribution', []), stocks)
 
     print()
-    print("TRADINGVIEW WATCHLIST EXPORT")
-
-    long_list_true = ",".join(
-        [t for t in true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.replace("^", "", regex=False).str.replace("~", "", regex=False).str.strip().tolist()]
-    )
-
-    distribution_list_true = ",".join(
-        [t for t in distribution_watchlist["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.replace("^", "", regex=False).str.replace("~", "", regex=False).str.strip().tolist()]
-    )
-
-    new_long_list = ",".join(
-        [t for t in true_longs[true_longs["Days"] == 1]["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.replace("^", "", regex=False).str.replace("~", "", regex=False).str.strip().tolist()]
-    ) if not true_longs.empty else ""
-
-    new_dist_list = ",".join(
-        [t for t in display_df[display_df["Days"] == 1]["Ticker"].astype(str).str.replace("*", "", regex=False).str.replace("+", "", regex=False).str.replace("^", "", regex=False).str.replace("~", "", regex=False).str.strip().tolist()]
-    ) if not display_df.empty else ""
-
-    print("###LONG," + long_list_true + ",")
-    print("###DISTRIBUTION," + distribution_list_true + ",")
-    print("###NEW_LONG," + new_long_list + ("," if new_long_list else ""))
-    print("###NEW_DISTRIBUTION," + new_dist_list + ("," if new_dist_list else ""))
-
-    print()
