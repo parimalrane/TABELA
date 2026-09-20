@@ -12,40 +12,48 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Semiconductor Equipment        Semiconductors      23   15  189.03   Leading (1)                     AMAT
-Refining & Marketing           Exploration          8    7  181.27   Neutral (13 -> -10)             PARR, DK, DINO, PBF, MPC
+Semiconductor Equipment        Semiconductors      23   15  189.03   Leading (1)                     AMAT, TOELY, UCTT
+Refining & Marketing           Exploration          8    7  181.27   Neutral (13 -> -10)             PARR, DK, DINO
 Healthcare Services            Healthcare          14    9  160.37   Leading (7 -> -3)               OSCR, HUM, PGNY
 Memory                         Semiconductors       4    4  158.93   Leading (1)                     MU, SNDK, SIMO
+Semiconductors                 Semiconductors      48   20  145.87   Leading (1)                     ASX, VSH, STM
 Pharmaceuticals                Pharma               3    3  135.86   Neutral (12 -> +2)              LQDA, ETON, CORT
-Cloud Infrastructure           Cloud Computing      5    4  135.46   Leading (10 -> +2)              DOCN, DDOG, SNOW, NET
-Healthcare                     Healthcare          41   14  115.70   Leading (7 -> -3)               INNV, ASTH
-Communications Cloud           Cloud Computing      4    3  108.64   Leading (10 -> +2)              TWLO
+Cloud Infrastructure           Cloud Computing      5    4  135.46   Leading (10 -> +2)              DOCN, DDOG, SNOW
+Optical Networking             Semiconductors       8    5  116.73   Leading (1)                     AAOI, NTCT
+Healthcare                     Healthcare          41   14  115.70   Leading (7 -> -3)               INNV, ASTH, OMDA
+Communications Cloud           Cloud Computing      4    3  108.64   Leading (10 -> +2)              TWLO, OOMA, FIVN
 AI Servers                     Artificial Intel..   2    2  107.66   Leading (8 -> +4)               DELL, HPE
-AI Compute                     Artificial Intel..   5    3  105.00   Leading (8 -> +4)               AMD, INTC
+AI Compute                     Artificial Intel..   5    3  105.00   Leading (8 -> +4)               AMD, INTC, ARM
+AI Infrastructure              Artificial Intel..   6    3   86.59   Leading (8 -> +4)               WYFI, NBIS
+AI Networking                  Artificial Intel..   3    2   81.80   Leading (8 -> +4)               EXTR
 Communication Infrastructure   Telecom              1    1   68.62   Leading (2)                     BAND
 Private Wireless Infrastruct.. Private Wireless..   1    1   68.62   Unknown                         ATEX
 Data Storage                   Semiconductors       1    1   67.93   Leading (1)                     STX
+AI ASIC                        Artificial Intel..   1    1   65.85   Leading (8 -> +4)               MRVL
 Biotechnology                  Biotech              5    2   64.50   Leading (9 -> -1)               KNSA, AGEN
 Asset Management               Banking              1    1   62.38   Leading (11 -> +2)              VCTR
+Optical Infrastructure         Semiconductors       1    1   62.38   Leading (1)                     GLW
+AI Sensors                     Artificial Intel..   1    1   62.38   Leading (8 -> +4)               OUST
 Biotech                        Biotech             86   13   60.77   Leading (9 -> -1)               TGTX, IBRX, ABCL
 Telecom                        Telecom             12    3   55.57   Leading (2)                     TIGO, VSAT
 Restaurants                    Consumer Staples    28    5   54.37   Leading                         BJRI, CBRL, CAKE
 AI Connectivity                Artificial Intel..   2    1   53.83   Leading (8 -> +4)               ALAB
+Semiconductor Testing          Semiconductors       2    1   49.44   Leading (1)                     COHU
+Foundry                        Semiconductors       3    1   45.74   Leading (1)                     UMC
 Digital Banking                Banking              3    1   43.89   Leading (11 -> +2)              DAVE
 Financial Services             Banking             66    5   27.41   Leading (11 -> +2)              MRX, VIRT, AAMI
 Consumer Staples               Consumer Staples    38    3   25.05   Leading                         COCO, CHEF
+Banking                        Banking            158    4   10.58   Leading (11 -> +2)              CARE
 Unknown                        Unknown            367    3    4.60   Unknown                         VSTS, TBI, ENVA
 Consumer Momentum              Broad                3    0    0.00   Leading (6 -> +1)               #SPOT
+Defense Drone Systems          Aerospace & Defe..   1    0    0.00   Lagging (34)                    #AVAV
 Defense Systems                Aerospace & Defe..   1    0    0.00   Lagging (34)                    #KTOS
 Aerospace & Defense            Aerospace & Defe..  39    0    0.00   Lagging (34)                    #AIRO, #EH, #HII
 Nuclear Infrastructure         Uranium Mining       3    0    0.00   Lagging (42 -> +1)              #CEG, #VST
-Medical Devices                Medical Devices     87    0    0.00   Lagging (40 -> -5)              #GEHC, #PBH, #PRGO,
-                                                                                                     #TMDX, #TNDM
-Gold Mining                    Gold Mining         43    0    0.00   Lagging (38)                    #AEM, #AGI, #LEU, #OR,
-                                                                                                     #UUUU
-Silver Mining                  Silver Mining        5    0    0.00   Lagging (36 -> +3)              #AG, #ASM, #BVN, #EXK,
-                                                                                                     #PAAS
-Space Infrastructure           Aerospace & Defe..   5    0    0.00   Lagging (34)                    #LUNR
+Medical Devices                Medical Devices     87    0    0.00   Lagging (40 -> -5)              #PBH, #PRGO, #TNDM
+Gold Mining                    Gold Mining         43    0    0.00   Lagging (38)                    #LEU, #OR, #UUUU
+Silver Mining                  Silver Mining        5    0    0.00   Lagging (36 -> +3)              #ASM, #EXK, #PAAS
+Space Infrastructure           Aerospace & Defe..   5    0    0.00   Lagging (34)                    #ASTS, #LUNR, #PL
 Telecom Infrastructure         Telecom              4    0    0.00   Leading (2)                     #CHTR
 Uranium Mining                 Uranium Mining       1    0    0.00   Lagging (42 -> +1)              #CCJ
 
@@ -59,52 +67,69 @@ Ticker                    Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement
    STX                    Data Storage         98      98.20          1        0     3
   SNDK                          Memory         99      97.35          1        0     3
   SIMO                          Memory         99      96.75          1        0     3
-  AMAT         Semiconductor Equipment         97      95.55          1       NA     1
-  BAND    Communication Infrastructure         99      94.96          1        0     3
-  OSCR             Healthcare Services         98      93.37          1      +13     3
-  DELL                      AI Servers         99      93.03          1       +1     3
-   AMD                      AI Compute         98      92.69          2       -2     2
+  AMAT         Semiconductor Equipment         97      95.55          1       +3     3
+   ASX                  Semiconductors         97      95.35          1       -1     3
+  BAND    Communication Infrastructure         99      94.96          1       -1     3
+ TOELY         Semiconductor Equipment         95      94.45          1       +1     3
+   VSH                  Semiconductors         97      94.35          1       -2     3
+   STM                  Semiconductors         98      93.50          1       +4     2
+  UCTT         Semiconductor Equipment         99      93.45          1       +4     2
+  OSCR             Healthcare Services         98      93.37          1      +14     3
+  DELL                      AI Servers         99      93.03          1       -1     3
+   AMD                      AI Compute         98      92.69          2       -4     3
+   UMC                         Foundry         99      92.65          3       +2     3
  ^LQDA                 Pharmaceuticals         98      92.64          1       NA     1
   DAVE                 Digital Banking         95      92.37          1       NA     1
-   HUM             Healthcare Services         97      92.12          1       -4     2
+   HUM             Healthcare Services         97      92.12          1       -7     3
    HPE                      AI Servers         97      91.64          1       -1     3
   ALAB                 AI Connectivity         98      91.49          3       -1     3
-  PGNY             Healthcare Services         95      91.32          1       -4     3
-  INNV                      Healthcare         97      90.62          2       +3     2
-  KNSA                   Biotechnology         90      89.70          1       -2     3
-  INTC                      AI Compute         98      89.49          1       NA     1
-  TGTX                         Biotech         95      89.35          3       -2     3
-  DOCN            Cloud Infrastructure         95      89.26          2       +4     3
-  IBRX                         Biotech         98      89.20          3       -3     3
-  ASTH                      Healthcare         95      89.12          3        0     3
+  AAOI              Optical Networking         95      91.45          3      +19     3
+  PGNY             Healthcare Services         95      91.32          1       -6     3
+  INNV                      Healthcare         97      90.62          2       +2     2
+  KNSA                   Biotechnology         90      89.70          1       -3     3
+  INTC                      AI Compute         98      89.49          1      +10     3
+  TGTX                         Biotech         95      89.35          3       -3     3
+  DOCN            Cloud Infrastructure         95      89.26          2      +10     3
+  IBRX                         Biotech         98      89.20          3       -4     3
+  WYFI               AI Infrastructure         97      89.14          3       -2     3
+  MRVL                         AI ASIC         95      89.14          3       +6     3
+  ASTH                      Healthcare         95      89.12          3       -2     3
+  COHU           Semiconductor Testing         90      89.10          2       +6     3
+   ARM                      AI Compute         97      88.94          3       +1     3
   VCTR                Asset Management         90      88.92          1       NA     1
-  ABCL                         Biotech         97      88.65          3       -3     3
-  DDOG            Cloud Infrastructure         98      87.91          3      -11     3
+  ABCL                         Biotech         97      88.65          3       -7     3
+  OMDA                      Healthcare         95      88.52          3       -3     3
+  DDOG            Cloud Infrastructure         98      87.91          3      -17     3
+   GLW          Optical Infrastructure         90      87.80          3       -6     3
    MRX              Financial Services         90      87.62          1       NA     1
   VIRT              Financial Services         90      87.62          1       NA     1
  ^ETON                 Pharmaceuticals         97      87.19          3       NA     1
+  NTCT              Optical Networking         90      87.10          3       +1     3
  ^CORT                 Pharmaceuticals         99      87.09          3       NA     1
-  AGEN                   Biotechnology         90      87.00          2       -7     2
+  NBIS               AI Infrastructure         90      87.09          3      -14     3
+  AGEN                   Biotechnology         90      87.00          2      -14     2
+  EXTR                   AI Networking         97      86.94          3       -5     3
   AAMI              Financial Services         90      86.92          1       NA     1
-  COCO                Consumer Staples         90      86.80          1       +2     2
-  BJRI                     Restaurants         95      86.75          2       -5     3
- ^PARR            Refining & Marketing         95      86.30          1       -1     2
-  SNOW            Cloud Infrastructure         95      85.66          3       -5     3
-   ^DK            Refining & Marketing         97      85.60          2       -1     2
-   NET            Cloud Infrastructure         90      85.41          2       -6     2
-  CBRL                     Restaurants         97      85.35          3       -6     3
-  TWLO            Communications Cloud         90      85.31          2      -12     3
- ^DINO            Refining & Marketing         95      84.50          2       -3     2
-  ^PBF            Refining & Marketing         98      83.65          3        0     2
- ~VSTS                         Unknown         97      82.95          1       -4     3
- ~ATEX Private Wireless Infrastructure         99      82.65          3       -4     3
-  TIGO                         Telecom         90      82.61         5*       -4     3
-  VSAT                         Telecom         90      82.01         5*       -3     3
-  ^MPC            Refining & Marketing         95      82.00          3       -1     2
-  CHEF                Consumer Staples         90      81.50          3       -4     3
-  CAKE                     Restaurants         90      81.50          3       -4     3
-  ~TBI                         Unknown         98      80.30          3       -3     3
- ~ENVA                         Unknown         90      80.00          2       -3     3
+  COCO                Consumer Staples         90      86.80          1       +4     2
+  BJRI                     Restaurants         95      86.75          2       -3     3
+ ^PARR            Refining & Marketing         95      86.30          1       +1     2
+  SNOW            Cloud Infrastructure         95      85.66          3       -2     3
+   ^DK            Refining & Marketing         97      85.60          2       +1     2
+  CBRL                     Restaurants         97      85.35          3       -3     3
+  TWLO            Communications Cloud         90      85.31          2       -9     3
+  OUST                      AI Sensors         90      85.29          3       -7     3
+  OOMA            Communications Cloud         90      84.61          2       -2     3
+ ^DINO            Refining & Marketing         95      84.50          2       -1     2
+ ~VSTS                         Unknown         97      82.95          1       -1     3
+  FIVN            Communications Cloud         90      82.81          3       -1     3
+ ~ATEX Private Wireless Infrastructure         99      82.65          3       -1     3
+  TIGO                         Telecom         90      82.61         5*       -1     3
+  VSAT                         Telecom         90      82.01         5*       -1     3
+  CHEF                Consumer Staples         90      81.50          3       -1     3
+  CAKE                     Restaurants         90      81.50          3       -1     2
+  CARE                         Banking         90      80.82         4*       NA     1
+  ~TBI                         Unknown         98      80.30          3       -2     3
+ ~ENVA                         Unknown         90      80.00          2       NA     1
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -113,30 +138,27 @@ Legend: * = Zacks Rank 1 or 2 (Warning for Shorts)
 ========================================
 Ticker           Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
    PBH        Medical Devices          1      15.72          4       NA     1
-  TNDM        Medical Devices          1      15.92          4       -1     3
+  TNDM        Medical Devices          1      15.92          4       -1     2
   PRGO        Medical Devices          1      16.52          3        0     3
-  GEHC        Medical Devices          1      16.82          4       NA     1
-    EH    Aerospace & Defense          1      17.55          5        0     3
-  TMDX        Medical Devices          1      17.82          5       +5     3
-    OR            Gold Mining          1      18.80          5       +1     2
-  LUNR   Space Infrastructure          1      19.45          3       -6     3
+    EH    Aerospace & Defense          1      17.55          5       +1     3
+    OR            Gold Mining          1      18.80          5       +3     2
+  LUNR   Space Infrastructure          1      19.45          3       -4     3
   UUUU            Gold Mining          1      20.00         2*       NA     1
    LEU            Gold Mining          1      20.10          3       NA     1
-  KTOS        Defense Systems          1      20.15          4       +2     3
-   AEM            Gold Mining          1      20.80          4       NA     1
-   AGI            Gold Mining          1      20.80          4       NA     1
+  KTOS        Defense Systems          1      20.15          4        0     3
   AIRO    Aerospace & Defense          1      20.85          3       NA     1
    HII    Aerospace & Defense          1      21.45          3        0     3
    CCJ         Uranium Mining         10      23.10          3       +3     3
    CEG Nuclear Infrastructure         10      23.10          3       +1     3
-   EXK          Silver Mining         10      27.63          3       -4     3
-  PAAS          Silver Mining         10      28.03          3       -3     3
-   ASM          Silver Mining         10      28.73          3        0     3
+  AVAV  Defense Drone Systems          1      23.65          3       +2     3
+   EXK          Silver Mining         10      27.63          3       -5     3
+  PAAS          Silver Mining         10      28.03          3       -4     3
+  ASTS   Space Infrastructure         10      28.60          3       +1     3
+   ASM          Silver Mining         10      28.73          3       +1     2
+    PL   Space Infrastructure         20      30.70          4       NA     1
  ^CHTR Telecom Infrastructure          1      31.96          5       NA     1
-   VST Nuclear Infrastructure         30      34.10          3       +2     3
-    AG          Silver Mining         20      37.43         2*       -2     3
+   VST Nuclear Infrastructure         30      34.10          3        0     3
  ^SPOT      Consumer Momentum         10      39.36          4       NA     1
-   BVN          Silver Mining         30      39.73          3       -2     3
 
 ----------------------------------------
 DROPPED LONGS DETAILS
@@ -145,31 +167,23 @@ Ticker                             Mapped_Theme  RS_Rating Long_Score           
   CORT           Pharmaceuticals (Micro Leader)         99      87.09               Crowded Out
   LQDA           Pharmaceuticals (Micro Leader)         98      92.64               Crowded Out
   ETON           Pharmaceuticals (Micro Leader)         97      87.19               Crowded Out
-   ASX                 Semiconductors (Leading)         97      95.35               Crowded Out
   URGN                         Pharma (Neutral)         95      87.19           Theme Downgrade
   CRDO              AI Infrastructure (Leading)         80      85.59                 RS < 85.0
+  CSCO                  AI Networking (Leading)         80      82.79                 RS < 85.0
+  ARKO               Consumer Staples (Leading)         80      74.60                 RS < 85.0
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
 Ticker                             Mapped_Theme  RS_Rating Long_Score               Exit_Reason
    UGI                    Natural Gas (Neutral)         30      37.16             Theme Upgrade
-   OGS                    Natural Gas (Neutral)         20      34.66             Theme Upgrade
     SR                    Natural Gas (Neutral)         20      32.57             Theme Upgrade
+  RKLB           Space Infrastructure (Lagging)         20      33.40               Crowded Out
   BIPC                    Natural Gas (Neutral)         20      35.27             Theme Upgrade
-   MUX                    Gold Mining (Lagging)         10      24.35               Crowded Out
-  ARIS                    Gold Mining (Lagging)         10      23.85               Crowded Out
   CELH        Consumer Momentum (Micro Laggard)         10      41.16              Score > 40.0
    KGC                    Gold Mining (Lagging)         10      23.75               Crowded Out
   RGLD                    Gold Mining (Lagging)         10      23.75               Crowded Out
    FLY            Aerospace & Defense (Lagging)          1      21.65               Crowded Out
-   BSX                Medical Devices (Lagging)          1      17.82               Crowded Out
-
-TRADINGVIEW WATCHLIST EXPORT
-###LONG,MU,STX,SNDK,SIMO,AMAT,BAND,OSCR,DELL,AMD,LQDA,DAVE,HUM,HPE,ALAB,PGNY,INNV,KNSA,INTC,TGTX,DOCN,IBRX,ASTH,VCTR,ABCL,DDOG,MRX,VIRT,ETON,CORT,AGEN,AAMI,COCO,BJRI,PARR,SNOW,DK,NET,CBRL,TWLO,DINO,PBF,VSTS,ATEX,TIGO,VSAT,MPC,CHEF,CAKE,TBI,ENVA,
-###DISTRIBUTION,PBH,TNDM,PRGO,GEHC,EH,TMDX,OR,LUNR,UUUU,LEU,KTOS,AEM,AGI,AIRO,HII,CCJ,CEG,EXK,PAAS,ASM,CHTR,VST,AG,SPOT,BVN,
-###NEW_LONG,AMAT,LQDA,DAVE,INTC,VCTR,MRX,VIRT,ETON,CORT,AAMI,
-###NEW_DISTRIBUTION,PBH,GEHC,UUUU,LEU,AEM,AGI,AIRO,CHTR,SPOT,
 
 ==============================================
 END OF TABELA SCAN - 2026-07-14

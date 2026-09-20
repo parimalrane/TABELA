@@ -12,39 +12,43 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Healthcare Services            Healthcare          14   10  171.38   Leading (9 -> -1)               OSCR, AVAH, AGL, VVX,
-                                                                                                     CON
-Cloud Infrastructure           Cloud Computing      5    5  168.43   Leading (2 -> -4)               DDOG, SNOW, DOCN, NET
+Healthcare Services            Healthcare          14   10  171.38   Leading (9 -> -1)               OSCR, AVAH, AGL
+Cloud Infrastructure           Cloud Computing      5    5  168.43   Leading (2 -> -4)               DDOG, SNOW, DOCN
 Biotechnology                  Biotech              5    5  166.99   Leading (10 -> +1)              AGEN, PGEN, KNSA
 Memory                         Semiconductors       4    4  153.70   Leading (1 -> -1)               SNDK, MU, WDC
 Pharmaceuticals                Pharma               3    3  136.78   Neutral (12 -> +3)              LQDA, ETON, CORT
-Communications Cloud           Cloud Computing      4    3  111.45   Leading (2 -> -4)               RNG
+Communications Cloud           Cloud Computing      4    3  111.45   Leading (2 -> -4)               RNG, FIVN, OOMA
+Semiconductor Equipment        Semiconductors      21    8  109.82   Leading (1 -> -1)               AEHR, UCTT, GRMN
 AI Servers                     Artificial Intel..   2    2  108.21   Leading (8 -> -6)               DELL, HPE
 AI Connectivity                Artificial Intel..   2    2   96.13   Leading (8 -> -6)               ALAB
+AI Networking                  Artificial Intel..   3    2   83.18   Leading (8 -> -6)               ANET, EXTR
 Private Wireless Infrastruct.. Private Wireless..   1    1   68.62   Unknown                         ATEX
 AI Sensors                     Artificial Intel..   1    1   67.24   Leading (8 -> -6)               OUST
 Data Storage                   Semiconductors       1    1   67.24   Leading (1 -> -1)               STX
 Energy Services                Energy Services      1    1   67.24   Leading                         FTK
 Telecom                        Telecom             10    3   67.14   Leading (3 -> -2)               UMAC, VSAT, TIGO
+Food Safety                    Healthcare           1    1   65.85   Leading (9 -> -1)               NEOG
 Energy Logistics & Fuel Dist.. Energy Logistics..   1    1   65.85   Unknown                         WKC
 Specialty Alloys / Aerospace.. Specialty Alloys..   1    1   62.38   Unknown                         CRS
 Communication Infrastructure   Telecom              1    1   62.38   Leading (3 -> -2)               BAND
+AI ASIC                        Artificial Intel..   1    1   62.38   Leading (8 -> -6)               MRVL
 AI Compute                     Artificial Intel..   5    2   60.92   Leading (8 -> -6)               AMD
-Semiconductors                 Semiconductors      44    7   55.81   Leading (1 -> -1)               MXL
-Restaurants                    Consumer Staples    25    4   51.35   Leading                         CAKE, BJRI, EAT, CBRL
+Semiconductors                 Semiconductors      44    7   55.81   Leading (1 -> -1)               MXL, ASX, AXTI
+Restaurants                    Consumer Staples    25    4   51.35   Leading                         CAKE, BJRI, EAT
+Optical Networking             Semiconductors       8    2   46.69   Leading (1 -> -1)               AAOI
+Foundry                        Semiconductors       3    1   41.58   Leading (1 -> -1)               UMC
+Healthcare                     Healthcare          38    4   32.79   Leading (9 -> -1)               LFST, OGN
+AI Infrastructure              Artificial Intel..   6    1   30.82   Leading (8 -> -6)               NBIS
 Consumer Staples               Consumer Staples    35    3   29.79   Leading                         NWL, CHEF
-Biotech                        Biotech             77    5   25.33   Leading (10 -> +1)              IBRX, PTGX
+Biotech                        Biotech             77    5   25.33   Leading (10 -> +1)              IBRX, PTGX, ALKS
 Copper Mining                  Copper Mining       10    1   21.58   Leading (7 -> +3)               MT
-Unknown                        Unknown            334    8   13.03   Unknown                         ENVA, CNK, RELL, BRKR,
-                                                                                                     NSIT
-Gold Mining                    Gold Mining         30    0    0.00   Lagging (38)                    #LEU, #MP, #MUX, #SGML,
-                                                                                                     #UAMY
+Unknown                        Unknown            334    8   13.03   Unknown                         ENVA, CNK, RELL
+Diagnostics                    Medical Devices      9    0    0.00   Lagging (36 -> +1)              #VCYT
+Gold Mining                    Gold Mining         30    0    0.00   Lagging (38)                    #LEU, #MUX, #SGML
 Nuclear Infrastructure         Uranium Mining       3    0    0.00   Lagging (43)                    #CEG, #TLN, #VST
-Medical Devices                Medical Devices     82    0    0.00   Lagging (36 -> +1)              #DOCS, #ISRG, #OMCL,
-                                                                                                     #PRCT, #TEM
+Medical Devices                Medical Devices     82    0    0.00   Lagging (36 -> +1)              #DOCS, #OMCL, #PRCT
 Social Media Platform          Internet             3    0    0.00   Neutral (24 -> -5)              #RDDT, #SNAP
-Silver Mining                  Silver Mining        6    0    0.00   Lagging (34)                    #AG, #ASM, #EXK, #HL,
-                                                                                                     #PAAS
+Silver Mining                  Silver Mining        6    0    0.00   Lagging (34)                    #ASM, #EXK, #PAAS
 Uranium Mining                 Uranium Mining       1    0    0.00   Lagging (43)                    #CCJ
 
 ========================================
@@ -56,51 +60,62 @@ Ticker                           Mapped_Theme  RS_Rating Long_Score Zacks Rank M
    STX                           Data Storage         97      97.65          1        0    18
   SNDK                                 Memory         99      97.35          1        0    18
     MU                                 Memory         95      96.55          1        0    18
-   WDC                                 Memory         98      94.70          1        0    12
-  DDOG                   Cloud Infrastructure         97      93.77          2       +3     6
-   MXL                         Semiconductors         97      93.65          2       +1     2
+   WDC                                 Memory         98      94.70          1        0     2
+  DDOG                   Cloud Infrastructure         97      93.77          2       +5     6
+   MXL                         Semiconductors         97      93.65          2       +1    13
+  AEHR                Semiconductor Equipment         99      93.45          1       +1    13
+  UCTT                Semiconductor Equipment         98      92.90          1       +1     4
  ^LQDA                        Pharmaceuticals         98      92.76          1       NA     1
-   RNG                   Communications Cloud         97      92.38          2       +1     6
-  OSCR                    Healthcare Services         97      91.94          1       -4    18
+  GRMN                Semiconductor Equipment         90      92.40          1       +1     3
+   RNG                   Communications Cloud         97      92.38          2       +3     6
+  OSCR                    Healthcare Services         97      91.94          1       -7    18
   OUST                             AI Sensors         97      91.72          2       NA     1
+   UMC                                Foundry         90      91.70          1       -2    18
   DELL                             AI Servers         99      91.62          2       NA     1
-  IBRX                                Biotech         98      91.32          2       +8    18
+   ASX                         Semiconductors         90      91.50          1       -3     4
+  IBRX                                Biotech         98      91.32          2       +9    18
   SNOW                   Cloud Infrastructure         98      91.23          3       -2     6
-  UMAC                                Telecom         95      90.50          3       +3     4
-  CAKE                            Restaurants         99      90.45          1       -5    18
-  DOCN                   Cloud Infrastructure         90      90.43          2       -3     2
+  UMAC                                Telecom         95      90.50          3       +5     4
+  CAKE                            Restaurants         99      90.45          1       -5    17
+  DOCN                   Cloud Infrastructure         90      90.43          2       -2     2
   ALAB                        AI Connectivity         95      89.92          3       NA     1
   BJRI                            Restaurants         98      89.90          1       -6    18
    AMD                             AI Compute         90      89.87          1       NA     1
-   NET                   Cloud Infrastructure         90      89.33          2       -1     3
-  AGEN                          Biotechnology         99      89.07          3       -3    11
+  AXTI                         Semiconductors         98      89.50          3       -7     2
+  AGEN                          Biotechnology         99      89.07          3       -1    11
+  AAOI                     Optical Networking         90      88.70          3       -4     2
  ^ETON                        Pharmaceuticals         99      88.41          3       NA     1
-  VSAT                                Telecom         95      88.30          3       +5     6
+  VSAT                                Telecom         95      88.30          3       +4     6
    HPE                             AI Servers         98      88.27          3       NA     1
-  PGEN                          Biotechnology         97      88.27          3       -2     3
-  BAND           Communication Infrastructure         90      88.05          2       +3     2
-   NWL                       Consumer Staples         98      87.90          1       -5     2
-   EAT                            Restaurants         98      87.60          3       -4     7
-   FTK                        Energy Services         97      87.35          3       -3     4
+  ANET                          AI Networking         90      88.27          2       NA     1
+  PGEN                          Biotechnology         97      88.27          3       -3     3
+  BAND           Communication Infrastructure         90      88.05          2       +1     2
+  NBIS                      AI Infrastructure         95      87.92         4*       NA     1
+   NWL                       Consumer Staples         98      87.90          1       -7     2
+   EAT                            Restaurants         98      87.60          3       NA     1
+   FTK                        Energy Services         97      87.35          3       -6     4
  ^CORT                        Pharmaceuticals         99      87.21          3       NA     1
-  AVAH                    Healthcare Services         90      86.89          2      -15     2
-  CHEF                       Consumer Staples         95      86.75          2       -5     3
-  CBRL                            Restaurants         99      86.45          3      -18    18
-  TIGO                                Telecom         90      86.15          3       +2    13
-   AGL                    Healthcare Services         99      85.64          3      -10     3
- ~ENVA                                Unknown         97      85.35          1       -4     8
-  KNSA                          Biotechnology         90      85.31          3       -2     6
-   VVX                    Healthcare Services         90      85.19          2       NA     1
-   CON                    Healthcare Services         90      83.69          3       -9     2
+  AVAH                    Healthcare Services         90      86.89          2      -17     2
+  CHEF                       Consumer Staples         95      86.75          2       -8     6
+  FIVN                   Communications Cloud         90      86.73          3       -6     6
+  MRVL                                AI ASIC         90      86.47          3       NA     1
+  TIGO                                Telecom         90      86.15          3        0    13
+  OOMA                   Communications Cloud         90      86.03          3       -3     6
+   AGL                    Healthcare Services         99      85.64          3      -15     2
+ ~ENVA                                Unknown         97      85.35          1       -9     8
+  KNSA                          Biotechnology         90      85.31          3       -5     6
   ~CNK                                Unknown         95      83.55          1       -1     2
-  PTGX                                Biotech         90      82.72          2       -3     2
- ~ATEX        Private Wireless Infrastructure         99      82.65          3       -5    18
+  NEOG                            Food Safety         95      83.44          3      -11     4
+  LFST                             Healthcare         90      83.39          3      -11     3
+  EXTR                          AI Networking         90      83.17          3       NA     1
+  PTGX                                Biotech         90      82.72          2       -6     2
+ ~ATEX        Private Wireless Infrastructure         99      82.65          3       -8    18
     MT                          Copper Mining         90      82.24          3       NA     1
-  ~WKC   Energy Logistics & Fuel Distribution         95      81.85          1       -4     8
-  ~CRS Specialty Alloys / Aerospace Materials         90      81.10          1       -4     2
- ~RELL                                Unknown         90      80.50          1       -4     3
- ~BRKR                                Unknown         90      80.50          1       NA     1
- ~NSIT                                Unknown         95      80.35          2       -5     7
+  ~WKC   Energy Logistics & Fuel Distribution         95      81.85          1       -7     8
+   OGN                             Healthcare         90      81.29          3      -12     6
+  ~CRS Specialty Alloys / Aerospace Materials         90      81.10          1       -8     2
+  ALKS                                Biotech         90      80.81          3       -7     2
+ ~RELL                                Unknown         90      80.50          1       -9     3
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -112,49 +127,39 @@ Ticker           Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days
   SGML            Gold Mining          1      17.93          3        0    12
    LEU            Gold Mining          1      18.53          4        0     2
    MUX            Gold Mining          1      19.83          4        0     3
-    MP            Gold Mining          1      20.03          3        0    11
-  UAMY            Gold Mining          1      20.13          4        0     4
-  PRCT        Medical Devices          1      20.38          4        0    13
+  PRCT        Medical Devices          1      20.38          4        0     6
   OMCL        Medical Devices          1      20.88          3       +1     3
    CEG Nuclear Infrastructure         10      21.10          4       -1    18
   PAAS          Silver Mining          1      22.44          4       NA     1
-  DOCS        Medical Devices          1      22.78          3        0     6
-   TEM        Medical Devices          1      23.08          3       +1     2
-   ASM          Silver Mining          1      23.14          4       -3    18
-  ISRG        Medical Devices          1      23.48          3       +1     2
+  DOCS        Medical Devices          1      22.78          3        0     2
+   ASM          Silver Mining          1      23.14          4       -2     8
  ^SNAP  Social Media Platform          1      24.70          4       NA     1
-   EXK          Silver Mining          1      24.94          3       -4    18
-    HL          Silver Mining          1      25.23          3       -3    13
-    AG          Silver Mining          1      25.84          3       -2     9
-   TLN Nuclear Infrastructure         10      26.40         2*       -2     8
-   VST Nuclear Infrastructure         20      28.60          3       -2     8
+   EXK          Silver Mining          1      24.94          3       -2    18
+   TLN Nuclear Infrastructure         10      26.40         2*       -1     8
+   VST Nuclear Infrastructure         20      28.60          3       -1     8
  ^RDDT  Social Media Platform          1      33.10         2*       NA     1
+  VCYT            Diagnostics         30      36.73          4       -1     2
 
 ----------------------------------------
 DROPPED LONGS DETAILS
 ----------------------------------------
 Ticker                             Mapped_Theme  RS_Rating Long_Score               Exit_Reason
   CORT           Pharmaceuticals (Micro Leader)         99      87.21               Crowded Out
+  CBRL                    Restaurants (Leading)         99      86.45               Crowded Out
   ETON           Pharmaceuticals (Micro Leader)         99      88.41               Crowded Out
   LQDA           Pharmaceuticals (Micro Leader)         98      92.76               Crowded Out
-  NEOG                    Food Safety (Leading)         95      83.44               Crowded Out
   AMRX                         Pharma (Neutral)         95      84.31           Theme Downgrade
+  ACRS                         Pharma (Neutral)         90      79.26           Theme Downgrade
   URGN                         Pharma (Neutral)         90      84.56           Theme Downgrade
 
 ----------------------------------------
 DROPPED DISTRIBUTIONS DETAILS
 ----------------------------------------
 Ticker                             Mapped_Theme  RS_Rating Long_Score               Exit_Reason
-   BVN                  Silver Mining (Lagging)         20      35.59               Crowded Out
   META                    AI Platform (Leading)         10      41.77             Theme Upgrade
   PLTR                    AI Platform (Leading)          1      40.72             Theme Upgrade
+    HL                  Silver Mining (Lagging)          1      25.23               Crowded Out
   SOUN                    AI Platform (Leading)          1      36.42             Theme Upgrade
-
-TRADINGVIEW WATCHLIST EXPORT
-###LONG,STX,SNDK,MU,WDC,DDOG,MXL,LQDA,RNG,OSCR,OUST,DELL,IBRX,SNOW,UMAC,CAKE,DOCN,ALAB,BJRI,AMD,NET,AGEN,ETON,VSAT,HPE,PGEN,BAND,NWL,EAT,FTK,CORT,AVAH,CHEF,CBRL,TIGO,AGL,ENVA,KNSA,VVX,CON,CNK,PTGX,ATEX,MT,WKC,CRS,RELL,BRKR,NSIT,
-###DISTRIBUTION,CCJ,SGML,LEU,MUX,MP,UAMY,PRCT,OMCL,CEG,PAAS,DOCS,TEM,ASM,ISRG,SNAP,EXK,HL,AG,TLN,VST,RDDT,
-###NEW_LONG,LQDA,OUST,DELL,ALAB,AMD,ETON,HPE,CORT,VVX,MT,BRKR,
-###NEW_DISTRIBUTION,PAAS,SNAP,RDDT,
 
 ==============================================
 END OF TABELA SCAN - 2026-08-04
