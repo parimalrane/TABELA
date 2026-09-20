@@ -817,6 +817,7 @@ def print_daily_scan(
         print("-" * 40)
         
         dropped_df = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(tickers)].copy()
+        dropped_df = dropped_df.drop_duplicates(subset="Ticker", keep="first")
         if dropped_df.empty:
             return
             
