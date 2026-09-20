@@ -550,10 +550,9 @@ def map_stock_themes(stocks):
     return stocks
 
 def score_stocks(stocks):
-    stocks = calculate_rs_raw(stocks)
-    stocks = calculate_rs_rating(stocks)
-    stocks = calculate_sales_score(stocks)
-    stocks = calculate_zacks_score(stocks)
+    # RS_Raw, RS_Rating, Sales_Score, and Zacks_Score are already computed
+    # BEFORE theme classification (lines 738-741 in run_tabela_pipeline).
+    # Only Margin and the final Long_Score assembly remain.
     stocks = calculate_margin_score(stocks)
     stocks = calculate_long_score(stocks)
     return stocks

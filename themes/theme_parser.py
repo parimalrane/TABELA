@@ -35,7 +35,7 @@ def parse_theme(strategy):
 
         sector = parts[0].strip()
 
-        theme = parts[1].strip().title()
+        theme = parts[1].strip()
 
     elif "artificial intelligence" in strategy.lower():
 

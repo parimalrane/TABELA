@@ -27,15 +27,20 @@ def load_previous_stock_history():
     if not STOCK_HISTORY_DIR.exists():
         return {}
 
-    files = sorted(
-        STOCK_HISTORY_DIR.rglob("*.json"),
-        key=lambda x: x.name
-    )
+    today = str(context.market_date)
+    today_prefix = today.replace("-", "")
 
-    if len(files) < 2:
+    candidates = []
+    for filepath in STOCK_HISTORY_DIR.rglob("*_stock_history.json"):
+        file_date = filepath.name.replace("_stock_history.json", "").replace("-", "")
+        if file_date < today_prefix:
+            candidates.append(filepath)
+
+    if not candidates:
         return {}
 
-    previous_file = files[-2]
+    candidates.sort(key=lambda x: x.name, reverse=True)
+    previous_file = candidates[0]
 
     with open(previous_file, "r") as f:
         data = json.load(f)

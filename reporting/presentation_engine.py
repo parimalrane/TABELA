@@ -481,8 +481,7 @@ def load_todays_registry():
     import os
     import json
     from config.runtime_context import context, get_monthly_path
-    from config.config import STOCK_TRANSITION_CONFIG
-    REGISTRY_DIR = STOCK_TRANSITION_CONFIG["REGISTRY_DIR"]
+    REGISTRY_DIR = "market_data/stock_transition"
     today = str(context.market_date)
     
     target_dir = get_monthly_path(REGISTRY_DIR, today)
@@ -654,9 +653,9 @@ def print_daily_scan(
                     if pd.notna(rank_delta):
                         r_d = int(rank_delta)
                         if r_d > 0:
-                            movement_str = f" -> +{r_d}"
+                            movement_str = f" -> -{r_d}"
                         elif r_d < 0:
-                            movement_str = f" -> -{abs(r_d)}"
+                            movement_str = f" -> +{abs(r_d)}"
                             
             mac_state_str = f"{macro_state} ({macro_rank}{movement_str})".ljust(29)
         else:

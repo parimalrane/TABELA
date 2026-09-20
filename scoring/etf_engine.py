@@ -1,5 +1,6 @@
 import pandas as pd
 
+from config.config import THEME_STRENGTH_CONFIG
 
 
 
@@ -8,13 +9,9 @@ import pandas as pd
 # ---------------------------------------------------
 def calculate_etf_rs(df):
 
-    period_weights = {
-        "Performance 3M (%)": 0.35,
-        "Performance 1M (%)": 0.30,
-        "Performance 6M (%)": 0.20,
-        "Performance 1Y (%)": 0.10,
-        "Performance 1W (%)": 0.05,
-    }
+    # Use the same period weights as the Theme Strength engine
+    # to ensure mathematical coherence across the entire pipeline.
+    period_weights = dict(THEME_STRENGTH_CONFIG["PERIOD_WEIGHTS"])
 
     shorter_periods = {
         "Performance 3M (%)": ["Performance 1M (%)", "Performance 1W (%)"],

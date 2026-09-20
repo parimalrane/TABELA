@@ -2,8 +2,9 @@ from config.config import LONG_ENTRY
 
 def build_long_watchlist(stocks, registry=None):
     # Pure Cross-Sectional Entry
+    allowed_themes = LONG_ENTRY.get("THEMES", ["Leading", "Micro Leader", "Unclassified Leader", "Unknown"])
     standard_entry = (
-        stocks["Theme_Class"].isin(["Leading", "Unclassified Leader", "Unknown"])
+        stocks["Theme_Class"].isin(allowed_themes)
         & (stocks["RS_Rating"] >= LONG_ENTRY["MIN_RS"])
         & (stocks["Long_Score"] >= LONG_ENTRY["MIN_LONG_SCORE"])
     )
