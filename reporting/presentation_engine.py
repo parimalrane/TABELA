@@ -871,4 +871,29 @@ def print_daily_scan(
     print_dropped_table("DROPPED LONGS", deltas.get('dropped_longs', []), stocks)
     print_dropped_table("DROPPED DISTRIBUTIONS", deltas.get('left_distribution', []), stocks)
 
+    # TradingView Watchlist Export — New entries only
+    def clean_ticker_list(df, day_col="Days", day_val=1):
+        if df.empty:
+            return ""
+        filtered = df[df[day_col] == day_val] if day_col in df.columns else df
+        return ",".join(
+            filtered["Ticker"].astype(str)
+            .str.replace("*", "", regex=False)
+            .str.replace("+", "", regex=False)
+            .str.replace("^", "", regex=False)
+            .str.replace("~", "", regex=False)
+            .str.strip().tolist()
+        )
+
+    new_long_list = clean_ticker_list(true_longs)
+    new_dist_list = clean_ticker_list(display_df)
+
+    if new_long_list or new_dist_list:
+        print()
+        print("TRADINGVIEW WATCHLIST EXPORT (NEW ENTRIES)")
+        if new_long_list:
+            print("###NEW_LONG," + new_long_list + ",")
+        if new_dist_list:
+            print("###NEW_DISTRIBUTION," + new_dist_list + ",")
+
     print()
