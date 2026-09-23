@@ -9,12 +9,9 @@
     *   Theme distribution splits are actively anchored at 25% Leading, 50% Neutral, and 25% Lagging.
 *   **Unified Weight System:** Both ETF-level individual scoring (`etf_engine.py`) and Theme-level aggregation (`pipeline.py`) now use the identical `THEME_STRENGTH_CONFIG["PERIOD_WEIGHTS"]` from `config.py`. There are zero hardcoded weight sets in the codebase.
 
-## 2. Crowding Logic (Micro Theme Grouping)
-*   **Grouping Key:** The `MAX_PER_THEME` cap is applied at the **Micro Theme** (`Mapped_Theme`) level, NOT the Macro ETF level.
-*   **Cap Value:** `MAX_PER_THEME = 3` for both Longs and Distributions.
-*   **Rationale:** This enforces the O'Neil/Minervini "Top 2-3 leaders per industry group" rule. A stock like MU (Memory) competes only against other Memory stocks, not against unrelated Foundry or Equipment stocks that share the "Semiconductors" macro tag.
-*   **Theme Classification** remains at the **Macro (ETF) level** for institutional accuracy. Only the crowding cap operates at the Micro level.
-*   **"Crowded Out" Exit Reason:** When a dropped stock passes all gates (Theme, RS, Score) but is missing from the board, the presentation engine deduces it was displaced by higher-scoring peers within its Micro Theme.
+## 2. Theme Gating (No Crowding Cap)
+*   **No Per-Theme Cap:** The `MAX_PER_THEME` crowding cap has been removed. All stocks that meet the RS and Score thresholds pass through regardless of how many peers share the same Micro Theme.
+*   **Theme Classification** remains at the **Macro (ETF) level** for institutional accuracy.
 
 ## 3. Reporting/UI Optimizations
 *   The `Theme Classification` column is stripped from the **Long Candidate Universe** and **Distribution Watchlist** active views to remove redundancy.
@@ -28,8 +25,8 @@
 
 ## 4. Config.py Status
 `config.py` acts as the command center for the entire pipeline.
-*   `LONG_ENTRY`: MIN_RS=85, MIN_LONG_SCORE=80, MAX_PER_THEME=3, THEMES=[Leading, Micro Leader, Unclassified Leader, Unknown]
-*   `DIST_ENTRY`: MAX_RS=40, MAX_LONG_SCORE=40, MAX_PER_THEME=3, THEMES=[Lagging, Micro Laggard]
+*   `LONG_ENTRY`: MIN_RS=85, MIN_LONG_SCORE=85, THEMES=[Leading, Micro Leader, Unclassified Leader, Unknown]
+*   `DIST_ENTRY`: MAX_RS=40, MAX_LONG_SCORE=40, THEMES=[Lagging, Micro Laggard]
 *   Theme weights, classification constraints, and entry allowances are fully externalized. No logic parameters are hardcoded in `pipeline.py` or `scoring_engine.py`.
 
 ## 5. Critical Bug Fixes Applied (2026-09-20)

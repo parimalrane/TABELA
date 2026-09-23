@@ -837,13 +837,13 @@ def print_daily_scan(
                 if theme not in themes_allowed: return "Theme Downgrade"
                 if rs < LONG_ENTRY.get("MIN_RS", 90.0): return f"RS < {LONG_ENTRY.get('MIN_RS', 90)}"
                 if score < LONG_ENTRY.get("MIN_LONG_SCORE", 90.0): return f"Score < {LONG_ENTRY.get('MIN_LONG_SCORE', 90)}"
-                return "Crowded Out"
+                return "Unknown"
             else:
                 themes_allowed = DIST_ENTRY.get("THEMES", ["Lagging"])
                 if theme not in themes_allowed: return "Theme Upgrade"
                 if rs > DIST_ENTRY.get("MAX_RS", 50.0): return f"RS > {DIST_ENTRY.get('MAX_RS', 50)}"
                 if score > DIST_ENTRY.get("MAX_LONG_SCORE", 50.0): return f"Score > {DIST_ENTRY.get('MAX_LONG_SCORE', 50)}"
-                return "Crowded Out"
+                return "Unknown"
                 
         display_dropped["Exit_Reason"] = display_dropped.apply(lambda r: get_exit_reason(r, title == "DROPPED LONGS"), axis=1)
 

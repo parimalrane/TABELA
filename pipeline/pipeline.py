@@ -576,12 +576,8 @@ def build_candidates(stocks):
         stocks=stocks,
     )
     
-    from config.config import DIST_ENTRY
     if not distribution_candidates.empty:
-        max_dist_per_theme = DIST_ENTRY.get("MAX_PER_THEME", 5)
         distribution_candidates = distribution_candidates.drop_duplicates(subset=["Ticker"])
-        distribution_candidates = distribution_candidates.sort_values(["Long_Score", "RS_Rating"], ascending=[True, True])
-        distribution_candidates = distribution_candidates.groupby("Mapped_Theme").head(max_dist_per_theme)
         distribution_candidates = distribution_candidates.sort_values(["Long_Score", "RS_Rating"], ascending=[True, True])
 
     distribution_watchlist = distribution_candidates
