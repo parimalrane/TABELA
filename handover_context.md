@@ -25,8 +25,8 @@
 
 ## 4. Config.py Status
 `config.py` acts as the command center for the entire pipeline.
-*   `LONG_ENTRY`: MIN_RS=85, MIN_LONG_SCORE=85, THEMES=[Leading, Micro Leader, Unclassified Leader, Unknown]
-*   `DIST_ENTRY`: MAX_RS=40, MAX_LONG_SCORE=40, THEMES=[Lagging, Micro Laggard]
+*   `LONG_ENTRY`: MIN_RS=90, MIN_LONG_SCORE=85, BLOCKED_ZACKS=[4,5], THEMES=[Leading, Micro Leader, Unclassified Leader, Unknown]
+*   `DIST_ENTRY`: MAX_RS=30, MAX_LONG_SCORE=40, BLOCKED_ZACKS=[1,2], THEMES=[Lagging, Micro Laggard]
 *   Theme weights, classification constraints, and entry allowances are fully externalized. No logic parameters are hardcoded in `pipeline.py` or `scoring_engine.py`.
 
 ## 5. Critical Bug Fixes Applied (2026-09-20)

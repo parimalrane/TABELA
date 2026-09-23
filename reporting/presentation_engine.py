@@ -688,8 +688,7 @@ def print_daily_scan(
     print("\n\n")
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
-    print("Legend: * = Zacks Rank 4 or 5 (Warning for Longs)")
-    print("        ^ = Micro Leader | ~ = Unknown/Unclassified")
+    print("Legend: ^ = Micro Leader | ~ = Unknown/Unclassified")
     print("========================================")
 
     display_df = long_candidates[
@@ -720,11 +719,6 @@ def print_daily_scan(
         .astype(int)
         .astype(str)
     )
-
-    display_df.loc[
-        display_df["Zacks Rank"].isin(["4", "5"]),
-        "Zacks Rank"
-    ] += "*"
     
     true_longs = display_df
     true_long_tickers = true_longs["Ticker"].tolist()
@@ -759,8 +753,7 @@ def print_daily_scan(
     print("\n")
     print("========================================")
     print("DISTRIBUTION WATCHLIST")
-    print("Legend: * = Zacks Rank 1 or 2 (Warning for Shorts)")
-    print("        ^ = Micro Laggard")
+    print("Legend: ^ = Micro Laggard")
     print("========================================")
 
     if distribution_watchlist.empty:
@@ -795,10 +788,6 @@ def print_daily_scan(
                 .astype(int)
                 .astype(str)
             )
-            display_df.loc[
-                display_df["Zacks Rank"].isin(["1", "2"]),
-                "Zacks Rank"
-            ] += "*"
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
@@ -871,13 +860,15 @@ def print_daily_scan(
     print_dropped_table("DROPPED LONGS", deltas.get('dropped_longs', []), stocks)
     print_dropped_table("DROPPED DISTRIBUTIONS", deltas.get('left_distribution', []), stocks)
 
-    # TradingView Watchlist Export — New entries only
-    def clean_ticker_list(df, day_col="Days", day_val=1):
+    # ========================================
+    # TradingView Watchlist Export
+    # ========================================
+    def clean_all_tickers(df):
+        """Extract all tickers from a DataFrame, cleaned of prefix markers."""
         if df.empty:
             return ""
-        filtered = df[df[day_col] == day_val] if day_col in df.columns else df
         return ",".join(
-            filtered["Ticker"].astype(str)
+            df["Ticker"].astype(str)
             .str.replace("*", "", regex=False)
             .str.replace("+", "", regex=False)
             .str.replace("^", "", regex=False)
@@ -885,15 +876,124 @@ def print_daily_scan(
             .str.strip().tolist()
         )
 
-    new_long_list = clean_ticker_list(true_longs)
-    new_dist_list = clean_ticker_list(display_df)
+    full_long_list = clean_all_tickers(true_longs)
+    full_short_list = clean_all_tickers(display_df)
 
-    if new_long_list or new_dist_list:
-        print()
-        print("TRADINGVIEW WATCHLIST EXPORT (NEW ENTRIES)")
-        if new_long_list:
-            print("###NEW_LONG," + new_long_list + ",")
-        if new_dist_list:
-            print("###NEW_DISTRIBUTION," + new_dist_list + ",")
+    # --- Accumulated Dropped History (21-Day Expiry + Auto-Purge) ---
+    import json as _json
+    from datetime import datetime, timedelta
+    from config.runtime_context import context
+
+    dropped_file = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "market_data", "dropped_accumulator.json"
+    )
+
+    # Dictionary format: {"TICKER": "YYYY-MM-DD"}
+    accumulated = {"long_dropped": {}, "short_dropped": {}}
+    if os.path.exists(dropped_file):
+        try:
+            with open(dropped_file, "r", encoding="utf-8") as _f:
+                loaded = _json.load(_f)
+                
+                # Check if legacy format (lists) and wipe if true
+                if isinstance(loaded.get("long_dropped", []), list):
+                    pass # Schema change requires fresh start
+                else:
+                    accumulated = loaded
+        except Exception:
+            pass
+
+    current_date_str = str(context.market_date) if hasattr(context, "market_date") else datetime.today().strftime("%Y-%m-%d")
+    current_date = datetime.strptime(current_date_str, "%Y-%m-%d")
+
+    # Add today's drops
+    for t in deltas.get("dropped_longs", []):
+        clean = str(t).replace("*", "").replace("^", "").replace("~", "").strip().upper()
+        if clean:
+            accumulated["long_dropped"][clean] = current_date_str
+
+    for t in deltas.get("left_distribution", []):
+        clean = str(t).replace("*", "").replace("^", "").replace("~", "").strip().upper()
+        if clean:
+            accumulated["short_dropped"][clean] = current_date_str
+
+    # Process Auto-Purge and Expiry
+    from config.config import LONG_ENTRY, DIST_ENTRY
+    min_dropped_long = LONG_ENTRY.get("MIN_DROPPED_WATCH_SCORE", 70.0)
+    max_dropped_dist = DIST_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 30.0)
+
+    def clean_accumulator(dropped_dict, active_list_str, is_long=True):
+        active_set = set(t.strip().upper() for t in active_list_str.split(",") if t.strip())
+        cleaned = {}
+        for ticker, date_str in dropped_dict.items():
+            # Opt 4: Auto-Purge if re-entered active list
+            if ticker in active_set:
+                continue
+                
+            # Technical Floor & Macro Theme Eviction
+            match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
+            if not match.empty:
+                row = match.iloc[0]
+                current_rs = pd.to_numeric(row.get("RS_Rating"), errors='coerce')
+                current_score = pd.to_numeric(row.get("Long_Score"), errors='coerce')
+                current_theme = str(row.get("Theme_Class", ""))
+                
+                zacks_raw = row.get("Zacks Rank", 0)
+                try:
+                    current_zacks = int(float(zacks_raw)) if pd.notna(zacks_raw) else 0
+                except (ValueError, TypeError):
+                    current_zacks = 0
+                
+                if pd.notna(current_rs) and pd.notna(current_score):
+                    if is_long:
+                        if current_rs < min_dropped_long or current_score < min_dropped_long:
+                            continue  # Purge, either price or total composite is broken
+                        if current_theme in DIST_ENTRY.get("THEMES", []):
+                            continue  # Purge, macro theme has died (Lagging)
+                        if current_zacks in LONG_ENTRY.get("BLOCKED_ZACKS", []):
+                            continue  # Purge, fundamentally broken (Zacks 4/5)
+                    if not is_long:
+                        if current_rs > max_dropped_dist or current_score > max_dropped_dist:
+                            continue  # Purge, shorts are squeezing upward
+                        if current_theme in LONG_ENTRY.get("THEMES", []):
+                            continue  # Purge, macro theme has rallied (Leading)
+                        if current_zacks in DIST_ENTRY.get("BLOCKED_ZACKS", []):
+                            continue  # Purge, fundamentals too strong to short (Zacks 1/2)
+
+            # 21-Day Time Expiry
+            try:
+                date_val = datetime.strptime(date_str, "%Y-%m-%d")
+                days_old = (current_date - date_val).days
+                if days_old <= 21:
+                    cleaned[ticker] = date_str
+            except Exception:
+                pass
+        return cleaned
+
+    accumulated["long_dropped"] = clean_accumulator(accumulated["long_dropped"], full_long_list, is_long=True)
+    accumulated["short_dropped"] = clean_accumulator(accumulated["short_dropped"], full_short_list, is_long=False)
+
+    # Save updated accumulator
+    try:
+        os.makedirs(os.path.dirname(dropped_file), exist_ok=True)
+        with open(dropped_file, "w", encoding="utf-8") as _f:
+            _json.dump(accumulated, _f, indent=4)
+    except Exception:
+        pass
+
+    long_dropped_str = ",".join(sorted(accumulated["long_dropped"].keys()))
+    short_dropped_str = ",".join(sorted(accumulated["short_dropped"].keys()))
+
+    print()
+    print("TRADINGVIEW WATCHLIST EXPORT")
+    if full_long_list:
+        print("###LONG," + full_long_list + ",")
+    if full_short_list:
+        print("###SHORT," + full_short_list + ",")
+    if long_dropped_str:
+        print("###LONG_Dropped," + long_dropped_str + ",")
+    if short_dropped_str:
+        print("###SHORT_Dropped," + short_dropped_str + ",")
 
     print()

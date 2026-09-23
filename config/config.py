@@ -45,16 +45,20 @@ RS_RAW_WEIGHTS = {
 # ==========================
 
 LONG_ENTRY = {
-    "MIN_RS": 85.0,
+    "MIN_RS": 90.0,
     "MIN_LONG_SCORE": 85.0,
     "THEMES": ["Leading", "Micro Leader", "Unclassified Leader", "Unknown"],
-    "MICRO_BREAKAWAY_PERCENTILE": 0.05
+    "MICRO_BREAKAWAY_PERCENTILE": 0.05,
+    "BLOCKED_ZACKS": [4, 5],
+    "MIN_DROPPED_WATCH_SCORE": 70.0
 }
 
 DIST_ENTRY = {
-    "MAX_RS": 20.0,
+    "MAX_RS": 10.0,
     "MAX_LONG_SCORE": 20.0,
     "THEMES": ["Lagging", "Micro Laggard"],
-    "MICRO_BREAKAWAY_PERCENTILE": 0.05
+    "MICRO_BREAKAWAY_PERCENTILE": 0.05,
+    "BLOCKED_ZACKS": [1, 2],
+    "MAX_DROPPED_WATCH_SCORE": 30.0
 }
 

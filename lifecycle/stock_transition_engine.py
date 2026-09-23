@@ -84,6 +84,14 @@ def _meets_criteria(row, criteria_dict):
     if "THEMES" in criteria_dict:
         if theme not in criteria_dict["THEMES"]: return False
 
+    if "BLOCKED_ZACKS" in criteria_dict:
+        zacks_raw = row.get("Zacks Rank", 0)
+        try:
+            zacks_val = int(float(zacks_raw)) if pd.notna(zacks_raw) else 0
+        except (ValueError, TypeError):
+            zacks_val = 0
+        if zacks_val in criteria_dict["BLOCKED_ZACKS"]: return False
+
     return True
 
 def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFrame, stocks: pd.DataFrame = None) -> Tuple[Dict, Dict]:
