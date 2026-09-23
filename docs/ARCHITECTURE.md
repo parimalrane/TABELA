@@ -172,12 +172,14 @@ Current storage:
 
 ```
 market_data/
-
-snapshots/
-
-rotation_delta/
-
-stock_universe/
+  snapshots/           # Daily market state JSONs
+  rotation_delta/      # Theme rank change JSONs
+  stock_universe/      # Stock history JSONs
+  watchlist_history/   # Watchlist snapshot JSONs with days-on-list tracking
+  market_context/      # Market regime (Accumulation/Distribution) JSONs
+  daily_reports/       # Terminal output capture (.txt)
+  stock_transition/    # Stock lifecycle registry JSONs
+  unknown_classification/  # Unclassified ticker audit JSONs
 ```
 
 Only structured data is stored.
@@ -188,9 +190,9 @@ Only structured data is stored.
 
 Produces:
 
-* console reports
-* TradingView exports
-* CSV outputs
+* Console reports (Theme Breadth, Long Candidates, Distribution Watchlist, Dropped Details)
+* TradingView exports (NEW entries only — new longs and new distributions)
+* Daily report text captures
 
 Presentation should not perform calculations.
 
@@ -300,14 +302,16 @@ No engine should modify upstream data.
 | Engine                  | Responsibility                            |
 | ----------------------- | ----------------------------------------- |
 | ETF                     | Load and filter ETF universe              |
-| Theme Mapping           | Convert industries to themes              |
-| Composite               | Calculate theme strength                  |
+| ETF Scoring             | Calculate individual ETF RS using unified config weights |
+| Theme Mapping           | Convert industries to themes (raw Zacks casing preserved) |
+| Composite               | Calculate theme strength (config-driven weights) |
 | Breadth                 | Measure participation                     |
-| Institutional Leader    | Identify strongest stocks                 |
-| Distribution            | Detect structurally weak shorts and breakdowns|
+| Watchlist Engine         | Identify strongest stocks, capped at 3 per Micro Theme |
+| Distribution            | Detect structurally weak shorts, capped at 3 per Micro Theme |
 | Rotation                | Compare current and previous market state |
 | Snapshot                | Persist current market state              |
 | Historical Intelligence | Multi-day trend analysis                  |
+| Stock History           | Date-aware previous-day lookup for days-on-list tracking |
 
 ---
 
