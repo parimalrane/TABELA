@@ -159,12 +159,10 @@ def build_theme_classification(theme_strength):
             theme_class = "Neutral"
 
         if total_themes == 1:
-            theme_score = 100
+            theme_score = 100.0
         else:
-            theme_score = round(
-                20 + 80 * (total_themes - rank_position) / (total_themes - 1),
-                2,
-            )
+            # Use true mathematical magnitude spacing, not artificial rank-based interpolation
+            theme_score = float(row.get("Theme_Strength_Normalized", 0.0))
 
         theme_class_map[theme] = theme_class
         theme_score_map[theme] = theme_score

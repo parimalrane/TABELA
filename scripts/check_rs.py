@@ -1,8 +1,6 @@
 import os
 import glob
 
-search_terms = ["MARKET STATISTICS", "print_market_context_summary"]
-
 output = []
 for file in glob.glob(r"c:\TABELA\**\*.py", recursive=True):
     path = file
@@ -17,9 +15,8 @@ for file in glob.glob(r"c:\TABELA\**\*.py", recursive=True):
             continue
             
     for i, line in enumerate(lines):
-        for term in search_terms:
-            if term in line:
-                output.append(f"{path}:{i+1}: {line.strip()}")
+        if "RS_Rating ==" in line or "RS_Rating.isin" in line:
+            output.append(f"{path}:{i+1}: {line.strip()}")
 
-with open(r"c:\TABELA\found2.txt", "w", encoding="utf-8") as f:
+with open(r"c:\TABELA\scripts\check_rs.txt", "w", encoding="utf-8") as f:
     f.write("\n".join(output))

@@ -496,7 +496,7 @@ def print_macro_weather(stocks, theme_strength_settings):
         
         name = spdr_map[t]
         sector_matrix_strs.append(
-            f"    {rank_val:<4} {name:<15} ({t})  {perf_1w:>8.2f}% {perf_1m:>9.2f}% {perf_3m:>10.2f}% {perf_ytd:>9.2f}%   ${aum_b:>6.1f}B   {impact:>7.1f}"
+            f"    {rank_val:<4} {name:<15} ({t})  {perf_1w:>+8.2f}% {perf_1m:>+9.2f}% {perf_3m:>+10.2f}% {perf_ytd:>+9.2f}%   ${aum_b:>6.1f}B   {impact:>7.1f}"
         )
             
     idx_strs = []
@@ -518,7 +518,7 @@ def print_macro_weather(stocks, theme_strength_settings):
             pytd = pytd if pd.notna(pytd) else 0.0
             
             name = f"{idx_map[t]} ({t})"
-            idx_strs.append(f"    {name:<17} {p1w:>8.2f}% {p1m:>9.2f}% {p3m:>10.2f}% {pytd:>13.2f}%")
+            idx_strs.append(f"    {name:<17} {p1w:>+8.2f}% {p1m:>+9.2f}% {p3m:>+10.2f}% {pytd:>+13.2f}%")
         
     nh = nl = net = 0
     if "Price as a % of 52 Wk H-L Range" in stocks.columns:

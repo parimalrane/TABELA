@@ -26,38 +26,6 @@ def calculate_rs_raw(stocks):
 # RS RATING
 # ----------------------------
 
-def assign_rs(percentile):
-
-    if percentile >= 99:
-        return 99
-    elif percentile >= 98:
-        return 98
-    elif percentile >= 97:
-        return 97
-    elif percentile >= 95:
-        return 95
-    elif percentile >= 90:
-        return 90
-    elif percentile >= 80:
-        return 80
-    elif percentile >= 70:
-        return 70
-    elif percentile >= 60:
-        return 60
-    elif percentile >= 50:
-        return 50
-    elif percentile >= 40:
-        return 40
-    elif percentile >= 30:
-        return 30
-    elif percentile >= 20:
-        return 20
-    elif percentile >= 10:
-        return 10
-    else:
-        return 1
-
-
 def calculate_rs_rating(stocks):
 
     stocks = stocks.sort_values(
@@ -74,9 +42,8 @@ def calculate_rs_rating(stocks):
 
     stocks["RS_Rating"] = (
 
-        stocks["Percentile"]
+        stocks["Percentile"].clip(lower=1.0, upper=99.0).round().astype(int)
 
-        .apply(assign_rs)
     )
 
     # NEW FIELD FOR SHORT ENGINE ONLY

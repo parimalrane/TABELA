@@ -46,7 +46,7 @@ RS_RAW_WEIGHTS = {
 
 LONG_ENTRY = {
     "MIN_RS": 90.0,
-    "MIN_LONG_SCORE": 85.0,
+    "MIN_LONG_SCORE": 75.0,
     "THEMES": ["Leading", "Micro Leader", "Unclassified Leader", "Unknown"],
     "MICRO_BREAKAWAY_PERCENTILE": 0.05,
     "BLOCKED_ZACKS": [4, 5],
