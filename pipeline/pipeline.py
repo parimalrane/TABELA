@@ -433,14 +433,13 @@ def build_theme_strength(etf_master, benchmark_returns, theme_strength_settings)
 
     def aggregate_theme_relative_score(group):
         aum = pd.to_numeric(group["Market Value (mil)"], errors="coerce")
+        valid_aum = aum.where(aum > 0)
+        total_aum = valid_aum.fillna(0).sum()
         diagnostics_df = group[diagnostics_columns].apply(pd.to_numeric, errors="coerce").fillna(0)
 
         if aggregation_mode == "equal_weight":
             aggregate_values = diagnostics_df.mean()
         elif aggregation_mode == "aum_weighted":
-            valid_aum = aum.where(aum > 0)
-            total_aum = valid_aum.fillna(0).sum()
-
             if total_aum > 0:
                 weights = valid_aum.fillna(0) / total_aum
                 aggregate_values = diagnostics_df.mul(weights, axis=0).sum()
@@ -461,6 +460,7 @@ def build_theme_strength(etf_master, benchmark_returns, theme_strength_settings)
             "WgtContr_1W": aggregate_values.get("WgtContr_1W", 0.0),
             "WgtContr_1M": aggregate_values.get("WgtContr_1M", 0.0),
             "WgtContr_3M": aggregate_values.get("WgtContr_3M", 0.0),
+            "Total_AUM_Mil": total_aum,
         })
 
     theme_strength = (
@@ -705,8 +705,6 @@ def run_tabela_pipeline():
         context.market_date
     )
     print_scan_preamble()
-    if market_context:
-        print_market_context_summary(market_context)
 
 
     theme_strength_settings = get_theme_strength_settings()

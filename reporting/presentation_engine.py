@@ -401,80 +401,8 @@ def print_market_context_summary(market_context):
     """
     Display Market Context summary.
     """
+    pass
 
-    TYPE_SYMBOL = {
-        "Accumulation": "Accumulation",
-        "Distribution": "Distribution",
-        "Consolidation": "Consolidation",
-        "Neutral": "N/A",
-        None: "N/A",
-    }
-
-    def fmt(value):
-        if value is None:
-            return "-"
-        return f"{value:+.2f}"
-
-    def fmt_rv(value):
-        if value is None:
-            return "-"
-        return f"{value:.2f}"
-
-    print()
-
-    snapshot = market_context["latest_market_snapshot"]
-    stats = snapshot["market_statistics"]
-    relative_performance = snapshot["relative_performance"]
-
-    has_valid_etfs = True
-    print("MARKET STATISTICS")
-    header = (
-        f"{'ETF':<6}"
-        f"{'State':>14}"
-        f"{'1D%':>8}"
-        f"{'5D%':>8}"
-        f"{'20D%':>8}"
-        f"{'50D%':>8}"
-        f"{'200D%':>8}"
-        f"{'Vol(M)':>8}"
-        f"{'AvgV(M)':>8}"
-        f"{'20Dist':>10}"
-        f"{'50Dist':>10}"
-        f"{'200Dist':>10}"
-    )
-
-    print("-" * len(header))
-    print(header)
-    print("-" * len(header))
-
-    for etf in ["SPY", "QQQ", "IWM", "DIA"]:
-
-        data = stats[etf]
-
-        returns = data["returns"]
-        vols = data.get("volume_data", {})
-        ma = data["moving_average_extension"]
-
-        # Format volumes in millions
-        vol_m = f"{vols.get('volume', 0) / 1000000:.1f}"
-        avg_m = f"{vols.get('avg_20d_vol', 0) / 1000000:.1f}"
-
-        print(
-            f"{etf:<6}"
-            f"{TYPE_SYMBOL.get(data.get('day_type'),'N/A'):>14}"
-            f"{fmt(returns.get('1d')):>8}"
-            f"{fmt(returns.get('1w')):>8}"
-            f"{fmt(returns.get('4w')):>8}"
-            f"{fmt(returns.get('10w')):>8}"
-            f"{fmt(returns.get('40w')):>8}"
-            f"{vol_m:>8}"
-            f"{avg_m:>8}"
-            f"{fmt(ma.get('20dma')):>10}"
-            f"{fmt(ma.get('50dma')):>10}"
-            f"{fmt(ma.get('200dma')):>10}"
-        )
-
-    print()
 
 
 def load_todays_registry():
@@ -491,6 +419,136 @@ def load_todays_registry():
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     return {}
+
+def print_macro_weather(stocks, theme_strength_settings):
+    from config.runtime_context import context
+    try:
+        try:
+            etf_df = pd.read_csv(context.etf_file, encoding='utf-16')
+        except UnicodeError:
+            etf_df = pd.read_csv(context.etf_file, encoding='utf-8')
+    except Exception as e:
+        return {}
+
+    period_weights = theme_strength_settings.get("period_weights", {})
+    if not period_weights:
+        return {}
+
+    etf_df["Raw_Mom"] = 0.0
+    total_w = 0.0
+    for p, w in period_weights.items():
+        if p in etf_df.columns:
+            etf_df["Raw_Mom"] += pd.to_numeric(etf_df[p], errors='coerce').fillna(0) * w
+            total_w += w
+
+    if total_w == 0:
+        return {}
+    
+    spdr_map = {
+        'XLK': 'Technology', 'XLY': 'Discretionary', 'XLC': 'Communications',
+        'XLF': 'Financials', 'XLP': 'Staples', 'XLU': 'Utilities',
+        'XLV': 'Health Care', 'XLE': 'Energy', 'XLB': 'Materials',
+        'XLI': 'Industrials', 'XLRE': 'Real Estate'
+    }
+    
+    idx_map = {'QQQ': 'Nasdaq', 'SPY': 'S&P 500', 'DIA': 'Dow Jones', 'IWM': 'Russell 2k'}
+    focus = etf_df[etf_df['Ticker'].isin(list(spdr_map.keys()) + list(idx_map.keys()))].copy()
+    
+    sector_rs_map = {}
+    green_count = 0
+    top_spdrs = []
+    bottom_spdrs = []
+    
+    import math
+    spdrs_only = focus[focus['Ticker'].isin(spdr_map.keys())].copy()
+    
+    # Calculate Log-AUM Conviction Multiplier
+    spdrs_only["AUM"] = pd.to_numeric(spdrs_only["Market Value (mil)"], errors='coerce').fillna(0)
+    spdrs_only["Log_AUM"] = spdrs_only["AUM"].apply(lambda x: math.log10(x) if x > 10 else 1)
+    
+    # Institutional Impact Score (Momentum * Gravity)
+    spdrs_only["Impact_Mom"] = spdrs_only["Raw_Mom"] * spdrs_only["Log_AUM"]
+    
+    # Rank 1 to 11 exactly (1 = Highest Institutional Impact)
+    spdrs_only["Sector_Rank"] = spdrs_only["Impact_Mom"].rank(ascending=False, method='min')
+    spdrs_only = spdrs_only.sort_values("Impact_Mom", ascending=False)
+    
+    sector_matrix_strs = []
+    for _, row in spdrs_only.iterrows():
+        t = row["Ticker"]
+        rank_val = int(row["Sector_Rank"])
+        sector_rs_map[t] = rank_val
+        perf_1m = pd.to_numeric(row.get("Performance 1M (%)", 0), errors='coerce')
+        if pd.isna(perf_1m): perf_1m = 0
+        if perf_1m > 0: green_count += 1
+            
+        aum_val = row.get("AUM", 0)
+        impact = row.get("Impact_Mom", 0)
+        aum_b = (aum_val / 1000.0) if aum_val > 0 else 0.0
+        
+        perf_1w = pd.to_numeric(row.get("Performance 1W (%)", 0), errors='coerce')
+        perf_3m = pd.to_numeric(row.get("Performance 3M (%)", 0), errors='coerce')
+        perf_ytd = pd.to_numeric(row.get("Performance YTD (%)", row.get("Performance 1Y (%)", 0)), errors='coerce')
+        
+        perf_1w = perf_1w if pd.notna(perf_1w) else 0.0
+        perf_3m = perf_3m if pd.notna(perf_3m) else 0.0
+        perf_ytd = perf_ytd if pd.notna(perf_ytd) else 0.0
+        
+        name = spdr_map[t]
+        sector_matrix_strs.append(
+            f"    {rank_val:<4} {name:<15} ({t})  {perf_1w:>8.2f}% {perf_1m:>9.2f}% {perf_3m:>10.2f}% {perf_ytd:>9.2f}%   ${aum_b:>6.1f}B   {impact:>7.1f}"
+        )
+            
+    idx_strs = []
+    idx_only = focus[focus['Ticker'].isin(idx_map.keys())].copy()
+    
+    # Pre-sort to maintain QQQ, SPY, IWM, DIA order
+    for t in ['QQQ', 'SPY', 'IWM', 'DIA']:
+        row_eval = idx_only[idx_only["Ticker"] == t]
+        if not row_eval.empty:
+            r = row_eval.iloc[0]
+            p1w = pd.to_numeric(r.get("Performance 1W (%)", 0), errors='coerce')
+            p1m = pd.to_numeric(r.get("Performance 1M (%)", 0), errors='coerce')
+            p3m = pd.to_numeric(r.get("Performance 3M (%)", 0), errors='coerce')
+            pytd = pd.to_numeric(r.get("Performance YTD (%)", r.get("Performance 1Y (%)", 0)), errors='coerce')
+            
+            p1w = p1w if pd.notna(p1w) else 0.0
+            p1m = p1m if pd.notna(p1m) else 0.0
+            p3m = p3m if pd.notna(p3m) else 0.0
+            pytd = pytd if pd.notna(pytd) else 0.0
+            
+            name = f"{idx_map[t]} ({t})"
+            idx_strs.append(f"    {name:<17} {p1w:>8.2f}% {p1m:>9.2f}% {p3m:>10.2f}% {pytd:>13.2f}%")
+        
+    nh = nl = net = 0
+    if "Price as a % of 52 Wk H-L Range" in stocks.columns:
+        valid_range = pd.to_numeric(stocks["Price as a % of 52 Wk H-L Range"], errors='coerce').dropna()
+        nh = len(valid_range[valid_range >= 98])
+        nl = len(valid_range[valid_range <= 2])
+        net = nh - nl
+
+    print("\n========================================================================")
+    print("              MACRO WEATHER REPORT & BREADTH X-RAY")
+    print("========================================================================")
+    print("[1] MARKET INDEXES (Multi-Timeframe Performance)")
+    print(f"    {'Index':<17} {'1-Week':>9} {'1-Month':>10} {'1-Quarter':>11} {'Year-To-Date':>14}")
+    print("    " + "-"*56)
+    for line in idx_strs:
+        print(line)
+    print("")
+    print("[2] MACRO SECTOR RANKINGS (Gravity-Weighted Capital Flows)")
+    print(f"    > 1-Month Sector Breadth  : {green_count} Sectors Positive | {11 - green_count} Sectors Negative\n")
+    print(f"    {'Rank':<4} {'Sector':<15} {'SPDR'}  {'1-Week':>9} {'1-Month':>10} {'1-Quarter':>11} {'YTD':>10}   {'AUM ($B)':>9}   {'Impact':>7}")
+    print("    " + "-"*92)
+    for line in sector_matrix_strs:
+        print(line)
+    print("")
+    print("[3] STRUCTURAL BREADTH (3,000+ Equities)")
+    print(f"    > Price Extremes  : {nh} New Highs | {nl} New Lows  [ Net: {net:+} ]")
+    print("========================================================================\n")
+
+    return sector_rs_map
+
 
 def print_daily_scan(
     today,
@@ -559,13 +617,11 @@ def print_daily_scan(
     print("TABELA DAILY MARKET SCAN")
     print("MARKET DATE:", today)
     print("==============================================")
-    print("\n")
+    # The pipeline prints MARKET STATISTICS externally somewhere, we slip this in 
+    # to render right before Theme Breadth.
+    
+    sector_rs_map = print_macro_weather(stocks, theme_strength_settings)
 
-    # print_theme_performance(theme_performance)
-
-
-
-    print()
     print("========================================")
     print("THEME BREADTH ANALYSIS")
     print("Legend: [No Prefix] = Long Candidate / # = Distribution")
@@ -642,8 +698,10 @@ def print_daily_scan(
         s_str = f"{score:>.2f}".rjust(7)
         
         macro_state = theme_class_map.get(parent_theme, "Unknown")
+        
         if not theme_strength[theme_strength["Theme"] == parent_theme].empty:
-            macro_rank = theme_strength[theme_strength["Theme"] == parent_theme].iloc[0]["Theme_Rank"]
+            ts_row = theme_strength[theme_strength["Theme"] == parent_theme].iloc[0]
+            macro_rank = ts_row["Theme_Rank"]
             
             movement_str = ""
             if theme_performance is not None and not theme_performance.empty:
@@ -660,7 +718,7 @@ def print_daily_scan(
             mac_state_str = f"{macro_state} ({macro_rank}{movement_str})".ljust(29)
         else:
             mac_state_str = macro_state.ljust(29)
-        
+            
         prefix = f"{micro} {macro} {tot_str} {q_str} {s_str}   {mac_state_str}   "
         prefix_len = len(prefix)
         
@@ -686,6 +744,26 @@ def print_daily_scan(
     print()
 
     print("\n\n")
+
+    ZACKS_TO_SPDR = {
+        "Computer and Technology": "XLK", "Business Services": "XLK",
+        "Finance": "XLF", "Medical": "XLV", "Oils-Energy": "XLE",
+        "Consumer Discretionary": "XLY", "Retail-Wholesale": "XLY", "Auto-Tires-Trucks": "XLY",
+        "Consumer Staples": "XLP", "Utilities": "XLU", "Basic Materials": "XLB",
+        "Construction": "XLI", "Industrial Products": "XLI", "Aerospace": "XLI",
+        "Transportation": "XLI", "Conglomerates": "XLI", "Multi-Sector Conglomerates": "XLI"
+    }
+
+    if long_candidates is not None and not long_candidates.empty:
+        if "Sector" in long_candidates.columns:
+            long_candidates["Sector (SPDR)"] = long_candidates["Sector"].map(ZACKS_TO_SPDR).fillna("N/A")
+            long_candidates["Sector Rank"] = long_candidates["Sector (SPDR)"].map(sector_rs_map).fillna(0).astype(int)
+
+    if distribution_watchlist is not None and not distribution_watchlist.empty:
+        if "Sector" in distribution_watchlist.columns:
+            distribution_watchlist["Sector (SPDR)"] = distribution_watchlist["Sector"].map(ZACKS_TO_SPDR).fillna("N/A")
+            distribution_watchlist["Sector Rank"] = distribution_watchlist["Sector (SPDR)"].map(sector_rs_map).fillna(0).astype(int)
+
     print("========================================")
     print("LONG CANDIDATE UNIVERSE")
     print("Legend: ^ = Micro Leader | ~ = Unknown/Unclassified")
@@ -698,7 +776,9 @@ def print_daily_scan(
             "Theme_Class",
             "RS_Rating",
             "Long_Score",
-            "Zacks Rank"
+            "Zacks Rank",
+            "Sector (SPDR)",
+            "Sector Rank"
         ]
     ].copy()
     display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
@@ -766,7 +846,9 @@ def print_daily_scan(
                 "Theme_Class",
                 "RS_Rating",
                 "Long_Score",
-                "Zacks Rank"
+                "Zacks Rank",
+                "Sector (SPDR)",
+                "Sector Rank"
             ]
         ].copy()
         display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
