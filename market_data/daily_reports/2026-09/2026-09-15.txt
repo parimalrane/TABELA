@@ -46,8 +46,6 @@ Micro Theme                    Macro Theme        Tot Qual   Score   Macro State
 Materials/Metals               Materials/Metals     2    2   97.78   Leading                         KRO
 Restaurants                    Consumer Staples    26    4   45.49   Leading                         CAKE
 Consumer Staples               Consumer Staples    35    4   37.99   Leading                         CHEF, TBBB
-Unknown                        Unknown            336    3    4.71   Unknown                         HNST, AMN, KMX, TNET,
-                                                                                                     CODI, BBY, MEOH, TITN
 AI Servers                     Artificial Intel..   3    0    0.00   Neutral (19)                    DELL
 Aerospace & Defense            Aerospace & Defe..  36    0    0.00   Lagging (38)                    #ASLE, #BWXT, #CW, #FLY,
                                                                                                      #FTAI, #KRMN, #SARO,
@@ -59,28 +57,27 @@ Building Materials             Infrastructure      42    0    0.00   Lagging (34
 Communications Cloud           Cloud Computing      4    0    0.00   Leading (5)                     FIVN
 Data Storage                   Semiconductors       1    0    0.00   Leading (8)                     STX
 Defense Systems                Aerospace & Defe..   1    0    0.00   Lagging (38)                    #KTOS
-Discount Retail                Discount Retail     10    0    0.00   Unknown                         TGT
 Footwear/Apparel               Retail              36    0    0.00   Lagging (36)                    #AEO, #BIRK, #CPRI,
                                                                                                      #DECK, #GOOS, #LULU,
                                                                                                      #MNSO, #NKE, #ONON,
                                                                                                      #OXM, #SHOE, #VFC
 Exploration                    Exploration         82    0    0.00   Leading (4)                     NESR
 Industrial Automation          Infrastructure      42    0    0.00   Lagging (34)                    #CNM, #MIDD
-Medical Devices                Medical Devices     80    0    0.00   Lagging (37)                    #BSX, #COO, #ENOV, #QDEL
-Memory                         Semiconductors       4    0    0.00   Leading (8)                     MU, SNDK
-Nuclear Infrastructure         Uranium Mining       3    0    0.00   Lagging (42)                    #TLN
 Infrastructure                 Infrastructure     108    0    0.00   Lagging (34)                    #BW, #CSIQ, #CTRI, #DQ,
                                                                                                      #DY, #HE, #JKS, #MEC,
                                                                                                      #MTRX, #MTZ, #NRG, #NXT,
                                                                                                      #ORN, #PNR, #PRIM,
                                                                                                      #SHLS, #TU
+Medical Devices                Medical Devices     80    0    0.00   Lagging (37)                    #BSX, #COO, #ENOV, #QDEL
+Memory                         Semiconductors       4    0    0.00   Leading (8)                     MU, SNDK
+Nuclear Infrastructure         Uranium Mining       3    0    0.00   Lagging (42)                    #TLN
 REITs                          REITs              119    0    0.00   Lagging (32)                    #ARI, #BN, #BXMT, #IVR,
                                                                                                      #NXRT, #SVC, #VONOY,
                                                                                                      #WSC
 Refining & Marketing           Exploration          8    0    0.00   Leading (4)                     MPC, DINO, PARR, DK,
                                                                                                      PBF, VLO
-Space Infrastructure           Aerospace & Defe..   5    0    0.00   Lagging (38)                    #LUNR
 Solar Infrastructure           Infrastructure       4    0    0.00   Lagging (34)                    #RUN
+Space Infrastructure           Aerospace & Defe..   5    0    0.00   Lagging (38)                    #LUNR
 
 ========================================
 LONG CANDIDATE UNIVERSE
@@ -91,29 +88,20 @@ Ticker         Mapped_Theme  RS_Rating Long_Score Zacks Rank Sector (SPDR)  Sect
   CHEF     Consumer Staples         93      87.15          1           XLP            7       +5    32
    KRO     Materials/Metals         92      83.10          2           XLB            5      +30    15
   TBBB     Consumer Staples         91      82.85          3           XLP            7      +35     7
- ~HNST              Unknown         98      78.90          3           XLY           10      +67    16
-  ~TGT      Discount Retail         91      78.15          2           XLY           10       NA     1
-  ~AMN              Unknown         95      77.85          3           XLK            2      +84    25
-  ~KMX              Unknown         90      77.60          2           XLY           10       NA     1
- ~TNET              Unknown         94      77.30          3           XLK            2       NA     1
- ~CODI              Unknown         95      77.25          3           XLF            4      +82    24
-  ~BBY              Unknown         91      77.05          3           XLY           10       NA     1
-  IOVA              Biotech         99      76.67          2           XLV            3       -4    26
-  HALO              Biotech         97      76.67          2           XLV            3       -4    25
-  FIVN Communications Cloud         97      75.82          1           XLK            2      +11    25
-   MPC Refining & Marketing         99      75.81          1           XLE            1       -1    13
-  DINO Refining & Marketing         99      75.81          1           XLE            1       -3    13
-  PARR Refining & Marketing         99      75.81          1           XLE            1      +30    13
- ~MEOH              Unknown         91      75.65          3           XLB            5      +77     3
-  NESR          Exploration         96      75.56          1           XLE            1       -8    13
-    DK Refining & Marketing         99      75.51          1           XLE            1       -2    13
-   PBF Refining & Marketing         99      75.51          1           XLE            1       -4    13
-   VLO Refining & Marketing         99      75.51          1           XLE            1       -3    13
-    MU               Memory         96      75.20          2           XLK            2      -21    46
- ^DELL           AI Servers         99      75.06          1           XLK            2      +10    12
- ~TITN              Unknown         91      75.05          3           XLY           10       NA     1
-  SNDK               Memory         99      75.05          3           XLK            2      -20    46
-   STX         Data Storage         93      75.05          1           XLK            2      -24    46
+  IOVA              Biotech         99      76.67          2           XLV            3       +3    26
+  HALO              Biotech         97      76.67          2           XLV            3       +3    25
+  FIVN Communications Cloud         97      75.82          1           XLK            2      +18    25
+   MPC Refining & Marketing         99      75.81          1           XLE            1       +6    13
+  DINO Refining & Marketing         99      75.81          1           XLE            1       +4    13
+  PARR Refining & Marketing         99      75.81          1           XLE            1      +37    13
+  NESR          Exploration         96      75.56          1           XLE            1        0    13
+    DK Refining & Marketing         99      75.51          1           XLE            1       +6    13
+   PBF Refining & Marketing         99      75.51          1           XLE            1       +4    13
+   VLO Refining & Marketing         99      75.51          1           XLE            1       +5    13
+    MU               Memory         96      75.20          2           XLK            2      -13    46
+ ^DELL           AI Servers         99      75.06          1           XLK            2      +18    12
+  SNDK               Memory         99      75.05          3           XLK            2      -11    46
+   STX         Data Storage         93      75.05          1           XLK            2      -15    46
 
 ========================================
 DISTRIBUTION WATCHLIST
@@ -185,9 +173,9 @@ Ticker           Mapped_Theme  RS_Rating Long_Score Zacks Rank Sector (SPDR)  Se
    TDG    Aerospace & Defense         10      19.96          3           XLI            9       NA     1
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,CAKE,CHEF,KRO,TBBB,HNST,TGT,AMN,KMX,TNET,CODI,BBY,IOVA,HALO,FIVN,MPC,DINO,PARR,MEOH,NESR,DK,PBF,VLO,MU,DELL,TITN,SNDK,STX,
+###LONG,CAKE,CHEF,KRO,TBBB,IOVA,HALO,FIVN,MPC,DINO,PARR,NESR,DK,PBF,VLO,MU,DELL,SNDK,STX,
 ###SHORT,DQ,JKS,QDEL,MIDD,BLDR,LUNR,KNF,BW,BXMT,PNR,ASLE,COO,CSIQ,SHOE,LII,LMB,MEC,TU,TLN,OXM,LULU,AMRZ,ARI,ORN,CPRI,MTZ,PRIM,HE,MTRX,NKE,SVC,DY,CTRI,GOOS,ROL,ENOV,KRMN,BSX,NRG,WSC,ONON,IVR,BIRK,BWXT,RUN,CNM,VFC,NXRT,MNSO,SHLS,FLY,DECK,BN,VONOY,FTAI,AEO,CRH,KTOS,MLM,NXT,SARO,CW,TDG,
-###LONG_Dropped,ABCL,AGL,AMPL,APA,APPN,ATEX,AUGO,AVAH,AXTI,BJRI,BLZE,CBRL,CHPT,CLMT,CON,CORT,CRGY,CRM,CVE,CVI,EAT,ELF,ENVA,EPC,EQNR,ETON,EZPW,FSLY,FTNT,HNGE,HNI,HPE,IBRX,IBTA,IMAX,KELYA,KNSA,KNTK,LB,LFST,LITE,LNVGY,MATV,MEI,MITK,MTA,MXL,NET,NIQ,NRIX,NSIT,NSP,NWL,OABI,OBIO,OII,OKTA,OOMA,OSCR,PAY,PAYC,PAYS,PBYI,PGEN,PR,PSX,PUBM,QNST,RCEL,RCRUY,RIGL,RNG,SAFT,SM,SMWB,SN,SNOW,STLN,TALO,TBI,TDW,TEAM,THC,TVTX,UMC,VSTM,XNCR,
+###LONG_Dropped,ABCL,AGL,AMPL,APA,APPN,AUGO,AVAH,AXTI,BJRI,BLZE,CBRL,CLMT,CON,CORT,CRGY,CRM,CVE,CVI,EAT,ELF,EPC,EQNR,ETON,FSLY,FTNT,HNGE,HPE,IBRX,IBTA,KNSA,KNTK,LB,LFST,LITE,LNVGY,MTA,MXL,NET,NIQ,NRIX,NWL,OABI,OBIO,OII,OKTA,OOMA,OSCR,PAY,PAYC,PAYS,PBYI,PGEN,PR,PSX,PUBM,RCEL,RCRUY,RIGL,RNG,SM,SMWB,SNOW,STLN,TALO,TDW,TEAM,THC,TVTX,UMC,VSTM,XNCR,
 ###SHORT_Dropped,ABR,ACM,AERO,AHCO,AIRO,AMTM,ASTS,ATS,AVAV,CCI,EH,EIX,ENPH,FSLR,ISRG,JBI,KEP,LEN,LHX,LMAT,LOMA,LPX,LUMN,MITT,MRCY,OMCL,PODD,PONY,PRCT,SEDG,STAA,SYK,TAC,TCMD,TE,TLK,TSSI,TXT,VLRS,WSO,
 
 ==============================================

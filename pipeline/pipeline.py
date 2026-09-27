@@ -234,7 +234,7 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
                 
             else:
                 theme_class = "Unknown"
-                theme_score = 60
+                theme_score = 0.0
                 theme_state = None
                 etf_raw_score = None
                 is_unclassified = False
