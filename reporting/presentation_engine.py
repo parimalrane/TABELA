@@ -776,7 +776,6 @@ def print_daily_scan(
             "Theme_Class",
             "RS_Rating",
             "Long_Score",
-            "Zacks Rank",
             "Sector (SPDR)",
             "Sector Rank"
         ]
@@ -793,13 +792,6 @@ def print_daily_scan(
     if "Long_Score" in display_df.columns:
         display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
 
-    display_df["Zacks Rank"] = (
-        display_df["Zacks Rank"]
-        .fillna(0)
-        .astype(int)
-        .astype(str)
-    )
-    
     true_longs = display_df
     true_long_tickers = true_longs["Ticker"].tolist()
 
@@ -853,7 +845,6 @@ def print_daily_scan(
                 "Theme_Class",
                 "RS_Rating",
                 "Long_Score",
-                "Zacks Rank",
                 "Sector (SPDR)",
                 "Sector Rank"
             ]
@@ -868,15 +859,6 @@ def print_daily_scan(
 
         if "Long_Score" in display_df.columns:
             display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
-
-        # Format Zacks Rank identical to Long Candidates
-        if "Zacks Rank" in display_df.columns:
-            display_df["Zacks Rank"] = (
-                display_df["Zacks Rank"]
-                .fillna(0)
-                .astype(int)
-                .astype(str)
-            )
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)

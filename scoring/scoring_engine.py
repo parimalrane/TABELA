@@ -94,7 +94,7 @@ def calculate_sales_score(stocks):
 # ZACKS SCORE
 # ----------------------------
 
-def zacks_score(rank):
+def zacks_score_legacy(rank):
 
     if rank == 1:
         return 100
@@ -109,16 +109,52 @@ def zacks_score(rank):
     else:
         return 40
 
+def zacks_score_momentum(rank):
+    # Using Fibonacci Retracement Levels
+    if rank == 1:
+        return 100.0
+    elif rank == 2:
+        return 78.6
+    elif rank == 3:
+        return 61.8
+    elif rank == 4:
+        return 38.2
+    elif rank == 5:
+        return -61.8
+    else:
+        return 38.2
+
 
 def calculate_zacks_score(stocks):
+    stocks["Zacks_Score_Legacy"] = stocks["Zacks Rank"].apply(zacks_score_legacy)
+    stocks["Zacks_Score_Momentum"] = stocks["Zacks Rank"].apply(zacks_score_momentum)
+    # Default to legacy for compatibility with obsolete files
+    stocks["Zacks_Score"] = stocks["Zacks_Score_Legacy"]
+    return stocks
 
-    stocks["Zacks_Score"] = (
+# ----------------------------
+# GROWTH SCORE
+# ----------------------------
 
-        stocks["Zacks Rank"]
+def growth_score(grade):
+    grade = str(grade).strip().upper()
+    # Using Fibonacci Retracement Levels
+    if grade == 'A':
+        return 100.0
+    elif grade == 'B':
+        return 78.6
+    elif grade == 'C':
+        return 61.8
+    elif grade == 'D':
+        return 38.2
+    else:
+        return 0.0
 
-        .apply(zacks_score)
-    )
-
+def calculate_growth_score(stocks):
+    if "Growth Score" in stocks.columns:
+        stocks["Growth_Score"] = stocks["Growth Score"].apply(growth_score)
+    else:
+        stocks["Growth_Score"] = 0.0
     return stocks
 
 

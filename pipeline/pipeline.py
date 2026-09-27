@@ -45,6 +45,7 @@ from scoring.scoring_engine import (
     calculate_rs_rating,
     calculate_sales_score,
     calculate_zacks_score,
+    calculate_growth_score,
 )
 
 from data_layer.snapshot_engine import save_daily_snapshot
@@ -730,6 +731,7 @@ def run_tabela_pipeline():
     stocks = calculate_rs_rating(stocks)
     stocks = calculate_sales_score(stocks)
     stocks = calculate_zacks_score(stocks)
+    stocks = calculate_growth_score(stocks)
     stocks = resolve_unclassified_leaders(stocks, theme_class_map)
 
     stocks = assign_stock_theme_classification(
