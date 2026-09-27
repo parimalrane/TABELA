@@ -43,24 +43,25 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Materials/Metals               Materials/Metals     2    2   99.97   Leading                         KRO
+Memory                         Semiconductors       4    2   79.26   Leading (8 -> +3)               MU, SNDK
+Data Storage                   Semiconductors       1    1   65.16   Leading (8 -> +3)               STX
 Energy Services                Energy Services      1    1   63.08   Leading                         FTK
-Consumer Staples               Consumer Staples    35    4   37.27   Leading                         CHEF, TBBB
-Restaurants                    Consumer Staples    26    2   22.43   Leading                         CAKE
+Materials/Metals               Materials/Metals     2    1   51.63   Leading                         KRO
+Biotechnology                  Biotech              5    1   34.40   Leading (6)                     PGEN
+Consumer Staples               Consumer Staples    35    3   28.56   Leading                         CHEF, TBBB
+Restaurants                    Consumer Staples    26    1   11.80   Leading                         CAKE
+Biotech                        Biotech             82    2   10.51   Leading (6)                     IOVA, HALO
+Semiconductors                 Semiconductors      41    1    8.85   Leading (8 -> +3)               SMTC
 Aerospace & Defense            Aerospace & Defe..  35    0    0.00   Lagging (38 -> -1)              #ASLE, #BWXT, #KRMN,
                                                                                                      #TDG
-Biotech                        Biotech             82    0    0.00   Leading (6)                     IOVA, HALO
-Biotechnology                  Biotech              5    0    0.00   Leading (6)                     PGEN
 Building Materials             Infrastructure      43    0    0.00   Lagging (33 -> +1)              #AMRZ, #BLDR, #CRH,
                                                                                                      #EXP, #KNF, #LII, #LMB,
                                                                                                      #LPX, #MLM, #ROL, #VMC
-Data Storage                   Semiconductors       1    0    0.00   Leading (8 -> +3)               STX
 Footwear/Apparel               Retail              39    0    0.00   Lagging (35)                    #AEO, #BIRK, #CPRI,
                                                                                                      #GIL, #GOOS, #LULU,
                                                                                                      #MNSO, #NKE, #ONON,
                                                                                                      #OXM, #SHOE, #VFC, #ZUMZ
 Homebuilders                   Infrastructure       4    0    0.00   Lagging (33 -> +1)              #LEN
-Industrial Automation          Infrastructure      42    0    0.00   Lagging (33 -> +1)              #MIDD
 Infrastructure                 Infrastructure     109    0    0.00   Lagging (33 -> +1)              #BW, #CSIQ, #CTRI, #DQ,
                                                                                                      #DY, #EIX, #HE, #JKS,
                                                                                                      #MEC, #MTRX, #MTZ, #NRG,
@@ -68,9 +69,8 @@ Infrastructure                 Infrastructure     109    0    0.00   Lagging (33
                                                                                                      #PRIM, #SHLS, #TU
 Medical Devices                Medical Devices     81    0    0.00   Lagging (37 -> -1)              #BSX, #COO, #ENOV,
                                                                                                      #OMCL, #QDEL
-Memory                         Semiconductors       4    0    0.00   Leading (8 -> +3)               MU, SNDK
 Nuclear Infrastructure         Uranium Mining       3    0    0.00   Lagging (42)                    #TLN
-Semiconductors                 Semiconductors      41    0    0.00   Leading (8 -> +3)               SMTC
+Industrial Automation          Infrastructure      42    0    0.00   Lagging (33 -> +1)              #MIDD
 Solar Infrastructure           Infrastructure       4    0    0.00   Lagging (33 -> +1)              #FSLR, #RUN
 Space Infrastructure           Aerospace & Defe..   5    0    0.00   Lagging (38 -> -1)              #LUNR
 
@@ -78,83 +78,83 @@ Space Infrastructure           Aerospace & Defe..   5    0    0.00   Lagging (38
 LONG CANDIDATE UNIVERSE
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-Ticker     Mapped_Theme  RS_Rating Long_Score Zacks Rank Sector (SPDR)  Sector Rank Movement  Days
-  CAKE      Restaurants         93      87.15          1           XLY           10        0    47
-  CHEF Consumer Staples         91      86.05          1           XLP            6        0    33
-   KRO Materials/Metals         94      84.20          2           XLB            5        0    16
-   FTK  Energy Services         91      84.05          3           XLB            5       NA     1
-  TBBB Consumer Staples         90      82.30          3           XLP            6       -1     8
-  IOVA          Biotech         99      76.61          2           XLV            3       -1    27
-    MU           Memory         98      76.51          2           XLK            2       +8    47
-  PGEN    Biotechnology         96      76.46          1           XLV            3       NA     1
-  HALO          Biotech         96      76.06          2           XLV            3       -3    26
-   STX     Data Storage         94      75.81          1           XLK            2       +8    47
-  SMTC   Semiconductors         97      75.46          1           XLK            2       NA     1
-  SNDK           Memory         99      75.26          3           XLK            2       +5    47
+Ticker     Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days Sector (Rk)
+  CAKE      Restaurants         93      87.15          1        0    47    XLY (10)
+  CHEF Consumer Staples         91      86.05          1        0    33     XLP (6)
+   KRO Materials/Metals         94      84.20          2        0    16     XLB (5)
+   FTK  Energy Services         91      84.05          3       NA     1     XLB (5)
+  TBBB Consumer Staples         90      82.30          3       -1     8     XLP (6)
+  IOVA          Biotech         99      76.61          2       -1    27     XLV (3)
+    MU           Memory         98      76.51          2       +8    47     XLK (2)
+  PGEN    Biotechnology         96      76.46          1       NA     1     XLV (3)
+  HALO          Biotech         96      76.06          2       -3    26     XLV (3)
+   STX     Data Storage         94      75.81          1       +8    47     XLK (2)
+  SMTC   Semiconductors         97      75.46          1       NA     1     XLK (2)
+  SNDK           Memory         99      75.26          3       +5    47     XLK (2)
 
 ========================================
 DISTRIBUTION WATCHLIST
 Legend: ^ = Micro Laggard
 ========================================
-Ticker           Mapped_Theme  RS_Rating Long_Score Zacks Rank Sector (SPDR)  Sector Rank Movement  Days
-  QDEL        Medical Devices          2       8.85          5           XLV            3       +2    10
-    DQ         Infrastructure          2       8.97          5           XLE            1       -1     4
-  BLDR     Building Materials          2       9.57          5           XLY           10       +2     4
-  CSIQ         Infrastructure          1      10.42          4           XLE            1       +9     4
-   JKS         Infrastructure          1      10.42          4           XLE            1       -3     4
-   KNF     Building Materials          2      10.97          5           XLI            9       +1     4
-  MIDD  Industrial Automation          6      11.17          5           XLI            9       -3     4
-    BW         Infrastructure          3      11.52          4           XLK            2        0     4
-  AMRZ     Building Materials          3      11.82          5           XLI            9      +13     4
-  LULU       Footwear/Apparel          3      12.02          5           XLY           10      +11     8
-   PNR         Infrastructure          3      12.12          5           XLK            2       -1     4
-  ZUMZ       Footwear/Apparel          1      12.32          4           XLY           10       NA     1
-  ASLE    Aerospace & Defense         10      12.58          5           XLI            9       -2     6
-    TU         Infrastructure          5      12.62          4           XLU            0       +4     4
-   LII     Building Materials          3      12.72          4           XLI            9        0     4
-  SHOE       Footwear/Apparel          8      12.77          5           XLY           10       -2     9
-  LUNR   Space Infrastructure          7      12.93          4           XLI            9      -11    17
-   MEC         Infrastructure          2      12.97          3           XLI            9       -1     4
-   OXM       Footwear/Apparel          9      13.32          5           XLY           10       +1     2
-   LPX     Building Materials          9      13.42          5           XLI            9       NA     1
-   LEN           Homebuilders         10      13.97          5           XLI            9       NA     1
-  GOOS       Footwear/Apparel          3      14.12          4           XLY           10      +12    10
-   COO        Medical Devices          4      14.55          4           XLV            3      -11     4
-   NKE       Footwear/Apparel          5      14.81          4           XLY           10       +6     9
-   ROL     Building Materials          3      14.82          4           XLK            2      +10     4
-   LMB     Building Materials          7      15.12          5           XLI            9      -10     4
-   ORN         Infrastructure          6      15.17          4           XLI            9       -3     4
-    HE         Infrastructure          8      15.17          4           XLU            0        0     4
-   BSX        Medical Devices          8      15.45          5           XLV            3       +9     9
-   TLN Nuclear Infrastructure          5      15.55          3           XLE            1      -11     4
-  CTRI         Infrastructure          2      15.67          3           XLU            0       +2     4
-   MTZ         Infrastructure          6      15.87          4           XLI            9       -6     2
-   VFC       Footwear/Apparel          4      15.96          3           XLY           10      +14     9
-   NRG         Infrastructure          4      16.07          3           XLU            0       +5     2
-  ONON       Footwear/Apparel          3      16.11          4           XLY           10       +6     9
-    DY         Infrastructure          3      16.22          3           XLI            9       -4     2
-   AEO       Footwear/Apparel          4      16.27          3           XLY           10      +19     4
-  MTRX         Infrastructure          7      16.42          4           XLI            9       -9     2
-  KRMN    Aerospace & Defense          2      16.58          3           XLI            9       -2    12
-  BIRK       Footwear/Apparel          3      16.71          3           XLY           10       +3     7
-  CPRI       Footwear/Apparel          8      16.77          3           XLY           10      -16    10
-  ENOV        Medical Devices          7      17.00          3           XLV            3       -6     9
-   RUN   Solar Infrastructure          1      17.12          3           XLE            1       +2     2
-  MNSO       Footwear/Apparel          2      17.27          3           XLY           10       +5     9
-  BWXT    Aerospace & Defense          6      17.38          3           XLI            9       -1     8
-   CRH     Building Materials          6      17.47          3           XLI            9      +11     2
-  SHLS         Infrastructure          5      17.62          3           XLE            1       +3     2
-   PCG         Infrastructure          7      18.32          3           XLU            0       NA     1
-   MLM     Building Materials          9      18.62          3           XLI            9      +10     2
-  OMCL        Medical Devices          9      18.70          3           XLV            3       NA     1
-  PRIM         Infrastructure          8      18.97          3           XLI            9      -24     4
-   NXT         Infrastructure          6      19.17          3           XLE            1       +8     2
-   TDG    Aerospace & Defense          9      19.33          3           XLI            9      +10     2
-   GIL       Footwear/Apparel          9      19.42          3           XLY           10       NA     1
-   EIX         Infrastructure          8      19.47          3           XLU            0       NA     1
-  FSLR   Solar Infrastructure          6      19.77          3           XLE            1       NA     1
-   EXP     Building Materials         10      19.97          3           XLI            9       NA     1
-   VMC     Building Materials         10      19.97          3           XLI            9       NA     1
+Ticker           Mapped_Theme  RS_Rating Long_Score Zacks Rank Movement  Days Sector (Rk)
+  QDEL        Medical Devices          2       8.85          5       +2    10     XLV (3)
+    DQ         Infrastructure          2       8.97          5       -1     4     XLE (1)
+  BLDR     Building Materials          2       9.57          5       +2     4    XLY (10)
+  CSIQ         Infrastructure          1      10.42          4       +9     4     XLE (1)
+   JKS         Infrastructure          1      10.42          4       -3     4     XLE (1)
+   KNF     Building Materials          2      10.97          5       +1     4     XLI (9)
+  MIDD  Industrial Automation          6      11.17          5       -3     4     XLI (9)
+    BW         Infrastructure          3      11.52          4        0     4     XLK (2)
+  AMRZ     Building Materials          3      11.82          5      +13     4     XLI (9)
+  LULU       Footwear/Apparel          3      12.02          5      +11     8    XLY (10)
+   PNR         Infrastructure          3      12.12          5       -1     4     XLK (2)
+  ZUMZ       Footwear/Apparel          1      12.32          4       NA     1    XLY (10)
+  ASLE    Aerospace & Defense         10      12.58          5       -2     6     XLI (9)
+    TU         Infrastructure          5      12.62          4       +4     4     XLU (0)
+   LII     Building Materials          3      12.72          4        0     4     XLI (9)
+  SHOE       Footwear/Apparel          8      12.77          5       -2     9    XLY (10)
+  LUNR   Space Infrastructure          7      12.93          4      -11    17     XLI (9)
+   MEC         Infrastructure          2      12.97          3       -1     4     XLI (9)
+   OXM       Footwear/Apparel          9      13.32          5       +1     2    XLY (10)
+   LPX     Building Materials          9      13.42          5       NA     1     XLI (9)
+   LEN           Homebuilders         10      13.97          5       NA     1     XLI (9)
+  GOOS       Footwear/Apparel          3      14.12          4      +12    10    XLY (10)
+   COO        Medical Devices          4      14.55          4      -11     4     XLV (3)
+   NKE       Footwear/Apparel          5      14.81          4       +6     9    XLY (10)
+   ROL     Building Materials          3      14.82          4      +10     4     XLK (2)
+   LMB     Building Materials          7      15.12          5      -10     4     XLI (9)
+   ORN         Infrastructure          6      15.17          4       -3     4     XLI (9)
+    HE         Infrastructure          8      15.17          4        0     4     XLU (0)
+   BSX        Medical Devices          8      15.45          5       +9     9     XLV (3)
+   TLN Nuclear Infrastructure          5      15.55          3      -11     4     XLE (1)
+  CTRI         Infrastructure          2      15.67          3       +2     4     XLU (0)
+   MTZ         Infrastructure          6      15.87          4       -6     2     XLI (9)
+   VFC       Footwear/Apparel          4      15.96          3      +14     9    XLY (10)
+   NRG         Infrastructure          4      16.07          3       +5     2     XLU (0)
+  ONON       Footwear/Apparel          3      16.11          4       +6     9    XLY (10)
+    DY         Infrastructure          3      16.22          3       -4     2     XLI (9)
+   AEO       Footwear/Apparel          4      16.27          3      +19     4    XLY (10)
+  MTRX         Infrastructure          7      16.42          4       -9     2     XLI (9)
+  KRMN    Aerospace & Defense          2      16.58          3       -2    12     XLI (9)
+  BIRK       Footwear/Apparel          3      16.71          3       +3     7    XLY (10)
+  CPRI       Footwear/Apparel          8      16.77          3      -16    10    XLY (10)
+  ENOV        Medical Devices          7      17.00          3       -6     9     XLV (3)
+   RUN   Solar Infrastructure          1      17.12          3       +2     2     XLE (1)
+  MNSO       Footwear/Apparel          2      17.27          3       +5     9    XLY (10)
+  BWXT    Aerospace & Defense          6      17.38          3       -1     8     XLI (9)
+   CRH     Building Materials          6      17.47          3      +11     2     XLI (9)
+  SHLS         Infrastructure          5      17.62          3       +3     2     XLE (1)
+   PCG         Infrastructure          7      18.32          3       NA     1     XLU (0)
+   MLM     Building Materials          9      18.62          3      +10     2     XLI (9)
+  OMCL        Medical Devices          9      18.70          3       NA     1     XLV (3)
+  PRIM         Infrastructure          8      18.97          3      -24     4     XLI (9)
+   NXT         Infrastructure          6      19.17          3       +8     2     XLE (1)
+   TDG    Aerospace & Defense          9      19.33          3      +10     2     XLI (9)
+   GIL       Footwear/Apparel          9      19.42          3       NA     1    XLY (10)
+   EIX         Infrastructure          8      19.47          3       NA     1     XLU (0)
+  FSLR   Solar Infrastructure          6      19.77          3       NA     1     XLE (1)
+   EXP     Building Materials         10      19.97          3       NA     1     XLI (9)
+   VMC     Building Materials         10      19.97          3       NA     1     XLI (9)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###LONG,CAKE,CHEF,KRO,FTK,TBBB,IOVA,MU,PGEN,HALO,STX,SMTC,SNDK,
