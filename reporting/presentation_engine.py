@@ -817,8 +817,15 @@ def print_daily_scan(
     if not true_longs.empty:
         true_longs["Movement"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         true_longs["Days"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
-        # Just add arbitrary padding to Ticker directly if we wanted, but we leave it natively left aligned
+        
+        # Merge columns to save horizontal space
+        true_longs["Sector (Rk)"] = true_longs["Sector (SPDR)"].astype(str) + " (" + true_longs["Sector Rank"].astype(str) + ")"
+        
+        # Keep Movement but format it cleaner if needed. Wait, we want to restore Movement.
         true_longs["Ticker"] = true_longs["Ticker"].apply(lambda t: f" {str(t).strip()}")
+        
+        # Drop the un-merged columns
+        true_longs = true_longs.drop(columns=["Sector (SPDR)", "Sector Rank"])
         
     if true_longs.empty:
         print("No active candidates in Long Candidate Universe.")
@@ -873,7 +880,12 @@ def print_daily_scan(
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
+        
+        display_df["Sector (Rk)"] = display_df["Sector (SPDR)"].astype(str) + " (" + display_df["Sector Rank"].astype(str) + ")"
+        
         display_df["Ticker"] = display_df["Ticker"].apply(lambda t: f" {str(t).strip()}")
+        display_df = display_df.drop(columns=["Sector (SPDR)", "Sector Rank"])
+        
         print(display_df.to_string(index=False))
 
     # Delta lists are handled natively via 'Days = 1' and the detailed Dropped Tables
