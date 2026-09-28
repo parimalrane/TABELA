@@ -10,6 +10,7 @@ def build_long_watchlist(stocks, registry=None):
         & (stocks["RS_Rating"] >= LONG_ENTRY["MIN_RS"])
         & (stocks["Long_Score"] >= LONG_ENTRY["MIN_LONG_SCORE"])
     )
+
     if blocked_zacks:
         zacks_numeric = pd.to_numeric(stocks["Zacks Rank"], errors="coerce").fillna(0).astype(int)
         standard_entry = standard_entry & (~zacks_numeric.isin(blocked_zacks))

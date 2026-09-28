@@ -216,35 +216,37 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
             etf_raw_score = theme_raw_score_map.get(etf_theme)
             is_unclassified = False
         else:
-            u_rs = 90
-            u_growth = 61.8 # Requires Growth C or better
-            u_zacks = 61.8  # Requires Zacks 3 or better
+            theme_class = "Unknown"
+            theme_score = 0.0
+            theme_state = None
+            etf_raw_score = None
+            is_unclassified = False
 
-            if (
-                row["RS_Rating"] >= u_rs
-                and row.get("Growth_Score", 0) >= u_growth
-                and row.get("Zacks_Score", 0) >= u_zacks
-            ):
-                theme_class = "Unclassified Leader"
-                theme_score = 80
-                is_unclassified = True
-                theme_state = None
-                etf_raw_score = None
-                
-            else:
-                theme_class = "Unknown"
-                theme_score = 0.0
-                theme_state = None
-                etf_raw_score = None
-                is_unclassified = False
-
-        # Apply Breakaway Micro-Theme Override
+        # 1. Apply Breakaway Micro-Theme Override
         # If the overarching macro-theme is dead, but the micro-theme is statistically elite, decouple it
-        if theme_class not in ["Leading", "Unclassified Leader"] and mapped_theme in breakaway_leaders:
+        if theme_class not in ["Leading"] and mapped_theme in breakaway_leaders:
             theme_class = "Micro Leader"
             
         if theme_class not in ["Lagging"] and mapped_theme in breakaway_laggards:
             theme_class = "Micro Laggard"
+
+        # 2. Idiosyncratic Breakout Escape Hatch
+        if theme_class not in ["Leading", "Micro Leader"] and row["RS_Rating"] >= 90 and row.get("Growth_Score", 0) >= 78.6 and row.get("Zacks_Score", 0) >= 78.6:
+            theme_class = "Unclassified Leader"
+            
+            # Dynamic Theme Subsidy: Use Zacks Industry Rank as the pure proxy for missing ETF Macro points.
+            # DAMPENED: Rank 1 -> 25.0 points, Rank 260+ -> 0.0 points
+            # This mathematically caps their Long Score around ~80.7, making it physically impossible 
+            # to overtake true macro leaders like Semiconductors, while still dynamically sorting them.
+            z_ind = pd.to_numeric(row.get("Zacks Industry Rank"), errors="coerce")
+            if pd.notna(z_ind) and z_ind > 0:
+                theme_score = max(0.0, 25.0 - ((z_ind - 1) / 259.0) * 25.0)
+            else:
+                theme_score = 0.0
+                
+            is_unclassified = True
+            theme_state = None
+            etf_raw_score = None
 
         theme_classes.append(theme_class)
         theme_scores.append(theme_score)
@@ -280,11 +282,6 @@ def resolve_unclassified_leaders(stocks, theme_class_map):
             pass
     
     for ticker, theme in overrides.items():
-        parent_theme = THEME_TRANSLATION.get(theme, theme)
-        if parent_theme not in theme_class_map:
-            theme_class_map[parent_theme] = "Leading"
-        if theme not in theme_class_map:
-            theme_class_map[theme] = "Leading"
 
         mask = stocks["Ticker"] == ticker
         if mask.any():
