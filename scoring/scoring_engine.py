@@ -58,58 +58,14 @@ def calculate_rs_rating(stocks):
 
 
 
-# ----------------------------
-# SALES SCORE
-# ----------------------------
 
-def sales_score(growth):
-
-    if growth >= 50:
-        return 100
-    elif growth >= 30:
-        return 90
-    elif growth >= 20:
-        return 80
-    elif growth >= 10:
-        return 70
-    elif growth >= 0:
-        return 60
-    else:
-        return 40
-
-
-def calculate_sales_score(stocks):
-
-    stocks["Sales_Score"] = (
-
-        stocks["Sales Growth F(0)/F(-1)"]
-
-        .apply(sales_score)
-    )
-
-    return stocks
 
 
 # ----------------------------
 # ZACKS SCORE
 # ----------------------------
 
-def zacks_score_legacy(rank):
-
-    if rank == 1:
-        return 100
-    elif rank == 2:
-        return 85
-    elif rank == 3:
-        return 60
-    elif rank == 4:
-        return 40
-    elif rank == 5:
-        return 20
-    else:
-        return 40
-
-def zacks_score_momentum(rank):
+def zacks_score(rank):
     # Using Fibonacci Retracement Levels
     if rank == 1:
         return 100.0
@@ -126,10 +82,7 @@ def zacks_score_momentum(rank):
 
 
 def calculate_zacks_score(stocks):
-    stocks["Zacks_Score_Legacy"] = stocks["Zacks Rank"].apply(zacks_score_legacy)
-    stocks["Zacks_Score_Momentum"] = stocks["Zacks Rank"].apply(zacks_score_momentum)
-    # Default to legacy for compatibility with obsolete files
-    stocks["Zacks_Score"] = stocks["Zacks_Score_Legacy"]
+    stocks["Zacks_Score"] = stocks["Zacks Rank"].apply(zacks_score)
     return stocks
 
 # ----------------------------
@@ -152,44 +105,7 @@ def growth_score(grade):
 
 def calculate_growth_score(stocks):
     if "Growth Score" in stocks.columns:
-        stocks["Growth_Score"] = stocks["Growth Score"].apply(growth_score)
+        stocks["Growth_Score"] = stocks["Growth Score"].fillna('C').apply(growth_score)
     else:
-        stocks["Growth_Score"] = 0.0
-    return stocks
-
-
-# ----------------------------
-# MARGIN SCORE
-# ----------------------------
-
-def margin_score(p):
-
-    if p >= 0.80:
-        return 100
-    elif p >= 0.60:
-        return 80
-    elif p >= 0.40:
-        return 70
-    elif p >= 0.20:
-        return 60
-    else:
-        return 40
-
-
-def calculate_margin_score(stocks):
-
-    stocks["Margin_Percentile"] = (
-
-        stocks["Net Margin %"]
-
-        .rank(pct=True)
-    )
-
-    stocks["Margin_Score"] = (
-
-        stocks["Margin_Percentile"]
-
-        .apply(margin_score)
-    )
-
+        stocks["Growth_Score"] = growth_score('C')
     return stocks

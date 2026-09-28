@@ -26,15 +26,8 @@ THEME_STRENGTH_CONFIG = {
 LONG_WEIGHTS = {
     "RS_WEIGHT": 0.55,
     "THEME_WEIGHT": 0.25,
-    
-    # Live CANSLIM Engine Weights
-    "ZACKS_WEIGHT_MOMENTUM": 0.12,
-    "GROWTH_WEIGHT": 0.08,
-    
-    # Historical Regression / Legacy Logic
-    "ZACKS_WEIGHT_LEGACY": 0.10,
-    "SALES_WEIGHT": 0.07,
-    "MARGIN_WEIGHT": 0.03
+    "ZACKS_WEIGHT": 0.12,
+    "GROWTH_WEIGHT": 0.08
 }
 
 RS_RAW_WEIGHTS = {
