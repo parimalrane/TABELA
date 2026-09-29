@@ -166,33 +166,19 @@ def build_theme_classification(theme_strength):
         theme_class_map[theme] = theme_class
         theme_score_map[theme] = theme_score
 
-    return theme_class_map, theme_score_map, theme_rank_map, theme_raw_score_map
+    # Calculate exactly what the current market averages for true "Leading" sectors
+    leading_scores = [score for cls, score in zip(theme_class_map.values(), theme_score_map.values()) if cls == "Leading"]
+    avg_leading_score = sum(leading_scores) / len(leading_scores) if leading_scores else 80.0
+
+    return theme_class_map, theme_score_map, theme_rank_map, theme_raw_score_map, avg_leading_score
 
 
-def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, theme_raw_score_map):
+def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, theme_raw_score_map, avg_leading_score):
     theme_classes = []
     is_unclassified_leaders = []
     theme_scores = []
     theme_states = []
     etf_raw_scores = []
-
-    from config.config import LONG_ENTRY
-    breakaway_pct = LONG_ENTRY.get("MICRO_BREAKAWAY_PERCENTILE", 0.05)
-    
-    # Pre-calculate pure micro-theme momentum to find Breakaways
-    micro_stats = stocks.groupby("Mapped_Theme").agg(
-        Avg_Mom=("RS_Rating", "mean"),
-        Count=("Ticker", "count")
-    ).reset_index()
-    
-    # Must have at least 3 stocks to prevent single-stock noise from distorting the micro-theme
-    micro_valid = micro_stats[micro_stats["Count"] >= 3].sort_values("Avg_Mom", ascending=False)
-    
-    total_valid = len(micro_valid)
-    slice_count = max(1, int(total_valid * breakaway_pct)) if total_valid > 0 else 0
-    
-    breakaway_leaders = set(micro_valid.head(slice_count)["Mapped_Theme"].tolist())
-    breakaway_laggards = set(micro_valid.tail(slice_count)["Mapped_Theme"].tolist())
 
     for _, row in stocks.iterrows():
         # Respect manually injected overrides to prevent overwriting
@@ -222,16 +208,11 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
             etf_raw_score = None
             is_unclassified = False
 
-        # 1. Apply Breakaway Micro-Theme Override
-        # If the overarching macro-theme is dead, but the micro-theme is statistically elite, decouple it
-        if theme_class not in ["Leading"] and mapped_theme in breakaway_leaders:
-            theme_class = "Micro Leader"
-            
-        if theme_class not in ["Lagging"] and mapped_theme in breakaway_laggards:
-            theme_class = "Micro Laggard"
+        # The Micro-Leader backdoor has been officially removed. 
+        # All stocks are strictly bound to their true ETF Macro performance.
 
         # 2. Idiosyncratic Breakout Escape Hatch
-        if theme_class not in ["Leading", "Micro Leader"] and row["RS_Rating"] >= 90 and row.get("Growth_Score", 0) >= 78.6 and row.get("Zacks_Score", 0) >= 78.6:
+        if theme_class not in ["Leading", "Micro Leader"] and row["RS_Rating"] >= 90 and row.get("Growth_Score", 0) >= 95.0 and row.get("Zacks_Score", 0) >= 95.0:
             theme_class = "Unclassified Leader"
             
             # Dynamic Theme Subsidy: Use Zacks Industry Rank as the pure proxy for missing ETF Macro points.
@@ -710,8 +691,8 @@ def run_tabela_pipeline():
         benchmark_returns,
         theme_strength_settings,
     )
-    theme_class_map, theme_score_map, theme_rank_map, theme_raw_score_map = build_theme_classification(theme_strength)
-
+    theme_class_map, theme_score_map, theme_rank_map, theme_raw_score_map, avg_leading_score = build_theme_classification(theme_strength)
+    
     stocks = map_stock_themes(stocks)
 
 
@@ -729,6 +710,7 @@ def run_tabela_pipeline():
         theme_class_map,
         theme_score_map,
         theme_raw_score_map,
+        avg_leading_score
     )
 
     stocks = score_stocks(stocks)

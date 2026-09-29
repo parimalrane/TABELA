@@ -754,12 +754,12 @@ def print_daily_scan(
         "Transportation": "XLI", "Conglomerates": "XLI", "Multi-Sector Conglomerates": "XLI"
     }
 
-    if long_candidates is not None and not long_candidates.empty:
+    if long_candidates is not None:
         if "Sector" in long_candidates.columns:
             long_candidates["Sector (SPDR)"] = long_candidates["Sector"].map(ZACKS_TO_SPDR).fillna("N/A")
             long_candidates["Sector Rank"] = long_candidates["Sector (SPDR)"].map(sector_rs_map).fillna(0).astype(int)
 
-    if distribution_watchlist is not None and not distribution_watchlist.empty:
+    if distribution_watchlist is not None:
         if "Sector" in distribution_watchlist.columns:
             distribution_watchlist["Sector (SPDR)"] = distribution_watchlist["Sector"].map(ZACKS_TO_SPDR).fillna("N/A")
             distribution_watchlist["Sector Rank"] = distribution_watchlist["Sector (SPDR)"].map(sector_rs_map).fillna(0).astype(int)

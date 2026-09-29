@@ -66,19 +66,19 @@ def calculate_rs_rating(stocks):
 # ----------------------------
 
 def zacks_score(rank):
-    # Using Fibonacci Retracement Levels
+    # Alpha Accumulation Curve (Flattened 1-3, Punishing 4-5)
     if rank == 1:
         return 100.0
     elif rank == 2:
-        return 78.6
+        return 95.0
     elif rank == 3:
-        return 61.8
+        return 90.0
     elif rank == 4:
-        return 38.2
+        return 20.0
     elif rank == 5:
-        return -61.8
+        return -50.0
     else:
-        return 38.2
+        return 20.0
 
 
 def calculate_zacks_score(stocks):
@@ -91,17 +91,19 @@ def calculate_zacks_score(stocks):
 
 def growth_score(grade):
     grade = str(grade).strip().upper()
-    # Using Fibonacci Retracement Levels
+    # Alpha Accumulation Curve (Flattened A-C, Punishing D/F)
     if grade == 'A':
         return 100.0
     elif grade == 'B':
-        return 78.6
+        return 95.0
     elif grade == 'C':
-        return 61.8
+        return 90.0
     elif grade == 'D':
-        return 38.2
+        return 20.0
+    elif grade == 'F':
+        return -50.0
     else:
-        return 0.0
+        return 20.0
 
 def calculate_growth_score(stocks):
     if "Growth Score" in stocks.columns:

@@ -14,6 +14,17 @@ def build_long_watchlist(stocks, registry=None):
     if blocked_zacks:
         zacks_numeric = pd.to_numeric(stocks["Zacks Rank"], errors="coerce").fillna(0).astype(int)
         standard_entry = standard_entry & (~zacks_numeric.isin(blocked_zacks))
+        
+    min_price = LONG_ENTRY.get("MIN_PRICE", 0.0)
+    min_volume = LONG_ENTRY.get("MIN_VOLUME", 0)
+    
+    if "Last Close" in stocks.columns:
+        valid_price = pd.to_numeric(stocks["Last Close"], errors="coerce").fillna(0) >= min_price
+        standard_entry = standard_entry & valid_price
+        
+    if "Avg Volume" in stocks.columns:
+        valid_volume = pd.to_numeric(stocks["Avg Volume"], errors="coerce").fillna(0) >= min_volume
+        standard_entry = standard_entry & valid_volume
 
     long_watchlist = stocks[standard_entry].copy()
     
