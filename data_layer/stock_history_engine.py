@@ -193,6 +193,24 @@ def save_stock_history(stocks):
                 safe_float(row.get("Long_Score", 0)), 2
             ),
 
+            # Short Engine (isolated scoring — never mixed with long_score)
+            "short_score": round(
+                safe_float(row.get("Short_Score", 0)), 2
+            ),
+
+            "short_rs_rating": safe_int(
+                row.get("Short_RS_Rating", 0)
+            ),
+
+            # Liquidity fields
+            "last_close": round(
+                safe_float(row.get("Last Close", 0)), 2
+            ),
+
+            "avg_volume": safe_float(
+                row.get("Avg Volume", 0)
+            ),
+
             "tracking_state": row.get(
                 "Tracking_State",
                 "UNTRACKED"

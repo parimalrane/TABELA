@@ -2,7 +2,7 @@ import os
 import json
 import pandas as pd
 from pathlib import Path
-from config.config import LONG_ENTRY, DIST_ENTRY
+from config.config import LONG_ENTRY, DIST_ENTRY, SHORT_ENTRY
 
 def run_backtest(mode="long", silent=False):
     prices = {}
@@ -48,7 +48,8 @@ def run_backtest(mode="long", silent=False):
                 long_score = row.get("long_score", 0.0)
                 rs_rating = row.get("rs_rating", 0)
             else:
-                long_score = row.get("long_score", 100.0)
+                # Use dedicated short_score if available, fall back to long_score
+                long_score = row.get("short_score", row.get("long_score", 100.0))
                 rs_rating = row.get("rs_rating", 100)
                 
             ticker = row["ticker"]
@@ -75,16 +76,25 @@ def run_backtest(mode="long", silent=False):
                             entries[ticker]["best_score"] = long_score
 
             elif mode == "short":
-                allowed_themes = DIST_ENTRY.get("THEMES", [])
-                max_rs = DIST_ENTRY.get("MAX_RS", 10.0)
-                min_rs_short = DIST_ENTRY.get("MIN_RS", 0.0)
-                max_score = DIST_ENTRY.get("MAX_LONG_SCORE", 20.0)
-                min_price = LONG_ENTRY.get("MIN_PRICE", 10.0)
-                
-                if long_score <= max_score and rs_rating <= max_rs and rs_rating > min_rs_short and theme_class in allowed_themes:
+                allowed_themes = SHORT_ENTRY.get("THEMES", [])
+                max_rs = SHORT_ENTRY.get("MAX_SHORT_RS", 15.0)
+                min_rs_short = SHORT_ENTRY.get("MIN_SHORT_RS", 8.0)
+                max_score = SHORT_ENTRY.get("MAX_SHORT_SCORE", 25.0)
+                min_price = SHORT_ENTRY.get("MIN_PRICE", 10.0)
+                min_volume = SHORT_ENTRY.get("MIN_VOLUME", 0)
+
+                avg_vol = row.get("avg_volume", 0) or 0
+                last_close = row.get("last_close", 0) or 0
+
+                passes_liquidity = (last_close >= min_price) and (avg_vol >= min_volume)
+
+                if (long_score <= max_score and rs_rating <= max_rs
+                        and rs_rating > min_rs_short
+                        and theme_class in allowed_themes
+                        and passes_liquidity):
                     if ticker not in entries:
                         entry_price = prices.get(date_str, {}).get(ticker, 0)
-                        if entry_price >= min_price:  
+                        if entry_price >= min_price:
                             entries[ticker] = {
                                 "entry_date": date_str,
                                 "entry_price": entry_price,
@@ -108,10 +118,13 @@ def run_backtest(mode="long", silent=False):
                 
             results.append({
                 "Ticker": ticker,
+                "Entry Date": data["entry_date"],
                 "Entry Px": data["entry_price"],
                 "Current Px": current_price,
                 "Return %": round(ret, 2),
-                "Class": data["theme_class"]
+                "Win": "YES" if ret > 0 else "NO",
+                "Class": data["theme_class"],
+                "Best Score": round(data["best_score"], 2),
             })
 
     res_df = pd.DataFrame(results)
@@ -149,6 +162,7 @@ def run_backtest(mode="long", silent=False):
         "lagging_trades": lg_t,
         "lagging_win_rate": round((len(lagging[lagging['Return %'] > 0]) / lg_t * 100), 2) if lg_t else 0.0,
         "lagging_avg_return": round(lagging['Return %'].mean(), 2) if lg_t else 0.0,
+        "_detail_df": res_df,  # Full trade-level DataFrame for detail mode
     }
     
     if not silent:

@@ -60,12 +60,55 @@ LONG_ENTRY = {
 }
 
 DIST_ENTRY = {
-    "MIN_RS": 8.0,            # Grid Search Winner: Floor to prevent dead-cat bounce squeezes
-    "MAX_RS": 15.0,           # Grid Search Winner: Widened from 10 to catch breakdowns earlier
-    "MAX_LONG_SCORE": 25.0,    # Grid Search Winner: Widened from 20 to catch breakdowns earlier
-    "THEMES": ["Lagging", "Micro Laggard"],
+    # Phase 2 Grid Search Winner (T7): 73.28% WR | +5.16% avg return | ~11 shorts/day
+    # "Fall From Grace" zone: former mid-range stocks actively losing momentum
+    "MIN_RS": 50.0,            # Floor: stocks must still have some standing to fall from
+    "MAX_RS": 75.0,            # Ceiling: catch before they become obvious laggards
+    "MAX_LONG_SCORE": 50.0,    # Only short stocks with clear composite deterioration
+    "THEMES": ["Neutral", "Unknown"],  # Neutral-only: Lagging adds noise at this RS level
     "MICRO_BREAKAWAY_PERCENTILE": 0.05,
     "BLOCKED_ZACKS": [1, 2],
     "MAX_DROPPED_WATCH_SCORE": 30.0
+}
+
+# ==========================
+# SHORT ENGINE (ISOLATED)
+# These variables are EXCLUSIVELY used by the Short backtesting tuner.
+# They do NOT affect the live Long pipeline in any way.
+# Tune these freely without risk of breaking the Long engine.
+# ==========================
+
+# Short-specific RS raw weights — P3-C Winner: YTD Reversal (YTD 40%, 4W 30%, 12W 20%, 1W 10%)
+SHORT_RS_RAW_WEIGHTS = {
+    "% Price Change (4 Weeks)": 0.30,
+    "% Price Change (12 Weeks)": 0.20,
+    "% Price Change (1 Week)": 0.10,
+    "Relative Price Change (YTD)": 0.40,   # Peak-to-trough reversal is the key short signal
+    "Price as a % of 52 Wk H-L Range": 0.00,
+}
+
+# Short-specific composite weights — P3-C Winner: RS Heavy (RS 65%, Theme 20%)
+SHORT_COMPOSITE_WEIGHTS = {
+    "RS_WEIGHT": 0.65,
+    "THEME_WEIGHT": 0.20,
+    "ZACKS_WEIGHT": 0.10,
+    "GROWTH_WEIGHT": 0.05,
+}
+
+# Short-specific Zacks scoring (reward confirmed sell ratings, penalise buys)
+SHORT_ZACKS_SCORE_MAP = {1: -100.0, 2: -50.0, 3: 20.0, 4: 80.0, 5: 100.0}
+
+# Short-specific Growth scoring (reward deteriorating earnings quality)
+SHORT_GROWTH_SCORE_MAP = {'A': -50.0, 'B': 0.0, 'C': 50.0, 'D': 80.0, 'F': 100.0}
+
+# Short entry thresholds — T7 Phase 2 Winner: 73.28% WR | +5.16% avg | ~11 stocks/day
+SHORT_ENTRY = {
+    "MIN_SHORT_RS": 50.0,      # Floor: stocks must still have standing to fall from (no graveyards)
+    "MAX_SHORT_RS": 75.0,      # Ceiling: catch the Fall From Grace before it becomes obvious
+    "MAX_SHORT_SCORE": 50.0,   # Score < 50 confirmed breakdown conviction
+    "THEMES": ["Neutral", "Unknown"],  # Neutral-only: Lagging adds noise at RS 50-75
+    "BLOCKED_ZACKS": [1, 2],
+    "MIN_PRICE": 10.0,         # Never short penny stocks
+    "MIN_VOLUME": 1_000_000,   # Institutional liquidity floor (borrow availability)
 }
 

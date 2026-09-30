@@ -44,8 +44,8 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Refining & Marketing           Exploration          8    8  213.41   Leading (6)                     PBF, DINO, MPC, DK,
-                                                                                                     CLMT, VLO, PSX, PARR
+Refining & Marketing           Exploration          8    8  213.41   Leading (6)                     PBF, DINO, VLO, MPC, DK,
+                                                                                                     CLMT, PSX, PARR
 Materials/Metals               Materials/Metals     2    1   51.63   Unknown                         MTA
 Restaurants                    Consumer Staples    26    1   11.80   Unknown                         EAT
 Aerospace & Defense            Aerospace & Defe..  36    0    0.00   Lagging (42 -> +1)              #AIRO, #BWXT, #FTAI,
@@ -80,10 +80,10 @@ Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
    PBF Refining & Marketing      91.68         99       NA     1     XLE (1)
   DINO Refining & Marketing      91.18         98       NA     1     XLE (1)
    MTA     Materials/Metals      91.00         94       NA     1     XLB (7)
+   VLO Refining & Marketing      90.68         97       NA     1     XLE (1)
    MPC Refining & Marketing      90.68         97       NA     1     XLE (1)
     DK Refining & Marketing      90.68         97       NA     1     XLE (1)
   CLMT Refining & Marketing      90.68         97       NA     1     XLE (1)
-   VLO Refining & Marketing      90.68         97       NA     1     XLE (1)
    EAT          Restaurants      90.50         93       NA     1    XLY (11)
    PSX Refining & Marketing      90.18         96       NA     1     XLE (1)
   PARR Refining & Marketing      90.18         96       NA     1     XLE (1)
@@ -94,9 +94,9 @@ Legend: ^ = Micro Laggard
 ========================================
 Ticker              Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
    KNF        Building Materials       2.84          9       +3     4    XLI (10)
-   PNR            Infrastructure       3.84         11       +1     4     XLK (4)
+   PNR            Infrastructure       3.84         11        0     4     XLK (4)
   BLDR        Building Materials       4.84         13       +2     4    XLY (11)
-  AMRZ        Building Materials       5.34         14       -2     3    XLI (10)
+  AMRZ        Building Materials       5.34         14       -1     3    XLI (10)
   AMSF                 Insurance       7.63         14       NA     1     XLF (2)
    LII        Building Materials      10.34          9       +2     3    XLI (10)
    PCG            Infrastructure      10.84         10       NA     1     XLU (5)
@@ -109,45 +109,45 @@ Ticker              Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk
     HE            Infrastructure      13.34         15       -5     6     XLU (5)
   FTAI       Aerospace & Defense      13.50          9        0     3    XLI (10)
    BHF                 Insurance      14.13         12       NA     1     XLF (2)
-   TXT       Aerospace & Defense      14.50         11        0     4    XLI (10)
-   LHX       Aerospace & Defense      14.50         11       -4     3    XLI (10)
-  BWXT       Aerospace & Defense      15.50         13       -1     2    XLI (10)
+   LHX       Aerospace & Defense      14.50         11       -3     3    XLI (10)
+   TXT       Aerospace & Defense      14.50         11       -1     4    XLI (10)
+  BWXT       Aerospace & Defense      15.50         13        0     2    XLI (10)
   ETOR                 Insurance      15.63         15       NA     1     XLF (2)
   VLRS   Transportation/Shipping      15.98          9      +11    12    XLI (10)
   AIRO       Aerospace & Defense      16.00         14       NA     1    XLI (10)
   ALGT   Transportation/Shipping      16.48         10        0     2    XLI (10)
-  SARO       Aerospace & Defense      16.50         15       -5     6    XLI (10)
-   VFC          Footwear/Apparel      16.54          8      +17     7    XLY (11)
+  SARO       Aerospace & Defense      16.50         15       -6     6    XLI (10)
+   VFC          Footwear/Apparel      16.54          8      +16     7    XLY (11)
+   AAL   Transportation/Shipping      16.98         11       -4     5    XLI (10)
+   HRI   Transportation/Shipping      16.98         11      +17     4    XLI (10)
    RXO   Transportation/Shipping      16.98         11       +9     3    XLI (10)
-   HRI   Transportation/Shipping      16.98         11      +18     4    XLI (10)
-   AAL   Transportation/Shipping      16.98         11       -6     5    XLI (10)
   FLEX Electronics Manufacturing      17.34          8       NA     1     XLK (4)
-   ALK   Transportation/Shipping      17.48         12       -2     5    XLI (10)
-   LUV   Transportation/Shipping      17.48         12       -4     6    XLI (10)
-    RL          Footwear/Apparel      17.54         10      +22     3    XLY (11)
-  SHOE          Footwear/Apparel      17.54         10      +14     7    XLY (11)
-  PRIM            Infrastructure      17.84          9       -4     4    XLI (10)
+   ALK   Transportation/Shipping      17.48         12       -3     5    XLI (10)
+   LUV   Transportation/Shipping      17.48         12       -3     6    XLI (10)
+  SHOE          Footwear/Apparel      17.54         10      +15     7    XLY (11)
+    RL          Footwear/Apparel      17.54         10      +21     3    XLY (11)
+  PRIM            Infrastructure      17.84          9       -5     4    XLI (10)
   PONY   Transportation/Shipping      17.98         13       NA     1    XLI (10)
   MCHP            Semiconductors      18.12          8       NA     1     XLK (4)
    STM            Semiconductors      18.12          8      -16     4     XLK (4)
-   RRX     Industrial Automation      18.34         10      -14     4    XLI (10)
-  AMTM            Infrastructure      18.34         10       -6     9    XLI (10)
+  AMTM            Infrastructure      18.34         10       -5     9    XLI (10)
+   RRX     Industrial Automation      18.34         10      -15     4    XLI (10)
   SEDG      Solar Infrastructure      18.34         10      -15     4     XLE (1)
    PVH          Footwear/Apparel      18.54         12      +11     5    XLY (11)
   LSCC            Semiconductors      18.62          9      -16     6     XLK (4)
   OMCL           Medical Devices      18.66         14       NA     1     XLV (3)
-  STAA           Medical Devices      18.66         14       NA     1     XLV (3)
   HIMS           Medical Devices      18.66         14       NA     1     XLV (3)
-  ULCC   Transportation/Shipping      18.98         15       -9     4    XLI (10)
+  STAA           Medical Devices      18.66         14       NA     1     XLV (3)
   CHRW   Transportation/Shipping      18.98         15       NA     1    XLI (10)
-  SAIA   Transportation/Shipping      18.98         15      -12     6    XLI (10)
-   ZTO   Transportation/Shipping      18.98         15       -5     2    XLI (10)
-  CROX          Footwear/Apparel      19.04         13       +5     4    XLY (11)
-   NKE          Footwear/Apparel      19.04         13        0     2    XLY (11)
+   ZTO   Transportation/Shipping      18.98         15       -2     2    XLI (10)
+  SAIA   Transportation/Shipping      18.98         15      -14     6    XLI (10)
+  ULCC   Transportation/Shipping      18.98         15      -13     4    XLI (10)
+   NKE          Footwear/Apparel      19.04         13       +1     2    XLY (11)
+  CROX          Footwear/Apparel      19.04         13       +4     4    XLY (11)
   ALGN           Medical Devices      19.16         15       NA     1     XLV (3)
-   JBL Electronics Manufacturing      19.34         12      -24     4     XLK (4)
+   JBL Electronics Manufacturing      19.34         12      -23     4     XLK (4)
+  LEVI          Footwear/Apparel      19.54         14       -5     7    XLY (11)
    UAA          Footwear/Apparel      19.54         14      -13     3    XLY (11)
-  LEVI          Footwear/Apparel      19.54         14       -6     7    XLY (11)
   NXPI            Semiconductors      19.62         11      -17     3     XLK (4)
    DHC                     REITs      19.67         12      -19     7     XLF (2)
   ROAD        Building Materials      19.84         13       NA     1    XLI (10)
@@ -240,8 +240,8 @@ Ticker              Mapped_Theme  Long_Score  RS_Rating  Days Out Sector (Rk)
   TSSI            Infrastructure        6.34          1        20    XLI (10)
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,PBF,DINO,MTA,MPC,DK,CLMT,VLO,EAT,PSX,PARR,
-###SHORT,KNF,PNR,BLDR,AMRZ,AMSF,LII,PCG,CAL,LTRX,GOOS,AMSC,ARI,ROL,HE,FTAI,BHF,TXT,LHX,BWXT,ETOR,VLRS,AIRO,ALGT,SARO,VFC,RXO,HRI,AAL,FLEX,ALK,LUV,RL,SHOE,PRIM,PONY,MCHP,STM,RRX,AMTM,SEDG,PVH,LSCC,OMCL,STAA,HIMS,ULCC,CHRW,SAIA,ZTO,CROX,NKE,ALGN,JBL,UAA,LEVI,NXPI,DHC,ROAD,HPP,HLMN,BN,OSIS,
+###LONG,PBF,DINO,MTA,VLO,MPC,DK,CLMT,EAT,PSX,PARR,
+###SHORT,KNF,PNR,BLDR,AMRZ,AMSF,LII,PCG,CAL,LTRX,GOOS,AMSC,ARI,ROL,HE,FTAI,BHF,LHX,TXT,BWXT,ETOR,VLRS,AIRO,ALGT,SARO,VFC,AAL,HRI,RXO,FLEX,ALK,LUV,SHOE,RL,PRIM,PONY,MCHP,STM,AMTM,RRX,SEDG,PVH,LSCC,OMCL,HIMS,STAA,CHRW,ZTO,SAIA,ULCC,NKE,CROX,ALGN,JBL,LEVI,UAA,NXPI,DHC,ROAD,HPP,HLMN,BN,OSIS,
 ###LONG_Dropped,APPF,APPN,CSTL,EFOR,ESTC,FIGR,FIVN,HALO,NIQ,NSIT,PAYC,PUBM,QLYS,SPT,U,WK,
 ###SHORT_Dropped,AAOI,ACLS,AMBA,ASTS,AVA,AVAV,BIRK,BRX,CAR,CCI,CNM,COHU,COLM,CPA,CSIQ,CTRI,CX,DECK,DKILY,DOV,DQ,DY,EH,ENB,EQR,EXP,FCEL,FLY,FSLR,GBX,GLW,HIMX,IFNNY,JKS,KMT,KRG,KRMN,KTOS,LINE,LMB,LOMA,LPTH,LUNR,LYTS,MEC,MITT,MLM,MNSO,MRAAY,MRCY,NI,NXRT,ORN,PLAB,POWL,RDW,RUN,STRL,TKR,TPR,TSSI,TU,VECO,WSC,WSO,WWD,
 

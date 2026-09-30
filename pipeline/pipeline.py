@@ -526,6 +526,10 @@ def map_stock_themes(stocks):
 
 def score_stocks(stocks):
     stocks = calculate_long_score(stocks)
+    # Short scoring is fully isolated — uses SHORT_* config variables only.
+    # Does NOT modify RS_Rating, Long_Score, Zacks_Score, or Growth_Score.
+    from scoring.scoring_engine import calculate_short_score
+    stocks = calculate_short_score(stocks)
     return stocks
 
 
