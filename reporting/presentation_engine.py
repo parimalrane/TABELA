@@ -787,8 +787,8 @@ def print_daily_scan(
             "Ticker",
             "Mapped_Theme",
             "Theme_Class",
-            "RS_Rating",
             "Long_Score",
+            "RS_Rating",
             "Sector (SPDR)",
             "Sector Rank"
         ]
@@ -856,8 +856,8 @@ def print_daily_scan(
                 "Ticker",
                 "Mapped_Theme",
                 "Theme_Class",
-                "RS_Rating",
                 "Long_Score",
+                "RS_Rating",
                 "Sector (SPDR)",
                 "Sector Rank"
             ]
@@ -1036,13 +1036,13 @@ def print_daily_scan(
                 rows.append({
                     "Ticker": display_ticker,
                     "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
-                    "RS_Rating": int(rs_val),
                     "Long_Score": round(score_val, 2),
+                    "RS_Rating": int(rs_val),
                     "Days Out": days_on_drop,
                     "Sector (Rk)": f"{spdr} ({int(s_rank)})"
                 })
         if rows:
-            df = pd.DataFrame(rows).sort_values(["Days Out", "RS_Rating"], ascending=[True, False])
+            df = pd.DataFrame(rows).sort_values(["Days Out", "Long_Score", "RS_Rating"], ascending=[True, False, False])
             print("=" * 40)
             print(title)
             print("=" * 40)

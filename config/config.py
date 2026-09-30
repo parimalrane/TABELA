@@ -46,8 +46,8 @@ RS_RAW_WEIGHTS = {
 # ==========================
 
 LONG_ENTRY = {
-    "MIN_RS": 90.0,
-    "MIN_LONG_SCORE": 85.0,  # Raised to 85.0 (Extreme Exclusivity)
+    "MIN_RS": 85.0,
+    "MIN_LONG_SCORE": 85.0,  # Restored to 85.0 (Extreme Exclusivity)
     "THEMES": ["Leading", "Neutral", "Unclassified Leader", "Unknown"],
     "BLOCKED_ZACKS": [4, 5],
     "MIN_PRICE": 10.0,       # Kill penny stock noise
