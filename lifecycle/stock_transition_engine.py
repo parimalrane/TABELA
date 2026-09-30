@@ -69,6 +69,10 @@ def _meets_criteria(row, criteria_dict):
     """
     rs = float(row.get("RS_Rating", 0) or 0)
     score = float(row.get("Long_Score", 0) or 0)
+    
+    short_rs = float(row.get("Short_RS_Rating", 0) or 0)
+    short_score = float(row.get("Short_Score", 0) or 0)
+    
     theme = str(row.get("Theme_Class", ""))
 
     if "MIN_RS" in criteria_dict:
@@ -80,6 +84,14 @@ def _meets_criteria(row, criteria_dict):
         if score < criteria_dict["MIN_LONG_SCORE"]: return False
     if "MAX_LONG_SCORE" in criteria_dict:
         if score > criteria_dict["MAX_LONG_SCORE"]: return False
+        
+    if "MIN_SHORT_RS" in criteria_dict:
+        if short_rs < criteria_dict["MIN_SHORT_RS"]: return False
+    if "MAX_SHORT_RS" in criteria_dict:
+        if short_rs > criteria_dict["MAX_SHORT_RS"]: return False
+        
+    if "MAX_SHORT_SCORE" in criteria_dict:
+        if short_score > criteria_dict["MAX_SHORT_SCORE"]: return False
 
     if "THEMES" in criteria_dict:
         if theme not in criteria_dict["THEMES"]: return False
@@ -91,6 +103,22 @@ def _meets_criteria(row, criteria_dict):
         except (ValueError, TypeError):
             zacks_val = 0
         if zacks_val in criteria_dict["BLOCKED_ZACKS"]: return False
+
+    if "MIN_PRICE" in criteria_dict:
+        price_raw = row.get("Last Close", 0)
+        try:
+            price_val = float(price_raw) if pd.notna(price_raw) else 0.0
+        except (ValueError, TypeError):
+            price_val = 0.0
+        if price_val < criteria_dict["MIN_PRICE"]: return False
+
+    if "MIN_VOLUME" in criteria_dict:
+        vol_raw = row.get("Avg Volume", 0)
+        try:
+            vol_val = float(vol_raw) if pd.notna(vol_raw) else 0.0
+        except (ValueError, TypeError):
+            vol_val = 0.0
+        if vol_val < criteria_dict["MIN_VOLUME"]: return False
 
     return True
 

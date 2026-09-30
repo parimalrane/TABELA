@@ -64,11 +64,13 @@ DIST_ENTRY = {
     # "Fall From Grace" zone: former mid-range stocks actively losing momentum
     "MIN_RS": 50.0,            # Floor: stocks must still have some standing to fall from
     "MAX_RS": 75.0,            # Ceiling: catch before they become obvious laggards
-    "MAX_LONG_SCORE": 50.0,    # Only short stocks with clear composite deterioration
+    "MAX_SHORT_SCORE": 50.0,    # Only short stocks with clear composite deterioration
     "THEMES": ["Neutral", "Unknown"],  # Neutral-only: Lagging adds noise at this RS level
     "MICRO_BREAKAWAY_PERCENTILE": 0.05,
     "BLOCKED_ZACKS": [1, 2],
-    "MAX_DROPPED_WATCH_SCORE": 30.0
+    "MAX_DROPPED_WATCH_SCORE": 30.0,
+    "MIN_PRICE": 10.0,         # Never short penny stocks
+    "MIN_VOLUME": 1_000_000,   # Institutional liquidity floor
 }
 
 # ==========================
