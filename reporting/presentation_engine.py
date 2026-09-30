@@ -473,27 +473,40 @@ def print_macro_weather(stocks, theme_strength_settings):
     spdrs_only["Sector_Rank"] = spdrs_only["Impact_Mom"].rank(ascending=False, method='min')
     spdrs_only = spdrs_only.sort_values("Impact_Mom", ascending=False)
     
+    w_pos = 0; w_neg = 0
+    m_pos = 0; m_neg = 0
+    q_pos = 0; q_neg = 0
+    
     sector_matrix_strs = []
     for _, row in spdrs_only.iterrows():
         t = row["Ticker"]
         rank_val = int(row["Sector_Rank"])
         sector_rs_map[t] = rank_val
+        
+        perf_1w = pd.to_numeric(row.get("Performance 1W (%)", 0), errors='coerce')
         perf_1m = pd.to_numeric(row.get("Performance 1M (%)", 0), errors='coerce')
-        if pd.isna(perf_1m): perf_1m = 0
-        if perf_1m > 0: green_count += 1
+        perf_3m = pd.to_numeric(row.get("Performance 3M (%)", 0), errors='coerce')
+        perf_ytd = pd.to_numeric(row.get("Performance YTD (%)", row.get("Performance 1Y (%)", 0)), errors='coerce')
+        
+        perf_1w = perf_1w if pd.notna(perf_1w) else 0.0
+        perf_1m = perf_1m if pd.notna(perf_1m) else 0.0
+        perf_3m = perf_3m if pd.notna(perf_3m) else 0.0
+        perf_ytd = perf_ytd if pd.notna(perf_ytd) else 0.0
+        
+        if perf_1w >= 0: w_pos += 1
+        else: w_neg += 1
+            
+        if perf_1m >= 0: m_pos += 1
+        else: m_neg += 1
+            
+        if perf_3m >= 0: q_pos += 1
+        else: q_neg += 1
             
         aum_val = row.get("AUM", 0)
         impact = row.get("Impact_Mom", 0)
         aum_b = (aum_val / 1000.0) if aum_val > 0 else 0.0
         
-        perf_1w = pd.to_numeric(row.get("Performance 1W (%)", 0), errors='coerce')
-        perf_3m = pd.to_numeric(row.get("Performance 3M (%)", 0), errors='coerce')
-        perf_ytd = pd.to_numeric(row.get("Performance YTD (%)", row.get("Performance 1Y (%)", 0)), errors='coerce')
-        
-        perf_1w = perf_1w if pd.notna(perf_1w) else 0.0
-        perf_3m = perf_3m if pd.notna(perf_3m) else 0.0
-        perf_ytd = perf_ytd if pd.notna(perf_ytd) else 0.0
-        
+
         name = spdr_map[t]
         sector_matrix_strs.append(
             f"    {rank_val:<4} {name:<15} ({t})  {perf_1w:>+8.2f}% {perf_1m:>+9.2f}% {perf_3m:>+10.2f}% {perf_ytd:>+9.2f}%   ${aum_b:>6.1f}B   {impact:>7.1f}"
@@ -537,7 +550,7 @@ def print_macro_weather(stocks, theme_strength_settings):
         print(line)
     print("")
     print("[2] MACRO SECTOR RANKINGS (Gravity-Weighted Capital Flows)")
-    print(f"    > 1-Month Sector Breadth  : {green_count} Sectors Positive | {11 - green_count} Sectors Negative\n")
+    print(f"    > Sector Breadth  : W (+{w_pos}/-{w_neg}) ; M (+{m_pos}/-{m_neg}) ; Q (+{q_pos}/-{q_neg})\n")
     print(f"    {'Rank':<4} {'Sector':<15} {'SPDR'}  {'1-Week':>9} {'1-Month':>10} {'1-Quarter':>11} {'YTD':>10}   {'AUM ($B)':>9}   {'Impact':>7}")
     print("    " + "-"*92)
     for line in sector_matrix_strs:
@@ -997,7 +1010,49 @@ def print_daily_scan(
     long_dropped_str = ",".join(sorted(accumulated["long_dropped"].keys()))
     short_dropped_str = ",".join(sorted(accumulated["short_dropped"].keys()))
 
+    def print_dropped_table(dropped_dict, title):
+        if not dropped_dict: return
+        rows = []
+        for ticker, date_str in dropped_dict.items():
+            try:
+                days_on_drop = (current_date - datetime.strptime(date_str, "%Y-%m-%d")).days
+            except:
+                days_on_drop = 0
+                
+            match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
+            if not match.empty:
+                r = match.iloc[0]
+                theme_class = str(r.get("Theme_Class", "Unknown"))
+                spdr = ZACKS_TO_SPDR.get(str(r.get("Sector", "")), "N/A")
+                s_rank = sector_rs_map.get(spdr, 0)
+                
+                display_ticker = ticker
+                if theme_class == "Micro Leader": display_ticker = "^" + ticker
+                elif theme_class in ["Unknown", "Unclassified Leader"]: display_ticker = "~" + ticker
+                
+                rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors='coerce')
+                score_val = pd.to_numeric(r.get("Long_Score", 0), errors='coerce')
+                
+                rows.append({
+                    "Ticker": display_ticker,
+                    "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
+                    "RS_Rating": int(rs_val),
+                    "Long_Score": round(score_val, 2),
+                    "Days Out": days_on_drop,
+                    "Sector (Rk)": f"{spdr} ({int(s_rank)})"
+                })
+        if rows:
+            df = pd.DataFrame(rows).sort_values(["Days Out", "RS_Rating"], ascending=[True, False])
+            print("=" * 40)
+            print(title)
+            print("=" * 40)
+            print(df.to_string(index=False))
+            print()
+
     print()
+    print_dropped_table(accumulated["long_dropped"], "RECENTLY DROPPED LONGS (Watch For Breakdown)")
+    print_dropped_table(accumulated["short_dropped"], "RECENTLY DROPPED SHORTS (Watch For Squeeze)")
+
     print("TRADINGVIEW WATCHLIST EXPORT")
     if full_long_list:
         print("###LONG," + full_long_list + ",")

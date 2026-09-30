@@ -1,7 +1,5 @@
 
 
-STOCK HISTORY ERROR: Expecting property name enclosed in double quotes: line 27 column 1 (char 771)
-
 ==============================================
 TABELA DAILY MARKET SCAN
 MARKET DATE: 2026-09-28
@@ -19,7 +17,7 @@ MARKET DATE: 2026-09-28
     Dow Jones (DIA)      -1.11%     -3.71%      -0.38%        +12.76%
 
 [2] MACRO SECTOR RANKINGS (Gravity-Weighted Capital Flows)
-    > 1-Month Sector Breadth  : 2 Sectors Positive | 9 Sectors Negative
+    > Sector Breadth  : W (+3/-7) ; M (+2/-8) ; Q (+5/-5)
 
     Rank Sector          SPDR     1-Week    1-Month   1-Quarter        YTD    AUM ($B)    Impact
     --------------------------------------------------------------------------------------------
@@ -47,15 +45,15 @@ Micro Theme                    Macro Theme        Tot Qual   Score   Macro State
 -----------------------------------------------------------------------------------------------------------------------------
 Energy Services                Energy Services      1    1   65.85   Unknown                         FTK
 Communications Cloud           Cloud Computing      4    1   39.83   Leading (4)                     RNG
-Refining & Marketing           Exploration          8    1   26.64   Leading (8)                     VLO
-Semiconductors                 Semiconductors      44    1    8.47   Leading (6)                     SMTC
+Refining & Marketing           Exploration          8    1   26.64   Leading (8 -> -2)               VLO
+Semiconductors                 Semiconductors      44    1    8.47   Leading (6 -> +1)               SMTC
 Software                       Software           205    1    2.56   Leading (7)                     NIQ
-Aerospace & Defense            Aerospace & Defe..  39    0    0.00   Lagging (38)                    #FTAI, #SPIR
-Banking                        Banking            152    0    0.00   Lagging (34)                    #FOUR, #KLAR, #OPFI,
+Aerospace & Defense            Aerospace & Defe..  39    0    0.00   Lagging (38 -> +1)              #FTAI, #SPIR
+Banking                        Banking            152    0    0.00   Lagging (34 -> -2)              #FOUR, #KLAR, #OPFI,
                                                                                                      #SUPV, #TBBK
-Financial Services             Banking             67    0    0.00   Lagging (34)                    #QFIN, #UPST
-Insurance                      Insurance           71    0    0.00   Lagging (30)                    #AON, #OSG
-REITs                          REITs              138    0    0.00   Lagging (33)                    #ARI, #BRSP, #BXMT,
+Financial Services             Banking             67    0    0.00   Lagging (34 -> -2)              #QFIN, #UPST
+Insurance                      Insurance           71    0    0.00   Lagging (30 -> -1)              #AON, #OSG
+REITs                          REITs              138    0    0.00   Lagging (33 -> +1)              #ARI, #BRSP, #BXMT,
                                                                                                      #CMTG, #DEI, #PMT, #RWT,
                                                                                                      #SAFE, #TRTX
 Transportation/Shipping        Transportation/S..  59    0    0.00   Lagging (37)                    #CAR
@@ -98,10 +96,117 @@ Ticker            Mapped_Theme  RS_Rating Long_Score Movement  Days Sector (Rk)
    RWT                   REITs          9      18.82       +6     2     XLF (7)
    AON               Insurance         10      19.87       +4     2     XLF (7)
 
+========================================
+RECENTLY DROPPED LONGS (Watch For Breakdown)
+========================================
+Ticker                  Mapped_Theme  RS_Rating  Long_Score  Days Out Sector (Rk)
+  AOUT     Leisure and Entertainment         99       84.93         0    XLY (10)
+ ~QMCO                    AI Compute         99       79.83         0     XLK (1)
+  TEAM      Developer Infrastructure         99       84.71         0     XLK (1)
+  AEHR       Semiconductor Equipment         98       84.38         0     XLK (1)
+  TWLO          Communications Cloud         98       84.45         0     XLK (1)
+  CRSR     Leisure and Entertainment         97       83.18         0    XLY (10)
+  IMAX     Leisure and Entertainment         97       83.18         0    XLY (10)
+   MXL                Semiconductors         97       83.88         0     XLK (1)
+   NET          Cloud Infrastructure         97       84.95         0     XLK (1)
+  OKTA                 Cybersecurity         97       83.21         0     XLK (1)
+  PAYS              Digital Payments         97       83.71         0     XLK (1)
+  RBRK                      Software         97       83.71         0     XLK (1)
+    PD                      Software         96       82.21         0     XLK (1)
+  PUBM                      Software         96       83.46         0     XLK (1)
+  DOCU                      Software         95       82.71         0     XLK (1)
+  FSLY          Cloud Infrastructure         95       84.70         0     XLK (1)
+  PAYC                      Software         95       83.21         0     XLK (1)
+  AXTI                Semiconductors         94       75.88         0     XLK (1)
+  BLSH                      Software         94       81.71         0     XLK (1)
+  FIVN          Communications Cloud         94       83.95         0     XLK (1)
+  NSIT                   IT Services         94       82.46         0    XLY (10)
+    ZS                 Cybersecurity         94       82.21         0     XLK (1)
+    DT                      Software         93       81.21         0     XLK (1)
+  ESTC           Data Infrastructure         93       82.21         0     XLK (1)
+ RCRUY             Business Software         92       80.71         0     XLK (1)
+     U                      Software         91       81.46         0     XLK (1)
+  SNOW          Cloud Infrastructure         89       81.70         0     XLK (1)
+   CRM              Enterprise Cloud         88       79.95         0     XLK (1)
+  APPN                      Software         87       80.21         0     XLK (1)
+  IREN Digital Assets Infrastructure         78       73.71         0     XLF (7)
+  NTSK                      Software         98       76.96         3     XLK (1)
+  SAIL                      Software         92       73.21         3     XLK (1)
+   NOW              Enterprise Cloud         78       74.45         3     XLK (1)
+     P                      Software         99       76.71         4     XLK (1)
+  DOCN          Cloud Infrastructure         92       74.45         4     XLK (1)
+  NTNX                      Software         92       80.96         4     XLK (1)
+  WDAY                      Software         92       81.21         4     XLK (1)
+     S                 Cybersecurity         91       80.21         4     XLK (1)
+  CTSH                      Software         88       79.46         4     XLK (1)
+  MANH                      Software         87       78.71         4     XLK (1)
+   ACN                      Software         85       77.21         4     XLK (1)
+    WK                      Software         83       78.21         4     XLK (1)
+  PCTY                      Software         82       75.96         4     XLK (1)
+   WIX                      Software         79       73.71         4     XLK (1)
+  QLYS                 Cybersecurity         70       70.71         4     XLK (1)
+  ABCL                       Biotech         99       75.94         5     XLV (3)
+  GRAL                       Biotech         99       75.94         5     XLV (3)
+  IOVA                       Biotech         99       83.44         5     XLV (3)
+  MRNA                       Biotech         99       83.94         5     XLV (3)
+   HPE                    AI Servers         98       83.10         5     XLK (1)
+  CSTL                       Biotech         97       74.94         5     XLV (3)
+   GCT     E Commerce Infrastructure         97       81.93         5     XLK (1)
+  QRVO                Semiconductors         97       82.88         5     XLK (1)
+  DELL                    AI Servers         96       82.10         5     XLK (1)
+  META                   AI Platform         96       81.10         5     XLK (1)
+  HALO                       Biotech         95       82.69         5     XLV (3)
+ ~PLTR                   AI Platform         95       76.03         5     XLK (1)
+   HPQ                    AI Compute         94       74.10         5     XLK (1)
+  MSFT                      Software         92       80.71         5     XLK (1)
+  OSPN                      Software         92       73.21         5     XLK (1)
+   SAP                      Software         90       79.96         5     XLK (1)
+  NMAX            Media Distribution         89       77.93         5    XLY (10)
+  ZETA           Digital Advertising         89       78.43         5     XLK (1)
+  VRNS                 Cybersecurity         86       77.71         5     XLK (1)
+   UMC                       Foundry         85       77.38         5     XLK (1)
+  EPAM                      Software         82       75.21         5     XLK (1)
+  FFIV                      Software         82       75.96         5     XLK (1)
+    AI                      Software         77       73.21         5     XLK (1)
+   MPC          Refining & Marketing         96       84.59        10     XLE (2)
+   PBF          Refining & Marketing         96       84.59        10     XLE (2)
+  CLMT          Refining & Marketing         95       83.34        10     XLE (2)
+  DINO          Refining & Marketing         95       84.09        10     XLE (2)
+   PSX          Refining & Marketing         95       84.09        10     XLE (2)
+  PARR          Refining & Marketing         90       80.09        10     XLE (2)
+    DK          Refining & Marketing         83       78.09        10     XLE (2)
+   CVI                        Energy         99       84.59        12     XLE (2)
+  CRGY                   Exploration         93       81.59        13     XLE (2)
+   PBR                   Exploration         93       81.09        13     XLE (2)
+  EQNR             Integrated Energy         92       82.59        13     XLE (2)
+   APA                   Exploration         91       81.34        13     XLE (2)
+  CGAU                   Gold Mining         90       75.03        13     XLB (6)
+   CVE                   Exploration         89       81.09        13     XLE (2)
+   CVX             Integrated Energy         89       79.59        13     XLE (2)
+   FSM                   Gold Mining         87       73.78        13     XLB (6)
+  TALO                   Exploration         87       79.09        13     XLE (2)
+   COP                        Energy         85       77.59        13     XLE (2)
+    SM                   Exploration         84       77.09        13     XLE (2)
+  CHRD                   Exploration         81       75.59        13     XLE (2)
+  PTEN                   Exploration         79       74.09        13     XLE (2)
+  SHEL             Integrated Energy         92       81.09        14     XLE (2)
+   DVN                   Exploration         81       75.59        14     XLE (2)
+  ETON               Pharmaceuticals         97       82.40        20     XLV (3)
+  NVAX                       Biotech         93       79.94        20     XLV (3)
+
+========================================
+RECENTLY DROPPED SHORTS (Watch For Squeeze)
+========================================
+Ticker Mapped_Theme  RS_Rating  Long_Score  Days Out Sector (Rk)
+ VONOY        REITs         12        9.82         0     XLF (7)
+   ABR        REITs         11       19.82         0     XLF (7)
+    WU      Banking         12       13.13         3     XLK (1)
+   IVR        REITs         13       -0.18         7     XLF (7)
+
 TRADINGVIEW WATCHLIST EXPORT
 ###LONG,FTK,RNG,NIQ,SMTC,VLO,
 ###SHORT,PMT,QFIN,CMTG,BXMT,BRSP,OPFI,UPST,FOUR,SPIR,DEI,OSG,KLAR,SUPV,TBBK,FTAI,ARI,TRTX,SAFE,CAR,RWT,AON,
-###LONG_Dropped,ABCL,ACN,AEHR,AI,AOUT,APA,APPN,AXTI,BLSH,CGAU,CHRD,COP,CRGY,CRM,CRSR,CSTL,CTSH,CVE,CVX,DK,DOCN,DOCU,DT,DVN,EPAM,EQNR,ESTC,ETON,FFIV,FIVN,FSLY,FSM,GRAL,HALO,HPQ,IMAX,IOVA,IREN,MANH,META,MRNA,MTA,MXL,NET,NMAX,NOW,NSIT,NTSK,NVAX,OKTA,OSPN,P,PARR,PAYC,PAYS,PBR,PCTY,PD,PLTR,PSX,PTEN,PUBM,QLYS,QMCO,QRVO,RBRK,RCEL,RCRUY,SAIL,SAP,SHEL,SM,SNOW,TALO,TEAM,TWLO,U,UMC,VRNS,WIX,WK,ZETA,ZS,
+###LONG_Dropped,ABCL,ACN,AEHR,AI,AOUT,APA,APPN,AXTI,BLSH,CGAU,CHRD,CLMT,COP,CRGY,CRM,CRSR,CSTL,CTSH,CVE,CVI,CVX,DELL,DINO,DK,DOCN,DOCU,DT,DVN,EPAM,EQNR,ESTC,ETON,FFIV,FIVN,FSLY,FSM,GCT,GRAL,HALO,HPE,HPQ,IMAX,IOVA,IREN,MANH,META,MPC,MRNA,MSFT,MTA,MXL,NET,NMAX,NOW,NSIT,NTNX,NTSK,NVAX,OKTA,OSPN,P,PARR,PAYC,PAYS,PBF,PBR,PCTY,PD,PLTR,PSX,PTEN,PUBM,QLYS,QMCO,QRVO,RBRK,RCEL,RCRUY,S,SAIL,SAP,SHEL,SM,SNOW,TALO,TEAM,TWLO,U,UMC,VRNS,WDAY,WIX,WK,ZETA,ZS,
 ###SHORT_Dropped,ABR,IVR,VONOY,WU,
 
 ==============================================
