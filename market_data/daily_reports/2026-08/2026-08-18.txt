@@ -44,229 +44,133 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
-Biotechnology                  Biotech              5    4  139.04   Leading (4 -> -7)               XNCR, SEPN, KNSA
-Cloud Infrastructure           Cloud Computing      5    3  102.49   Leading (1)                     FSLY, SNOW, NET
-Biotech                        Biotech             85   16   78.85   Leading (4 -> -7)               ABCL, HALO, RGNX, PTGX,
-                                                                                                     RGEN, NRIX, CSTL, ZLAB,
-                                                                                                     KYMR, MGTX, VRDN, TVTX
-Communications Cloud           Cloud Computing      4    2   76.45   Leading (1)                     RNG, FIVN
-Energy Services                Energy Services      1    1   60.30   Unknown                         FTK
-Gold Mining                    Gold Mining         36    6   54.38   Leading (3 -> -5)               CGAU, MTRN, IAG, FSM,
-                                                                                                     CDE
-Pharmaceuticals                Pharma               3    1   45.74   Leading (5 -> +7)               CORT
-Life Sciences Tools            Medical Devices      5    1   35.48   Leading (10 -> +6)              TXG
-Pharma                         Pharma              40    3   27.20   Leading (5 -> +7)               FDMT, URGN
-Refining & Marketing           Exploration          8    1   26.92   Leading (8 -> +8)               PBF
-Diagnostics                    Medical Devices      9    1   25.33   Leading (10 -> +6)              CDNA
-Medical Devices                Medical Devices     89    5   24.93   Leading (10 -> +6)              DCTH, HTFL
+Communications Cloud           Cloud Computing      4    1   37.02   Leading (1)                     FIVN
+Cloud Infrastructure           Cloud Computing      5    1   35.48   Leading (1)                     FSLY
 Restaurants                    Consumer Staples    26    1   12.44   Unknown                         EAT
-Aerospace & Defense            Aerospace & Defe..  36    1    9.64   Leading (6)                     ATRO
-Building Materials             Infrastructure      39    0    0.00   Lagging (38 -> -4)              #ROL
-Footwear/Apparel               Retail              37    0    0.00   Lagging (36 -> +12)             #GOOS, #NKE
-Infrastructure                 Infrastructure     102    0    0.00   Lagging (38 -> -4)              #BW, #HE, #ORN, #TSSI,
-                                                                                                     #TU
-Industrial Automation          Infrastructure      45    0    0.00   Lagging (38 -> -4)              #AGCO
-REITs                          REITs              118    0    0.00   Lagging (37 -> +3)              #ARI
+Building Materials             Infrastructure      39    0    0.00   Lagging (38 -> -4)              #CX, #LII, #LOMA, #ROL
+Electrical Infrastructure      Infrastructure       4    0    0.00   Lagging (38 -> -4)              #POWL
+Footwear/Apparel               Retail              37    0    0.00   Lagging (36 -> +12)             #BIRK, #CPRI, #GOOS,
+                                                                                                     #MNSO, #NKE, #ONON,
+                                                                                                     #TPR, #UAA, #VFC
+Industrial Automation          Infrastructure      45    0    0.00   Lagging (38 -> -4)              #AGCO, #RRX, #WSO
+Infrastructure                 Infrastructure     102    0    0.00   Lagging (38 -> -4)              #AMTM, #BW, #CSIQ,
+                                                                                                     #CTRI, #ENB, #HE, #JKS,
+                                                                                                     #LUMN, #MEC, #MTZ, #NXT,
+                                                                                                     #ORN, #SHLS, #STRL,
+                                                                                                     #TSSI, #TU, #VIV
+REITs                          REITs              118    0    0.00   Lagging (37 -> +3)              #ARI, #CCI, #LAND
+Solar Infrastructure           Infrastructure       4    0    0.00   Lagging (38 -> -4)              #ENPH, #RUN, #SEDG
+Transportation/Shipping        Transportation/S..  57    0    0.00   Lagging (34 -> +5)              #CHRW, #RXO, #SAIA
 
 ========================================
 LONG CANDIDATE UNIVERSE
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-  FSLY Cloud Infrastructure      97.75         99        0    14     XLK (4)
-   RNG Communications Cloud      96.50         98        0    18     XLK (4)
-  SNOW Cloud Infrastructure      96.50         98        0    18     XLK (4)
-  FIVN Communications Cloud      95.00         92        0     7     XLK (4)
-   EAT          Restaurants      92.25         98       +1    23     XLY (9)
-   NET Cloud Infrastructure      92.00         89       +2     2     XLK (4)
-  ABCL              Biotech      89.23         99       +9     2     XLV (2)
-  XNCR        Biotechnology      89.23         99       +9     2     XLV (2)
-  SEPN        Biotechnology      88.73         98      +11     2     XLV (2)
-  CGAU          Gold Mining      88.72         95       -5     2     XLB (6)
-  HALO              Biotech      88.48         96      +11     2     XLV (2)
-  RGNX              Biotech      87.73         96       NA     1     XLV (2)
-  PTGX              Biotech      87.23         95       NA     1     XLV (2)
-  KNSA        Biotechnology      87.23         95       NA     1     XLV (2)
-  RGEN              Biotech      87.23         92       NA     1     XLV (2)
-  MTRN          Gold Mining      87.22         89       -9     2     XLB (6)
-  CORT      Pharmaceuticals      87.09         99       NA     1     XLV (2)
-   FTK      Energy Services      86.75         87       -4    14     XLB (6)
-  NRIX              Biotech      86.73         94       NA     1     XLV (2)
-  CSTL              Biotech      86.73         94       NA     1     XLV (2)
-  FDMT               Pharma      86.59         98       NA     1     XLV (2)
-  CDNA          Diagnostics      86.50         99       -4     9     XLV (2)
-  URGN               Pharma      86.34         96       NA     1     XLV (2)
-   PBF Refining & Marketing      86.32         98       NA     1     XLE (1)
-  ZLAB              Biotech      86.23         93       NA     1     XLV (2)
-   IAG          Gold Mining      86.22         90       NA     1     XLB (6)
-  ATRO  Aerospace & Defense      86.08         96      -12     3     XLI (5)
-  KYMR              Biotech      85.73         92       NA     1     XLV (2)
-  MGTX              Biotech      85.73         92       NA     1     XLV (2)
-   FSM          Gold Mining      85.72         89      -21     2     XLB (6)
-  DCTH      Medical Devices      85.50         97       -7     3     XLV (2)
-  VRDN              Biotech      85.23         91       NA     1     XLV (2)
-  TVTX              Biotech      85.23         91       NA     1     XLV (2)
-   CDE          Gold Mining      85.22         88      -24     2     XLB (6)
-   TXG  Life Sciences Tools      85.00         99       NA     1     XLV (2)
-  HTFL      Medical Devices      85.00         99       NA     1     XLV (2)
+  FSLY Cloud Infrastructure      98.50         99        0     7     XLK (4)
+  FIVN Communications Cloud      95.00         92        0     3     XLK (4)
+   EAT          Restaurants      93.00         98        0     3     XLY (9)
 
 ========================================
 DISTRIBUTION WATCHLIST
 Legend: ^ = Micro Laggard
 ========================================
-Ticker          Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-   ROL    Building Materials      15.16          1       +2     2     XLK (4)
-   ORN        Infrastructure      15.16          1       +2     7     XLI (5)
-    BW        Infrastructure      15.66          2       +3     6     XLK (4)
-   ARI                 REITs      16.73          4       -2     8     XLF (3)
-  GOOS      Footwear/Apparel      17.28          5       -4     2     XLY (9)
-    TU        Infrastructure      17.66          6       +2     4    XLU (10)
-    HE        Infrastructure      18.16          7       NA     1    XLU (10)
-   NKE      Footwear/Apparel      18.28          7       -3     2     XLY (9)
-  AGCO Industrial Automation      18.66          8       NA     1     XLI (5)
-  TSSI        Infrastructure      19.66         10       NA     1     XLI (5)
+Ticker              Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+   ROL        Building Materials       4.67          1       +2     2     XLK (4)
+   ORN            Infrastructure       4.67          1       +2     8     XLI (5)
+    BW            Infrastructure       5.17          2       +3     8     XLK (4)
+   ARI                     REITs       6.23          4       -2    11     XLF (3)
+  GOOS          Footwear/Apparel       6.78          5       -4     2     XLY (9)
+    TU            Infrastructure       7.17          6       +2     9    XLU (10)
+    HE            Infrastructure       7.67          7       +3     2    XLU (10)
+   NKE          Footwear/Apparel       7.78          7       -3     2     XLY (9)
+  AGCO     Industrial Automation       8.16          8        0     7     XLI (5)
+  TSSI            Infrastructure       9.16         10      +39     3     XLI (5)
+  SEDG      Solar Infrastructure      12.16          1       +9     8     XLE (1)
+  ENPH      Solar Infrastructure      12.66          2      +12     4     XLE (1)
+   RUN      Solar Infrastructure      12.66          2      +12     9     XLE (1)
+  MNSO          Footwear/Apparel      12.78          2       -2     2     XLY (9)
+  ONON          Footwear/Apparel      12.78          2       -2     2     XLY (9)
+  CHRW   Transportation/Shipping      12.96          1       +7     2     XLI (5)
+   VIV            Infrastructure      13.16          3      +10     7    XLU (10)
+  LOMA        Building Materials      13.16          3      +10     4     XLI (5)
+   LII        Building Materials      13.16          3      +10     7     XLI (5)
+   UAA          Footwear/Apparel      13.28          3       -6     2     XLY (9)
+  SHLS            Infrastructure      13.66          4      +11     7     XLE (1)
+  CTRI            Infrastructure      13.66          4      +11     4    XLU (10)
+   WSO     Industrial Automation      13.66          4      +11     8     XLI (5)
+   RRX     Industrial Automation      14.16          5      +11     9     XLI (5)
+   VFC          Footwear/Apparel      14.28          5       -9     2     XLY (9)
+  CPRI          Footwear/Apparel      14.28          5       -9     2     XLY (9)
+   JKS            Infrastructure      14.66          6      +10     4     XLE (1)
+   MTZ            Infrastructure      14.66          6      +10     8     XLI (5)
+  CSIQ            Infrastructure      15.16          7      +10     3     XLE (1)
+  LUMN            Infrastructure      15.16          7      +10     2    XLU (10)
+   NXT            Infrastructure      15.16          7      +10     3     XLE (1)
+   ENB            Infrastructure      15.66          8      +12     4     XLE (1)
+  POWL Electrical Infrastructure      15.66          8      +12     8     XLI (5)
+    CX        Building Materials      15.66          8      +12     7     XLI (5)
+   CCI                     REITs      15.73          8       -4     7     XLF (3)
+  BIRK          Footwear/Apparel      15.78          8      -10     2     XLY (9)
+  STRL            Infrastructure      16.16          9      +11     8     XLI (5)
+   TPR          Footwear/Apparel      16.28          9       -8     2     XLY (9)
+   RXO   Transportation/Shipping      16.46          8       +8     2     XLI (5)
+  SAIA   Transportation/Shipping      16.46          8       +3     2     XLI (5)
+  AMTM            Infrastructure      16.66         10       +9     2     XLI (5)
+   MEC            Infrastructure      16.66         10       +9     7     XLI (5)
+  LAND                     REITs      16.73         10       -7     4     XLF (3)
 
 ========================================
 RECENTLY DROPPED LONGS (Watch For Breakdown)
 ========================================
 Ticker              Mapped_Theme  Long_Score  RS_Rating  Days Out Sector (Rk)
-  VOYG       Aerospace & Defense       84.58         96         0     XLI (5)
-   ATI       Aerospace & Defense       84.58         93         0     XLI (5)
-   HBM               Gold Mining       84.22         86         0     XLB (6)
-  SSRM               Gold Mining       84.22         86         0     XLB (6)
-   WPM               Gold Mining       83.72         85         0     XLB (6)
-  QMCO                AI Compute       81.03         99         0     XLK (4)
-  DELL                AI Servers       80.28         96         0     XLK (4)
-  PAYC                  Software       84.80         98         1     XLK (4)
-  AVTR       Life Sciences Tools       84.75         97         1     XLV (2)
-  EFOR               IT Services       84.54         99         1     XLK (4)
-  PAYS          Digital Payments       84.54         99         1     XLK (4)
-     U                  Software       84.54         99         1     XLK (4)
-  NESR               Exploration       84.32         94         1     XLE (1)
-  APPN                  Software       84.30         97         1     XLK (4)
-  QLYS             Cybersecurity       84.30         97         1     XLK (4)
-   NEO               Diagnostics       84.25         96         1     XLV (2)
-   PAY          Digital Payments       84.04         98         1     XLK (4)
-  ATRC           Medical Devices       84.00         97         1     XLV (2)
-  MASS           Medical Devices       84.00         97         1     XLV (2)
-  BLZE                  Software       83.80         99         1     XLK (4)
-   NIQ                  Software       83.80         99         1     XLK (4)
-  ADPT               Diagnostics       83.50         96         1     XLV (2)
-  SMTI           Medical Devices       83.50         96         1     XLV (2)
-  BLFS       Life Sciences Tools       83.50         93         1     XLV (2)
-  AMPL                  Software       83.30         98         1     XLK (4)
-     P                  Software       83.30         98         1     XLK (4)
-  PRCH      Insurance Technology       83.30         98         1     XLK (4)
-  PUBM                  Software       83.30         98         1     XLK (4)
-  ITGR           Medical Devices       83.25         94         1     XLV (2)
-  NSIT               IT Services       83.04         96         1     XLY (9)
-   MAN     Professional Services       82.80         97         1     XLK (4)
-  MNTN                  Software       82.80         97         1     XLK (4)
- RCRUY         Business Software       82.80         97         1     XLK (4)
-   BVS           Medical Devices       82.75         93         1     XLV (2)
-  GKOS           Medical Devices       82.50         94         1     XLV (2)
-  TNDM           Medical Devices       82.50         94         1     XLV (2)
-  ESTC       Data Infrastructure       82.30         96         1     XLK (4)
-   WIX                  Software       82.30         96         1     XLK (4)
-   RPD             Cybersecurity       82.04         94         1     XLK (4)
-  BLKB                  Software       81.80         95         1     XLK (4)
-  WDAY                  Software       81.80         95         1     XLK (4)
-   MDB       Data Infrastructure       81.30         94         1     XLK (4)
-  GTLB  Developer Infrastructure       80.80         93         1     XLK (4)
+   FTK           Energy Services       87.50         87         1     XLB (6)
   TWLO      Communications Cloud       87.50         77         4     XLK (4)
-  PATH                  Software       81.80         95         4     XLK (4)
-  RBRK                  Software       81.80         95         4     XLK (4)
-    WK                  Software       81.80         92         4     XLK (4)
-  NTAP       Data Infrastructure       81.30         94         4     XLK (4)
-    PD                  Software       81.30         94         4     XLK (4)
-  QTWO                  Software       80.80         90         4     XLK (4)
-  MANH                  Software       80.54         91         4     XLK (4)
-  NTNX                  Software       80.54         91         4     XLK (4)
-  PCOR                  Software       78.80         89         4     XLK (4)
-  PANW             Cybersecurity       78.54         87         4     XLK (4)
-  TTAN                  Software       78.54         87         4     XLK (4)
-  OKTA             Cybersecurity       78.04         86         4     XLK (4)
-  NTRA               Diagnostics       82.50         94         5     XLV (2)
-   WHD              Oil Services       82.07         91         5     XLE (1)
-  MMSI           Medical Devices       81.00         91         5     XLV (2)
-   HAE           Medical Devices       80.00         89         5     XLV (2)
-   BAX           Medical Devices       79.50         88         5     XLV (2)
-  BBNX           Medical Devices       78.00         85         5     XLV (2)
-  SDGR           Medical Devices       78.00         85         5     XLV (2)
-  ICUI           Medical Devices       80.00         89         6     XLV (2)
-  TOST                  Software       79.30         90         6     XLK (4)
-   EXK             Silver Mining       79.02         87         6     XLB (6)
-  KMTS           Medical Devices       79.00         87         6     XLV (2)
-  PRGS                  Software       78.54         87         6     XLK (4)
-    GH               Diagnostics       77.50         84         6     XLV (2)
-  INSP           Medical Devices       77.00         80         6     XLV (2)
-  PRGO           Medical Devices       76.75         81         6     XLV (2)
-  SAIL                  Software       75.80         83         6     XLK (4)
-   SPT                  Software       79.04         88         7     XLK (4)
-  HNGE            Digital Health       78.80         89         7     XLV (2)
-    DV                  Software       77.80         87         7     XLK (4)
-  PCTY                  Software       77.04         84         7     XLK (4)
-  PYPL          Digital Payments       76.30         84         7     XLK (4)
-  ATHM                  Software       74.80         81         7     XLK (4)
-  CRWD             Cybersecurity       73.80         79         7     XLK (4)
-  APPS             Mobile Adtech       79.27         99         8     XLK (4)
-  MGNI       Digital Advertising       78.77         98         8     XLK (4)
-   MCS Leisure and Entertainment       78.27         97         8     XLY (9)
-   VAC Leisure and Entertainment       78.02         95         8     XLY (9)
-  FRSH                  Software       77.30         86         8     XLK (4)
-  EXLS                  Software       76.54         83         8     XLK (4)
-  LIND Leisure and Entertainment       76.52         95         8     XLY (9)
-  CTSH                  Software       74.80         81         8     XLK (4)
-   CNK Leisure and Entertainment       74.52         91         8     XLY (9)
-  SAIC                  Software       74.04         78         8     XLK (4)
-  MSFT                  Software       73.80         79         8     XLK (4)
-   DBX                  Software       71.80         75         8     XLK (4)
-  TENB             Cybersecurity       70.80         73         8     XLK (4)
-  CHYM        Financial Services       84.29         99        11     XLF (3)
-   PGY        Financial Services       82.79         96        11     XLF (3)
-  CNMD           Medical Devices       78.00         85        11     XLV (2)
-  CRSR Leisure and Entertainment       77.77         96        11     XLY (9)
-  ZETA       Digital Advertising       77.52         97        11     XLK (4)
-  IMAX Leisure and Entertainment       76.02         94        11     XLY (9)
-  EXPE Leisure and Entertainment       75.52         93        11     XLY (9)
-     W                  Internet       75.52         93        11     XLY (9)
-   WEX                   Banking       75.29         84        11     XLK (4)
-   GCT E Commerce Infrastructure       75.02         92        11     XLK (4)
-  SHOP E Commerce Infrastructure       75.02         92        11     XLK (4)
-  DOCU                  Software       74.30         80        11     XLK (4)
-  SSNC                  Software       73.80         79        11     XLK (4)
-  AMCX        Media Distribution       73.52         86        11     XLY (9)
-  GLBE                  Internet       73.27         87        11     XLY (9)
-     S             Cybersecurity       71.80         75        11     XLK (4)
-   BOX                  Software       70.80         73        11     XLK (4)
-  AAMI        Financial Services       77.29         85        12     XLF (3)
-  APPF                  Software       71.54         73        12     XLK (4)
-  DXCM           Medical Devices       77.00         83        13     XLV (2)
-   LTH Leisure and Entertainment       73.52         86        13     XLY (9)
-  AMRX                    Pharma       83.09         88        14     XLV (2)
-  VCTR          Asset Management       80.29         91        14     XLF (3)
-   TMO           Medical Devices       77.00         83        14     XLV (2)
-  AMTB                   Banking       76.79         84        14     XLF (3)
-  ILMN               Diagnostics       76.25         80        14     XLV (2)
-  SIBN           Medical Devices       76.25         80        14     XLV (2)
-   ABT           Medical Devices       75.00         79        14     XLV (2)
-  LPLA                   Banking       74.79         83        14     XLF (3)
-   DGX               Diagnostics       75.25         78        15     XLV (2)
-   BFH        Financial Services       74.79         83        18     XLF (3)
-   RTX       Aerospace & Defense       78.33         82        21     XLI (5)
-   HEI       Aerospace & Defense       75.83         77        21     XLI (5)
+  CDNA               Diagnostics       86.50         99         6     XLV (2)
+  AVTR       Life Sciences Tools       85.50         97         6     XLV (2)
+  DCTH           Medical Devices       85.50         97         6     XLV (2)
+  EFOR               IT Services       85.30         99         6     XLK (4)
+  PAYS          Digital Payments       85.30         99         6     XLK (4)
+   NEO               Diagnostics       85.00         96         6     XLV (2)
+  MTRN               Gold Mining       87.22         89         7     XLB (6)
+     U                  Software       85.30         99         7     XLK (4)
+   PAY          Digital Payments       84.80         98         7     XLK (4)
+  PAYC                  Software       84.80         98         7     XLK (4)
+  APPN                  Software       84.30         97         7     XLK (4)
+  NSIT               IT Services       83.80         96         7     XLY (9)
+   RNG      Communications Cloud       83.00         98        11     XLK (4)
+  QTWO                  Software       80.80         90        11     XLK (4)
+  PANW             Cybersecurity       79.30         87        11     XLK (4)
+  OKTA             Cybersecurity       78.80         86        11     XLK (4)
+  NTNX                  Software       81.30         91        12     XLK (4)
+  EXLS                  Software       77.30         83        13     XLK (4)
+  BLFS       Life Sciences Tools       83.50         93        14     XLV (2)
+   TXG       Life Sciences Tools       71.50         99        14     XLV (2)
+   BVS           Medical Devices       83.50         93        15     XLV (2)
+  CRSR Leisure and Entertainment       78.52         96        15     XLY (9)
+  URGN                    Pharma       87.09         96        18     XLV (2)
+  SNOW      Cloud Infrastructure       83.00         98        21     XLK (4)
+  VCTR          Asset Management       80.29         91        21     XLF (3)
 
 ========================================
 RECENTLY DROPPED SHORTS (Watch For Squeeze)
 ========================================
-Ticker   Mapped_Theme  Long_Score  RS_Rating  Days Out Sector (Rk)
- LBTYA Infrastructure       22.16         15         7    XLU (10)
+Ticker            Mapped_Theme  Long_Score  RS_Rating  Days Out Sector (Rk)
+  WERN Transportation/Shipping       17.96         11         0     XLI (5)
+   WSC                   REITs       18.23         13         1     XLF (3)
+   KMT   Industrial Automation       17.16         11         1     XLI (5)
+    NI          Infrastructure       17.16         11         1    XLU (10)
+  STAG                   REITs        9.73         11         1     XLF (3)
+   NRG          Infrastructure       17.16         11         4    XLU (10)
+   NHI                   REITs       11.73         15         4     XLF (3)
+ LBTYA          Infrastructure       11.66         15         5    XLU (10)
+   SYM   Industrial Automation       18.16         13         7     XLK (4)
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,FSLY,RNG,SNOW,FIVN,EAT,NET,ABCL,XNCR,SEPN,CGAU,HALO,RGNX,PTGX,KNSA,RGEN,MTRN,CORT,FTK,NRIX,CSTL,FDMT,CDNA,URGN,PBF,ZLAB,IAG,ATRO,KYMR,MGTX,FSM,DCTH,VRDN,TVTX,CDE,TXG,HTFL,
-###SHORT,ROL,ORN,BW,ARI,GOOS,TU,HE,NKE,AGCO,TSSI,
-###LONG_Dropped,AAMI,ABT,ADPT,AMCX,AMPL,AMRX,AMTB,APPF,APPN,APPS,ATHM,ATI,ATRC,AVTR,BAX,BBNX,BFH,BIO,BLFS,BLKB,BLZE,BOX,BVS,CHYM,CNK,CNMD,CRSR,CRWD,CTSH,DBX,DELL,DGX,DOCU,DV,DXCM,EFOR,ERO,ESTC,EXK,EXLS,EXPE,FRSH,GCT,GH,GKOS,GLBE,GTLB,HAE,HBM,HEI,HNGE,ICUI,IIIN,ILMN,IMAX,INNV,INSP,ISSC,ITGR,KMTS,LIND,LPLA,LTH,MAN,MANH,MASS,MCS,MDB,MGNI,MMSI,MNTN,MSFT,NEO,NESR,NIQ,NSIT,NTAP,NTNX,NTRA,OKTA,P,PANW,PATH,PAY,PAYC,PAYS,PCOR,PCTY,PD,PGY,PRCH,PRGO,PRGS,PUBM,PYPL,QLYS,QMCO,QTWO,RBRK,RCRUY,RPD,RTX,S,SAIC,SAIL,SDGR,SHOP,SIBN,SMTI,SPT,SSNC,SSRM,TENB,TMO,TNDM,TOST,TTAN,TWLO,U,VAC,VCTR,VOYG,W,WDAY,WEX,WHD,WIX,WK,WPM,ZETA,
-###SHORT_Dropped,KNF,LBTYA,PNR,PRIM,SBS,
+###LONG,FSLY,FIVN,EAT,
+###SHORT,ROL,ORN,BW,ARI,GOOS,TU,HE,NKE,AGCO,TSSI,SEDG,ENPH,RUN,MNSO,ONON,CHRW,VIV,LOMA,LII,UAA,SHLS,CTRI,WSO,RRX,VFC,CPRI,JKS,MTZ,CSIQ,LUMN,NXT,ENB,POWL,CX,CCI,BIRK,STRL,TPR,RXO,SAIA,AMTM,MEC,LAND,
+###LONG_Dropped,APPN,AVTR,BLFS,BVS,CDNA,CRSR,DCTH,EFOR,EXLS,FTK,INNV,MTRN,NEO,NSIT,NTNX,OKTA,PANW,PAY,PAYC,PAYS,QTWO,RNG,SNOW,TWLO,TXG,U,URGN,VCTR,
+###SHORT_Dropped,ARRY,BLDR,BRSP,BXMT,KMT,KNF,LBTYA,MIDD,NHI,NI,NRG,PNR,PRIM,SBS,SEI,STAG,SYM,TE,WERN,WSC,
 
 ==============================================
 END OF TABELA SCAN - 2026-08-18

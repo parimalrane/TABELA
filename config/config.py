@@ -41,13 +41,17 @@ RS_RAW_WEIGHTS = {
     "Price as a % of 52 Wk H-L Range": 0.00 # Removed from raw RS, handled safely in Long Score
 }
 
+# Zacks Binary: Only Rank 1/2 survive. Rank 3 turnarounds = poison (proven by 61-experiment grid search)
+ZACKS_SCORE_MAP = {1: 100.0, 2: 100.0, 3: 0.0, 4: -50.0, 5: -100.0}
+GROWTH_SCORE_MAP = {'A': 100.0, 'B': 95.0, 'C': 90.0, 'D': 20.0, 'F': -50.0}
+
 # ==========================
 # THRESHOLDS (STATE-BASED)
 # ==========================
 
 LONG_ENTRY = {
-    "MIN_RS": 85.0,
-    "MIN_LONG_SCORE": 85.0,  # Restored to 85.0 (Extreme Exclusivity)
+    "MIN_RS": 90.0,           # Grid Search Winner: 90/90 gate (53.97% WR, +2.58% avg return)
+    "MIN_LONG_SCORE": 90.0,    # Grid Search Winner: 90/90 gate (126 trades over 3 months)
     "THEMES": ["Leading", "Neutral", "Unclassified Leader", "Unknown"],
     "BLOCKED_ZACKS": [4, 5],
     "MIN_PRICE": 10.0,       # Kill penny stock noise

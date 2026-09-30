@@ -65,20 +65,14 @@ def calculate_rs_rating(stocks):
 # ZACKS SCORE
 # ----------------------------
 
+from config.config import ZACKS_SCORE_MAP
+
 def zacks_score(rank):
-    # Alpha Accumulation Curve (Flattened 1-3, Punishing 4-5)
-    if rank == 1:
-        return 100.0
-    elif rank == 2:
-        return 95.0
-    elif rank == 3:
-        return 90.0
-    elif rank == 4:
-        return 20.0
-    elif rank == 5:
-        return -50.0
-    else:
-        return 20.0
+    try:
+        rank = int(float(rank))
+    except (ValueError, TypeError):
+        return ZACKS_SCORE_MAP.get(3, 20.0)
+    return ZACKS_SCORE_MAP.get(rank, 20.0)
 
 
 def calculate_zacks_score(stocks):
@@ -89,21 +83,11 @@ def calculate_zacks_score(stocks):
 # GROWTH SCORE
 # ----------------------------
 
+from config.config import GROWTH_SCORE_MAP
+
 def growth_score(grade):
     grade = str(grade).strip().upper()
-    # Alpha Accumulation Curve (Flattened A-C, Punishing D/F)
-    if grade == 'A':
-        return 100.0
-    elif grade == 'B':
-        return 95.0
-    elif grade == 'C':
-        return 90.0
-    elif grade == 'D':
-        return 20.0
-    elif grade == 'F':
-        return -50.0
-    else:
-        return 20.0
+    return GROWTH_SCORE_MAP.get(grade, 20.0)
 
 def calculate_growth_score(stocks):
     if "Growth Score" in stocks.columns:
