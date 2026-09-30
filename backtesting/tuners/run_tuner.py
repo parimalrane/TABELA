@@ -20,7 +20,7 @@ from datetime import datetime
 BASE_DIR = Path("c:/TABELA")
 CONFIG_PATH = BASE_DIR / "config" / "config.py"
 CONFIG_BACKUP = BASE_DIR / "config" / "config_backup_tuner.py"
-RESULTS_FILE = BASE_DIR / "optimization_results.csv"
+RESULTS_FILE = BASE_DIR / "backtesting" / "results" / "optimization_results.csv"
 
 # ============================================================
 # 30 PRE-FILLED EXPERIMENTS (7 Dimensions)
@@ -424,7 +424,7 @@ def run_regression_silent():
     return result.returncode == 0
 
 
-def run_backtest_silent():
+def run_backtest(mode="long", silent=True):
     """Run backtest.py and return results dict."""
     sys.path.insert(0, str(BASE_DIR))
     
@@ -501,7 +501,7 @@ def main():
         
         # Step 4: Run backtest
         print(f"  [3/3] Running backtest...")
-        bt = run_backtest_silent()
+        bt = run_backtest(mode="long", silent=True)
         
         if bt is None:
             bt = {

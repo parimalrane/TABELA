@@ -16,7 +16,7 @@ from datetime import datetime
 BASE_DIR = Path("c:/TABELA")
 CONFIG_PATH = BASE_DIR / "config" / "config.py"
 CONFIG_BACKUP = BASE_DIR / "config" / "config_backup_tuner.py"
-RESULTS_FILE = BASE_DIR / "optimization_results_phase3.csv"
+RESULTS_FILE = BASE_DIR / "backtesting" / "results" / "optimization_results_phase3.csv"
 
 # --- Reusable building blocks ---
 RS_CURRENT = {
@@ -157,7 +157,7 @@ def run_regression_silent():
     return result.returncode == 0
 
 
-def run_backtest_silent():
+def run_backtest(mode="long", silent=True):
     sys.path.insert(0, str(BASE_DIR))
     import importlib
     for mod in ["config.config", "scoring.scoring_engine", "scoring.long_scoring_engine", "backtest"]:
@@ -205,7 +205,7 @@ def main():
 
         print(f"  [2/3] Regression complete in {reg_time}s.")
         print(f"  [3/3] Running backtest...")
-        bt = run_backtest_silent()
+        bt = run_backtest(mode="long", silent=True)
         if bt is None:
             bt = {"total_trades": 0, "win_rate": 0.0, "avg_return": 0.0,
                   "neutral_trades": 0, "neutral_win_rate": 0.0, "neutral_avg_return": 0.0,

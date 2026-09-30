@@ -60,8 +60,9 @@ LONG_ENTRY = {
 }
 
 DIST_ENTRY = {
-    "MAX_RS": 10.0,
-    "MAX_LONG_SCORE": 20.0,
+    "MIN_RS": 8.0,            # Grid Search Winner: Floor to prevent dead-cat bounce squeezes
+    "MAX_RS": 15.0,           # Grid Search Winner: Widened from 10 to catch breakdowns earlier
+    "MAX_LONG_SCORE": 25.0,    # Grid Search Winner: Widened from 20 to catch breakdowns earlier
     "THEMES": ["Lagging", "Micro Laggard"],
     "MICRO_BREAKAWAY_PERCENTILE": 0.05,
     "BLOCKED_ZACKS": [1, 2],
