@@ -778,7 +778,7 @@ def print_daily_scan(
             distribution_watchlist["Sector Rank"] = distribution_watchlist["Sector (SPDR)"].map(sector_rs_map).fillna(0).astype(int)
 
     print("========================================")
-    print("LONG CANDIDATE UNIVERSE")
+    print("STRONG BULLISH (Trend Continuation)")
     print("Legend: ^ = Micro Leader | ~ = Unknown/Unclassified")
     print("========================================")
 
@@ -844,7 +844,7 @@ def print_daily_scan(
 
     print("\n")
     print("========================================")
-    print("DISTRIBUTION WATCHLIST")
+    print("STRONG BEARISH (Trend Breakdown)")
     print("Legend: ^ = Micro Laggard")
     print("========================================")
 
@@ -1050,17 +1050,17 @@ def print_daily_scan(
             print()
 
     print()
-    print_dropped_table(accumulated["long_dropped"], "RECENTLY DROPPED LONGS (Watch For Breakdown)")
-    print_dropped_table(accumulated["short_dropped"], "RECENTLY DROPPED SHORTS (Watch For Squeeze)")
+    print_dropped_table(accumulated["long_dropped"], "MILD BULLISH (Watch For Pullback Setup)")
+    print_dropped_table(accumulated["short_dropped"], "MILD BEARISH (Watch For Relief Rally Fade)")
 
     print("TRADINGVIEW WATCHLIST EXPORT")
     if full_long_list:
-        print("###LONG," + full_long_list + ",")
+        print("###Strong Bullish," + full_long_list + ",")
     if full_short_list:
-        print("###SHORT," + full_short_list + ",")
+        print("###Strong Bearish," + full_short_list + ",")
     if long_dropped_str:
-        print("###LONG_Dropped," + long_dropped_str + ",")
+        print("###Mild Bullish," + long_dropped_str + ",")
     if short_dropped_str:
-        print("###SHORT_Dropped," + short_dropped_str + ",")
+        print("###Mild Bearish," + short_dropped_str + ",")
 
     print()

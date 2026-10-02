@@ -1,31 +1,31 @@
 Experiment,Name,Hypothesis,Total Trades,Win Rate (%),Avg Return (%),Leading Trades,Leading WR (%),Leading Avg (%),Neutral Trades,Neutral WR (%),Neutral Avg (%),Regression Time (s)
-1,Baseline (Current Config),Control group. Current production settings.,536,40.11,-1.05,456,37.5,-2.68,80,55.0,8.24,142.3
-2,RS: 12W Dominant,Does longer-term intermediate trend beat short-term breakout?,495,39.8,-0.97,426,37.79,-2.24,69,52.17,6.89,133.0
-3,RS: YTD Comeback (15%),Does adding back YTD drift catch better long-term winners?,510,40.2,-1.57,431,38.28,-3.0,79,50.63,6.26,144.6
-4,RS: 52W High Proximity (15%),Does nearness to 52-week high improve breakout quality?,560,38.21,-2.24,461,36.66,-3.55,99,45.45,3.88,144.1
-5,RS: Weekly Pulse (30%),Does amplifying weekly momentum catch fresher breakouts?,570,40.0,-1.46,483,38.1,-2.93,87,50.57,6.73,144.5
-6,RS: Legacy Formula,Does the original pre-optimization formula actually perform better?,449,38.08,-2.37,379,36.41,-4.09,70,47.14,6.96,145.3
-7,RS: Hybrid (YTD + 52W),Best of both: immediate breakout + structural strength.,523,39.2,-1.93,444,37.39,-3.32,79,49.37,5.9,157.2
-8,Theme: Monthly Dominance (60%),Does monthly ETF flow outperform weekly rotation detection?,480,40.83,-1.26,333,35.44,-3.62,147,53.06,4.08,138.8
-9,Theme: Quarterly Anchor (45%),Does longer-term capital flow produce more stable Leading sectors?,469,38.81,-1.36,320,32.81,-4.85,149,51.68,6.14,134.6
-10,Theme: Pure Weekly Pulse (50%),Does ultra-fast weekly rotation catch sector shifts earlier?,551,39.02,-1.46,466,39.06,-2.12,85,38.82,2.16,137.1
-11,Theme: Legacy Drift Formula,Does the original slow-moving theme formula actually outperform?,347,38.62,-2.34,258,36.43,-4.03,89,44.94,2.56,131.1
-12,Theme: Balanced All-Period,Does a balanced blend across all timeframes reduce whipsaw?,387,40.05,-2.13,283,36.75,-3.67,104,49.04,2.08,138.0
-13,Theme: 6-Month Anchor,Does 6-month institutional flow reveal true secular trends?,330,42.42,-1.37,261,38.31,-3.43,69,57.97,6.41,131.9
-14,Composite: RS Heavy (60/20/12/8),Does pure momentum domination maximize win rate?,577,39.34,-1.51,466,36.91,-3.02,111,49.55,4.84,146.5
-15,Composite: Theme Heavy (40/35/15/10),Does macro flow conviction beat individual stock momentum?,448,40.18,-0.84,409,39.12,-1.59,39,51.28,7.06,125.9
-16,Composite: Fundamentals Heavy (40/20/25/15),Does weighting Zacks/Growth heavily filter garbage breakouts?,586,39.25,-1.35,473,37.42,-2.7,113,46.9,4.29,152.4
-17,Composite: Equal Split (40/30/15/15),Does balanced weighting reduce concentration risk?,491,39.51,-1.17,441,37.87,-2.28,50,54.0,8.66,139.5
-18,Composite: Pure Momentum (70/15/10/5),Does extreme RS dominance crush everything else?,624,40.06,-1.33,475,37.47,-3.13,148,47.97,4.42,141.2
-19,Threshold: Loose Gate (80/80),Does a wider funnel catch more winners despite more noise?,795,36.6,-2.18,582,35.05,-3.38,213,40.85,1.1,199.3
-20,Threshold: Medium Gate (85/80),Does RS strictness with score flexibility find the sweet spot?,680,37.79,-1.67,490,36.12,-3.29,190,42.11,2.5,156.8
-21,Threshold: Tight Gate (90/85),Does extreme RS filtration maximize precision?,427,43.09,0.2,345,39.42,-2.01,82,58.54,9.5,133.0
-22,Threshold: Ultra Tight (90/90),Does maximum exclusivity produce the highest win rate?,249,44.58,0.92,244,44.26,0.79,5,60.0,7.34,118.3
-23,Sector: Narrow Leading (20/20),Does a narrow Leading bucket concentrate on truly elite sectors?,537,40.04,-1.1,314,35.35,-2.7,223,46.64,1.14,135.9
-24,Sector: Wide Leading (40/40),Does a wide Leading bucket catch more rotational opportunities?,532,39.66,-1.08,493,37.53,-2.45,39,66.67,16.24,126.0
-25,Sector: Asymmetric (25/35),Does a tight Leading + wide Lagging create earlier warnings?,532,39.85,-1.05,408,38.73,-2.34,124,43.55,3.2,123.4
-26,Zacks: Steep Penalty,Does harshly punishing Rank 3 turnarounds improve quality?,363,39.94,-0.79,332,39.46,-1.0,31,45.16,1.42,121.0
-27,Zacks: Pure Binary,Does treating Rank 1-2 as pass and everything else as fail work?,267,45.32,-0.5,211,45.02,-1.08,56,46.43,1.68,117.3
-28,Zacks: Block Rank 3,Does completely blocking Rank 3 turnarounds improve win rate?,536,40.11,-1.05,456,37.5,-2.68,80,55.0,8.24,111.2
-29,Growth: Steep Fibonacci,Does the classic Fibonacci penalty curve beat the flattened one?,387,40.31,-0.92,363,38.57,-1.7,24,66.67,10.79,119.1
-30,Growth: Irrelevant (Weight = 0),"Does Growth Score add any value at all, or is it pure noise?",495,40.2,-0.88,431,38.52,-2.45,64,51.56,9.68,109.3
+1,Baseline (Current Config),Control group. Current production settings.,536,40.86,-0.61,456,37.72,-2.05,80,58.75,7.61,118.8
+2,RS: 12W Dominant,Does longer-term intermediate trend beat short-term breakout?,494,40.89,-0.42,425,38.82,-1.45,69,53.62,5.91,103.6
+3,RS: YTD Comeback (15%),Does adding back YTD drift catch better long-term winners?,510,40.98,-1.11,430,39.07,-2.31,80,51.25,5.34,107.0
+4,RS: 52W High Proximity (15%),Does nearness to 52-week high improve breakout quality?,562,37.9,-2.06,463,36.07,-3.14,99,46.46,3.0,100.8
+5,RS: Weekly Pulse (30%),Does amplifying weekly momentum catch fresher breakouts?,569,39.19,-1.07,482,36.72,-2.41,87,52.87,6.33,99.7
+6,RS: Legacy Formula,Does the original pre-optimization formula actually perform better?,449,38.53,-2.01,378,37.04,-3.39,71,46.48,5.32,98.8
+7,RS: Hybrid (YTD + 52W),Best of both: immediate breakout + structural strength.,523,39.96,-1.64,443,38.15,-2.82,80,50.0,4.92,100.3
+8,Theme: Monthly Dominance (60%),Does monthly ETF flow outperform weekly rotation detection?,480,41.67,-0.71,333,36.04,-3.42,147,54.42,5.42,97.7
+9,Theme: Quarterly Anchor (45%),Does longer-term capital flow produce more stable Leading sectors?,469,39.87,-0.9,319,31.97,-5.11,150,56.67,8.05,98.1
+10,Theme: Pure Weekly Pulse (50%),Does ultra-fast weekly rotation catch sector shifts earlier?,549,40.62,-0.95,464,40.09,-1.33,85,43.53,1.08,97.9
+11,Theme: Legacy Drift Formula,Does the original slow-moving theme formula actually outperform?,345,40.29,-1.79,256,35.55,-4.1,89,53.93,4.86,93.5
+12,Theme: Balanced All-Period,Does a balanced blend across all timeframes reduce whipsaw?,385,40.26,-1.65,281,35.59,-3.74,104,52.88,3.99,95.6
+13,Theme: 6-Month Anchor,Does 6-month institutional flow reveal true secular trends?,328,43.9,-0.67,259,38.61,-3.17,69,63.77,8.69,93.7
+14,Composite: RS Heavy (60/20/12/8),Does pure momentum domination maximize win rate?,577,40.21,-1.13,466,37.77,-2.46,111,50.45,4.43,102.8
+15,Composite: Theme Heavy (40/35/15/10),Does macro flow conviction beat individual stock momentum?,447,40.27,-0.28,408,38.97,-0.96,39,53.85,6.8,97.0
+16,Composite: Fundamentals Heavy (40/20/25/15),Does weighting Zacks/Growth heavily filter garbage breakouts?,586,39.93,-0.95,472,38.14,-2.07,114,47.37,3.68,101.5
+17,Composite: Equal Split (40/30/15/15),Does balanced weighting reduce concentration risk?,490,40.41,-0.62,440,38.41,-1.55,50,58.0,7.56,97.5
+18,Composite: Pure Momentum (70/15/10/5),Does extreme RS dominance crush everything else?,626,41.05,-0.99,476,38.03,-2.59,149,50.34,4.06,105.6
+19,Threshold: Loose Gate (80/80),Does a wider funnel catch more winners despite more noise?,798,37.59,-2.05,584,36.64,-3.05,214,40.19,0.69,106.2
+20,Threshold: Medium Gate (85/80),Does RS strictness with score flexibility find the sweet spot?,682,39.44,-1.41,491,37.88,-2.76,191,43.46,2.08,102.9
+21,Threshold: Tight Gate (90/85),Does extreme RS filtration maximize precision?,426,44.6,0.83,344,40.7,-1.14,82,60.98,9.08,97.1
+22,Threshold: Ultra Tight (90/90),Does maximum exclusivity produce the highest win rate?,247,45.34,1.66,242,45.04,1.41,5,60.0,13.64,91.6
+23,Sector: Narrow Leading (20/20),Does a narrow Leading bucket concentrate on truly elite sectors?,537,40.78,-0.66,314,35.03,-2.42,223,48.88,1.82,101.9
+24,Sector: Wide Leading (40/40),Does a wide Leading bucket catch more rotational opportunities?,532,40.6,-0.64,493,38.34,-1.99,39,69.23,16.46,98.6
+25,Sector: Asymmetric (25/35),Does a tight Leading + wide Lagging create earlier warnings?,532,40.6,-0.61,409,38.14,-1.96,123,48.78,3.89,99.4
+26,Zacks: Steep Penalty,Does harshly punishing Rank 3 turnarounds improve quality?,362,41.44,-0.26,331,40.48,-0.31,31,51.61,0.26,95.1
+27,Zacks: Pure Binary,Does treating Rank 1-2 as pass and everything else as fail work?,268,46.64,0.2,212,45.75,0.02,56,50.0,0.87,93.8
+28,Zacks: Block Rank 3,Does completely blocking Rank 3 turnarounds improve win rate?,536,40.86,-0.61,456,37.72,-2.05,80,58.75,7.61,89.5
+29,Growth: Steep Fibonacci,Does the classic Fibonacci penalty curve beat the flattened one?,386,41.45,-0.3,362,40.06,-0.96,24,62.5,9.64,95.1
+30,Growth: Irrelevant (Weight = 0),"Does Growth Score add any value at all, or is it pure noise?",494,40.89,-0.35,430,38.84,-1.7,64,54.69,8.72,99.7
