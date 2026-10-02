@@ -293,9 +293,13 @@ def extract_benchmark_returns(raw_etf_df, theme_strength_settings):
     benchmark_returns = {}
 
     for period in period_weights:
-        benchmark_returns[period] = pd.to_numeric(
-            benchmark_row.get(period), errors="coerce"
-        )
+        val = pd.to_numeric(benchmark_row.get(period), errors="coerce")
+        if pd.isna(val):
+            # Fallback to zero rather than dropping NaNs into the universal relative strength calculator
+            # This protects the global scoring engine from a complete zero-out if SPY data skips a day
+            benchmark_returns[period] = 0.0
+        else:
+            benchmark_returns[period] = val
 
     return benchmark_returns
 
@@ -394,16 +398,11 @@ def build_theme_strength(etf_master, benchmark_returns, theme_strength_settings)
     relative_components = etf_master.apply(compute_relative_components, axis=1)
     etf_master = pd.concat([etf_master, relative_components], axis=1)
 
-    diagnostics_columns = [
-        "Relative_ETF_Score",
-        "Rel_1D",
-        "Rel_1W",
-        "Rel_1M",
-        "Rel_3M",
-        "WgtContr_1D",
-        "WgtContr_1W",
-        "WgtContr_1M",
-        "WgtContr_3M",
+    # Use the exact same period alias map logic that the calculator used above to guarantee column alignment
+    diagnostics_columns = ["Relative_ETF_Score"] + [
+        f"Rel_{period_alias_map.get(k, k)}" for k in period_weights.keys()
+    ] + [
+        f"WgtContr_{period_alias_map.get(k, k)}" for k in period_weights.keys()
     ]
 
     def aggregate_theme_relative_score(group):
@@ -425,18 +424,15 @@ def build_theme_strength(etf_master, benchmark_returns, theme_strength_settings)
                 f"Unsupported THEME_STRENGTH_CONFIG aggregation mode: '{aggregation_mode}'."
             )
 
-        return pd.Series({
+        ret_dict = {
             "Theme_Relative_Score": aggregate_values.get("Relative_ETF_Score", 0.0),
-            "Rel_1D": aggregate_values.get("Rel_1D", 0.0),
-            "Rel_1W": aggregate_values.get("Rel_1W", 0.0),
-            "Rel_1M": aggregate_values.get("Rel_1M", 0.0),
-            "Rel_3M": aggregate_values.get("Rel_3M", 0.0),
-            "WgtContr_1D": aggregate_values.get("WgtContr_1D", 0.0),
-            "WgtContr_1W": aggregate_values.get("WgtContr_1W", 0.0),
-            "WgtContr_1M": aggregate_values.get("WgtContr_1M", 0.0),
-            "WgtContr_3M": aggregate_values.get("WgtContr_3M", 0.0),
             "Total_AUM_Mil": total_aum,
-        })
+        }
+        for col in diagnostics_columns:
+            if col != "Relative_ETF_Score":
+                ret_dict[col] = aggregate_values.get(col, 0.0)
+                
+        return pd.Series(ret_dict)
 
     theme_strength = (
         etf_master.groupby("Theme").apply(aggregate_theme_relative_score, include_groups=False).reset_index()

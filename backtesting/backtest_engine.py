@@ -2,7 +2,7 @@ import os
 import json
 import pandas as pd
 from pathlib import Path
-from config.config import LONG_ENTRY, DIST_ENTRY, SHORT_ENTRY
+import config.config as cfg
 
 def run_backtest(mode="long", silent=False):
     prices = {}
@@ -50,16 +50,17 @@ def run_backtest(mode="long", silent=False):
             else:
                 # Use dedicated short_score if available, fall back to long_score
                 long_score = row.get("short_score", row.get("long_score", 100.0))
-                rs_rating = row.get("rs_rating", 100)
+                # Use dedicated short_rs_rating instead of inheriting the long engine's rs_rating mapping
+                rs_rating = row.get("short_rs_rating", row.get("rs_rating", 100))
                 
             ticker = row["ticker"]
             theme_class = row.get("theme_class", "Unknown")
             
             if mode == "long":
-                allowed_themes = LONG_ENTRY.get("THEMES", [])
-                min_rs = LONG_ENTRY.get("MIN_RS", 0.0)
-                min_score = LONG_ENTRY.get("MIN_LONG_SCORE", 0.0)
-                min_price = LONG_ENTRY.get("MIN_PRICE", 10.0)
+                allowed_themes = cfg.LONG_ENTRY.get("THEMES", [])
+                min_rs = cfg.LONG_ENTRY.get("MIN_RS", 0.0)
+                min_score = cfg.LONG_ENTRY.get("MIN_LONG_SCORE", 0.0)
+                min_price = cfg.LONG_ENTRY.get("MIN_PRICE", 10.0)
                 
                 if long_score >= min_score and rs_rating >= min_rs and theme_class in allowed_themes:
                     if ticker not in entries:
@@ -76,12 +77,12 @@ def run_backtest(mode="long", silent=False):
                             entries[ticker]["best_score"] = long_score
 
             elif mode == "short":
-                allowed_themes = SHORT_ENTRY.get("THEMES", [])
-                max_rs = SHORT_ENTRY.get("MAX_SHORT_RS", 15.0)
-                min_rs_short = SHORT_ENTRY.get("MIN_SHORT_RS", 8.0)
-                max_score = SHORT_ENTRY.get("MAX_SHORT_SCORE", 25.0)
-                min_price = SHORT_ENTRY.get("MIN_PRICE", 10.0)
-                min_volume = SHORT_ENTRY.get("MIN_VOLUME", 0)
+                allowed_themes = cfg.SHORT_ENTRY.get("THEMES", [])
+                max_rs = cfg.SHORT_ENTRY.get("MAX_SHORT_RS", 15.0)
+                min_rs_short = cfg.SHORT_ENTRY.get("MIN_SHORT_RS", 8.0)
+                max_score = cfg.SHORT_ENTRY.get("MAX_SHORT_SCORE", 25.0)
+                min_price = cfg.SHORT_ENTRY.get("MIN_PRICE", 10.0)
+                min_volume = cfg.SHORT_ENTRY.get("MIN_VOLUME", 0)
 
                 avg_vol = row.get("avg_volume", 0) or 0
                 last_close = row.get("last_close", 0) or 0

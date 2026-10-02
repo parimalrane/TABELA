@@ -136,6 +136,7 @@ def generate_short_config_block(exp):
         f'    "THEMES": {themes},\n'
         f'    "BLOCKED_ZACKS": [1, 2],\n'
         f'    "MIN_PRICE": 10.0,\n'
+        f'    "MIN_VOLUME": 1000000,\n'
         f'}}'
     )
 
@@ -148,23 +149,24 @@ def generate_short_config_block(exp):
 
 
 def run_regression_silent():
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(BASE_DIR)
+    
     result = subprocess.run(
         [sys.executable, str(BASE_DIR / "runners" / "run_historical.py")],
         cwd=str(BASE_DIR), capture_output=True, text=True,
-        env={**os.environ, "PYTHONPATH": str(BASE_DIR)}
+        env=env
     )
     return result.returncode == 0
-
-
 def run_backtest_short_silent():
     sys.path.insert(0, str(BASE_DIR))
     import importlib
-    for mod in list(sys.modules.keys()):
-        if "config" in mod or "backtest" in mod or "scoring" in mod:
-            try:
-                importlib.reload(sys.modules[mod])
-            except Exception:
-                pass
+    if "config.config" in sys.modules:
+        importlib.reload(sys.modules["config.config"])
+    if "scoring.scoring_engine" in sys.modules:
+        importlib.reload(sys.modules["scoring.scoring_engine"])
+    if "scoring.long_scoring_engine" in sys.modules:
+        importlib.reload(sys.modules["scoring.long_scoring_engine"])
     
     sys.path.insert(0, str(BASE_DIR / "backtesting"))
     try:

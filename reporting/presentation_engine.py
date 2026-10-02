@@ -856,8 +856,8 @@ def print_daily_scan(
                 "Ticker",
                 "Mapped_Theme",
                 "Theme_Class",
-                "Long_Score",
-                "RS_Rating",
+                "Short_Score",
+                "Short_RS_Rating",
                 "Sector (SPDR)",
                 "Sector Rank"
             ]
@@ -870,8 +870,8 @@ def print_daily_scan(
         # Drop the Theme_Class column
         display_df = display_df.drop(columns=["Theme_Class"])
 
-        if "Long_Score" in display_df.columns:
-            display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
+        if "Short_Score" in display_df.columns:
+            display_df["Short_Score"] = display_df["Short_Score"].map("{:.2f}".format)
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)

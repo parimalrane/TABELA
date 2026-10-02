@@ -103,17 +103,12 @@ def calculate_growth_score(stocks):
 # Does NOT touch RS_Rating, Long_Score, Zacks_Score, Growth_Score.
 # ============================================================
 
-from config.config import (
-    SHORT_RS_RAW_WEIGHTS,
-    SHORT_COMPOSITE_WEIGHTS,
-    SHORT_ZACKS_SCORE_MAP,
-    SHORT_GROWTH_SCORE_MAP,
-)
+import config.config as cfg
 
 def calculate_short_rs_raw(stocks):
     """Computes a dedicated raw RS score using SHORT_RS_RAW_WEIGHTS."""
     stocks["Short_RS_Raw"] = 0.0
-    for column, weight in SHORT_RS_RAW_WEIGHTS.items():
+    for column, weight in cfg.SHORT_RS_RAW_WEIGHTS.items():
         if column in stocks.columns:
             stocks["Short_RS_Raw"] += stocks[column].fillna(0) * weight
     return stocks
@@ -134,13 +129,13 @@ def _short_zacks_score(rank):
     try:
         rank = int(float(rank))
     except (ValueError, TypeError):
-        return SHORT_ZACKS_SCORE_MAP.get(3, 20.0)
-    return SHORT_ZACKS_SCORE_MAP.get(rank, 20.0)
+        return cfg.SHORT_ZACKS_SCORE_MAP.get(3, 20.0)
+    return cfg.SHORT_ZACKS_SCORE_MAP.get(rank, 20.0)
 
 
 def _short_growth_score(grade):
     grade = str(grade).strip().upper()
-    return SHORT_GROWTH_SCORE_MAP.get(grade, 50.0)
+    return cfg.SHORT_GROWTH_SCORE_MAP.get(grade, 50.0)
 
 
 def calculate_short_score(stocks):
@@ -152,7 +147,7 @@ def calculate_short_score(stocks):
     stocks = calculate_short_rs_raw(stocks)
     stocks = calculate_short_rs_rating(stocks)
 
-    w = SHORT_COMPOSITE_WEIGHTS
+    w = cfg.SHORT_COMPOSITE_WEIGHTS
     rs_w = w.get("RS_WEIGHT", 0.50)
     theme_w = w.get("THEME_WEIGHT", 0.25)
     zacks_w = w.get("ZACKS_WEIGHT", 0.15)

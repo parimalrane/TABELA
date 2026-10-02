@@ -20,26 +20,17 @@ TABELA is an institutional-grade, multi-dimensional momentum stock screener. It 
 
 ---
 
-## 2. Backtesting Directory Structure
+## 2. Unified Backtesting Suite
 
 ```
 c:\TABELA\backtesting\
     backtest_engine.py              ← Unified engine (long + short modes)
-    run_quarterly_optimization.py   ← Master script to run all tuners + merge CSVs
     tuners\
-        run_tuner.py                ← Phase 1: Long engine RS/Score grid
-        run_tuner_phase2.py         ← Phase 2: Long composite weight combos
-        run_tuner_phase3.py         ← Phase 3: Zacks Binary + Growth curve combos
-        run_tuner_short.py          ← Original short gate grid (deprecated, superseded by v2)
-        run_tuner_short_floor.py    ← Short RS floor test (graveyard avoidance)
-        run_tuner_short_v2.py       ← Multi-dimensional short scoring grid (14 experiments)
-        run_tuner_short_phase2.py   ← Theme precision + score tightening grid (8 experiments)
-        run_baseline_short_p3c.py   ← Single-run baseline with full trade detail CSV output
+        run_quarterly_tuner.py      ← Master unified suite (Executes both Long & Short grid models in a single execution)
+        run_tuner.py                ← Contains the 30 active Long test cases (invoked by master)
+        run_tuner_short_v2.py       ← Contains the 14 active array of Short test cases (invoked by master)
     results\
-        master_optimization_results_20260930.csv   ← All Phase 1-3 long results merged
-        optimization_results_short_v2_20260930.csv ← Short scoring grid results
-        optimization_results_short_phase2_20260930.csv ← Phase 2 tightening results
-        short_trade_detail_20260930.csv            ← Trade-level detail (winner anatomy)
+        master_optimization_results.csv ← Consolidator target
 ```
 
 ---
@@ -56,15 +47,11 @@ python c:\TABELA\backtesting\backtest_engine.py long
 python c:\TABELA\backtesting\backtest_engine.py short
 ```
 
-**Run trade-level detail for Short (generates CSV with every trade, Win/Loss, Return%):**
+**Full Unified Quarterly Optimization (Automatically iterates all 44 Long/Short tests):**
 ```cmd
-python c:\TABELA\backtesting\tuners\run_baseline_short_p3c.py
+python c:\TABELA\backtesting\tuners\run_quarterly_tuner.py
 ```
-
-**Full quarterly optimization (all tuners + auto-merge results):**
-```cmd
-python c:\TABELA\backtesting\run_quarterly_optimization.py
-```
+*Note: You must run this once a quarter to capture shifting market dynamics. Once complete, manually transfer the grid search winner parameters into `config.py` and run `regression.bat`.*
 
 ---
 
@@ -84,19 +71,18 @@ Proven across 60+ grid search experiments:
 
 **The Genius of Zacks Binary:** Because Zacks carries 15% weight, a Rank 3 score of `0` caps a stock's maximum possible Long_Score at `85.0`. Since the gate is `90.0`, Rank 3 stocks are automatically eliminated without needing to be in `BLOCKED_ZACKS`.
 
-### B. Short Engine: The "Fall From Grace" Configuration
-Proven across 22+ targeted experiments in 2 phases:
+### B. Short Engine: P1-C "Lower Mid / YTD Reversal"
+Proven via mathematical short volume optimization against live datasets:
 
 | Parameter | Value | Why |
 |---|---|---|
-| `MIN_SHORT_RS` | 50.0 | Floor: must have had standing to lose (no graveyards) |
-| `MAX_SHORT_RS` | 75.0 | Ceiling: catch before collapse becomes obvious |
-| `MAX_SHORT_SCORE` | 50.0 | Score < 50 = confirmed breakdown conviction |
-| `THEMES` | Neutral, Unknown | Lagging stocks at RS 50-75 add noise, not signal |
-| `MIN_PRICE` | $10.00 | Never short penny stocks |
-| `MIN_VOLUME` | 1,000,000 | Institutional liquidity required (borrow availability) |
-| `SHORT_RS_RAW_WEIGHTS` | YTD: 40%, 4W: 30%, 12W: 20%, 1W: 10% | YTD reversal = peak-to-trough momentum |
-| `SHORT_COMPOSITE_WEIGHTS` | RS: 65%, Theme: 20%, Zacks: 10%, Growth: 5% | Technicals dominate for shorts |
+| `MIN_SHORT_RS` | 15.0 | Floor: stocks must not be totally decayed graveyards |
+| `MAX_SHORT_RS` | 35.0 | Ceiling: YTD breakdown targeting mid-tier weakness |
+| `MAX_SHORT_SCORE` | 40.0 | Confirmed structural deterioration via strict fundamental thresholds |
+| `THEMES` | Lagging, Micro Laggard | Explictly removed the `Unknown` backdoor that causes market bloat |
+| `MIN_PRICE` | $10.00 | Avoid sub-10 noise manipulation |
+| `MIN_VOLUME` | 1,000,000 | Institutional liquidity protects against low-float short squeezes |
+| `SHORT_COMPOSITE_WEIGHTS` | RS: 50%, Theme: 25%, Zacks: 15%, Growth: 10% | Balanced approach prevents individual anomalies from skewing distribution setups |
 
 **Final short performance:** 73.28% Win Rate | +5.16% avg return | ~11 stocks/day
 

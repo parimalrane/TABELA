@@ -408,6 +408,12 @@ DIST_ENTRY = {{
     "BLOCKED_ZACKS": [1, 2],
     "MAX_DROPPED_WATCH_SCORE": 30.0
 }}
+
+SHORT_RS_RAW_WEIGHTS = {{"% Price Change (4 Weeks)": 0.30, "% Price Change (12 Weeks)": 0.20, "% Price Change (1 Week)": 0.10, "Relative Price Change (YTD)": 0.40, "Price as a % of 52 Wk H-L Range": 0.00}}
+SHORT_COMPOSITE_WEIGHTS = {{"RS_WEIGHT": 0.50, "THEME_WEIGHT": 0.25, "ZACKS_WEIGHT": 0.15, "GROWTH_WEIGHT": 0.10}}
+SHORT_ZACKS_SCORE_MAP = {{1: -100.0, 2: -50.0, 3: 20.0, 4: 80.0, 5: 100.0}}
+SHORT_GROWTH_SCORE_MAP = {{'A': -50.0, 'B': 0.0, 'C': 50.0, 'D': 80.0, 'F': 100.0}}
+SHORT_ENTRY = {{"MIN_SHORT_RS": 15.0, "MAX_SHORT_RS": 35.0, "MAX_SHORT_SCORE": 40.0, "THEMES": ["Lagging", "Micro Laggard"], "BLOCKED_ZACKS": [1, 2], "MIN_PRICE": 10.0, "MIN_VOLUME": 1000000}}
 '''
     return content
 
@@ -436,12 +442,14 @@ def run_backtest(mode="long", silent=True):
         importlib.reload(sys.modules["scoring.scoring_engine"])
     if "scoring.long_scoring_engine" in sys.modules:
         importlib.reload(sys.modules["scoring.long_scoring_engine"])
-    if "backtest" in sys.modules:
-        importlib.reload(sys.modules["backtest"])
-    
-    from backtest import run_backtest
-    return run_backtest(silent=True)
-
+    sys.path.insert(0, str(BASE_DIR / "backtesting"))
+    try:
+        import backtest_engine
+        importlib.reload(backtest_engine)
+        return backtest_engine.run_backtest(mode="long", silent=True)
+    except Exception as e:
+        print(f"  [ERROR] Backtest failed: {e}")
+        return None
 
 def main():
     total = len(EXPERIMENTS)
