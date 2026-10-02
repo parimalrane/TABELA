@@ -45,12 +45,12 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Refining & Marketing           Exploration          8    8  211.48   Leading (5 -> -4)               DK, PBF, PARR, DINO,
-                                                                                                     VLO, CLMT, MPC, PSX
+                                                                                                     CLMT, VLO, MPC, PSX
 Healthcare Services            Healthcare          15   11  193.33   Leading (4 -> +2)               PGNY, HUM, AGL, OSCR,
                                                                                                      AMN, PACS, DVA, BTSG,
                                                                                                      CON, IQV
 Pharmaceuticals                Pharma               3    3  137.24   Leading (8 -> -5)               LQDA, ETON, CORT
-Healthcare                     Healthcare          41   12  103.48   Leading (4 -> +2)               OMDA, LFST, INNV, PNTG,
+Healthcare                     Healthcare          41   12  103.48   Leading (4 -> +2)               LFST, OMDA, INNV, PNTG,
                                                                                                      CNC, CYRX, CRL, MEDP,
                                                                                                      OGN, ASTH
 Biotechnology                  Biotech              4    2   77.66   Leading (9 -> +3)               KNSA
@@ -79,12 +79,12 @@ Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
 Ticker             Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   PGNY      Healthcare Services      95.44         98        0     6     XLV (2)
-   HUM      Healthcare Services      95.44         98        0     6     XLV (2)
+   HUM      Healthcare Services      95.44         98       +1     6     XLV (2)
     DK     Refining & Marketing      94.69         99      +19     3     XLE (1)
    AGL      Healthcare Services      94.44         99       +1     4     XLV (2)
-  OSCR      Healthcare Services      94.44         96       -2     6     XLF (3)
-  OMDA               Healthcare      93.94         98       +1     6     XLV (2)
-  LFST               Healthcare      93.94         98       +2     6     XLV (2)
+  OSCR      Healthcare Services      94.44         96       -3     6     XLF (3)
+  LFST               Healthcare      93.94         98       +3     6     XLV (2)
+  OMDA               Healthcare      93.94         98        0     6     XLV (2)
    PBF     Refining & Marketing      93.94         99      +22     3     XLE (1)
   PARR     Refining & Marketing      93.94         96      +26     3     XLE (1)
   LQDA          Pharmaceuticals      93.84         99       -2     5     XLV (2)
@@ -93,12 +93,12 @@ Ticker             Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
    AMN      Healthcare Services      93.44         97      +20     5     XLK (8)
   DAVE          Digital Banking      92.84         99      -10     5     XLK (8)
   PACS      Healthcare Services      92.69         94       -2     4     XLV (2)
-   VLO     Refining & Marketing      92.69         95       NA     1     XLE (1)
   CLMT     Refining & Marketing      92.69         95       NA     1     XLE (1)
+   VLO     Refining & Marketing      92.69         95       NA     1     XLE (1)
   PNTG               Healthcare      92.44         95      +14     5     XLV (2)
+   DVA      Healthcare Services      92.44         95       -2     6     XLV (2)
    CNC               Healthcare      92.44         95       -8     6     XLV (2)
-  CYRX               Healthcare      92.44         95       -8     6     XLV (2)
-   DVA      Healthcare Services      92.44         95       -4     6     XLV (2)
+  CYRX               Healthcare      92.44         95      -10     6     XLV (2)
    MPC     Refining & Marketing      92.44         96       NA     1     XLE (1)
   ETON          Pharmaceuticals      92.34         99        0     2     XLV (2)
   CORT          Pharmaceuticals      92.34         99       -6     3     XLV (2)
@@ -107,14 +107,14 @@ Ticker             Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   MEDP               Healthcare      91.69         92       NA     1     XLV (2)
   DDOG     Cloud Infrastructure      91.59         99       -2     6     XLK (8)
   HNGE           Digital Health      91.42         99      -14     6     XLV (2)
-  FTRE                  Biotech      91.38         98       -6     6     XLV (2)
-  SNOW     Cloud Infrastructure      91.09         98       +3     6     XLK (8)
-  FIVN     Communications Cloud      91.09         98      +17     6     XLK (8)
+  FTRE                  Biotech      91.38         98       -5     6     XLV (2)
+  FIVN     Communications Cloud      91.09         98      +18     6     XLK (8)
+  SNOW     Cloud Infrastructure      91.09         98       +2     6     XLK (8)
   BTSG      Healthcare Services      90.94         92      +10     2     XLV (2)
    OGN               Healthcare      90.94         92       NA     1     XLV (2)
    PSX     Refining & Marketing      90.94         93       NA     1     XLE (1)
-  FTNT            Cybersecurity      90.92         98      -15     5     XLK (8)
-  VSTS    Professional Services      90.92         98       -6     5     XLI (6)
+  VSTS    Professional Services      90.92         98       -5     5     XLI (6)
+  FTNT            Cybersecurity      90.92         98      -16     5     XLK (8)
   PENG                 Software      90.92         98      -22     6     XLK (8)
   KNSA            Biotechnology      90.88         94       +9     6     XLV (2)
    CON      Healthcare Services      90.69         90       NA     1     XLV (2)
@@ -124,7 +124,7 @@ Ticker             Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   ASTH               Healthcare      90.44         91      -30     6     XLV (2)
   GTLB Developer Infrastructure      90.42         97       -3     5     XLK (8)
  RCRUY        Business Software      90.42         97       +7     5     XLK (8)
-  NRIX                  Biotech      90.38         96      -22     6     XLV (2)
+  NRIX                  Biotech      90.38         96      -23     6     XLV (2)
   ALKS                  Biotech      90.38         96       -1     6     XLV (2)
 
 ========================================
@@ -132,22 +132,22 @@ DISTRIBUTION WATCHLIST
 Legend: ^ = Micro Laggard
 ========================================
 Ticker   Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-   AEM    Gold Mining       23.57                4      +11     5    XLB (11)
-    OR    Gold Mining       23.57                4       -1     5    XLB (11)
-   KGC    Gold Mining       24.07                5       -1     5    XLB (11)
-   CDE    Gold Mining       24.07                5       +4     6    XLB (11)
-  ARIS    Gold Mining       25.07                7       -2     6    XLB (11)
-  PAAS  Silver Mining       24.45                6       +9     2    XLB (11)
-  RGLD    Gold Mining       26.07                9       -3     6    XLB (11)
- NHYDY    Gold Mining       34.07               25       -2     6    XLB (11)
-  UAMY    Gold Mining       21.07                5       +2     4    XLB (11)
-   AGI    Gold Mining       19.57                2        0     6    XLB (11)
-   MUX    Gold Mining       22.07                7       +3     6    XLB (11)
-    AU    Gold Mining       23.57               10       -7     5    XLB (11)
-   IAG    Gold Mining       23.07                9       +4     5    XLB (11)
-   FSM    Gold Mining       23.07                9       +4     2    XLB (11)
-   KEP Infrastructure       35.28                3       +4     3     XLU (7)
-   EGO    Gold Mining       22.07                7       NA     1    XLB (11)
+   AEM    Gold Mining       13.71                3      +11     5    XLB (11)
+    OR    Gold Mining       13.71                3       -1     5    XLB (11)
+   KGC    Gold Mining       13.71                3       -1     5    XLB (11)
+  ARIS    Gold Mining       14.51                5       -1     6    XLB (11)
+   CDE    Gold Mining       14.51                5       +3     6    XLB (11)
+  PAAS  Silver Mining       14.32                5       +9     2    XLB (11)
+  RGLD    Gold Mining       14.91                6       -3     6    XLB (11)
+ NHYDY    Gold Mining       15.31                7       -2     6    XLB (11)
+  UAMY    Gold Mining       12.91                1       +1     4    XLB (11)
+   AGI    Gold Mining       13.31                2       +1     6    XLB (11)
+   MUX    Gold Mining       13.71                3       +3     6    XLB (11)
+    AU    Gold Mining       15.31                7       -7     5    XLB (11)
+   IAG    Gold Mining       15.71                8       +4     5    XLB (11)
+   FSM    Gold Mining       15.71                8       +4     2    XLB (11)
+   KEP Infrastructure       34.05                5       +4     3     XLU (7)
+   EGO    Gold Mining       17.71               13       NA     1    XLB (11)
 
 ========================================
 RECENTLY DROPPED LONGS (Watch For Breakdown)
@@ -213,8 +213,8 @@ Ticker        Mapped_Theme  Long_Score  RS_Rating  Days Out Sector (Rk)
    FNV         Gold Mining       19.57         12         0    XLB (11)
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,PGNY,HUM,DK,AGL,OSCR,OMDA,LFST,PBF,PARR,LQDA,INNV,DINO,AMN,DAVE,PACS,VLO,CLMT,PNTG,CNC,CYRX,DVA,MPC,ETON,CORT,CRL,URGN,MEDP,DDOG,HNGE,FTRE,SNOW,FIVN,BTSG,OGN,PSX,FTNT,VSTS,PENG,KNSA,CON,OKTA,SEZL,IQV,ASTH,GTLB,RCRUY,NRIX,ALKS,
-###SHORT,AEM,OR,KGC,CDE,ARIS,PAAS,RGLD,NHYDY,UAMY,AGI,MUX,AU,IAG,FSM,KEP,EGO,
+###LONG,PGNY,HUM,DK,AGL,OSCR,LFST,OMDA,PBF,PARR,LQDA,INNV,DINO,AMN,DAVE,PACS,CLMT,VLO,PNTG,DVA,CNC,CYRX,MPC,ETON,CORT,CRL,URGN,MEDP,DDOG,HNGE,FTRE,FIVN,SNOW,BTSG,OGN,PSX,VSTS,FTNT,PENG,KNSA,CON,OKTA,SEZL,IQV,ASTH,GTLB,RCRUY,NRIX,ALKS,
+###SHORT,AEM,OR,KGC,ARIS,CDE,PAAS,RGLD,NHYDY,UAMY,AGI,MUX,AU,IAG,FSM,KEP,EGO,
 ###LONG_Dropped,ACIW,AGIO,ALIT,APPS,BAND,BB,BILL,BLZE,BWIN,CVLT,CVS,CYTK,EVER,FA,FIG,FROG,GCMG,GRAL,GRPN,GSHD,KYMR,LTH,MGTX,MIRM,MOH,NET,NSIT,NTAP,OOMA,PANW,PD,PGY,PRGS,PTGX,PUBM,QLYS,RARE,RBRK,RELY,RPD,S,SKWD,SLDE,TGTX,TWLO,VCEL,VCTR,VRDN,VRNS,
 ###SHORT_Dropped,AAUC,EH,FNV,TFPM,
 

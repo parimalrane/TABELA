@@ -45,7 +45,7 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
 -----------------------------------------------------------------------------------------------------------------------------
 Refining & Marketing           Exploration          8    6  160.40   Leading (11)                    DK, PBF, PARR, DINO,
-                                                                                                     VLO, CLMT
+                                                                                                     CLMT, VLO
 Life Sciences Tools            Medical Devices      5    4  140.12   Leading (7)                     AVTR, TXG, BLFS
 Pharmaceuticals                Pharma               3    3  137.24   Leading (9)                     LQDA, ETON, CORT
 Professional Services          Software             3    3  135.86   Leading (10)                    MAN, VSTS
@@ -59,9 +59,9 @@ Cloud Infrastructure           Cloud Computing      5    2   69.16   Leading (2)
 Food Safety                    Healthcare           1    1   66.54   Leading (8)                     NEOG
 Cybersecurity                  Software            13    2   39.37   Leading (10)                    OKTA, PANW
 Business Software              Software             6    1   31.79   Leading (10)                    RCRUY
-Software                       Software           159    9   27.19   Leading (10)                    MANH, NTNX, PD, EXLS,
+Software                       Software           159    9   27.19   Leading (10)                    MANH, NTNX, EXLS, PD,
                                                                                                      BLKB, PCTY, CRTO, U
-Medical Devices                Medical Devices     79    5   27.13   Leading (7)                     ATRC, CNMD, BAX, BVS
+Medical Devices                Medical Devices     79    5   27.13   Leading (7)                     CNMD, ATRC, BAX, BVS
 Insurance                      Insurance           62    3   19.45   Leading (5)                     GSHD, LNC, WTW
 Energy                         Exploration         14    1   18.76   Leading (11)                    CVI
 Restaurants                    Consumer Staples    24    1   13.02   Unknown                         EAT
@@ -97,15 +97,15 @@ Ticker          Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   GSHD             Insurance      92.04         98      -17     4     XLF (1)
    THC   Healthcare Services      91.94         97       -5     4     XLV (2)
   URGN                Pharma      91.83         97      -11    12     XLV (2)
-  ATRC       Medical Devices      91.72         98      -11     3     XLV (2)
   CNMD       Medical Devices      91.72         98       NA     1     XLV (2)
-   NEO           Diagnostics      91.72         98       -6     3     XLV (2)
+  ATRC       Medical Devices      91.72         98      -11     3     XLV (2)
    BAX       Medical Devices      91.72         98       NA     1     XLV (2)
+   NEO           Diagnostics      91.72         98       -7     3     XLV (2)
   BLFS   Life Sciences Tools      91.72         95       -7     3     XLV (2)
-   WGS            Healthcare      91.69         98       -2     3     XLV (2)
+   WGS            Healthcare      91.69         98       -1     3     XLV (2)
    LNC             Insurance      91.54         97       NA     1     XLF (1)
-  ILMN           Diagnostics      91.47         96      +35     3     XLV (2)
-   BVS       Medical Devices      91.47         96       -9     3     XLV (2)
+   BVS       Medical Devices      91.47         96       -8     3     XLV (2)
+  ILMN           Diagnostics      91.47         96      +34     3     XLV (2)
    AMN   Healthcare Services      91.44         96      -11     4     XLK (7)
   PARR  Refining & Marketing      91.32         99      +21    12     XLE (3)
   VSXY      Footwear/Apparel      91.27         99      -10     3     XLY (9)
@@ -114,18 +114,18 @@ Ticker          Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
    WTW             Insurance      91.04         96       -2     3     XLF (1)
    EAT           Restaurants      91.00         97      +41     4     XLY (9)
   NTNX              Software      90.80         95       +4     3     XLK (7)
-   IQV   Healthcare Services      90.69         96      -13     4     XLV (2)
   NEOG           Food Safety      90.69         96       NA     1     XLV (2)
+   IQV   Healthcare Services      90.69         96      -15     4     XLV (2)
   OSCR   Healthcare Services      90.69         93       -3     4     XLF (1)
   PYPL      Digital Payments      90.55         96      +26     3     XLK (7)
-  PANW         Cybersecurity      90.55         96       NA     1     XLK (7)
   VSTS Professional Services      90.55         96      +27     3     XLI (8)
+  PANW         Cybersecurity      90.55         96       NA     1     XLK (7)
   PACS   Healthcare Services      90.44         94       NA     1     XLV (2)
    CVI                Energy      90.32         97       NA     1     XLE (3)
-    PD              Software      90.30         94       -3     3     XLK (7)
   EXLS              Software      90.30         94       +7     3     XLK (7)
-   VLO  Refining & Marketing      90.07         95       NA     1     XLE (3)
+    PD              Software      90.30         94       -3     3     XLK (7)
   CLMT  Refining & Marketing      90.07         95       NA     1     XLE (3)
+   VLO  Refining & Marketing      90.07         95       NA     1     XLE (3)
   BLKB              Software      90.05         95       -3     3     XLK (7)
   PCTY              Software      90.05         95       -2     3     XLK (7)
   CRTO              Software      90.05         95       +6     3     XLK (7)
@@ -219,8 +219,8 @@ Ticker            Mapped_Theme  Long_Score  RS_Rating  Days Out Sector (Rk)
    AGI             Gold Mining       27.33          5         9     XLB (6)
 
 TRADINGVIEW WATCHLIST EXPORT
-###LONG,SNOW,RNG,DDOG,FIVN,LQDA,EFOR,RCRUY,AVTR,DK,PBF,NSIT,PGNY,ADPT,MANH,OKTA,CDNA,TXG,ETON,CORT,MAN,GSHD,THC,URGN,ATRC,CNMD,NEO,BAX,BLFS,WGS,LNC,ILMN,BVS,AMN,PARR,VSXY,DINO,PAY,WTW,EAT,NTNX,IQV,NEOG,OSCR,PYPL,PANW,VSTS,PACS,CVI,PD,EXLS,VLO,CLMT,BLKB,PCTY,CRTO,U,
-###SHORT,SNOW,RNG,DDOG,FIVN,LQDA,EFOR,RCRUY,AVTR,DK,PBF,NSIT,PGNY,ADPT,MANH,OKTA,CDNA,TXG,ETON,CORT,MAN,GSHD,THC,URGN,ATRC,CNMD,NEO,BAX,BLFS,WGS,LNC,ILMN,BVS,AMN,PARR,VSXY,DINO,PAY,WTW,EAT,NTNX,IQV,NEOG,OSCR,PYPL,PANW,VSTS,PACS,CVI,PD,EXLS,VLO,CLMT,BLKB,PCTY,CRTO,U,
+###LONG,SNOW,RNG,DDOG,FIVN,LQDA,EFOR,RCRUY,AVTR,DK,PBF,NSIT,PGNY,ADPT,MANH,OKTA,CDNA,TXG,ETON,CORT,MAN,GSHD,THC,URGN,CNMD,ATRC,BAX,NEO,BLFS,WGS,LNC,BVS,ILMN,AMN,PARR,VSXY,DINO,PAY,WTW,EAT,NTNX,NEOG,IQV,OSCR,PYPL,VSTS,PANW,PACS,CVI,EXLS,PD,CLMT,VLO,BLKB,PCTY,CRTO,U,
+###SHORT,SNOW,RNG,DDOG,FIVN,LQDA,EFOR,RCRUY,AVTR,DK,PBF,NSIT,PGNY,ADPT,MANH,OKTA,CDNA,TXG,ETON,CORT,MAN,GSHD,THC,URGN,CNMD,ATRC,BAX,NEO,BLFS,WGS,LNC,BVS,ILMN,AMN,PARR,VSXY,DINO,PAY,WTW,EAT,NTNX,NEOG,IQV,OSCR,PYPL,VSTS,PANW,PACS,CVI,EXLS,PD,CLMT,VLO,BLKB,PCTY,CRTO,U,
 ###LONG_Dropped,ABT,ACIW,AGL,AJG,ALIT,ALKS,AMRX,APPN,BBIO,BILL,BOX,BRO,BTSG,BWIN,CLDT,CON,CRL,CTAS,CTSH,CVS,DAVE,DBX,DOCU,DVA,ENOV,FA,FIG,FTNT,FTRE,GTLB,GWRE,HUBS,HUM,ICLR,INNV,IOT,KNSA,LB,MEDP,MPC,NBIX,NET,NRIX,OII,OOMA,PAYC,PAYX,PNTG,PRGS,PSX,PTGX,RLI,RYAN,SEZL,SIBN,SKWD,SOLV,TGTX,TRV,VCEL,VCTR,VRDN,VVX,WDAY,WEX,XNCR,XRAY,
 ###SHORT_Dropped,AAUC,AEM,AGI,ARIS,AU,AUGO,CDE,ELVA,FN,ICHR,KGC,NHYDY,OR,PAAS,PDFS,POWI,RGLD,TMDX,UAMY,WULF,
 
