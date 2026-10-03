@@ -76,7 +76,7 @@ DIST_ENTRY = {
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
     "MAX_DROPPED_WATCH_SCORE": 30.0,
-    "MILD_DAYS": 21
+    "MILD_DAYS": 50
 }
 
 # ==========================
@@ -122,6 +122,6 @@ SHORT_ENTRY = {
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
     "MAX_DROPPED_WATCH_SCORE": 30.0,
-    "MILD_DAYS": 21
+    "MILD_DAYS": 50
 }
 
