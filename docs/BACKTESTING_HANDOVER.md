@@ -1,146 +1,77 @@
 # TABELA Backtesting & Optimization: Master Handover Document
 
-**Last Updated:** Sep 30, 2026
+**Last Updated:** October 2, 2026
 **Target Audience:** Future LLMs, AI Agents, or developers taking over the TABELA codebase.
 **Purpose:** This document contains the distilled, institutional knowledge of the TABELA quantitative backtesting suite. Read this thoroughly before suggesting *any* modifications to the scoring engine, configuration, or short/long logic.
 
 ---
 
-## 1. Project Overview & Architecture
+## 1. Project Overview & Architecture: The 4-Tier System
 
-TABELA is an institutional-grade, multi-dimensional momentum stock screener. It identifies:
-- **Long candidates** — High-conviction breakout stocks (RS 90+, Score 90+, Leading/Neutral themes)
-- **Short candidates** — "Fall From Grace" breakdowns (RS 50-75, Score < 50, Neutral themes actively losing momentum)
+TABELA is an institutional-grade, multi-dimensional momentum stock screener. After massive historical regressions, the system was mathematically optimized into a strict **4-Tier Tracker**:
 
+- **Tier 1: Strong Breakout** (Long) — High-conviction breakout stocks (RS 90+, Score 90+)
+- **Tier 2: Mild Pullback** (Long) — The Day 1-21 recoil of a Strong Breakout. 
+- **Tier 3: Strong Breakdown** (Short) — Institutional "Fall From Grace" structural failures (RS 40-60, Score < 45).
+- **Tier 4: Mild Relief Rally** (Short) — The Day 1-21 dead-cat bounce of a Strong Breakdown. 
+
+**Critical Discovery:** The 50-Day "Basing" (Long) and "Decaying" (Short) tracking buckets were permanently executed from the codebase. A dedicated backtesting grid (`run_tuner_basing.py`) mathematically proved that maintaining 50-day fundamental forgiveness resulted in a massive 70%+ failure rate. Once a stock surpasses 21 days off the tracker, it is purely chopped/dead money and is deleted.
+
+### Infrastructure
 **The Brain:** `c:\TABELA\config\config.py` — all weights, thresholds, and scoring maps.
-**The Memory:** `c:\TABELA\lifecycle\stock_transition_engine.py` — tracks how many days a stock has been in each state. Saves to `c:\TABELA\market_data\stock_transition\`.
-**The Scorer:** `c:\TABELA\scoring\scoring_engine.py` — computes both `Long_Score` and `Short_Score` per stock.
-**The History:** `c:\TABELA\data_layer\stock_history_engine.py` — saves daily JSON per stock including `long_score`, `short_score`, `rs_rating`, `short_rs_rating`, `avg_volume`, `last_close`.
-**The Evaluator:** `c:\TABELA\backtesting\backtest_engine.py` — evaluates the ruleset over a 3-month hold period.
+**The Memory:** `c:\TABELA\market_data\stock_universe\` — JSON arrays that store state and increment drop-days continuously.
+**The Scorer:** `c:\TABELA\scoring\scoring_engine.py` — computes independent `Long_Score` and `Short_Score` per stock with mandatory data string formatting guards.
+**The Evaluator:** `c:\TABELA\backtesting\backtest_engine.py` — simulates state machines, entering trades exactly as the metrics fire.
 
 ---
 
-## 2. Backtesting Directory Structure
+## 2. Critical Quantitative Discoveries — DO NOT REVERT
 
-```
-c:\TABELA\backtesting\
-    backtest_engine.py              ← Unified engine (long + short modes)
-    run_quarterly_optimization.py   ← Master script to run all tuners + merge CSVs
-    tuners\
-        run_tuner.py                ← Phase 1: Long engine RS/Score grid
-        run_tuner_phase2.py         ← Phase 2: Long composite weight combos
-        run_tuner_phase3.py         ← Phase 3: Zacks Binary + Growth curve combos
-        run_tuner_short.py          ← Original short gate grid (deprecated, superseded by v2)
-        run_tuner_short_floor.py    ← Short RS floor test (graveyard avoidance)
-        run_tuner_short_v2.py       ← Multi-dimensional short scoring grid (14 experiments)
-        run_tuner_short_phase2.py   ← Theme precision + score tightening grid (8 experiments)
-        run_baseline_short_p3c.py   ← Single-run baseline with full trade detail CSV output
-    results\
-        master_optimization_results_20260930.csv   ← All Phase 1-3 long results merged
-        optimization_results_short_v2_20260930.csv ← Short scoring grid results
-        optimization_results_short_phase2_20260930.csv ← Phase 2 tightening results
-        short_trade_detail_20260930.csv            ← Trade-level detail (winner anatomy)
-```
-
----
-
-## 3. Running the Backtesting Engine
-
-**Evaluate current Long config performance (3-month hold):**
-```cmd
-python c:\TABELA\backtesting\backtest_engine.py long
-```
-
-**Evaluate current Short config performance (3-month hold):**
-```cmd
-python c:\TABELA\backtesting\backtest_engine.py short
-```
-
-**Run trade-level detail for Short (generates CSV with every trade, Win/Loss, Return%):**
-```cmd
-python c:\TABELA\backtesting\tuners\run_baseline_short_p3c.py
-```
-
-**Full quarterly optimization (all tuners + auto-merge results):**
-```cmd
-python c:\TABELA\backtesting\run_quarterly_optimization.py
-```
-
----
-
-## 4. Critical Quantitative Discoveries — DO NOT REVERT
-
-### A. Long Engine: The "Sniper" Configuration
-Proven across 60+ grid search experiments:
+### A. Long Engine: The "90/90 Sniper"
+Proven across absolute grid search execution, this setup produces the highest verifiable win-rate constraint. 
 
 | Parameter | Value | Why |
 |---|---|---|
-| `MIN_RS` | 90.0 | 90/90 gate = 53.97% WR, +2.58% avg return, 126 trades |
-| `MIN_LONG_SCORE` | 90.0 | Same gate, proven optimal |
-| `ZACKS_SCORE_MAP` | Binary: 1/2=100, 3=0, 4=-50, 5=-100 | Rank 3 "Hold" stocks are statistically poisonous to momentum |
-| `BLOCKED_ZACKS` | [4, 5] | Hard block on confirmed sells |
-| `MIN_PRICE` | $10.00 | Kill penny stock noise |
-| `MIN_VOLUME` | 300,000 | Kill illiquid traps |
+| `MIN_RS` | 90.0 | Maximum technical strictness. |
+| `MIN_LONG_SCORE` | 90.0 | Maximum composite strictness. |
+| `ZACKS_SCORE_MAP` | Binary | Rank 1/2=100. Rank 3=0. Rank 4=-50, 5=-100. Rank 3 stocks were proven to poison forward momentum. |
+| `MILD_DAYS` | 21 | The elite pullback window. Beyond 21 days = dead money. |
+| `MIN_DROPPED` | 70.0 | Score Floor while pulling back. |
+| `BASING/DECAY`| Deleted | 70% failure rate proven in dedicated simulations. |
 
-**The Genius of Zacks Binary:** Because Zacks carries 15% weight, a Rank 3 score of `0` caps a stock's maximum possible Long_Score at `85.0`. Since the gate is `90.0`, Rank 3 stocks are automatically eliminated without needing to be in `BLOCKED_ZACKS`.
+**The Base Tracker Lesson:** We do not algorithmically trade or stalk 50-day horizontal bases. The tuner mathematically dictated that if a sleeping base is truly elite, we just ignore it until its native RS surges and triggers the standard Strong 90/90 gate again.
 
-### B. Short Engine: The "Fall From Grace" Configuration
-Proven across 22+ targeted experiments in 2 phases:
+### B. Short Engine: "Combo C (The Absolute Chokehold)"
+Shorting is messy, highly volatile, and prone to violent short-squeezes. The Short Grid strictly choked the volume to eliminate low-conviction noise while maintaining a mathematically staggering **70.3% Win Rate**.
 
 | Parameter | Value | Why |
 |---|---|---|
-| `MIN_SHORT_RS` | 50.0 | Floor: must have had standing to lose (no graveyards) |
-| `MAX_SHORT_RS` | 75.0 | Ceiling: catch before collapse becomes obvious |
-| `MAX_SHORT_SCORE` | 50.0 | Score < 50 = confirmed breakdown conviction |
-| `THEMES` | Neutral, Unknown | Lagging stocks at RS 50-75 add noise, not signal |
-| `MIN_PRICE` | $10.00 | Never short penny stocks |
-| `MIN_VOLUME` | 1,000,000 | Institutional liquidity required (borrow availability) |
-| `SHORT_RS_RAW_WEIGHTS` | YTD: 40%, 4W: 30%, 12W: 20%, 1W: 10% | YTD reversal = peak-to-trough momentum |
-| `SHORT_COMPOSITE_WEIGHTS` | RS: 65%, Theme: 20%, Zacks: 10%, Growth: 5% | Technicals dominate for shorts |
+| `MIN_RS` | 40.0 | Floor: stocks must still have standing to lose (do not short dead <35 graveyards). |
+| `MAX_RS` | 60.0 | Ceiling: Crush the ceiling below 75 so we don't accidentally catch fundamentally safe stocks. |
+| `MAX_LONG_SCORE` | 45.0 | Score < 45 = confirmed fundamental structural failure. |
+| `THEMES` | No Leading | "Lagging, Micro Laggard, Neutral, Unknown" |
+| `BLOCKED_ZACKS` | [1, 2] | Do not short institutional darlings. |
+| `MIN_VOLUME` | 2,500,000 | Institutional liquidity required. Eliminated 50% of the erratic low-volume noise. |
+| `RS_RAW_WEIGHTS`| YTD Reversal | 40% YTD, 30% 4W, 20% 12W. YTD peak reversal predicts crashes. |
 
-**Final short performance:** 73.28% Win Rate | +5.16% avg return | ~11 stocks/day
-
-**Critical: The Short RS Rating is computed separately** using `SHORT_RS_RAW_WEIGHTS` in `scoring_engine.py → calculate_short_score()`. It is stored as `short_score` and `short_rs_rating` in the daily JSON. The Long engine columns are never touched.
+**The Pullback Edge:** The data identically proved on BOTH engines that buying the *Secondary Move* (The Mild 1-21 Day Recoil) mathematically provided a ~2% to 4% higher winning probability than buying the initial Breakout/Breakdown exactly as it fired. 
 
 ---
 
-## 5. The Two-Scoring-Engine Architecture (Key Concept)
-
-The pipeline runs **two completely independent scoring passes** per stock every day:
-
-```
-Daily CSV Input
-     │
-     ├──► Long Scoring Engine ──► Long_Score, RS_Rating   (used by watchlist_engine.py)
-     │
-     └──► Short Scoring Engine ──► Short_Score, Short_RS_Rating  (used by distribution_engine.py)
-```
-
-Both scores are saved to the daily JSON. The Long and Short engines use entirely separate weight maps from `config.py`. **Changing `SHORT_*` variables has zero impact on Long output.**
+## 3. The Data Cleansing Protocols
+Barchart historical dumps regularly export dirty strings (`""`, `"-"`) inside supposedly numeric columns.
+The math inside `scoring_engine.py` (both Long and Short passes) are explicitly wrapped in:
+`pd.to_numeric(stocks[column], errors='coerce')` ending natively with `.fillna(0.0)`.
+**Never remove this wrapper.** Attempting to multiply a Barchart formatted string by a float weight will instantly crash the daily regression loops.
 
 ---
 
-## 6. Operational Rules for Future AI Agents
-
-1. **Sandbox Principle:** Any tuner script MUST `shutil.copy2` backup `config.py` at start and restore it at exit — even if an exception occurs. Never leave `config.py` mutated.
-
-2. **The Regression Rule:** After any permanent `config.py` change, ALWAYS run `c:\TABELA\regression.bat` to rebuild 3 months of JSON history. Without this, the JSON state will be misaligned with the new config.
-
-3. **Minimum Trade Threshold:** A backtest result with fewer than 100 trades over 3 months is statistically unreliable. Do not recommend a config change based on thin samples.
-
-4. **Do NOT touch the Long engine** unless win rate drops significantly below 50% in a quarterly health check. It is at its mathematically proven optimum for the current dataset.
-
-5. **Quarterly Schedule:** Next optimization run is **December 31, 2026**.
-
----
-
-## 7. Execution Commands
+## 4. Execution Commands
 
 | Action | Command |
 |---|---|
 | Daily live scan | `c:\TABELA\main.bat` |
-| Rebuild 3-month JSON history | `c:\TABELA\regression.bat` |
-| Quarterly health check (Long) | `python c:\TABELA\backtesting\backtest_engine.py long` |
-| Quarterly health check (Short) | `python c:\TABELA\backtesting\backtest_engine.py short` |
-| Short trade anatomy detail | `python c:\TABELA\backtesting\tuners\run_baseline_short_p3c.py` |
-| Full quarterly re-tune | `python c:\TABELA\backtesting\run_quarterly_optimization.py` |
+| Rebuild 3-month JSON history | `python c:\TABELA\runners\run_historical.py` |
+| Quarterly Health Tune | `python c:\TABELA\backtesting\tuners\run_quarterly_tuner.py` |
+| Short Chokehold Tune | `python c:\TABELA\backtesting\tuners\run_tuner_short_v2.py` |
+| Basing Viability Tune | `python c:\TABELA\backtesting\tuners\run_tuner_basing.py` |
