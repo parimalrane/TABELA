@@ -216,14 +216,25 @@ def main():
         bt = run_backtest_short_silent()
 
         if bt is None:
-            bt = {"total_trades": 0, "win_rate": 0.0, "avg_return": 0.0}
+            bt = {
+                "total_trades": 0, "win_rate": 0.0, "avg_return": 0.0,
+                "strong_trades": 0, "strong_win_rate": 0.0, "strong_avg_return": 0.0,
+                "mild_trades": 0, "mild_win_rate": 0.0, "mild_avg_return": 0.0,
+                "basing_trades": 0, "basing_win_rate": 0.0, "basing_avg_return": 0.0,
+            }
 
-        print(f"  >>> Trades: {bt['total_trades']} | Win Rate: {bt['win_rate']}% | Avg Return: {bt['avg_return']}%")
+        print(f"  >>> Strong WR: {bt['strong_win_rate']}% | Mild WR: {bt['mild_win_rate']}% | Decay WR: {bt['basing_win_rate']}%")
         results.append({
             "Exp": idx, "Name": name,
             "Trades": bt["total_trades"],
             "WR%": bt["win_rate"],
-            "AvgReturn%": bt["avg_return"],
+            "Avg%": bt["avg_return"],
+            "Str.Trd": bt["strong_trades"],
+            "Str.WR%": bt["strong_win_rate"],
+            "Mil.Trd": bt["mild_trades"],
+            "Mil.WR%": bt["mild_win_rate"],
+            "Decay.Trd": bt["basing_trades"],
+            "Decay.WR%": bt["basing_win_rate"],
             "Gate_Min_RS": exp["gate"]["MIN_SHORT_RS"],
             "Gate_Max_RS": exp["gate"]["MAX_SHORT_RS"],
             "Gate_Max_Score": exp["gate"]["MAX_SHORT_SCORE"],

@@ -986,11 +986,12 @@ def print_daily_scan(
                         if current_zacks in DIST_ENTRY.get("BLOCKED_ZACKS", []):
                             continue  # Purge, fundamentals too strong to short (Zacks 1/2)
 
-            # 21-Day Time Expiry
+            # Timeline Expiry from Config
+            max_days = LONG_ENTRY.get("MILD_DAYS", 21) if is_long else DIST_ENTRY.get("MILD_DAYS", 21)
             try:
                 date_val = datetime.strptime(date_str, "%Y-%m-%d")
                 days_old = (current_date - date_val).days
-                if days_old <= 21:
+                if days_old <= max_days:
                     cleaned[ticker] = date_str
             except Exception:
                 pass
@@ -1010,7 +1011,7 @@ def print_daily_scan(
     long_dropped_str = ",".join(sorted(accumulated["long_dropped"].keys()))
     short_dropped_str = ",".join(sorted(accumulated["short_dropped"].keys()))
 
-    def print_dropped_table(dropped_dict, title):
+    def print_dropped_table(dropped_dict, title, max_days=21, min_days=0):
         if not dropped_dict: return
         rows = []
         for ticker, date_str in dropped_dict.items():
@@ -1018,6 +1019,9 @@ def print_daily_scan(
                 days_on_drop = (current_date - datetime.strptime(date_str, "%Y-%m-%d")).days
             except:
                 days_on_drop = 0
+                
+            if not (min_days <= days_on_drop <= max_days):
+                continue
                 
             match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
             if not match.empty:
@@ -1032,17 +1036,20 @@ def print_daily_scan(
                 
                 rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors='coerce')
                 score_val = pd.to_numeric(r.get("Long_Score", 0), errors='coerce')
+                if not 'is_long' in title.lower():
+                    rs_val = pd.to_numeric(r.get("Short_RS_Rating", rs_val), errors='coerce')
+                    score_val = pd.to_numeric(r.get("Short_Score", score_val), errors='coerce')
                 
                 rows.append({
                     "Ticker": display_ticker,
                     "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
-                    "Long_Score": round(score_val, 2),
+                    "Score": round(score_val, 2),
                     "RS_Rating": int(rs_val),
                     "Days Out": days_on_drop,
                     "Sector (Rk)": f"{spdr} ({int(s_rank)})"
                 })
         if rows:
-            df = pd.DataFrame(rows).sort_values(["Days Out", "Long_Score", "RS_Rating"], ascending=[True, False, False])
+            df = pd.DataFrame(rows).sort_values(["Days Out", "Score", "RS_Rating"], ascending=[True, False, False])
             print("=" * 40)
             print(title)
             print("=" * 40)
@@ -1050,17 +1057,20 @@ def print_daily_scan(
             print()
 
     print()
-    print_dropped_table(accumulated["long_dropped"], "MILD BULLISH (Watch For Pullback Setup)")
-    print_dropped_table(accumulated["short_dropped"], "MILD BEARISH (Watch For Relief Rally Fade)")
+    print_dropped_table(accumulated["long_dropped"], "MILD BULLISH (Watch For Pullback Setup) [Day 1-21]", max_days=21, min_days=0)
+    print_dropped_table(accumulated["short_dropped"], "MILD BEARISH (Watch For Relief Rally Fade) [Day 1-21]", max_days=21, min_days=0)
+
+    long_pullback_str = ",".join(k for k,v in accumulated["long_dropped"].items() if 0 <= (current_date - datetime.strptime(v, "%Y-%m-%d")).days <= 21)
+    short_rally_str = ",".join(k for k,v in accumulated["short_dropped"].items() if 0 <= (current_date - datetime.strptime(v, "%Y-%m-%d")).days <= 21)
 
     print("TRADINGVIEW WATCHLIST EXPORT")
     if full_long_list:
         print("###Strong Bullish," + full_long_list + ",")
     if full_short_list:
         print("###Strong Bearish," + full_short_list + ",")
-    if long_dropped_str:
-        print("###Mild Bullish," + long_dropped_str + ",")
-    if short_dropped_str:
-        print("###Mild Bearish," + short_dropped_str + ",")
+    if long_pullback_str:
+        print("###Mild Bullish," + long_pullback_str + ",")
+    if short_rally_str:
+        print("###Mild Bearish," + short_rally_str + ",")
 
     print()

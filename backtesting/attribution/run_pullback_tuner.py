@@ -113,7 +113,7 @@ def run_pullback_tuner():
     print(f"Discovered {len([x for x in active_pullbacks if x['type'] == 'SHORT_RALLY'])} Short Relief Rallies")
     
     # Calculate MFE (Maximum Favorable Excursion)
-    time_windows = [1, 2, 3, 5, 8, 13, 21]
+    time_windows = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
     
     long_results = {w: [] for w in time_windows}
     short_results = {w: [] for w in time_windows}

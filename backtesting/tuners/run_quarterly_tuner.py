@@ -145,15 +145,11 @@ def run_quarterly_master():
         print("[ERROR] Base Grid Search Failed.")
         sys.exit(1)
 
-    # 2. Extract Win Rates and Overwrite Live Config mathematically
-    try:
-        if not inject_golden_configs():
-            sys.exit(1)
-    except Exception as e:
-        import traceback
-        print("\n\n[FATAL ERROR IN STEP 2]")
-        traceback.print_exc(file=sys.stdout)
-        sys.exit(1)
+    # 2. Extract Win Rates and PROMPT USER for manual input
+    print("\n>>> STEP 2: MANUAL CONFIG UPDATE REQUIRED")
+    print("[SYSTEM LOCK] The automaton has been neutralized.")
+    print("Please review master_optimization_results.csv and update config.py manually.")
+
 
     # 3. Re-run historical memory baseline (Golden Run)
     print("\n>>> STEP 3: EXECUTING GOLDEN HISTORICAL REGRESSION")

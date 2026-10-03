@@ -86,16 +86,40 @@ def make_experiment(name, hypothesis, overrides):
 
 EXPERIMENTS = [
     # ============================
-    # EXPERIMENT 1: BASELINE (Control Group)
+    # EXPERIMENT 1: BASELINE (Control Group - 85.0 Baseline)
     # ============================
     make_experiment(
         "Baseline (Current Config)",
-        "Control group. Current production settings.",
+        "Control group using the 85.0 template.",
         {}
     ),
 
     # ============================
-    # RS FORMULA VARIATIONS (Exps 2-7)
+    # GATING MATRIX (Testing Entrance Thresholds)
+    # ============================
+    make_experiment(
+        "Gate: The 90/90 Sniper",
+        "Strict pricing and strict total score.",
+        {"MIN_RS": 90.0, "MIN_LONG_SCORE": 90.0}
+    ),
+    make_experiment(
+        "Gate: The 80/80 Loose Hunter",
+        "Loose pricing and loose score to see if sample size overcomes low win rate.",
+        {"MIN_RS": 80.0, "MIN_LONG_SCORE": 80.0}
+    ),
+    make_experiment(
+        "Gate: Asymmetrical (High RS, Loose Score)",
+        "Price action matters more than fundamentals. RS>90, Score>75",
+        {"MIN_RS": 90.0, "MIN_LONG_SCORE": 75.0}
+    ),
+    make_experiment(
+        "Gate: Asymmetrical (Loose RS, Strict Score)",
+        "Fundamentals matter more than absolute price momentum. RS>75, Score>90",
+        {"MIN_RS": 75.0, "MIN_LONG_SCORE": 90.0}
+    ),
+
+    # ============================
+    # RS FORMULA VARIATIONS
     # ============================
     make_experiment(
         "RS: 12W Dominant",
@@ -514,11 +538,14 @@ def main():
         if bt is None:
             bt = {
                 "total_trades": 0, "win_rate": 0.0, "avg_return": 0.0,
+                "strong_trades": 0, "strong_win_rate": 0.0, "strong_avg_return": 0.0,
+                "mild_trades": 0, "mild_win_rate": 0.0, "mild_avg_return": 0.0,
+                "basing_trades": 0, "basing_win_rate": 0.0, "basing_avg_return": 0.0,
                 "neutral_trades": 0, "neutral_win_rate": 0.0, "neutral_avg_return": 0.0,
                 "leading_trades": 0, "leading_win_rate": 0.0, "leading_avg_return": 0.0,
             }
         
-        print(f"  >>> Trades: {bt['total_trades']} | Win Rate: {bt['win_rate']}% | Avg Return: {bt['avg_return']}%")
+        print(f"  >>> Strong WR: {bt['strong_win_rate']}% | Mild WR: {bt['mild_win_rate']}% | Basing WR: {bt['basing_win_rate']}%")
         
         results.append({
             "Experiment": idx,
@@ -527,6 +554,15 @@ def main():
             "Total Trades": bt["total_trades"],
             "Win Rate (%)": bt["win_rate"],
             "Avg Return (%)": bt["avg_return"],
+            "Strong Trades": bt["strong_trades"],
+            "Strong WR (%)": bt["strong_win_rate"],
+            "Strong Avg (%)": bt["strong_avg_return"],
+            "Mild Trades": bt["mild_trades"],
+            "Mild WR (%)": bt["mild_win_rate"],
+            "Mild Avg (%)": bt["mild_avg_return"],
+            "Basing Trades": bt["basing_trades"],
+            "Basing WR (%)": bt["basing_win_rate"],
+            "Basing Avg (%)": bt["basing_avg_return"],
             "Leading Trades": bt["leading_trades"],
             "Leading WR (%)": bt["leading_win_rate"],
             "Leading Avg (%)": bt["leading_avg_return"],
