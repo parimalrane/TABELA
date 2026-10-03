@@ -117,7 +117,7 @@ SHORT_ENTRY = {
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
     "MAX_DROPPED_WATCH_SCORE": 75.0,
-    "MILD_DAYS": 50,
+    "MILD_DAYS": 21,
     "PURGE_DAYS": 50
 }
 

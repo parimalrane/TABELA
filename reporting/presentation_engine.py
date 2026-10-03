@@ -913,12 +913,13 @@ def print_daily_scan(
         )
 
     full_long_list = clean_all_tickers(true_longs)
-    full_short_list = clean_all_tickers(display_df)
+    full_short_list = clean_all_tickers(distribution_watchlist)
 
     # --- Accumulated Dropped History (21-Day Expiry + Auto-Purge) ---
     import json as _json
     from datetime import datetime, timedelta
     from config.runtime_context import context
+    from config.config import LONG_ENTRY, SHORT_ENTRY
 
     dropped_file = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -943,6 +944,81 @@ def print_daily_scan(
     current_date_str = str(context.market_date) if hasattr(context, "market_date") else datetime.today().strftime("%Y-%m-%d")
     current_date = datetime.strptime(current_date_str, "%Y-%m-%d")
 
+    purge_file = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "market_data", "purged_accumulator.json"
+    )
+    purged = {"long_purged": {}, "short_purged": {}}
+    if os.path.exists(purge_file):
+        with open(purge_file, "r", encoding="utf-8") as _f:
+            loaded_purged = _json.load(_f)
+        if not isinstance(loaded_purged, dict):
+            raise ValueError(f"Invalid purged accumulator format in {purge_file}")
+        for bucket in purged:
+            entries = loaded_purged.get(bucket, {})
+            if not isinstance(entries, dict):
+                raise ValueError(f"Invalid '{bucket}' bucket in {purge_file}")
+            purged[bucket] = entries
+
+    current_long_set = {ticker.upper() for ticker in full_long_list.split(",")} if full_long_list else set()
+    current_short_set = {
+        str(ticker).replace("*", "").replace("^", "").replace("~", "").strip().upper()
+        for ticker in distribution_watchlist["Ticker"]
+    } if distribution_watchlist is not None and not distribution_watchlist.empty else set()
+
+    for delta_key, bucket in (("dropped_longs", "long_purged"), ("left_distribution", "short_purged")):
+        for ticker in deltas.get(delta_key, []):
+            clean = str(ticker).replace("*", "").replace("^", "").replace("~", "").strip().upper()
+            if clean and clean not in purged[bucket]:
+                purged[bucket][clean] = {
+                    "days_purged": 1,
+                    "purged_on": current_date_str,
+                }
+
+    for source_bucket, purge_bucket in (
+        ("long_dropped", "long_purged"),
+        ("short_dropped", "short_purged"),
+    ):
+        for ticker, dropped_on in accumulated.get(source_bucket, {}).items():
+            clean = str(ticker).strip().upper()
+            if clean and clean not in purged[purge_bucket]:
+                purged[purge_bucket][clean] = {
+                    "days_purged": 1,
+                    "purged_on": dropped_on,
+                }
+
+    purge_windows = {
+        "long_purged": LONG_ENTRY.get("PURGE_DAYS", 50),
+        "short_purged": SHORT_ENTRY.get("PURGE_DAYS", 50),
+    }
+    active_by_bucket = {
+        "long_purged": current_long_set,
+        "short_purged": current_short_set,
+    }
+    for bucket, entries in purged.items():
+        for ticker, record in list(entries.items()):
+            if ticker in active_by_bucket[bucket]:
+                del entries[ticker]
+                continue
+            if not isinstance(record, dict):
+                record = {"days_purged": 1, "purged_on": current_date_str}
+            try:
+                purged_on = datetime.strptime(record["purged_on"], "%Y-%m-%d")
+                days_purged = (current_date - purged_on).days + 1
+            except (KeyError, TypeError, ValueError):
+                days_purged = int(record.get("days_purged", 1) or 1)
+                purged_on = current_date - timedelta(days=max(days_purged - 1, 0))
+            if days_purged > purge_windows[bucket]:
+                del entries[ticker]
+                continue
+            record["days_purged"] = days_purged
+            record["purged_on"] = purged_on.strftime("%Y-%m-%d")
+            entries[ticker] = record
+
+    os.makedirs(os.path.dirname(purge_file), exist_ok=True)
+    with open(purge_file, "w", encoding="utf-8") as _f:
+        _json.dump(purged, _f, indent=4, sort_keys=True)
+
     # Add today's drops
     for t in deltas.get("dropped_longs", []):
         clean = str(t).replace("*", "").replace("^", "").replace("~", "").strip().upper()
@@ -955,7 +1031,6 @@ def print_daily_scan(
             accumulated["short_dropped"][clean] = current_date_str
 
     # Process Auto-Purge and Expiry
-    from config.config import LONG_ENTRY, SHORT_ENTRY
     min_dropped_long = LONG_ENTRY.get("MIN_DROPPED_WATCH_SCORE", 70.0)
     max_dropped_dist = SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 30.0)
 
@@ -1075,44 +1150,16 @@ def print_daily_scan(
             print()
         return ",".join(valid_tickers)
 
-    long_mild_days = LONG_ENTRY.get("MILD_DAYS", 50)
-    short_mild_days = SHORT_ENTRY.get("MILD_DAYS", 50)
+    long_mild_days = LONG_ENTRY.get("MILD_DAYS", 21)
+    short_mild_days = SHORT_ENTRY.get("MILD_DAYS", 21)
 
     long_pullback_str = print_dropped_table(accumulated["long_dropped"], "MILD BULLISH", max_days=long_mild_days, min_days=0, is_long_table=True)
     short_rally_str = print_dropped_table(accumulated["short_dropped"], "MILD BEARISH", max_days=short_mild_days, min_days=0, is_long_table=False)
 
     def load_purged_tickers(side_name):
-        purge_file = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-            "market_data", "purged_accumulator.json"
-        )
-        if not os.path.exists(purge_file):
-            return []
-        try:
-            with open(purge_file, "r", encoding="utf-8") as _f:
-                loaded = json.load(_f)
-        except Exception:
-            return []
-
-        if not isinstance(loaded, dict):
-            return []
-
         bucket = "long_purged" if side_name == "LONG" else "short_purged"
-        entries = loaded.get(bucket, {})
-        if not isinstance(entries, dict):
-            return []
+        return sorted(purged[bucket])
 
-        tickers = []
-        for ticker, record in entries.items():
-            if not isinstance(record, dict):
-                continue
-            days_purged = int(record.get("days_purged", 1) or 1)
-            if days_purged <= (LONG_ENTRY.get("PURGE_DAYS", 50) if side_name == "LONG" else SHORT_ENTRY.get("PURGE_DAYS", 50)):
-                tickers.append(str(ticker).strip().upper())
-        return sorted(set(tickers))
-
-    purge_window_long = LONG_ENTRY.get("PURGE_DAYS", 50)
-    purge_window_short = SHORT_ENTRY.get("PURGE_DAYS", 50)
     long_purged = load_purged_tickers("LONG")
     short_purged = load_purged_tickers("SHORT")
 
