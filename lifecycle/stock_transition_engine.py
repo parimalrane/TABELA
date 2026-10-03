@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 from typing import Dict, Tuple
 
 import pandas as pd
@@ -14,10 +15,120 @@ from reporting.watchlist_delta_engine import load_previous_long_watchlist
 
 
 REGISTRY_DIR = "market_data/stock_transition"
+PURGED_ACCUMULATOR_PATH = Path("market_data") / "purged_accumulator.json"
 
 OBSERVATION = "OBSERVATION"
 DISTRIBUTION = "DISTRIBUTION"
 LONG = "LONG"
+
+
+def _normalize_ticker(ticker) -> str:
+    if ticker is None or pd.isna(ticker):
+        return ""
+    return str(ticker).replace("*", "").replace("^", "").replace("~", "").strip().upper()
+
+
+def load_purged_accumulator() -> Dict:
+    """Return the purged-memory tracker {long_purged: {...}, short_purged: {...}}."""
+    if not PURGED_ACCUMULATOR_PATH.exists():
+        return {"long_purged": {}, "short_purged": {}}
+
+    try:
+        with open(PURGED_ACCUMULATOR_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError):
+        return {"long_purged": {}, "short_purged": {}}
+
+    normalized = {"long_purged": {}, "short_purged": {}}
+    for side_key, bucket in [("long_purged", "long_purged"), ("short_purged", "short_purged")]:
+        raw_bucket = data.get(side_key, {}) if isinstance(data, dict) else {}
+        if not isinstance(raw_bucket, dict):
+            continue
+        for ticker, entry in raw_bucket.items():
+            clean_ticker = _normalize_ticker(ticker)
+            if not clean_ticker:
+                continue
+            if isinstance(entry, dict):
+                record = {"days_purged": int(entry.get("days_purged", 1) or 1), "purged_on": entry.get("purged_on", str(context.market_date))}
+            else:
+                record = {"days_purged": 1, "purged_on": str(context.market_date)}
+            normalized[bucket][clean_ticker] = record
+    return normalized
+
+
+def save_purged_accumulator(accumulator: Dict) -> None:
+    PURGED_ACCUMULATOR_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(PURGED_ACCUMULATOR_PATH, "w", encoding="utf-8") as f:
+        json.dump(accumulator, f, indent=4, sort_keys=True)
+
+
+def register_purged_ticker(ticker: str, side: str, market_date=None) -> Dict:
+    """Register a stock as purged when it leaves active or waitlist memory."""
+    clean_ticker = _normalize_ticker(ticker)
+    if not clean_ticker:
+        return load_purged_accumulator()
+
+    bucket_key = "long_purged" if str(side).upper() == "LONG" else "short_purged"
+    accumulator = load_purged_accumulator()
+    today = str(market_date or getattr(context, "market_date", datetime.today().strftime("%Y-%m-%d")))
+
+    existing = accumulator.get(bucket_key, {}).get(clean_ticker)
+    if isinstance(existing, dict):
+        existing["days_purged"] = max(int(existing.get("days_purged", 1) or 1), 1)
+        existing["purged_on"] = existing.get("purged_on", today)
+        existing["last_seen"] = today
+    else:
+        accumulator.setdefault(bucket_key, {})[clean_ticker] = {
+            "days_purged": 1,
+            "purged_on": today,
+            "last_seen": today,
+        }
+
+    save_purged_accumulator(accumulator)
+    return accumulator
+
+
+def advance_purged_accumulator(market_date=None) -> Dict:
+    """Increment the age of every purged ticker and retire anything older than 50 days."""
+    accumulator = load_purged_accumulator()
+    today = str(market_date or getattr(context, "market_date", datetime.today().strftime("%Y-%m-%d")))
+
+    for bucket_key in ("long_purged", "short_purged"):
+        for ticker, record in list(accumulator.get(bucket_key, {}).items()):
+            if not isinstance(record, dict):
+                continue
+            current_days = int(record.get("days_purged", 1) or 1) + 1
+            if current_days >= 51:
+                accumulator[bucket_key].pop(ticker, None)
+                continue
+            record["days_purged"] = current_days
+            record["last_seen"] = today
+            accumulator[bucket_key][ticker] = record
+
+    save_purged_accumulator(accumulator)
+    return accumulator
+
+
+def sync_purged_memory(registry: Dict, active_tickers=None, waitlist_tickers=None) -> Dict:
+    """Any stock that leaves the active/waitlist memory will be persisted in the purged accumulator."""
+    active_set = set()
+    for candidate_group in (active_tickers or (), waitlist_tickers or ()):
+        for ticker in candidate_group:
+            clean_ticker = _normalize_ticker(ticker)
+            if clean_ticker:
+                active_set.add(clean_ticker)
+
+    for ticker, state in list(registry.items()):
+        clean_ticker = _normalize_ticker(ticker)
+        if not clean_ticker:
+            continue
+        tracking_state = state.get("tracking_state") if isinstance(state, dict) else ""
+        if tracking_state in {LONG, DISTRIBUTION} and clean_ticker not in active_set:
+            side = "LONG" if tracking_state == LONG else "SHORT"
+            register_purged_ticker(clean_ticker, side, getattr(context, "market_date", None))
+            del registry[ticker]
+
+    return registry
 
 
 def load_registry() -> Dict:
@@ -197,6 +308,8 @@ def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFram
             if ticker in registry:
                 recovered[registry[ticker]["tracking_state"].lower()].append(ticker)
 
+    advance_purged_accumulator(context.market_date)
+    sync_purged_memory(updated_registry, active_tickers=current_longs, waitlist_tickers=set())
     return updated_registry, recovered
 
 
@@ -247,6 +360,8 @@ def post_distribution_update(registry: Dict, qualified_distribution: pd.DataFram
     # Clean registry (Remove unneeded OBSERVATION objects maybe? No, we need observation to know what just fell)
     # Actually, if we keep observation permanently, it grows.
     # Let's keep it simple: just save.
+    advance_purged_accumulator(context.market_date)
+    sync_purged_memory(registry, active_tickers=set(), waitlist_tickers=qualified)
     save_registry(registry)
     return registry
 

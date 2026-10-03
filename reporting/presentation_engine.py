@@ -1081,14 +1081,61 @@ def print_daily_scan(
     long_pullback_str = print_dropped_table(accumulated["long_dropped"], "MILD BULLISH", max_days=long_mild_days, min_days=0, is_long_table=True)
     short_rally_str = print_dropped_table(accumulated["short_dropped"], "MILD BEARISH", max_days=short_mild_days, min_days=0, is_long_table=False)
 
+    def load_purged_tickers(side_name):
+        purge_file = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "market_data", "purged_accumulator.json"
+        )
+        if not os.path.exists(purge_file):
+            return []
+        try:
+            with open(purge_file, "r", encoding="utf-8") as _f:
+                loaded = json.load(_f)
+        except Exception:
+            return []
+
+        if not isinstance(loaded, dict):
+            return []
+
+        bucket = "long_purged" if side_name == "LONG" else "short_purged"
+        entries = loaded.get(bucket, {})
+        if not isinstance(entries, dict):
+            return []
+
+        tickers = []
+        for ticker, record in entries.items():
+            if not isinstance(record, dict):
+                continue
+            days_purged = int(record.get("days_purged", 1) or 1)
+            if days_purged <= (LONG_ENTRY.get("PURGE_DAYS", 50) if side_name == "LONG" else SHORT_ENTRY.get("PURGE_DAYS", 50)):
+                tickers.append(str(ticker).strip().upper())
+        return sorted(set(tickers))
+
+    purge_window_long = LONG_ENTRY.get("PURGE_DAYS", 50)
+    purge_window_short = SHORT_ENTRY.get("PURGE_DAYS", 50)
+    long_purged = load_purged_tickers("LONG")
+    short_purged = load_purged_tickers("SHORT")
+
+    long_purged_csv = ",".join(long_purged)
+    short_purged_csv = ",".join(short_purged)
+
     print("TRADINGVIEW WATCHLIST EXPORT")
     if full_long_list:
-        print("###Strong Bullish," + full_long_list + ",")
-    if full_short_list:
-        print("###Strong Bearish," + full_short_list + ",")
+        print("###Bullish_Momentum," + full_long_list + ",")
     if long_pullback_str:
-        print("###Mild Bullish," + long_pullback_str + ",")
+        print("###Bullish_Swing," + long_pullback_str + ",")
+    if long_purged_csv:
+        print(f"###Bullish_Garage,{long_purged_csv},")
+    else:
+        print("###Bullish_Garage,")
+
+    if full_short_list:
+        print("###Bearish_Momentum," + full_short_list + ",")
     if short_rally_str:
-        print("###Mild Bearish," + short_rally_str + ",")
+        print("###Bearish_Swing," + short_rally_str + ",")
+    if short_purged_csv:
+        print(f"###Bearish_Garage,{short_purged_csv},")
+    else:
+        print("###Bearish_Garage,")
 
     print()
