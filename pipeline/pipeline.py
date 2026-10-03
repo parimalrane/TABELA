@@ -293,7 +293,10 @@ def extract_benchmark_returns(raw_etf_df, theme_strength_settings):
     benchmark_returns = {}
 
     for period in period_weights:
-        val = pd.to_numeric(benchmark_row.get(period), errors="coerce")
+        val_str = str(benchmark_row.get(period)).replace('%', '').replace('$', '').replace(',', '').strip()
+        if val_str.startswith('(') and val_str.endswith(')'):
+            val_str = '-' + val_str[1:-1]
+        val = pd.to_numeric(val_str, errors="coerce")
         if pd.isna(val):
             # Fallback to zero rather than dropping NaNs into the universal relative strength calculator
             # This protects the global scoring engine from a complete zero-out if SPY data skips a day
@@ -363,7 +366,10 @@ def build_theme_strength(etf_master, benchmark_returns, theme_strength_settings)
         result = {}
 
         for period, weight in period_weights.items():
-            etf_return = pd.to_numeric(row.get(period), errors="coerce")
+            etf_ret_str = str(row.get(period)).replace('%', '').replace('$', '').replace(',', '').strip()
+            if etf_ret_str.startswith('(') and etf_ret_str.endswith(')'):
+                etf_ret_str = '-' + etf_ret_str[1:-1]
+            etf_return = pd.to_numeric(etf_ret_str, errors="coerce")
             benchmark_return = benchmark_returns.get(period)
             period_alias = period_alias_map.get(period, period)
 

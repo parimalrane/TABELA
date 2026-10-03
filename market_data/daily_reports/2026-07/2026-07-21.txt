@@ -42,123 +42,55 @@ THEME BREADTH ANALYSIS
 Legend: [No Prefix] = Long Candidate / # = Distribution
         + - = 1D Rank Delta
 ========================================
-Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
------------------------------------------------------------------------------------------------------------------------------
-Refining & Marketing           Exploration          8    5  133.76   Leading (3 -> -1)               DK, DINO, PARR, CLMT,
-                                                                                                     VLO
-Pharmaceuticals                Pharma               3    2   91.50   Leading (5)                     LQDA, CORT
-Healthcare Services            Healthcare          15    5   88.71   Leading (2 -> -2)               PGNY, HUM, OSCR, PACS
-Digital Health                 Software             1    1   68.62   Neutral (18 -> -2)              HNGE
-Digital Banking                Banking              3    1   45.28   Leading (10 -> +1)              DAVE
-Digital Payments               Software             4    1   39.83   Neutral (18 -> -2)              SEZL
-Healthcare                     Healthcare          41    3   25.44   Leading (2 -> -2)               INNV, CRL, CVS
-Pharma                         Pharma              41    2   17.42   Leading (5)                     URGN, NBIX
-Consumer Staples               Consumer Staples    38    0    0.00   Unknown                         #CL, #KDP, #KMB, #KO,
-                                                                                                     #KVUE
-Copper Mining                  Copper Mining        9    0    0.00   Lagging (36)                    #FCX
-Digital Assets Infrastructure  Software            10    0    0.00   Neutral (18 -> -2)              #COIN
-Education                      Education           12    0    0.00   Unknown                         #TAL
-AI ASIC                        Artificial Intel..   1    0    0.00   Lagging (31 -> +1)              #MRVL
-Infrastructure                 Infrastructure     107    0    0.00   Lagging (30 -> -1)              #AES, #ENB, #GFL, #PCG
-Internet                       Internet            19    0    0.00   Neutral (24)                    #BABA, #CHWY
-Medical Devices                Medical Devices     88    0    0.00   Neutral (28 -> -2)              #MDT
-Restaurants                    Consumer Staples    28    0    0.00   Unknown                         #CMG, #SBUX
-Software                       Software           169    0    0.00   Neutral (18 -> -2)              #STNE, #TCEHY
-Travel Platform                Transportation/S..   1    0    0.00   Neutral (14 -> +2)              #ABNB
-Unknown                        Unknown            354    0    0.00   Unknown                         #ARCC, #BBWI, #COF, #GM,
-                                                                                                     #HD, #HUN, #IP, #NDAQ,
-                                                                                                     #OMC, #SONY, #SW, #SYY,
-                                                                                                     #TDC, #USFD
+Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
+------------------------------------------------------------------------------------------------------------------------------------
+Refining & Marketing           Exploration          8    5  133.76   7.30   Leading (3 -> -1)               DINO, VLO
+Pharmaceuticals                Pharma               3    2   91.50   6.64   Leading (5)                     
+Healthcare Services            Healthcare          15    5   88.71   8.45   Leading (2 -> -2)               OSCR
+Digital Health                 Software             1    1   68.62   0.60   Neutral (18 -> -2)              HNGE
+Healthcare                     Healthcare          41    3   25.44   8.45   Leading (2 -> -2)               CVS
+Pharma                         Pharma              41    2   17.42   6.64   Leading (5)                     
+Energy                         Exploration         15    0    0.00   7.30   Leading (3 -> -1)               
+Exploration                    Exploration         82    0    0.00   7.30   Leading (3 -> -1)               
+Gold Mining                    Gold Mining         43    0    0.00 -10.98   Lagging (38 -> +2)              
+GLP-1 Weight Loss              Pharma               3    0    0.00   6.64   Leading (5)                     
+Food Safety                    Healthcare           1    0    0.00   8.45   Leading (2 -> -2)               
+Integrated Energy              Exploration          7    0    0.00   7.30   Leading (3 -> -1)               
+Nuclear Infrastructure         Uranium Mining       3    0    0.00 -14.10   Lagging (40 -> -2)              
+Oil Services                   Exploration          5    0    0.00   7.30   Leading (3 -> -1)               
+Restaurants                    Consumer Staples    28    0    0.00   0.00   Unknown                         #QSR
+Uranium Mining                 Uranium Mining       1    0    0.00 -14.10   Lagging (40 -> -2)              
 
 ========================================
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-  PGNY  Healthcare Services      96.72         98        0     8     XLV (1)
-   HUM  Healthcare Services      96.22         97        0     7     XLV (1)
-    DK Refining & Marketing      96.19         99        0     6     XLE (2)
   OSCR  Healthcare Services      95.72         96        0     6     XLF (3)
-  INNV           Healthcare      95.72         96       +3     7     XLV (1)
-  DINO Refining & Marketing      95.69         98       -1     5     XLE (2)
-  PARR Refining & Marketing      95.69         98        0     5     XLE (2)
-  URGN               Pharma      95.60         99       +3     5     XLV (1)
-  LQDA      Pharmaceuticals      95.60         99       +3     7     XLV (1)
-  CORT      Pharmaceuticals      95.60         99       -1     2     XLV (1)
-  CLMT Refining & Marketing      95.19         97       -5     3     XLE (2)
-  PACS  Healthcare Services      94.72         94       +2     6     XLV (1)
-   VLO Refining & Marketing      94.19         95       -3     3     XLE (2)
-   CRL           Healthcare      93.72         92       -1     6     XLV (1)
+  DINO Refining & Marketing      95.69         98        0     5     XLE (2)
+   VLO Refining & Marketing      94.19         95        0     3     XLE (2)
    CVS           Healthcare      93.22         91       NA     1     XLV (1)
-  DAVE      Digital Banking      92.11         98        0     7     XLK (5)
-  NBIX               Pharma      92.10         92       NA     1     XLV (1)
-  HNGE       Digital Health      90.23         99        0     8     XLV (1)
-  SEZL     Digital Payments      90.23         99        0     8     XLK (5)
+  HNGE       Digital Health      90.23         99       +1     8     XLV (1)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
 Legend: ^ = Micro Laggard
 ========================================
-Ticker                  Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-    HD                       Unknown       31.95               33       +1     5    XLY (10)
-  ARCC                       Unknown       31.95               33       +1     6     XLF (3)
-    GM                       Unknown       26.60               34       NA     1    XLY (10)
-  BBWI                       Unknown       28.55               37      +21     5    XLY (10)
-   KDP              Consumer Staples       32.45               43       +7     6     XLP (6)
-    SW                       Unknown       35.05               47        0     6    XLB (11)
-    CL              Consumer Staples       37.65               51      +19     2     XLP (6)
-  USFD                       Unknown       45.45               63       +5     5     XLP (6)
-   TDC                       Unknown       24.65               31       NA     1     XLK (5)
-    IP                       Unknown       24.00               30       +8     8    XLB (11)
-    KO              Consumer Staples       40.90               56      +12     5     XLP (6)
-   TAL                     Education       27.25               35       +4     7    XLY (10)
-   HUN                       Unknown       48.05               67       NA     1    XLB (11)
-   CMG                   Restaurants       23.35               29        0     5    XLY (10)
-  NDAQ                       Unknown       27.25               35       NA     1     XLF (3)
-  SBUX                   Restaurants       46.75               65       +8     5    XLY (10)
-  CHWY                      Internet       33.99               14       NA     1    XLY (10)
-   COF                       Unknown       22.70               28       +2     8     XLF (3)
-  KVUE              Consumer Staples       38.30               52       NA     1     XLP (6)
-   OMC                       Unknown       30.50               40       NA     1     XLK (5)
-   SYY                       Unknown       38.30               52        0     5     XLP (6)
-   MDT               Medical Devices       38.06               24       +5     3     XLV (1)
-  STNE                      Software       34.28               16       NA     1     XLK (5)
-  SONY                       Unknown       21.40               26       NA     1    XLY (10)
-   KMB              Consumer Staples       37.00               50       NA     1     XLP (6)
-   FCX                 Copper Mining       52.24               60       NA     1    XLB (11)
-  COIN Digital Assets Infrastructure       36.88               20       NA     1     XLF (3)
-  MRVL                       AI ASIC       77.71               96       NA     1     XLK (5)
-  BABA                      Internet       38.49               24       NA     1    XLY (10)
-   AES                Infrastructure       40.74               39       NA     1     XLU (8)
-   GFL                Infrastructure       32.94               27       NA     1     XLK (5)
-   ENB                Infrastructure       49.19               52       NA     1     XLE (2)
-   PCG                Infrastructure       54.54               51       -3     4     XLU (8)
-  ABNB               Travel Platform       54.22               45       NA     1    XLY (10)
- TCEHY                      Software       36.88               20       NA     1     XLK (5)
-
+Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+   QSR  Restaurants       37.15               41        0     2    XLY (10)
 ========================================
-MILD BULLISH (Watch For Pullback Setup) [Day 1-21]
+MILD BULLISH
 ========================================
-Ticker         Mapped_Theme  Score  RS_Rating  Days Out Sector (Rk)
-   CON  Healthcare Services  83.28         92         0     XLV (1)
-  OOMA Communications Cloud  73.63         94         0     XLK (5)
-   NET Cloud Infrastructure  69.73         88         0     XLK (5)
-  KNSA        Biotechnology  65.76         87         0     XLV (1)
-  TWLO Communications Cloud  62.78         85         0     XLK (5)
-  MEDP           Healthcare  52.88         56         1     XLV (1)
-  VCTR     Asset Management  66.28         90         4     XLF (3)
-  PTGX              Biotech  81.01         92         5     XLV (1)
-  MGTX              Biotech  72.71         90         6     XLV (1)
-  DDOG Cloud Infrastructure  82.58         97         7     XLK (5)
-  LFST           Healthcare  84.58         94         8     XLV (1)
-  OMDA           Healthcare  83.93         93         8     XLV (1)
-  NRIX              Biotech  77.11         86         8     XLV (1)
-  FTRE              Biotech  72.56         79         8     XLV (1)
+Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
+  LQDA      Pharmaceuticals    95.60    99         0     XLV (1)
+   NET Cloud Infrastructure    89.28    93         0     XLK (5)
+  TWLO Communications Cloud    87.28    89         0     XLK (5)
+  LFST           Healthcare    80.72    96         8     XLV (1)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Strong Bullish,PGNY,HUM,DK,OSCR,INNV,DINO,PARR,URGN,LQDA,CORT,CLMT,PACS,VLO,CRL,CVS,DAVE,NBIX,HNGE,SEZL,
-###Strong Bearish,HD,ARCC,GM,BBWI,KDP,SW,CL,USFD,TDC,IP,KO,TAL,HUN,CMG,NDAQ,SBUX,CHWY,COF,KVUE,OMC,SYY,MDT,STNE,SONY,KMB,FCX,COIN,MRVL,BABA,AES,GFL,ENB,PCG,ABNB,TCEHY,
-###Mild Bullish,FTRE,LFST,NRIX,OMDA,DDOG,MGTX,PTGX,VCTR,MEDP,CON,KNSA,NET,OOMA,TWLO,
+###Strong Bullish,OSCR,DINO,VLO,CVS,HNGE,
+###Strong Bearish,QSR,
+###Mild Bullish,LFST,LQDA,NET,TWLO,
 
 ==============================================
 END OF TABELA SCAN - 2026-07-21

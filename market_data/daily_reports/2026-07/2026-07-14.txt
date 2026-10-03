@@ -42,163 +42,86 @@ THEME BREADTH ANALYSIS
 Legend: [No Prefix] = Long Candidate / # = Distribution
         + - = 1D Rank Delta
 ========================================
-Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
------------------------------------------------------------------------------------------------------------------------------
-Memory                         Semiconductors       4    3  117.89   Leading (4 -> +8)               SIMO, MU, SNDK
-Healthcare Services            Healthcare          15    6  105.73   Leading (3 -> -4)               PGNY, HUM, OSCR, PACS,
-                                                                                                     CON
-Cybersecurity                  Software            13    4   79.58   Leading (7 -> -3)               OKTA, BB, FTNT, S
-Communications Cloud           Cloud Computing      4    2   74.44   Leading (2)                     TWLO, OOMA
-Biotechnology                  Biotech              5    2   69.16   Leading (6)                     KNSA
-Communication Infrastructure   Telecom              1    1   68.62   Leading (13 -> +5)              BAND
-Digital Health                 Software             1    1   68.62   Leading (7 -> -3)               HNGE
-AI Servers                     Artificial Intel..   2    1   54.38   Neutral (15 -> +13)             DELL
-Pharmaceuticals                Pharma               3    1   45.74   Neutral (20 -> -5)              LQDA
-Digital Banking                Banking              3    1   45.28   Leading (10 -> -1)              DAVE
-Developer Infrastructure       Software             3    1   43.89   Leading (7 -> -3)               GTLB
-IT Services                    Software             3    1   43.89   Leading (7 -> -3)               NSIT
-Professional Services          Software             3    1   43.43   Leading (7 -> -3)               VSTS
-Digital Payments               Software             4    1   39.83   Leading (7 -> -3)               SEZL
-AI Compute                     Artificial Intel..   5    1   35.12   Neutral (15 -> +13)             AMD
-Business Software              Software             5    1   34.04   Leading (7 -> -3)               RCRUY
-Cloud Infrastructure           Cloud Computing      5    1   33.69   Leading (2)                     NET
-Refining & Marketing           Exploration          8    1   26.92   Neutral (19 -> -12)             DK
-Healthcare                     Healthcare          41    3   26.08   Leading (3 -> -4)               INNV, CRL
-Semiconductor Equipment        Semiconductors      23    2   25.71   Leading (4 -> +8)               TOELY, AMAT
-Semiconductors                 Semiconductors      48    2   14.69   Leading (4 -> +8)               STM, ASX
-Software                       Software           170    5   14.57   Leading (7 -> -3)               PENG, PD, FIG
-Leisure and Entertainment      Internet            41    1    8.66   Leading (12 -> +1)              LTH
-Biotech                        Biotech             86    1    4.77   Leading (6)                     MGTX
-Consumer Staples               Consumer Staples    38    0    0.00   Unknown                         #CL, #KDP, #KMB, #KVUE
-Education                      Education           11    0    0.00   Unknown                         #TAL
-Discount Retail                Discount Retail     10    0    0.00   Unknown                         #DG, #KSS, #M
-Exploration                    Exploration         82    0    0.00   Neutral (19 -> -12)             #PR
-Infrastructure                 Infrastructure     109    0    0.00   Neutral (28 -> +6)              #CMS, #PEG, #XEL
-Integrated Energy              Exploration          7    0    0.00   Neutral (19 -> -12)             #SHEL
-Medical Devices                Medical Devices     87    0    0.00   Lagging (35 -> -1)              #BDX, #COO, #NVST
-Pharma                         Pharma              42    0    0.00   Neutral (20 -> -5)              #TAK
-Nuclear Infrastructure         Uranium Mining       3    0    0.00   Lagging (37 -> +5)              #VST
-Unknown                        Unknown            358    0    0.00   Unknown                         #AMCR, #ARCC, #CAG,
-                                                                                                     #COF, #CPB, #GIS, #HOG,
-                                                                                                     #IP, #MOS, #NDAQ, #NTR,
-                                                                                                     #OMC, #PCAR, #PM,
-                                                                                                     #SFTBY, #SONY, #SW
+Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
+------------------------------------------------------------------------------------------------------------------------------------
+Memory                         Semiconductors       4    3  117.89   5.62   Leading (4 -> +8)               MU, SNDK
+Healthcare Services            Healthcare          15    6  105.73   6.32   Leading (3 -> -4)               OSCR
+Cybersecurity                  Software            13    4   79.58   3.09   Leading (7 -> -3)               OKTA, BB, FTNT, S
+Communications Cloud           Cloud Computing      4    2   74.44   6.34   Leading (2)                     TWLO
+Digital Health                 Software             1    1   68.62   3.09   Leading (7 -> -3)               HNGE
+AI Servers                     Artificial Intel..   2    1   54.38   0.41   Neutral (15 -> +13)             DELL
+Pharmaceuticals                Pharma               3    1   45.74  -0.30   Neutral (20 -> -5)              LQDA
+Developer Infrastructure       Software             3    1   43.89   3.09   Leading (7 -> -3)               GTLB
+AI Compute                     Artificial Intel..   5    1   35.12   0.41   Neutral (15 -> +13)             AMD
+Cloud Infrastructure           Cloud Computing      5    1   33.69   6.34   Leading (2)                     NET
+Healthcare                     Healthcare          41    3   26.08   6.32   Leading (3 -> -4)               
+Semiconductor Equipment        Semiconductors      23    2   25.71   5.62   Leading (4 -> +8)               AMAT
+Semiconductors                 Semiconductors      48    2   14.69   5.62   Leading (4 -> +8)               STM, ASX
+Software                       Software           170    5   14.57   3.09   Leading (7 -> -3)               PENG, PD, FIG
+Leisure and Entertainment      Internet            41    1    8.66   1.57   Leading (12 -> +1)              LTH
+Consumer Momentum              Broad                3    0    0.00   4.06   Leading (5 -> +2)               
+Data Storage                   Semiconductors       1    0    0.00   5.62   Leading (4 -> +8)               
+Enterprise Cloud               Cloud Computing      2    0    0.00   6.34   Leading (2)                     
+Gold Mining                    Gold Mining         43    0    0.00 -12.30   Lagging (40 -> +2)              
+Foundry                        Semiconductors       3    0    0.00   5.62   Leading (4 -> +8)               
+Food Safety                    Healthcare           1    0    0.00   6.32   Leading (3 -> -4)               
+Optical Networking             Semiconductors       8    0    0.00   5.62   Leading (4 -> +8)               
+Optical Infrastructure         Semiconductors       1    0    0.00   5.62   Leading (4 -> +8)               
+Semiconductor Analytics        Semiconductors       1    0    0.00   5.62   Leading (4 -> +8)               
+Semiconductor Testing          Semiconductors       3    0    0.00   5.62   Leading (4 -> +8)               
+Silver Mining                  Silver Mining        5    0    0.00 -11.78   Lagging (39 -> +3)              
+Unknown                        Unknown            358    0    0.00   0.00   Unknown                         #AMCR, #PM
+Wireless Chips                 Semiconductors       2    0    0.00   5.62   Leading (4 -> +8)               
 
 ========================================
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-Ticker                 Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-  PGNY          Healthcare Services      96.97         98        0     3     XLV (5)
-   HUM          Healthcare Services      96.97         98        0     2     XLV (5)
-  OSCR          Healthcare Services      96.97         98       NA     1     XLF (2)
-  SIMO                       Memory      96.72         99      +10     3     XLK (1)
-  INNV                   Healthcare      96.47         97       -1     2     XLV (5)
-    MU                       Memory      96.22         98      +15     3     XLK (1)
-  SNDK                       Memory      95.22         96       NA     1     XLK (1)
-   NET         Cloud Infrastructure      95.00         94       -1     3     XLK (1)
-  TWLO         Communications Cloud      95.00         94       -4     2     XLK (1)
-   CRL                   Healthcare      94.47         93       NA     1     XLV (5)
-  PACS          Healthcare Services      93.97         92       NA     1     XLV (5)
-  OKTA                Cybersecurity      93.96         99       +5     2     XLK (1)
-  HNGE               Digital Health      93.96         99       -2     3     XLV (5)
-    BB                Cybersecurity      93.96         99       -2     3     XLK (1)
-  SEZL             Digital Payments      93.96         99       +4     3     XLK (1)
-  PENG                     Software      93.96         99       -3     3     XLK (1)
- TOELY      Semiconductor Equipment      93.72         93       NA     1     XLK (1)
-  AMAT      Semiconductor Equipment      93.72         93       NA     1     XLK (1)
-  OOMA         Communications Cloud      93.50         91      -11     3     XLK (1)
-  FTNT                Cybersecurity      93.46         98       -2     2     XLK (1)
-   CON          Healthcare Services      92.97         90      -15     3     XLV (5)
-    PD                     Software      92.96         97       -6     2     XLK (1)
-   STM               Semiconductors      92.72         91       NA     1     XLK (1)
-  DAVE              Digital Banking      92.66         98       +3     2     XLK (1)
-     S                Cybersecurity      92.46         96       NA     1     XLK (1)
-   ASX               Semiconductors      92.22         90       NA     1     XLK (1)
-  BAND Communication Infrastructure      92.10         99       -4     3     XLK (1)
-   FIG                     Software      91.96         95       NA     1     XLK (1)
-  GTLB     Developer Infrastructure      91.96         95       -5     2     XLK (1)
- RCRUY            Business Software      91.96         95       -5     2     XLK (1)
-  NSIT                  IT Services      91.96         95       -5     2     XLY (9)
-  KNSA                Biotechnology      91.86         94      -22     3     XLV (5)
-  VSTS        Professional Services      91.46         94       -4     2     XLI (4)
-  DELL                   AI Servers      91.03         99       -4     3     XLK (1)
-  MGTX                      Biotech      90.86         92       NA     1     XLV (5)
-   AMD                   AI Compute      90.53         98       NA     1     XLK (1)
-   LTH    Leisure and Entertainment      90.30         95       -9     2     XLY (9)
-  LQDA              Pharmaceuticals      90.25         99      -16     2     XLV (5)
-    DK         Refining & Marketing      90.04         98       NA     1     XLE (3)
+Ticker              Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  OSCR       Healthcare Services      96.97         98       NA     1     XLF (2)
+    MU                    Memory      96.22         98       +9     3     XLK (1)
+  SNDK                    Memory      95.22         96       NA     1     XLK (1)
+   NET      Cloud Infrastructure      95.00         94       -1     3     XLK (1)
+  TWLO      Communications Cloud      95.00         94       -3     2     XLK (1)
+  OKTA             Cybersecurity      93.96         99       +3     2     XLK (1)
+  HNGE            Digital Health      93.96         99       -2     3     XLV (5)
+    BB             Cybersecurity      93.96         99       -2     3     XLK (1)
+  PENG                  Software      93.96         99       -2     3     XLK (1)
+  AMAT   Semiconductor Equipment      93.72         93       NA     1     XLK (1)
+  FTNT             Cybersecurity      93.46         98       -1     2     XLK (1)
+    PD                  Software      92.96         97       -4     2     XLK (1)
+   STM            Semiconductors      92.72         91       NA     1     XLK (1)
+     S             Cybersecurity      92.46         96       NA     1     XLK (1)
+   ASX            Semiconductors      92.22         90       NA     1     XLK (1)
+   FIG                  Software      91.96         95       NA     1     XLK (1)
+  GTLB  Developer Infrastructure      91.96         95       -3     2     XLK (1)
+  DELL                AI Servers      91.03         99       -2     3     XLK (1)
+   AMD                AI Compute      90.53         98       NA     1     XLK (1)
+   LTH Leisure and Entertainment      90.30         95       -5     2     XLY (9)
+  LQDA           Pharmaceuticals      90.25         99       -9     2     XLV (5)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
 Legend: ^ = Micro Laggard
 ========================================
-Ticker           Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-   MOS                Unknown       35.25               35       NA     1    XLB (11)
-  ARCC                Unknown       30.00               30       NA     1     XLF (2)
-   CAG                Unknown       24.80               22       +1     2     XLP (8)
-   GIS                Unknown       28.10               24       NA     1     XLP (8)
- SFTBY                Unknown       57.95               73       -3     2     XLK (1)
-   CPB                Unknown       24.15               21       -3     3     XLP (8)
-  AMCR                Unknown       37.80               42       -2     3     XLI (4)
-    PM                Unknown       41.70               48       NA     1     XLP (8)
-  NDAQ                Unknown       22.05               27       -1     2     XLF (2)
-    SW                Unknown       34.40               46       NA     1    XLB (11)
-   HOG                Unknown       42.85               59       +2     3     XLY (9)
-  PCAR                Unknown       37.00               50       -3     3     XLY (9)
-    CL       Consumer Staples       47.55               57       NA     1     XLP (8)
-   BDX        Medical Devices       29.20               18      +15     3     XLV (5)
-  SONY                Unknown       18.15               21       NA     1     XLY (9)
-   NTR                Unknown       37.00               50       -9     2    XLB (11)
-   KSS        Discount Retail       18.15               21       +3     3     XLY (9)
-   TAL              Education       26.60               34      -12     2     XLY (9)
-    IP                Unknown       24.00               30       -9     3    XLB (11)
-   TAK                 Pharma       53.20               42       NA     1     XLV (5)
-   COF                Unknown       21.40               26       -5     3     XLF (2)
-    DG        Discount Retail       24.65               31       -4     2     XLY (9)
-     M        Discount Retail       33.10               44       -8     3     XLY (9)
-   KDP       Consumer Staples       34.40               46       NA     1     XLP (8)
-   OMC                Unknown       31.15               41       NA     1     XLK (1)
-  KVUE       Consumer Staples       37.00               50       NA     1     XLP (8)
-   VST Nuclear Infrastructure       32.62               36       -8     3     XLU (6)
-  SHEL      Integrated Energy       57.93               52       -3     2     XLE (3)
-   XEL         Infrastructure       51.73               46       -5     2     XLU (6)
-   KMB       Consumer Staples       35.70               48       NA     1     XLP (8)
-  NVST        Medical Devices       49.85               59       NA     1     XLV (5)
-   COO        Medical Devices       26.45               23       NA     1     XLV (5)
-    PR            Exploration       73.53               76       NA     1     XLE (3)
-   CMS         Infrastructure       43.78               43       NA     1     XLU (6)
-   PEG         Infrastructure       39.88               37       NA     1     XLU (6)
-
+Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+  AMCR      Unknown       37.80               42       +1     3     XLI (4)
+    PM      Unknown       41.70               48       NA     1     XLP (8)
 ========================================
-MILD BULLISH (Watch For Pullback Setup) [Day 1-21]
+MILD BULLISH
 ========================================
-Ticker         Mapped_Theme  Score  RS_Rating  Days Out Sector (Rk)
-  DDOG Cloud Infrastructure  87.40         98         0     XLK (1)
-   CVS           Healthcare  71.93         85         0     XLV (5)
-  SKWD            Insurance  62.24         75         0     XLF (2)
-  AMBQ       Semiconductors  87.42         99         1     XLK (1)
-   VPG       Semiconductors  87.42         99         1     XLK (1)
-  OMDA           Healthcare  84.78         94         1     XLV (5)
-  LFST           Healthcare  84.13         93         1     XLV (5)
-  NRIX              Biotech  77.74         87         1     XLV (5)
-  FTRE              Biotech  75.79         84         1     XLV (5)
-   STX         Data Storage  75.42         99         1     XLK (1)
-   WDC               Memory  75.42         99         1     XLK (1)
-  APPS        Mobile Adtech  71.24         98         1     XLK (1)
-  PTGX              Biotech  66.39         88         1     XLV (5)
-
-========================================
-MILD BEARISH (Watch For Relief Rally Fade) [Day 1-21]
-========================================
-Ticker    Mapped_Theme  Score  RS_Rating  Days Out Sector (Rk)
-   MDT Medical Devices   29.2         18         0     XLV (5)
+Ticker                 Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
+   CVS                   Healthcare    92.48    89         0     XLV (5)
+  BAND Communication Infrastructure    92.10    99         0     XLK (1)
+  DDOG         Cloud Infrastructure    82.50    99         0     XLK (1)
+  APPS                Mobile Adtech    92.30    99         1     XLK (1)
+   STX                 Data Storage    90.72    87         1     XLK (1)
+  LFST                   Healthcare    81.47    97         1     XLV (5)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Strong Bullish,PGNY,HUM,OSCR,SIMO,INNV,MU,SNDK,NET,TWLO,CRL,PACS,OKTA,HNGE,BB,SEZL,PENG,TOELY,AMAT,OOMA,FTNT,CON,PD,STM,DAVE,S,ASX,BAND,FIG,GTLB,RCRUY,NSIT,KNSA,VSTS,DELL,MGTX,AMD,LTH,LQDA,DK,
-###Strong Bearish,MOS,ARCC,CAG,GIS,SFTBY,CPB,AMCR,PM,NDAQ,SW,HOG,PCAR,CL,BDX,SONY,NTR,KSS,TAL,IP,TAK,COF,DG,M,KDP,OMC,KVUE,VST,SHEL,XEL,KMB,NVST,COO,PR,CMS,PEG,
-###Mild Bullish,AMBQ,APPS,FTRE,LFST,NRIX,OMDA,PTGX,STX,VPG,WDC,CVS,DDOG,SKWD,
-###Mild Bearish,MDT,
+###Strong Bullish,OSCR,MU,SNDK,NET,TWLO,OKTA,HNGE,BB,PENG,AMAT,FTNT,PD,STM,S,ASX,FIG,GTLB,DELL,AMD,LTH,LQDA,
+###Strong Bearish,AMCR,PM,
+###Mild Bullish,APPS,LFST,STX,BAND,CVS,DDOG,
 
 ==============================================
 END OF TABELA SCAN - 2026-07-14

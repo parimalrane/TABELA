@@ -662,25 +662,33 @@ def print_daily_scan(
                 true_long_tickers.append(clean_ticker)
 
     def should_display(row):
+        mapped_theme = str(row['Mapped_Theme'])
+        macro_for_lookup = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
+        macro_state = theme_class_map.get(macro_for_lookup, "Unknown")
+        
+        # Determine Macro Rank
+        macro_rank = 999
+        if not theme_strength[theme_strength["Theme"] == macro_for_lookup].empty:
+            macro_rank = theme_strength[theme_strength["Theme"] == macro_for_lookup].iloc[0]["Theme_Rank"]
+            
+        # Always force top 5 and bottom 5 themes to print to maintain visual continuity of market cap flows
+        if macro_state == "Leading" and macro_rank <= 5:
+            return True
+        if macro_state == "Lagging" and macro_rank >= (len(theme_strength) - 4):
+            return True
+
         leaders_val = row.get("Leaders")
         if pd.isna(leaders_val) or str(leaders_val).strip() == "" or str(leaders_val).strip() == "None":
             return False
-            
-        mapped_theme = str(row['Mapped_Theme'])
-        macro_for_lookup = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
-            
-        macro_state = theme_class_map.get(macro_for_lookup, "Unknown")
-        
+
         if macro_state == "Neutral":
             has_valid_swing_signal = False
             for item in str(leaders_val).split(","):
                 item_clean = item.strip()
                 if item_clean.startswith("#"):
-                    # Distribution candidate - critical for short setups and risk management
                     has_valid_swing_signal = True
                     break
                 elif item_clean.upper() in true_long_tickers:
-                    # True Long institutional leader
                     has_valid_swing_signal = True
                     break
                     
@@ -691,8 +699,8 @@ def print_daily_scan(
         
     display_df = display_df[display_df.apply(should_display, axis=1)]
 
-    print(f"{'Micro Theme'.ljust(30)} {'Macro Theme'.ljust(18)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'Score'.rjust(7)}   {'Macro State & Movement'.ljust(29)}   {'Stocks'}")
-    print("-" * 125)
+    print(f"{'Micro Theme'.ljust(30)} {'Macro Theme'.ljust(18)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'W_Brdth'.rjust(7)} {'ETF_RS'.rjust(6)}   {'Macro State & Movement'.ljust(29)}   {'Stocks'}")
+    print("-" * 132)
     
     for _, row in display_df.iterrows():
         mapped_theme = str(row['Mapped_Theme'])
@@ -712,9 +720,11 @@ def print_daily_scan(
         
         macro_state = theme_class_map.get(parent_theme, "Unknown")
         
+        etf_rs_val = 0.0
         if not theme_strength[theme_strength["Theme"] == parent_theme].empty:
             ts_row = theme_strength[theme_strength["Theme"] == parent_theme].iloc[0]
             macro_rank = ts_row["Theme_Rank"]
+            etf_rs_val = float(ts_row.get("ETF_RS_Raw", 0.0))
             
             movement_str = ""
             if theme_performance is not None and not theme_performance.empty:
@@ -732,7 +742,8 @@ def print_daily_scan(
         else:
             mac_state_str = macro_state.ljust(29)
             
-        prefix = f"{micro} {macro} {tot_str} {q_str} {s_str}   {mac_state_str}   "
+        r_str = f"{etf_rs_val:>.2f}".rjust(6)
+        prefix = f"{micro} {macro} {tot_str} {q_str} {s_str} {r_str}   {mac_state_str}   "
         prefix_len = len(prefix)
         
         leaders_str = str(row['Leaders']).strip()
@@ -743,7 +754,7 @@ def print_daily_scan(
             
         wrapped = textwrap.wrap(
             leaders_str, 
-            width=(125 - prefix_len),
+            width=(132 - prefix_len),
             break_long_words=False,
             break_on_hyphens=False
         )
@@ -944,9 +955,9 @@ def print_daily_scan(
             accumulated["short_dropped"][clean] = current_date_str
 
     # Process Auto-Purge and Expiry
-    from config.config import LONG_ENTRY, DIST_ENTRY
+    from config.config import LONG_ENTRY, SHORT_ENTRY
     min_dropped_long = LONG_ENTRY.get("MIN_DROPPED_WATCH_SCORE", 70.0)
-    max_dropped_dist = DIST_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 30.0)
+    max_dropped_dist = SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 30.0)
 
     def clean_accumulator(dropped_dict, active_list_str, is_long=True):
         active_set = set(t.strip().upper() for t in active_list_str.split(",") if t.strip())
@@ -974,7 +985,7 @@ def print_daily_scan(
                     if is_long:
                         if current_rs < min_dropped_long or current_score < min_dropped_long:
                             continue  # Purge, either price or total composite is broken
-                        if current_theme in DIST_ENTRY.get("THEMES", []):
+                        if current_theme in SHORT_ENTRY.get("THEMES", []):
                             continue  # Purge, macro theme has died (Lagging)
                         if current_zacks in LONG_ENTRY.get("BLOCKED_ZACKS", []):
                             continue  # Purge, fundamentally broken (Zacks 4/5)
@@ -983,11 +994,11 @@ def print_daily_scan(
                             continue  # Purge, shorts are squeezing upward
                         if current_theme in LONG_ENTRY.get("THEMES", []):
                             continue  # Purge, macro theme has rallied (Leading)
-                        if current_zacks in DIST_ENTRY.get("BLOCKED_ZACKS", []):
+                        if current_zacks in SHORT_ENTRY.get("BLOCKED_ZACKS", []):
                             continue  # Purge, fundamentals too strong to short (Zacks 1/2)
 
             # Timeline Expiry from Config
-            max_days = LONG_ENTRY.get("MILD_DAYS", 21) if is_long else DIST_ENTRY.get("MILD_DAYS", 21)
+            max_days = LONG_ENTRY.get("MILD_DAYS", 21) if is_long else SHORT_ENTRY.get("MILD_DAYS", 21)
             try:
                 date_val = datetime.strptime(date_str, "%Y-%m-%d")
                 days_old = (current_date - date_val).days
@@ -1011,9 +1022,10 @@ def print_daily_scan(
     long_dropped_str = ",".join(sorted(accumulated["long_dropped"].keys()))
     short_dropped_str = ",".join(sorted(accumulated["short_dropped"].keys()))
 
-    def print_dropped_table(dropped_dict, title, max_days=21, min_days=0):
-        if not dropped_dict: return
+    def print_dropped_table(dropped_dict, title, max_days=21, min_days=0, is_long_table=True):
+        if not dropped_dict: return ""
         rows = []
+        valid_tickers = []
         for ticker, date_str in dropped_dict.items():
             try:
                 days_on_drop = (current_date - datetime.strptime(date_str, "%Y-%m-%d")).days
@@ -1025,6 +1037,7 @@ def print_daily_scan(
                 
             match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
             if not match.empty:
+                valid_tickers.append(ticker)
                 r = match.iloc[0]
                 theme_class = str(r.get("Theme_Class", "Unknown"))
                 spdr = ZACKS_TO_SPDR.get(str(r.get("Sector", "")), "N/A")
@@ -1034,34 +1047,39 @@ def print_daily_scan(
                 if theme_class == "Micro Leader": display_ticker = "^" + ticker
                 elif theme_class in ["Unknown", "Unclassified Leader"]: display_ticker = "~" + ticker
                 
-                rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors='coerce')
-                score_val = pd.to_numeric(r.get("Long_Score", 0), errors='coerce')
-                if not 'is_long' in title.lower():
-                    rs_val = pd.to_numeric(r.get("Short_RS_Rating", rs_val), errors='coerce')
-                    score_val = pd.to_numeric(r.get("Short_Score", score_val), errors='coerce')
+                if is_long_table:
+                    rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors='coerce')
+                    score_val = pd.to_numeric(r.get("Long_Score", 0), errors='coerce')
+                    score_header = "L_Score"
+                    rs_header = "L_RS"
+                else:
+                    rs_val = pd.to_numeric(r.get("Short_RS_Rating", 0), errors='coerce')
+                    score_val = pd.to_numeric(r.get("Short_Score", 0), errors='coerce')
+                    score_header = "S_Score"
+                    rs_header = "S_RS"
                 
                 rows.append({
                     "Ticker": display_ticker,
                     "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
-                    "Score": round(score_val, 2),
-                    "RS_Rating": int(rs_val),
+                    score_header: round(score_val, 2),
+                    rs_header: int(rs_val),
                     "Days Out": days_on_drop,
                     "Sector (Rk)": f"{spdr} ({int(s_rank)})"
                 })
         if rows:
-            df = pd.DataFrame(rows).sort_values(["Days Out", "Score", "RS_Rating"], ascending=[True, False, False])
+            df = pd.DataFrame(rows).sort_values(["Days Out", score_header, rs_header], ascending=[True, False, False])
             print("=" * 40)
             print(title)
             print("=" * 40)
             print(df.to_string(index=False))
             print()
+        return ",".join(valid_tickers)
 
-    print()
-    print_dropped_table(accumulated["long_dropped"], "MILD BULLISH (Watch For Pullback Setup) [Day 1-21]", max_days=21, min_days=0)
-    print_dropped_table(accumulated["short_dropped"], "MILD BEARISH (Watch For Relief Rally Fade) [Day 1-21]", max_days=21, min_days=0)
+    long_mild_days = LONG_ENTRY.get("MILD_DAYS", 50)
+    short_mild_days = SHORT_ENTRY.get("MILD_DAYS", 50)
 
-    long_pullback_str = ",".join(k for k,v in accumulated["long_dropped"].items() if 0 <= (current_date - datetime.strptime(v, "%Y-%m-%d")).days <= 21)
-    short_rally_str = ",".join(k for k,v in accumulated["short_dropped"].items() if 0 <= (current_date - datetime.strptime(v, "%Y-%m-%d")).days <= 21)
+    long_pullback_str = print_dropped_table(accumulated["long_dropped"], "MILD BULLISH", max_days=long_mild_days, min_days=0, is_long_table=True)
+    short_rally_str = print_dropped_table(accumulated["short_dropped"], "MILD BEARISH", max_days=short_mild_days, min_days=0, is_long_table=False)
 
     print("TRADINGVIEW WATCHLIST EXPORT")
     if full_long_list:

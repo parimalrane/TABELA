@@ -23,17 +23,25 @@ def calculate_etf_rs(df):
         available_values = {}
 
         for period, weight in period_weights.items():
-            value = pd.to_numeric(row[period], errors="coerce")
+            val_str = str(row[period]).replace('%', '').replace('$', '').replace(',', '').strip()
+            if val_str.startswith('(') and val_str.endswith(')'):
+                val_str = '-' + val_str[1:-1]
+            value = pd.to_numeric(val_str, errors="coerce")
 
             if pd.isna(value):
                 continue
 
             if period in shorter_periods and value == 0.0:
-                if any(
-                    not pd.isna(pd.to_numeric(row[shorter_period], errors="coerce"))
-                    and pd.to_numeric(row[shorter_period], errors="coerce") != 0.0
-                    for shorter_period in shorter_periods[period]
-                ):
+                short_valid = False
+                for shorter_period in shorter_periods[period]:
+                    s_val = str(row[shorter_period]).replace('%', '').replace('$', '').replace(',', '').strip()
+                    if s_val.startswith('(') and s_val.endswith(')'):
+                        s_val = '-' + s_val[1:-1]
+                    s_num = pd.to_numeric(s_val, errors="coerce")
+                    if pd.notna(s_num) and s_num != 0.0:
+                        short_valid = True
+                        break
+                if short_valid:
                     continue
 
             available_values[period] = (value, weight)

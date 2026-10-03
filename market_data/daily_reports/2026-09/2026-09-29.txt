@@ -42,40 +42,21 @@ THEME BREADTH ANALYSIS
 Legend: [No Prefix] = Long Candidate / # = Distribution
         + - = 1D Rank Delta
 ========================================
-Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
------------------------------------------------------------------------------------------------------------------------------
-Banking                        Banking            152    0    0.00   Lagging (35 -> -1)              #BNY, #COLB, #FHN, #FNB,
-                                                                                                     #IBKR, #JPM, #ONB,
-                                                                                                     #SCHW, #USB
-Building Materials             Infrastructure      47    0    0.00   Neutral (29 -> -4)              #JHX
-Consumer Staples               Consumer Staples    40    0    0.00   Unknown                         #CL, #KVUE
-Discount Retail                Discount Retail     10    0    0.00   Unknown                         #TJX
-Financial Services             Banking             67    0    0.00   Lagging (35 -> -1)              #APLD, #APO, #BEN,
-                                                                                                     #GLXY, #OBDC, #SYF
-Footwear/Apparel               Retail              45    0    0.00   Neutral (26 -> -8)              #ONON
-Gold Mining                    Gold Mining         51    0    0.00   Neutral (23 -> +10)             #CDE
-Healthcare                     Healthcare          43    0    0.00   Neutral (16 -> -1)              #ELAN
-Homebuilders                   Infrastructure       4    0    0.00   Neutral (29 -> -4)              #DHI
-Industrial Automation          Infrastructure      46    0    0.00   Neutral (29 -> -4)              #CNM
-Infrastructure                 Infrastructure     115    0    0.00   Neutral (29 -> -4)              #AEP, #EPD, #ET, #FE,
-                                                                                                     #KMI, #OKE, #WEC
-Insurance                      Insurance           70    0    0.00   Neutral (27 -> -3)              #ACGL, #AIG, #PGR
-Medical Devices                Medical Devices    100    0    0.00   Neutral (19 -> -7)              #BSX, #EW
-Nuclear Infrastructure         Uranium Mining       3    0    0.00   Lagging (41)                    #VST
-REITs                          REITs              138    0    0.00   Lagging (33 -> -4)              #AMT, #BRX, #COLD,
-                                                                                                     #CUBE, #DOC, #MAC, #PLD,
-                                                                                                     #VTR
-Restaurants                    Consumer Staples    28    0    0.00   Unknown                         #QSR
-Silver Mining                  Silver Mining        6    0    0.00   Lagging (37 -> +11)             #PAAS
-Space Infrastructure           Aerospace & Defe..   6    0    0.00   Lagging (38 -> +2)              #ASTS
-Transportation Platform        Transportation/S..   1    0    0.00   Lagging (36 -> -1)              #UBER
-Transportation/Shipping        Transportation/S..  60    0    0.00   Lagging (36 -> -1)              #AAL, #CSX
-Travel Platform                Transportation/S..   1    0    0.00   Lagging (36 -> -1)              #ABNB
-Unknown                        Unknown            374    0    0.00   Unknown                         #AMCR, #APG, #CAG, #COF,
-                                                                                                     #DOW, #HON, #LI, #LYB,
-                                                                                                     #MAT, #MDLZ, #MO, #MOS,
-                                                                                                     #MRSH, #RIVN, #SW, #SYY,
-                                                                                                     #TSCO, #VIPS
+Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
+------------------------------------------------------------------------------------------------------------------------------------
+Aerospace & Defense            Aerospace & Defe..  39    0    0.00  -6.66   Lagging (38 -> +2)              
+Cloud Infrastructure           Cloud Computing      5    0    0.00   3.72   Leading (4)                     
+Communications Cloud           Cloud Computing      4    0    0.00   3.72   Leading (4)                     
+Consumer Momentum              Broad                3    0    0.00   2.58   Leading (5 -> -1)               
+Defense Drone Systems          Aerospace & Defe..   1    0    0.00  -6.66   Lagging (38 -> +2)              
+Defense Systems                Aerospace & Defe..   1    0    0.00  -6.66   Lagging (38 -> +2)              
+Enterprise Cloud               Cloud Computing      2    0    0.00   3.72   Leading (4)                     
+Gold Mining                    Gold Mining         51    0    0.00  -3.21   Neutral (23 -> +10)             #CDE, #WLTH
+Homebuilders                   Infrastructure       4    0    0.00  -4.32   Neutral (29 -> -4)              #DHI
+Nuclear Infrastructure         Uranium Mining       3    0    0.00 -11.87   Lagging (41)                    
+Space Infrastructure           Aerospace & Defe..   6    0    0.00  -6.66   Lagging (38 -> +2)              
+Unknown                        Unknown            374    0    0.00   0.00   Unknown                         #MOS
+Uranium Mining                 Uranium Mining       1    0    0.00 -11.87   Lagging (41)                    
 
 ========================================
 STRONG BULLISH (Trend Continuation)
@@ -87,103 +68,30 @@ No active candidates in Long Candidate Universe.
 STRONG BEARISH (Trend Breakdown)
 Legend: ^ = Micro Laggard
 ========================================
-Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-  VIPS                 Unknown       28.00               20        0     2     XLK (2)
-    LI                 Unknown       25.70               18       +1     6    XLY (10)
-  ASTS    Space Infrastructure       36.03               30       NA     1     XLK (2)
-   MOS                 Unknown       39.65               41       -2     2     XLB (8)
-  TSCO                 Unknown       23.05               17       NA     1    XLY (10)
-   PLD                   REITs       48.32               49       +5    10     XLF (6)
-  APLD      Financial Services       46.66               50       NA     1     XLF (6)
-  MRSH                 Unknown       29.40               36       -4     2     XLK (2)
-   CAG                 Unknown       23.05               27       +4     7     XLP (5)
-  KVUE        Consumer Staples       38.50               50       -1     2     XLP (5)
-  CUBE                   REITs       44.62               51       -5     4     XLF (6)
-   HON                 Unknown       15.45               13       -7     3     XLI (7)
-  ACGL               Insurance       42.05               46       +1     7     XLF (6)
-   CNM   Industrial Automation       33.76               29       +4     7     XLI (7)
-  ONON        Footwear/Apparel       25.11               19       +8     6    XLY (10)
-   BRX                   REITs       42.97               50      +18     3     XLF (6)
-   JPM                 Banking       45.61               53       +5     2     XLF (6)
-    FE          Infrastructure       37.56               41       NA     1    XLU (11)
-   WEC          Infrastructure       38.21               42       NA     1    XLU (11)
-   FHN                 Banking       37.46               42       -1     3     XLF (6)
-   BNY                 Banking       55.01               69      +19     4     XLF (6)
-   BEN      Financial Services       61.86               78       NA     1     XLF (6)
-   AIG               Insurance       36.85               38      -16     3     XLF (6)
-  SCHW                 Banking       38.76               44       -7     6     XLF (6)
-  COLB                 Banking       42.01               49      +12     3     XLF (6)
-    MO                 Unknown       52.20               68       NA     1     XLP (5)
-   MAC                   REITs       55.32               69       -1     2     XLF (6)
-   SYF      Financial Services       31.61               33      -13     3     XLF (6)
-   DOW                 Unknown       40.45               63      +23     3     XLB (8)
-  MDLZ                 Unknown       45.65               61       NA     1     XLP (5)
-   DOC                   REITs       55.97               70       +7    26     XLF (6)
-   DHI            Homebuilders       43.36               43       +1     3     XLI (7)
-   FNB                 Banking       41.36               48       -3     3     XLF (6)
-  RIVN                 Unknown       20.75               25       NA     1    XLY (10)
-   QSR             Restaurants       37.00               50       +4     4    XLY (10)
-   BSX         Medical Devices       19.22                8      +13     6     XLV (3)
-  COLD                   REITs       50.12               61       -1     3     XLF (6)
-  AMCR                 Unknown       30.05               47       +7     6     XLI (7)
-    CL        Consumer Staples       39.05               57       +4     6     XLP (5)
-   MAT                 Unknown       16.20               18       +6     3    XLY (10)
-   COF                 Unknown       22.70               28       -9    15     XLF (6)
-   SYY                 Unknown       39.60               54       +6     3     XLP (5)
-   TJX         Discount Retail       24.75               35      -16     2    XLY (10)
-  IBKR                 Banking       56.11               73       NA     1     XLF (6)
-  UBER Transportation Platform       25.53               30       NA     1     XLK (2)
-   AEP          Infrastructure       40.61               48       +4     2    XLU (11)
-   JHX      Building Materials       50.36               63       NA     1     XLI (7)
-   AAL Transportation/Shipping       31.93               36       NA     1     XLI (7)
-   OKE          Infrastructure       47.21               62      +19     3     XLE (1)
-   VTR                   REITs       47.32               59      +14    11     XLF (6)
-   EPD          Infrastructure       43.96               57       NA     1     XLE (1)
-   USB                 Banking       44.41               55       +8    11     XLF (6)
-   PGR               Insurance       34.35               38       +1     2     XLF (6)
-   AMT                   REITs       39.72               45       NA     1     XLF (6)
-   APO      Financial Services       26.86               28       NA     1     XLF (6)
-  GLXY      Financial Services       40.51               49      -12     2     XLF (6)
-   CDE             Gold Mining       44.75               48      -22     2     XLB (8)
-   LYB                 Unknown       48.90               76       NA     1     XLB (8)
-   APG                 Unknown       36.45               53       NA     1     XLK (2)
-  ABNB         Travel Platform       45.68               61       -7     2    XLY (10)
-   KMI          Infrastructure       47.11               58       +5     3     XLE (1)
-   VST  Nuclear Infrastructure       27.18               38      -15     7    XLU (11)
-  ELAN              Healthcare       37.33               44       -6     2     XLV (3)
-    SW                 Unknown       44.25               65       -2     2     XLB (8)
-   CSX Transportation/Shipping       56.63               74       -9     4     XLI (7)
-   ONB                 Banking       48.96               62       +3     2     XLF (6)
-  PAAS           Silver Mining       29.84               37      -12     3     XLB (8)
-    EW         Medical Devices       39.32               52       NA     1     XLV (3)
-    ET          Infrastructure       48.61               68       NA     1     XLE (1)
-  OBDC      Financial Services       32.06               36       -5     3     XLF (6)
+Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+   MOS      Unknown       39.65               41        0     2     XLB (8)
+   DHI Homebuilders       43.36               43        0     3     XLI (7)
+   CDE  Gold Mining       44.75               48        0     2     XLB (8)
+  WLTH  Gold Mining       42.15               44       NA     1     XLB (8)
+========================================
+MILD BULLISH
+========================================
+Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
+  FIVN Communications Cloud    81.52    91         5     XLK (2)
+  FSLY Cloud Infrastructure    85.52    97         6     XLK (2)
+  ESTC  Data Infrastructure    81.71    94         6     XLK (2)
 
 ========================================
-MILD BULLISH (Watch For Pullback Setup) [Day 1-21]
+MILD BEARISH
 ========================================
-Ticker         Mapped_Theme  Score  RS_Rating  Days Out Sector (Rk)
-  FIVN Communications Cloud  61.91         92         5     XLK (2)
-  FSLY Cloud Infrastructure  65.81         98         6     XLK (2)
-  NTSK             Software  60.22         81         6     XLK (2)
-  SNOW Cloud Infrastructure  59.96         89         6     XLK (2)
-  PAYC             Software  57.62         87         6     XLK (2)
-  ESTC  Data Infrastructure  55.02         83         6     XLK (2)
-   NIQ             Software  46.77         78         6     XLK (2)
-
-========================================
-MILD BEARISH (Watch For Relief Rally Fade) [Day 1-21]
-========================================
-Ticker    Mapped_Theme  Score  RS_Rating  Days Out Sector (Rk)
-    NU Digital Banking  20.91         15         1     XLF (6)
-   NLY           REITs  31.62         31         4     XLF (6)
-  KTOS Defense Systems  15.08          7         7     XLI (7)
-  FISV         Banking  24.61         13         8     XLK (2)
+Ticker            Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
+  LUNR    Space Infrastructure    36.68    31         1     XLI (7)
+   UAL Transportation/Shipping    49.78    55         5     XLI (7)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Strong Bearish,VIPS,LI,ASTS,MOS,TSCO,PLD,APLD,MRSH,CAG,KVUE,CUBE,HON,ACGL,CNM,ONON,BRX,JPM,FE,WEC,FHN,BNY,BEN,AIG,SCHW,COLB,MO,MAC,SYF,DOW,MDLZ,DOC,DHI,FNB,RIVN,QSR,BSX,COLD,AMCR,CL,MAT,COF,SYY,TJX,IBKR,UBER,AEP,JHX,AAL,OKE,VTR,EPD,USB,PGR,AMT,APO,GLXY,CDE,LYB,APG,ABNB,KMI,VST,ELAN,SW,CSX,ONB,PAAS,EW,ET,OBDC,
-###Mild Bullish,MTA,ESTC,FSLY,NIQ,NTSK,PAYC,SNOW,FIVN,
-###Mild Bearish,FISV,KTOS,NLY,NU,
+###Strong Bearish,MOS,DHI,CDE,WLTH,
+###Mild Bullish,ESTC,FSLY,FIVN,
+###Mild Bearish,UAL,LUNR,
 
 ==============================================
 END OF TABELA SCAN - 2026-09-29

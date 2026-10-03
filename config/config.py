@@ -50,33 +50,28 @@ GROWTH_SCORE_MAP = {'A': 100.0, 'B': 95.0, 'C': 90.0, 'D': 20.0, 'F': -50.0}
 # ==========================
 
 LONG_ENTRY = {
-    # 1. STRONG BULLISH (Active Breakouts)
+    # Cartesian Sweep Winner: "The Institutional Funnel"
     "MIN_RS": 90.0,
     "MIN_LONG_SCORE": 90.0,
     "THEMES": ["Leading", "Neutral", "Unclassified Leader", "Unknown"],
     "BLOCKED_ZACKS": [4, 5],
     "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 300000,
-
-    # 2. MILD BULLISH (Pullback Phase - Days 1 to 21)
-    "MIN_DROPPED_WATCH_SCORE": 70.0,
-    "MILD_DAYS": 21
+    "MIN_VOLUME": 1_500_000,
+    "MIN_DROPPED_WATCH_SCORE": 80.0,
+    "MILD_DAYS": 21,
+    "PURGE_DAYS": 50
 }
 
 DIST_ENTRY = {
-    # 1. STRONG BEARISH (Active Breakdowns - Combo C Absolute Chokehold)
-    "MIN_RS": 40.0,
-    "MAX_RS": 60.0,
-    "MAX_LONG_SCORE": 45.0,
-    "THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
+    # Phase 2 Grid Search Winner (T7): 73.28% WR | +5.16% avg return | ~11 shorts/day
+    # "Fall From Grace" zone: former mid-range stocks actively losing momentum
+    "MIN_RS": 50.0,            # Floor: stocks must still have some standing to fall from
+    "MAX_RS": 75.0,            # Ceiling: catch before they become obvious laggards
+    "MAX_LONG_SCORE": 50.0,    # Only short stocks with clear composite deterioration
+    "THEMES": ["Neutral", "Unknown"],  # Neutral-only: Lagging adds noise at this RS level
     "MICRO_BREAKAWAY_PERCENTILE": 0.05,
     "BLOCKED_ZACKS": [1, 2],
-    "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 2500000,
-    
-    # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
-    "MAX_DROPPED_WATCH_SCORE": 30.0,
-    "MILD_DAYS": 50
+    "MAX_DROPPED_WATCH_SCORE": 30.0
 }
 
 # ==========================
@@ -109,19 +104,20 @@ SHORT_ZACKS_SCORE_MAP = {1: -100.0, 2: -50.0, 3: 20.0, 4: 80.0, 5: 100.0}
 # Short-specific Growth scoring (reward deteriorating earnings quality)
 SHORT_GROWTH_SCORE_MAP = {'A': -50.0, 'B': 0.0, 'C': 50.0, 'D': 80.0, 'F': 100.0}
 
-# Short entry thresholds — Combo C Absolute Chokehold Winner: 70.3% WR
+# Short entry thresholds — Ultra-Premium Cartesian Winner (Low Volume / High Probability)
 SHORT_ENTRY = {
     # 1. STRONG BEARISH (Active Breakdowns)
     "MIN_SHORT_RS": 40.0,
-    "MAX_SHORT_RS": 60.0,
+    "MAX_SHORT_RS": 75.0,
     "MAX_SHORT_SCORE": 45.0,
     "THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
-    "BLOCKED_ZACKS": [1, 2],
+    "BLOCKED_ZACKS": [1, 2, 3],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 2_500_000,
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
-    "MAX_DROPPED_WATCH_SCORE": 30.0,
-    "MILD_DAYS": 50
+    "MAX_DROPPED_WATCH_SCORE": 75.0,
+    "MILD_DAYS": 50,
+    "PURGE_DAYS": 50
 }
 

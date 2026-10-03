@@ -17,8 +17,9 @@ def calculate_rs_raw(stocks):
     stocks["RS_Raw"] = 0.0
     for column, weight in RS_RAW_WEIGHTS.items():
         if column in stocks.columns:
-            stocks[column] = pd.to_numeric(stocks[column], errors='coerce')
-            stocks["RS_Raw"] += stocks[column].fillna(0.0) * weight
+            clean_series = stocks[column].astype(str).str.replace(r'[%$,]', '', regex=True).str.strip()
+            clean_series = clean_series.replace(r'^\((.*)\)$', r'-\1', regex=True)
+            stocks["RS_Raw"] += pd.to_numeric(clean_series, errors='coerce').fillna(0.0) * weight
 
     return stocks
 
@@ -72,8 +73,9 @@ def zacks_score(rank):
     try:
         rank = int(float(rank))
     except (ValueError, TypeError):
-        return ZACKS_SCORE_MAP.get(3, 20.0)
-    return ZACKS_SCORE_MAP.get(rank, 20.0)
+        # Missing Zacks Data: Pro-rate to a neutral 50.0 (7.5 pts out of 15) to prevent math-locking true technical breakouts
+        return 50.0
+    return ZACKS_SCORE_MAP.get(rank, 0.0)
 
 
 def calculate_zacks_score(stocks):
@@ -104,15 +106,20 @@ def calculate_growth_score(stocks):
 # Does NOT touch RS_Rating, Long_Score, Zacks_Score, Growth_Score.
 # ============================================================
 
-import config.config as cfg
+from config.config import (
+    SHORT_RS_RAW_WEIGHTS,
+    SHORT_COMPOSITE_WEIGHTS,
+    SHORT_ZACKS_SCORE_MAP,
+    SHORT_GROWTH_SCORE_MAP,
+)
 
 def calculate_short_rs_raw(stocks):
     """Computes a dedicated raw RS score using SHORT_RS_RAW_WEIGHTS."""
     stocks["Short_RS_Raw"] = 0.0
-    for column, weight in cfg.SHORT_RS_RAW_WEIGHTS.items():
+    for column, weight in SHORT_RS_RAW_WEIGHTS.items():
         if column in stocks.columns:
-            stocks[column] = pd.to_numeric(stocks[column], errors='coerce')
-            stocks["Short_RS_Raw"] += stocks[column].fillna(0.0) * weight
+            clean_series = stocks[column].astype(str).str.replace(r'[%$]', '', regex=True).str.replace(',', '')
+            stocks["Short_RS_Raw"] += pd.to_numeric(clean_series, errors='coerce').fillna(0.0) * weight
     return stocks
 
 
@@ -131,13 +138,13 @@ def _short_zacks_score(rank):
     try:
         rank = int(float(rank))
     except (ValueError, TypeError):
-        return cfg.SHORT_ZACKS_SCORE_MAP.get(3, 20.0)
-    return cfg.SHORT_ZACKS_SCORE_MAP.get(rank, 20.0)
+        return SHORT_ZACKS_SCORE_MAP.get(3, 20.0)
+    return SHORT_ZACKS_SCORE_MAP.get(rank, 20.0)
 
 
 def _short_growth_score(grade):
     grade = str(grade).strip().upper()
-    return cfg.SHORT_GROWTH_SCORE_MAP.get(grade, 50.0)
+    return SHORT_GROWTH_SCORE_MAP.get(grade, 50.0)
 
 
 def calculate_short_score(stocks):
@@ -149,7 +156,7 @@ def calculate_short_score(stocks):
     stocks = calculate_short_rs_raw(stocks)
     stocks = calculate_short_rs_rating(stocks)
 
-    w = cfg.SHORT_COMPOSITE_WEIGHTS
+    w = SHORT_COMPOSITE_WEIGHTS
     rs_w = w.get("RS_WEIGHT", 0.50)
     theme_w = w.get("THEME_WEIGHT", 0.25)
     zacks_w = w.get("ZACKS_WEIGHT", 0.15)

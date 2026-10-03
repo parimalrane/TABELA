@@ -42,43 +42,30 @@ THEME BREADTH ANALYSIS
 Legend: [No Prefix] = Long Candidate / # = Distribution
         + - = 1D Rank Delta
 ========================================
-Micro Theme                    Macro Theme        Tot Qual   Score   Macro State & Movement          Stocks
------------------------------------------------------------------------------------------------------------------------------
-Energy Services                Energy Services      1    1   68.62   Unknown                         FTK
-Diagnostics                    Medical Devices      9    2   50.40   Leading (6 -> -6)               CDNA, NEO
-IT Services                    Software             3    1   45.74   Leading (9)                     EFOR
-Digital Payments               Software             4    1   39.83   Leading (9)                     PAYS
-Cloud Infrastructure           Cloud Computing      5    1   35.12   Leading (1 -> -1)               FSLY
-Life Sciences Tools            Medical Devices      5    1   34.76   Leading (6 -> -6)               AVTR
-Medical Devices                Medical Devices     88    1    4.96   Leading (6 -> -6)               DCTH
-AI Networking                  Artificial Intel..   3    0    0.00   Lagging (38 -> +16)             #CSCO
-Automotive Technology          Automotive Techn..  22    0    0.00   Unknown                         #GNTX
-Banking                        Banking            145    0    0.00   Neutral (15 -> -1)              #FHN, #FNB, #MS, #VLY,
-                                                                                                     #WBS
-Building Materials             Infrastructure      39    0    0.00   Lagging (37 -> +5)              #MAS, #RYN, #WY
-Consumer Staples               Consumer Staples    36    0    0.00   Unknown                         #KMB, #KVUE, #TAP
-Digital Banking                Banking              3    0    0.00   Neutral (15 -> -1)              #NU
-AI Compute                     Artificial Intel..   5    0    0.00   Lagging (38 -> +16)             #ARM
-Financial Services             Banking             61    0    0.00   Neutral (15 -> -1)              #CG
-Homebuilders                   Infrastructure       3    0    0.00   Lagging (37 -> +5)              #DHI
-Infrastructure                 Infrastructure     105    0    0.00   Lagging (37 -> +5)              #BCE, #ET
-Industrial Automation          Infrastructure      48    0    0.00   Lagging (37 -> +5)              #CNH
-Internet                       Internet            19    0    0.00   Neutral (19 -> +2)              #BABA, #JD
-Leisure and Entertainment      Internet            34    0    0.00   Neutral (19 -> +2)              #PENN, #TCOM
-Nuclear Infrastructure         Uranium Mining       3    0    0.00   Lagging (39 -> +8)              #CEG
-REITs                          REITs              119    0    0.00   Lagging (41 -> +4)              #DLR, #DRH, #MAC, #REXR
-Retail Trading Platform        Digital Assets       1    0    0.00   Unknown                         #HOOD
-Semiconductors                 Semiconductors      43    0    0.00   Lagging (42 -> +27)             #LPTH
-Solar Infrastructure           Infrastructure       5    0    0.00   Lagging (37 -> +5)              #FSLR
-Telecom Infrastructure         Telecom              4    0    0.00   Lagging (33 -> +20)             #VZ
-Transportation/Shipping        Transportation/S..  58    0    0.00   Lagging (32 -> +9)              #CP, #LUV
-Unknown                        Unknown            330    0    0.00   Unknown                         #APG, #ARCC, #BBWI,
-                                                                                                     #CMCSA, #CPB, #F, #GIS,
-                                                                                                     #HRL, #IBM, #ICE, #JBS,
-                                                                                                     #LOW, #MAT, #MDLZ, #MKC,
-                                                                                                     #MOS, #NWSA, #ORLY,
-                                                                                                     #RIVN, #RKT, #SYY
-Uranium Mining                 Uranium Mining       1    0    0.00   Lagging (39 -> +8)              #CCJ
+Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
+------------------------------------------------------------------------------------------------------------------------------------
+Diagnostics                    Medical Devices      9    2   50.40   7.38   Leading (6 -> -6)               NEO
+Cloud Infrastructure           Cloud Computing      5    1   35.12  12.76   Leading (1 -> -1)               FSLY
+Life Sciences Tools            Medical Devices      5    1   34.76   7.38   Leading (6 -> -6)               AVTR
+Data Storage                   Semiconductors       1    0    0.00  -5.15   Lagging (42 -> +27)             
+Communications Cloud           Cloud Computing      4    0    0.00  12.76   Leading (1 -> -1)               
+Enterprise Cloud               Cloud Computing      2    0    0.00  12.76   Leading (1 -> -1)               
+Gold Mining                    Gold Mining         35    0    0.00   9.51   Leading (2 -> +1)               
+Foundry                        Semiconductors       3    0    0.00  -5.15   Lagging (42 -> +27)             
+Infrastructure                 Infrastructure     105    0    0.00  -1.76   Lagging (37 -> +5)              #D
+Memory                         Semiconductors       4    0    0.00  -5.15   Lagging (42 -> +27)             
+Nuclear Infrastructure         Uranium Mining       3    0    0.00  -2.84   Lagging (39 -> +8)              
+Optical Infrastructure         Semiconductors       1    0    0.00  -5.15   Lagging (42 -> +27)             
+Optical Networking             Semiconductors       8    0    0.00  -5.15   Lagging (42 -> +27)             
+REITs                          REITs              119    0    0.00  -3.24   Lagging (41 -> +4)              
+Semiconductor Analytics        Semiconductors       1    0    0.00  -5.15   Lagging (42 -> +27)             
+Semiconductor Equipment        Semiconductors      22    0    0.00  -5.15   Lagging (42 -> +27)             
+Semiconductor Testing          Semiconductors       3    0    0.00  -5.15   Lagging (42 -> +27)             
+Semiconductors                 Semiconductors      43    0    0.00  -5.15   Lagging (42 -> +27)             
+Silver Mining                  Silver Mining        6    0    0.00   8.30   Leading (5 -> -1)               
+Unknown                        Unknown            330    0    0.00   0.00   Unknown                         #PM
+Uranium Mining                 Uranium Mining       1    0    0.00  -2.84   Lagging (39 -> +8)              
+Wireless Chips                 Semiconductors       2    0    0.00  -5.15   Lagging (42 -> +27)             
 
 ========================================
 STRONG BULLISH (Trend Continuation)
@@ -86,121 +73,32 @@ Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   FSLY Cloud Infrastructure      98.00         98        0     2     XLK (6)
-   FTK      Energy Services      93.50         99        0     4     XLB (4)
-  CDNA          Diagnostics      91.62         99       NA     1     XLV (1)
    NEO          Diagnostics      91.12         98       NA     1     XLV (1)
   AVTR  Life Sciences Tools      90.62         97       NA     1     XLV (1)
-  DCTH      Medical Devices      90.62         97       NA     1     XLV (1)
-  EFOR          IT Services      90.37         99       -4     9     XLK (6)
-  PAYS     Digital Payments      90.37         99       -4     3     XLK (6)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
 Legend: ^ = Micro Laggard
 ========================================
-Ticker              Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-   MOS                   Unknown       28.70               28      +16     2     XLB (4)
-   LOW                   Unknown       26.10               24        0     2     XLY (7)
-  REXR                     REITs       28.41               22       +2     3     XLF (3)
-   RKT                   Unknown       18.30               12       -3     2     XLF (3)
-   HRL                   Unknown       35.20               38       NA     1     XLP (8)
-  HOOD   Retail Trading Platform       13.60               14       +5     2     XLF (3)
-  GNTX     Automotive Technology       25.95               33       NA     1     XLY (7)
-  BBWI                   Unknown       18.80               22      +19     3     XLY (7)
-     F                   Unknown       29.20               38      +10     2     XLY (7)
-  MDLZ                   Unknown       35.70               48       NA     1     XLP (8)
-   GIS                   Unknown       22.85               19       -4     3     XLP (8)
-    CP   Transportation/Shipping       54.48               58       NA     1     XLI (5)
-   APG                   Unknown       35.05               47       -5     2     XLK (6)
-   TAP          Consumer Staples       18.80               22      +12     9     XLP (8)
-   BCE            Infrastructure       37.73               34       NA     1    XLU (11)
-  TCOM Leisure and Entertainment       24.22                7       NA     1     XLY (7)
-   ICE                   Unknown       22.05               27       +1     7     XLF (3)
-  ORLY                   Unknown       27.90               36       +3     2     XLY (7)
-   MKC                   Unknown       13.60               14      +15    11     XLP (8)
-  KVUE          Consumer Staples       34.40               46       +4     9     XLP (8)
-   MAT                   Unknown       12.95               13       -5     5     XLY (7)
-    NU           Digital Banking       28.93               13      +20     3     XLF (3)
-   KMB          Consumer Staples       33.10               44        0     9     XLP (8)
-  NWSA                   Unknown       34.40               46       +7     2     XLY (7)
-   CCJ            Uranium Mining       35.82               42      -11     2     XLE (2)
-   RYN        Building Materials       27.83               28      +12     2     XLI (5)
-   CNH     Industrial Automation       39.53               46       NA     1     XLI (5)
-   SYY                   Unknown       37.65               51      +11     2     XLP (8)
-   MAC                     REITs       51.01               66       -4     2     XLF (3)
-  LPTH            Semiconductors       45.15               60       NA     1     XLK (6)
-    ET            Infrastructure       47.98               59       -9     3     XLE (2)
-   CPB                   Unknown       15.55               17       -4     2     XLP (8)
-   JBS                   Unknown       21.40               26       NA     1     XLP (8)
-  ARCC                   Unknown       27.90               36      +16     9     XLF (3)
-  CSCO             AI Networking       61.99               81       +1     3     XLK (6)
- CMCSA                   Unknown       19.45               23      -16     7     XLY (7)
-   DRH                     REITs       51.66               67       +9     2     XLF (3)
-   FNB                   Banking       51.03               47       -8     3     XLF (3)
-   IBM                   Unknown       16.85               19       NA     1     XLK (6)
-  RIVN                   Unknown       16.85               19      +12     2     XLY (7)
-    CG        Financial Services       30.88               16       -4     3     XLF (3)
-   DLR                     REITs       47.76               61      -10     3     XLF (3)
-   DHI              Homebuilders       35.63               40      -40     2     XLI (5)
-   WBS                   Banking       61.43               63       +1     3     XLF (3)
-   VLY                   Banking       62.08               64       -2     3     XLF (3)
-   ARM                AI Compute       72.39               97      +11     2     XLK (6)
-   FHN                   Banking       38.53               37       NA     1     XLF (3)
-    MS                   Banking       48.28               52      +14     3     XLF (3)
-    VZ    Telecom Infrastructure       45.71               54       +7     2     XLK (6)
-    WY        Building Materials       37.58               43       NA     1     XLI (5)
-   MAS        Building Materials       46.68               57      -11     3     XLI (5)
-   CEG    Nuclear Infrastructure       19.57               17      -46     2     XLE (2)
-   LUV   Transportation/Shipping       40.68               46      -18     2     XLI (5)
-    JD                  Internet       44.22               47       NA     1     XLY (7)
-  PENN Leisure and Entertainment       55.27               64       NA     1     XLY (7)
-  FSLR      Solar Infrastructure       29.78               31       -7     2     XLE (2)
-  BABA                  Internet       27.32               21       NA     1     XLY (7)
-
+Ticker   Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+     D Infrastructure       41.63               40       NA     1    XLU (11)
+    PM        Unknown       41.70               48        0     7     XLP (8)
 ========================================
-MILD BULLISH (Watch For Pullback Setup) [Day 1-21]
+MILD BULLISH
 ========================================
-Ticker             Mapped_Theme  Score  RS_Rating  Days Out Sector (Rk)
-  NSIT              IT Services  74.05         97         0     XLY (7)
-  MTRN              Gold Mining  72.22         97         0     XLB (4)
-   PAY         Digital Payments  70.80         92         0     XLK (6)
-     U                 Software  66.90         86         0     XLK (6)
-  PAYC                 Software  66.45         93         0     XLK (6)
-  APPN                 Software  61.90         86         0     XLK (6)
-  BLKB                 Software  55.85         69         0     XLK (6)
-  TOST                 Software  62.85         69         1     XLK (6)
-   RNG     Communications Cloud  88.20         98         4     XLK (6)
-   NET     Cloud Infrastructure  83.00         90         4     XLK (6)
- RCRUY        Business Software  81.70         98         4     XLK (6)
-  PANW            Cybersecurity  74.05         97         4     XLK (6)
-  OKTA            Cybersecurity  71.45         93         4     XLK (6)
-  MANH                 Software  63.00         80         4     XLK (6)
-  PRGS                 Software  56.50         70         4     XLK (6)
-  QTWO                 Software  41.10         54         4     XLK (6)
-  ESTC      Data Infrastructure  65.45         73         5     XLK (6)
-  NTNX                 Software  63.00         80         5     XLK (6)
-  EXLS                 Software  40.90         46         6     XLK (6)
-  GTLB Developer Infrastructure  73.90         86         8     XLK (6)
-    PD                 Software  62.20         68         8     XLK (6)
-   IOT                 Software  55.85         69        12     XLK (6)
-  SNOW     Cloud Infrastructure  86.25         95        14     XLK (6)
-
-========================================
-MILD BEARISH (Watch For Relief Rally Fade) [Day 1-21]
-========================================
-Ticker         Mapped_Theme  Score  RS_Rating  Days Out Sector (Rk)
-  AAOI   Optical Networking  70.50         99         0     XLK (6)
-  WELL                REITs  39.31         48         0     XLF (3)
-   VTR                REITs  28.91         32         0     XLF (3)
-  SBRA                REITs  25.66         27         0     XLF (3)
-  AMRZ   Building Materials  16.78         11         1     XLI (5)
-  ENPH Solar Infrastructure  42.78         51         5     XLE (2)
+Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
+     U             Software    89.87    98         0     XLK (6)
+  OKTA        Cybersecurity    86.87    92         4     XLK (6)
+  PANW        Cybersecurity    86.87    92         4     XLK (6)
+   RNG Communications Cloud    82.50    97         4     XLK (6)
+  NTNX             Software    83.87    86         5     XLK (6)
+  EXLS             Software    84.37    87         6     XLK (6)
+  SNOW Cloud Infrastructure    83.00    98        14     XLK (6)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Strong Bullish,FSLY,FTK,CDNA,NEO,AVTR,DCTH,EFOR,PAYS,
-###Strong Bearish,MOS,LOW,REXR,RKT,HRL,HOOD,GNTX,BBWI,F,MDLZ,GIS,CP,APG,TAP,BCE,TCOM,ICE,ORLY,MKC,KVUE,MAT,NU,KMB,NWSA,CCJ,RYN,CNH,SYY,MAC,LPTH,ET,CPB,JBS,ARCC,CSCO,CMCSA,DRH,FNB,IBM,RIVN,CG,DLR,DHI,WBS,VLY,ARM,FHN,MS,VZ,WY,MAS,CEG,LUV,JD,PENN,FSLR,BABA,
-###Mild Bullish,INNV,SNOW,IOT,GTLB,PD,EXLS,ESTC,NTNX,MANH,NET,OKTA,PANW,PRGS,QTWO,RCRUY,RNG,TOST,APPN,BLKB,MTRN,NSIT,PAY,PAYC,U,
-###Mild Bearish,CAG,COLB,ENPH,AMRZ,ZTS,AAOI,SBRA,VTR,WELL,
+###Strong Bullish,FSLY,NEO,AVTR,
+###Strong Bearish,D,PM,
+###Mild Bullish,SNOW,EXLS,NTNX,OKTA,PANW,RNG,U,
 
 ==============================================
 END OF TABELA SCAN - 2026-08-11

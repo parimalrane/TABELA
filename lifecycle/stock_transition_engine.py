@@ -7,7 +7,7 @@ from pathlib import Path
 
 from config.config import (
     LONG_ENTRY,
-    DIST_ENTRY
+    SHORT_ENTRY
 )
 from config.runtime_context import context, get_monthly_path
 from reporting.watchlist_delta_engine import load_previous_long_watchlist
@@ -163,7 +163,7 @@ def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFram
                 new_state = LONG
                 days_in_state += 1
         elif old_state == DISTRIBUTION:
-            if not _meets_criteria(row, DIST_ENTRY):
+            if not _meets_criteria(row, SHORT_ENTRY):
                 new_state = OBSERVATION
                 days_in_state = 1
                 grace_days = 0
@@ -174,7 +174,7 @@ def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFram
                 days_in_state = 1
                 grace_days = 0
                 recovered[old_state.lower()].append(ticker)
-            elif _meets_criteria(row, DIST_ENTRY):
+            elif _meets_criteria(row, SHORT_ENTRY):
                 new_state = DISTRIBUTION
                 days_in_state = 1
                 grace_days = 0
@@ -213,7 +213,7 @@ def get_distribution_candidates(registry: Dict, stocks: pd.DataFrame) -> pd.Data
         ticker = str(row["Ticker"]).replace("*", "").strip().upper()
         
         # Uses strict entry for all states, no hysteresis
-        if _meets_criteria(row, DIST_ENTRY):
+        if _meets_criteria(row, SHORT_ENTRY):
             eligible.add(ticker)
 
     if not eligible:
