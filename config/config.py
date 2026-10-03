@@ -64,15 +64,15 @@ LONG_ENTRY = {
 }
 
 DIST_ENTRY = {
-    # 1. STRONG BEARISH (Active Breakdowns)
+    # 1. STRONG BEARISH (Active Breakdowns - Combo C Absolute Chokehold)
     "MIN_RS": 40.0,
-    "MAX_RS": 75.0,
-    "MAX_LONG_SCORE": 65.0,
+    "MAX_RS": 60.0,
+    "MAX_LONG_SCORE": 45.0,
     "THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
     "MICRO_BREAKAWAY_PERCENTILE": 0.05,
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_000_000,
+    "MIN_VOLUME": 2500000,
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
     "MAX_DROPPED_WATCH_SCORE": 30.0,
@@ -109,16 +109,16 @@ SHORT_ZACKS_SCORE_MAP = {1: -100.0, 2: -50.0, 3: 20.0, 4: 80.0, 5: 100.0}
 # Short-specific Growth scoring (reward deteriorating earnings quality)
 SHORT_GROWTH_SCORE_MAP = {'A': -50.0, 'B': 0.0, 'C': 50.0, 'D': 80.0, 'F': 100.0}
 
-# Short entry thresholds — P1-F Fall From Grace Winner: 71.1% WR
+# Short entry thresholds — Combo C Absolute Chokehold Winner: 70.3% WR
 SHORT_ENTRY = {
     # 1. STRONG BEARISH (Active Breakdowns)
-    "MIN_SHORT_RS": 40.0,      # True Mid-tier
-    "MAX_SHORT_RS": 75.0,      # Fall From Grace Ceiling
-    "MAX_SHORT_SCORE": 65.0,   # Score Confirmation
+    "MIN_SHORT_RS": 40.0,
+    "MAX_SHORT_RS": 60.0,
+    "MAX_SHORT_SCORE": 45.0,
     "THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_000_000,
+    "MIN_VOLUME": 2_500_000,
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
     "MAX_DROPPED_WATCH_SCORE": 30.0,

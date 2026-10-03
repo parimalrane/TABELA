@@ -65,35 +65,23 @@ THEMES_STRICT = ["Lagging", "Micro Laggard"]
 THEMES_WIDE = ["Lagging", "Micro Laggard", "Neutral", "Unknown"]
 
 
-def make_exp(name, hypothesis, rs_weights, comp, zacks, growth, gate, themes):
+def make_exp(name, hypothesis, gate, blocked_zacks, min_volume, themes):
     return {
         "name": name, "hypothesis": hypothesis,
-        "rs_weights": rs_weights, "comp": comp,
-        "zacks": zacks, "growth": growth,
-        "gate": gate, "themes": themes
+        "gate": gate, "themes": themes, 
+        "blocked_zacks": blocked_zacks, "min_volume": min_volume
     }
 
-
 EXPERIMENTS = [
-    # === PHASE 1: RS VELOCITY (What kind of weakness?) ===
-    make_exp("P1-A: Cliff + Graveyard", "Violent 1W speed at the bottom.", RS_CLIFF, COMP_STANDARD, ZACKS_REWARD_SELLS, GROWTH_REWARD_DECAY, GATE_GRAVEYARD, THEMES_STRICT),
-    make_exp("P1-B: Slow Bleed + Graveyard", "12W drift at the bottom.", RS_SLOW_BLEED, COMP_STANDARD, ZACKS_REWARD_SELLS, GROWTH_REWARD_DECAY, GATE_GRAVEYARD, THEMES_STRICT),
-    make_exp("P1-C: YTD Reversal + Lower Mid", "YTD peak reversal in lower mid-tier.", RS_YTD_REVERSAL, COMP_STANDARD, ZACKS_REWARD_SELLS, GROWTH_REWARD_DECAY, GATE_LOWER_MID, THEMES_STRICT),
-    make_exp("P1-D: Cliff + Lower Mid", "Violent speed in lower mid-tier.", RS_CLIFF, COMP_STANDARD, ZACKS_REWARD_SELLS, GROWTH_REWARD_DECAY, GATE_LOWER_MID, THEMES_STRICT),
-    make_exp("P1-E: Balanced + True Mid", "Balanced RS in mid-tier.", RS_BALANCED, COMP_STANDARD, ZACKS_REWARD_SELLS, GROWTH_REWARD_DECAY, GATE_TRUE_MID, THEMES_WIDE),
-    make_exp("P1-F: YTD Reversal + Fall From Grace", "Peak-to-trough reversal in former leaders.", RS_YTD_REVERSAL, COMP_STANDARD, ZACKS_REWARD_SELLS, GROWTH_REWARD_DECAY, GATE_FALL_FROM_GRACE, THEMES_WIDE),
-
-    # === PHASE 2: FUNDAMENTAL POISON ===
-    make_exp("P2-A: Pure Technical (No Fundamentals)", "Does ignoring fundamentals improve shorts?", RS_CLIFF, COMP_PURE_TECH, ZACKS_IGNORE, GROWTH_IGNORE, GATE_LOWER_MID, THEMES_STRICT),
-    make_exp("P2-B: Fundamental Heavy + Lower Mid", "Does heavy Zacks/Growth weight improve shorts?", RS_BALANCED, COMP_FUNDAMENTAL, ZACKS_REWARD_SELLS, GROWTH_REWARD_DECAY, GATE_LOWER_MID, THEMES_STRICT),
-    make_exp("P2-C: Zacks Ignore (Growth Only) + Lower Mid", "Does Zacks even matter for shorts?", RS_CLIFF, COMP_STANDARD, ZACKS_IGNORE, GROWTH_REWARD_DECAY, GATE_LOWER_MID, THEMES_STRICT),
-    make_exp("P2-D: Theme Heavy + True Mid Wide", "Does macro theme carry more weight at mid-tier?", RS_BALANCED, COMP_THEME_HEAVY, ZACKS_NEUTRAL, GROWTH_NEUTRAL, GATE_TRUE_MID, THEMES_WIDE),
-
-    # === PHASE 3: COMPOSITE BLENDS + FALL FROM GRACE ===
-    make_exp("P3-A: RS Heavy + Fall From Grace Wide", "Pure momentum weight on former leaders.", RS_CLIFF, COMP_RS_HEAVY, ZACKS_IGNORE, GROWTH_IGNORE, GATE_FALL_FROM_GRACE, THEMES_WIDE),
-    make_exp("P3-B: Fundamental Heavy + Fall From Grace Wide", "Do earnings matter more on quality breakdowns?", RS_BALANCED, COMP_FUNDAMENTAL, ZACKS_REWARD_SELLS, GROWTH_REWARD_DECAY, GATE_FALL_FROM_GRACE, THEMES_WIDE),
-    make_exp("P3-C: YTD Reversal + RS Heavy + Fall From Grace", "Peak-to-trough with RS-heavy composite.", RS_YTD_REVERSAL, COMP_RS_HEAVY, ZACKS_IGNORE, GROWTH_IGNORE, GATE_FALL_FROM_GRACE, THEMES_WIDE),
-    make_exp("P3-D: Slow Bleed + Theme Heavy + True Mid Wide", "Slow deterioration with theme weight.", RS_SLOW_BLEED, COMP_THEME_HEAVY, ZACKS_NEUTRAL, GROWTH_NEUTRAL, GATE_TRUE_MID, THEMES_WIDE),
+    make_exp("Baseline (Last Winner P1-F)", "Control group: 1457 trades, 71.1% WR.", {"MIN_RS": 40.0, "MAX_RS": 75.0, "SCORE": 65.0}, "[1, 2]", 1_000_000, THEMES_WIDE),
+    make_exp("Sniper 1: Block Zacks 3", "Cut the fundamental noise exactly in half.", {"MIN_RS": 40.0, "MAX_RS": 75.0, "SCORE": 65.0}, "[1, 2, 3]", 1_000_000, THEMES_WIDE),
+    make_exp("Sniper 2: Strict Volume Floor", "Require 2.5m volume.", {"MIN_RS": 40.0, "MAX_RS": 75.0, "SCORE": 65.0}, "[1, 2]", 2_500_000, THEMES_WIDE),
+    make_exp("Sniper 3: Lower Tech Ceiling", "Crush RS ceiling to 60.", {"MIN_RS": 40.0, "MAX_RS": 60.0, "SCORE": 65.0}, "[1, 2]", 1_000_000, THEMES_WIDE),
+    make_exp("Sniper 4: Strict Score Ceiling", "Crush Score ceiling to 45.", {"MIN_RS": 40.0, "MAX_RS": 75.0, "SCORE": 45.0}, "[1, 2]", 1_000_000, THEMES_WIDE),
+    make_exp("Sniper 5: Exclude Neutral/Unknown", "Strictly Lagging/Micro Laggard.", {"MIN_RS": 40.0, "MAX_RS": 75.0, "SCORE": 65.0}, "[1, 2]", 1_000_000, THEMES_STRICT),
+    make_exp("Combo A: The Clean Cut", "Block Zacks 3 + 2.5m Volume.", {"MIN_RS": 40.0, "MAX_RS": 75.0, "SCORE": 65.0}, "[1, 2, 3]", 2_500_000, THEMES_WIDE),
+    make_exp("Combo B: Strict Fundamentals", "Block Zacks 3 + Score 45.", {"MIN_RS": 40.0, "MAX_RS": 75.0, "SCORE": 45.0}, "[1, 2, 3]", 1_000_000, THEMES_WIDE),
+    make_exp("Combo C: The Absolute Chokehold", "RS<60 + Score<45 + Zacks 4/5 only + 2.5m Vol.", {"MIN_RS": 40.0, "MAX_RS": 60.0, "SCORE": 45.0}, "[1, 2, 3]", 2_500_000, THEMES_WIDE)
 ]
 
 
@@ -102,48 +90,25 @@ def generate_short_config_block(exp):
     with open(CONFIG_BACKUP, "r", encoding="utf-8") as f:
         content = f.read()
 
-    rs = exp["rs_weights"]
-    comp = exp["comp"]
-    zacks = exp["zacks"]
-    growth = exp["growth"]
     gate = exp["gate"]
     themes = str(exp["themes"]).replace("'", '"')
+    blocked_zacks = exp["blocked_zacks"]
+    min_volume = exp["min_volume"]
 
-    rs_block = (
-        f'SHORT_RS_RAW_WEIGHTS = {{\n'
-        f'    "% Price Change (4 Weeks)": {rs.get("% Price Change (4 Weeks)", 0.0)},\n'
-        f'    "% Price Change (12 Weeks)": {rs.get("% Price Change (12 Weeks)", 0.0)},\n'
-        f'    "% Price Change (1 Week)": {rs.get("% Price Change (1 Week)", 0.0)},\n'
-        f'    "Relative Price Change (YTD)": {rs.get("Relative Price Change (YTD)", 0.0)},\n'
-        f'    "Price as a % of 52 Wk H-L Range": {rs.get("Price as a % of 52 Wk H-L Range", 0.0)},\n'
-        f'}}'
-    )
-    comp_block = (
-        f'SHORT_COMPOSITE_WEIGHTS = {{\n'
-        f'    "RS_WEIGHT": {comp["RS_WEIGHT"]},\n'
-        f'    "THEME_WEIGHT": {comp["THEME_WEIGHT"]},\n'
-        f'    "ZACKS_WEIGHT": {comp["ZACKS_WEIGHT"]},\n'
-        f'    "GROWTH_WEIGHT": {comp["GROWTH_WEIGHT"]},\n'
-        f'}}'
-    )
-    zacks_items = ", ".join(f"{k}: {v}" for k, v in zacks.items())
-    growth_items = ", ".join(f"'{k}': {v}" for k, v in growth.items())
     entry_block = (
         f'SHORT_ENTRY = {{\n'
-        f'    "MIN_SHORT_RS": {gate["MIN_SHORT_RS"]},\n'
-        f'    "MAX_SHORT_RS": {gate["MAX_SHORT_RS"]},\n'
-        f'    "MAX_SHORT_SCORE": {gate["MAX_SHORT_SCORE"]},\n'
+        f'    "MIN_SHORT_RS": {gate["MIN_RS"]},\n'
+        f'    "MAX_SHORT_RS": {gate["MAX_RS"]},\n'
+        f'    "MAX_SHORT_SCORE": {gate["SCORE"]},\n'
         f'    "THEMES": {themes},\n'
-        f'    "BLOCKED_ZACKS": [1, 2],\n'
+        f'    "BLOCKED_ZACKS": {blocked_zacks},\n'
         f'    "MIN_PRICE": 10.0,\n'
-        f'    "MIN_VOLUME": 1000000,\n'
+        f'    "MIN_VOLUME": {min_volume},\n'
+        f'    "MAX_DROPPED_WATCH_SCORE": 30.0,\n'
+        f'    "MILD_DAYS": 21\n'
         f'}}'
     )
 
-    content = re.sub(r'SHORT_RS_RAW_WEIGHTS\s*=\s*\{.*?\}', rs_block, content, flags=re.DOTALL)
-    content = re.sub(r'SHORT_COMPOSITE_WEIGHTS\s*=\s*\{.*?\}', comp_block, content, flags=re.DOTALL)
-    content = re.sub(r'SHORT_ZACKS_SCORE_MAP\s*=\s*\{.*?\}', f'SHORT_ZACKS_SCORE_MAP = {{{zacks_items}}}', content)
-    content = re.sub(r'SHORT_GROWTH_SCORE_MAP\s*=\s*\{.*?\}', f'SHORT_GROWTH_SCORE_MAP = {{{growth_items}}}', content)
     content = re.sub(r'SHORT_ENTRY\s*=\s*\{.*?\}', entry_block, content, flags=re.DOTALL)
     return content
 
@@ -194,7 +159,7 @@ def main():
         print(f"\n{'='*80}")
         print(f"  EXPERIMENT {idx}/{total}: {name}")
         print(f"  {exp['hypothesis']}")
-        print(f"  RS:{list(exp['rs_weights'].values())} | Composite:{list(exp['comp'].values())} | Gate:{exp['gate']}")
+        print(f"  Gate: {exp['gate']} | Blocked Zacks: {exp['blocked_zacks']} | Min Vol: {exp['min_volume']}")
         print(f"{'='*80}")
 
         with open(CONFIG_PATH, "w", encoding="utf-8") as f:
@@ -235,10 +200,11 @@ def main():
             "Mil.WR%": bt["mild_win_rate"],
             "Decay.Trd": bt["basing_trades"],
             "Decay.WR%": bt["basing_win_rate"],
-            "Gate_Min_RS": exp["gate"]["MIN_SHORT_RS"],
-            "Gate_Max_RS": exp["gate"]["MAX_SHORT_RS"],
-            "Gate_Max_Score": exp["gate"]["MAX_SHORT_SCORE"],
-            "Themes": ",".join(exp["themes"]),
+            "Max_RS": exp["gate"]["MAX_RS"],
+            "Score": exp["gate"]["SCORE"],
+            "ZacksBlocked": exp["blocked_zacks"],
+            "MinVol": exp["min_volume"],
+            "Themes": len(exp["themes"]),
             "Time(s)": reg_time
         })
 

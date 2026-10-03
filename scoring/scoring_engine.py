@@ -17,7 +17,8 @@ def calculate_rs_raw(stocks):
     stocks["RS_Raw"] = 0.0
     for column, weight in RS_RAW_WEIGHTS.items():
         if column in stocks.columns:
-            stocks["RS_Raw"] += stocks[column].fillna(0) * weight
+            stocks[column] = pd.to_numeric(stocks[column], errors='coerce')
+            stocks["RS_Raw"] += stocks[column].fillna(0.0) * weight
 
     return stocks
 
@@ -110,7 +111,8 @@ def calculate_short_rs_raw(stocks):
     stocks["Short_RS_Raw"] = 0.0
     for column, weight in cfg.SHORT_RS_RAW_WEIGHTS.items():
         if column in stocks.columns:
-            stocks["Short_RS_Raw"] += stocks[column].fillna(0) * weight
+            stocks[column] = pd.to_numeric(stocks[column], errors='coerce')
+            stocks["Short_RS_Raw"] += stocks[column].fillna(0.0) * weight
     return stocks
 
 
