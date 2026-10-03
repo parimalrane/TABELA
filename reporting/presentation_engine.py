@@ -1120,22 +1120,12 @@ def print_daily_scan(
     short_purged_csv = ",".join(short_purged)
 
     print("TRADINGVIEW WATCHLIST EXPORT")
-    if full_long_list:
-        print("###Bullish_Momentum," + full_long_list + ",")
-    if long_pullback_str:
-        print("###Bullish_Swing," + long_pullback_str + ",")
-    if long_purged_csv:
-        print(f"###Bullish_Garage,{long_purged_csv},")
-    else:
-        print("###Bullish_Garage,")
+    print("###Bullish_Momentum," + full_long_list + ",") if full_long_list else print("###Bullish_Momentum,")
+    print("###Bullish_Swing," + long_pullback_str + ",") if long_pullback_str else print("###Bullish_Swing,")
+    print(f"###Bullish_Garage,{long_purged_csv},") if long_purged_csv else print("###Bullish_Garage,")
 
-    if full_short_list:
-        print("###Bearish_Momentum," + full_short_list + ",")
-    if short_rally_str:
-        print("###Bearish_Swing," + short_rally_str + ",")
-    if short_purged_csv:
-        print(f"###Bearish_Garage,{short_purged_csv},")
-    else:
-        print("###Bearish_Garage,")
+    print("###Bearish_Momentum," + full_short_list + ",") if full_short_list else print("###Bearish_Momentum,")
+    print("###Bearish_Swing," + short_rally_str + ",") if short_rally_str else print("###Bearish_Swing,")
+    print(f"###Bearish_Garage,{short_purged_csv},") if short_purged_csv else print("###Bearish_Garage,")
 
     print()
