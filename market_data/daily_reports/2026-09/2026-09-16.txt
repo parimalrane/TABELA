@@ -43,6 +43,7 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+Refining & Marketing           Exploration          8    7  189.51   9.16   Leading (4)                     DINO, DK, PBF, VLO, MPC
 Banking                        Banking            137    0    0.00  -3.24   Lagging (30 -> +2)              #FNB
 Cloud Infrastructure           Cloud Computing      5    0    0.00   6.78   Leading (5 -> -3)               
 Communications Cloud           Cloud Computing      4    0    0.00   6.78   Leading (5 -> -3)               
@@ -57,7 +58,6 @@ Nuclear Infrastructure         Uranium Mining       3    0    0.00  -9.61   Lagg
 Oil Services                   Exploration          5    0    0.00   9.16   Leading (4)                     
 Optical Infrastructure         Semiconductors       1    0    0.00  -7.02   Lagging (38 -> +7)              
 Optical Networking             Semiconductors       8    0    0.00  -7.02   Lagging (38 -> +7)              
-Refining & Marketing           Exploration          8    0    0.00   9.16   Leading (4)                     
 Semiconductor Analytics        Semiconductors       1    0    0.00  -7.02   Lagging (38 -> +7)              
 Semiconductor Equipment        Semiconductors      21    0    0.00  -7.02   Lagging (38 -> +7)              
 Semiconductor Testing          Semiconductors       3    0    0.00  -7.02   Lagging (38 -> +7)              
@@ -70,7 +70,12 @@ Wireless Chips                 Semiconductors       2    0    0.00  -7.02   Lagg
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-No active candidates in Long Candidate Universe.
+Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  DINO Refining & Marketing      85.97         99       +1    11     XLE (1)
+    DK Refining & Marketing      85.97         99       -1    11     XLE (1)
+   PBF Refining & Marketing      85.97         99       +2    11     XLE (1)
+   VLO Refining & Marketing      85.47         98        0    11     XLE (1)
+   MPC Refining & Marketing      85.47         98       -2    11     XLE (1)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -83,13 +88,9 @@ Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Secto
 MILD BULLISH
 ========================================
 Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  DINO Refining & Marketing    85.96    99         1     XLE (1)
-    DK Refining & Marketing    85.96    99         1     XLE (1)
-   PBF Refining & Marketing    85.96    99         1     XLE (1)
-   MPC Refining & Marketing    85.46    98         1     XLE (1)
-   VLO Refining & Marketing    85.46    98         1     XLE (1)
-   PSX Refining & Marketing    84.96    97         1     XLE (1)
-  HALO              Biotech    81.50    95         8     XLV (2)
+   PSX Refining & Marketing    84.96    97         0     XLE (1)
+  TALO          Exploration    80.96    89         1     XLE (1)
+  HALO              Biotech    81.50    95         7     XLV (2)
 
 ========================================
 MILD BEARISH
@@ -99,9 +100,9 @@ Ticker       Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    NEE     Infrastructure    38.03    37         1     XLU (0)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,
-###Bullish_Swing,HALO,DINO,DK,MPC,PBF,PSX,VLO,
-###Bullish_Garage,ADPT,AVTR,BLFS,CNK,CTAS,DDOG,DINO,DK,DXCM,ESTC,EXLS,FIG,FIGR,FIVN,FSLY,FTNT,GTLB,HALO,HUBS,ILMN,IOT,MPC,NEO,NET,NIQ,NTNX,OKTA,OSCR,PANW,PBF,PD,PSX,RNG,TOST,TRV,TWLO,TXG,U,VLO,VSXY,
+###Bullish_Momentum,DINO,DK,PBF,VLO,MPC,
+###Bullish_Swing,HALO,TALO,PSX,
+###Bullish_Garage,ADPT,AEHR,AMRX,ANET,APPS,ATI,AVAH,AVTR,BLFS,CLF,CNK,CTAS,DDOG,DELL,DXCM,ESTC,EXLS,FIG,FIGR,FIVN,FRSH,FSLY,FTNT,GRND,GTLB,HALO,HNGE,HPE,HUBS,ILMN,IOT,KURA,LFST,LTH,NEO,NESR,NET,NIQ,NTNX,OKTA,OSCR,OUST,PANW,PD,PK,PLTR,PSX,QMCO,RAL,RNG,RPD,SAIL,SHOP,SNOW,TALO,TOST,TRIP,TRV,TWLO,TXG,U,VNT,VSXY,
 ###Bearish_Momentum,DAL,FNB,
 ###Bearish_Swing,NEE,GLXY,
 ###Bearish_Garage,AESI,AMCR,CAG,CIFR,CLX,COLB,CPRT,D,DOW,ERIC,FHN,FMC,GLXY,HD,HRL,ICE,IONQ,MOS,NEE,OMC,PCG,PM,QSR,SAIL,SE,UGI,WRBY,YUM,

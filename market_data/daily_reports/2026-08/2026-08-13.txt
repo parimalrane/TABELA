@@ -44,36 +44,36 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+IT Services                    Software             3    2   90.58   9.38   Leading (2 -> -2)               
+Cybersecurity                  Software            13    4   77.55   9.38   Leading (2 -> -2)               RPD, OKTA, PANW
+Professional Services          Software             3    1   44.82   9.38   Leading (2 -> -2)               
+Data Infrastructure            Software             4    1   39.83   9.38   Leading (2 -> -2)               
+Digital Payments               Software             4    1   39.83   9.38   Leading (2 -> -2)               
 Communications Cloud           Cloud Computing      4    1   36.61  18.24   Leading (1)                     TWLO
 Cloud Infrastructure           Cloud Computing      5    1   35.48  18.24   Leading (1)                     FSLY
+Life Sciences Tools            Medical Devices      5    1   34.76   5.75   Leading (4)                     AVTR
+Software                       Software           170   11   31.42   9.38   Leading (2 -> -2)               U, NTNX, SAIL
+Diagnostics                    Medical Devices      9    1   25.33   5.75   Leading (4)                     
+Medical Devices                Medical Devices     88    1    5.07   5.75   Leading (4)                     
 Alternative Energy             Infrastructure       2    0    0.00  -2.37   Lagging (39 -> -1)              
 Building Materials             Infrastructure      39    0    0.00  -2.37   Lagging (39 -> -1)              
-Business Software              Software             6    0    0.00   9.38   Leading (2 -> -2)               
-Cybersecurity                  Software            13    0    0.00   9.38   Leading (2 -> -2)               
-Data Infrastructure            Software             4    0    0.00   9.38   Leading (2 -> -2)               
 Consumer Staples               Consumer Staples    36    0    0.00   0.00   Unknown                         #CLX, #WRBY
+Business Software              Software             6    0    0.00   9.38   Leading (2 -> -2)               
 Developer Infrastructure       Software             3    0    0.00   9.38   Leading (2 -> -2)               
-Diagnostics                    Medical Devices      9    0    0.00   5.75   Leading (4)                     
 Digital Assets Infrastructure  Software             8    0    0.00   9.38   Leading (2 -> -2)               
 Digital Health                 Software             1    0    0.00   9.38   Leading (2 -> -2)               
-Digital Payments               Software             4    0    0.00   9.38   Leading (2 -> -2)               
-Electronics Manufacturing      Infrastructure       5    0    0.00  -2.37   Lagging (39 -> -1)              
-Electrical Infrastructure      Infrastructure       4    0    0.00  -2.37   Lagging (39 -> -1)              
-Energy Infrastructure          Infrastructure       1    0    0.00  -2.37   Lagging (39 -> -1)              
 Enterprise Cloud               Cloud Computing      2    0    0.00  18.24   Leading (1)                     
-Fuel Cell Infrastructure       Infrastructure       1    0    0.00  -2.37   Lagging (39 -> -1)              
+Energy Infrastructure          Infrastructure       1    0    0.00  -2.37   Lagging (39 -> -1)              
+Electrical Infrastructure      Infrastructure       4    0    0.00  -2.37   Lagging (39 -> -1)              
+Electronics Manufacturing      Infrastructure       5    0    0.00  -2.37   Lagging (39 -> -1)              
 Gold Mining                    Gold Mining         38    0    0.00   4.78   Leading (5 -> +1)               
 Homebuilders                   Infrastructure       3    0    0.00  -2.37   Lagging (39 -> -1)              
-IT Services                    Software             3    0    0.00   9.38   Leading (2 -> -2)               
 Industrial Automation          Infrastructure      45    0    0.00  -2.37   Lagging (39 -> -1)              
-Infrastructure                 Infrastructure     102    0    0.00  -2.37   Lagging (39 -> -1)              #D, #PCG
+Fuel Cell Infrastructure       Infrastructure       1    0    0.00  -2.37   Lagging (39 -> -1)              
 Insurance Technology           Software             1    0    0.00   9.38   Leading (2 -> -2)               
-Life Sciences Tools            Medical Devices      5    0    0.00   5.75   Leading (4)                     
-Medical Devices                Medical Devices     88    0    0.00   5.75   Leading (4)                     
+Infrastructure                 Infrastructure     102    0    0.00  -2.37   Lagging (39 -> -1)              #D, #PCG
 Nuclear Infrastructure         Uranium Mining       3    0    0.00  -2.64   Lagging (40 -> +2)              
-Professional Services          Software             3    0    0.00   9.38   Leading (2 -> -2)               
 SaaS Platform                  Software             1    0    0.00   9.38   Leading (2 -> -2)               
-Software                       Software           170    0    0.00   9.38   Leading (2 -> -2)               
 Solar Infrastructure           Infrastructure       5    0    0.00  -2.37   Lagging (39 -> -1)              
 Unknown                        Unknown            335    0    0.00   0.00   Unknown                         #AMCR
 Uranium Mining                 Uranium Mining       1    0    0.00  -2.64   Lagging (40 -> +2)              
@@ -85,6 +85,13 @@ Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   FSLY Cloud Infrastructure      98.50         99        0     4     XLK (4)
   TWLO Communications Cloud      94.50         91       NA     1     XLK (4)
+     U             Software      89.67         99       +1     7     XLK (4)
+   RPD        Cybersecurity      89.17         98       +3     2     XLK (4)
+  NTNX             Software      87.17         94       NA     1     XLK (4)
+  OKTA        Cybersecurity      87.17         94       +4    15     XLK (4)
+  PANW        Cybersecurity      86.17         92       +4     8     XLK (4)
+  SAIL             Software      85.67         91       NA     1     XLK (4)
+  AVTR  Life Sciences Tools      85.05         97       -6     4     XLV (2)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -100,20 +107,19 @@ Ticker     Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
 MILD BULLISH
 ========================================
 Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  AVTR  Life Sciences Tools    85.05    97         1     XLV (2)
-   NEO          Diagnostics    84.55    96         1     XLV (2)
-     U             Software    89.67    99         2     XLK (4)
-  OKTA        Cybersecurity    87.17    94         6     XLK (4)
-  PANW        Cybersecurity    86.17    92         6     XLK (4)
+   NEO          Diagnostics    84.55    96         0     XLV (2)
+   PBF Refining & Marketing    84.49    98         0     XLE (1)
+  NESR          Exploration    81.99    93         0     XLE (1)
+  BLFS  Life Sciences Tools    81.55    90         0     XLV (2)
+  HALO              Biotech    81.20    95         0     XLV (2)
+  EXLS             Software    82.67    85         3     XLK (4)
    RNG Communications Cloud    83.50    99         6     XLK (4)
-  NTNX             Software    87.17    94         7     XLK (4)
-  EXLS             Software    82.67    85         8     XLK (4)
   SNOW Cloud Infrastructure    83.50    99        16     XLK (4)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,FSLY,TWLO,
-###Bullish_Swing,SNOW,EXLS,NTNX,OKTA,PANW,RNG,U,AVTR,NEO,
-###Bullish_Garage,ADPT,AMAT,AMD,APPS,ASX,AVTR,BAND,BB,BILL,BLFS,CNK,CRDO,CTAS,CVS,DDOG,DELL,DINO,DXCM,ESTC,EXLS,FIG,FTNT,GTLB,HNGE,HPE,HUBS,ILMN,IOT,LFST,LQDA,LTH,MU,NEO,NET,NRIX,NTNX,OKTA,OSCR,PANW,PBF,PD,PENG,QDEL,RAL,RNG,RTX,S,SNDK,SNOW,STM,STX,TOST,TRV,TXG,U,VLO,VSXY,WDC,
+###Bullish_Momentum,FSLY,TWLO,U,RPD,NTNX,OKTA,PANW,SAIL,AVTR,
+###Bullish_Swing,SNOW,RNG,EXLS,BLFS,HALO,NEO,NESR,PBF,
+###Bullish_Garage,ADPT,AEHR,AMAT,AMD,AMRX,ANET,APPS,ASX,BAND,BB,BILL,BLFS,BRZE,CLF,CNK,CRDO,CRSR,CTAS,CVS,DDOG,DELL,DINO,DOCN,DXCM,ESTC,EXLS,FCEL,FIG,FRSH,FTNT,GEO,GRND,GTLB,HALO,HIW,HNGE,HPE,HUBS,ILMN,INTC,IOT,IVZ,KLAR,LFST,LQDA,LTH,MFG,MU,NEO,NESR,NET,NRIX,OSCR,OUST,PBF,PD,PEB,PENG,PK,PLTR,PSX,QDEL,RAL,RLJ,RNG,RSI,RTX,S,SHLS,SHOP,SMFG,SNDK,SNOW,STM,STX,TOST,TRIP,TRV,TXG,VG,VLO,VNO,VNT,VSXY,WDC,
 ###Bearish_Momentum,WRBY,D,PCG,CLX,AMCR,
 ###Bearish_Swing,
 ###Bearish_Garage,DOW,HD,HRL,ICE,MOS,OMC,PG,PM,QSR,SHEL,SLM,

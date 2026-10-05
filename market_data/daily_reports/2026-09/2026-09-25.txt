@@ -44,25 +44,27 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
-Business Software              Software             6    0    0.00   6.01   Leading (5)                     
-Cloud Infrastructure           Cloud Computing      5    0    0.00   7.54   Leading (4)                     
-Communications Cloud           Cloud Computing      4    0    0.00   7.54   Leading (4)                     
+Cloud Infrastructure           Cloud Computing      5    2   66.65   7.54   Leading (4)                     FSLY, SNOW
+Professional Services          Software             3    1   44.36   6.01   Leading (5)                     
+IT Services                    Software             3    1   43.43   6.01   Leading (5)                     
+Communications Cloud           Cloud Computing      4    1   39.03   7.54   Leading (4)                     FIVN
+Data Infrastructure            Software             4    1   37.42   6.01   Leading (5)                     ESTC
+AI Compute                     Artificial Intel..   5    1   35.48   1.25   Leading (9 -> +1)               QMCO
+Business Software              Software             6    1   30.17   6.01   Leading (5)                     
+Semiconductors                 Semiconductors      43    2   17.42   2.45   Leading (8)                     SMTC, AXTI
+Software                       Software           207    6   14.65   6.01   Leading (5)                     U
 Cybersecurity                  Software            13    0    0.00   6.01   Leading (5)                     
-Data Infrastructure            Software             4    0    0.00   6.01   Leading (5)                     
 Delivery Platform              Transportation/S..   1    0    0.00  -7.44   Lagging (38 -> +2)              
 Developer Infrastructure       Software             3    0    0.00   6.01   Leading (5)                     
 Digital Assets Infrastructure  Software             9    0    0.00   6.01   Leading (5)                     
 Digital Health                 Software             1    0    0.00   6.01   Leading (5)                     
 Digital Payments               Software             4    0    0.00   6.01   Leading (5)                     
-Enterprise Cloud               Cloud Computing      2    0    0.00   7.54   Leading (4)                     
 Gold Mining                    Gold Mining         51    0    0.00  -2.13   Neutral (17 -> +4)              #AGI, #WLTH
-Homebuilders                   Infrastructure       4    0    0.00  -5.57   Lagging (32 -> -1)              #DHI
-IT Services                    Software             3    0    0.00   6.01   Leading (5)                     
+Enterprise Cloud               Cloud Computing      2    0    0.00   7.54   Leading (4)                     
 Insurance Technology           Software             1    0    0.00   6.01   Leading (5)                     
+Homebuilders                   Infrastructure       4    0    0.00  -5.57   Lagging (32 -> -1)              #DHI
 Nuclear Infrastructure         Uranium Mining       3    0    0.00 -13.11   Lagging (41)                    
-Professional Services          Software             3    0    0.00   6.01   Leading (5)                     
 SaaS Platform                  Software             1    0    0.00   6.01   Leading (5)                     
-Software                       Software           207    0    0.00   6.01   Leading (5)                     
 Space Infrastructure           Aerospace & Defe..   6    0    0.00  -6.46   Lagging (36 -> -3)              #LUNR
 Transportation Platform        Transportation/S..   1    0    0.00  -7.44   Lagging (38 -> +2)              
 Transportation/Shipping        Transportation/S..  60    0    0.00  -7.44   Lagging (38 -> +2)              
@@ -73,7 +75,15 @@ Uranium Mining                 Uranium Mining       1    0    0.00 -13.11   Lagg
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-No active candidates in Long Candidate Universe.
+Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  FIVN Communications Cloud      89.23         97        0     5     XLK (1)
+  FSLY Cloud Infrastructure      89.23         95        0     5     XLK (1)
+  SNOW Cloud Infrastructure      87.23         91       +3     2     XLK (1)
+     U             Software      87.00         93       +1     4     XLK (1)
+  SMTC       Semiconductors      86.66         99       NA     1     XLK (1)
+  AXTI       Semiconductors      86.66         99       NA     1     XLK (1)
+  QMCO           AI Compute      86.20         99       NA     1     XLK (1)
+  ESTC  Data Infrastructure      86.00         93       -4     5     XLK (1)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -87,11 +97,11 @@ Ticker         Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (
 ========================================
 MILD BULLISH
 ========================================
-Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  FIVN Communications Cloud    89.23    97         1     XLK (1)
-  FSLY Cloud Infrastructure    89.23    95         2     XLK (1)
-  ESTC  Data Infrastructure    86.00    93         2     XLK (1)
-  NTSK             Software    81.50    98         2     XLK (1)
+Ticker Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
+  NTSK     Software     81.5    98         0     XLK (1)
+  DELL   AI Servers     84.7    98         2     XLK (1)
+   HPE   AI Servers     84.7    98         2     XLK (1)
+  PLTR  AI Platform     83.7    95         2     XLK (1)
 
 ========================================
 MILD BEARISH
@@ -102,9 +112,9 @@ Ticker            Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    NEE          Infrastructure    38.45    33        10    XLU (11)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,
-###Bullish_Swing,ESTC,FSLY,NTSK,FIVN,
-###Bullish_Garage,AVTR,DINO,DK,ESTC,FIG,FIGR,FIVN,FSLY,HALO,HUBS,MPC,NEO,NET,NIQ,NTSK,ODD,OKTA,PANW,PBF,PSX,RNG,SNOW,TOST,TWLO,U,VLO,
+###Bullish_Momentum,FIVN,FSLY,SNOW,U,SMTC,AXTI,QMCO,ESTC,
+###Bullish_Swing,DELL,HPE,PLTR,NTSK,
+###Bullish_Garage,AEHR,AMRX,APPS,ATI,AVAH,AVTR,BLFS,CLF,CNK,DELL,DINO,DK,EXLS,FIG,FIGR,FRSH,HALO,HNGE,HPE,HPQ,HUBS,KURA,LFST,MDB,MPC,NEO,NESR,NET,NIQ,NTNX,NTSK,ODD,OKTA,PANW,PBF,PLTR,PSX,RNG,RPD,SAIL,SHOP,SMCI,TALO,TH,TOST,TWLO,UMC,VLO,VNT,VSXY,
 ###Bearish_Momentum,LUNR,DHI,AGI,WLTH,
 ###Bearish_Swing,NEE,DAL,UAL,
 ###Bearish_Garage,AESI,AMCR,CAG,CIFR,CLX,COLB,CPRT,D,DAL,ERIC,FHN,FMC,FNB,GLXY,HD,HRL,IONQ,MOS,NEE,OMC,PCG,PM,SAIL,SE,UAL,UGI,WRBY,YUM,

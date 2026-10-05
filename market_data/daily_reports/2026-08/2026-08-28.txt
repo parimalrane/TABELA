@@ -44,14 +44,15 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+IT Services                    Software             6    4  119.68  10.28   Leading (4 -> -2)               
 Data Infrastructure            Software             8    4  108.49  10.28   Leading (4 -> -2)               ESTC
 Digital Payments               Software             8    4  105.74  10.28   Leading (4 -> -2)               
-IT Services                    Software             6    3   90.48  10.28   Leading (4 -> -2)               
+Professional Services          Software             6    2   58.70  10.28   Leading (4 -> -2)               
 Communications Cloud           Cloud Computing      8    2   51.36  12.73   Leading (2 -> -1)               FIVN
-Cybersecurity                  Software            26    3   36.51  10.28   Leading (4 -> -2)               OKTA
-Software                       Software           334   21   35.20  10.28   Leading (4 -> -2)               NIQ, U, FIGR
+Cybersecurity                  Software            26    4   48.03  10.28   Leading (4 -> -2)               OKTA
+Software                       Software           334   24   39.91  10.28   Leading (4 -> -2)               NIQ, U, FIGR
+Biotech                        Biotech            172    9   25.87   5.68   Leading (7)                     KURA, HALO
 Gold Mining                    Gold Mining         68    2   11.51  13.83   Leading (1)                     
-Alternative Energy             Infrastructure       4    0    0.00  -3.95   Lagging (39 -> +1)              
 Aerospace & Defense            Aerospace & Defe..  68    0    0.00  -4.83   Lagging (42)                    
 Cloud Infrastructure           Cloud Computing     10    0    0.00  12.73   Leading (2 -> -1)               
 Building Materials             Infrastructure      67    0    0.00  -3.95   Lagging (39 -> +1)              
@@ -63,17 +64,17 @@ Delivery Platform              Transportation/S..   2    0    0.00  -3.71   Lagg
 Developer Infrastructure       Software             6    0    0.00  10.28   Leading (4 -> -2)               
 Digital Assets Infrastructure  Software            16    0    0.00  10.28   Leading (4 -> -2)               
 Digital Health                 Software             2    0    0.00  10.28   Leading (4 -> -2)               
-Electrical Infrastructure      Infrastructure       8    0    0.00  -3.95   Lagging (39 -> +1)              
+Alternative Energy             Infrastructure       4    0    0.00  -3.95   Lagging (39 -> +1)              
 Energy Infrastructure          Infrastructure       2    0    0.00  -3.95   Lagging (39 -> +1)              
 Electronics Manufacturing      Infrastructure      10    0    0.00  -3.95   Lagging (39 -> +1)              
+Electrical Infrastructure      Infrastructure       8    0    0.00  -3.95   Lagging (39 -> +1)              
 Enterprise Cloud               Cloud Computing      4    0    0.00  12.73   Leading (2 -> -1)               
 Fuel Cell Infrastructure       Infrastructure       2    0    0.00  -3.95   Lagging (39 -> +1)              
 Homebuilders                   Infrastructure       8    0    0.00  -3.95   Lagging (39 -> +1)              
-Industrial Automation          Infrastructure      82    0    0.00  -3.95   Lagging (39 -> +1)              
 Financial Services             Banking            114    0    0.00   0.25   Neutral (23 -> +3)              #GLXY
 Insurance Technology           Software             2    0    0.00  10.28   Leading (4 -> -2)               
+Industrial Automation          Infrastructure      82    0    0.00  -3.95   Lagging (39 -> +1)              
 Infrastructure                 Infrastructure     205    0    0.00  -3.95   Lagging (39 -> +1)              
-Professional Services          Software             6    0    0.00  10.28   Leading (4 -> -2)               
 REITs                          REITs              247    0    0.00  -4.01   Lagging (40 -> +1)              
 SaaS Platform                  Software             2    0    0.00  10.28   Leading (4 -> -2)               
 Silver Mining                  Silver Mining       12    0    0.00  12.47   Leading (3)                     
@@ -91,10 +92,12 @@ Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   FIVN Communications Cloud      94.53         94       NA     1     XLK (3)
   ESTC  Data Infrastructure      93.75         99       NA     1     XLK (3)
-   NIQ             Software      93.75         99       NA     1     XLK (3)
-     U             Software      92.25         96       NA     1     XLK (3)
-  FIGR             Software      91.75         95       NA     1     XLK (3)
+   NIQ             Software      93.75         99       -1     3     XLK (3)
+     U             Software      92.25         96        0     2     XLK (3)
+  FIGR             Software      91.75         95        0     2     XLK (3)
   OKTA        Cybersecurity      90.25         92       NA     1     XLK (3)
+  KURA              Biotech      86.59         97       -6     4     XLV (4)
+  HALO              Biotech      85.59         95       -5    10     XLV (4)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -105,21 +108,15 @@ Ticker       Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk
    CLX   Consumer Staples       39.75               45       +3     3     XLP (8)
    CAG            Unknown       40.40               46       +4     3     XLP (8)
 ========================================
-MILD BULLISH
-========================================
-Ticker Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  HALO      Biotech    85.59    95         8     XLV (4)
-
-========================================
 MILD BEARISH
 ========================================
 Ticker   Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    PCG Infrastructure    28.34    26         3    XLU (11)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,FIVN,ESTC,NIQ,U,FIGR,OKTA,
-###Bullish_Swing,HALO,
-###Bullish_Garage,ADPT,AMAT,AMD,APPS,ASX,AVTR,BAND,BB,BILL,BLFS,CNK,CRDO,CTAS,CVS,DDOG,DELL,DINO,DXCM,EXLS,FIG,FSLY,FTNT,GTLB,HALO,HNGE,HPE,HUBS,ILMN,IOT,LFST,LQDA,LTH,MU,NEO,NET,NRIX,NTNX,OSCR,PANW,PBF,PD,PENG,QDEL,RAL,RNG,RTX,S,SNDK,SNOW,STM,STX,TOST,TRV,TWLO,TXG,VLO,VSXY,WDC,
+###Bullish_Momentum,FIVN,ESTC,NIQ,U,FIGR,OKTA,KURA,HALO,
+###Bullish_Swing,
+###Bullish_Garage,ADPT,AEHR,AMAT,AMD,AMRX,ANET,APPS,ASX,ATI,AVTR,BAND,BB,BILL,BLFS,BRZE,CLF,CNK,CRDO,CRSR,CTAS,CVS,DDOG,DELL,DINO,DOCN,DXCM,EXLS,FCEL,FIG,FRSH,FSLY,FTNT,GEO,GRND,GTLB,HIW,HNGE,HPE,HUBS,ILMN,INTC,IOT,IVZ,KLAR,LFST,LQDA,LTH,MFG,MU,NEO,NESR,NET,NRIX,NTNX,OSCR,OUST,PANW,PBF,PD,PEB,PENG,PK,PLTR,PSX,QDEL,QMCO,RAL,RLJ,RNG,RPD,RSI,RTX,S,SAIL,SHLS,SHOP,SMFG,SNDK,SNOW,STM,STX,TOST,TRIP,TRV,TWLO,TXG,VG,VLO,VNO,VNT,VSXY,WDC,
 ###Bearish_Momentum,GLXY,CLX,CAG,
 ###Bearish_Swing,PCG,
 ###Bearish_Garage,AESI,AMCR,COLB,CPRT,D,DOW,FNB,HD,HRL,ICE,IONQ,MOS,OMC,PCG,PG,PM,QSR,SHEL,SLM,UGI,WRBY,YUM,

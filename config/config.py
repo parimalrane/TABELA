@@ -50,9 +50,9 @@ GROWTH_SCORE_MAP = {'A': 100.0, 'B': 95.0, 'C': 90.0, 'D': 20.0, 'F': -50.0}
 # ==========================
 
 LONG_ENTRY = {
-    # Cartesian Sweep Winner: "The Institutional Funnel"
+    # Vectorized Optimization Winner: "Tight Gate (90 RS / 85 Long Score) -> 44.2% WR"
     "MIN_RS": 90.0,
-    "MIN_LONG_SCORE": 90.0,
+    "MIN_LONG_SCORE": 85.0,
     "THEMES": ["Leading", "Neutral", "Unclassified Leader", "Unknown"],
     "BLOCKED_ZACKS": [4, 5],
     "MIN_PRICE": 10.0,

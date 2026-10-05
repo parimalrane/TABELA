@@ -44,32 +44,36 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+Refining & Marketing           Exploration          8    5  126.62   8.65   Leading (4 -> -5)               PBF, DK, MPC, VLO, DINO
+Data Infrastructure            Software             4    2   79.26   4.80   Leading (11 -> -3)              ESTC
+Communications Cloud           Cloud Computing      4    1   37.82   6.12   Leading (8 -> -1)               FIVN
 Biotechnology                  Biotech              5    1   34.76   8.80   Leading (3 -> +1)               
-Refining & Marketing           Exploration          8    1   26.09   8.65   Leading (4 -> -5)               PBF
-Biotech                        Biotech             85    2   10.21   8.80   Leading (3 -> +1)               HALO
+Software                       Software           166    7   21.04   4.80   Leading (11 -> -3)              NIQ
+Biotech                        Biotech             85    4   20.09   8.80   Leading (3 -> +1)               HALO
+Healthcare Services            Healthcare          14    1   19.14   3.67   Neutral (15 -> +7)              AVAH
+Gold Mining                    Gold Mining         35    1    9.53   8.99   Leading (2)                     
+Exploration                    Exploration         80    1    5.16   8.65   Leading (4 -> -5)               NESR
 Aerospace & Defense            Aerospace & Defe..  35    0    0.00  -4.48   Lagging (40 -> +5)              
-Alternative Energy             Infrastructure       2    0    0.00  -3.90   Lagging (38)                    
 Building Materials             Infrastructure      35    0    0.00  -3.90   Lagging (38)                    
 Data Storage                   Semiconductors       1    0    0.00  -4.47   Lagging (39 -> -3)              
 Defense Drone Systems          Aerospace & Defe..   1    0    0.00  -4.48   Lagging (40 -> +5)              
 Defense Systems                Aerospace & Defe..   1    0    0.00  -4.48   Lagging (40 -> +5)              
 Delivery Platform              Transportation/S..   1    0    0.00  -5.09   Lagging (42 -> +3)              
-Electrical Infrastructure      Infrastructure       4    0    0.00  -3.90   Lagging (38)                    
-Electronics Manufacturing      Infrastructure       5    0    0.00  -3.90   Lagging (38)                    
-Energy                         Exploration         14    0    0.00   8.65   Leading (4 -> -5)               
+Alternative Energy             Infrastructure       2    0    0.00  -3.90   Lagging (38)                    
 Energy Infrastructure          Infrastructure       1    0    0.00  -3.90   Lagging (38)                    
-Exploration                    Exploration         80    0    0.00   8.65   Leading (4 -> -5)               
-Foundry                        Semiconductors       3    0    0.00  -4.47   Lagging (39 -> -3)              
+Energy                         Exploration         14    0    0.00   8.65   Leading (4 -> -5)               
+Electronics Manufacturing      Infrastructure       5    0    0.00  -3.90   Lagging (38)                    
+Electrical Infrastructure      Infrastructure       4    0    0.00  -3.90   Lagging (38)                    
 Fuel Cell Infrastructure       Infrastructure       1    0    0.00  -3.90   Lagging (38)                    
-Gold Mining                    Gold Mining         35    0    0.00   8.99   Leading (2)                     
 Homebuilders                   Infrastructure       4    0    0.00  -3.90   Lagging (38)                    
-Industrial Automation          Infrastructure      39    0    0.00  -3.90   Lagging (38)                    
-Infrastructure                 Infrastructure     102    0    0.00  -3.90   Lagging (38)                    
+Foundry                        Semiconductors       3    0    0.00  -4.47   Lagging (39 -> -3)              
 Integrated Energy              Exploration          6    0    0.00   8.65   Leading (4 -> -5)               
 Memory                         Semiconductors       4    0    0.00  -4.47   Lagging (39 -> -3)              
-Oil Services                   Exploration          5    0    0.00   8.65   Leading (4 -> -5)               
-Optical Infrastructure         Semiconductors       1    0    0.00  -4.47   Lagging (39 -> -3)              
+Industrial Automation          Infrastructure      39    0    0.00  -3.90   Lagging (38)                    
+Infrastructure                 Infrastructure     102    0    0.00  -3.90   Lagging (38)                    
 Optical Networking             Semiconductors       8    0    0.00  -4.47   Lagging (39 -> -3)              
+Optical Infrastructure         Semiconductors       1    0    0.00  -4.47   Lagging (39 -> -3)              
+Oil Services                   Exploration          5    0    0.00   8.65   Leading (4 -> -5)               
 Semiconductor Analytics        Semiconductors       1    0    0.00  -4.47   Lagging (39 -> -3)              
 Semiconductor Equipment        Semiconductors      22    0    0.00  -4.47   Lagging (39 -> -3)              
 Semiconductor Testing          Semiconductors       3    0    0.00  -4.47   Lagging (39 -> -3)              
@@ -87,8 +91,17 @@ STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-  HALO              Biotech      90.98         96       NA     1     XLV (2)
+  HALO              Biotech      90.98         96       +7    11     XLV (2)
    PBF Refining & Marketing      90.28         95       NA     1     XLE (1)
+  NESR          Exploration      89.78         94       NA     1     XLE (1)
+    DK Refining & Marketing      89.28         93       NA     1     XLE (1)
+   MPC Refining & Marketing      88.78         92       NA     1     XLE (1)
+   VLO Refining & Marketing      88.28         91       NA     1     XLE (1)
+  DINO Refining & Marketing      87.78         90       NA     1     XLE (1)
+   NIQ             Software      87.02         99       -5     4     XLK (5)
+  ESTC  Data Infrastructure      86.52         98       -7     2     XLK (5)
+  FIVN Communications Cloud      86.31         94       -9     2     XLK (5)
+  AVAH  Healthcare Services      85.47         99       NA     1     XLV (2)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -100,12 +113,9 @@ Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
 ========================================
 MILD BULLISH
 ========================================
-Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-   NIQ             Software    87.02    99         0     XLK (5)
-  ESTC  Data Infrastructure    86.52    98         0     XLK (5)
-  FIVN Communications Cloud    86.32    94         0     XLK (5)
-  FIGR             Software    84.52    94         0     XLK (5)
-     U             Software    84.52    94         0     XLK (5)
+Ticker Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
+  FIGR     Software    84.52    94         0     XLK (5)
+     U     Software    84.52    94         0     XLK (5)
 
 ========================================
 MILD BEARISH
@@ -114,9 +124,9 @@ Ticker   Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    PCG Infrastructure    13.11     2         7    XLU (10)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,HALO,PBF,
-###Bullish_Swing,ESTC,FIGR,FIVN,NIQ,U,
-###Bullish_Garage,ADPT,AMAT,AMD,ASX,AVTR,BAND,BB,BILL,BLFS,CNK,CTAS,CVS,DDOG,DELL,DINO,DXCM,ESTC,EXLS,FIG,FIGR,FIVN,FSLY,FTNT,GTLB,HNGE,HUBS,ILMN,IOT,LQDA,LTH,MU,NEO,NET,NIQ,NTNX,OKTA,OSCR,PANW,PD,PENG,QDEL,RAL,RNG,RTX,S,SNDK,SNOW,STM,TOST,TRV,TWLO,TXG,U,VLO,VSXY,
+###Bullish_Momentum,HALO,PBF,NESR,DK,MPC,VLO,DINO,NIQ,ESTC,FIVN,AVAH,
+###Bullish_Swing,FIGR,U,
+###Bullish_Garage,ADPT,AEHR,AMAT,AMD,AMRX,ANET,APPS,ASX,ATI,AVTR,BAND,BB,BILL,BLFS,BRZE,CLF,CNK,CRSR,CTAS,CVS,DDOG,DELL,DOCN,DXCM,EXLS,FCEL,FIG,FIGR,FRSH,FSLY,FTNT,GEO,GRND,GTLB,HIW,HNGE,HPE,HUBS,ILMN,INTC,IOT,IVZ,KLAR,KURA,LQDA,LTH,MFG,MU,NEO,NET,NTNX,OKTA,OSCR,OUST,PANW,PD,PEB,PENG,PK,PLTR,PSX,QDEL,QMCO,RAL,RLJ,RNG,RPD,RSI,RTX,S,SAIL,SHLS,SHOP,SMFG,SNDK,SNOW,STM,TOST,TRIP,TRV,TWLO,TXG,U,VG,VNO,VNT,VSXY,
 ###Bearish_Momentum,MOS,CAG,
 ###Bearish_Swing,PCG,
 ###Bearish_Garage,AESI,AMCR,CLX,COLB,CPRT,D,DOW,FNB,GLXY,HD,HRL,ICE,IONQ,OMC,PCG,PG,PM,QSR,UGI,WRBY,YUM,

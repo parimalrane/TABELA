@@ -44,16 +44,23 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
-Refining & Marketing           Exploration          8    5  133.48   6.43   Leading (4)                     PBF, DINO
+Refining & Marketing           Exploration          8    7  183.47   6.43   Leading (4)                     PBF, DINO, PSX, VLO
+Healthcare Services            Healthcare          15    6  105.73   6.40   Leading (5 -> +1)               OSCR
 Pharmaceuticals                Pharma               3    2   91.50   5.82   Leading (7 -> -1)               LQDA
-Healthcare Services            Healthcare          15    4   71.36   6.40   Leading (5 -> +1)               
-Healthcare                     Healthcare          38    2   18.50   6.40   Leading (5 -> +1)               
+Fuel Cell Infrastructure       Infrastructure       1    1   67.93  -1.16   Neutral (30 -> -3)              FCEL
+Cybersecurity                  Software            13    2   39.98  -1.09   Neutral (29 -> +3)              OKTA, FTNT
+Cloud Infrastructure           Cloud Computing      5    1   33.33   2.11   Neutral (17 -> +7)              NET
+Healthcare                     Healthcare          38    3   27.27   6.40   Leading (5 -> +1)               
+REITs                          REITs              119    4   15.32   2.61   Leading (13 -> +7)              RLJ
+Biotech                        Biotech             79    2   10.31   2.62   Leading (12 -> -4)              HALO
+Insurance                      Insurance           66    1    6.07   5.11   Leading (8 -> +2)               TRV
+Infrastructure                 Infrastructure     103    1    4.41  -1.16   Neutral (30 -> -3)              GEO
 Energy                         Exploration         15    0    0.00   6.43   Leading (4)                     
+Integrated Energy              Exploration          6    0    0.00   6.43   Leading (4)                     
 Exploration                    Exploration         74    0    0.00   6.43   Leading (4)                     
 Food Safety                    Healthcare           1    0    0.00   6.40   Leading (5 -> +1)               
-Integrated Energy              Exploration          6    0    0.00   6.43   Leading (4)                     
-Nuclear Infrastructure         Uranium Mining       3    0    0.00 -10.34   Lagging (41)                    
 Oil Services                   Exploration          5    0    0.00   6.43   Leading (4)                     
+Nuclear Infrastructure         Uranium Mining       3    0    0.00 -10.34   Lagging (41)                    
 Silver Mining                  Silver Mining        5    0    0.00  -4.24   Lagging (39)                    
 Unknown                        Unknown            330    0    0.00   0.00   Unknown                         #AMCR
 Uranium Mining                 Uranium Mining       1    0    0.00 -10.34   Lagging (41)                    
@@ -62,10 +69,21 @@ Uranium Mining                 Uranium Mining       1    0    0.00 -10.34   Lagg
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-   PBF Refining & Marketing      92.12         99        0     2     XLE (1)
-  LQDA      Pharmaceuticals      91.64         99       +1     3     XLV (2)
-  DINO Refining & Marketing      91.12         97       -1     8     XLE (1)
+Ticker             Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+   PBF     Refining & Marketing      92.12         99        0     2     XLE (1)
+  LQDA          Pharmaceuticals      91.64         99       +1     3     XLV (2)
+  DINO     Refining & Marketing      91.12         97       -1    10     XLE (1)
+  OSCR      Healthcare Services      89.60         94       +1     9     XLF (3)
+   TRV                Insurance      89.09         95       NA     1     XLF (3)
+   PSX     Refining & Marketing      88.12         91        0     2     XLE (1)
+   VLO     Refining & Marketing      88.12         91       -3     9     XLE (1)
+   RLJ                    REITs      87.63         96       NA     1     XLF (3)
+  OKTA            Cybersecurity      86.23         99       NA     1     XLK (7)
+   NET     Cloud Infrastructure      85.74         93       NA     1     XLK (7)
+  FTNT            Cybersecurity      85.73         98       NA     1     XLK (7)
+   GEO           Infrastructure      85.67         98       NA     1     XLK (7)
+  FCEL Fuel Cell Infrastructure      85.67         98       -3     3     XLE (1)
+  HALO                  Biotech      85.64         92       -6     2     XLV (2)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -76,15 +94,14 @@ Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
 ========================================
 MILD BULLISH
 ========================================
-Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  OSCR  Healthcare Services    89.60    94         1     XLF (3)
-   VLO Refining & Marketing    88.12    91         1     XLE (1)
-   CVS           Healthcare    86.10    87         2     XLV (2)
+Ticker       Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
+   IVZ Financial Services    83.52    87         1     XLF (3)
+   CVS         Healthcare    86.10    87         2     XLV (2)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,PBF,LQDA,DINO,
-###Bullish_Swing,CVS,OSCR,VLO,
-###Bullish_Garage,AMAT,AMD,APPS,ASX,BAND,BB,BILL,CRDO,CVS,DDOG,DELL,FIG,FTNT,GTLB,HNGE,HPE,IOT,LFST,LTH,MU,NET,NRIX,OKTA,OSCR,PD,PENG,QDEL,RAL,S,SNDK,STM,STX,TRV,TWLO,VLO,WDC,
+###Bullish_Momentum,PBF,LQDA,DINO,OSCR,TRV,PSX,VLO,RLJ,OKTA,NET,FTNT,GEO,FCEL,HALO,
+###Bullish_Swing,CVS,IVZ,
+###Bullish_Garage,ADPT,AMAT,AMD,APPS,ASX,AVTR,BAND,BB,BILL,BRZE,CRDO,CRSR,CVS,DDOG,DELL,DOCN,FIG,GRND,GTLB,HIW,HNGE,HPE,ILMN,INTC,IOT,IVZ,KLAR,LFST,LTH,MU,NESR,NRIX,NTNX,PD,PEB,PENG,QDEL,RAL,RSI,S,SHLS,SNDK,STM,STX,TWLO,VG,VNO,VSXY,WDC,
 ###Bearish_Momentum,AMCR,
 ###Bearish_Swing,
 ###Bearish_Garage,PG,PM,QSR,SHEL,SLM,

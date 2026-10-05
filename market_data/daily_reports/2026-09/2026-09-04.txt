@@ -44,7 +44,9 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
-Biotech                        Biotech             84    2   10.36   9.57   Leading (6)                     HALO
+Refining & Marketing           Exploration          8    7  185.94   8.04   Leading (7 -> +1)               PBF, DINO, MPC, DK, VLO
+Biotech                        Biotech             84    3   15.33   9.57   Leading (6)                     HALO
+Exploration                    Exploration         85    1    4.94   8.04   Leading (7 -> +1)               NESR
 Aerospace & Defense            Aerospace & Defe..  36    0    0.00  -6.27   Lagging (42 -> -1)              
 Data Storage                   Semiconductors       1    0    0.00  -3.64   Lagging (39 -> +1)              
 Defense Drone Systems          Aerospace & Defe..   1    0    0.00  -6.27   Lagging (42 -> -1)              
@@ -52,9 +54,9 @@ Defense Systems                Aerospace & Defe..   1    0    0.00  -6.27   Lagg
 Delivery Platform              Transportation/S..   1    0    0.00  -3.56   Lagging (38)                    
 Digital Assets Infrastructure  Software             9    0    0.00   0.23   Neutral (28 -> +1)              #CIFR
 Foundry                        Semiconductors       3    0    0.00  -3.64   Lagging (39 -> +1)              
-Gold Mining                    Gold Mining         44    0    0.00  14.18   Leading (2)                     
 Memory                         Semiconductors       4    0    0.00  -3.64   Lagging (39 -> +1)              
 Optical Infrastructure         Semiconductors       1    0    0.00  -3.64   Lagging (39 -> +1)              
+Gold Mining                    Gold Mining         44    0    0.00  14.18   Leading (2)                     
 Optical Networking             Semiconductors       8    0    0.00  -3.64   Lagging (39 -> +1)              
 Semiconductor Analytics        Semiconductors       1    0    0.00  -3.64   Lagging (39 -> +1)              
 Semiconductor Equipment        Semiconductors      22    0    0.00  -3.64   Lagging (39 -> +1)              
@@ -73,8 +75,14 @@ Wireless Chips                 Semiconductors       2    0    0.00  -3.64   Lagg
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-Ticker Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-  HALO      Biotech      91.01         97        0     4     XLV (2)
+Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  HALO              Biotech      91.01         97        0    14     XLV (2)
+   PBF Refining & Marketing      89.72         98        0     4     XLE (1)
+  DINO Refining & Marketing      89.22         97        0     4     XLE (1)
+   MPC Refining & Marketing      89.22         97        0     4     XLE (1)
+    DK Refining & Marketing      89.22         97        0     4     XLE (1)
+   VLO Refining & Marketing      88.72         96        0     4     XLE (1)
+  NESR          Exploration      87.72         94        0     4     XLE (1)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -88,10 +96,7 @@ Ticker                  Mapped_Theme Short_Score  Short_RS_Rating Movement  Days
 MILD BULLISH
 ========================================
 Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-   PBF Refining & Marketing    89.72    98         1     XLE (1)
-  DINO Refining & Marketing    89.22    97         1     XLE (1)
-   MPC Refining & Marketing    89.22    97         1     XLE (1)
-  FIVN Communications Cloud    83.33    96         3     XLK (6)
+  FIVN Communications Cloud    83.33    96         0     XLK (6)
 
 ========================================
 MILD BEARISH
@@ -100,9 +105,9 @@ Ticker   Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    PCG Infrastructure    17.84     7        10     XLU (8)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,HALO,
-###Bullish_Swing,FIVN,DINO,MPC,PBF,
-###Bullish_Garage,ADPT,AVTR,BLFS,CNK,CTAS,CVS,DDOG,DINO,DXCM,ESTC,EXLS,FIG,FIGR,FIVN,FSLY,FTNT,GTLB,HNGE,HUBS,ILMN,IOT,LQDA,MPC,NEO,NET,NIQ,NTNX,OKTA,OSCR,PANW,PBF,PD,PENG,QDEL,RAL,RNG,RTX,S,SNOW,TOST,TRV,TWLO,TXG,U,VLO,VSXY,
+###Bullish_Momentum,HALO,PBF,DINO,MPC,DK,VLO,NESR,
+###Bullish_Swing,FIVN,
+###Bullish_Garage,ADPT,AEHR,AMRX,ANET,APPS,ATI,AVAH,AVTR,BILL,BLFS,BRZE,CLF,CNK,CRSR,CTAS,CVS,DDOG,DELL,DOCN,DXCM,ESTC,EXLS,FCEL,FIG,FIGR,FIVN,FRSH,FSLY,FTNT,GEO,GRND,GTLB,HIW,HNGE,HPE,HUBS,ILMN,IOT,IVZ,KURA,LFST,LQDA,LTH,MFG,MU,NEO,NET,NIQ,NTNX,OKTA,OSCR,OUST,PANW,PD,PEB,PENG,PK,PLTR,PSX,QDEL,QMCO,RAL,RLJ,RNG,RPD,RSI,RTX,S,SAIL,SHOP,SMFG,SNOW,TOST,TRIP,TRV,TWLO,TXG,U,VG,VNO,VNT,VSXY,
 ###Bearish_Momentum,CIFR,CPRT,SE,
 ###Bearish_Swing,PCG,
 ###Bearish_Garage,AESI,AMCR,CAG,CLX,COLB,D,DOW,FNB,GLXY,HD,HRL,ICE,IONQ,MOS,OMC,PCG,PG,PM,QSR,UGI,WRBY,YUM,

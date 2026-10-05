@@ -44,10 +44,11 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+Cloud Infrastructure           Cloud Computing      5    1   34.76   6.42   Leading (4)                     FSLY
+Semiconductors                 Semiconductors      44    2   17.06   5.29   Leading (5 -> +1)               SMTC
 Aerospace & Defense            Aerospace & Defe..  39    0    0.00  -6.80   Lagging (39)                    
 Asset Management               Banking              1    0    0.00  -6.14   Lagging (38 -> -1)              
 Banking                        Banking            153    0    0.00  -6.14   Lagging (38 -> -1)              
-Cloud Infrastructure           Cloud Computing      5    0    0.00   6.42   Leading (4)                     
 Communications Cloud           Cloud Computing      4    0    0.00   6.42   Leading (4)                     
 Data Storage                   Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
 Defense Drone Systems          Aerospace & Defe..   1    0    0.00  -6.80   Lagging (39)                    
@@ -62,10 +63,9 @@ Memory                         Semiconductors       4    0    0.00   5.29   Lead
 Nuclear Infrastructure         Uranium Mining       3    0    0.00  -9.98   Lagging (42)                    
 Optical Infrastructure         Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
 Optical Networking             Semiconductors       8    0    0.00   5.29   Leading (5 -> +1)               
-Semiconductor Analytics        Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
 Semiconductor Equipment        Semiconductors      26    0    0.00   5.29   Leading (5 -> +1)               
+Semiconductor Analytics        Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
 Semiconductor Testing          Semiconductors       3    0    0.00   5.29   Leading (5 -> +1)               
-Semiconductors                 Semiconductors      44    0    0.00   5.29   Leading (5 -> +1)               
 Space Infrastructure           Aerospace & Defe..   6    0    0.00  -6.80   Lagging (39)                    
 Specialty Finance / Debt Col.. Banking              1    0    0.00  -6.14   Lagging (38 -> -1)              
 Uranium Mining                 Uranium Mining       1    0    0.00  -9.98   Lagging (42)                    
@@ -75,7 +75,9 @@ Wireless Chips                 Semiconductors       2    0    0.00   5.29   Lead
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-No active candidates in Long Candidate Universe.
+Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  FSLY Cloud Infrastructure      85.40         97        0     9     XLK (1)
+  SMTC       Semiconductors      85.08         98        0     5     XLK (1)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -88,9 +90,13 @@ Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
 MILD BULLISH
 ========================================
 Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  FIVN Communications Cloud    82.40    93         7     XLK (1)
-  FSLY Cloud Infrastructure    85.40    97         8     XLK (1)
-  ESTC  Data Infrastructure    82.41    96         8     XLK (1)
+  LITE   Optical Networking    84.08    96         0     XLK (1)
+  SNOW Cloud Infrastructure    83.90    94         0     XLK (1)
+  QMCO           AI Compute    83.22    99         0     XLK (1)
+   VLO Refining & Marketing    81.54    94         2     XLE (2)
+  ESTC  Data Infrastructure    82.41    96         3     XLK (1)
+  FIVN Communications Cloud    82.40    93         3     XLK (1)
+     U             Software    81.91    93         3     XLK (1)
 
 ========================================
 MILD BEARISH
@@ -100,9 +106,9 @@ Ticker            Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    UAL Transportation/Shipping    46.17    51         7     XLI (5)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,
-###Bullish_Swing,ESTC,FSLY,FIVN,
-###Bullish_Garage,DINO,DK,ESTC,FIGR,FIVN,FSLY,HALO,MPC,NIQ,NTSK,ODD,OKTA,PBF,PSX,SNOW,TWLO,U,VLO,
+###Bullish_Momentum,FSLY,SMTC,
+###Bullish_Swing,ESTC,FIVN,U,VLO,LITE,QMCO,SNOW,
+###Bullish_Garage,AEHR,ATI,AVAH,AVTR,AXTI,BLFS,DELL,DINO,DK,ESTC,FIGR,FIVN,HALO,HPE,HPQ,KURA,LFST,LITE,MDB,MPC,NEO,NESR,NIQ,NTNX,NTSK,ODD,OKTA,PANW,PBF,PLTR,PSX,QMCO,RPD,SAIL,SMCI,SNOW,TALO,TH,TWLO,U,UMC,VLO,
 ###Bearish_Momentum,DHI,CDE,
 ###Bearish_Swing,UAL,LUNR,
 ###Bearish_Garage,AESI,AGI,AMCR,CAG,CIFR,CLX,COLB,CPRT,D,DAL,ERIC,FHN,FMC,FNB,GLXY,HRL,IONQ,LUNR,MOS,NEE,OMC,PCG,PM,SAIL,SE,UAL,UGI,WLTH,WRBY,YUM,

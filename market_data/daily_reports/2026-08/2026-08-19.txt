@@ -44,28 +44,28 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+Cloud Infrastructure           Cloud Computing      5    2   69.16  11.13   Leading (4)                     SNOW, FSLY
+Communications Cloud           Cloud Computing      4    1   38.22  11.13   Leading (4)                     FIVN
 Biotechnology                  Biotech              5    1   34.40  12.91   Leading (3 -> -3)               
-Biotech                        Biotech             85    2   10.21  12.91   Leading (3 -> -3)               HALO
+Biotech                        Biotech             85    4   19.88  12.91   Leading (3 -> -3)               HALO
 Alternative Energy             Infrastructure       2    0    0.00  -2.48   Lagging (40 -> +5)              
 Building Materials             Infrastructure      38    0    0.00  -2.48   Lagging (40 -> +5)              
-Cloud Infrastructure           Cloud Computing      5    0    0.00  11.13   Leading (4)                     
-Communications Cloud           Cloud Computing      4    0    0.00  11.13   Leading (4)                     
 Data Storage                   Semiconductors       1    0    0.00  -3.16   Lagging (42 -> +16)             
 Electrical Infrastructure      Infrastructure       4    0    0.00  -2.48   Lagging (40 -> +5)              
 Electronics Manufacturing      Infrastructure       5    0    0.00  -2.48   Lagging (40 -> +5)              
 Energy Infrastructure          Infrastructure       1    0    0.00  -2.48   Lagging (40 -> +5)              
 Enterprise Cloud               Cloud Computing      2    0    0.00  11.13   Leading (4)                     
 Foundry                        Semiconductors       3    0    0.00  -3.16   Lagging (42 -> +16)             
-Fuel Cell Infrastructure       Infrastructure       1    0    0.00  -2.48   Lagging (40 -> +5)              
 Gold Mining                    Gold Mining         37    0    0.00  18.59   Leading (1 -> +1)               
 Homebuilders                   Infrastructure       4    0    0.00  -2.48   Lagging (40 -> +5)              
 Industrial Automation          Infrastructure      45    0    0.00  -2.48   Lagging (40 -> +5)              
-Infrastructure                 Infrastructure     102    0    0.00  -2.48   Lagging (40 -> +5)              #D, #PCG
+Fuel Cell Infrastructure       Infrastructure       1    0    0.00  -2.48   Lagging (40 -> +5)              
 LNG / Natural Gas Export Inf.. Natural Gas          1    0    0.00  -2.16   Lagging (39 -> -8)              
 Memory                         Semiconductors       4    0    0.00  -3.16   Lagging (42 -> +16)             
 Natural Gas                    Natural Gas          8    0    0.00  -2.16   Lagging (39 -> -8)              
-Optical Infrastructure         Semiconductors       1    0    0.00  -3.16   Lagging (42 -> +16)             
+Infrastructure                 Infrastructure     102    0    0.00  -2.48   Lagging (40 -> +5)              #D, #PCG
 Optical Networking             Semiconductors       8    0    0.00  -3.16   Lagging (42 -> +16)             
+Optical Infrastructure         Semiconductors       1    0    0.00  -3.16   Lagging (42 -> +16)             
 Semiconductor Analytics        Semiconductors       1    0    0.00  -3.16   Lagging (42 -> +16)             
 Semiconductor Equipment        Semiconductors      21    0    0.00  -3.16   Lagging (42 -> +16)             
 Semiconductor Testing          Semiconductors       3    0    0.00  -3.16   Lagging (42 -> +16)             
@@ -79,8 +79,11 @@ Wireless Chips                 Semiconductors       2    0    0.00  -3.16   Lagg
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-Ticker Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-  HALO      Biotech      91.15         97       NA     1     XLV (1)
+Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  HALO              Biotech      91.15         97       +2     3     XLV (1)
+  SNOW Cloud Infrastructure      89.66         98       NA     1     XLK (5)
+  FIVN Communications Cloud      88.16         95       -1     4     XLK (5)
+  FSLY Cloud Infrastructure      88.16         95       -3     8     XLK (5)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -94,15 +97,16 @@ Ticker   Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
 MILD BULLISH
 ========================================
 Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  FIVN Communications Cloud    88.16    95         0     XLK (5)
-  FSLY Cloud Infrastructure    88.16    95         0     XLK (5)
-  AVTR  Life Sciences Tools    82.81    96         7     XLV (1)
-   NEO          Diagnostics    82.31    95         7     XLV (1)
+  AVTR  Life Sciences Tools    82.81    96         0     XLV (1)
+     U             Software    82.70    99         0     XLK (5)
+   NEO          Diagnostics    82.31    95         0     XLV (1)
+   PBF Refining & Marketing    81.96    98         0     XLE (2)
+  BLFS  Life Sciences Tools    81.31    93         6     XLV (1)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,HALO,
-###Bullish_Swing,AVTR,NEO,FIVN,FSLY,
-###Bullish_Garage,ADPT,AMAT,AMD,APPS,ASX,AVTR,BAND,BB,BILL,BLFS,CNK,CRDO,CTAS,CVS,DDOG,DELL,DINO,DXCM,ESTC,EXLS,FIG,FIVN,FSLY,FTNT,GTLB,HNGE,HPE,HUBS,ILMN,IOT,LFST,LQDA,LTH,MU,NEO,NET,NRIX,NTNX,OKTA,OSCR,PANW,PBF,PD,PENG,QDEL,RAL,RNG,RTX,S,SNDK,SNOW,STM,STX,TOST,TRV,TWLO,TXG,U,VLO,VSXY,WDC,
+###Bullish_Momentum,HALO,SNOW,FIVN,FSLY,
+###Bullish_Swing,BLFS,AVTR,NEO,PBF,U,
+###Bullish_Garage,ADPT,AEHR,AMAT,AMD,AMRX,ANET,APPS,ASX,ATI,AVTR,BAND,BB,BILL,BLFS,BRZE,CLF,CNK,CRDO,CRSR,CTAS,CVS,DDOG,DELL,DINO,DOCN,DXCM,ESTC,EXLS,FCEL,FIG,FRSH,FTNT,GEO,GRND,GTLB,HIW,HNGE,HPE,HUBS,ILMN,INTC,IOT,IVZ,KLAR,LFST,LQDA,LTH,MFG,MU,NEO,NESR,NET,NRIX,NTNX,OKTA,OSCR,OUST,PANW,PBF,PD,PEB,PENG,PK,PLTR,PSX,QDEL,QMCO,RAL,RLJ,RNG,RPD,RSI,RTX,S,SAIL,SHLS,SHOP,SMFG,SNDK,STM,STX,TOST,TRIP,TRV,TWLO,TXG,U,VG,VLO,VNO,VNT,VSXY,WDC,
 ###Bearish_Momentum,D,HRL,PCG,
 ###Bearish_Swing,
 ###Bearish_Garage,AMCR,CLX,DOW,HD,ICE,IONQ,MOS,OMC,PG,PM,QSR,SHEL,SLM,WRBY,

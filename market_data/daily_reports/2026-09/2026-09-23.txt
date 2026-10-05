@@ -43,13 +43,17 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+Data Infrastructure            Software             4    3  112.26   6.55   Leading (5)                     ESTC, MDB
+IT Services                    Software             3    2   86.88   6.55   Leading (5)                     
+Professional Services          Software             3    1   44.82   6.55   Leading (5)                     
 Communications Cloud           Cloud Computing      4    1   39.83   8.29   Leading (4 -> -1)               FIVN
+Cloud Infrastructure           Cloud Computing      5    1   34.40   8.29   Leading (4 -> -1)               FSLY
+Software                       Software           206   12   29.35   6.55   Leading (5)                     NTSK, ODD, U
+Cybersecurity                  Software            13    1   18.67   6.55   Leading (5)                     
+Semiconductors                 Semiconductors      44    1    8.30   3.68   Leading (7)                     SMTC
 Aerospace & Defense            Aerospace & Defe..  39    0    0.00  -7.08   Lagging (38 -> +4)              
 Banking                        Banking            148    0    0.00  -6.68   Lagging (37 -> +7)              #COLB, #FNB
 Business Software              Software             6    0    0.00   6.55   Leading (5)                     
-Cloud Infrastructure           Cloud Computing      5    0    0.00   8.29   Leading (4 -> -1)               
-Cybersecurity                  Software            13    0    0.00   6.55   Leading (5)                     
-Data Infrastructure            Software             4    0    0.00   6.55   Leading (5)                     
 Defense Drone Systems          Aerospace & Defe..   1    0    0.00  -7.08   Lagging (38 -> +4)              
 Defense Systems                Aerospace & Defe..   1    0    0.00  -7.08   Lagging (38 -> +4)              
 Developer Infrastructure       Software             3    0    0.00   6.55   Leading (5)                     
@@ -57,12 +61,9 @@ Digital Assets Infrastructure  Software             9    0    0.00   6.55   Lead
 Digital Health                 Software             1    0    0.00   6.55   Leading (5)                     
 Digital Payments               Software             4    0    0.00   6.55   Leading (5)                     
 Enterprise Cloud               Cloud Computing      2    0    0.00   8.29   Leading (4 -> -1)               
-IT Services                    Software             3    0    0.00   6.55   Leading (5)                     
 Insurance Technology           Software             1    0    0.00   6.55   Leading (5)                     
 Nuclear Infrastructure         Uranium Mining       3    0    0.00  -9.43   Lagging (41 -> -3)              
-Professional Services          Software             3    0    0.00   6.55   Leading (5)                     
 SaaS Platform                  Software             1    0    0.00   6.55   Leading (5)                     
-Software                       Software           206    0    0.00   6.55   Leading (5)                     
 Space Infrastructure           Aerospace & Defe..   6    0    0.00  -7.08   Lagging (38 -> +4)              
 Transportation/Shipping        Transportation/S..  58    0    0.00  -6.44   Lagging (36 -> -1)              #UAL
 Uranium Mining                 Uranium Mining       1    0    0.00  -9.43   Lagging (41 -> -3)              
@@ -72,7 +73,14 @@ STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-  FIVN Communications Cloud      91.48         99        0     2     XLK (1)
+  FIVN Communications Cloud      91.48         99        0     3     XLK (1)
+  FSLY Cloud Infrastructure      89.98         96        0     3     XLK (1)
+  NTSK             Software      89.91         99       +1     3     XLK (1)
+   ODD             Software      88.91         97       +1     3     XLK (1)
+  ESTC  Data Infrastructure      88.91         97       +1     3     XLK (1)
+     U             Software      87.41         94       +1     2     XLK (1)
+   MDB  Data Infrastructure      86.41         92       +1     2     XLK (1)
+  SMTC       Semiconductors      85.82         96       +1     2     XLK (1)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -85,11 +93,15 @@ Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Secto
 ========================================
 MILD BULLISH
 ========================================
-Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  FSLY Cloud Infrastructure    89.98    96         0     XLK (1)
-  NTSK             Software    89.91    99         0     XLK (1)
-  ESTC  Data Infrastructure    88.91    97         0     XLK (1)
-   ODD             Software    88.91    97         0     XLK (1)
+Ticker              Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
+  PLTR               AI Platform    84.74    97         0     XLK (1)
+  SMCI         AI Infrastructure    84.24    96         0     XLK (1)
+   UMC                   Foundry    83.82    92         0     XLK (1)
+  DELL                AI Servers    83.74    95         0     XLK (1)
+   HPE                AI Servers    83.74    95         0     XLK (1)
+   HPQ                AI Compute    83.74    95         0     XLK (1)
+  AXTI            Semiconductors    83.32    91         0     XLK (1)
+    TH Leisure and Entertainment    82.53    91         0     XLY (8)
 
 ========================================
 MILD BEARISH
@@ -99,9 +111,9 @@ Ticker            Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    NEE          Infrastructure    38.72    36         8     XLU (0)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,FIVN,
-###Bullish_Swing,ESTC,FSLY,NTSK,ODD,
-###Bullish_Garage,AVTR,DDOG,DINO,DK,ESTC,EXLS,FIG,FIGR,FSLY,FTNT,HALO,HUBS,MPC,NEO,NET,NIQ,NTNX,NTSK,ODD,OKTA,PANW,PBF,PSX,RNG,SNOW,TOST,TWLO,U,VLO,
+###Bullish_Momentum,FIVN,FSLY,NTSK,ODD,ESTC,U,MDB,SMTC,
+###Bullish_Swing,AXTI,DELL,HPE,HPQ,PLTR,SMCI,TH,UMC,
+###Bullish_Garage,ADPT,AEHR,AMRX,ANET,APPS,ATI,AVAH,AVTR,AXTI,BLFS,CLF,CNK,DDOG,DELL,DINO,DK,EXLS,FIG,FIGR,FRSH,FTNT,HALO,HNGE,HPE,HPQ,HUBS,KURA,LFST,LTH,MPC,NEO,NESR,NET,NIQ,NTNX,OKTA,OUST,PANW,PBF,PLTR,PSX,QMCO,RNG,RPD,SAIL,SHOP,SMCI,SNOW,TALO,TH,TOST,TRIP,TWLO,TXG,UMC,VLO,VNT,VSXY,
 ###Bearish_Momentum,UAL,COLB,FNB,
 ###Bearish_Swing,NEE,DAL,
 ###Bearish_Garage,AESI,AMCR,CAG,CIFR,CLX,CPRT,D,DAL,DOW,ERIC,FHN,FMC,GLXY,HD,HRL,IONQ,MOS,NEE,OMC,PCG,PM,SAIL,SE,UGI,WRBY,YUM,

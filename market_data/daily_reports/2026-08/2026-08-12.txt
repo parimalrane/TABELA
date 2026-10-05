@@ -44,18 +44,23 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+Cybersecurity                  Software            13    4   76.53   6.07   Leading (7 -> +4)               RPD, OKTA, PANW
+Life Sciences Tools            Medical Devices      5    2   68.45   6.78   Leading (6 -> -3)               AVTR, BLFS
+Diagnostics                    Medical Devices      9    2   50.40   6.78   Leading (6 -> -3)               NEO
 Cloud Infrastructure           Cloud Computing      5    1   35.12  13.77   Leading (1)                     FSLY
+Oil Services                   Exploration          5    1   32.25   7.28   Leading (4 -> -2)               
+Refining & Marketing           Exploration          8    1   25.82   7.28   Leading (4 -> -2)               PBF
+Software                       Software           166    7   20.61   6.07   Leading (7 -> +4)               U
+Biotech                        Biotech             81    2   10.61   4.74   Leading (10 -> +4)              HALO
+Exploration                    Exploration         76    1    5.33   7.28   Leading (4 -> -2)               NESR
 Communications Cloud           Cloud Computing      4    0    0.00  13.77   Leading (1)                     
 Energy                         Exploration         15    0    0.00   7.28   Leading (4 -> -2)               
-Enterprise Cloud               Cloud Computing      2    0    0.00  13.77   Leading (1)                     
-Exploration                    Exploration         76    0    0.00   7.28   Leading (4 -> -2)               
 Gold Mining                    Gold Mining         33    0    0.00   7.40   Leading (3)                     
+Enterprise Cloud               Cloud Computing      2    0    0.00  13.77   Leading (1)                     
 Infrastructure                 Infrastructure     105    0    0.00  -1.49   Lagging (36 -> -1)              #D
 Integrated Energy              Exploration          6    0    0.00   7.28   Leading (4 -> -2)               
 Nuclear Infrastructure         Uranium Mining       3    0    0.00  -2.74   Lagging (41)                    
-Oil Services                   Exploration          5    0    0.00   7.28   Leading (4 -> -2)               
 REITs                          REITs              120    0    0.00  -2.61   Lagging (40 -> +1)              
-Refining & Marketing           Exploration          8    0    0.00   7.28   Leading (4 -> -2)               
 Uranium Mining                 Uranium Mining       1    0    0.00  -2.74   Lagging (41)                    
 
 ========================================
@@ -64,6 +69,16 @@ Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   FSLY Cloud Infrastructure      98.00         98        0     3     XLK (4)
+   NEO          Diagnostics      89.34         98        0     3     XLV (2)
+  AVTR  Life Sciences Tools      88.84         97        0     3     XLV (2)
+     U             Software      88.46         98        0     6     XLK (4)
+   PBF Refining & Marketing      87.97         94       +1     2     XLE (1)
+  NESR          Exploration      87.47         93       +2     2     XLE (1)
+   RPD        Cybersecurity      87.46         96       NA     1     XLK (4)
+  BLFS  Life Sciences Tools      87.34         94       -3     2     XLV (2)
+  HALO              Biotech      85.82         96       -2     2     XLV (2)
+  OKTA        Cybersecurity      85.46         92       -1    14     XLK (4)
+  PANW        Cybersecurity      85.46         92       -1     7     XLK (4)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -75,20 +90,16 @@ Ticker   Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
 MILD BULLISH
 ========================================
 Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-   NEO          Diagnostics    89.34    98         0     XLV (2)
-  AVTR  Life Sciences Tools    88.84    97         0     XLV (2)
-     U             Software    88.46    98         1     XLK (4)
-  OKTA        Cybersecurity    85.46    92         5     XLK (4)
-  PANW        Cybersecurity    85.46    92         5     XLK (4)
+  SAIL             Software    84.46    90         0     XLK (4)
+  EXLS             Software    82.96    87         2     XLK (4)
    RNG Communications Cloud    82.50    97         5     XLK (4)
   NTNX             Software    82.46    86         6     XLK (4)
-  EXLS             Software    82.96    87         7     XLK (4)
   SNOW Cloud Infrastructure    83.00    98        15     XLK (4)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,FSLY,
-###Bullish_Swing,SNOW,EXLS,NTNX,OKTA,PANW,RNG,U,AVTR,NEO,
-###Bullish_Garage,ADPT,AMAT,AMD,APPS,ASX,AVTR,BAND,BB,BILL,BLFS,CNK,CRDO,CTAS,CVS,DDOG,DELL,DINO,DXCM,ESTC,EXLS,FIG,FTNT,GTLB,HNGE,HPE,HUBS,ILMN,IOT,LFST,LQDA,LTH,MU,NEO,NET,NRIX,NTNX,OKTA,OSCR,PANW,PBF,PD,PENG,QDEL,RAL,RNG,RTX,S,SNDK,SNOW,STM,STX,TOST,TRV,TWLO,TXG,U,VLO,VSXY,WDC,
+###Bullish_Momentum,FSLY,NEO,AVTR,U,PBF,NESR,RPD,BLFS,HALO,OKTA,PANW,
+###Bullish_Swing,SNOW,NTNX,RNG,EXLS,SAIL,
+###Bullish_Garage,ADPT,AEHR,AMAT,AMD,AMRX,ANET,APPS,ASX,BAND,BB,BILL,BRZE,CLF,CNK,CRDO,CRSR,CTAS,CVS,DDOG,DELL,DINO,DOCN,DXCM,ESTC,EXLS,FCEL,FIG,FRSH,FTNT,GEO,GRND,GTLB,HIW,HNGE,HPE,HUBS,ILMN,INTC,IOT,IVZ,KLAR,LFST,LQDA,LTH,MFG,MU,NET,NRIX,NTNX,OSCR,OUST,PD,PEB,PENG,PK,PLTR,PSX,QDEL,RAL,RLJ,RNG,RSI,RTX,S,SAIL,SHLS,SHOP,SMFG,SNDK,SNOW,STM,STX,TOST,TRIP,TRV,TWLO,TXG,VG,VLO,VNO,VNT,VSXY,WDC,
 ###Bearish_Momentum,D,
 ###Bearish_Swing,
 ###Bearish_Garage,AMCR,DOW,HD,HRL,ICE,MOS,OMC,PG,PM,QSR,SHEL,SLM,WRBY,

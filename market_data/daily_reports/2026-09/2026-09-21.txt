@@ -43,23 +43,23 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
-Business Software              Software             6    0    0.00   4.60   Leading (5 -> +1)               
-Cloud Infrastructure           Cloud Computing      5    0    0.00   7.75   Leading (4)                     
-Communications Cloud           Cloud Computing      4    0    0.00   7.75   Leading (4)                     
+IT Services                    Software             3    1   45.28   4.60   Leading (5 -> +1)               
+Professional Services          Software             3    1   44.82   4.60   Leading (5 -> +1)               
+Communications Cloud           Cloud Computing      4    1   39.83   7.75   Leading (4)                     FIVN
+Data Infrastructure            Software             4    1   39.03   4.60   Leading (5 -> +1)               ESTC
+Cloud Infrastructure           Cloud Computing      5    1   35.12   7.75   Leading (4)                     FSLY
+Business Software              Software             6    1   31.47   4.60   Leading (5 -> +1)               
+Software                       Software           171    5   14.73   4.60   Leading (5 -> +1)               NTSK, ODD
 Cybersecurity                  Software            13    0    0.00   4.60   Leading (5 -> +1)               
-Data Infrastructure            Software             4    0    0.00   4.60   Leading (5 -> +1)               
 Delivery Platform              Transportation/S..   1    0    0.00  -6.61   Lagging (39 -> +1)              
 Developer Infrastructure       Software             3    0    0.00   4.60   Leading (5 -> +1)               
 Digital Assets Infrastructure  Software             9    0    0.00   4.60   Leading (5 -> +1)               
 Digital Health                 Software             1    0    0.00   4.60   Leading (5 -> +1)               
 Digital Payments               Software             4    0    0.00   4.60   Leading (5 -> +1)               
 Enterprise Cloud               Cloud Computing      2    0    0.00   7.75   Leading (4)                     
-IT Services                    Software             3    0    0.00   4.60   Leading (5 -> +1)               
 Insurance Technology           Software             1    0    0.00   4.60   Leading (5 -> +1)               
 Nuclear Infrastructure         Uranium Mining       3    0    0.00  -8.01   Lagging (40 -> -2)              
-Professional Services          Software             3    0    0.00   4.60   Leading (5 -> +1)               
 SaaS Platform                  Software             1    0    0.00   4.60   Leading (5 -> +1)               
-Software                       Software           171    0    0.00   4.60   Leading (5 -> +1)               
 Transportation Platform        Transportation/S..   1    0    0.00  -6.61   Lagging (39 -> +1)              
 Transportation/Shipping        Transportation/S..  55    0    0.00  -6.61   Lagging (39 -> +1)              #UAL
 Travel Platform                Transportation/S..   1    0    0.00  -6.61   Lagging (39 -> +1)              
@@ -70,7 +70,12 @@ Uranium Mining                 Uranium Mining       1    0    0.00  -8.01   Lagg
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-No active candidates in Long Candidate Universe.
+Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  FIVN Communications Cloud      89.35         99       NA     1     XLK (1)
+  FSLY Cloud Infrastructure      88.85         98       NA     1     XLK (1)
+  NTSK             Software      86.69         99       NA     1     XLK (1)
+   ODD             Software      85.69         97       NA     1     XLK (1)
+  ESTC  Data Infrastructure      85.69         97       NA     1     XLK (1)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -83,13 +88,13 @@ Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Secto
 MILD BULLISH
 ========================================
 Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  DINO Refining & Marketing    83.40    98         6     XLE (2)
-   MPC Refining & Marketing    82.90    97         6     XLE (2)
-   VLO Refining & Marketing    82.90    97         6     XLE (2)
-   PBF Refining & Marketing    82.40    96         6     XLE (2)
-   PSX Refining & Marketing    82.40    96         6     XLE (2)
-    DK Refining & Marketing    81.90    95         6     XLE (2)
-  HALO              Biotech    81.71    95        13     XLV (3)
+  DINO Refining & Marketing    83.40    98         3     XLE (2)
+   MPC Refining & Marketing    82.90    97         3     XLE (2)
+   VLO Refining & Marketing    82.90    97         3     XLE (2)
+   PBF Refining & Marketing    82.40    96         3     XLE (2)
+   PSX Refining & Marketing    82.40    96         3     XLE (2)
+    DK Refining & Marketing    81.90    95         3     XLE (2)
+  HALO              Biotech    81.71    95        12     XLV (3)
 
 ========================================
 MILD BEARISH
@@ -100,9 +105,9 @@ Ticker            Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    NEE          Infrastructure    37.48    35         6     XLU (0)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,
+###Bullish_Momentum,FIVN,FSLY,NTSK,ODD,ESTC,
 ###Bullish_Swing,HALO,DINO,DK,MPC,PBF,PSX,VLO,
-###Bullish_Garage,ADPT,AVTR,BLFS,CNK,DDOG,DINO,DK,DXCM,ESTC,EXLS,FIG,FIGR,FIVN,FSLY,FTNT,GTLB,HALO,HUBS,ILMN,MPC,NEO,NET,NIQ,NTNX,OKTA,PANW,PBF,PD,PSX,RNG,TOST,TWLO,TXG,U,VLO,VSXY,
+###Bullish_Garage,ADPT,AEHR,AMRX,ANET,APPS,ATI,AVAH,AVTR,BLFS,CLF,CNK,DDOG,DELL,DINO,DK,DXCM,EXLS,FIG,FIGR,FRSH,FTNT,GTLB,HALO,HNGE,HPE,HUBS,ILMN,KURA,LFST,LTH,MPC,NEO,NESR,NET,NIQ,NTNX,OKTA,OSCR,OUST,PANW,PBF,PD,PLTR,PSX,QMCO,RNG,RPD,SAIL,SHOP,SNOW,TALO,TOST,TRIP,TWLO,TXG,U,VLO,VNT,VSXY,
 ###Bearish_Momentum,UAL,MOS,
 ###Bearish_Swing,NEE,DAL,FNB,
 ###Bearish_Garage,AESI,AMCR,CAG,CIFR,CLX,COLB,CPRT,D,DAL,DOW,ERIC,FHN,FMC,FNB,GLXY,HD,HRL,IONQ,NEE,OMC,PCG,PM,SAIL,SE,UGI,WRBY,YUM,

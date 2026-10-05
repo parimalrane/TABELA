@@ -43,8 +43,10 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
+Cloud Infrastructure           Cloud Computing      5    1   34.04   3.59   Leading (4)                     FSLY
+Refining & Marketing           Exploration          8    1   26.64   1.81   Leading (8 -> -2)               VLO
+Semiconductors                 Semiconductors      44    1    8.47   2.19   Leading (6 -> +1)               SMTC
 Aerospace & Defense            Aerospace & Defe..  39    0    0.00  -7.09   Lagging (38 -> +1)              
-Cloud Infrastructure           Cloud Computing      5    0    0.00   3.59   Leading (4)                     
 Communications Cloud           Cloud Computing      4    0    0.00   3.59   Leading (4)                     
 Consumer Momentum              Broad                3    0    0.00   2.88   Leading (5)                     
 Defense Drone Systems          Aerospace & Defe..   1    0    0.00  -7.09   Lagging (38 -> +1)              
@@ -61,7 +63,10 @@ Uranium Mining                 Uranium Mining       1    0    0.00 -12.46   Lagg
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
-No active candidates in Long Candidate Universe.
+Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  FSLY Cloud Infrastructure      85.45         95       +1     6     XLK (1)
+  SMTC       Semiconductors      85.38         98       +3     2     XLK (1)
+   VLO Refining & Marketing      85.09         97       NA     1     XLE (2)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -75,9 +80,11 @@ Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
 MILD BULLISH
 ========================================
 Ticker         Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  FIVN Communications Cloud    83.95    94         4     XLK (1)
-  FSLY Cloud Infrastructure    85.45    95         5     XLK (1)
-  ESTC  Data Infrastructure    82.21    93         5     XLK (1)
+  FIVN Communications Cloud    83.95    94         0     XLK (1)
+  SNOW Cloud Infrastructure    82.45    89         0     XLK (1)
+  ESTC  Data Infrastructure    82.21    93         0     XLK (1)
+     U             Software    82.21    91         0     XLK (1)
+ ~QMCO           AI Compute    80.58    99         0     XLK (1)
 
 ========================================
 MILD BEARISH
@@ -88,9 +95,9 @@ Ticker            Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
    DAL Transportation/Shipping    64.14    73        11     XLI (8)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,
-###Bullish_Swing,ESTC,FSLY,FIVN,
-###Bullish_Garage,AVTR,DINO,DK,ESTC,FIGR,FIVN,FSLY,HALO,MPC,NEO,NIQ,NTSK,ODD,OKTA,PBF,PSX,SNOW,TOST,TWLO,U,VLO,
+###Bullish_Momentum,FSLY,SMTC,VLO,
+###Bullish_Swing,ESTC,FIVN,QMCO,SNOW,U,
+###Bullish_Garage,AEHR,APPS,ATI,AVAH,AVTR,AXTI,BLFS,CNK,DELL,DINO,DK,ESTC,EXLS,FIGR,FIVN,FRSH,HALO,HNGE,HPE,HPQ,KURA,LFST,MDB,MPC,NEO,NESR,NIQ,NTNX,NTSK,ODD,OKTA,PANW,PBF,PLTR,PSX,QMCO,RPD,SAIL,SMCI,SNOW,TALO,TH,TOST,TWLO,U,UMC,VNT,
 ###Bearish_Momentum,MOS,DHI,CDE,
 ###Bearish_Swing,DAL,UAL,LUNR,
 ###Bearish_Garage,AESI,AGI,AMCR,CAG,CIFR,CLX,COLB,CPRT,D,DAL,ERIC,FHN,FMC,FNB,GLXY,HD,HRL,IONQ,LUNR,NEE,OMC,PCG,PM,SAIL,SE,UAL,UGI,WLTH,WRBY,YUM,
