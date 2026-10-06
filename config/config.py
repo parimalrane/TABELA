@@ -121,3 +121,31 @@ SHORT_ENTRY = {
     "PURGE_DAYS": 50
 }
 
+# ==========================
+# GARAGE ENGINE (Phase 2 Optimization)
+# ==========================
+LONG_GARAGE_RS_RAW_WEIGHTS = {
+    "% Price Change (1 Week)": 0.70,       # Extreme weight on immediate breakout flow
+    "% Price Change (4 Weeks)": 0.30,      # Minor stabilization weight
+    "% Price Change (12 Weeks)": 0.00,
+    "Relative Price Change (YTD)": 0.00,
+    "Price as a % of 52 Wk H-L Range": 0.00
+}
+
+LONG_GARAGE_ENTRY = {
+    "WAKE_UP_SCORE": 85.0
+}
+
+SHORT_GARAGE_RS_RAW_WEIGHTS = {
+    "% Price Change (1 Week)": 0.70,       # Extreme weight on immediate downside thrust
+    "% Price Change (4 Weeks)": 0.30,
+    "% Price Change (12 Weeks)": 0.00,
+    "Relative Price Change (YTD)": 0.00,
+    "Price as a % of 52 Wk H-L Range": 0.00
+}
+
+SHORT_GARAGE_ENTRY = {
+    "WAKE_UP_SCORE": 85.0
+}
+
+

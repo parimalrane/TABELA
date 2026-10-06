@@ -58,9 +58,47 @@ def calculate_rs_rating(stocks):
 
     return stocks
 
+# ============================================================
+# GARAGE ENGINE (Phase 2 Optimization)
+# ============================================================
 
+from config.config import LONG_GARAGE_RS_RAW_WEIGHTS, SHORT_GARAGE_RS_RAW_WEIGHTS
 
+def calculate_long_garage_rs_raw(stocks):
+    """Computes pure kinetic upside breakout speed."""
+    stocks["Long_Garage_RS_Raw"] = 0.0
+    for column, weight in LONG_GARAGE_RS_RAW_WEIGHTS.items():
+        if column in stocks.columns:
+            clean_series = stocks[column].astype(str).str.replace(r'[%$,]', '', regex=True).str.strip()
+            clean_series = clean_series.replace(r'^\((.*)\)$', r'-\1', regex=True)
+            stocks["Long_Garage_RS_Raw"] += pd.to_numeric(clean_series, errors='coerce').fillna(0.0) * weight
+    return stocks
 
+def calculate_long_garage_rs_rating(stocks):
+    stocks = stocks.sort_values("Long_Garage_RS_Raw", ascending=False).reset_index(drop=True)
+    total = len(stocks)
+    stocks["Long_Garage_Percentile"] = ((1 - (stocks.index / total)) * 100)
+    stocks["Long_Garage_RS_Rating"] = stocks["Long_Garage_Percentile"].clip(lower=1.0, upper=99.0).round().astype(int)
+    return stocks
+
+def calculate_short_garage_rs_raw(stocks):
+    """Computes pure kinetic downside breakdown speed."""
+    stocks["Short_Garage_RS_Raw"] = 0.0
+    for column, weight in SHORT_GARAGE_RS_RAW_WEIGHTS.items():
+        if column in stocks.columns:
+            clean_series = stocks[column].astype(str).str.replace(r'[%$,]', '', regex=True).str.strip()
+            clean_series = clean_series.replace(r'^\((.*)\)$', r'-\1', regex=True)
+            stocks["Short_Garage_RS_Raw"] += pd.to_numeric(clean_series, errors='coerce').fillna(0.0) * weight
+    return stocks
+
+def calculate_short_garage_rs_rating(stocks):
+    # Sort ascending for downside velocity (weakest gets highest weakness rating)
+    stocks = stocks.sort_values("Short_Garage_RS_Raw", ascending=True).reset_index(drop=True)
+    total = len(stocks)
+    import numpy as np
+    stocks["Short_Garage_Percentile"] = (stocks.index.to_numpy() / total) * 100
+    stocks["Short_Garage_RS_Rating"] = np.clip(stocks["Short_Garage_Percentile"], 1.0, 99.0).round().astype(int)
+    return stocks
 
 
 # ----------------------------

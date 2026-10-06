@@ -121,9 +121,11 @@ class VectorizedBacktestEngine:
                 if mode == "long":
                     score = row.get("long_score", 0.0)    
                     rs_rating = row.get("RS_Rating", 0)
+                    garage_rs = row.get("Long_Garage_RS_Rating", 0.0)
                 else:
                     score = row.get("Short_Score", 0.0)
                     rs_rating = row.get("Short_RS_Rating", 0.0)
+                    garage_rs = row.get("Short_Garage_RS_Rating", 0.0)
                     
                 theme_class = row.get("theme_class", "Unknown")
                 zacks_rank = row.get("Zacks Rank", 3)
@@ -172,16 +174,19 @@ class VectorizedBacktestEngine:
                                         entries[ticker]["Mild"].update(row.to_dict())
                                 else:
                                     del drop_tracker[ticker]
-                            elif 22 <= days <= 50:
+                            elif 22 <= days <= cfg.LONG_ENTRY.get("PURGE_DAYS", 50):
+                                wake_up_score = cfg.LONG_GARAGE_ENTRY.get("WAKE_UP_SCORE", 85.0)
                                 if zacks_rank in basing_zacks and theme_class in basing_themes:
-                                    if "Basing" not in entries[ticker]:
-                                        entries[ticker]["Basing"] = {
-                                            "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
-                                        }
-                                        entries[ticker]["Basing"].update(row.to_dict())
+                                    if garage_rs >= wake_up_score:
+                                        if "Garage_Wake" not in entries[ticker]:
+                                            entries[ticker]["Garage_Wake"] = {
+                                                "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                                            }
+                                            entries[ticker]["Garage_Wake"].update(row.to_dict())
+                                        del drop_tracker[ticker]
                                 else:
                                     del drop_tracker[ticker]
-                            elif days > 50:
+                            elif days > cfg.LONG_ENTRY.get("PURGE_DAYS", 50):
                                 del drop_tracker[ticker]
                 else:
                     # mode == "short"
@@ -226,16 +231,19 @@ class VectorizedBacktestEngine:
                                         entries[ticker]["Mild"].update(row.to_dict())
                                 else:
                                     del drop_tracker[ticker]
-                            elif 22 <= days <= 50:
+                            elif 22 <= days <= cfg.SHORT_ENTRY.get("PURGE_DAYS", 50):
+                                wake_up_score = cfg.SHORT_GARAGE_ENTRY.get("WAKE_UP_SCORE", 85.0)
                                 if zacks_rank in decay_zacks and theme_class in decay_themes:
-                                    if "Basing" not in entries[ticker]:
-                                        entries[ticker]["Basing"] = {
-                                            "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
-                                        }
-                                        entries[ticker]["Basing"].update(row.to_dict())
+                                    if garage_rs >= wake_up_score:
+                                        if "Garage_Wake" not in entries[ticker]:
+                                            entries[ticker]["Garage_Wake"] = {
+                                                "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                                            }
+                                            entries[ticker]["Garage_Wake"].update(row.to_dict())
+                                        del drop_tracker[ticker]
                                 else:
                                     del drop_tracker[ticker]
-                            elif days > 50:
+                            elif days > cfg.SHORT_ENTRY.get("PURGE_DAYS", 50):
                                 del drop_tracker[ticker]
 
         # Evaluate returns on final day
@@ -311,6 +319,14 @@ class VectorizedBacktestEngine:
             df_d = scoring.calculate_rs_rating(df_d)
             df_d = scoring.calculate_zacks_score(df_d)
             df_d = scoring.calculate_growth_score(df_d)
+            
+            # Garage specific metrics
+            if mode == "long":
+                df_d = scoring.calculate_long_garage_rs_raw(df_d)
+                df_d = scoring.calculate_long_garage_rs_rating(df_d)
+            else:
+                df_d = scoring.calculate_short_garage_rs_raw(df_d)
+                df_d = scoring.calculate_short_garage_rs_rating(df_d)
             
             # --- DYNAMIC ETF CLASSIFICATION ---
             if df_etf is not None and not df_etf.empty:
@@ -389,7 +405,7 @@ class VectorizedBacktestEngine:
         t_all, wr_all, ar_all = calc_bucket(res_df)
         t_str, wr_str, ar_str = calc_bucket(res_df[res_df["Bucket"] == "Strong"])
         t_mil, wr_mil, ar_mil = calc_bucket(res_df[res_df["Bucket"] == "Mild"])
-        t_bas, wr_bas, ar_bas = calc_bucket(res_df[res_df["Bucket"] == "Basing"])
+        t_bas, wr_bas, ar_bas = calc_bucket(res_df[res_df["Bucket"].isin(["Basing", "Garage_Wake"])])
         
         lead_df = res_df[res_df['Class'] == 'Leading']
         neut_df = res_df[res_df['Class'] == 'Neutral']

@@ -1,0 +1,9 @@
+Experiment,Name,Hypothesis,1W Weight (%),4W Weight (%),Wake Up Threshold,Total Pipeline Trades,Strong Trades,Mild Trades,Garage Wake Trades,Garage Wake WR (%),Garage Wake Avg (%),Exec Time (s)
+1,Exp 1: Standard Divergence (Wake Up 80.0),70% 1W / 30% 4W with loose 80.0 trigger.,70,30,80.0,346,181,163,2,50.0,16.51,31.17
+2,Exp 2: Standard Divergence (Wake Up 85.0),70% 1W / 30% 4W with standard 85.0 trigger.,70,30,85.0,346,181,163,2,50.0,16.51,30.91
+3,Exp 3: Strict Divergence (Wake Up 90.0),70% 1W / 30% 4W with strict 90.0 trigger.,70,30,90.0,346,181,163,2,50.0,16.51,27.56
+4,Exp 4: Extreme Divergence (Wake Up 95.0),70% 1W / 30% 4W with exclusive 95.0 trigger.,70,30,95.0,345,181,163,1,100.0,38.95,28.64
+5,Exp 5: Hyper-Fast Velocity (Wake Up 85.0),100% 1W momentum only. Ignore 4W base.,100,0,85.0,346,181,163,2,50.0,16.51,28.99
+6,Exp 6: Hyper-Fast Velocity (Wake Up 90.0),100% 1W momentum only with strict 90.0 trigger.,100,0,90.0,346,181,163,2,50.0,16.51,29.63
+7,Exp 7: Balanced Velocity (Wake Up 85.0),50% 1W / 50% 4W to ensure slightly more structure.,50,50,85.0,346,181,163,2,50.0,16.51,28.23
+8,Exp 8: Balanced Velocity (Wake Up 90.0),50% 1W / 50% 4W with strict 90.0 trigger.,50,50,90.0,346,181,163,2,50.0,16.51,29.18
