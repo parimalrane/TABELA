@@ -118,8 +118,13 @@ class VectorizedBacktestEngine:
             for _, row in df_today.iterrows():
                 ticker = row["Ticker"]
                 
-                score = row.get("long_score", 0.0)    
-                rs_rating = row.get("RS_Rating", 0)
+                if mode == "long":
+                    score = row.get("long_score", 0.0)    
+                    rs_rating = row.get("RS_Rating", 0)
+                else:
+                    score = row.get("Short_Score", 0.0)
+                    rs_rating = row.get("Short_RS_Rating", 0.0)
+                    
                 theme_class = row.get("theme_class", "Unknown")
                 zacks_rank = row.get("Zacks Rank", 3)
                 
@@ -169,6 +174,60 @@ class VectorizedBacktestEngine:
                                     del drop_tracker[ticker]
                             elif 22 <= days <= 50:
                                 if zacks_rank in basing_zacks and theme_class in basing_themes:
+                                    if "Basing" not in entries[ticker]:
+                                        entries[ticker]["Basing"] = {
+                                            "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                                        }
+                                        entries[ticker]["Basing"].update(row.to_dict())
+                                else:
+                                    del drop_tracker[ticker]
+                            elif days > 50:
+                                del drop_tracker[ticker]
+                else:
+                    # mode == "short"
+                    allowed_themes = cfg.SHORT_ENTRY.get("THEMES", [])
+                    max_rs = cfg.SHORT_ENTRY.get("MAX_SHORT_RS", 15.0)
+                    min_rs_short = cfg.SHORT_ENTRY.get("MIN_SHORT_RS", 8.0)
+                    max_score = cfg.SHORT_ENTRY.get("MAX_SHORT_SCORE", 25.0)
+                    min_price = cfg.SHORT_ENTRY.get("MIN_PRICE", 10.0)
+                    mild_floor = cfg.SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 30.0)
+                    decay_zacks = cfg.SHORT_ENTRY.get("DECAY_ZACKS", [4, 5])
+                    decay_themes = cfg.SHORT_ENTRY.get("DECAY_THEMES", ["Lagging"])
+                    avg_vol = row.get("avg_volume", 0) or 0
+                    
+                    passes_liquidity = (entry_price >= min_price) and (avg_vol >= cfg.SHORT_ENTRY.get("MIN_VOLUME", 1000000))
+                    if not passes_liquidity:
+                        continue
+                        
+                    is_strong = (score <= max_score and min_rs_short <= rs_rating <= max_rs and theme_class in allowed_themes)
+                    
+                    if ticker not in entries:
+                        entries[ticker] = {}
+
+                    if is_strong:
+                        if ticker in drop_tracker: del drop_tracker[ticker]
+                        if "Strong" not in entries[ticker]:
+                            entries[ticker]["Strong"] = {
+                                "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                            }
+                            entries[ticker]["Strong"].update(row.to_dict())
+                    else:
+                        if "Strong" in entries[ticker] and ticker not in drop_tracker:
+                            drop_tracker[ticker] = {"days_dropped": 1}
+                        
+                        if ticker in drop_tracker:
+                            days = drop_tracker[ticker]["days_dropped"]
+                            if days <= 21:
+                                if score <= mild_floor and rs_rating <= mild_floor:
+                                    if "Mild" not in entries[ticker]:
+                                        entries[ticker]["Mild"] = {
+                                            "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                                        }
+                                        entries[ticker]["Mild"].update(row.to_dict())
+                                else:
+                                    del drop_tracker[ticker]
+                            elif 22 <= days <= 50:
+                                if zacks_rank in decay_zacks and theme_class in decay_themes:
                                     if "Basing" not in entries[ticker]:
                                         entries[ticker]["Basing"] = {
                                             "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
@@ -236,7 +295,11 @@ class VectorizedBacktestEngine:
             df_etf = self.raw_etf_matrices.get(d)
             
             # --- CALCULATE BASE STOCK METRICS FIRST ---
-            cols_to_clean = list(cfg.RS_RAW_WEIGHTS.keys()) + ["Last Close", "avg_volume"]
+            if mode == "long":
+                cols_to_clean = list(cfg.RS_RAW_WEIGHTS.keys()) + ["Last Close", "avg_volume"]
+            else:
+                cols_to_clean = list(cfg.RS_RAW_WEIGHTS.keys()) + list(cfg.SHORT_RS_RAW_WEIGHTS.keys()) + ["Last Close", "avg_volume"]
+                
             for c in cols_to_clean:
                 if c in df_d.columns:
                     df_d[c] = pd.to_numeric(
@@ -277,23 +340,26 @@ class VectorizedBacktestEngine:
                 if "Theme_Score" in df_d.columns:
                     df_d["theme_strength_score"] = df_d["Theme_Score"]
             
-            # --- COMPOSITE LONG SCORE ---
-            lw = cfg.LONG_WEIGHTS
-            rs_w = lw.get("RS_WEIGHT", 0.50)
-            theme_w = lw.get("THEME_WEIGHT", 0.25)
-            zacks_w = lw.get("ZACKS_WEIGHT", 0.15)
-            growth_w = lw.get("GROWTH_WEIGHT", 0.10)
-            
-            ts = df_d["theme_strength_score"] if "theme_strength_score" in df_d.columns else 50.0
-            zs = df_d["Zacks_Score"] if "Zacks_Score" in df_d.columns else 50.0
-            gs = df_d["Growth_Score"] if "Growth_Score" in df_d.columns else 50.0
-            
-            df_d["long_score"] = (
-                df_d["RS_Rating"] * rs_w +
-                ts * theme_w +
-                zs * zacks_w +
-                gs * growth_w
-            ).round(2)
+            # --- COMPOSITE SCORE ---
+            if mode == "long":
+                lw = cfg.LONG_WEIGHTS
+                rs_w = lw.get("RS_WEIGHT", 0.50)
+                theme_w = lw.get("THEME_WEIGHT", 0.25)
+                zacks_w = lw.get("ZACKS_WEIGHT", 0.15)
+                growth_w = lw.get("GROWTH_WEIGHT", 0.10)
+                
+                ts = df_d["theme_strength_score"] if "theme_strength_score" in df_d.columns else 50.0
+                zs = df_d["Zacks_Score"] if "Zacks_Score" in df_d.columns else 50.0
+                gs = df_d["Growth_Score"] if "Growth_Score" in df_d.columns else 50.0
+                
+                df_d["long_score"] = (
+                    df_d["RS_Rating"] * rs_w +
+                    ts * theme_w +
+                    zs * zacks_w +
+                    gs * growth_w
+                ).round(2)
+            else:
+                df_d = scoring.calculate_short_score(df_d)
             
             scored_dfs.append(df_d)
             

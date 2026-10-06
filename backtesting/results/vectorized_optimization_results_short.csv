@@ -1,0 +1,10 @@
+Experiment,Name,Hypothesis,Total Trades,Win Rate (%),Avg Return (%),Strong Trades,Strong WR (%),Strong Avg (%),Mild Trades,Mild WR (%),Mild Avg (%),Basing Trades,Basing WR (%),Basing Avg (%),Exec Time (s)
+1,Baseline (Last Winner P1-F),"Control group: 1457 trades, 71.1% WR.",2304,65.28,6.39,1257,65.08,7.27,1042,65.55,5.35,5,60.0,1.94,27.56
+2,Sniper 1: Block Zacks 3,Cut the fundamental noise exactly in half.,2304,65.28,6.39,1257,65.08,7.27,1042,65.55,5.35,5,60.0,1.94,27.97
+3,Sniper 2: Strict Volume Floor,Require 2.5m volume.,1116,62.37,2.9,617,61.1,2.78,497,63.98,3.06,2,50.0,-2.22,32.64
+4,Sniper 3: Lower Tech Ceiling,Crush RS ceiling to 60.,2172,65.75,5.31,1162,61.96,3.18,1005,70.15,7.79,5,60.0,1.94,29.85
+5,Sniper 4: Strict Score Ceiling,Crush Score ceiling to 45.,836,66.39,7.01,456,60.96,4.18,379,72.82,10.42,1,100.0,10.43,31.02
+6,Sniper 5: Exclude Neutral/Unknown,Strictly Lagging/Micro Laggard.,582,59.79,0.92,307,57.98,-0.68,270,61.85,2.72,5,60.0,1.94,27.46
+7,Combo A: The Clean Cut,Block Zacks 3 + 2.5m Volume.,1116,62.37,2.9,617,61.1,2.78,497,63.98,3.06,2,50.0,-2.22,29.72
+8,Combo B: Strict Fundamentals,Block Zacks 3 + Score 45.,836,66.39,7.01,456,60.96,4.18,379,72.82,10.42,1,100.0,10.43,1018.15
+9,Combo C: The Absolute Chokehold,RS<60 + Score<45 + Zacks 4/5 only + 2.5m Vol.,368,63.59,4.68,210,57.62,3.64,158,71.52,6.06,0,0.0,0.0,27.71
