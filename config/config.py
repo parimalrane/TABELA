@@ -59,19 +59,11 @@ LONG_ENTRY = {
     "MIN_VOLUME": 1_500_000,
     "MIN_DROPPED_WATCH_SCORE": 80.0,
     "MILD_DAYS": 21,
-    "PURGE_DAYS": 50
-}
-
-DIST_ENTRY = {
-    # Phase 2 Grid Search Winner (T7): 73.28% WR | +5.16% avg return | ~11 shorts/day
-    # "Fall From Grace" zone: former mid-range stocks actively losing momentum
-    "MIN_RS": 50.0,            # Floor: stocks must still have some standing to fall from
-    "MAX_RS": 75.0,            # Ceiling: catch before they become obvious laggards
-    "MAX_LONG_SCORE": 50.0,    # Only short stocks with clear composite deterioration
-    "THEMES": ["Neutral", "Unknown"],  # Neutral-only: Lagging adds noise at this RS level
-    "MICRO_BREAKAWAY_PERCENTILE": 0.05,
-    "BLOCKED_ZACKS": [1, 2],
-    "MAX_DROPPED_WATCH_SCORE": 30.0
+    "PURGE_DAYS": 50,
+    
+    # 3. BASING (Garage - Days 22 to X)
+    "BASING_ZACKS": [1, 2],
+    "BASING_THEMES": ["Leading", "Neutral"]
 }
 
 # ==========================
@@ -118,34 +110,10 @@ SHORT_ENTRY = {
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
     "MAX_DROPPED_WATCH_SCORE": 75.0,
     "MILD_DAYS": 21,
-    "PURGE_DAYS": 50
+    
+    # 3. BASING (Garage - Days 22 to X)
+    "PURGE_DAYS": 50,
+    "DECAY_ZACKS": [4, 5],
+    "DECAY_THEMES": ["Lagging"]
 }
-
-# ==========================
-# GARAGE ENGINE (Phase 2 Optimization)
-# ==========================
-LONG_GARAGE_RS_RAW_WEIGHTS = {
-    "% Price Change (1 Week)": 0.70,       # Extreme weight on immediate breakout flow
-    "% Price Change (4 Weeks)": 0.30,      # Minor stabilization weight
-    "% Price Change (12 Weeks)": 0.00,
-    "Relative Price Change (YTD)": 0.00,
-    "Price as a % of 52 Wk H-L Range": 0.00
-}
-
-LONG_GARAGE_ENTRY = {
-    "WAKE_UP_SCORE": 85.0
-}
-
-SHORT_GARAGE_RS_RAW_WEIGHTS = {
-    "% Price Change (1 Week)": 0.70,       # Extreme weight on immediate downside thrust
-    "% Price Change (4 Weeks)": 0.30,
-    "% Price Change (12 Weeks)": 0.00,
-    "Relative Price Change (YTD)": 0.00,
-    "Price as a % of 52 Wk H-L Range": 0.00
-}
-
-SHORT_GARAGE_ENTRY = {
-    "WAKE_UP_SCORE": 85.0
-}
-
 
