@@ -115,9 +115,9 @@ def main():
             "Mild Trades": bt["mild_trades"],
             "Mild WR (%)": bt["mild_win_rate"],
             "Mild Avg (%)": bt["mild_avg_return"],
-            "Basing Trades": bt["basing_trades"],
-            "Basing WR (%)": bt["basing_win_rate"],
-            "Basing Avg (%)": bt["basing_avg_return"],
+            "Deep Retrace Trades": bt["deep_retrace_trades"],
+            "Deep Retrace WR (%)": bt["deep_retrace_win_rate"],
+            "Deep Retrace Avg (%)": bt["deep_retrace_avg_return"],
             "Exec Time (s)": round(exp_time, 2)
         })
         

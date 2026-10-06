@@ -61,9 +61,9 @@ LONG_ENTRY = {
     "MILD_DAYS": 21,
     "PURGE_DAYS": 50,
     
-    # 3. BASING (Garage - Days 22 to X)
-    "BASING_ZACKS": [1, 2],
-    "BASING_THEMES": ["Leading", "Neutral"]
+    # 3. DEEP RETRACE (Days 22 to X)
+    "DEEP_RETRACE_ZACKS": [1, 2],
+    "DEEP_RETRACE_THEMES": ["Leading", "Neutral"]
 }
 
 # ==========================
@@ -111,9 +111,9 @@ SHORT_ENTRY = {
     "MAX_DROPPED_WATCH_SCORE": 75.0,
     "MILD_DAYS": 21,
     
-    # 3. BASING (Garage - Days 22 to X)
+    # 3. DEEP RETRACE (Days 22 to X)
     "PURGE_DAYS": 50,
-    "DECAY_ZACKS": [4, 5],
-    "DECAY_THEMES": ["Lagging"]
+    "DEEP_RETRACE_ZACKS": [4, 5],
+    "DEEP_RETRACE_THEMES": ["Lagging"]
 }
 

@@ -137,8 +137,8 @@ class VectorizedBacktestEngine:
                     min_score = cfg.LONG_ENTRY.get("MIN_LONG_SCORE", 0.0)
                     min_price = cfg.LONG_ENTRY.get("MIN_PRICE", 10.0)
                     mild_floor = cfg.LONG_ENTRY.get("MIN_DROPPED_WATCH_SCORE", 70.0)
-                    basing_zacks = cfg.LONG_ENTRY.get("BASING_ZACKS", [1, 2])
-                    basing_themes = cfg.LONG_ENTRY.get("BASING_THEMES", ["Leading", "Neutral"])
+                    deep_retrace_zacks = cfg.LONG_ENTRY.get("DEEP_RETRACE_ZACKS", [1, 2])
+                    deep_retrace_themes = cfg.LONG_ENTRY.get("DEEP_RETRACE_THEMES", ["Leading", "Neutral"])
                     
                     if entry_price < min_price:
                         continue
@@ -165,23 +165,17 @@ class VectorizedBacktestEngine:
                             days = drop_tracker[ticker]["days_dropped"]
                             
                             if days <= 21:
-                                if score >= mild_floor and rs_rating >= mild_floor:
-                                    if "Mild" not in entries[ticker]:
-                                        entries[ticker]["Mild"] = {
-                                            "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
-                                        }
-                                        entries[ticker]["Mild"].update(row.to_dict())
-                                else:
-                                    del drop_tracker[ticker]
+                                if "Mild" not in entries[ticker]:
+                                    entries[ticker]["Mild"] = {
+                                        "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                                    }
+                                    entries[ticker]["Mild"].update(row.to_dict())
                             elif 22 <= days <= cfg.LONG_ENTRY.get("PURGE_DAYS", 50):
-                                if zacks_rank in basing_zacks and theme_class in basing_themes:
-                                    if "Basing" not in entries[ticker]:
-                                        entries[ticker]["Basing"] = {
-                                            "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
-                                        }
-                                        entries[ticker]["Basing"].update(row.to_dict())
-                                else:
-                                    del drop_tracker[ticker]
+                                if "Deep_Retrace" not in entries[ticker]:
+                                    entries[ticker]["Deep_Retrace"] = {
+                                        "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                                    }
+                                    entries[ticker]["Deep_Retrace"].update(row.to_dict())
                             elif days > cfg.LONG_ENTRY.get("PURGE_DAYS", 50):
                                 del drop_tracker[ticker]
                 else:
@@ -193,8 +187,8 @@ class VectorizedBacktestEngine:
                     max_score = cfg.SHORT_ENTRY.get("MAX_SHORT_SCORE", 25.0)
                     min_price = cfg.SHORT_ENTRY.get("MIN_PRICE", 10.0)
                     mild_floor = cfg.SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 30.0)
-                    decay_zacks = cfg.SHORT_ENTRY.get("DECAY_ZACKS", [4, 5])
-                    decay_themes = cfg.SHORT_ENTRY.get("DECAY_THEMES", ["Lagging"])
+                    deep_retrace_zacks = cfg.SHORT_ENTRY.get("DEEP_RETRACE_ZACKS", [4, 5])
+                    deep_retrace_themes = cfg.SHORT_ENTRY.get("DEEP_RETRACE_THEMES", ["Lagging"])
                     avg_vol = row.get("avg_volume", 0) or 0
                     
                     passes_liquidity = (entry_price >= min_price) and (avg_vol >= cfg.SHORT_ENTRY.get("MIN_VOLUME", 1000000))
@@ -220,23 +214,17 @@ class VectorizedBacktestEngine:
                         if ticker in drop_tracker:
                             days = drop_tracker[ticker]["days_dropped"]
                             if days <= 21:
-                                if score <= mild_floor and rs_rating <= mild_floor:
-                                    if "Mild" not in entries[ticker]:
-                                        entries[ticker]["Mild"] = {
-                                            "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
-                                        }
-                                        entries[ticker]["Mild"].update(row.to_dict())
-                                else:
-                                    del drop_tracker[ticker]
+                                if "Mild" not in entries[ticker]:
+                                    entries[ticker]["Mild"] = {
+                                        "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                                    }
+                                    entries[ticker]["Mild"].update(row.to_dict())
                             elif 22 <= days <= cfg.SHORT_ENTRY.get("PURGE_DAYS", 50):
-                                if zacks_rank in decay_zacks and theme_class in decay_themes:
-                                    if "Basing" not in entries[ticker]:
-                                        entries[ticker]["Basing"] = {
-                                            "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
-                                        }
-                                        entries[ticker]["Basing"].update(row.to_dict())
-                                else:
-                                    del drop_tracker[ticker]
+                                if "Deep_Retrace" not in entries[ticker]:
+                                    entries[ticker]["Deep_Retrace"] = {
+                                        "entry_date": current_date, "entry_price": entry_price, "theme_class": theme_class
+                                    }
+                                    entries[ticker]["Deep_Retrace"].update(row.to_dict())
                             elif days > cfg.SHORT_ENTRY.get("PURGE_DAYS", 50):
                                 del drop_tracker[ticker]
 
@@ -378,7 +366,7 @@ class VectorizedBacktestEngine:
                 "total_trades": 0, "win_rate": 0.0, "avg_return": 0.0,
                 "strong_trades": 0, "strong_win_rate": 0.0, "strong_avg_return": 0.0,
                 "mild_trades": 0, "mild_win_rate": 0.0, "mild_avg_return": 0.0,
-                "basing_trades": 0, "basing_win_rate": 0.0, "basing_avg_return": 0.0,
+                "deep_retrace_trades": 0, "deep_retrace_win_rate": 0.0, "deep_retrace_avg_return": 0.0,
                 "leading_trades": 0, "leading_win_rate": 0.0, "leading_avg_return": 0.0,
                 "neutral_trades": 0, "neutral_win_rate": 0.0, "neutral_avg_return": 0.0,
                 "_detail_df": res_df
@@ -393,7 +381,7 @@ class VectorizedBacktestEngine:
         t_all, wr_all, ar_all = calc_bucket(res_df)
         t_str, wr_str, ar_str = calc_bucket(res_df[res_df["Bucket"] == "Strong"])
         t_mil, wr_mil, ar_mil = calc_bucket(res_df[res_df["Bucket"] == "Mild"])
-        t_bas, wr_bas, ar_bas = calc_bucket(res_df[res_df["Bucket"] == "Basing"])
+        t_deep, wr_deep, ar_deep = calc_bucket(res_df[res_df["Bucket"] == "Deep_Retrace"])
         
         lead_df = res_df[res_df['Class'] == 'Leading']
         neut_df = res_df[res_df['Class'] == 'Neutral']
@@ -405,15 +393,15 @@ class VectorizedBacktestEngine:
             print(f"          TABELA 3-MONTH {mode.upper()} BACKTEST (VECTORIZED PIPELINE)")
             print("="*80)
             print(f"Total Combined Trades: {t_all} | WR: {wr_all:.1f}% | Avg: {ar_all:.2f}%")
-            print(f"  [Strong Tier]  Trades: {t_str} | WR: {wr_str:.1f}% | Avg: {ar_str:.2f}%")
-            print(f"  [Mild Tier]    Trades: {t_mil} | WR: {wr_mil:.1f}% | Avg: {ar_mil:.2f}%")
-            print(f"  [Basing Tier]  Trades: {t_bas} | WR: {wr_bas:.1f}% | Avg: {ar_bas:.2f}%\n")
+            print(f"  [Strong Tier]        Trades: {t_str} | WR: {wr_str:.1f}% | Avg: {ar_str:.2f}%")
+            print(f"  [Mild Tier]          Trades: {t_mil} | WR: {wr_mil:.1f}% | Avg: {ar_mil:.2f}%")
+            print(f"  [Deep Retrace Tier]  Trades: {t_deep} | WR: {wr_deep:.1f}% | Avg: {ar_deep:.2f}%\n")
             
         return {
             "total_trades": t_all, "win_rate": wr_all, "avg_return": ar_all,
             "strong_trades": t_str, "strong_win_rate": wr_str, "strong_avg_return": ar_str,
             "mild_trades": t_mil, "mild_win_rate": wr_mil, "mild_avg_return": ar_mil,
-            "basing_trades": t_bas, "basing_win_rate": wr_bas, "basing_avg_return": ar_bas,
+            "deep_retrace_trades": t_deep, "deep_retrace_win_rate": wr_deep, "deep_retrace_avg_return": ar_deep,
             "leading_trades": t_ld, "leading_win_rate": wr_ld, "leading_avg_return": ar_ld,
             "neutral_trades": t_nt, "neutral_win_rate": wr_nt, "neutral_avg_return": ar_nt,
             "_detail_df": res_df,

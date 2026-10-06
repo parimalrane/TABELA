@@ -950,15 +950,19 @@ def print_daily_scan(
     )
     purged = {"long_purged": {}, "short_purged": {}}
     if os.path.exists(purge_file):
-        with open(purge_file, "r", encoding="utf-8") as _f:
-            loaded_purged = _json.load(_f)
-        if not isinstance(loaded_purged, dict):
-            raise ValueError(f"Invalid purged accumulator format in {purge_file}")
-        for bucket in purged:
-            entries = loaded_purged.get(bucket, {})
-            if not isinstance(entries, dict):
-                raise ValueError(f"Invalid '{bucket}' bucket in {purge_file}")
-            purged[bucket] = entries
+        try:
+            with open(purge_file, "r", encoding="utf-8") as _f:
+                loaded_purged = _json.load(_f)
+            if not isinstance(loaded_purged, dict):
+                raise ValueError(f"Invalid purged accumulator format in {purge_file}")
+            for bucket in purged:
+                entries = loaded_purged.get(bucket, {})
+                if not isinstance(entries, dict):
+                    raise ValueError(f"Invalid '{bucket}' bucket in {purge_file}")
+                purged[bucket] = entries
+        except Exception:
+            # If the file is corrupted, start fresh
+            purged = {"long_purged": {}, "short_purged": {}}
 
     current_long_set = {ticker.upper() for ticker in full_long_list.split(",")} if full_long_list else set()
     current_short_set = {
@@ -1015,9 +1019,12 @@ def print_daily_scan(
             record["purged_on"] = purged_on.strftime("%Y-%m-%d")
             entries[ticker] = record
 
-    os.makedirs(os.path.dirname(purge_file), exist_ok=True)
-    with open(purge_file, "w", encoding="utf-8") as _f:
-        _json.dump(purged, _f, indent=4, sort_keys=True)
+    try:
+        os.makedirs(os.path.dirname(purge_file), exist_ok=True)
+        with open(purge_file, "w", encoding="utf-8") as _f:
+            _json.dump(purged, _f, indent=4, sort_keys=True)
+    except Exception:
+        pass
 
     # Add today's drops
     for t in deltas.get("dropped_longs", []):
@@ -1042,35 +1049,7 @@ def print_daily_scan(
             if ticker in active_set:
                 continue
                 
-            # Technical Floor & Macro Theme Eviction
-            match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
-            if not match.empty:
-                row = match.iloc[0]
-                current_rs = pd.to_numeric(row.get("RS_Rating"), errors='coerce')
-                current_score = pd.to_numeric(row.get("Long_Score"), errors='coerce')
-                current_theme = str(row.get("Theme_Class", ""))
-                
-                zacks_raw = row.get("Zacks Rank", 0)
-                try:
-                    current_zacks = int(float(zacks_raw)) if pd.notna(zacks_raw) else 0
-                except (ValueError, TypeError):
-                    current_zacks = 0
-                
-                if pd.notna(current_rs) and pd.notna(current_score):
-                    if is_long:
-                        if current_rs < min_dropped_long or current_score < min_dropped_long:
-                            continue  # Purge, either price or total composite is broken
-                        if current_theme in SHORT_ENTRY.get("THEMES", []):
-                            continue  # Purge, macro theme has died (Lagging)
-                        if current_zacks in LONG_ENTRY.get("BLOCKED_ZACKS", []):
-                            continue  # Purge, fundamentally broken (Zacks 4/5)
-                    if not is_long:
-                        if current_rs > max_dropped_dist or current_score > max_dropped_dist:
-                            continue  # Purge, shorts are squeezing upward
-                        if current_theme in LONG_ENTRY.get("THEMES", []):
-                            continue  # Purge, macro theme has rallied (Leading)
-                        if current_zacks in SHORT_ENTRY.get("BLOCKED_ZACKS", []):
-                            continue  # Purge, fundamentals too strong to short (Zacks 1/2)
+
 
             # Timeline Expiry from Config
             max_days = LONG_ENTRY.get("MILD_DAYS", 21) if is_long else SHORT_ENTRY.get("MILD_DAYS", 21)
@@ -1169,10 +1148,10 @@ def print_daily_scan(
     print("TRADINGVIEW WATCHLIST EXPORT")
     print("###Bullish_Momentum," + full_long_list + ",") if full_long_list else print("###Bullish_Momentum,")
     print("###Bullish_Swing," + long_pullback_str + ",") if long_pullback_str else print("###Bullish_Swing,")
-    print(f"###Bullish_Garage,{long_purged_csv},") if long_purged_csv else print("###Bullish_Garage,")
+    print(f"###Bullish_Deep_Retrace,{long_purged_csv},") if long_purged_csv else print("###Bullish_Deep_Retrace,")
 
     print("###Bearish_Momentum," + full_short_list + ",") if full_short_list else print("###Bearish_Momentum,")
     print("###Bearish_Swing," + short_rally_str + ",") if short_rally_str else print("###Bearish_Swing,")
-    print(f"###Bearish_Garage,{short_purged_csv},") if short_purged_csv else print("###Bearish_Garage,")
+    print(f"###Bearish_Deep_Retrace,{short_purged_csv},") if short_purged_csv else print("###Bearish_Deep_Retrace,")
 
     print()
