@@ -520,18 +520,20 @@ def print_macro_weather(stocks, theme_strength_settings):
         row_eval = idx_only[idx_only["Ticker"] == t]
         if not row_eval.empty:
             r = row_eval.iloc[0]
+            p1d = pd.to_numeric(r.get("Performance 1D (%)", 0), errors='coerce')
             p1w = pd.to_numeric(r.get("Performance 1W (%)", 0), errors='coerce')
             p1m = pd.to_numeric(r.get("Performance 1M (%)", 0), errors='coerce')
             p3m = pd.to_numeric(r.get("Performance 3M (%)", 0), errors='coerce')
             pytd = pd.to_numeric(r.get("Performance YTD (%)", r.get("Performance 1Y (%)", 0)), errors='coerce')
             
+            p1d = p1d if pd.notna(p1d) else 0.0
             p1w = p1w if pd.notna(p1w) else 0.0
             p1m = p1m if pd.notna(p1m) else 0.0
             p3m = p3m if pd.notna(p3m) else 0.0
             pytd = pytd if pd.notna(pytd) else 0.0
             
             name = f"{idx_map[t]} ({t})"
-            idx_strs.append(f"    {name:<17} {p1w:>+8.2f}% {p1m:>+9.2f}% {p3m:>+10.2f}% {pytd:>+13.2f}%")
+            idx_strs.append(f"    {name:<17} {p1d:>+7.2f}% {p1w:>+8.2f}% {p1m:>+9.2f}% {p3m:>+10.2f}% {pytd:>+13.2f}%")
         
     nh = nl = net = 0
     if "Price as a % of 52 Wk H-L Range" in stocks.columns:
@@ -544,8 +546,8 @@ def print_macro_weather(stocks, theme_strength_settings):
     print("              MACRO WEATHER REPORT & BREADTH X-RAY")
     print("========================================================================")
     print("[1] MARKET INDEXES (Multi-Timeframe Performance)")
-    print(f"    {'Index':<17} {'1-Week':>9} {'1-Month':>10} {'1-Quarter':>11} {'Year-To-Date':>14}")
-    print("    " + "-"*56)
+    print(f"    {'Index':<17} {'1-Day':>8} {'1-Week':>9} {'1-Month':>10} {'1-Quarter':>11} {'Year-To-Date':>14}")
+    print("    " + "-"*65)
     for line in idx_strs:
         print(line)
     print("")
@@ -788,10 +790,7 @@ def print_daily_scan(
             distribution_watchlist["Sector (SPDR)"] = distribution_watchlist["Sector"].map(ZACKS_TO_SPDR).fillna("N/A")
             distribution_watchlist["Sector Rank"] = distribution_watchlist["Sector (SPDR)"].map(sector_rs_map).fillna(0).astype(int)
 
-    print("========================================")
-    print("STRONG BULLISH (Trend Continuation)")
-    print("Legend: ^ = Micro Leader | ~ = Unknown/Unclassified")
-    print("========================================")
+    strong_bullish_out = "========================================\nSTRONG BULLISH (Trend Continuation)\nLegend: ^ = Micro Leader | ~ = Unknown/Unclassified\n========================================\n"
 
     display_df = long_candidates[
         [
@@ -844,23 +843,19 @@ def print_daily_scan(
         true_longs = true_longs.drop(columns=["Sector (SPDR)", "Sector Rank"])
         
     if true_longs.empty:
-        print("No active candidates in Long Candidate Universe.")
+        strong_bullish_out += "No active candidates in Long Candidate Universe.\n"
     else:
-        print(true_longs.to_string(index=False))
+        strong_bullish_out += true_longs.to_string(index=False) + "\n"
 
     # Deltas already calculated above
 
 
 
 
-    print("\n")
-    print("========================================")
-    print("STRONG BEARISH (Trend Breakdown)")
-    print("Legend: ^ = Micro Laggard")
-    print("========================================")
+    strong_bearish_out = "========================================\nSTRONG BEARISH (Trend Breakdown)\nLegend: ^ = Micro Laggard\n========================================\n"
 
     if distribution_watchlist.empty:
-        print("No qualified distribution candidates today.")
+        strong_bearish_out += "No qualified distribution candidates today.\n"
     else:
         display_df = distribution_watchlist[
             [
@@ -892,7 +887,7 @@ def print_daily_scan(
         display_df["Ticker"] = display_df["Ticker"].apply(lambda t: f" {str(t).strip()}")
         display_df = display_df.drop(columns=["Sector (SPDR)", "Sector Rank"])
         
-        print(display_df.to_string(index=False))
+        strong_bearish_out += display_df.to_string(index=False) + "\n"
 
     # Delta lists are handled natively via 'Days = 1' and the detailed Dropped Tables
 
@@ -1136,7 +1131,7 @@ def print_daily_scan(
     short_dropped_str = ",".join(sorted(accumulated["short_dropped"].keys()))
 
     def print_dropped_table(dropped_dict, title, max_days=21, min_days=0, is_long_table=True):
-        if not dropped_dict: return ""
+        if not dropped_dict: return "", ""
         rows = []
         valid_tickers = []
         for ticker, date_str in dropped_dict.items():
@@ -1163,36 +1158,45 @@ def print_daily_scan(
                 if is_long_table:
                     rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors='coerce')
                     score_val = pd.to_numeric(r.get("Long_Score", 0), errors='coerce')
-                    score_header = "L_Score"
-                    rs_header = "L_RS"
+                    score_header = "Long_Score"
+                    rs_header = "RS_Rating"
                 else:
                     rs_val = pd.to_numeric(r.get("Short_RS_Rating", 0), errors='coerce')
                     score_val = pd.to_numeric(r.get("Short_Score", 0), errors='coerce')
-                    score_header = "S_Score"
-                    rs_header = "S_RS"
+                    score_header = "Short_Score"
+                    rs_header = "Short_RS_Rating"
                 
                 rows.append({
                     "Ticker": display_ticker,
                     "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
-                    score_header: round(score_val, 2),
+                    score_header: f"{float(score_val):.2f}",
                     rs_header: int(rs_val),
-                    "Days Out": days_on_drop,
+                    "Movement": "NA",
+                    "Days": days_on_drop,
                     "Sector (Rk)": f"{spdr} ({int(s_rank)})"
                 })
+        output_str = ""
         if rows:
-            df = pd.DataFrame(rows).sort_values(["Days Out", score_header, rs_header], ascending=[True, False, False])
-            print("=" * 40)
-            print(title)
-            print("=" * 40)
-            print(df.to_string(index=False))
-            print()
-        return ",".join(valid_tickers)
+            df = pd.DataFrame(rows).sort_values(["Days", score_header, rs_header], ascending=[True, False, False])
+            output_str += "=" * 40 + "\n"
+            output_str += title + "\n"
+            output_str += "=" * 40 + "\n"
+            output_str += df.to_string(index=False) + "\n\n"
+        return output_str, ",".join(valid_tickers)
 
     long_mild_days = LONG_ENTRY.get("MILD_DAYS", 21)
     short_mild_days = SHORT_ENTRY.get("MILD_DAYS", 21)
 
-    long_pullback_str = print_dropped_table(accumulated["long_dropped"], "MILD BULLISH", max_days=long_mild_days, min_days=0, is_long_table=True)
-    short_rally_str = print_dropped_table(accumulated["short_dropped"], "MILD BEARISH", max_days=short_mild_days, min_days=0, is_long_table=False)
+    mild_bullish_out, long_pullback_str = print_dropped_table(accumulated["long_dropped"], "MILD BULLISH", max_days=long_mild_days, min_days=0, is_long_table=True)
+    mild_bearish_out, short_rally_str = print_dropped_table(accumulated["short_dropped"], "MILD BEARISH", max_days=short_mild_days, min_days=0, is_long_table=False)
+
+    print("\n" + strong_bullish_out)
+    if mild_bullish_out:
+        print(mild_bullish_out)
+        
+    print("\n" + strong_bearish_out)
+    if mild_bearish_out:
+        print(mild_bearish_out)
 
     def load_purged_tickers(side_name):
         bucket = "long_purged" if side_name == "LONG" else "short_purged"
