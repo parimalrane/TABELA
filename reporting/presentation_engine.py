@@ -1079,7 +1079,7 @@ def print_daily_scan(
 
     # Process Auto-Purge and Expiry
     min_dropped_long = LONG_ENTRY.get("MIN_DROPPED_WATCH_SCORE", 70.0)
-    max_dropped_dist = SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 30.0)
+    max_dropped_dist = SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 75.0)
 
     def clean_accumulator(dropped_dict, active_list_str, is_long=True):
         active_set = set(t.strip().upper() for t in active_list_str.split(",") if t.strip())
@@ -1097,6 +1097,25 @@ def print_daily_scan(
                 date_val = datetime.strptime(date_str, "%Y-%m-%d")
                 days_old = (current_date - date_val).days
                 if days_old <= max_days:
+                    # LIVE MILD QUALITY EVALUATION
+                    match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
+                    if not match.empty:
+                        r = match.iloc[0]
+                        try:
+                            zacks_val = int(float(pd.to_numeric(r.get("Zacks Rank", 0), errors="coerce")))
+                        except:
+                            zacks_val = 0
+                            
+                        # If a stock physically breaks the drop limits or reverses its fundamental trend, purge immediately
+                        if is_long:
+                            score = float(pd.to_numeric(r.get("Long_Score", 0), errors="coerce"))
+                            if score < min_dropped_long or zacks_val not in [1, 2, 3]:
+                                continue
+                        else:
+                            score = float(pd.to_numeric(r.get("Short_Score", 0), errors="coerce"))
+                            if score > max_dropped_dist or zacks_val not in [3, 4, 5]:
+                                continue
+                                
                     cleaned[ticker] = date_str
             except Exception:
                 pass
