@@ -164,6 +164,7 @@ def compile_stock_scores(stock_data, all_dates, stock_to_theme, compiled_themes_
     w_rs_12w = rs_weights["12W"]
     w_rs_1w = rs_weights["1W"]
     w_rs_ytd = rs_weights["YTD"]
+    w_rs_52w = rs_weights.get("52W", 0.0)
     
     comp_rs = long_weights["RS"]
     comp_theme = long_weights["THEME"]
@@ -178,7 +179,7 @@ def compile_stock_scores(stock_data, all_dates, stock_to_theme, compiled_themes_
         df = df.copy()
         
         # 1. Raw RS
-        for col in ['% Price Change (1 Week)', '% Price Change (4 Weeks)', '% Price Change (12 Weeks)', 'Relative Price Change (YTD)']:
+        for col in ['% Price Change (1 Week)', '% Price Change (4 Weeks)', '% Price Change (12 Weeks)', 'Relative Price Change (YTD)', 'Price as a % of 52 Wk H-L Range']:
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
             else:
@@ -188,7 +189,8 @@ def compile_stock_scores(stock_data, all_dates, stock_to_theme, compiled_themes_
             df['% Price Change (4 Weeks)'] * w_rs_4w +
             df['% Price Change (12 Weeks)'] * w_rs_12w +
             df['% Price Change (1 Week)'] * w_rs_1w +
-            df['Relative Price Change (YTD)'] * w_rs_ytd
+            df['Relative Price Change (YTD)'] * w_rs_ytd + 
+            df['Price as a % of 52 Wk H-L Range'] * w_rs_52w
         )
         
         # RS Rating ignores 0 values properly usually, but standard rank is sufficient 
@@ -328,12 +330,12 @@ def simulate_long_baseline_gates(daily_scored, prices, all_dates, baseline_gates
                     all_returns.append(ret)
                     
     if not all_returns:
-        return 0.0, 0.0
+        return 0.0, 0.0, 0
         
     avg = sum(all_returns) / len(all_returns)
     wr = sum(1 for r in all_returns if r > 0) / len(all_returns) * 100
     
-    return wr, avg
+    return wr, avg, len(all_returns)
 
 def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
     print("\nStarting Long Phase 1 (Fundamental Math Sweep)...")
@@ -355,7 +357,7 @@ def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
             stock_data, all_dates, stock_to_theme, compiled_themes_by_date, 
             p["RS_RAW_WEIGHTS"], p["LONG_WEIGHTS"], p["ZACKS_SCORE_MAP"], p["GROWTH_SCORE_MAP"]
         )
-        wr, avg = simulate_long_baseline_gates(daily_scored, prices, all_dates, baseline_gates)
+        wr, avg, trc = simulate_long_baseline_gates(daily_scored, prices, all_dates, baseline_gates)
         print(f"  [P{i+1}] WR: {wr:.1f}% Avg: {avg:.2f}% | Math Map Evaluated")
         
         # Flatten dict for readable csv columns
@@ -409,8 +411,8 @@ def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
         )
         
         for g_idx, gate in enumerate(phase2_perms):
-            p2_wr, p2_avg = simulate_long_baseline_gates(daily_scored, prices, all_dates, gate)
-            merged = {**flat_base_model, **gate, 'WinRate_Final': p2_wr, 'AvgReturn_Final': p2_avg}
+            p2_wr, p2_avg, p2_trades = simulate_long_baseline_gates(daily_scored, prices, all_dates, gate)
+            merged = {**flat_base_model, **gate, 'WinRate_Final': p2_wr, 'AvgReturn_Final': p2_avg, 'Trades_Final': p2_trades}
             final_phase2_results.append(merged)
             
     # Export Phase 2 results

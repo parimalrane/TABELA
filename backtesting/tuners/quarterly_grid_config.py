@@ -32,19 +32,15 @@ LONG_PHASE_1 = {
     
     # 2. Stock Momentum (How RS Rating is Scored)
     "RS_RAW_WEIGHTS": [
-        # Immediate Breakout Focus (High 4W/12W)
-        {"4W": 0.50, "12W": 0.40, "1W": 0.10, "YTD": 0.0}, 
-        # Smooth Structural Trending Focus
-        {"4W": 0.30, "12W": 0.50, "1W": 0.10, "YTD": 0.10},
-        # Ultra Fast Momentum Focus
-        {"4W": 0.60, "12W": 0.20, "1W": 0.20, "YTD": 0.0},
+        # LEGACY BASELINE (Turnarounds Allowed)
+        {"4W": 0.60, "12W": 0.20, "1W": 0.20, "YTD": 0.0, "52W": 0.0},
+        # PROPOSED PATCH (Garbage Filtered)
+        {"4W": 0.40, "12W": 0.20, "1W": 0.10, "YTD": 0.10, "52W": 0.20},
     ],
     
     # 3. Composite Calculation (How Long_Score is Scored)
     "LONG_WEIGHTS": [
-        {"RS": 0.50, "THEME": 0.25, "ZACKS": 0.15, "GROWTH": 0.10}, # Baseline Master
-        {"RS": 0.60, "THEME": 0.20, "ZACKS": 0.10, "GROWTH": 0.10}, # Pure Price Action
-        {"RS": 0.40, "THEME": 0.40, "ZACKS": 0.10, "GROWTH": 0.10}, # Liquid Theme Flow
+        {"RS": 0.60, "THEME": 0.20, "ZACKS": 0.10, "GROWTH": 0.10}, # Baseline Master
     ],
     
     # 4. Fundamental Curves
@@ -102,9 +98,9 @@ SHORT_PHASE_1 = {
 SHORT_PHASE_2 = {
     "MAX_SHORT_RS": [60.0, 75.0],        # Ceiling for RS weakness
     "MIN_SHORT_RS": [8.0, 15.0],         # Floor to avoid graveyard
-    "MAX_SHORT_SCORE": [45.0, 50.0],
+    "MAX_SHORT_SCORE": [25.0, 35.0, 45.0],
     "MAX_DROPPED_WATCH_SCORE": [65.0, 75.0], # Bounce resistance ceiling
     "MILD_DAYS": [14, 21],
-    "MIN_VOLUME": [1_500_000, 2_500_000],
+    "MIN_VOLUME": [2_500_000, 5_000_000],
     "BLOCKED_ZACKS": [[1,2], [1,2,3]],
 }

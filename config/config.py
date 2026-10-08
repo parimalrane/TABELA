@@ -27,18 +27,18 @@ THEME_STRENGTH_CONFIG = {
 
 # User Request: 50% RS, 25% Theme, 25% Fundamentals
 LONG_WEIGHTS = {
-    "RS_WEIGHT": 0.50,
-    "THEME_WEIGHT": 0.25,
-    "ZACKS_WEIGHT": 0.15,
+    "RS_WEIGHT": 0.60,
+    "THEME_WEIGHT": 0.20,
+    "ZACKS_WEIGHT": 0.10,
     "GROWTH_WEIGHT": 0.10
 }
 
 RS_RAW_WEIGHTS = {
-    "% Price Change (4 Weeks)": 0.50,      # Huge weight on immediate breakout flow
-    "% Price Change (12 Weeks)": 0.40,     # Strong weight on intermediate trend
-    "% Price Change (1 Week)": 0.10,       # Slight weight on current week
-    "Relative Price Change (YTD)": 0.00,   # Nuke YTD to discover Early Turnarounds
-    "Price as a % of 52 Wk H-L Range": 0.00 # Removed from raw RS, handled safely in Long Score
+    "% Price Change (4 Weeks)": 0.40,      # High velocity near-term
+    "% Price Change (12 Weeks)": 0.20,     # Core trend confirmation
+    "% Price Change (1 Week)": 0.10,       # Slight weight on immediate term
+    "Relative Price Change (YTD)": 0.10,   # Block severe structural downtrends
+    "Price as a % of 52 Wk H-L Range": 0.20 # Force true breakouts near high ranges
 }
 
 # Zacks Binary: Only Rank 1/2 survive. Rank 3 turnarounds = poison (proven by 61-experiment grid search)
@@ -50,14 +50,14 @@ GROWTH_SCORE_MAP = {'A': 100.0, 'B': 95.0, 'C': 90.0, 'D': 20.0, 'F': -50.0}
 # ==========================
 
 LONG_ENTRY = {
-    # Vectorized Optimization Winner: "Tight Gate (90 RS / 85 Long Score) -> 44.2% WR"
+    # Re-tightened to Institutional Elite (Top 10% constraints) for strict watchlist quality over quantity
     "MIN_RS": 90.0,
     "MIN_LONG_SCORE": 85.0,
     "THEMES": ["Leading", "Neutral", "Unclassified Leader", "Unknown"],
     "BLOCKED_ZACKS": [4, 5],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_500_000,
-    "MIN_DROPPED_WATCH_SCORE": 80.0,
+    "MIN_DROPPED_WATCH_SCORE": 70.0,
     "MILD_DAYS": 21,
     "PURGE_DAYS": 50,
     
@@ -98,14 +98,14 @@ SHORT_GROWTH_SCORE_MAP = {'A': -50.0, 'B': 0.0, 'C': 50.0, 'D': 80.0, 'F': 100.0
 
 # Short entry thresholds — Ultra-Premium Cartesian Winner (Low Volume / High Probability)
 SHORT_ENTRY = {
-    # 1. STRONG BEARISH (Active Breakdowns)
-    "MIN_SHORT_RS": 40.0,
-    "MAX_SHORT_RS": 75.0,
-    "MAX_SHORT_SCORE": 45.0,
+    # 1. STRONG BEARISH (Active Breakdowns) - Thematic Exodus Strategy Winner
+    "MIN_SHORT_RS": 8.0,
+    "MAX_SHORT_RS": 60.0,
+    "MAX_SHORT_SCORE": 35.0,
     "THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
     "BLOCKED_ZACKS": [1, 2, 3],
     "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 2_500_000,
+    "MIN_VOLUME": 5_000_000,
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
     "MAX_DROPPED_WATCH_SCORE": 75.0,
