@@ -420,7 +420,7 @@ def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
     date_str = datetime.now().strftime("%Y%m%d")
     df_p2 = pd.DataFrame(final_phase2_results)
     df_p2 = df_p2.sort_values(by=["WinRate_Final", "AvgReturn_Final"], ascending=False)
-    p2_csv = f"C:/TABELA/backtesting/tuners/{date_str}_quarterly_master_results.csv"
+    p2_csv = f"C:/TABELA/backtesting/tuners/{date_str}_quarterly_long_master_results.csv"
     df_p2.to_csv(p2_csv, index=False)
     print(f"\nExported {p2_csv}")
     

@@ -24,7 +24,7 @@ These algorithms use a highly optimized, fully in-memory pandas vectorized loop 
 
 ### 2. Review the Output
 Once the script completes, navigate to `backtesting\tuners\`. You will find the newly generated CSV files containing the master optimization matrices:
-- `YYYYMMDD_quarterly_master_results.csv` (Long Engine)
+- `YYYYMMDD_quarterly_long_master_results.csv` (Long Engine)
 - `YYYYMMDD_quarterly_short_master_results.csv` (Short Engine)
 
 Open the CSVs and sort by **Win Rate (%)** and **Avg Return (%)**. Identify the "Winner" experiment.
