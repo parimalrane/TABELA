@@ -63,7 +63,9 @@ LONG_ENTRY = {
     
     # 3. DEEP RETRACE (Days 22 to X)
     "DEEP_RETRACE_ZACKS": [1, 2],
-    "DEEP_RETRACE_THEMES": ["Leading", "Neutral"]
+    "DEEP_RETRACE_THEMES": ["Leading", "Neutral", "Unclassified Leader", "Unknown"],
+    "DEEP_RETRACE_MIN_RS": 70.0,
+    "DEEP_RETRACE_MIN_SCORE": 65.0
 }
 
 # ==========================
@@ -114,6 +116,8 @@ SHORT_ENTRY = {
     # 3. DEEP RETRACE (Days 22 to X)
     "PURGE_DAYS": 50,
     "DEEP_RETRACE_ZACKS": [4, 5],
-    "DEEP_RETRACE_THEMES": ["Lagging"]
+    "DEEP_RETRACE_THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
+    "DEEP_RETRACE_MAX_RS": 35.0,
+    "DEEP_RETRACE_MAX_SCORE": 50.0
 }
 

@@ -104,3 +104,36 @@ SHORT_PHASE_2 = {
     "MIN_VOLUME": [2_500_000, 5_000_000],
     "BLOCKED_ZACKS": [[1,2], [1,2,3]],
 }
+
+# ==============================================================================
+# RETRACEMENT ENGINE GRIDS (PHASE 3)
+# ==============================================================================
+
+RETRACE_PHASE = {
+    # 1. Long Retracement Weights (Testing Basing Logic vs Breakout Momentum)
+    "LONG_RETRACE_WEIGHTS": [
+        {"RS_WEIGHT": 0.20, "THEME_WEIGHT": 0.40, "ZACKS_WEIGHT": 0.25, "GROWTH_WEIGHT": 0.15}, # Proposed Fundamental Anchor
+        {"RS_WEIGHT": 0.40, "THEME_WEIGHT": 0.40, "ZACKS_WEIGHT": 0.10, "GROWTH_WEIGHT": 0.10}, # Moderate 
+        {"RS_WEIGHT": 0.25, "THEME_WEIGHT": 0.50, "ZACKS_WEIGHT": 0.15, "GROWTH_WEIGHT": 0.10}, # Macro Thematic Anchor
+    ],
+    
+    # 2. Long Retracement Thresholds
+    "LONG_RETRACE_GATES": [
+        {"DEEP_RETRACE_MIN_RS": 70.0, "DEEP_RETRACE_MIN_SCORE": 65.0}, # Institutional Standard
+        {"DEEP_RETRACE_MIN_RS": 60.0, "DEEP_RETRACE_MIN_SCORE": 55.0}, # Loose
+        {"DEEP_RETRACE_MIN_RS": 40.0, "DEEP_RETRACE_MIN_SCORE": 40.0}, # Ultra Forgiving
+    ],
+
+    # 3. Short Retracement Weights (Tracking Relief Rallies waiting for breakdowns)
+    "SHORT_RETRACE_WEIGHTS": [
+        {"RS_WEIGHT": 0.20, "THEME_WEIGHT": 0.40, "ZACKS_WEIGHT": 0.25, "GROWTH_WEIGHT": 0.15}, # Thematic decay priority
+        {"RS_WEIGHT": 0.40, "THEME_WEIGHT": 0.40, "ZACKS_WEIGHT": 0.10, "GROWTH_WEIGHT": 0.10}, # Balanced
+    ],
+
+    # 4. Short Retracement Thresholds
+    "SHORT_RETRACE_GATES": [
+        {"DEEP_RETRACE_MAX_RS": 25.0, "DEEP_RETRACE_MAX_SCORE": 40.0},
+        {"DEEP_RETRACE_MAX_RS": 35.0, "DEEP_RETRACE_MAX_SCORE": 50.0},
+        {"DEEP_RETRACE_MAX_RS": 50.0, "DEEP_RETRACE_MAX_SCORE": 60.0},
+    ]
+}

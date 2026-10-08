@@ -1015,6 +1015,46 @@ def print_daily_scan(
             if days_purged > purge_windows[bucket]:
                 del entries[ticker]
                 continue
+                
+            # Quality Expiry Check
+            match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
+            if not match.empty:
+                r = match.iloc[0]
+                theme_class = str(r.get("Theme_Class", "Unknown"))
+                try:
+                    zacks_val = int(float(pd.to_numeric(r.get("Zacks Rank", 0), errors="coerce")))
+                except:
+                    zacks_val = 0
+                
+                is_long = (bucket == "long_purged")
+                cfg = LONG_ENTRY if is_long else SHORT_ENTRY
+                
+                allowed_themes = cfg.get("DEEP_RETRACE_THEMES", [])
+                allowed_zacks = cfg.get("DEEP_RETRACE_ZACKS", [])
+                
+                rs_key = "RS_Rating" if is_long else "Short_RS_Rating"
+                score_key = "Long_Score" if is_long else "Short_Score"
+                
+                current_rs = float(pd.to_numeric(r.get(rs_key, 0), errors="coerce"))
+                current_score = float(pd.to_numeric(r.get(score_key, 0), errors="coerce"))
+                
+                if theme_class not in allowed_themes or zacks_val not in allowed_zacks:
+                    del entries[ticker]
+                    continue
+                    
+                if is_long:
+                    min_rs = cfg.get("DEEP_RETRACE_MIN_RS", 0.0)
+                    min_score = cfg.get("DEEP_RETRACE_MIN_SCORE", 0.0)
+                    if current_rs < min_rs or current_score < min_score:
+                        del entries[ticker]
+                        continue
+                else:
+                    max_rs = cfg.get("DEEP_RETRACE_MAX_RS", 100.0)
+                    max_score = cfg.get("DEEP_RETRACE_MAX_SCORE", 100.0)
+                    if current_rs > max_rs or current_score > max_score:
+                        del entries[ticker]
+                        continue
+                        
             record["days_purged"] = days_purged
             record["purged_on"] = purged_on.strftime("%Y-%m-%d")
             entries[ticker] = record
