@@ -12,21 +12,20 @@ By running this once per quarter, you guarantee that TABELA is using the mathema
 ### 1. Run the Tuner
 Navigate to your main workspace terminal and execute the master suite:
 ```cmd
-python backtesting\tuners\run_quarterly_tuner.py
+backtesting\run_quarterly_backtest.bat
 ```
-This script will:
-1. Back up your live `config.py` safely.
-2. Execute **30 structured test cases** across the Long Engine.
-3. Automatically run a 90-day regression and historical backtest on every test case.
-4. Execute **14 structured test cases** across the Short Engine (using Phase 1 / Phase 3 configurations).
-5. Restore your live `config.py` perfectly.
+This script will automatically trigger two high-speed algorithms in sequence:
+1. `run_quarterly_in_memory_tuner.py` (Long Matrix)
+2. `run_quarterly_in_memory_tuner_short.py` (Short Matrix)
 
-*Note: Execution takes approximately ~5-8 minutes total as it iterates over 44 separate 3-month regressions.*
+These algorithms use a highly optimized, fully in-memory pandas vectorized loop that completely bypasses legacy JSON I/O loading, testing the complete combinatorial math arrays specified within `backtesting\tuners\quarterly_grid_config.py`.
+
+*Note: Due to the vectorized design, the multi-phase test sequence executes in under ~2 minutes, bypassing all production config files.*
 
 ### 2. Review the Output
-Once the script completes, navigate to `backtesting\results\`. You will find the newly generated CSV files containing the master optimization matrices:
-- `optimization_results.csv` (Long Engine)
-- `optimization_results_short_v2_YYYYMMDD.csv` (Short Engine)
+Once the script completes, navigate to `backtesting\tuners\`. You will find the newly generated CSV files containing the master optimization matrices:
+- `YYYYMMDD_quarterly_master_results.csv` (Long Engine)
+- `YYYYMMDD_quarterly_short_master_results.csv` (Short Engine)
 
 Open the CSVs and sort by **Win Rate (%)** and **Avg Return (%)**. Identify the "Winner" experiment.
 
