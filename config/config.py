@@ -34,11 +34,11 @@ LONG_WEIGHTS = {
 }
 
 RS_RAW_WEIGHTS = {
-    "% Price Change (4 Weeks)": 0.40,      # High velocity near-term
+    "% Price Change (4 Weeks)": 0.60,      # High velocity near-term
     "% Price Change (12 Weeks)": 0.20,     # Core trend confirmation
-    "% Price Change (1 Week)": 0.10,       # Slight weight on immediate term
-    "Relative Price Change (YTD)": 0.10,   # Block severe structural downtrends
-    "Price as a % of 52 Wk H-L Range": 0.20 # Force true breakouts near high ranges
+    "% Price Change (1 Week)": 0.20,       # Slight weight on immediate term
+    "Relative Price Change (YTD)": 0.00,   # Block severe structural downtrends
+    "Price as a % of 52 Wk H-L Range": 0.00 # Force true breakouts near high ranges
 }
 
 # Zacks Binary: Only Rank 1/2 survive. Rank 3 turnarounds = poison (proven by 61-experiment grid search)
@@ -57,8 +57,8 @@ LONG_ENTRY = {
     "BLOCKED_ZACKS": [4, 5],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_500_000,
-    "MIN_DROPPED_WATCH_SCORE": 70.0,
-    "MILD_DAYS": 21,
+    "MIN_DROPPED_WATCH_SCORE": 80.0,
+    "MILD_DAYS": 14,
     "PURGE_DAYS": 50,
     
     # 3. DEEP RETRACE (Days 22 to X)
@@ -109,9 +109,9 @@ SHORT_ENTRY = {
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 5_000_000,
     
-    # 2. MILD BEARISH (Relief Rallies - Days 1 to 21)
-    "MAX_DROPPED_WATCH_SCORE": 75.0,
-    "MILD_DAYS": 21,
+    # 2. MILD BEARISH (Relief Rallies - Days 1 to 14)
+    "MAX_DROPPED_WATCH_SCORE": 65.0,
+    "MILD_DAYS": 14,
     
     # 3. DEEP RETRACE (Days 22 to X)
     "PURGE_DAYS": 50,

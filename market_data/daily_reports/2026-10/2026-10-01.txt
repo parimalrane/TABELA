@@ -9,12 +9,12 @@ MARKET DATE: 2026-10-01
               MACRO WEATHER REPORT & BREADTH X-RAY
 ========================================================================
 [1] MARKET INDEXES (Multi-Timeframe Performance)
-    Index                1-Week    1-Month   1-Quarter   Year-To-Date
-    --------------------------------------------------------
-    Nasdaq (QQQ)         +0.13%     +4.97%      +2.43%        +23.52%
-    S&P 500 (SPY)        -0.42%     +0.54%      +2.70%        +15.43%
-    Russell 2k (IWM)     -0.94%     -3.72%      -6.53%        +16.19%
-    Dow Jones (DIA)      -0.79%     -3.40%      -2.30%        +11.11%
+    Index                1-Day    1-Week    1-Month   1-Quarter   Year-To-Date
+    -----------------------------------------------------------------
+    Nasdaq (QQQ)        +0.31%    +0.13%     +4.97%      +2.43%        +23.52%
+    S&P 500 (SPY)       +0.18%    -0.42%     +0.54%      +2.70%        +15.43%
+    Russell 2k (IWM)    +0.41%    -0.94%     -3.72%      -6.53%        +16.19%
+    Dow Jones (DIA)     +0.01%    -0.79%     -3.40%      -2.30%        +11.11%
 
 [2] MACRO SECTOR RANKINGS (Gravity-Weighted Capital Flows)
     > Sector Breadth  : W (+3/-8) ; M (+1/-10) ; Q (+4/-7)
@@ -44,15 +44,14 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
-Refining & Marketing           Exploration          8    5  132.93   3.17   Leading (8 -> +1)               PBF, VLO, MPC, DINO
-AI Servers                     Artificial Intel..   2    2  108.76   2.03   Leading (9 -> +1)               HPE, DELL
 Cloud Infrastructure           Cloud Computing      5    2   68.45   6.42   Leading (4)                     FSLY, SNOW
-Optical Networking             Semiconductors       8    2   53.28   5.29   Leading (5 -> +1)               LITE, VIAV
-Memory                         Semiconductors       4    1   38.63   5.29   Leading (5 -> +1)               
+Semiconductor Analytics        Semiconductors       1    1   65.16   5.29   Leading (5 -> +1)               
+Optical Networking             Semiconductors       8    2   52.46   5.29   Leading (5 -> +1)               VIAV, LITE
 AI Compute                     Artificial Intel..   5    1   35.48   2.03   Leading (9 -> +1)               QMCO
-Semiconductors                 Semiconductors      44    3   25.62   5.29   Leading (5 -> +1)               SMTC, ASX
-Cybersecurity                  Software            13    1   19.69   4.36   Leading (7 -> -2)               FTNT
+Semiconductors                 Semiconductors      44    3   25.36   5.29   Leading (5 -> +1)               SMTC, ASX
+Exploration                    Exploration        100    2    9.09   3.17   Leading (8 -> +1)               SEI
 Aerospace & Defense            Aerospace & Defe..  39    0    0.00  -6.80   Lagging (39)                    #BA
+Asset Management               Banking              1    0    0.00  -6.14   Lagging (38 -> -1)              
 Building Materials             Infrastructure      47    0    0.00  -3.24   Neutral (21 -> -1)              #CRH
 Communications Cloud           Cloud Computing      4    0    0.00   6.42   Leading (4)                     
 Consumer Staples               Consumer Staples    41    0    0.00   0.00   Unknown                         #PEP
@@ -60,18 +59,17 @@ Data Storage                   Semiconductors       1    0    0.00   5.29   Lead
 Defense Drone Systems          Aerospace & Defe..   1    0    0.00  -6.80   Lagging (39)                    
 Defense Systems                Aerospace & Defe..   1    0    0.00  -6.80   Lagging (39)                    
 Digital Banking                Banking              2    0    0.00  -6.14   Lagging (38 -> -1)              
-Asset Management               Banking              1    0    0.00  -6.14   Lagging (38 -> -1)              
 Banking                        Banking            153    0    0.00  -6.14   Lagging (38 -> -1)              #FISV
+Foundry                        Semiconductors       3    0    0.00   5.29   Leading (5 -> +1)               
 Footwear/Apparel               Retail              45    0    0.00  -3.26   Neutral (22 -> -2)              #NKE, #ONON
-Gold Mining                    Gold Mining         51    0    0.00  -2.32   Neutral (18 -> -2)              #KGC, #UUUU
 Enterprise Cloud               Cloud Computing      2    0    0.00   6.42   Leading (4)                     
+Gold Mining                    Gold Mining         51    0    0.00  -2.32   Neutral (18 -> -2)              #KGC, #UUUU
 Financial Services             Banking             68    0    0.00  -6.14   Lagging (38 -> -1)              #APLD
 Medical Devices                Medical Devices     99    0    0.00  -3.46   Neutral (23 -> +1)              #COO
-Foundry                        Semiconductors       3    0    0.00   5.29   Leading (5 -> +1)               
-Optical Infrastructure         Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
+Memory                         Semiconductors       4    0    0.00   5.29   Leading (5 -> +1)               
 Nuclear Infrastructure         Uranium Mining       3    0    0.00  -9.98   Lagging (42)                    
+Optical Infrastructure         Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
 Semiconductor Equipment        Semiconductors      26    0    0.00   5.29   Leading (5 -> +1)               
-Semiconductor Analytics        Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
 Semiconductor Testing          Semiconductors       3    0    0.00   5.29   Leading (5 -> +1)               
 Space Infrastructure           Aerospace & Defe..   6    0    0.00  -6.80   Lagging (39)                    #ASTS, #LUNR
 Specialty Finance / Debt Col.. Banking              1    0    0.00  -6.14   Lagging (38 -> -1)              
@@ -86,19 +84,30 @@ Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
 Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
   SMTC       Semiconductors      88.26         99       +1     9     XLK (1)
-  FSLY Cloud Infrastructure      87.72         97       -1    11     XLK (1)
-  LITE   Optical Networking      87.66         98        0     9     XLK (1)
-   ASX       Semiconductors      87.66         98        0     9     XLK (1)
-  FTNT        Cybersecurity      86.53         97       +1     9     XLK (1)
-  VIAV   Optical Networking      86.46         96       +5     3     XLK (1)
-   PBF Refining & Marketing      86.43         98       -2    23     XLE (2)
-  QMCO           AI Compute      86.37         99       -1     3     XLK (1)
-  SNOW Cloud Infrastructure      85.92         94       +1     2     XLK (1)
-   VLO Refining & Marketing      85.83         97       -2     7     XLE (2)
-   MPC Refining & Marketing      85.83         97       -2     7     XLE (2)
-   HPE           AI Servers      85.37         99       +1     9     XLK (1)
-  DELL           AI Servers      85.37         99       +1     9     XLK (1)
-  DINO Refining & Marketing      85.23         96       -2    23     XLE (2)
+  FSLY Cloud Infrastructure      87.72         97       -1     9     XLK (1)
+  VIAV   Optical Networking      86.46         96       +3     3     XLK (1)
+  QMCO           AI Compute      86.37         99        0     3     XLK (1)
+   SEI          Exploration      85.93         98       -2     6     XLE (2)
+  SNOW Cloud Infrastructure      85.92         94       -1     2     XLK (1)
+  LITE   Optical Networking      85.86         95        0     3     XLK (1)
+   ASX       Semiconductors      85.86         95        0     9     XLK (1)
+
+========================================
+MILD BULLISH
+========================================
+Ticker            Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+   HPE              AI Servers      84.77         98       NA     0     XLK (1)
+  ENTG Semiconductor Equipment      84.76         94       NA     0     XLK (1)
+  FTNT           Cybersecurity      84.73         94       NA     0     XLK (1)
+   PBF    Refining & Marketing      84.03         94       NA     0     XLE (2)
+  ESTC     Data Infrastructure      83.73         94       NA     0     XLK (1)
+  PLTR             AI Platform      83.47         95       NA     0     XLK (1)
+   VLO    Refining & Marketing      83.43         93       NA     0     XLE (2)
+  ILMN             Diagnostics      82.18         99       NA     0     XLV (3)
+  DELL              AI Servers      81.17         92       NA     1     XLK (1)
+   MPC    Refining & Marketing      82.83         92       NA     2     XLE (2)
+  DINO    Refining & Marketing      81.63         90       NA     2     XLE (2)
+   PSX    Refining & Marketing      81.03         89       NA     2     XLE (2)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -107,75 +116,40 @@ Legend: ^ = Micro Laggard
 Ticker         Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
   UUUU          Gold Mining       27.25               12        0     7     XLB (7)
    CPB              Unknown       23.10               14        0     8     XLP (6)
-  FISV              Banking       24.68               13        0    21     XLK (1)
    MOS              Unknown       33.80               32        0     2     XLB (7)
-  ASTS Space Infrastructure       29.79               23        0     2     XLK (1)
-   COO      Medical Devices       20.28               10       +1     4     XLV (3)
+  FISV              Banking       24.68               13        0    21     XLK (1)
+   COO      Medical Devices       20.28               10        0     4     XLV (3)
+  ASTS Space Infrastructure       29.79               23       +1     2     XLK (1)
+ CMCSA              Unknown       20.25               15       -1     7     XLY (9)
   LUNR Space Infrastructure       34.34               30       NA     1     XLI (5)
- CMCSA              Unknown       20.25               15       -2     7     XLY (9)
-   NKE     Footwear/Apparel       17.25                9       +4     4     XLY (9)
-  TSCO              Unknown       23.05               17       -2    21     XLY (9)
-   CRH   Building Materials       22.21               12        0     3     XLI (5)
-   IBM              Unknown       20.25               15       -3     9     XLK (1)
-   PEP     Consumer Staples       30.00               30       -3    18     XLP (6)
-    BA  Aerospace & Defense       22.94               24        0     5     XLI (5)
    KGC          Gold Mining       26.20               25        0     4     XLB (7)
-  ONON     Footwear/Apparel       23.10               18        0     8     XLY (9)
+    BA  Aerospace & Defense       22.94               24       +1     5     XLI (5)
+   IBM              Unknown       20.25               15       -1     9     XLK (1)
+   CRH   Building Materials       22.21               12       +1     3     XLI (5)
+   PEP     Consumer Staples       30.00               30       -1    18     XLP (6)
+   NKE     Footwear/Apparel       17.25                9       +1     4     XLY (9)
+  TSCO              Unknown       23.05               17       -1    21     XLY (9)
   APLD   Financial Services       34.93               38       NA     1     XLF (8)
-========================================
-MILD BULLISH
-========================================
-Ticker              Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-    DK      Refining & Marketing    84.63    95         0     XLE (2)
-  ENTG   Semiconductor Equipment    84.16    93         0     XLK (1)
-   SEI               Exploration    84.13    95         0     XLE (2)
-   PSX      Refining & Marketing    84.03    94         0     XLE (2)
-  FIVN      Communications Cloud    83.72    92         0     XLK (1)
- ~HALO                   Biotech    77.33    93         0     XLV (3)
-    TH Leisure and Entertainment    73.57    95         0     XLY (9)
-  APPS             Mobile Adtech    72.37    93         1     XLK (1)
-  EQNR         Integrated Energy    81.03    89         2     XLE (2)
-   CNK Leisure and Entertainment    72.37    93         2     XLY (9)
-  VSTS     Professional Services    81.73    89         3     XLI (5)
-  AXTI            Semiconductors    77.76    99         3     XLK (1)
-   STX              Data Storage    77.66    98         3     XLK (1)
-   TER     Semiconductor Testing    75.86    95         3     XLK (1)
-  ESTC       Data Infrastructure    82.53    92         6     XLK (1)
-  NTAP       Data Infrastructure    78.53    97         6     XLK (1)
-   UMC                   Foundry    77.16    98         6     XLK (1)
-  NTSK                  Software    76.13    93         6     XLK (1)
-  ALAB           AI Connectivity    75.37    94         7     XLK (1)
-  PLTR               AI Platform    81.67    92         8     XLK (1)
-  ANET             AI Networking    74.17    92         8     XLK (1)
-   HPQ                AI Compute    71.17    87         8     XLK (1)
-   MXL            Semiconductors    78.26    99         9     XLK (1)
-  IOVA                   Biotech    73.83    99        10     XLV (3)
-  TALO               Exploration    77.03    84        15     XLE (2)
-  AVAH       Healthcare Services    74.90    86        15     XLV (3)
-  LFST                Healthcare    75.50    87        16     XLV (3)
+  ONON     Footwear/Apparel       23.10               18       -1     8     XLY (9)
 
 ========================================
 MILD BEARISH
 ========================================
-Ticker              Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
-  ~CAG                   Unknown    11.85    19         0     XLP (6)
-   BSX           Medical Devices    16.33     7         1     XLV (3)
-  TSLA     Autonomous Driving AI    33.82    29         2     XLY (9)
- ~IONQ                   Unknown    55.90    66         7     XLK (1)
-  CELH         Consumer Momentum    21.73     9        10     XLP (6)
-  ~ACI          Consumer Staples    13.60    14        10     XLP (6)
-   HDB                   Banking    17.68    13        13     XLF (8)
-  CHWY                  Internet    15.32     5        15     XLY (9)
-  INFY                  Software    19.43    14        16     XLK (1)
-   ~KR                   Unknown    34.50    50        20     XLY (9)
-  DKNG Leisure and Entertainment    16.52     3        20     XLY (9)
+Ticker          Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+  ~CAG               Unknown       11.85               19       NA     0     XLP (6)
+   BSX       Medical Devices       16.33                7       NA     1     XLV (3)
+  TSLA Autonomous Driving AI       33.82               29       NA     2     XLY (9)
+ ~IONQ               Unknown       55.90               66       NA     7     XLK (1)
+  CELH     Consumer Momentum       21.73                9       NA    10     XLP (6)
+  ~ACI      Consumer Staples       13.60               14       NA    10     XLP (6)
+   HDB               Banking       17.68               13       NA    13     XLF (8)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,SMTC,FSLY,LITE,ASX,FTNT,VIAV,PBF,QMCO,SNOW,VLO,MPC,HPE,DELL,DINO,
-###Bullish_Swing,LFST,AVAH,TALO,IOVA,MXL,ANET,HPQ,PLTR,ALAB,ESTC,NTAP,NTSK,UMC,AXTI,STX,TER,VSTS,CNK,EQNR,APPS,DK,ENTG,FIVN,HALO,PSX,SEI,TH,
-###Bullish_Deep_Retrace,ALAB,ANET,AVAH,CRSR,DK,ENTG,EQNR,ESTC,FIVN,HALO,HPQ,LFST,NIQ,NTAP,NTSK,OSCR,PLTR,PSX,SEI,TALO,U,VSTS,
-###Bearish_Momentum,UUUU,CPB,FISV,MOS,ASTS,COO,LUNR,CMCSA,NKE,TSCO,CRH,IBM,PEP,BA,KGC,ONON,APLD,
-###Bearish_Swing,DKNG,KR,INFY,CHWY,HDB,ACI,CELH,IONQ,TSLA,BSX,CAG,
+###Bullish_Momentum,SMTC,FSLY,VIAV,QMCO,SEI,SNOW,LITE,ASX,
+###Bullish_Swing,DINO,MPC,PSX,DELL,ENTG,ESTC,FTNT,HPE,ILMN,PBF,PLTR,VLO,
+###Bullish_Deep_Retrace,ALAB,ARQT,AVAH,DELL,DINO,ENTG,ESTC,FIVN,FTNT,HALO,HPE,HPQ,ILMN,MPC,NIQ,NTSK,ODD,PBF,PLTR,PSX,SMCI,TALO,U,VLO,
+###Bearish_Momentum,UUUU,CPB,MOS,FISV,COO,ASTS,CMCSA,LUNR,KGC,BA,IBM,CRH,PEP,NKE,TSCO,APLD,ONON,
+###Bearish_Swing,HDB,ACI,CELH,IONQ,TSLA,BSX,CAG,
 ###Bearish_Deep_Retrace,BSX,FIS,
 
 ==============================================

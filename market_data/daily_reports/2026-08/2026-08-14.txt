@@ -9,12 +9,12 @@ MARKET DATE: 2026-08-14
               MACRO WEATHER REPORT & BREADTH X-RAY
 ========================================================================
 [1] MARKET INDEXES (Multi-Timeframe Performance)
-    Index                1-Week    1-Month   1-Quarter   Year-To-Date
-    --------------------------------------------------------
-    Nasdaq (QQQ)         +1.11%     +1.58%      +1.68%        +26.59%
-    S&P 500 (SPY)        +0.40%     +3.26%      +4.02%        +21.54%
-    Russell 2k (IWM)     +1.17%     +3.59%      +7.50%        +34.83%
-    Dow Jones (DIA)      -0.52%     +2.34%      +7.55%        +21.11%
+    Index                1-Day    1-Week    1-Month   1-Quarter   Year-To-Date
+    -----------------------------------------------------------------
+    Nasdaq (QQQ)        -0.14%    +1.11%     +1.58%      +1.68%        +26.59%
+    S&P 500 (SPY)       -0.20%    +0.40%     +3.26%      +4.02%        +21.54%
+    Russell 2k (IWM)    +0.52%    +1.17%     +3.59%      +7.50%        +34.83%
+    Dow Jones (DIA)     -0.21%    -0.52%     +2.34%      +7.55%        +21.11%
 
 [2] MACRO SECTOR RANKINGS (Gravity-Weighted Capital Flows)
     > Sector Breadth  : W (+9/-2) ; M (+10/-1) ; Q (+8/-3)
@@ -44,25 +44,25 @@ Legend: [No Prefix] = Long Candidate / # = Distribution
 ========================================
 Micro Theme                    Macro Theme        Tot Qual W_Brdth ETF_RS   Macro State & Movement          Stocks
 ------------------------------------------------------------------------------------------------------------------------------------
-Refining & Marketing           Exploration          8    5  129.36   6.13   Leading (4 -> +2)               PBF, VLO, DINO
-IT Services                    Software             3    2   89.19   5.92   Leading (5 -> -5)               
+IT Services                    Software             3    2   90.58   5.92   Leading (5 -> -5)               
 Digital Payments               Software             4    2   79.26   5.92   Leading (5 -> -5)               
-Communications Cloud           Cloud Computing      4    2   78.06  14.51   Leading (1)                     FIVN, RNG
-Cloud Infrastructure           Cloud Computing      5    2   70.24  14.51   Leading (1)                     FSLY, SNOW
-Oil Services                   Exploration          5    2   68.45   6.13   Leading (4 -> +2)               
+Communications Cloud           Cloud Computing      4    2   77.66  14.51   Leading (1)                     FIVN, RNG
+Cloud Infrastructure           Cloud Computing      5    2   69.88  14.51   Leading (1)                     FSLY, SNOW
 Life Sciences Tools            Medical Devices      5    2   66.65   7.38   Leading (3 -> -2)               AVTR
-AI Servers                     Artificial Intel..   2    1   54.38   1.32   Neutral (20 -> -10)             DELL
+Oil Services                   Exploration          5    2   66.30   6.13   Leading (4 -> +2)               
 Mobile Adtech                  Internet             2    1   54.38   1.86   Neutral (17 -> -10)             APPS
-Diagnostics                    Medical Devices      9    2   48.61   7.38   Leading (3 -> -2)               NEO
-Professional Services          Software             3    1   42.97   5.92   Leading (5 -> -5)               
+Digital Advertising            Internet             3    1   45.28   1.86   Neutral (17 -> -10)             MGNI
+Professional Services          Software             3    1   44.36   5.92   Leading (5 -> -5)               
 Data Infrastructure            Software             4    1   39.43   5.92   Leading (5 -> -5)               
-Cybersecurity                  Software            13    2   38.36   5.92   Leading (5 -> -5)               PANW
+Cybersecurity                  Software            13    2   37.54   5.92   Leading (5 -> -5)               RPD
 AI Compute                     Artificial Intel..   5    1   35.48   1.32   Neutral (20 -> -10)             QMCO
-Medical Devices                Medical Devices     88    4   19.66   7.38   Leading (3 -> -2)               
-Aerospace & Defense            Aerospace & Defe..  37    2   18.99   4.87   Leading (6 -> -1)               ATI
-Software                       Software           169    4   11.62   5.92   Leading (5 -> -5)               U, PENG
-Leisure and Entertainment      Internet            34    1   10.24   1.86   Neutral (17 -> -10)             CRSR
-Exploration                    Exploration         75    1    5.64   6.13   Leading (4 -> +2)               NESR
+Refining & Marketing           Exploration          8    1   26.09   6.13   Leading (4 -> +2)               PBF
+Diagnostics                    Medical Devices      9    1   24.56   7.38   Leading (3 -> -2)               
+Medical Devices                Medical Devices     88    4   19.50   7.38   Leading (3 -> -2)               
+Aerospace & Defense            Aerospace & Defe..  37    2   19.09   4.87   Leading (6 -> -1)               RDW
+Software                       Software           169    6   17.29   5.92   Leading (5 -> -5)               U, NTNX
+Financial Services             Banking             61    1    6.43   4.10   Leading (9 -> -5)               PGY
+Exploration                    Exploration         75    1    5.53   6.13   Leading (4 -> +2)               NESR
 Consumer Staples               Consumer Staples    34    0    0.00   0.00   Unknown                         #PG
 Business Software              Software             6    0    0.00   5.92   Leading (5 -> -5)               
 Energy                         Exploration         15    0    0.00   6.13   Leading (4 -> +2)               
@@ -85,115 +85,77 @@ Wireless Chips                 Semiconductors       2    0    0.00  -2.49   Lagg
 STRONG BULLISH (Trend Continuation)
 Legend: ^ = Micro Leader | ~ = Unknown/Unclassified
 ========================================
+Ticker         Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  FSLY Cloud Infrastructure      98.40         99        0     5     XLK (4)
+  FIVN Communications Cloud      95.40         94       +6     5     XLK (4)
+     U             Software      89.86         99        0    10     XLK (4)
+  AVTR  Life Sciences Tools      88.91         95       +8    15     XLV (2)
+   RNG Communications Cloud      88.40         99        0    15     XLK (4)
+  NESR          Exploration      88.27         96       +9     5     XLE (1)
+   PBF Refining & Marketing      87.67         95       +4     4     XLE (1)
+   RDW  Aerospace & Defense      87.62         97       NA     1     XLI (5)
+  SNOW Cloud Infrastructure      86.60         96        0    15     XLK (4)
+  APPS        Mobile Adtech      85.83         99       NA     1     XLK (4)
+   PGY   Financial Services      85.65         95       NA     1     XLF (3)
+  QMCO           AI Compute      85.29         99       +1     3     XLK (4)
+  MGNI  Digital Advertising      85.23         98       +3     3     XLK (4)
+   RPD        Cybersecurity      85.06         91      -10     3     XLK (4)
+  NTNX             Software      85.06         91       -8     2     XLK (4)
+
+========================================
+MILD BULLISH
+========================================
 Ticker              Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
-  FSLY      Cloud Infrastructure      98.40         99        0    11     XLK (4)
-  FIVN      Communications Cloud      96.00         95       +7     5     XLK (4)
-  NESR               Exploration      89.47         98      +10     5     XLE (1)
-   PBF      Refining & Marketing      89.47         98       +4     5     XLE (1)
-     U                  Software      89.26         98       -2     6     XLK (4)
-   RNG      Communications Cloud      88.40         99        0    15     XLK (4)
-  AVTR       Life Sciences Tools      87.71         93      +11    14     XLV (2)
-  SNOW      Cloud Infrastructure      87.20         97       -1    15     XLK (4)
-   NEO               Diagnostics      87.11         92      +10    11     XLV (2)
-   VLO      Refining & Marketing      87.07         94      +10     4     XLE (1)
-  PANW             Cybersecurity      86.86         94       -7     9     XLK (4)
-  PENG                  Software      86.86         94       NA     1     XLK (4)
-   ATI       Aerospace & Defense      86.42         95       NA     1     XLI (5)
-  DINO      Refining & Marketing      85.87         92       NA     1     XLE (1)
-  APPS             Mobile Adtech      85.83         99       NA     1     XLK (4)
-  DELL                AI Servers      85.29         99        0     2     XLK (4)
-  QMCO                AI Compute      85.29         99        0     3     XLK (4)
-  CRSR Leisure and Entertainment      85.23         98       -8     6     XLY (9)
+  TWLO      Communications Cloud      88.20         82       NA     0     XLK (4)
+  SAIL                  Software      84.46         90       NA     0     XLK (4)
+  CRSR Leisure and Entertainment      84.03         96       NA     0     XLY (9)
+  BLFS       Life Sciences Tools      86.51         91       NA     1     XLV (2)
+   NEO               Diagnostics      84.71         88       NA     1     XLV (2)
+   ATI       Aerospace & Defense      84.02         91       NA     1     XLI (5)
+  HALO                   Biotech      82.89         92       NA     1     XLV (2)
+  EXLS                  Software      82.66         87       NA     1     XLK (4)
+  FIGS          Footwear/Apparel      81.92         96       NA     2     XLY (9)
+  PANW             Cybersecurity      80.26         83       NA     3     XLK (4)
+  PLTR               AI Platform      81.69         93       NA     8     XLK (4)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
 Legend: ^ = Micro Laggard
 ========================================
 Ticker     Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-   MOS          Unknown       18.95               13        0     4     XLB (8)
+  QCOM   Wireless Chips       19.45                9       +1     6     XLK (4)
+   MOS          Unknown       18.95               13       -1     4     XLB (8)
     PG Consumer Staples       24.80               22        0    14     XLP (6)
-  QCOM   Wireless Chips       19.45                9        0     6     XLK (4)
+   WMT  Discount Retail       28.70               28        0    14     XLY (9)
+  ERIC          Telecom       31.97               22       +1     4     XLK (4)
+   PPL   Infrastructure       32.37               28       -1     8    XLU (11)
    RKT          Unknown       18.95               13        0     5     XLF (3)
   CPRT          Unknown       21.55               17       NA     1     XLK (4)
-   WMT  Discount Retail       28.70               28        0    14     XLY (9)
-  ERIC          Telecom       31.97               22        0     4     XLK (4)
   TSCO          Unknown       23.50               20       NA     1     XLY (9)
-   PPL   Infrastructure       32.37               28       -4     8    XLU (11)
-========================================
-MILD BULLISH
-========================================
-Ticker              Mapped_Theme  L_Score  L_RS  Days Out Sector (Rk)
-  TWLO      Communications Cloud    91.80    88         0     XLK (4)
-   HPE                AI Servers    84.69    98         0     XLK (4)
-  MGNI       Digital Advertising    84.63    97         0     XLK (4)
-  OKTA             Cybersecurity    84.46    90         0     XLK (4)
-  NTNX                  Software    82.66    87         0     XLK (4)
-   RPD             Cybersecurity    77.26    78         0     XLK (4)
-  BLFS       Life Sciences Tools    87.71    93         1     XLV (2)
-  HALO                   Biotech    83.49    93         1     XLV (2)
-  VSXY          Footwear/Apparel    79.52    92         2     XLY (9)
-  FTNT             Cybersecurity    80.26    83         3     XLK (4)
-  SAIL                  Software    77.86    79         3     XLK (4)
-  HNGE            Digital Health    75.66    92         3     XLV (2)
-  AEHR   Semiconductor Equipment    81.50    99         4     XLK (4)
-   CNK Leisure and Entertainment    72.83    94         4     XLY (9)
-   LTH Leisure and Entertainment    81.03    91         7     XLY (9)
-  ILMN               Diagnostics    79.91    80         7     XLV (2)
-   IVZ        Financial Services    77.85    82         7     XLF (3)
-  SNDK                    Memory    81.50    99         8     XLK (4)
-   TXG       Life Sciences Tools    81.31    99         8     XLV (2)
-    MU                    Memory    80.30    97         8     XLK (4)
-   FBP                   Banking    79.65    85         8     XLF (3)
-  ANET             AI Networking    79.29    89         8     XLK (4)
-   APH           AI Connectivity    73.29    79         8     XLK (4)
-  BLZE                  Software    79.86    99         9     XLK (4)
-   MAN     Professional Services    79.26    98         9     XLK (4)
-  ADPT               Diagnostics    78.31    94         9     XLV (2)
-     S             Cybersecurity    74.46    90        10     XLK (4)
-   STT                   Banking    79.05    84        11     XLF (3)
-   ING                   Banking    77.25    81        11     XLF (3)
-  DXCM           Medical Devices    74.71    88        11     XLV (2)
-   RTX       Aerospace & Defense    71.02    86        15     XLI (5)
-   MFG                   Banking    78.45    83        17     XLF (3)
-   BNY                   Banking    76.65    80        17     XLF (3)
-   GEO            Infrastructure    76.67    90        18     XLK (4)
 
 ========================================
 MILD BEARISH
 ========================================
-Ticker              Mapped_Theme  S_Score  S_RS  Days Out Sector (Rk)
-    NU           Digital Banking    47.45    42         1     XLF (3)
-  FISV                   Banking    29.25    14         1     XLK (4)
-  ~PEP          Consumer Staples    18.80    22         1     XLP (6)
-  ~GIS                   Unknown    19.45    23         2     XLP (6)
-  ~GPK                   Unknown    13.60    14         2     XLI (5)
-  CHWY                  Internet    18.43    10         3     XLY (9)
-  ~CPB                   Unknown    17.50    20         4     XLP (6)
-   VFC          Footwear/Apparel    13.07     5         7     XLY (9)
-  LBRT               Exploration    31.12    23         8     XLE (1)
-     B               Gold Mining    45.34    38         9     XLB (8)
-   NKE          Footwear/Apparel    17.77     3         9     XLY (9)
-  CVNA                  Internet    34.03    34        15     XLY (9)
-  RBLX Leisure and Entertainment    12.58     1        15     XLY (9)
- NTDOY Leisure and Entertainment    43.78    49        17     XLY (9)
-  INFY                  Software    26.51     7        17     XLK (4)
-   ACN                  Software    24.41    13        17     XLK (4)
-   NOW          Enterprise Cloud    53.90    36        18     XLK (4)
-    PL      Space Infrastructure    37.67    35        18     XLK (4)
-   WBD        Media Distribution    31.43    30        18     XLY (9)
- ~ECHO                   Unknown     9.05     7        18     XLK (4)
-   CDE               Gold Mining    62.89    65        21     XLB (8)
-   KGC               Gold Mining    45.99    39        21     XLB (8)
-  LYFT                  Software    43.91    43        21     XLK (4)
-~CMCSA                   Unknown    20.10    24        21     XLY (9)
+Ticker     Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+    NU  Digital Banking       47.45               42       NA     1     XLF (3)
+  FISV          Banking       29.25               14       NA     1     XLK (4)
+  ~PEP Consumer Staples       18.80               22       NA     1     XLP (6)
+  ~GIS          Unknown       19.45               23       NA     2     XLP (6)
+  ~GPK          Unknown       13.60               14       NA     2     XLI (5)
+  CHWY         Internet       18.43               10       NA     3     XLY (9)
+  ~CPB          Unknown       17.50               20       NA     4     XLP (6)
+   VFC Footwear/Apparel       13.07                5       NA     7     XLY (9)
+  LBRT      Exploration       31.12               23       NA     8     XLE (1)
+     B      Gold Mining       45.34               38       NA     9     XLB (8)
+   NKE Footwear/Apparel       17.77                3       NA     9     XLY (9)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Momentum,FSLY,FIVN,NESR,PBF,U,RNG,AVTR,SNOW,NEO,VLO,PANW,PENG,ATI,DINO,APPS,DELL,QMCO,CRSR,
-###Bullish_Swing,GEO,BNY,MFG,RTX,DXCM,ING,STT,S,ADPT,BLZE,MAN,ANET,APH,FBP,MU,SNDK,TXG,ILMN,IVZ,LTH,AEHR,CNK,FTNT,HNGE,SAIL,VSXY,BLFS,HALO,HPE,MGNI,NTNX,OKTA,RPD,TWLO,
-###Bullish_Deep_Retrace,AMRX,ANET,APH,BLFS,BNY,FBP,FTNT,HALO,HPE,HWM,ILMN,ING,IVZ,LTH,MFG,MGNI,NTNX,OKTA,RPD,SAIL,STT,TWLO,VSXY,
-###Bearish_Momentum,MOS,PG,QCOM,RKT,CPRT,WMT,ERIC,TSCO,PPL,
-###Bearish_Swing,CDE,CMCSA,KGC,LYFT,ECHO,NOW,PL,WBD,ACN,INFY,NTDOY,CVNA,RBLX,B,NKE,LBRT,VFC,CPB,CHWY,GIS,GPK,FISV,NU,PEP,
-###Bearish_Deep_Retrace,AA,CAG,CELH,EQT,NKE,VALE,
+###Bullish_Momentum,FSLY,FIVN,U,AVTR,RNG,NESR,PBF,RDW,SNOW,APPS,PGY,QMCO,MGNI,RPD,NTNX,
+###Bullish_Swing,PLTR,PANW,FIGS,ATI,BLFS,EXLS,HALO,NEO,CRSR,SAIL,TWLO,
+###Bullish_Deep_Retrace,ATI,BLFS,CRSR,EXLS,FIGS,HALO,NEO,OKTA,PANW,PLTR,PRGO,SAIL,TWLO,VSXY,
+###Bearish_Momentum,QCOM,MOS,PG,WMT,ERIC,PPL,RKT,CPRT,TSCO,
+###Bearish_Swing,B,NKE,LBRT,VFC,CPB,CHWY,GIS,GPK,FISV,NU,PEP,
+###Bearish_Deep_Retrace,AA,CAG,EQT,NKE,VALE,
 
 ==============================================
 END OF TABELA SCAN - 2026-08-14
