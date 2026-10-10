@@ -478,10 +478,12 @@ def print_macro_weather(stocks, theme_strength_settings):
     q_pos = 0; q_neg = 0
     
     sector_matrix_strs = []
+    legacy_data_list = []
     for _, row in spdrs_only.iterrows():
         t = row["Ticker"]
         rank_val = int(row["Sector_Rank"])
         sector_rs_map[t] = rank_val
+        legacy_data_list.append({"Ticker": t, "Impact_Mom": row.get("Impact_Mom", 0)})
         
         perf_1w = pd.to_numeric(row.get("Performance 1W (%)", 0), errors='coerce')
         perf_1m = pd.to_numeric(row.get("Performance 1M (%)", 0), errors='coerce')
@@ -551,18 +553,12 @@ def print_macro_weather(stocks, theme_strength_settings):
     for line in idx_strs:
         print(line)
     print("")
-    print("[2] MACRO SECTOR RANKINGS (Gravity-Weighted Capital Flows)")
-    print(f"    > Sector Breadth  : W (+{w_pos}/-{w_neg}) ; M (+{m_pos}/-{m_neg}) ; Q (+{q_pos}/-{q_neg})\n")
-    print(f"    {'Rank':<4} {'Sector':<15} {'SPDR'}  {'1-Week':>9} {'1-Month':>10} {'1-Quarter':>11} {'YTD':>10}   {'AUM ($B)':>9}   {'Impact':>7}")
-    print("    " + "-"*92)
-    for line in sector_matrix_strs:
-        print(line)
-    print("")
-    print("[3] STRUCTURAL BREADTH (3,000+ Equities)")
+    
+    print("[2] STRUCTURAL BREADTH (3,000+ Equities)")
     print(f"    > Price Extremes  : {nh} New Highs | {nl} New Lows  [ Net: {net:+} ]")
     print("========================================================================\n")
 
-    return sector_rs_map
+    return sector_rs_map, legacy_data_list, {"w": (w_pos, w_neg), "m": (m_pos, m_neg), "q": (q_pos, q_neg)}
 
 
 def print_daily_scan(
@@ -635,7 +631,33 @@ def print_daily_scan(
     # The pipeline prints MARKET STATISTICS externally somewhere, we slip this in 
     # to render right before Theme Breadth.
     
-    sector_rs_map = print_macro_weather(stocks, theme_strength_settings)
+    try:
+        macro_results = print_macro_weather(stocks, theme_strength_settings)
+        if len(macro_results) == 3:
+            sector_rs_map, legacy_data_list, breadth = macro_results
+        else:
+            sector_rs_map = macro_results
+            legacy_data_list = []
+            breadth = {"w": (0,0), "m": (0,0), "q": (0,0)}
+    except Exception as e:
+        sector_rs_map = {}
+        legacy_data_list = []
+        breadth = {"w": (0,0), "m": (0,0), "q": (0,0)}
+
+    # --- Inject Sector Intelligence Output ---
+    try:
+        from scoring.sector_intelligence import SectorIntelligence, get_historical_etf_path
+        from config.runtime_context import context
+        curr_etf = str(context.etf_file)
+        hist_etf = get_historical_etf_path(curr_etf, days_back=7)
+        si = SectorIntelligence(curr_etf, hist_etf)
+        report_data = si.generate_intelligence_report()
+        report_str = si.format_terminal_output(report_data, legacy_data_list, breadth)
+        if report_str:
+            print(report_str)
+    except Exception as e:
+        pass
+    # ------------------------------------------
 
     print("========================================")
     print("THEME BREADTH ANALYSIS")
