@@ -661,9 +661,45 @@ def print_daily_scan(
 
     print("========================================")
     print("THEME BREADTH ANALYSIS")
-    print("Legend: [No Prefix] = Long Candidate / # = Distribution")
+    print("Legend: [No Prefix]=Long / #=Short / -=Mild Swing / -#=Mild Short")
     print("        + - = 1D Rank Delta")
     print("========================================")
+
+    # --- INJECT MILD STOCKS INTO BREADTH ---
+    import os
+    import json as _json
+    dropped_file = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "market_data", "dropped_accumulator.json"
+    )
+    accumulated_breadth = {"long_dropped": {}, "short_dropped": {}}
+    if os.path.exists(dropped_file):
+        try:
+            with open(dropped_file, "r", encoding="utf-8") as _f:
+                loaded = _json.load(_f)
+                if not isinstance(loaded.get("long_dropped", []), list):
+                    accumulated_breadth = loaded
+        except Exception:
+            pass
+
+    for ticker in accumulated_breadth.get("long_dropped", {}).keys():
+        match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
+        if not match.empty:
+            theme = match.iloc[0].get("Mapped_Theme")
+            if theme in theme_breadth["Mapped_Theme"].values:
+                curr = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"].iloc[0]
+                new_val = f"-{ticker}" if pd.isna(curr) or str(curr).strip() == "" or str(curr).strip() == "None" else f"{curr}, -{ticker}"
+                theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
+
+    for ticker in accumulated_breadth.get("short_dropped", {}).keys():
+        match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
+        if not match.empty:
+            theme = match.iloc[0].get("Mapped_Theme")
+            if theme in theme_breadth["Mapped_Theme"].values:
+                curr = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"].iloc[0]
+                new_val = f"-#{ticker}" if pd.isna(curr) or str(curr).strip() == "" or str(curr).strip() == "None" else f"{curr}, -#{ticker}"
+                theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
+    # ---------------------------------------
     
     display_df = (
         theme_breadth[
@@ -709,7 +745,7 @@ def print_daily_scan(
             has_valid_swing_signal = False
             for item in str(leaders_val).split(","):
                 item_clean = item.strip()
-                if item_clean.startswith("#"):
+                if item_clean.startswith("#") or item_clean.startswith("-"):
                     has_valid_swing_signal = True
                     break
                 elif item_clean.upper() in true_long_tickers:
