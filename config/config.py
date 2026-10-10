@@ -101,11 +101,11 @@ SHORT_GROWTH_SCORE_MAP = {'A': -50.0, 'B': 0.0, 'C': 50.0, 'D': 80.0, 'F': 100.0
 # Short entry thresholds — Ultra-Premium Cartesian Winner (Low Volume / High Probability)
 SHORT_ENTRY = {
     # 1. STRONG BEARISH (Active Breakdowns) - Thematic Exodus Strategy Winner
-    "MIN_SHORT_RS": 8.0,
+    "MIN_SHORT_RS": 15.0,
     "MAX_SHORT_RS": 60.0,
-    "MAX_SHORT_SCORE": 35.0,
+    "MAX_SHORT_SCORE": 25.0,
     "THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
-    "BLOCKED_ZACKS": [1, 2, 3],
+    "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 5_000_000,
     

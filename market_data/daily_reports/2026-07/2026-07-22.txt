@@ -62,26 +62,21 @@ Oil Services                   Exploration          5    1   34.76   8.57   Lead
 Cloud Infrastructure           Cloud Computing      5    1   34.04   1.72   Neutral (15 -> +5)              NET
 Integrated Energy              Exploration          7    1   28.53   8.57   Leading (3 -> -1)               EQNR
 Leisure and Entertainment      Internet            41    3   25.99  -1.96   Neutral (28 -> +2)              CRSR, LTH
-Footwear/Apparel               Retail              37    2   18.70  -0.23   Neutral (22 -> +3)              VSXY, CTAS, #NKE
+Footwear/Apparel               Retail              37    2   18.70  -0.23   Neutral (22 -> +3)              VSXY, CTAS
 REITs                          REITs              127    5   17.51   2.09   Neutral (14 -> -1)              RLJ, AHR
 Exploration                    Exploration         83    3   14.93   8.57   Leading (3 -> -1)               NESR, SM
-Media Distribution             Internet            19    1   14.65  -1.96   Neutral (28 -> +2)              #WBD
 Financial Services             Banking             68    2   11.51   3.13   Leading (10 -> -2)              IVZ
-Software                       Software           167    4   11.47  -1.86   Neutral (27 -> +5)              FIG, PENG, #LYFT
+Software                       Software           167    4   11.47  -1.86   Neutral (27 -> +5)              FIG, PENG
 Healthcare                     Healthcare          41    1    8.85   6.92   Leading (5)                     
 Insurance                      Insurance           69    1    5.85   4.67   Leading (7 -> +2)               TRV
 Infrastructure                 Infrastructure     107    1    4.14  -2.12   Neutral (29 -> +1)              GEO
-Enterprise Cloud               Cloud Computing      2    0    0.00   1.72   Neutral (15 -> +5)              #NOW
-Digital Assets Infrastructure  Software            10    0    0.00  -1.86   Neutral (27 -> +5)              #COIN
-Consumer Staples               Consumer Staples    38    0    0.00   0.00   Unknown                         #PEP
+Consumer Staples               Consumer Staples    38    0    0.00   0.00   Unknown                         #ACI, #PEP
 Food Safety                    Healthcare           1    0    0.00   6.92   Leading (5)                     
-Gold Mining                    Gold Mining         42    0    0.00  -6.93   Lagging (37 -> -1)              #KGC
 Nuclear Infrastructure         Uranium Mining       3    0    0.00 -11.77   Lagging (40)                    
-Internet                       Internet            19    0    0.00  -1.96   Neutral (28 -> +2)              #CHWY
+Restaurants                    Consumer Staples    27    0    0.00   0.00   Unknown                         #CMG
 Silver Mining                  Silver Mining        6    0    0.00  -7.23   Lagging (38 -> -1)              
-Space Infrastructure           Aerospace & Defe..   5    0    0.00  -2.75   Lagging (32)                    #PL, #RKLB
-Unknown                        Unknown            355    0    0.00   0.00   Unknown                         #AA, #CAG, #CMCSA, #CPB,
-                                                                                                            #ECHO, #GIS
+Unknown                        Unknown            355    0    0.00   0.00   Unknown                         #CMCSA, #CPB, #KR, #MAT,
+                                                                                                            #ORLY
 Uranium Mining                 Uranium Mining       1    0    0.00 -11.77   Lagging (40)                    
 
 ========================================
@@ -142,56 +137,40 @@ Ticker                 Mapped_Theme Long_Score  RS_Rating Movement  Days Sector 
 STRONG BEARISH (Trend Breakdown)
 Legend: ^ = Micro Laggard
 ========================================
-Ticker                  Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-    AA                       Unknown       18.35                9       NA     1     XLI (8)
-  ECHO                       Unknown       17.00               10       -1     2     XLK (7)
-   PEP              Consumer Staples       24.15               21       +1     9     XLP (5)
-    PL          Space Infrastructure       34.02               19       +2     4     XLK (7)
-  RKLB          Space Infrastructure       32.07               16        0     2     XLI (8)
-   KGC                   Gold Mining       31.78               17       -4     2     XLB (9)
-   WBD            Media Distribution       34.57               19       NA     1    XLY (11)
- CMCSA                       Unknown       20.25               15       +4     9    XLY (11)
-   CPB                       Unknown       22.85               19       +6     9     XLP (5)
-  LYFT                      Software       34.70               16       NA     1     XLK (7)
-   NKE              Footwear/Apparel       29.94               10       +2     9    XLY (11)
-   GIS                       Unknown       28.10               24       +2     9     XLP (5)
-   NOW              Enterprise Cloud       31.32               10       NA     1     XLK (7)
-   CAG                       Unknown       33.30               32       +2     9     XLP (5)
-  CHWY                      Internet       31.37               11       +2     2    XLY (11)
-  COIN Digital Assets Infrastructure       32.70               16       NA     1     XLF (3)
+Ticker     Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+   PEP Consumer Staples       24.15               21        0     3     XLP (5)
+    KR          Unknown       17.50               20        0     4    XLY (11)
+ CMCSA          Unknown       20.25               15        0     3    XLY (11)
+  ORLY          Unknown       22.70               28        0     2    XLY (11)
+   CPB          Unknown       22.85               19       NA     1     XLP (5)
+   CMG      Restaurants       18.80               22       +1     4    XLY (11)
+   ACI Consumer Staples       16.85               19       -1     9     XLP (5)
+   MAT          Unknown       14.25               15       NA     1    XLY (11)
 
 ========================================
 MILD BEARISH
 ========================================
-Ticker         Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-  VALE          Gold Mining       49.28               47       NA     0     XLB (9)
-  SMCI    AI Infrastructure       46.18               48       NA     0     XLK (7)
-   NEM          Gold Mining       36.28               27       NA     0     XLB (9)
-   ~PG     Consumer Staples       35.85               39       NA     0     XLP (5)
-   CDE          Gold Mining       35.68               23       NA     0     XLB (9)
-  ~RKT              Unknown       14.40                6       NA     0     XLF (3)
-  GEHC      Medical Devices       30.38               13       NA     1     XLV (2)
-  ~MOS              Unknown       27.90               36       NA     1     XLB (9)
-  CELH    Consumer Momentum       26.80                5       NA     1     XLP (5)
- ~ORLY              Unknown       22.70               28       NA     1    XLY (11)
-  BABA             Internet       31.82               24       NA     2    XLY (11)
-  INFY             Software       26.20                6       NA     2     XLK (7)
-   RUN Solar Infrastructure       22.76                1       NA     5     XLE (1)
-  NFLX   Media Distribution       19.47                5       NA     5    XLY (11)
-   MDT      Medical Devices       38.18               25       NA     6     XLV (2)
-  ~MKC              Unknown       25.45               23       NA     7     XLP (5)
-   EQT          Exploration       54.34               38       NA     9     XLE (1)
- ~BRBR              Unknown        5.80                2       NA     9     XLP (5)
-  ASTS Space Infrastructure       23.47               12       NA     9     XLK (7)
-  ~CMG          Restaurants       18.80               22       NA     9    XLY (11)
+Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+  ~MOS                 Unknown       27.90               36       NA     0     XLB (9)
+  VALE             Gold Mining       49.28               47       NA     1     XLB (9)
+ ~HOOD Retail Trading Platform       41.55               57       NA     1     XLF (3)
+   ~GM                 Unknown       34.40               46       NA     1    XLY (11)
+ ~RIVN                 Unknown       29.85               39       NA     2    XLY (11)
+  ~RKT                 Unknown       14.40                6       NA     2     XLF (3)
+   NEM             Gold Mining       36.28               27       NA     5     XLB (9)
+  ~CAG                 Unknown       33.30               32       NA     6     XLP (5)
+   ~IP                 Unknown       29.85               39       NA     7     XLB (9)
+ ~BBWI                 Unknown       25.95               33       NA     7    XLY (11)
+  ~HUN                 Unknown       56.50               80       NA     8     XLB (9)
+  RKLB    Space Infrastructure       32.07               16       NA     8     XLI (8)
+   ABT         Medical Devices       38.03               34       NA     9     XLV (2)
+  ~MKC                 Unknown       25.45               23       NA     9     XLP (5)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###Bullish_Momentum,DINO,VLO,LQDA,NESR,TRV,OSCR,VG,NET,VSXY,RLJ,OKTA,CRSR,IVZ,HNGE,FTNT,CTAS,LTH,GEO,FCEL,AHR,PBF,S,MPC,MU,PSX,GTLB,EQNR,SM,FIG,PENG,
 ###Bullish_Swing,APPS,BAND,SNOW,BB,DDOG,NRIX,CHYM,NTNX,AVTR,ILMN,LFST,QDEL,RAL,
-###Bullish_Deep_Retrace,APPS,BAND,BB,GRND,NTNX,RAL,SNDX,
-###Bearish_Momentum,AA,ECHO,PEP,PL,RKLB,KGC,WBD,CMCSA,CPB,LYFT,NKE,GIS,NOW,CAG,CHWY,COIN,
-###Bearish_Swing,ASTS,BRBR,CMG,EQT,MKC,MDT,NFLX,RUN,BABA,INFY,CELH,GEHC,MOS,ORLY,CDE,NEM,PG,RKT,SMCI,VALE,
-###Bearish_Deep_Retrace,CDE,CELH,GEHC,INFY,MDT,MKC,NEM,RKT,RUN,
+###Bearish_Momentum,PEP,KR,CMCSA,ORLY,CPB,CMG,ACI,MAT,
+###Bearish_Swing,ABT,MKC,HUN,RKLB,BBWI,IP,CAG,NEM,RIVN,RKT,GM,HOOD,VALE,MOS,
 
 ==============================================
 END OF TABELA SCAN - 2026-07-22

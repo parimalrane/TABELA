@@ -56,29 +56,32 @@ Semiconductors                 Semiconductors      44    3   25.36   5.29   Lead
 Exploration                    Exploration        100    2    9.09   3.17   Leading (8 -> +1)               SEI
 Aerospace & Defense            Aerospace & Defe..  39    0    0.00  -6.80   Lagging (39)                    #BA
 Asset Management               Banking              1    0    0.00  -6.14   Lagging (38 -> -1)              
-Building Materials             Infrastructure      47    0    0.00  -3.24   Neutral (21 -> -1)              #CRH
+Building Materials             Infrastructure      47    0    0.00  -3.24   Neutral (21 -> -1)              #WY
 Communications Cloud           Cloud Computing      4    0    0.00   6.42   Leading (4)                     
-Consumer Staples               Consumer Staples    41    0    0.00   0.00   Unknown                         #PEP
+Consumer Staples               Consumer Staples    41    0    0.00   0.00   Unknown                         #TAP
 Data Storage                   Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
 Defense Drone Systems          Aerospace & Defe..   1    0    0.00  -6.80   Lagging (39)                    
 Defense Systems                Aerospace & Defe..   1    0    0.00  -6.80   Lagging (39)                    
-Digital Banking                Banking              2    0    0.00  -6.14   Lagging (38 -> -1)              
-Banking                        Banking            153    0    0.00  -6.14   Lagging (38 -> -1)              #FISV
+Digital Banking                Banking              2    0    0.00  -6.14   Lagging (38 -> -1)              #NU
+Banking                        Banking            153    0    0.00  -6.14   Lagging (38 -> -1)              
 Foundry                        Semiconductors       3    0    0.00   5.29   Leading (5 -> +1)               
-Footwear/Apparel               Retail              45    0    0.00  -3.26   Neutral (22 -> -2)              #NKE, #ONON
+Footwear/Apparel               Retail              45    0    0.00  -3.26   Neutral (22 -> -2)              #CPRI, #ONON
 Enterprise Cloud               Cloud Computing      2    0    0.00   6.42   Leading (4)                     
-Gold Mining                    Gold Mining         51    0    0.00  -2.32   Neutral (18 -> -2)              #KGC, #UUUU
-Financial Services             Banking             68    0    0.00  -6.14   Lagging (38 -> -1)              #APLD
-Medical Devices                Medical Devices     99    0    0.00  -3.46   Neutral (23 -> +1)              #COO
+Financial Services             Banking             68    0    0.00  -6.14   Lagging (38 -> -1)              
+Infrastructure                 Infrastructure     115    0    0.00  -3.24   Neutral (21 -> -1)              #PCG
 Memory                         Semiconductors       4    0    0.00   5.29   Leading (5 -> +1)               
 Nuclear Infrastructure         Uranium Mining       3    0    0.00  -9.98   Lagging (42)                    
 Optical Infrastructure         Semiconductors       1    0    0.00   5.29   Leading (5 -> +1)               
+REITs                          REITs              137    0    0.00  -5.80   Lagging (37 -> -1)              #NLY
+Restaurants                    Consumer Staples    28    0    0.00   0.00   Unknown                         #CMG, #MCD
 Semiconductor Equipment        Semiconductors      26    0    0.00   5.29   Leading (5 -> +1)               
 Semiconductor Testing          Semiconductors       3    0    0.00   5.29   Leading (5 -> +1)               
-Space Infrastructure           Aerospace & Defe..   6    0    0.00  -6.80   Lagging (39)                    #ASTS, #LUNR
+Space Infrastructure           Aerospace & Defe..   6    0    0.00  -6.80   Lagging (39)                    
 Specialty Finance / Debt Col.. Banking              1    0    0.00  -6.14   Lagging (38 -> -1)              
-Unknown                        Unknown            374    0    0.00   0.00   Unknown                         #CMCSA, #CPB, #IBM,
-                                                                                                            #MOS, #TSCO
+Transportation Platform        Transportation/S..   1    0    0.00  -4.77   Lagging (32)                    #UBER
+Unknown                        Unknown            374    0    0.00   0.00   Unknown                         #AS, #BBWI, #CAG,
+                                                                                                            #CMCSA, #CPRT, #F, #IBM,
+                                                                                                            #IP, #RIVN, #TSCO
 Uranium Mining                 Uranium Mining       1    0    0.00  -9.98   Lagging (42)                    
 Wireless Chips                 Semiconductors       2    0    0.00   5.29   Leading (5 -> +1)               
 
@@ -117,44 +120,62 @@ Ticker            Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
 STRONG BEARISH (Trend Breakdown)
 Legend: ^ = Micro Laggard
 ========================================
-Ticker         Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-  UUUU          Gold Mining       27.25               12        0     7     XLB (7)
-   CPB              Unknown       23.10               14        0     8     XLP (6)
-   MOS              Unknown       33.80               32        0     2     XLB (7)
-  FISV              Banking       24.68               13        0    21     XLK (1)
-   COO      Medical Devices       20.28               10        0     4     XLV (3)
-  ASTS Space Infrastructure       29.79               23       +1     2     XLK (1)
- CMCSA              Unknown       20.25               15       -1     7     XLY (9)
-  LUNR Space Infrastructure       34.34               30       NA     1     XLI (5)
-   KGC          Gold Mining       26.20               25        0     4     XLB (7)
-    BA  Aerospace & Defense       22.94               24       +1     5     XLI (5)
-   IBM              Unknown       20.25               15       -1     9     XLK (1)
-   CRH   Building Materials       22.21               12       +1     3     XLI (5)
-   PEP     Consumer Staples       30.00               30       -1    18     XLP (6)
-   NKE     Footwear/Apparel       17.25                9       +1     4     XLY (9)
-  TSCO              Unknown       23.05               17       -1    21     XLY (9)
-  APLD   Financial Services       34.93               38       NA     1     XLF (8)
-  ONON     Footwear/Apparel       23.10               18       -1     8     XLY (9)
+Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+   NLY                   REITs       21.77               19        0     2     XLF (8)
+    WY      Building Materials       21.31               16        0     3     XLI (5)
+    NU         Digital Banking       20.28               17       +1     3     XLF (8)
+  CPRT                 Unknown       16.75               15       -1     2     XLK (1)
+ CMCSA                 Unknown       20.25               15        0     4     XLY (9)
+  BBWI                 Unknown       10.55               17       +1     4     XLY (9)
+    BA     Aerospace & Defense       22.94               24       +3     4     XLI (5)
+     F                 Unknown       23.35               29        0     2     XLY (9)
+   CAG                 Unknown       11.85               19       -3     5     XLP (6)
+   IBM                 Unknown       20.25               15       -1     5     XLK (1)
+   CMG             Restaurants       18.90               26        0     9     XLY (9)
+   MCD             Restaurants       15.55               17        0     6     XLY (9)
+  TSCO                 Unknown       23.05               17        0     3     XLY (9)
+   PCG          Infrastructure       18.16               15        0     2    XLU (11)
+    IP                 Unknown       19.55               27        0     5     XLB (7)
+   TAP        Consumer Staples       20.75               25        0     9     XLP (6)
+  UBER Transportation Platform       23.87               29       NA     1     XLK (1)
+    AS                 Unknown       11.85               19       -1     5     XLY (9)
+  RIVN                 Unknown       20.75               25       -1     6     XLY (9)
+  ONON        Footwear/Apparel       23.10               18       NA     1     XLY (9)
+  CPRI        Footwear/Apparel       15.65               15       -2     8     XLY (9)
 
 ========================================
 MILD BEARISH
 ========================================
-Ticker          Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-  ~CAG               Unknown       11.85               19       NA     0     XLP (6)
-   BSX       Medical Devices       16.33                7       NA     1     XLV (3)
-  TSLA Autonomous Driving AI       33.82               29       NA     2     XLY (9)
- ~IONQ               Unknown       55.90               66       NA     7     XLK (1)
-  CELH     Consumer Momentum       21.73                9       NA    10     XLP (6)
-  ~ACI      Consumer Staples       13.60               14       NA    10     XLP (6)
-   HDB               Banking       17.68               13       NA    13     XLF (8)
+Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+   EIX          Infrastructure       27.26               29       NA     1    XLU (11)
+  ~CPB                 Unknown       23.10               14       NA     1     XLP (6)
+    HL           Silver Mining       25.46               35       NA     2     XLB (7)
+  ~ACI        Consumer Staples       13.60               14       NA     2     XLP (6)
+  ~GIS                 Unknown       12.50               10       NA     2     XLP (6)
+   AEO        Footwear/Apparel       27.45               37       NA     3     XLY (9)
+   KGC             Gold Mining       26.20               25       NA     3     XLB (7)
+   HDB                 Banking       17.68               13       NA     3     XLF (8)
+   VFC        Footwear/Apparel       30.50               34       NA     6     XLY (9)
+   AAL Transportation/Shipping       30.27               35       NA     6     XLI (5)
+  ASTS    Space Infrastructure       29.79               23       NA     6     XLK (1)
+  HBAN                 Banking       27.73               30       NA     6     XLF (8)
+  VICI                   REITs       25.02               24       NA     6     XLF (8)
+  ~HRL                 Unknown       17.60               24       NA     6     XLP (6)
+ ~ORLY                 Unknown       33.20               48       NA     9     XLY (9)
+    CX      Building Materials       23.56               21       NA     9     XLI (5)
+ ~COMP  Real Estate Technology       11.20               18       NA     9     XLK (1)
+ ~IONQ                 Unknown       55.90               66       NA    10     XLK (1)
+  HIMS         Medical Devices       35.58               42       NA    10     XLV (3)
+   NVO       GLP-1 Weight Loss       16.33               12       NA    10     XLV (3)
+  CRDO       AI Infrastructure       61.62               81       NA    13     XLK (1)
+   GAP        Footwear/Apparel       51.50               64       NA    14     XLY (9)
+   OWL      Financial Services       12.58                9       NA    14     XLF (8)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###Bullish_Momentum,SMTC,FSLY,VIAV,QMCO,SEI,SNOW,LITE,ASX,
 ###Bullish_Swing,DINO,MPC,PSX,DELL,ENTG,ESTC,FTNT,HPE,ILMN,PBF,PLTR,VLO,
-###Bullish_Deep_Retrace,ALAB,ARQT,AVAH,DELL,DINO,ENTG,ESTC,FIVN,FTNT,HALO,HPE,HPQ,ILMN,MPC,NIQ,NTSK,ODD,PBF,PLTR,PSX,SMCI,TALO,U,VLO,
-###Bearish_Momentum,UUUU,CPB,MOS,FISV,COO,ASTS,CMCSA,LUNR,KGC,BA,IBM,CRH,PEP,NKE,TSCO,APLD,ONON,
-###Bearish_Swing,HDB,ACI,CELH,IONQ,TSLA,BSX,CAG,
-###Bearish_Deep_Retrace,BSX,FIS,
+###Bearish_Momentum,NLY,WY,NU,CPRT,CMCSA,BBWI,BA,F,CAG,IBM,CMG,MCD,TSCO,PCG,IP,TAP,UBER,AS,RIVN,ONON,CPRI,
+###Bearish_Swing,GAP,OWL,CRDO,HIMS,IONQ,NVO,COMP,CX,ORLY,AAL,ASTS,HBAN,HRL,VFC,VICI,AEO,HDB,KGC,ACI,GIS,HL,CPB,EIX,
 
 ==============================================
 END OF TABELA SCAN - 2026-10-01

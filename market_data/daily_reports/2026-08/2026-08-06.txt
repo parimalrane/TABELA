@@ -64,18 +64,19 @@ Leisure and Entertainment      Internet            34    3   30.52   0.58   Lead
 Business Software              Software             6    1   29.19   3.63   Leading (3 -> +1)               
 Software                       Software           164    9   26.35   3.63   Leading (3 -> +1)               FIG, U
 Copper Mining                  Copper Mining       10    1   22.78   4.20   Leading (2 -> -1)               CLF
-Footwear/Apparel               Retail              36    2   19.37  -0.47   Neutral (16 -> +4)              VSXY, #VFC
+Footwear/Apparel               Retail              36    2   19.37  -0.47   Neutral (16 -> +4)              VSXY
+Building Materials             Infrastructure      38    1    9.44  -3.38   Lagging (37 -> -2)              #CX
 Enterprise Cloud               Cloud Computing      2    0    0.00   7.38   Leading (1)                     
 Discount Retail                Discount Retail     10    0    0.00   0.00   Unknown                         #WMT
 Digital Health                 Software             1    0    0.00   3.63   Leading (3 -> +1)               
 Digital Assets Infrastructure  Software             7    0    0.00   3.63   Leading (3 -> +1)               
 Developer Infrastructure       Software             3    0    0.00   3.63   Leading (3 -> +1)               
-Consumer Staples               Consumer Staples    35    0    0.00   0.00   Unknown                         #PEP, #PG
+Consumer Staples               Consumer Staples    35    0    0.00   0.00   Unknown                         #PEP
 Insurance Technology           Software             1    0    0.00   3.63   Leading (3 -> +1)               
-Infrastructure                 Infrastructure     107    0    0.00  -3.38   Lagging (37 -> -2)              #PPL
+Infrastructure                 Infrastructure     107    0    0.00  -3.38   Lagging (37 -> -2)              #NI
 Nuclear Infrastructure         Uranium Mining       3    0    0.00  -7.37   Lagging (42 -> -3)              
-Telecom                        Telecom             10    0    0.00  -0.87   Neutral (22 -> +6)              #ERIC
-Unknown                        Unknown            326    0    0.00   0.00   Unknown                         #GIS, #GPK, #RKT
+Restaurants                    Consumer Staples    24    0    0.00   0.00   Unknown                         #CMG
+Unknown                        Unknown            326    0    0.00   0.00   Unknown                         #CMCSA
 Uranium Mining                 Uranium Mining       1    0    0.00  -7.37   Lagging (42 -> -3)              
 
 ========================================
@@ -127,49 +128,41 @@ Ticker              Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk
 STRONG BEARISH (Trend Breakdown)
 Legend: ^ = Micro Laggard
 ========================================
-Ticker     Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-   PEP Consumer Staples       21.55               17       +1    20     XLP (7)
-   WMT  Discount Retail       22.85               19       +1     8     XLY (6)
-  ERIC          Telecom       31.60               15       +4     2     XLK (1)
-   RKT          Unknown       15.70                8       NA     1     XLF (2)
-   GIS          Unknown       17.65               11       +1     9     XLP (7)
-    PG Consumer Staples       30.00               30       -1     8     XLP (7)
-   VFC Footwear/Apparel       28.12                9       NA     1     XLY (6)
-   PPL   Infrastructure       34.17               23        0     2    XLU (11)
-   GPK          Unknown       32.60               34       +1     2     XLI (5)
+Ticker       Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+   PEP   Consumer Staples       21.55               17        0     4     XLP (7)
+   WMT    Discount Retail       22.85               19        0     4     XLY (6)
+    NI     Infrastructure       24.27               17       NA     1    XLU (11)
+    CX Building Materials       23.62               16       -1     2     XLI (5)
+   CMG        Restaurants       22.05               27       -1     2     XLY (6)
+ CMCSA            Unknown       14.90               16        0     5     XLY (6)
 
 ========================================
 MILD BEARISH
 ========================================
 Ticker              Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-  ~MOS                   Unknown       35.20               38       NA     0     XLB (9)
-  QCOM            Wireless Chips       23.50                6       NA     0     XLK (1)
-  LBRT               Exploration       19.60                7       NA     0     XLE (4)
-   NEM               Gold Mining       47.53               38       NA     1     XLB (9)
-     B               Gold Mining       43.63               32       NA     1     XLB (9)
-   NKE          Footwear/Apparel       26.17                6       NA     1     XLY (6)
- ~CPRT                   Unknown       14.40                6       NA     1     XLK (1)
-  CVNA                  Internet       27.12               15       NA     7     XLY (6)
-  RBLX Leisure and Entertainment       18.02                1       NA     7     XLY (6)
-   ACN                  Software       36.97               16       NA     9     XLK (1)
-  INFY                  Software       35.67               14       NA     9     XLK (1)
- NTDOY Leisure and Entertainment       30.52               11       NA     9     XLY (6)
-   NOW          Enterprise Cloud       50.00               30       NA    10     XLK (1)
-   WBD        Media Distribution       33.12               15       NA    10     XLY (6)
-  RKLB      Space Infrastructure       32.43               14       NA    10     XLI (5)
-    PL      Space Infrastructure       23.83               10       NA    10     XLK (1)
-  LYFT                  Software       41.37               32       NA    13     XLK (1)
-  CHWY                  Internet       37.02               21       NA    13     XLY (6)
-  KTOS           Defense Systems       35.68               19       NA    13     XLI (5)
-~CMCSA                   Unknown       14.90               16       NA    13     XLY (6)
+  VICI                     REITs       25.02               18       NA     0     XLF (2)
+   ~KR                   Unknown       11.00               10       NA     1     XLY (6)
+ ~ORLY                   Unknown       31.80               42       NA     3     XLY (6)
+    TU            Infrastructure       21.82                4       NA     6    XLU (11)
+  ~GIS                   Unknown       17.65               11       NA     6     XLP (7)
+ ~RIVN                   Unknown       11.00               10       NA     6     XLY (6)
+  SWKS            Semiconductors       44.80               48       NA     7     XLK (1)
+  META               AI Platform       23.75               14       NA     7     XLK (1)
+ ~CPRT                   Unknown       14.40                6       NA     7     XLK (1)
+   CCL Leisure and Entertainment       50.52               51       NA    10     XLY (6)
+ ~BBWI                   Unknown       33.75               45       NA    10     XLY (6)
+   PDD                  Internet       25.82               13       NA    10     XLY (6)
+  ~JBS                   Unknown       24.00               30       NA    10     XLP (7)
+  NCLH Leisure and Entertainment       44.67               42       NA    13     XLY (6)
+  ~MOS                   Unknown       35.20               38       NA    13     XLB (9)
+    HL             Silver Mining       25.22               15       NA    13     XLB (9)
+  ~MAT                   Unknown       11.65               11       NA    14     XLY (6)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###Bullish_Momentum,RNG,FIG,CLF,HUBS,PANW,AVTR,APPS,BLFS,U,OKTA,NEO,CNK,VSXY,SHOP,SNOW,FSLY,FIVN,
 ###Bullish_Swing,CRSR,LQDA,PD,BLZE,GRND,MAN,PBF,AEHR,ANET,DDOG,DELL,EXLS,NET,NTNX,OUST,PLTR,TXG,
-###Bullish_Deep_Retrace,AMZN,CRSR,CTAS,DDOG,EXLS,GRND,ILMN,KC,LQDA,LTH,NET,NTNX,PBF,RTX,TRV,
-###Bearish_Momentum,PEP,WMT,ERIC,RKT,GIS,PG,VFC,PPL,GPK,
-###Bearish_Swing,CHWY,CMCSA,KTOS,LYFT,NOW,PL,RKLB,WBD,ACN,INFY,NTDOY,CVNA,RBLX,B,CPRT,NEM,NKE,LBRT,MOS,QCOM,
-###Bearish_Deep_Retrace,AA,B,CAG,CDE,COIN,CPB,CPRT,ECHO,EQT,KGC,NKE,QCOM,RUN,VALE,
+###Bearish_Momentum,PEP,WMT,NI,CX,CMG,CMCSA,
+###Bearish_Swing,MAT,HL,MOS,NCLH,BBWI,CCL,JBS,PDD,CPRT,META,SWKS,GIS,RIVN,TU,ORLY,KR,VICI,
 
 ==============================================
 END OF TABELA SCAN - 2026-08-06
