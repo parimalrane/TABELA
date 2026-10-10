@@ -961,128 +961,6 @@ def print_daily_scan(
     current_date_str = str(context.market_date) if hasattr(context, "market_date") else datetime.today().strftime("%Y-%m-%d")
     current_date = datetime.strptime(current_date_str, "%Y-%m-%d")
 
-    purge_file = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "market_data", "purged_accumulator.json"
-    )
-    purged = {"long_purged": {}, "short_purged": {}}
-    if os.path.exists(purge_file):
-        try:
-            with open(purge_file, "r", encoding="utf-8") as _f:
-                loaded_purged = _json.load(_f)
-            if not isinstance(loaded_purged, dict):
-                raise ValueError(f"Invalid purged accumulator format in {purge_file}")
-            for bucket in purged:
-                entries = loaded_purged.get(bucket, {})
-                if not isinstance(entries, dict):
-                    raise ValueError(f"Invalid '{bucket}' bucket in {purge_file}")
-                purged[bucket] = entries
-        except Exception:
-            # If the file is corrupted, start fresh
-            purged = {"long_purged": {}, "short_purged": {}}
-
-    current_long_set = {ticker.upper() for ticker in full_long_list.split(",")} if full_long_list else set()
-    current_short_set = {
-        str(ticker).replace("*", "").replace("^", "").replace("~", "").strip().upper()
-        for ticker in distribution_watchlist["Ticker"]
-    } if distribution_watchlist is not None and not distribution_watchlist.empty else set()
-
-    for delta_key, bucket in (("dropped_longs", "long_purged"), ("left_distribution", "short_purged")):
-        for ticker in deltas.get(delta_key, []):
-            clean = str(ticker).replace("*", "").replace("^", "").replace("~", "").strip().upper()
-            if clean and clean not in purged[bucket]:
-                purged[bucket][clean] = {
-                    "days_purged": 1,
-                    "purged_on": current_date_str,
-                }
-
-    for source_bucket, purge_bucket in (
-        ("long_dropped", "long_purged"),
-        ("short_dropped", "short_purged"),
-    ):
-        for ticker, dropped_on in accumulated.get(source_bucket, {}).items():
-            clean = str(ticker).strip().upper()
-            if clean and clean not in purged[purge_bucket]:
-                purged[purge_bucket][clean] = {
-                    "days_purged": 1,
-                    "purged_on": dropped_on,
-                }
-
-    purge_windows = {
-        "long_purged": LONG_ENTRY.get("PURGE_DAYS", 50),
-        "short_purged": SHORT_ENTRY.get("PURGE_DAYS", 50),
-    }
-    active_by_bucket = {
-        "long_purged": current_long_set,
-        "short_purged": current_short_set,
-    }
-    for bucket, entries in purged.items():
-        for ticker, record in list(entries.items()):
-            if ticker in active_by_bucket[bucket]:
-                del entries[ticker]
-                continue
-            if not isinstance(record, dict):
-                record = {"days_purged": 1, "purged_on": current_date_str}
-            try:
-                purged_on = datetime.strptime(record["purged_on"], "%Y-%m-%d")
-                days_purged = (current_date - purged_on).days + 1
-            except (KeyError, TypeError, ValueError):
-                days_purged = int(record.get("days_purged", 1) or 1)
-                purged_on = current_date - timedelta(days=max(days_purged - 1, 0))
-            if days_purged > purge_windows[bucket]:
-                del entries[ticker]
-                continue
-                
-            # Quality Expiry Check
-            match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
-            if not match.empty:
-                r = match.iloc[0]
-                theme_class = str(r.get("Theme_Class", "Unknown"))
-                try:
-                    zacks_val = int(float(pd.to_numeric(r.get("Zacks Rank", 0), errors="coerce")))
-                except:
-                    zacks_val = 0
-                
-                is_long = (bucket == "long_purged")
-                cfg = LONG_ENTRY if is_long else SHORT_ENTRY
-                
-                allowed_themes = cfg.get("DEEP_RETRACE_THEMES", [])
-                allowed_zacks = cfg.get("DEEP_RETRACE_ZACKS", [])
-                
-                rs_key = "RS_Rating" if is_long else "Short_RS_Rating"
-                score_key = "Long_Score" if is_long else "Short_Score"
-                
-                current_rs = float(pd.to_numeric(r.get(rs_key, 0), errors="coerce"))
-                current_score = float(pd.to_numeric(r.get(score_key, 0), errors="coerce"))
-                
-                if theme_class not in allowed_themes or zacks_val not in allowed_zacks:
-                    del entries[ticker]
-                    continue
-                    
-                if is_long:
-                    min_rs = cfg.get("DEEP_RETRACE_MIN_RS", 0.0)
-                    min_score = cfg.get("DEEP_RETRACE_MIN_SCORE", 0.0)
-                    if current_rs < min_rs or current_score < min_score:
-                        del entries[ticker]
-                        continue
-                else:
-                    max_rs = cfg.get("DEEP_RETRACE_MAX_RS", 100.0)
-                    max_score = cfg.get("DEEP_RETRACE_MAX_SCORE", 100.0)
-                    if current_rs > max_rs or current_score > max_score:
-                        del entries[ticker]
-                        continue
-                        
-            record["days_purged"] = days_purged
-            record["purged_on"] = purged_on.strftime("%Y-%m-%d")
-            entries[ticker] = record
-
-    try:
-        os.makedirs(os.path.dirname(purge_file), exist_ok=True)
-        with open(purge_file, "w", encoding="utf-8") as _f:
-            _json.dump(purged, _f, indent=4, sort_keys=True)
-    except Exception:
-        pass
-
     # Add today's drops
     for t in deltas.get("dropped_longs", []):
         clean = str(t).replace("*", "").replace("^", "").replace("~", "").strip().upper()
@@ -1220,23 +1098,12 @@ def print_daily_scan(
     if mild_bearish_out:
         print(mild_bearish_out)
 
-    def load_purged_tickers(side_name):
-        bucket = "long_purged" if side_name == "LONG" else "short_purged"
-        return sorted(purged[bucket])
-
-    long_purged = load_purged_tickers("LONG")
-    short_purged = load_purged_tickers("SHORT")
-
-    long_purged_csv = ",".join(long_purged)
-    short_purged_csv = ",".join(short_purged)
-
     print("TRADINGVIEW WATCHLIST EXPORT")
+    
     print("###Bullish_Momentum," + full_long_list + ",") if full_long_list else print("###Bullish_Momentum,")
     print("###Bullish_Swing," + long_pullback_str + ",") if long_pullback_str else print("###Bullish_Swing,")
-    print(f"###Bullish_Deep_Retrace,{long_purged_csv},") if long_purged_csv else print("###Bullish_Deep_Retrace,")
 
     print("###Bearish_Momentum," + full_short_list + ",") if full_short_list else print("###Bearish_Momentum,")
     print("###Bearish_Swing," + short_rally_str + ",") if short_rally_str else print("###Bearish_Swing,")
-    print(f"###Bearish_Deep_Retrace,{short_purged_csv},") if short_purged_csv else print("###Bearish_Deep_Retrace,")
 
     print()
