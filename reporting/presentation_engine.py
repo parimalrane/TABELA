@@ -9,7 +9,7 @@ import textwrap
 scoring.rotation_engine.print_rotation_report = lambda *args, **kwargs: None
 
 from reporting.watchlist_delta_engine import compare_watchlists
-from themes.theme_translation_engine import THEME_TRANSLATION
+from themes.theme_translation_engine import THEME_TRANSLATION, THEME_ETF_MAPPING
 
 
 class OutputCapturer:
@@ -759,16 +759,16 @@ def print_daily_scan(
         
     display_df = display_df[display_df.apply(should_display, axis=1)]
 
-    print(f"{'Micro Theme'.ljust(30)} {'Macro Theme'.ljust(18)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'W_Brdth'.rjust(7)} {'ETF_RS'.rjust(6)}   {'Macro State & Movement'.ljust(29)}   {'Stocks'}")
-    print("-" * 132)
+    print(f"{'Micro Theme'.ljust(28)} {'Macro Theme'.ljust(16)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'W_Brdth'.rjust(7)} {'ETF_RS'.rjust(6)}   {'Macro State & Movement'.ljust(25)}   {'ETFs'.ljust(20)}   {'Stocks'}")
+    print("-" * 145)
     
     for _, row in display_df.iterrows():
         mapped_theme = str(row['Mapped_Theme'])
         parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
         
         # Format columns
-        micro = (mapped_theme[:28] + "..") if len(mapped_theme) > 30 else mapped_theme.ljust(30)
-        macro = (parent_theme[:16] + "..") if len(parent_theme) > 18 else parent_theme.ljust(18)
+        micro = (mapped_theme[:26] + "..") if len(mapped_theme) > 28 else mapped_theme.ljust(28)
+        macro = (parent_theme[:14] + "..") if len(parent_theme) > 16 else parent_theme.ljust(16)
         
         total = int(row['Total_Stocks']) if pd.notna(row['Total_Stocks']) else 0
         qual = int(row['Strong_Stocks']) if pd.notna(row['Strong_Stocks']) else 0
@@ -798,12 +798,16 @@ def print_daily_scan(
                         elif r_d < 0:
                             movement_str = f" -> +{abs(r_d)}"
                             
-            mac_state_str = f"{macro_state} ({macro_rank}{movement_str})".ljust(29)
+            mac_state_str = f"{macro_state} ({macro_rank}{movement_str})".ljust(25)
         else:
-            mac_state_str = macro_state.ljust(29)
+            mac_state_str = macro_state.ljust(25)
             
         r_str = f"{etf_rs_val:>.2f}".rjust(6)
-        prefix = f"{micro} {macro} {tot_str} {q_str} {s_str} {r_str}   {mac_state_str}   "
+
+        etfs_val = THEME_ETF_MAPPING.get(mapped_theme) or THEME_ETF_MAPPING.get(parent_theme, "")
+        etfs_col = (etfs_val[:18] + "..") if len(etfs_val) > 20 else etfs_val.ljust(20)
+
+        prefix = f"{micro} {macro} {tot_str} {q_str} {s_str} {r_str}   {mac_state_str}   {etfs_col}   "
         prefix_len = len(prefix)
         
         leaders_str = str(row['Leaders']).strip()
@@ -814,7 +818,7 @@ def print_daily_scan(
             
         wrapped = textwrap.wrap(
             leaders_str, 
-            width=(132 - prefix_len),
+            width=max(35, 145 - prefix_len),
             break_long_words=False,
             break_on_hyphens=False
         )

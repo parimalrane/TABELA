@@ -76,5 +76,10 @@ Executive Summary → Dataset Validation → Watchlist Continuity (W/W) → Inst
 ---
 Sweep tracking (hard record): After each Extended Taxonomy Sweep, append one line to the Sweep Log section of TABELA_Taxonomy_Reference.md: date, ticker range/rows covered, and any confirmed drift findings. Before starting a new sweep, read this log first to determine where the last sweep left off — treat it as authoritative over conversation memory if the two ever conflict.
 
+### 📅 Thematic ETF Mapping Review (Quarterly / Yearly)
+In addition to individual stock taxonomy, maintain the thematic and sector ETF mapping file (`data/theme_etf_mapping.csv`):
+- **Quarterly Cadence (Jan, Apr, Jul, Oct):** Review newly launched or rapidly growing thematic ETFs (e.g. `DRAM` for Memory, new AI sub-themes). If AUM > $25M and average volume supports TradingView charting, add or update the pure-play tickers.
+- **Yearly Audit (January):** Full review of `data/theme_etf_mapping.csv` to prune closed/delisted ETFs, update ticker renames, and confirm Sector SPDR prefixes (`[XLK]`, `[XLE]`, `[XLV]`, `[XLF]`, `[XLU]`, etc.). Strictly maintain string length $\le 18$ characters to prevent terminal line wrapping. Refer to `docs/THEMATIC_ETF_MAPPING_GUIDE.md` for full SOP.
+
 ========
 

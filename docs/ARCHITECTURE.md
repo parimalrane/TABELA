@@ -125,7 +125,7 @@ Typical sources:
 
 * ETF.csv
 * stocks.csv
-* theme mapping tables
+* theme mapping tables (`data/macro_theme_mapping.csv`, `data/theme_etf_mapping.csv`)
 
 No calculations occur here.
 
@@ -392,7 +392,7 @@ Avoid modifying stable engines unless necessary.
 | Data                 | Owner                   |
 | -------------------- | ----------------------- |
 | ETF universe         | ETF Engine              |
-| Theme mapping        | Theme Mapper            |
+| Theme mapping        | Theme Mapper (`data/macro_theme_mapping.csv`, `data/theme_etf_mapping.csv`) |
 | Theme scores         | Composite Engine        |
 | Breadth metrics      | Breadth Engine          |
 | Leader lists         | Institutional Leader    |
