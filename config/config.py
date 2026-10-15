@@ -57,15 +57,8 @@ LONG_ENTRY = {
     "BLOCKED_ZACKS": [4, 5],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_500_000,
-    "MIN_DROPPED_WATCH_SCORE": 80.0,
-    "MILD_DAYS": 14,
-    "PURGE_DAYS": 50,
-    
-    # 3. DEEP RETRACE (Days 22 to X)
-    "DEEP_RETRACE_ZACKS": [1, 2],
-    "DEEP_RETRACE_THEMES": ["Leading", "Neutral", "Unclassified Leader", "Unknown"],
-    "DEEP_RETRACE_MIN_RS": 70.0,
-    "DEEP_RETRACE_MIN_SCORE": 65.0
+    "MIN_DROPPED_WATCH_SCORE": 70.0,
+    "MILD_DAYS": 50
 }
 
 # ==========================
@@ -110,14 +103,40 @@ SHORT_ENTRY = {
     "MIN_VOLUME": 5_000_000,
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 14)
-    "MAX_DROPPED_WATCH_SCORE": 65.0,
-    "MILD_DAYS": 14,
+    "MAX_DROPPED_WATCH_SCORE": 70.0,
+    "MILD_DAYS": 50.0
+}
+
+# ==========================
+# MILD WATCHLIST ENTRY CRITERIA
+# Config-driven filtering for mild watchlist candidates
+# ==========================
+
+MILD_LONG_ENTRY = {
+    # Theme restriction: Long mild stocks must NOT be from lagging themes
+    "BLOCKED_THEMES": ["Lagging", "Micro Laggard"],
     
-    # 3. DEEP RETRACE (Days 22 to X)
-    "PURGE_DAYS": 50,
-    "DEEP_RETRACE_ZACKS": [4, 5],
-    "DEEP_RETRACE_THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
-    "DEEP_RETRACE_MAX_RS": 35.0,
-    "DEEP_RETRACE_MAX_SCORE": 50.0
+    # Zacks restriction: Long mild stocks must have Zacks rank 1 or 2 only
+    "ALLOWED_ZACKS": [1, 2],
+    
+    # Minimum thresholds (optional - can be more lenient than LONG_ENTRY)
+    "MIN_RS": 70.0,
+    "MIN_LONG_SCORE": 60.0,
+    "MIN_PRICE": 10.0,
+    "MIN_VOLUME": 1_000_000,
+}
+
+MILD_SHORT_ENTRY = {
+    # Theme restriction: Short mild stocks must NOT be from leading themes
+    "BLOCKED_THEMES": ["Leading", "Micro Leader", "Unclassified Leader"],
+    
+    # Zacks restriction: Short mild stocks must have Zacks rank 4 or 5 only
+    "ALLOWED_ZACKS": [4, 5],
+    
+    # Maximum thresholds (optional - can be more lenient than SHORT_ENTRY)
+    "MAX_SHORT_RS": 70.0,
+    "MAX_SHORT_SCORE": 60.0,
+    "MIN_PRICE": 10.0,
+    "MIN_VOLUME": 1_000_000,
 }
 

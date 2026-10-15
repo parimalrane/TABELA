@@ -972,11 +972,17 @@ def print_daily_scan(
     full_long_list = clean_all_tickers(true_longs)
     full_short_list = clean_all_tickers(distribution_watchlist)
 
+    # ========================================
+    # MILD WATCHLIST - Dropped-Based with Config Filters
+    # ========================================
+    mild_bullish_out = ""
+    mild_bearish_out = ""
+
     # --- Accumulated Dropped History (21-Day Expiry + Auto-Purge) ---
     import json as _json
     from datetime import datetime, timedelta
     from config.runtime_context import context
-    from config.config import LONG_ENTRY, SHORT_ENTRY
+    from config.config import LONG_ENTRY, SHORT_ENTRY, MILD_LONG_ENTRY, MILD_SHORT_ENTRY
 
     dropped_file = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -1012,9 +1018,15 @@ def print_daily_scan(
         if clean:
             accumulated["short_dropped"][clean] = current_date_str
 
-    # Process Auto-Purge and Expiry
+    # Process Auto-Purge and Expiry with Theme/Zacks Filters
     min_dropped_long = LONG_ENTRY.get("MIN_DROPPED_WATCH_SCORE", 70.0)
     max_dropped_dist = SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 75.0)
+    
+    # Get theme/Zacks filters from config
+    mild_long_blocked_themes = MILD_LONG_ENTRY.get("BLOCKED_THEMES", ["Lagging", "Micro Laggard"])
+    mild_long_allowed_zacks = MILD_LONG_ENTRY.get("ALLOWED_ZACKS", [1, 2])
+    mild_short_blocked_themes = MILD_SHORT_ENTRY.get("BLOCKED_THEMES", ["Leading", "Micro Leader", "Unclassified Leader"])
+    mild_short_allowed_zacks = MILD_SHORT_ENTRY.get("ALLOWED_ZACKS", [4, 5])
 
     def clean_accumulator(dropped_dict, active_list_str, is_long=True):
         active_set = set(t.strip().upper() for t in active_list_str.split(",") if t.strip())
@@ -1024,8 +1036,6 @@ def print_daily_scan(
             if ticker in active_set:
                 continue
                 
-
-
             # Timeline Expiry from Config
             max_days = LONG_ENTRY.get("MILD_DAYS", 21) if is_long else SHORT_ENTRY.get("MILD_DAYS", 21)
             try:
@@ -1040,15 +1050,29 @@ def print_daily_scan(
                             zacks_val = int(float(pd.to_numeric(r.get("Zacks Rank", 0), errors="coerce")))
                         except:
                             zacks_val = 0
-                            
+                        
+                        theme_class = str(r.get("Theme_Class", ""))
+                        
                         # If a stock physically breaks the drop limits or reverses its fundamental trend, purge immediately
                         if is_long:
                             score = float(pd.to_numeric(r.get("Long_Score", 0), errors="coerce"))
                             if score < min_dropped_long or zacks_val not in [1, 2, 3]:
                                 continue
+                            # Apply config filters: exclude blocked themes
+                            if theme_class in mild_long_blocked_themes:
+                                continue
+                            # Apply config filters: only allow specified Zacks
+                            if zacks_val not in mild_long_allowed_zacks:
+                                continue
                         else:
                             score = float(pd.to_numeric(r.get("Short_Score", 0), errors="coerce"))
                             if score > max_dropped_dist or zacks_val not in [3, 4, 5]:
+                                continue
+                            # Apply config filters: exclude blocked themes
+                            if theme_class in mild_short_blocked_themes:
+                                continue
+                            # Apply config filters: only allow specified Zacks
+                            if zacks_val not in mild_short_allowed_zacks:
                                 continue
                                 
                     cleaned[ticker] = date_str
@@ -1127,19 +1151,21 @@ def print_daily_scan(
     long_mild_days = LONG_ENTRY.get("MILD_DAYS", 21)
     short_mild_days = SHORT_ENTRY.get("MILD_DAYS", 21)
 
-    mild_bullish_out, long_pullback_str = print_dropped_table(accumulated["long_dropped"], "MILD BULLISH", max_days=long_mild_days, min_days=0, is_long_table=True)
-    mild_bearish_out, short_rally_str = print_dropped_table(accumulated["short_dropped"], "MILD BEARISH", max_days=short_mild_days, min_days=0, is_long_table=False)
+    # Dropped-based mild watchlists with config filters
+    dropped_mild_bullish_out, long_pullback_str = print_dropped_table(accumulated["long_dropped"], "MILD BULLISH (Pulled Back)", max_days=long_mild_days, min_days=0, is_long_table=True)
+    dropped_mild_bearish_out, short_rally_str = print_dropped_table(accumulated["short_dropped"], "MILD BEARISH (Rallied)", max_days=short_mild_days, min_days=0, is_long_table=False)
 
     print("\n" + strong_bullish_out)
-    if mild_bullish_out:
-        print(mild_bullish_out)
+    if dropped_mild_bullish_out:
+        print(dropped_mild_bullish_out)
         
     print("\n" + strong_bearish_out)
-    if mild_bearish_out:
-        print(mild_bearish_out)
+    if dropped_mild_bearish_out:
+        print(dropped_mild_bearish_out)
 
     print("TRADINGVIEW WATCHLIST EXPORT")
     
+    # Dropped-based mild watchlists = Swing
     print("###Bullish_Momentum," + full_long_list + ",") if full_long_list else print("###Bullish_Momentum,")
     print("###Bullish_Swing," + long_pullback_str + ",") if long_pullback_str else print("###Bullish_Swing,")
 
