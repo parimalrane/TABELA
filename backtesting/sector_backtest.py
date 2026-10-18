@@ -71,7 +71,7 @@ def run_backtest():
 
         hist_file = get_historical_etf_path(curr_file, days_back=7)
         si = SectorIntelligence(curr_file, hist_file)
-        intel = si.generate_intelligence_report(top_n=3, bottom_n=3)
+        intel = si.generate_intelligence_report()
         
         if not intel:
             continue

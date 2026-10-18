@@ -25,6 +25,28 @@ THEME_STRENGTH_CONFIG = {
     "CLASSIFICATION_PERCENTAGE_LAGGING": 0.30
 }
 
+# Weights for the sector composite strength score
+SECTOR_COMPOSITE_WEIGHTS = {
+    "Performance 1W (%)": 0.2,
+    "Performance 1M (%)": 0.4,
+    "Performance 3M (%)": 0.3,
+    "Performance YTD (%)": 0.1,
+}
+
+# Configuration for sector classification
+SECTOR_CLASSIFICATION_CONFIG = {
+    "SPDR_MAP": {
+        'XLK': 'Technology', 'XLY': 'Discretionary', 'XLC': 'Communications',
+        'XLF': 'Financials', 'XLP': 'Staples', 'XLU': 'Utilities',
+        'XLV': 'Health Care', 'XLE': 'Energy', 'XLB': 'Materials',
+        'XLI': 'Industrials', 'XLRE': 'Real Estate'
+    },
+    "TOP_N_LEADERS": 3,  # Number of top sectors to classify as LEADING
+    "BOTTOM_N_LAGGARDS": 3, # Number of bottom sectors to classify as LAGGING
+    "IMPROVING_RANK_DELTA": 2, # Rank delta for a sector to be classified as IMPROVING
+    "DETERIORATING_RANK_DELTA": -2 # Rank delta for a sector to be classified as DETERIORATING
+}
+
 # User Request: 50% RS, 25% Theme, 25% Fundamentals
 LONG_WEIGHTS = {
     "RS_WEIGHT": 0.60,

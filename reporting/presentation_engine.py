@@ -630,19 +630,19 @@ def print_daily_scan(
     print("==============================================")
     # The pipeline prints MARKET STATISTICS externally somewhere, we slip this in 
     # to render right before Theme Breadth.
+    sector_rs_map = {}
+    legacy_data_list = []
+    breadth = {"w": (0,0), "m": (0,0), "q": (0,0)}
     
     try:
         macro_results = print_macro_weather(stocks, theme_strength_settings)
-        if len(macro_results) == 3:
+        if isinstance(macro_results, tuple) and len(macro_results) == 3:
             sector_rs_map, legacy_data_list, breadth = macro_results
-        else:
+        elif isinstance(macro_results, dict):
             sector_rs_map = macro_results
-            legacy_data_list = []
-            breadth = {"w": (0,0), "m": (0,0), "q": (0,0)}
-    except Exception as e:
-        sector_rs_map = {}
-        legacy_data_list = []
-        breadth = {"w": (0,0), "m": (0,0), "q": (0,0)}
+    except Exception:
+        # Log the exception if necessary, but proceed with empty data
+        pass
 
     # --- Inject Sector Intelligence Output ---
     try:
@@ -655,7 +655,7 @@ def print_daily_scan(
         report_str = si.format_terminal_output(report_data, legacy_data_list, breadth)
         if report_str:
             print(report_str)
-    except Exception as e:
+    except Exception:
         pass
     # ------------------------------------------
 

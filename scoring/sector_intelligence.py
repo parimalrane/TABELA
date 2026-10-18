@@ -5,12 +5,9 @@ from datetime import datetime
 import os
 import re
 
-SPDR_MAP = {
-    'XLK': 'Technology', 'XLY': 'Discretionary', 'XLC': 'Communications',
-    'XLF': 'Financials', 'XLP': 'Staples', 'XLU': 'Utilities',
-    'XLV': 'Health Care', 'XLE': 'Energy', 'XLB': 'Materials',
-    'XLI': 'Industrials', 'XLRE': 'Real Estate'
-}
+from config.config import SECTOR_COMPOSITE_WEIGHTS, SECTOR_CLASSIFICATION_CONFIG
+
+SPDR_MAP = SECTOR_CLASSIFICATION_CONFIG["SPDR_MAP"]
 
 def get_historical_etf_path(current_path: str, days_back: int = 7) -> str:
     from datetime import datetime, timedelta
@@ -73,7 +70,7 @@ class SectorIntelligence:
             except Exception:
                 return pd.DataFrame()
 
-    def generate_intelligence_report(self, top_n: int = 3, bottom_n: int = 3) -> Dict[str, Any]:
+    def generate_intelligence_report(self) -> Dict[str, Any]:
         """
         Generates sector strength scores, excess returns vs SPY, and rotation changes.
         """
@@ -112,7 +109,10 @@ class SectorIntelligence:
 
             # Sector Strength Score Logic
             # Using configurable weights to build composite score (e.g., heavily weighting 1M and 1Q)
-            w_1w, w_1m, w_3m, w_ytd = 0.2, 0.4, 0.3, 0.1
+            w_1w = SECTOR_COMPOSITE_WEIGHTS.get("Performance 1W (%)", 0.0)
+            w_1m = SECTOR_COMPOSITE_WEIGHTS.get("Performance 1M (%)", 0.0)
+            w_3m = SECTOR_COMPOSITE_WEIGHTS.get("Performance 3M (%)", 0.0)
+            w_ytd = SECTOR_COMPOSITE_WEIGHTS.get("Performance YTD (%)", 0.0)
             composite_score = (p1w * w_1w) + (p1m * w_1m) + (p3m * w_3m) + (pytd * w_ytd)
 
             excess_vs_spy_1m = p1m - spy_1m
@@ -150,7 +150,10 @@ class SectorIntelligence:
                      hytd = pd.to_numeric(h_row.get("Performance YTD (%)", h_row.get("Performance 1Y (%)", 0)), errors='coerce')
                      hytd = hytd if pd.notna(hytd) else 0.0
                      
-                     w_1w, w_1m, w_3m, w_ytd = 0.2, 0.4, 0.3, 0.1
+                     w_1w = SECTOR_COMPOSITE_WEIGHTS.get("Performance 1W (%)", 0.0)
+                     w_1m = SECTOR_COMPOSITE_WEIGHTS.get("Performance 1M (%)", 0.0)
+                     w_3m = SECTOR_COMPOSITE_WEIGHTS.get("Performance 3M (%)", 0.0)
+                     w_ytd = SECTOR_COMPOSITE_WEIGHTS.get("Performance YTD (%)", 0.0)
                      hist_score = (h1w * w_1w) + (h1m * w_1m) + (h3m * w_3m) + (hytd * w_ytd)
                      result_df.at[idx, 'Historical_Score'] = hist_score
                  else:
@@ -168,25 +171,28 @@ class SectorIntelligence:
 
         result_df = result_df.sort_values('Rank')
 
+        top_n_leaders = SECTOR_CLASSIFICATION_CONFIG["TOP_N_LEADERS"]
+        bottom_n_laggards = SECTOR_CLASSIFICATION_CONFIG["BOTTOM_N_LAGGARDS"]
+
         # Determine state
         def derive_status(row):
             rank = row['Rank']
             r_delta = row['Rank_Delta']
-            if rank <= top_n:
+            if rank <= top_n_leaders:
                 return "LEADING"
-            elif rank >= len(result_df) - bottom_n + 1:
+            elif rank >= len(result_df) - bottom_n_laggards + 1:
                 return "LAGGING"
-            elif r_delta >= 2:
+            elif r_delta >= SECTOR_CLASSIFICATION_CONFIG["IMPROVING_RANK_DELTA"]:
                 return "IMPROVING"
-            elif r_delta <= -2:
+            elif r_delta <= SECTOR_CLASSIFICATION_CONFIG["DETERIORATING_RANK_DELTA"]:
                 return "DETERIORATING"
             return "NEUTRAL"
         
         result_df['Status'] = result_df.apply(derive_status, axis=1)
 
-        long_watchlist = result_df[result_df['Rank'] <= top_n]['Name'].tolist()
-        short_watchlist = result_df[result_df['Rank'] >= len(result_df) - bottom_n + 1]['Name'].tolist()
-        rotation_watchlist = result_df[(result_df['Rank_Delta'] >= 2) & (result_df['Rank'] > top_n)]['Name'].tolist()
+        long_watchlist = result_df[result_df['Rank'] <= top_n_leaders]['Name'].tolist()
+        short_watchlist = result_df[result_df['Rank'] >= len(result_df) - bottom_n_laggards + 1]['Name'].tolist()
+        rotation_watchlist = result_df[(result_df['Rank_Delta'] >= SECTOR_CLASSIFICATION_CONFIG["IMPROVING_RANK_DELTA"]) & (result_df['Rank'] > top_n_leaders)]['Name'].tolist()
 
 
         output_data = {
