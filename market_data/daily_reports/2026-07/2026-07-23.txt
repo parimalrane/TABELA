@@ -48,7 +48,7 @@ Legend: [No Prefix]=Long / #=Short / -=Mild Swing / -#=Mild Short
 Micro Theme                  Macro Theme      Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
 Refining & Marketing         Exploration        8    7  188.41   7.60   Leading (3)                 [XLE] CRAK             DINO, PBF, PSX, VLO
-AI Servers                   Artificial Int..   2    2  106.57  -0.81   Neutral (28 -> +4)          [XLK] SMH, AIQ         DELL, HPE
+AI Servers                   Artificial Int..   2    2  106.57  -0.81   Neutral (28 -> +4)          [XLK] SMH, AIQ         DELL, HPE, -DELL
 Pharmaceuticals              Pharma             3    2   91.50   6.23   Leading (5 -> +1)           [XLV] XPH, IHE         LQDA
 Healthcare Services          Healthcare        15    5   87.42   6.13   Leading (6 -> +3)           [XLV] IHI, XBI         OSCR
 Fuel Cell Infrastructure     Infrastructure     1    1   68.62  -0.53   Neutral (26 -> -1)          [XLI] PAVE, IGF        FCEL
@@ -68,10 +68,14 @@ Infrastructure               Infrastructure   107    1    4.22  -0.53   Neutral 
 Software                     Software         166    1    2.98  -1.68   Lagging (30 -> +9)          [XLK] IGV, XSW         -AVPT, -GRND, -U, -BILL, -IOT,
                                                                                                                            -NTNX, -RAL
 Communications Cloud         Cloud Computing    4    0    0.00   0.74   Neutral (22 -> +3)          [XLK] CLOU, FCOM       -FIVN
+Diagnostics                  Medical Devices    9    0    0.00  -4.02   Lagging (35 -> +3)          [XLV] IHI, XHE         -ADPT, -ILMN
 Energy                       Exploration       15    0    0.00   7.60   Leading (3)                 [XLE] XOP, IEO         
 Digital Assets Infrastruct.. Software          10    0    0.00  -1.68   Lagging (30 -> +9)          [XLK] BITQ, DAPP       #COIN
+Gold Mining                  Gold Mining       42    0    0.00  -5.05   Lagging (37 -> -1)          [XLB] GDX, GDXJ        -#NEM, -#VALE
 Internet                     Internet          18    0    0.00  -2.89   Lagging (33 -> +4)          [XLC] FDN              #PDD
+Life Sciences Tools          Medical Devices    5    0    0.00  -4.02   Lagging (35 -> +3)          [XLV] IHI, XHE         -AVTR
 Integrated Energy            Exploration        7    0    0.00   7.60   Leading (3)                 [XLE] XOP, IEO         
+Medical Devices              Medical Devices   86    0    0.00  -4.02   Lagging (35 -> +3)          [XLV] IHI, XHE         -QDEL, -#ABT
 GLP-1 Weight Loss            Pharma             3    0    0.00   6.23   Leading (5 -> +1)           [XLV] XPH, IHE         
 Oil Services                 Exploration        5    0    0.00   7.60   Leading (3)                 [XLE] OIH, XES         
 Nuclear Infrastructure       Uranium Mining     3    0    0.00  -8.87   Lagging (40)                [XLU] NLR, URNM        
@@ -79,6 +83,7 @@ Mobile Adtech                Internet           2    0    0.00  -2.89   Lagging 
 Restaurants                  Consumer Staples  27    0    0.00   0.00   Unknown                     [XLY] MENU, PBJ        #CMG
 Retail Trading Platform      Digital Assets     1    0    0.00   0.00   Unknown                     [XLK] BITO, IBIT       -#HOOD
 Silver Mining                Silver Mining      6    0    0.00  -5.53   Lagging (38 -> +1)          [XLB] SIL, SILJ        #HL
+Space Infrastructure         Aerospace & De..   5    0    0.00   1.28   Neutral (14 -> -1)          [XLI] ARKX, ITA        -#RKLB
 Unknown                      Unknown          354    0    0.00   0.00   Unknown                                            #BBWI, #CPB, #GIS, #JBS, #KR, #MOS,
                                                                                                                            #ORLY, #RIVN, -#MKC, -#HUN, -#BBWI,
                                                                                                                            -#IP, -#CAG, -#RIVN, -#RKT, -#GM,
@@ -110,21 +115,43 @@ Ticker                            Mapped_Theme Long_Score  RS_Rating Movement  D
 MILD BULLISH (Pulled Back)
 ========================================
 Ticker                 Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  OKTA                Cybersecurity      86.54         98       NA     0     XLK (4)
+  CRSR    Leisure and Entertainment      85.16         97       NA     0    XLY (10)
+  FTNT                Cybersecurity      84.74         95       NA     0     XLK (4)
    IVZ           Financial Services      84.63         91       NA     0     XLF (3)
+  CTAS             Footwear/Apparel      84.09         95       NA     0    XLY (10)
     MU                       Memory      83.91         89       NA     0     XLK (4)
+  HNGE               Digital Health      83.54         93       NA     0     XLV (2)
+   LTH    Leisure and Entertainment      83.36         94       NA     0    XLY (10)
+  GTLB     Developer Infrastructure      82.94         92       NA     0     XLK (4)
+     S                Cybersecurity      82.94         92       NA     0     XLK (4)
   EQNR            Integrated Energy      82.51         98       NA     0     XLE (1)
+  VSXY             Footwear/Apparel      82.29         92       NA     0    XLY (10)
    MPC         Refining & Marketing      81.91         97       NA     0     XLE (1)
     SM                  Exploration      81.91         97       NA     0     XLE (1)
+   FIG                     Software      81.74         90       NA     0     XLK (4)
    AHR                        REITs      80.30         85       NA     0     XLF (3)
    TRV                    Insurance      79.32         97       NA     0     XLF (3)
+  PENG                     Software      78.74         85       NA     0     XLK (4)
   NESR                  Exploration      75.71         70       NA     0     XLE (1)
+  ILMN                  Diagnostics      84.43         97       NA     1     XLV (2)
+  QDEL              Medical Devices      84.43         97       NA     1     XLV (2)
+  AVTR          Life Sciences Tools      83.23         95       NA     1     XLV (2)
+   RAL                     Software      79.94         87       NA     1     XLK (4)
   LFST                   Healthcare      78.56         93       NA     1     XLV (2)
    HIW                        REITs      75.70         94       NA     1     XLF (3)
+  ADPT                  Diagnostics      74.43         97       NA     1     XLV (2)
+  NTNX                     Software      72.34         91       NA     2     XLK (4)
+  BILL                     Software      74.14         94       NA     3     XLK (4)
+     U                     Software      73.94         77       NA     6     XLK (4)
   DDOG         Cloud Infrastructure      78.10         98       NA     7     XLK (4)
   NRIX                      Biotech      76.92         92       NA     7     XLV (2)
   SNOW         Cloud Infrastructure      78.70         99       NA     8     XLK (4)
   FIVN         Communications Cloud      71.50         87       NA     8     XLK (4)
   BAND Communication Infrastructure      86.92         96       NA     9     XLK (4)
+  GRND                     Software      73.34         76       NA     9     XLK (4)
+  APPS                Mobile Adtech      81.56         91       NA    10     XLK (4)
+  AVPT                     Software      71.74         90       NA    10     XLK (4)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -153,19 +180,23 @@ Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Secto
   ~PEP        Consumer Staples       25.45               23       NA     0     XLP (8)
 ~CMCSA                 Unknown       16.35                9       NA     0    XLY (10)
   ~MAT                 Unknown       13.60               14       NA     0    XLY (10)
+  VALE             Gold Mining       47.62               47       NA     2     XLB (9)
  ~HOOD Retail Trading Platform       41.55               57       NA     2     XLF (3)
    ~GM                 Unknown       32.45               43       NA     2    XLY (10)
   ~RKT                 Unknown       13.10                4       NA     3     XLF (3)
+   NEM             Gold Mining       34.62               27       NA     6     XLB (9)
   ~CAG                 Unknown       29.40               26       NA     7     XLP (8)
    ~IP                 Unknown       34.40               46       NA     8     XLB (9)
   ~HUN                 Unknown       52.60               74       NA     9     XLB (9)
+  RKLB    Space Infrastructure       36.09               23       NA     9     XLI (5)
+   ABT         Medical Devices       33.18               33       NA    10     XLV (2)
   ~MKC                 Unknown       21.55               17       NA    10     XLP (8)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###Bullish_Momentum,DINO,PBF,LQDA,PSX,VLO,VG,OSCR,FCEL,DELL,HALO,GEO,NET,RTX,HPE,RLJ,
-###Bullish_Swing,BAND,FIVN,SNOW,DDOG,NRIX,HIW,LFST,AHR,EQNR,IVZ,MPC,MU,NESR,SM,TRV,
+###Bullish_Swing,APPS,AVPT,BAND,GRND,FIVN,SNOW,DDOG,NRIX,U,BILL,NTNX,ADPT,AVTR,HIW,ILMN,LFST,QDEL,RAL,AHR,CRSR,CTAS,EQNR,FIG,FTNT,GTLB,HNGE,IVZ,LTH,MPC,MU,NESR,OKTA,PENG,S,SM,TRV,VSXY,
 ###Bearish_Momentum,BBWI,KR,CPB,GIS,JBS,ORLY,NCLH,CMG,MOS,HL,RIVN,PDD,COIN,
-###Bearish_Swing,MKC,HUN,IP,CAG,RKT,GM,HOOD,ACI,CMCSA,MAT,PEP,
+###Bearish_Swing,ABT,MKC,HUN,RKLB,IP,CAG,NEM,RKT,GM,HOOD,VALE,ACI,CMCSA,MAT,PEP,
 
 ==============================================
 END OF TABELA SCAN - 2026-07-23

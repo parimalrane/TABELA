@@ -859,6 +859,7 @@ def print_daily_scan(
             "Ticker",
             "Mapped_Theme",
             "Theme_Class",
+            "Zacks Rank",
             "Long_Score",
             "RS_Rating",
             "Sector (SPDR)",
@@ -871,8 +872,7 @@ def print_daily_scan(
     display_df.loc[display_df["Theme_Class"] == "Micro Leader", "Ticker"] = "^" + display_df["Ticker"]
     display_df.loc[display_df["Theme_Class"].isin(["Unknown", "Unclassified Leader"]), "Ticker"] = "~" + display_df["Ticker"]
     
-    # Drop the Theme_Class column
-    display_df = display_df.drop(columns=["Theme_Class"])
+
 
     if "Long_Score" in display_df.columns:
         display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
@@ -924,6 +924,7 @@ def print_daily_scan(
                 "Ticker",
                 "Mapped_Theme",
                 "Theme_Class",
+                "Zacks Rank",
                 "Short_Score",
                 "Short_RS_Rating",
                 "Sector (SPDR)",
@@ -935,8 +936,7 @@ def print_daily_scan(
         # Prepend tag directly to the Ticker string
         display_df.loc[display_df["Theme_Class"] == "Micro Laggard", "Ticker"] = "^" + display_df["Ticker"]
 
-        # Drop the Theme_Class column
-        display_df = display_df.drop(columns=["Theme_Class"])
+
 
         if "Short_Score" in display_df.columns:
             display_df["Short_Score"] = display_df["Short_Score"].map("{:.2f}".format)
@@ -1133,6 +1133,8 @@ def print_daily_scan(
                 rows.append({
                     "Ticker": display_ticker,
                     "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
+                    "Theme_Class": theme_class,
+                    "Zacks_Rank": int(pd.to_numeric(r.get("Zacks Rank", 0), errors='coerce')),
                     score_header: f"{float(score_val):.2f}",
                     rs_header: int(rs_val),
                     "Movement": "NA",

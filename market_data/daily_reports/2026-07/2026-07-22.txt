@@ -56,6 +56,7 @@ Communication Infrastructure Telecom            1    1   68.62  -0.23   Neutral 
 Digital Health               Software           1    1   67.24  -1.86   Neutral (27 -> +5)          [XLK] IGV, XSW         HNGE
 Fuel Cell Infrastructure     Infrastructure     1    1   65.85  -2.12   Neutral (29 -> +1)          [XLI] PAVE, IGF        FCEL
 Cybersecurity                Software          13    3   58.47  -1.86   Neutral (27 -> +5)          [XLK] CIBR, BUG        OKTA, FTNT, S, -BB, -ZS
+AI Servers                   Artificial Int..   2    1   53.83  -3.73   Lagging (35 -> -3)          [XLK] SMH, AIQ         -DELL
 Mobile Adtech                Internet           2    1   52.18  -1.96   Neutral (28 -> +2)          [XLC] FDN              -APPS
 Developer Infrastructure     Software           3    1   42.51  -1.86   Neutral (27 -> +5)          [XLK] IGV, CLOU        GTLB
 Memory                       Semiconductors     4    1   36.61  -0.48   Neutral (24 -> -7)          [XLK] DRAM             MU
@@ -64,6 +65,7 @@ Oil Services                 Exploration        5    1   34.76   8.57   Leading 
 Cloud Infrastructure         Cloud Computing    5    1   34.04   1.72   Neutral (15 -> +5)          [XLK] CLOU, WCLD       NET, -SNOW, -DDOG
 Integrated Energy            Exploration        7    1   28.53   8.57   Leading (3 -> -1)           [XLE] XOP, IEO         EQNR
 Leisure and Entertainment    Internet          41    3   25.99  -1.96   Neutral (28 -> +2)          [XLC] FDN              CRSR, LTH, -LTH
+Medical Devices              Medical Devices   87    4   19.77  -2.38   Lagging (31 -> +2)          [XLV] IHI, XHE         -#ABT
 Footwear/Apparel             Retail            37    2   18.70  -0.23   Neutral (22 -> +3)          [XLY] XRT              VSXY, CTAS
 REITs                        REITs            127    5   17.51   2.09   Neutral (14 -> -1)          [XLRE] VNQ, IYR        RLJ, AHR
 Exploration                  Exploration       83    3   14.93   8.57   Leading (3 -> -1)           [XLE] XOP, IEO         NESR, SM, -NESR
@@ -77,10 +79,12 @@ Infrastructure               Infrastructure   107    1    4.14  -2.12   Neutral 
 Consumer Staples             Consumer Staples  38    0    0.00   0.00   Unknown                     [XLP] PBJ, IYK         #ACI, #PEP
 Communications Cloud         Cloud Computing    4    0    0.00   1.72   Neutral (15 -> +5)          [XLK] CLOU, FCOM       -FIVN, -TWLO
 Food Safety                  Healthcare         1    0    0.00   6.92   Leading (5)                 [XLV] IHI, XBI         
+Gold Mining                  Gold Mining       42    0    0.00  -6.93   Lagging (37 -> -1)          [XLB] GDX, GDXJ        -#NEM, -#VALE
 Nuclear Infrastructure       Uranium Mining     3    0    0.00 -11.77   Lagging (40)                [XLU] NLR, URNM        
 Restaurants                  Consumer Staples  27    0    0.00   0.00   Unknown                     [XLY] MENU, PBJ        #CMG
 Retail Trading Platform      Digital Assets     1    0    0.00   0.00   Unknown                     [XLK] BITO, IBIT       -#HOOD
 Silver Mining                Silver Mining      6    0    0.00  -7.23   Lagging (38 -> -1)          [XLB] SIL, SILJ        
+Space Infrastructure         Aerospace & De..   5    0    0.00  -2.75   Lagging (32)                [XLI] ARKX, ITA        -#RKLB
 Unknown                      Unknown          355    0    0.00   0.00   Unknown                                            #CMCSA, #CPB, #KR, #MAT, #ORLY,
                                                                                                                            -#MKC, -#HUN, -#BBWI, -#IP, -#CAG,
                                                                                                                            -#CPB, -#RIVN, -#RKT, -#GM
@@ -126,14 +130,19 @@ Ticker                            Mapped_Theme Long_Score  RS_Rating Movement  D
 MILD BULLISH (Pulled Back)
 ========================================
 Ticker                 Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  QDEL              Medical Devices      89.83         99       NA     0     XLV (2)
+  ILMN                  Diagnostics      87.43         95       NA     0     XLV (2)
+  AVTR          Life Sciences Tools      86.23         93       NA     0     XLV (2)
   LFST                   Healthcare      84.57         96       NA     0     XLV (2)
    RAL                     Software      83.60         88       NA     0     XLK (7)
    HIW                        REITs      79.38         93       NA     0     XLF (3)
+  ADPT                  Diagnostics      78.03         96       NA     0     XLV (2)
   NTNX                     Software      84.80         90       NA     1     XLK (7)
    IOT                     Software      70.40         66       NA     1     XLK (7)
   CHYM           Financial Services      80.11         93       NA     2     XLF (3)
   BILL                     Software      77.20         94       NA     2     XLK (7)
      U                     Software      72.80         70       NA     5     XLK (7)
+  DELL                   AI Servers      88.28         98       NA     6     XLK (7)
     BB                Cybersecurity      84.80         90       NA     6     XLK (7)
   NRIX                      Biotech      82.31         97       NA     6     XLV (2)
   DDOG         Cloud Infrastructure      81.52         97       NA     6     XLK (7)
@@ -165,21 +174,25 @@ MILD BEARISH (Rallied)
 ========================================
 Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
   ~MOS                 Unknown       27.90               36       NA     0     XLB (9)
+  VALE             Gold Mining       49.28               47       NA     1     XLB (9)
  ~HOOD Retail Trading Platform       41.55               57       NA     1     XLF (3)
    ~GM                 Unknown       34.40               46       NA     1    XLY (11)
  ~RIVN                 Unknown       29.85               39       NA     2    XLY (11)
   ~RKT                 Unknown       14.40                6       NA     2     XLF (3)
+   NEM             Gold Mining       36.28               27       NA     5     XLB (9)
   ~CAG                 Unknown       33.30               32       NA     6     XLP (5)
    ~IP                 Unknown       29.85               39       NA     7     XLB (9)
  ~BBWI                 Unknown       25.95               33       NA     7    XLY (11)
   ~HUN                 Unknown       56.50               80       NA     8     XLB (9)
+  RKLB    Space Infrastructure       32.07               16       NA     8     XLI (8)
+   ABT         Medical Devices       38.03               34       NA     9     XLV (2)
   ~MKC                 Unknown       25.45               23       NA     9     XLP (5)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###Bullish_Momentum,DINO,VLO,LQDA,NESR,TRV,OSCR,VG,NET,VSXY,RLJ,OKTA,CRSR,IVZ,HNGE,FTNT,CTAS,LTH,GEO,FCEL,AHR,PBF,S,MPC,MU,PSX,GTLB,EQNR,SM,FIG,PENG,
-###Bullish_Swing,APPS,AVPT,BAND,GRND,CNC,FIVN,SNDX,SNOW,BB,DDOG,NRIX,U,BILL,CHYM,IOT,NTNX,HIW,LFST,RAL,
+###Bullish_Swing,APPS,AVPT,BAND,GRND,CNC,FIVN,SNDX,SNOW,BB,DDOG,DELL,NRIX,U,BILL,CHYM,IOT,NTNX,ADPT,AVTR,HIW,ILMN,LFST,QDEL,RAL,
 ###Bearish_Momentum,PEP,KR,CMCSA,ORLY,CPB,CMG,ACI,MAT,
-###Bearish_Swing,MKC,HUN,BBWI,IP,CAG,RIVN,RKT,GM,HOOD,MOS,
+###Bearish_Swing,ABT,MKC,HUN,RKLB,BBWI,IP,CAG,NEM,RIVN,RKT,GM,HOOD,VALE,MOS,
 
 ==============================================
 END OF TABELA SCAN - 2026-07-22

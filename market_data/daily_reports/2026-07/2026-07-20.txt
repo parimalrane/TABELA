@@ -66,15 +66,16 @@ Cloud Infrastructure         Cloud Computing    5    1   33.69   4.78   Leading 
 Life Sciences Tools          Medical Devices    5    1   32.25  -1.44   Neutral (26 -> +7)          [XLV] IHI, XHE         AVTR
 Footwear/Apparel             Retail            37    2   18.20   0.52   Neutral (19)                [XLY] XRT              VSXY, CTAS, -VSXY
 Leisure and Entertainment    Internet          41    2   16.51  -0.23   Neutral (22 -> -3)          [XLC] FDN              RSI, -RSI
-Medical Devices              Medical Devices   88    3   14.75  -1.44   Neutral (26 -> +7)          [XLV] IHI, XHE         QDEL
+Medical Devices              Medical Devices   88    3   14.75  -1.44   Neutral (26 -> +7)          [XLV] IHI, XHE         QDEL, -#ABT
 REITs                        REITs            128    2    6.82   2.48   Neutral (14 -> -2)          [XLRE] VNQ, IYR        AHR, HIW
 Insurance                    Insurance         68    1    6.10   5.58   Leading (6 -> -2)           [XLF] KIE, IAK         -BWIN
 Biotech                      Biotech           85    0    0.00   3.84   Leading (11 -> +3)          [XLV] XBI, IBB         -SNDX, -NRIX
+AI Servers                   Artificial Int..   2    0    0.00  -5.19   Lagging (34 -> +2)          [XLK] SMH, AIQ         -HPE, -DELL
 Energy                       Exploration       15    0    0.00   6.67   Leading (4 -> -7)           [XLE] XOP, IEO         
 Discount Retail              Discount Retail   10    0    0.00   0.00   Unknown                                            #WMT
 Consumer Staples             Consumer Staples  38    0    0.00   0.00   Unknown                     [XLP] PBJ, IYK         #ACI, #PEP, -#PEP
 Integrated Energy            Exploration        7    0    0.00   6.67   Leading (4 -> -7)           [XLE] XOP, IEO         
-Gold Mining                  Gold Mining       43    0    0.00 -14.95   Lagging (39)                [XLB] GDX, GDXJ        #VALE
+Gold Mining                  Gold Mining       43    0    0.00 -14.95   Lagging (39)                [XLB] GDX, GDXJ        #VALE, -#NEM
 Exploration                  Exploration       82    0    0.00   6.67   Leading (4 -> -7)           [XLE] XOP, IEO         -NESR
 Food Safety                  Healthcare         1    0    0.00   7.85   Leading (2 -> +1)           [XLV] IHI, XBI         
 Oil Services                 Exploration        5    0    0.00   6.67   Leading (4 -> -7)           [XLE] OIH, XES         
@@ -82,6 +83,7 @@ Nuclear Infrastructure       Uranium Mining     3    0    0.00 -16.59   Lagging 
 Retail Trading Platform      Digital Assets     1    0    0.00   0.00   Unknown                     [XLK] BITO, IBIT       #HOOD
 Restaurants                  Consumer Staples  28    0    0.00   0.00   Unknown                     [XLY] MENU, PBJ        #CMG
 Silver Mining                Silver Mining      6    0    0.00 -14.67   Lagging (38 -> -2)          [XLB] SIL, SILJ        
+Space Infrastructure         Aerospace & De..   5    0    0.00  -5.12   Lagging (33)                [XLI] ARKX, ITA        -#RKLB
 Unknown                      Unknown          358    0    0.00   0.00   Unknown                                            #CMCSA, #GM, #KR, -#MKC, -#MOS,
                                                                                                                            -#HUN, -#BBWI, -#IP, -#CAG, -#CPB,
                                                                                                                            -#ORLY
@@ -135,6 +137,7 @@ Ticker                 Mapped_Theme Long_Score  RS_Rating Movement  Days Sector 
   DDOG         Cloud Infrastructure      84.57         98       NA     4     XLK (8)
     BB                Cybersecurity      82.96         81       NA     4     XLK (8)
   NRIX                      Biotech      81.51         94       NA     4     XLV (2)
+  DELL                   AI Servers      73.78         75       NA     4     XLK (8)
   TWLO         Communications Cloud      89.17         89       NA     5     XLK (8)
   FIVN         Communications Cloud      84.57         98       NA     5     XLK (8)
   SNOW         Cloud Infrastructure      84.57         98       NA     5     XLK (8)
@@ -164,23 +167,26 @@ Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Secto
 ========================================
 MILD BEARISH (Rallied)
 ========================================
-Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
- ~RIVN      Unknown       27.25               35       NA     0    XLY (10)
-  ~RKT      Unknown       19.60               14       NA     0     XLF (3)
-  ~CPB      Unknown       27.40               26       NA     3     XLP (5)
- ~ORLY      Unknown       25.45               23       NA     3    XLY (10)
-  ~CAG      Unknown       33.95               33       NA     4     XLP (5)
- ~BBWI      Unknown       34.40               46       NA     5    XLY (10)
-   ~IP      Unknown       24.65               31       NA     5    XLB (11)
-  ~HUN      Unknown       39.60               54       NA     6    XLB (11)
-  ~MOS      Unknown       31.35               29       NA     7    XLB (11)
-  ~MKC      Unknown       27.40               26       NA     7     XLP (5)
+Ticker         Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+ ~RIVN              Unknown       27.25               35       NA     0    XLY (10)
+  ~RKT              Unknown       19.60               14       NA     0     XLF (3)
+  ~CPB              Unknown       27.40               26       NA     3     XLP (5)
+ ~ORLY              Unknown       25.45               23       NA     3    XLY (10)
+   NEM          Gold Mining       19.92               10       NA     3    XLB (11)
+  ~CAG              Unknown       33.95               33       NA     4     XLP (5)
+ ~BBWI              Unknown       34.40               46       NA     5    XLY (10)
+   ~IP              Unknown       24.65               31       NA     5    XLB (11)
+  ~HUN              Unknown       39.60               54       NA     6    XLB (11)
+  RKLB Space Infrastructure       23.57                5       NA     6     XLI (6)
+   ABT      Medical Devices       40.96               37       NA     7     XLV (2)
+  ~MOS              Unknown       31.35               29       NA     7    XLB (11)
+  ~MKC              Unknown       27.40               26       NA     7     XLP (5)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###Bullish_Momentum,DINO,VLO,OKTA,HNGE,LQDA,GTLB,S,NET,FIG,BRZE,PD,FTNT,OSCR,IOT,QDEL,ADPT,NTNX,VSXY,ZS,PATH,AHR,HIW,CTAS,VG,RSI,PBF,LFST,ILMN,AVTR,MPC,
-###Bullish_Swing,APPS,AVPT,BAND,BWIN,GRND,CNC,FIVN,SNDX,SNOW,TWLO,BB,DDOG,NRIX,NESR,U,BILL,CHYM,LTH,
+###Bullish_Swing,APPS,AVPT,BAND,BWIN,GRND,CNC,FIVN,SNDX,SNOW,TWLO,BB,DDOG,DELL,NRIX,NESR,U,BILL,CHYM,LTH,
 ###Bearish_Momentum,PEP,VALE,WMT,GM,HOOD,CMCSA,KR,CMG,ACI,
-###Bearish_Swing,MKC,MOS,HUN,BBWI,IP,CAG,CPB,ORLY,RIVN,RKT,
+###Bearish_Swing,ABT,MKC,MOS,HUN,RKLB,BBWI,IP,CAG,CPB,NEM,ORLY,RIVN,RKT,
 
 ==============================================
 END OF TABELA SCAN - 2026-07-20

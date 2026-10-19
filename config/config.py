@@ -83,6 +83,27 @@ LONG_ENTRY = {
     "MILD_DAYS": 50
 }
 
+
+# ==========================
+# MILD WATCHLIST ENTRY CRITERIA
+# Config-driven filtering for mild watchlist candidates
+# ==========================
+
+MILD_LONG_ENTRY = {
+    # Theme restriction: Long mild stocks must NOT be from lagging themes
+    "BLOCKED_THEMES": [""],
+    
+    # Zacks restriction: Long mild stocks must have Zacks rank 1 or 2 only
+    "ALLOWED_ZACKS": [1, 2, 3],
+    
+    # Minimum thresholds (optional - can be more lenient than LONG_ENTRY)
+    "MIN_RS": 70.0,
+    "MIN_LONG_SCORE": 60.0,
+    "MIN_PRICE": 10.0,
+    "MIN_VOLUME": 1_000_000,
+}
+
+
 # ==========================
 # SHORT ENGINE (ISOLATED)
 # These variables are EXCLUSIVELY used by the Short backtesting tuner.
@@ -129,28 +150,9 @@ SHORT_ENTRY = {
     "MILD_DAYS": 50.0
 }
 
-# ==========================
-# MILD WATCHLIST ENTRY CRITERIA
-# Config-driven filtering for mild watchlist candidates
-# ==========================
-
-MILD_LONG_ENTRY = {
-    # Theme restriction: Long mild stocks must NOT be from lagging themes
-    "BLOCKED_THEMES": ["Lagging", "Micro Laggard", "Lagging"],
-    
-    # Zacks restriction: Long mild stocks must have Zacks rank 1 or 2 only
-    "ALLOWED_ZACKS": [1, 2, 3],
-    
-    # Minimum thresholds (optional - can be more lenient than LONG_ENTRY)
-    "MIN_RS": 70.0,
-    "MIN_LONG_SCORE": 60.0,
-    "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_000_000,
-}
-
 MILD_SHORT_ENTRY = {
     # Theme restriction: Short mild stocks must NOT be from leading themes
-    "BLOCKED_THEMES": ["Leading", "Micro Leader", "Unclassified Leader", "Lagging"],
+    "BLOCKED_THEMES": [""],
     
     # Zacks restriction: Short mild stocks must have Zacks rank 4 or 5 only
     "ALLOWED_ZACKS": [3, 4, 5],
