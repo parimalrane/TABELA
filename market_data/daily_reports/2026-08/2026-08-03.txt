@@ -48,9 +48,9 @@ Legend: [No Prefix]=Long / #=Short / -=Mild Swing / -#=Mild Short
 ========================================
 Micro Theme                  Macro Theme      Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Life Sciences Tools          Medical Devices    5    3  105.36   2.68   Leading (7 -> +3)           [XLV] IHI, XHE         AVTR, TXG, BLFS
+Life Sciences Tools          Medical Devices    5    3  105.36   2.68   Leading (7 -> +3)           [XLV] IHI, XHE         AVTR, TXG, BLFS, -TXG
 Cloud Infrastructure         Cloud Computing    5    3  104.28   9.04   Leading (1 -> -1)           [XLK] CLOU, WCLD       NET, SNOW, FSLY, -DDOG
-Refining & Marketing         Exploration        8    4  104.09   3.07   Leading (5 -> -8)           [XLE] CRAK             PBF, DINO
+Refining & Marketing         Exploration        8    4  104.09   3.07   Leading (5 -> -8)           [XLE] CRAK             PBF, DINO, -MPC, -PSX
 IT Services                  Software           3    2   90.58   4.00   Leading (3 -> -6)           [XLK] IGV, XSW         
 Communications Cloud         Cloud Computing    4    2   78.86   9.04   Leading (1 -> -1)           [XLK] CLOU, FCOM       RNG, FIVN
 Data Infrastructure          Software           4    2   78.46   4.00   Leading (3 -> -6)           [XLK] IGV, CLOU        ESTC
@@ -66,11 +66,12 @@ Leisure and Entertainment    Internet          35    3   29.89   1.84   Leading 
 Software                     Software         163    9   26.40   4.00   Leading (3 -> -6)           [XLK] IGV, XSW         EXLS, FIG, NTNX, GRND, U, -GRND,
                                                                                                                            -IOT, -U
 Healthcare Services          Healthcare        15    1   17.57   1.19   Leading (12 -> +1)          [XLV] IHI, XBI         -OSCR
-Insurance                    Insurance         64    1    5.99   0.41   Neutral (16 -> +2)          [XLF] KIE, IAK         -TRV
+Medical Devices              Medical Devices   82    2    9.97   2.68   Leading (7 -> +3)           [XLV] IHI, XHE         -XRAY
+Insurance                    Insurance         64    1    5.99   0.41   Neutral (16 -> +2)          [XLF] KIE, IAK         -ALL, -RYAN, -TRV
 Banking                      Banking          149    0    0.00   1.45   Leading (11 -> +1)          [XLF] KRE, KBE         -SCHW, -SMFG
 Consumer Staples             Consumer Staples  36    0    0.00   0.00   Unknown                     [XLP] PBJ, IYK         #PEP, -#PEP
 Copper Mining                Copper Mining     10    0    0.00  -0.65   Neutral (24)                [XLB] COPX             -CLF
-Cybersecurity                Software          13    0    0.00   4.00   Leading (3 -> -6)           [XLK] CIBR, BUG        -S
+Cybersecurity                Software          13    0    0.00   4.00   Leading (3 -> -6)           [XLK] CIBR, BUG        -S, -FTNT
 Biotech                      Biotech           76    0    0.00  -2.67   Lagging (31 -> +6)          [XLV] XBI, IBB         -HALO
 Aerospace & Defense          Aerospace & De..  38    0    0.00  -1.56   Neutral (28 -> -4)          [XLI] ITA, XAR         -RTX
 Enterprise Cloud             Cloud Computing    2    0    0.00   9.04   Leading (1 -> -1)           [XLK] CLOU, SKYY       
@@ -80,13 +81,17 @@ Digital Payments             Software           4    0    0.00   4.00   Leading 
 Digital Health               Software           1    0    0.00   4.00   Leading (3 -> -6)           [XLK] IGV, XSW         
 Digital Assets Infrastruct.. Software           8    0    0.00   4.00   Leading (3 -> -6)           [XLK] BITQ, DAPP       
 Developer Infrastructure     Software           3    0    0.00   4.00   Leading (3 -> -6)           [XLK] IGV, CLOU        
-Integrated Energy            Exploration        6    0    0.00   3.07   Leading (5 -> -8)           [XLE] XOP, IEO         
+Internet                     Internet          19    0    0.00   1.84   Leading (8 -> -7)           [XLC] FDN              -#PDD
+Integrated Energy            Exploration        6    0    0.00   3.07   Leading (5 -> -8)           [XLE] XOP, IEO         -EQNR
 Insurance Technology         Software           1    0    0.00   4.00   Leading (3 -> -6)           [XLK] IGV, XSW         
-Exploration                  Exploration       72    0    0.00   3.07   Leading (5 -> -8)           [XLE] XOP, IEO         
+Exploration                  Exploration       72    0    0.00   3.07   Leading (5 -> -8)           [XLE] XOP, IEO         -SM
 Nuclear Infrastructure       Uranium Mining     3    0    0.00 -10.40   Lagging (40)                [XLU] NLR, URNM        
+Restaurants                  Consumer Staples  25    0    0.00   0.00   Unknown                     [XLY] MENU, PBJ        -#CMG
+REITs                        REITs            118    0    0.00  -2.20   Neutral (30 -> +3)          [XLRE] VNQ, IYR        -RLJ
 Silver Mining                Silver Mining      5    0    0.00  -9.29   Lagging (39 -> +4)          [XLB] SIL, SILJ        
-Unknown                      Unknown          323    0    0.00   0.00   Unknown                                            #CMCSA, #KR, #SONY, -#MKC, -#RKT,
-                                                                                                                           -#MOS, -#CPRT, -#GIS
+Unknown                      Unknown          323    0    0.00   0.00   Unknown                                            #CMCSA, #KR, #SONY, -#MKC, -#HUN,
+                                                                                                                           -#IP, -#RKT, -#MAT, -#MOS, -#BBWI,
+                                                                                                                           -#JBS, -#CPRT, -#GIS, -#RIVN
 Uranium Mining               Uranium Mining     1    0    0.00 -10.40   Lagging (40)                [XLU] URNM, URA        
 
 ========================================
@@ -125,16 +130,28 @@ Ticker              Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk
    VLO      Refining & Marketing      87.23         88       NA     0     XLE (1)
   CTAS          Footwear/Apparel      85.17         87       NA     0     XLY (4)
    LTH Leisure and Entertainment      85.09         86       NA     0     XLY (4)
+   MAN     Professional Services      84.54         99       NA     0     XLK (3)
+    PD                  Software      83.34         97       NA     0     XLK (3)
+  DXCM           Medical Devices      82.94         98       NA     0     XLV (5)
   ILMN               Diagnostics      82.74         81       NA     0     XLV (5)
+  GTLB  Developer Infrastructure      79.14         90       NA     0     XLK (3)
   DDOG      Cloud Infrastructure      91.80         88       NA     3     XLK (3)
    CLF             Copper Mining      74.79         72       NA     3    XLB (10)
    TRV                 Insurance      82.20         83       NA     4     XLF (2)
+  XRAY           Medical Devices      79.34         92       NA     4     XLV (5)
+   PSX      Refining & Marketing      77.23         88       NA     4     XLE (1)
    IOT                  Software      75.94         68       NA     4     XLK (3)
+  RYAN                 Insurance      73.40         85       NA     4     XLF (2)
+  FTNT             Cybersecurity      84.34         82       NA     6     XLK (3)
    RTX       Aerospace & Defense      77.69         78       NA     6     XLI (6)
   SCHW                   Banking      77.59         74       NA     6     XLF (2)
      S             Cybersecurity      87.94         88       NA     7     XLK (3)
   LQDA           Pharmaceuticals      86.38         91       NA     7     XLV (5)
+   RLJ                     REITs      71.40         85       NA     7     XLF (2)
   OSCR       Healthcare Services      78.60         76       NA    10     XLF (2)
+  EQNR         Integrated Energy      79.63         92       NA    11     XLE (1)
+    SM               Exploration      78.43         90       NA    11     XLE (1)
+   MPC      Refining & Marketing      76.63         87       NA    11     XLE (1)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -151,17 +168,25 @@ Ticker     Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
 MILD BEARISH (Rallied)
 ========================================
 Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+ ~ORLY      Unknown       26.60               34       NA     0     XLY (4)
+ ~RIVN      Unknown        9.05                7       NA     3     XLY (4)
   ~GIS      Unknown       19.60               14       NA     3     XLP (9)
+  ~CMG  Restaurants       41.55               57       NA     4     XLY (4)
  ~CPRT      Unknown       16.35                9       NA     4     XLK (3)
+ ~BBWI      Unknown       29.20               38       NA     7     XLY (4)
+  ~JBS      Unknown       24.65               31       NA     7     XLP (9)
   ~MOS      Unknown       25.45               23       NA    10    XLB (10)
+  ~MAT      Unknown       16.20               18       NA    11     XLY (4)
   ~RKT      Unknown       13.75                5       NA    14     XLF (2)
+   ~IP      Unknown       44.15               61       NA    19    XLB (10)
+  ~HUN      Unknown       11.65               11       NA    20    XLB (10)
   ~MKC      Unknown       19.60               14       NA    21     XLP (9)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###Bullish_Momentum,RNG,NET,PBF,AVTR,TXG,EXLS,HUBS,ESTC,NEO,CNK,VSXY,BLFS,FIG,NTNX,ADPT,GRND,U,DINO,SNOW,DELL,FIVN,FSLY,
-###Bullish_Swing,OSCR,LQDA,S,RTX,SCHW,IOT,TRV,CLF,DDOG,CTAS,ILMN,LTH,OKTA,VLO,
+###Bullish_Swing,EQNR,MPC,SM,OSCR,LQDA,RLJ,S,FTNT,RTX,SCHW,IOT,PSX,RYAN,TRV,XRAY,CLF,DDOG,CTAS,DXCM,GTLB,ILMN,LTH,MAN,OKTA,PD,VLO,
 ###Bearish_Momentum,PEP,WMT,KR,CMCSA,SONY,
-###Bearish_Swing,MKC,RKT,MOS,CPRT,GIS,
+###Bearish_Swing,MKC,HUN,IP,RKT,MAT,MOS,BBWI,JBS,CMG,CPRT,GIS,RIVN,ORLY,
 
 ==============================================
 END OF TABELA SCAN - 2026-08-03

@@ -58,17 +58,18 @@ LNG / Natural Gas Export I.. Natural Gas        1    1   65.16  -2.37   Neutral 
 Diagnostics                  Medical Devices    8    2   51.63  -1.44   Neutral (26 -> +7)          [XLV] IHI, XHE         ADPT, ILMN
 Mobile Adtech                Internet           2    1   50.54  -0.23   Neutral (22 -> -3)          [XLC] FDN              -APPS
 Developer Infrastructure     Software           3    1   45.28   2.77   Leading (13 -> +1)          [XLK] IGV, CLOU        GTLB
-Healthcare                   Healthcare        41    5   43.59   7.85   Leading (2 -> +1)           [XLV] IHI, XBI         LFST
-Communications Cloud         Cloud Computing    4    1   37.42   4.78   Leading (7)                 [XLK] CLOU, FCOM       -TWLO
+Healthcare                   Healthcare        41    5   43.59   7.85   Leading (2 -> +1)           [XLV] IHI, XBI         LFST, -CNC
+Communications Cloud         Cloud Computing    4    1   37.42   4.78   Leading (7)                 [XLK] CLOU, FCOM       -FIVN, -TWLO
 Software                     Software         169   13   37.40   2.77   Leading (13 -> +1)          [XLK] IGV, XSW         FIG, BRZE, PD, IOT, NTNX, PATH,
-                                                                                                                           -GRND, -PENG, -U
-Cloud Infrastructure         Cloud Computing    5    1   33.69   4.78   Leading (7)                 [XLK] CLOU, WCLD       NET
+                                                                                                                           -AVPT, -GRND, -PENG, -U
+Cloud Infrastructure         Cloud Computing    5    1   33.69   4.78   Leading (7)                 [XLK] CLOU, WCLD       NET, -SNOW, -DDOG
 Life Sciences Tools          Medical Devices    5    1   32.25  -1.44   Neutral (26 -> +7)          [XLV] IHI, XHE         AVTR
 Footwear/Apparel             Retail            37    2   18.20   0.52   Neutral (19)                [XLY] XRT              VSXY, CTAS, -VSXY
 Leisure and Entertainment    Internet          41    2   16.51  -0.23   Neutral (22 -> -3)          [XLC] FDN              RSI, -RSI
 Medical Devices              Medical Devices   88    3   14.75  -1.44   Neutral (26 -> +7)          [XLV] IHI, XHE         QDEL
 REITs                        REITs            128    2    6.82   2.48   Neutral (14 -> -2)          [XLRE] VNQ, IYR        AHR, HIW
-Biotech                      Biotech           85    0    0.00   3.84   Leading (11 -> +3)          [XLV] XBI, IBB         -SNDX
+Insurance                    Insurance         68    1    6.10   5.58   Leading (6 -> -2)           [XLF] KIE, IAK         -BWIN
+Biotech                      Biotech           85    0    0.00   3.84   Leading (11 -> +3)          [XLV] XBI, IBB         -SNDX, -NRIX
 Energy                       Exploration       15    0    0.00   6.67   Leading (4 -> -7)           [XLE] XOP, IEO         
 Discount Retail              Discount Retail   10    0    0.00   0.00   Unknown                                            #WMT
 Consumer Staples             Consumer Staples  38    0    0.00   0.00   Unknown                     [XLP] PBJ, IYK         #ACI, #PEP, -#PEP
@@ -82,7 +83,8 @@ Retail Trading Platform      Digital Assets     1    0    0.00   0.00   Unknown 
 Restaurants                  Consumer Staples  28    0    0.00   0.00   Unknown                     [XLY] MENU, PBJ        #CMG
 Silver Mining                Silver Mining      6    0    0.00 -14.67   Lagging (38 -> -2)          [XLB] SIL, SILJ        
 Unknown                      Unknown          358    0    0.00   0.00   Unknown                                            #CMCSA, #GM, #KR, -#MKC, -#MOS,
-                                                                                                                           -#CAG, -#CPB, -#ORLY
+                                                                                                                           -#HUN, -#BBWI, -#IP, -#CAG, -#CPB,
+                                                                                                                           -#ORLY
 Uranium Mining               Uranium Mining     1    0    0.00 -16.59   Lagging (40 -> +4)          [XLU] URNM, URA        
 
 ========================================
@@ -125,14 +127,24 @@ Ticker                            Mapped_Theme Long_Score  RS_Rating Movement  D
 MILD BULLISH (Pulled Back)
 ========================================
 Ticker                 Mapped_Theme Long_Score  RS_Rating Movement  Days Sector (Rk)
+  BILL                     Software      83.16         98       NA     0     XLK (8)
+  CHYM           Financial Services      80.70         93       NA     0     XLF (3)
+   LTH    Leisure and Entertainment      79.25         95       NA     0    XLY (10)
      U                     Software      78.76         74       NA     3     XLK (8)
   NESR                  Exploration      77.90         68       NA     3     XLE (1)
+  DDOG         Cloud Infrastructure      84.57         98       NA     4     XLK (8)
     BB                Cybersecurity      82.96         81       NA     4     XLK (8)
+  NRIX                      Biotech      81.51         94       NA     4     XLV (2)
   TWLO         Communications Cloud      89.17         89       NA     5     XLK (8)
+  FIVN         Communications Cloud      84.57         98       NA     5     XLK (8)
+  SNOW         Cloud Infrastructure      84.57         98       NA     5     XLK (8)
   SNDX                      Biotech      83.71         81       NA     5     XLV (2)
+   CNC                   Healthcare      78.93         85       NA     5     XLV (2)
   BAND Communication Infrastructure      90.11         99       NA     6     XLK (8)
   GRND                     Software      87.16         88       NA     6     XLK (8)
+  BWIN                    Insurance      76.13         83       NA     6     XLF (3)
   APPS                Mobile Adtech      87.45         92       NA     7     XLK (8)
+  AVPT                     Software      82.56         97       NA     7     XLK (8)
 
 ========================================
 STRONG BEARISH (Trend Breakdown)
@@ -153,18 +165,22 @@ Ticker            Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Secto
 MILD BEARISH (Rallied)
 ========================================
 Ticker Mapped_Theme Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+ ~RIVN      Unknown       27.25               35       NA     0    XLY (10)
   ~RKT      Unknown       19.60               14       NA     0     XLF (3)
   ~CPB      Unknown       27.40               26       NA     3     XLP (5)
  ~ORLY      Unknown       25.45               23       NA     3    XLY (10)
   ~CAG      Unknown       33.95               33       NA     4     XLP (5)
+ ~BBWI      Unknown       34.40               46       NA     5    XLY (10)
+   ~IP      Unknown       24.65               31       NA     5    XLB (11)
+  ~HUN      Unknown       39.60               54       NA     6    XLB (11)
   ~MOS      Unknown       31.35               29       NA     7    XLB (11)
   ~MKC      Unknown       27.40               26       NA     7     XLP (5)
 
 TRADINGVIEW WATCHLIST EXPORT
 ###Bullish_Momentum,DINO,VLO,OKTA,HNGE,LQDA,GTLB,S,NET,FIG,BRZE,PD,FTNT,OSCR,IOT,QDEL,ADPT,NTNX,VSXY,ZS,PATH,AHR,HIW,CTAS,VG,RSI,PBF,LFST,ILMN,AVTR,MPC,
-###Bullish_Swing,APPS,BAND,GRND,SNDX,TWLO,BB,NESR,U,
+###Bullish_Swing,APPS,AVPT,BAND,BWIN,GRND,CNC,FIVN,SNDX,SNOW,TWLO,BB,DDOG,NRIX,NESR,U,BILL,CHYM,LTH,
 ###Bearish_Momentum,PEP,VALE,WMT,GM,HOOD,CMCSA,KR,CMG,ACI,
-###Bearish_Swing,MKC,MOS,CAG,CPB,ORLY,RKT,
+###Bearish_Swing,MKC,MOS,HUN,BBWI,IP,CAG,CPB,ORLY,RIVN,RKT,
 
 ==============================================
 END OF TABELA SCAN - 2026-07-20
