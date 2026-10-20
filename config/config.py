@@ -140,7 +140,7 @@ SHORT_ENTRY = {
     "MIN_SHORT_RS": 15.0,
     "MAX_SHORT_RS": 60.0,
     "MAX_SHORT_SCORE": 25.0,
-    "THEMES": ["Lagging", "Micro Laggard", "Neutral", "Unknown"],
+    "THEMES": ["Lagging", "Neutral", "Unknown"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 5_000_000,

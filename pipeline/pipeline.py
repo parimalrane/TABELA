@@ -212,7 +212,7 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
         # All stocks are strictly bound to their true ETF Macro performance.
 
         # 2. Idiosyncratic Breakout Escape Hatch
-        if theme_class not in ["Leading", "Micro Leader"] and row["RS_Rating"] >= 90 and row.get("Growth_Score", 0) >= 95.0 and row.get("Zacks_Score", 0) >= 95.0:
+        if theme_class not in ["Leading"] and row["RS_Rating"] >= 90 and row.get("Growth_Score", 0) >= 95.0 and row.get("Zacks_Score", 0) >= 95.0:
             theme_class = "Unclassified Leader"
             
             # Dynamic Theme Subsidy: Use Zacks Industry Rank as the pure proxy for missing ETF Macro points.

@@ -852,7 +852,7 @@ def print_daily_scan(
             distribution_watchlist["Sector (SPDR)"] = distribution_watchlist["Sector"].map(ZACKS_TO_SPDR).fillna("N/A")
             distribution_watchlist["Sector Rank"] = distribution_watchlist["Sector (SPDR)"].map(sector_rs_map).fillna(0).astype(int)
 
-    strong_bullish_out = "========================================\nSTRONG BULLISH (Trend Continuation)\nLegend: ^ = Micro Leader | ~ = Unknown/Unclassified\n========================================\n"
+    strong_bullish_out = "========================================\nSTRONG BULLISH (Trend Continuation)\nLegend: ~ = Unknown/Unclassified\n========================================\n"
 
     display_df = long_candidates[
         [
@@ -869,7 +869,6 @@ def print_daily_scan(
     display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
     
     # Prepend tag directly to the Ticker string for clean left-side reading
-    display_df.loc[display_df["Theme_Class"] == "Micro Leader", "Ticker"] = "^" + display_df["Ticker"]
     display_df.loc[display_df["Theme_Class"].isin(["Unknown", "Unclassified Leader"]), "Ticker"] = "~" + display_df["Ticker"]
     
 
@@ -914,7 +913,7 @@ def print_daily_scan(
 
 
 
-    strong_bearish_out = "========================================\nSTRONG BEARISH (Trend Breakdown)\nLegend: ^ = Micro Laggard\n========================================\n"
+    strong_bearish_out = "========================================\nSTRONG BEARISH (Trend Breakdown)\n========================================\n"
 
     if distribution_watchlist.empty:
         strong_bearish_out += "No qualified distribution candidates today.\n"
@@ -934,7 +933,6 @@ def print_daily_scan(
         display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
 
         # Prepend tag directly to the Ticker string
-        display_df.loc[display_df["Theme_Class"] == "Micro Laggard", "Ticker"] = "^" + display_df["Ticker"]
 
 
 
@@ -1116,8 +1114,7 @@ def print_daily_scan(
                 s_rank = sector_rs_map.get(spdr, 0)
                 
                 display_ticker = ticker
-                if theme_class == "Micro Leader": display_ticker = "^" + ticker
-                elif theme_class in ["Unknown", "Unclassified Leader"]: display_ticker = "~" + ticker
+                if theme_class in ["Unknown", "Unclassified Leader"]: display_ticker = "~" + ticker
                 
                 if is_long_table:
                     rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors='coerce')
