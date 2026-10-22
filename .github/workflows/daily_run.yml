@@ -32,7 +32,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           # 1. Update Market Context to generate the market_data CSV
-          python runners/update_market_metrics.py
+          #python runners/update_market_metrics.py
           
           # 2. Run the main pipeline and pipe the terminal output to a file
           python runners/main.py > terminal_output.txt
