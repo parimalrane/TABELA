@@ -420,6 +420,58 @@ def load_todays_registry():
             return json.load(f)
     return {}
 
+
+def _load_historical_breadth_nets():
+    from pathlib import Path
+    data_dir = Path("market_data") / "input_files"
+    stock_files = sorted(
+        data_dir.rglob("*_stocks.csv"),
+        key=lambda p: p.stem.replace("_stocks", "")
+    )
+    nets = []
+    for f in stock_files:
+        try:
+            df = pd.read_csv(f)
+            if "Price as a % of 52 Wk H-L Range" in df.columns:
+                valid_range = pd.to_numeric(
+                    df["Price as a % of 52 Wk H-L Range"],
+                    errors='coerce'
+                ).dropna()
+                nh = len(valid_range[valid_range >= 98])
+                nl = len(valid_range[valid_range <= 2])
+                nets.append(nh - nl)
+        except Exception:
+            continue
+    return nets
+
+
+def _compute_breadth_streaks(nets):
+    if len(nets) < 2:
+        return []
+    trends = []
+    for i in range(1, len(nets)):
+        prev_net = nets[i - 1]
+        curr_net = nets[i]
+        if curr_net > prev_net:
+            trends.append("\u2191")
+        elif curr_net < prev_net:
+            trends.append("\u2193")
+        else:
+            trends.append("\u2192")
+    streaks = []
+    curr_trend = trends[0]
+    count = 1
+    for t in trends[1:]:
+        if t == curr_trend:
+            count += 1
+        else:
+            streaks.append((curr_trend, count))
+            curr_trend = t
+            count = 1
+    streaks.append((curr_trend, count))
+    return streaks
+
+
 def print_macro_weather(stocks, theme_strength_settings):
     from config.runtime_context import context
     try:
@@ -555,7 +607,14 @@ def print_macro_weather(stocks, theme_strength_settings):
     print("")
     
     print("[2] STRUCTURAL BREADTH (3,000+ Equities)")
-    print(f"    > Price Extremes  : {nh} New Highs | {nl} New Lows  [ Net: {net:+} ]")
+    historical_nets = _load_historical_breadth_nets()
+    streaks = _compute_breadth_streaks(historical_nets)
+    movement_tag = ""
+    if streaks:
+        last_3 = streaks[-3:]
+        parts = [f"{count}{trend}" for trend, count in last_3]
+        movement_tag = f"  [ Movement: {' -> '.join(parts)} ]"
+    print(f"    > Price Extremes  : {nh} New Highs | {nl} New Lows  [ Net: {net:+} ]{movement_tag}")
     print("========================================================================\n")
 
     return sector_rs_map, legacy_data_list, {"w": (w_pos, w_neg), "m": (m_pos, m_neg), "q": (q_pos, q_neg)}
