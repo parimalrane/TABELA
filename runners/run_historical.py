@@ -25,6 +25,22 @@ def main():
     input_dir = data_dir / "input_files"
     backup_dir = data_dir / "input_files_all"
 
+    # Safety: confirm, then back up all JSON history before it is deleted below.
+    if "--yes" not in sys.argv:
+        answer = input("This will DELETE all JSON history under market_data/ (a backup is made first). Type YES to continue: ")
+        if answer.strip() != "YES":
+            print("Cancelled. Nothing was deleted.")
+            return
+    from datetime import datetime
+    backup_root = base_dir / "backups" / f"market_json_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    backed_up = 0
+    for json_file in data_dir.rglob("*.json"):
+        dest = backup_root / json_file.relative_to(data_dir)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(json_file, dest)
+        backed_up += 1
+    print(f"Backed up {backed_up} JSON files to {backup_root}")
+
     count = 0
     for json_file in data_dir.rglob("*.json"):
         try:

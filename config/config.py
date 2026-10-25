@@ -75,7 +75,7 @@ LONG_ENTRY = {
     # Re-tightened to Institutional Elite (Top 10% constraints) for strict watchlist quality over quantity
     "MIN_RS": 90.0,
     "MIN_LONG_SCORE": 85.0,
-    "THEMES": ["Leading", "Neutral", "Unclassified Leader", "Unknown"],
+    "THEMES": ["Leading", "Unclassified Leader"],
     "BLOCKED_ZACKS": [4, 5],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_500_000,
@@ -91,7 +91,7 @@ LONG_ENTRY = {
 
 MILD_LONG_ENTRY = {
     # Theme restriction: Long mild stocks must NOT be from lagging themes
-    "BLOCKED_THEMES": [""],
+    "BLOCKED_THEMES": ["Lagging"],
     
     # Zacks restriction: Long mild stocks must have Zacks rank 1 or 2 only
     "ALLOWED_ZACKS": [1, 2, 3],
@@ -140,7 +140,7 @@ SHORT_ENTRY = {
     "MIN_SHORT_RS": 15.0,
     "MAX_SHORT_RS": 60.0,
     "MAX_SHORT_SCORE": 25.0,
-    "THEMES": ["Lagging", "Neutral"],
+    "THEMES": ["Lagging"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 5_000_000,
