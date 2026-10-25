@@ -1230,4 +1230,58 @@ def print_daily_scan(
     print("###Bearish_Momentum," + full_short_list + ",") if full_short_list else print("###Bearish_Momentum,")
     print("###Bearish_Swing," + short_rally_str + ",") if short_rally_str else print("###Bearish_Swing,")
 
+    # Thematic & Sector ETF Watchlists (Primary Pure-Play per theme)
+    def extract_primary_etf(etf_raw):
+        if not etf_raw or pd.isna(etf_raw):
+            return None
+        cleaned = re.sub(r'\[.*?\]', '', str(etf_raw)).strip()
+        if not cleaned:
+            return None
+        tokens = [t.strip() for t in cleaned.split(',') if t.strip()]
+        if tokens:
+            ticker = tokens[0].split()[0].replace('/', '').strip().upper()
+            if ticker and ticker.isalpha():
+                return ticker
+        return None
+
+    leading_etfs = []
+    for _, row in display_df.iterrows():
+        micro_theme = str(row['Mapped_Theme'])
+        macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+        if theme_class_map.get(macro_theme) == "Leading":
+            etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+            etf = extract_primary_etf(etf_raw)
+            if etf and etf not in leading_etfs:
+                leading_etfs.append(etf)
+    for row in leading_themes:
+        theme = row.get("Theme")
+        if theme:
+            etf_raw = THEME_ETF_MAPPING.get(theme)
+            etf = extract_primary_etf(etf_raw)
+            if etf and etf not in leading_etfs:
+                leading_etfs.append(etf)
+
+    lagging_etfs = []
+    for _, row in display_df.iterrows():
+        micro_theme = str(row['Mapped_Theme'])
+        macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+        if theme_class_map.get(macro_theme) == "Lagging":
+            etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+            etf = extract_primary_etf(etf_raw)
+            if etf and etf not in lagging_etfs:
+                lagging_etfs.append(etf)
+    for row in lagging_themes:
+        theme = row.get("Theme")
+        if theme:
+            etf_raw = THEME_ETF_MAPPING.get(theme)
+            etf = extract_primary_etf(etf_raw)
+            if etf and etf not in lagging_etfs:
+                lagging_etfs.append(etf)
+
+    leading_etf_str = ",".join(leading_etfs)
+    lagging_etf_str = ",".join(lagging_etfs)
+
+    print("###Leading_ETF," + leading_etf_str + ",") if leading_etf_str else print("###Leading_ETF,")
+    print("###Lagging_ETF," + lagging_etf_str + ",") if lagging_etf_str else print("###Lagging_ETF,")
+
     print()
