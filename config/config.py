@@ -140,7 +140,7 @@ SHORT_ENTRY = {
     "MIN_SHORT_RS": 15.0,
     "MAX_SHORT_RS": 60.0,
     "MAX_SHORT_SCORE": 25.0,
-    "THEMES": ["Lagging", "Neutral", "Unknown"],
+    "THEMES": ["Lagging", "Neutral"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 5_000_000,
@@ -152,7 +152,7 @@ SHORT_ENTRY = {
 
 MILD_SHORT_ENTRY = {
     # Theme restriction: Short mild stocks must NOT be from leading themes
-    "BLOCKED_THEMES": [""],
+    "BLOCKED_THEMES": ["Leading", "Unclassified Leader"],
     
     # Zacks restriction: Short mild stocks must have Zacks rank 4 or 5 only
     "ALLOWED_ZACKS": [3, 4, 5],
