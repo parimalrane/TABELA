@@ -720,7 +720,7 @@ def print_daily_scan(
 
     print("========================================")
     print("THEME BREADTH ANALYSIS")
-    print("Legend: [No Prefix]=Long / #=Short / -=Mild Swing / -#=Mild Short")
+    print("Legend: [No Prefix]=Long / #=Short")
     print("        + - = 1D Rank Delta")
     print("========================================")
 
@@ -747,8 +747,10 @@ def print_daily_scan(
             theme = match.iloc[0].get("Mapped_Theme")
             if theme in theme_breadth["Mapped_Theme"].values:
                 curr = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"].iloc[0]
-                new_val = f"-{ticker}" if pd.isna(curr) or str(curr).strip() == "" or str(curr).strip() == "None" else f"{curr}, -{ticker}"
-                theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
+                existing = [t.strip().lstrip("#") for t in str(curr).split(",") if t.strip()]
+                if ticker not in existing:
+                    new_val = f"{ticker}" if pd.isna(curr) or str(curr).strip() in ("", "None", "nan") else f"{curr}, {ticker}"
+                    theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
 
     for ticker in accumulated_breadth.get("short_dropped", {}).keys():
         match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
@@ -756,8 +758,10 @@ def print_daily_scan(
             theme = match.iloc[0].get("Mapped_Theme")
             if theme in theme_breadth["Mapped_Theme"].values:
                 curr = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"].iloc[0]
-                new_val = f"-#{ticker}" if pd.isna(curr) or str(curr).strip() == "" or str(curr).strip() == "None" else f"{curr}, -#{ticker}"
-                theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
+                existing = [t.strip().lstrip("#") for t in str(curr).split(",") if t.strip()]
+                if ticker not in existing:
+                    new_val = f"#{ticker}" if pd.isna(curr) or str(curr).strip() in ("", "None", "nan") else f"{curr}, #{ticker}"
+                    theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
     # ---------------------------------------
     
     display_df = (
@@ -781,38 +785,10 @@ def print_daily_scan(
                 true_long_tickers.append(clean_ticker)
 
     def should_display(row):
-        mapped_theme = str(row['Mapped_Theme'])
-        macro_for_lookup = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
-        macro_state = theme_class_map.get(macro_for_lookup, "Unknown")
-        
-        # Determine Macro Rank
-        macro_rank = 999
-        if not theme_strength[theme_strength["Theme"] == macro_for_lookup].empty:
-            macro_rank = theme_strength[theme_strength["Theme"] == macro_for_lookup].iloc[0]["Theme_Rank"]
-            
-        # Always force top 5 and bottom 5 themes to print to maintain visual continuity of market cap flows
-        if macro_state == "Leading" and macro_rank <= 5:
-            return True
-        if macro_state == "Lagging" and macro_rank >= (len(theme_strength) - 4):
-            return True
-
+        # Require at least one active stock candidate to display
         leaders_val = row.get("Leaders")
-        if pd.isna(leaders_val) or str(leaders_val).strip() == "" or str(leaders_val).strip() == "None":
+        if pd.isna(leaders_val) or str(leaders_val).strip() in ("", "None", "nan"):
             return False
-
-        if macro_state == "Neutral":
-            has_valid_swing_signal = False
-            for item in str(leaders_val).split(","):
-                item_clean = item.strip()
-                if item_clean.startswith("#") or item_clean.startswith("-"):
-                    has_valid_swing_signal = True
-                    break
-                elif item_clean.upper() in true_long_tickers:
-                    has_valid_swing_signal = True
-                    break
-                    
-            if not has_valid_swing_signal:
-                return False
             
         return True
         
