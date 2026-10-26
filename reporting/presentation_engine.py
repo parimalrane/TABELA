@@ -81,10 +81,8 @@ def print_scan_epilogue():
         ("HEADER", "TABELA DAILY MARKET SCAN"),
         ("THEME_PERFORMANCE", "THEME PERFORMANCE"),
         ("THEME_BREADTH", "THEME BREADTH ANALYSIS"),
-        ("LONG_UNIVERSE", "LONG CANDIDATE UNIVERSE"),
-        ("OBSERVATION_WATCHLIST", "OBSERVATION WATCHLIST"),
-        ("UNCLASSIFIED_LEADERS", "UNCLASSIFIED LEADERS"),
-        ("DISTRIBUTION_WATCHLIST", "DISTRIBUTION WATCHLIST"),
+        ("BULLISH_UNIVERSE", "BULLISH UNIVERSE"),
+        ("BEARISH_UNIVERSE", "BEARISH UNIVERSE"),
         ("TRADINGVIEW_EXPORT", "TRADINGVIEW WATCHLIST EXPORT"),
         ("WATCHLIST_DELTA", "WATCHLIST DELTA REPORT"),
         ("END_BANNER", "END OF TABELA SCAN")
@@ -122,9 +120,8 @@ def print_scan_epilogue():
         "MARKET_CONTEXT",
         "THEME_PERFORMANCE",
         "THEME_BREADTH",
-        "LONG_UNIVERSE",
-        "OBSERVATION_WATCHLIST",
-        "DISTRIBUTION_WATCHLIST",
+        "BULLISH_UNIVERSE",
+        "BEARISH_UNIVERSE",
         "TRADINGVIEW_EXPORT",
         "WATCHLIST_DELTA"
     ]
@@ -762,6 +759,27 @@ def print_daily_scan(
                 if ticker not in existing:
                     new_val = f"#{ticker}" if pd.isna(curr) or str(curr).strip() in ("", "None", "nan") else f"{curr}, #{ticker}"
                     theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
+
+    # --- INJECT RADAR STOCKS INTO BREADTH ---
+    radar_breadth_mask = (
+        (stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])) &
+        (pd.to_numeric(stocks["RS_Rating"], errors="coerce") >= 85) &
+        (pd.to_numeric(stocks["RS_Rating"], errors="coerce") < 90) &
+        (pd.to_numeric(stocks["Long_Score"], errors="coerce") >= 85) &
+        (pd.to_numeric(stocks["Zacks Rank"], errors="coerce").fillna(0).astype(int).isin([1, 2])) &
+        (pd.to_numeric(stocks["Avg Volume"], errors="coerce").fillna(0) >= 1500000) &
+        (pd.to_numeric(stocks["Last Close"], errors="coerce").fillna(0) >= 10.0)
+    )
+    radar_candidates_df = stocks[radar_breadth_mask]
+    for _, r_row in radar_candidates_df.iterrows():
+        r_ticker = str(r_row["Ticker"]).replace("*", "").strip().upper()
+        theme = r_row.get("Mapped_Theme")
+        if theme in theme_breadth["Mapped_Theme"].values:
+            curr = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"].iloc[0]
+            existing = [t.strip().lstrip("#") for t in str(curr).split(",") if t.strip()]
+            if r_ticker not in existing:
+                new_val = f"{r_ticker}" if pd.isna(curr) or str(curr).strip() in ("", "None", "nan") else f"{curr}, {r_ticker}"
+                theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
     # ---------------------------------------
     
     display_df = (
@@ -928,31 +946,11 @@ def print_daily_scan(
     if not true_longs.empty:
         true_longs["Movement"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         true_longs["Days"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
-        
-        # Merge columns to save horizontal space
         true_longs["Sector (Rk)"] = true_longs["Sector (SPDR)"].astype(str) + " (" + true_longs["Sector Rank"].astype(str) + ")"
-        
-        # Keep Movement but format it cleaner if needed. Wait, we want to restore Movement.
         true_longs["Ticker"] = true_longs["Ticker"].apply(lambda t: f" {str(t).strip()}")
-        
-        # Drop the un-merged columns
         true_longs = true_longs.drop(columns=["Sector (SPDR)", "Sector Rank"])
-        
-    if true_longs.empty:
-        strong_bullish_out += "No active candidates in Long Candidate Universe.\n"
-    else:
-        strong_bullish_out += true_longs.to_string(index=False) + "\n"
 
-    # Deltas already calculated above
-
-
-
-
-    strong_bearish_out = "========================================\nSTRONG BEARISH (Trend Breakdown)\n========================================\n"
-
-    if distribution_watchlist.empty:
-        strong_bearish_out += "No qualified distribution candidates today.\n"
-    else:
+    if not distribution_watchlist.empty:
         display_df = distribution_watchlist[
             [
                 "Ticker",
@@ -966,31 +964,16 @@ def print_daily_scan(
             ]
         ].copy()
         display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
-
-        # Prepend tag directly to the Ticker string
-
-
-
         if "Short_Score" in display_df.columns:
             display_df["Short_Score"] = display_df["Short_Score"].map("{:.2f}".format)
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
-        
         display_df["Sector (Rk)"] = display_df["Sector (SPDR)"].astype(str) + " (" + display_df["Sector Rank"].astype(str) + ")"
-        
         display_df["Ticker"] = display_df["Ticker"].apply(lambda t: f" {str(t).strip()}")
         display_df = display_df.drop(columns=["Sector (SPDR)", "Sector Rank"])
-        
-        strong_bearish_out += display_df.to_string(index=False) + "\n"
 
-    # Delta lists are handled natively via 'Days = 1' and the detailed Dropped Tables
-
-    # ========================================
-    # TradingView Watchlist Export
-    # ========================================
     def clean_all_tickers(df):
-        """Extract all tickers from a DataFrame, cleaned of prefix markers."""
         if df.empty:
             return ""
         return ",".join(
@@ -1005,12 +988,6 @@ def print_daily_scan(
     full_long_list = clean_all_tickers(true_longs)
     full_short_list = clean_all_tickers(distribution_watchlist)
 
-    # ========================================
-    # MILD WATCHLIST - Dropped-Based with Config Filters
-    # ========================================
-    mild_bullish_out = ""
-    mild_bearish_out = ""
-
     # --- Accumulated Dropped History (21-Day Expiry + Auto-Purge) ---
     import json as _json
     from datetime import datetime, timedelta
@@ -1022,16 +999,13 @@ def print_daily_scan(
         "market_data", "dropped_accumulator.json"
     )
 
-    # Dictionary format: {"TICKER": "YYYY-MM-DD"}
     accumulated = {"long_dropped": {}, "short_dropped": {}}
     if os.path.exists(dropped_file):
         try:
             with open(dropped_file, "r", encoding="utf-8") as _f:
                 loaded = _json.load(_f)
-                
-                # Check if legacy format (lists) and wipe if true
                 if isinstance(loaded.get("long_dropped", []), list):
-                    pass # Schema change requires fresh start
+                    pass
                 else:
                     accumulated = loaded
         except Exception:
@@ -1051,11 +1025,9 @@ def print_daily_scan(
         if clean:
             accumulated["short_dropped"][clean] = current_date_str
 
-    # Process Auto-Purge and Expiry with Theme/Zacks Filters
     min_dropped_long = LONG_ENTRY.get("MIN_DROPPED_WATCH_SCORE", 70.0)
     max_dropped_dist = SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 75.0)
     
-    # Get theme/Zacks filters from config
     mild_long_blocked_themes = MILD_LONG_ENTRY.get("BLOCKED_THEMES", ["Lagging", "Micro Laggard"])
     mild_long_allowed_zacks = MILD_LONG_ENTRY.get("ALLOWED_ZACKS", [1, 2])
     mild_short_blocked_themes = MILD_SHORT_ENTRY.get("BLOCKED_THEMES", ["Leading", "Micro Leader", "Unclassified Leader"])
@@ -1065,17 +1037,13 @@ def print_daily_scan(
         active_set = set(t.strip().upper() for t in active_list_str.split(",") if t.strip())
         cleaned = {}
         for ticker, date_str in dropped_dict.items():
-            # Opt 4: Auto-Purge if re-entered active list
             if ticker in active_set:
                 continue
-                
-            # Timeline Expiry from Config
             max_days = LONG_ENTRY.get("MILD_DAYS", 21) if is_long else SHORT_ENTRY.get("MILD_DAYS", 21)
             try:
                 date_val = datetime.strptime(date_str, "%Y-%m-%d")
                 days_old = (current_date - date_val).days
                 if days_old <= max_days:
-                    # LIVE MILD QUALITY EVALUATION
                     match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
                     if not match.empty:
                         r = match.iloc[0]
@@ -1085,29 +1053,22 @@ def print_daily_scan(
                             zacks_val = 0
                         
                         theme_class = str(r.get("Theme_Class", ""))
-                        
-                        # If a stock physically breaks the drop limits or reverses its fundamental trend, purge immediately
                         if is_long:
                             score = float(pd.to_numeric(r.get("Long_Score", 0), errors="coerce"))
                             if score < min_dropped_long or zacks_val not in [1, 2, 3]:
                                 continue
-                            # Apply config filters: exclude blocked themes
                             if theme_class in mild_long_blocked_themes:
                                 continue
-                            # Apply config filters: only allow specified Zacks
                             if zacks_val not in mild_long_allowed_zacks:
                                 continue
                         else:
                             score = float(pd.to_numeric(r.get("Short_Score", 0), errors="coerce"))
                             if score > max_dropped_dist or zacks_val not in [3, 4, 5]:
                                 continue
-                            # Apply config filters: exclude blocked themes
                             if theme_class in mild_short_blocked_themes:
                                 continue
-                            # Apply config filters: only allow specified Zacks
                             if zacks_val not in mild_short_allowed_zacks:
                                 continue
-                                
                     cleaned[ticker] = date_str
             except Exception:
                 pass
@@ -1116,7 +1077,6 @@ def print_daily_scan(
     accumulated["long_dropped"] = clean_accumulator(accumulated["long_dropped"], full_long_list, is_long=True)
     accumulated["short_dropped"] = clean_accumulator(accumulated["short_dropped"], full_short_list, is_long=False)
 
-    # Save updated accumulator
     try:
         os.makedirs(os.path.dirname(dropped_file), exist_ok=True)
         with open(dropped_file, "w", encoding="utf-8") as _f:
@@ -1124,11 +1084,8 @@ def print_daily_scan(
     except Exception:
         pass
 
-    long_dropped_str = ",".join(sorted(accumulated["long_dropped"].keys()))
-    short_dropped_str = ",".join(sorted(accumulated["short_dropped"].keys()))
-
-    def print_dropped_table(dropped_dict, title, max_days=21, min_days=0, is_long_table=True):
-        if not dropped_dict: return "", ""
+    def get_dropped_rows(dropped_dict, max_days=21, min_days=0, is_long_table=True):
+        if not dropped_dict: return [], []
         rows = []
         valid_tickers = []
         for ticker, date_str in dropped_dict.items():
@@ -1154,57 +1111,157 @@ def print_daily_scan(
                 if is_long_table:
                     rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors='coerce')
                     score_val = pd.to_numeric(r.get("Long_Score", 0), errors='coerce')
-                    score_header = "Long_Score"
-                    rs_header = "RS_Rating"
+                    rows.append({
+                        "Ticker": f" {display_ticker}",
+                        "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
+                        "Status": "Mild",
+                        "Zacks Rank": int(pd.to_numeric(r.get("Zacks Rank", 0), errors='coerce')),
+                        "Long_Score": f"{float(score_val):.2f}",
+                        "RS_Rating": int(rs_val),
+                        "Movement": "NA",
+                        "Days": days_on_drop,
+                        "Sector (Rk)": f"{spdr} ({int(s_rank)})"
+                    })
                 else:
                     rs_val = pd.to_numeric(r.get("Short_RS_Rating", 0), errors='coerce')
                     score_val = pd.to_numeric(r.get("Short_Score", 0), errors='coerce')
-                    score_header = "Short_Score"
-                    rs_header = "Short_RS_Rating"
-                
-                rows.append({
-                    "Ticker": display_ticker,
-                    "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
-                    "Theme_Class": theme_class,
-                    "Zacks_Rank": int(pd.to_numeric(r.get("Zacks Rank", 0), errors='coerce')),
-                    score_header: f"{float(score_val):.2f}",
-                    rs_header: int(rs_val),
-                    "Movement": "NA",
-                    "Days": days_on_drop,
-                    "Sector (Rk)": f"{spdr} ({int(s_rank)})"
-                })
-        output_str = ""
-        if rows:
-            df = pd.DataFrame(rows).sort_values(["Days", score_header, rs_header], ascending=[True, False, False])
-            output_str += "=" * 40 + "\n"
-            output_str += title + "\n"
-            output_str += "=" * 40 + "\n"
-            output_str += df.to_string(index=False) + "\n\n"
-        return output_str, ",".join(valid_tickers)
+                    rows.append({
+                        "Ticker": f" {display_ticker}",
+                        "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
+                        "Status": "Mild",
+                        "Zacks Rank": int(pd.to_numeric(r.get("Zacks Rank", 0), errors='coerce')),
+                        "Short_Score": f"{float(score_val):.2f}",
+                        "Short_RS_Rating": int(rs_val),
+                        "Movement": "NA",
+                        "Days": days_on_drop,
+                        "Sector (Rk)": f"{spdr} ({int(s_rank)})"
+                    })
+        return rows, valid_tickers
 
     long_mild_days = LONG_ENTRY.get("MILD_DAYS", 21)
     short_mild_days = SHORT_ENTRY.get("MILD_DAYS", 21)
 
-    # Dropped-based mild watchlists with config filters
-    dropped_mild_bullish_out, long_pullback_str = print_dropped_table(accumulated["long_dropped"], "MILD BULLISH (Pulled Back)", max_days=long_mild_days, min_days=0, is_long_table=True)
-    dropped_mild_bearish_out, short_rally_str = print_dropped_table(accumulated["short_dropped"], "MILD BEARISH (Rallied)", max_days=short_mild_days, min_days=0, is_long_table=False)
+    mild_long_rows, long_pullback_tickers = get_dropped_rows(accumulated["long_dropped"], max_days=long_mild_days, min_days=0, is_long_table=True)
+    mild_short_rows, short_rally_tickers = get_dropped_rows(accumulated["short_dropped"], max_days=short_mild_days, min_days=0, is_long_table=False)
 
-    print("\n" + strong_bullish_out)
-    if dropped_mild_bullish_out:
-        print(dropped_mild_bullish_out)
-        
-    print("\n" + strong_bearish_out)
-    if dropped_mild_bearish_out:
-        print(dropped_mild_bearish_out)
+    # --- RADAR CANDIDATES (Emerging Coiling Leaders: RS 85-89, Score >= 85, Zacks 1-2, Vol >= 1.5M) ---
+    existing_long_keys = set(t.replace("*", "").replace("~", "").replace("^", "").strip().upper() for t in true_long_tickers)
+    existing_long_keys.update(accumulated.get("long_dropped", {}).keys())
+
+    radar_mask = (
+        (stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])) &
+        (pd.to_numeric(stocks["RS_Rating"], errors="coerce") >= 85) &
+        (pd.to_numeric(stocks["RS_Rating"], errors="coerce") < 90) &
+        (pd.to_numeric(stocks["Long_Score"], errors="coerce") >= 85) &
+        (pd.to_numeric(stocks["Zacks Rank"], errors="coerce").fillna(0).astype(int).isin([1, 2])) &
+        (pd.to_numeric(stocks["Avg Volume"], errors="coerce").fillna(0) >= 1500000) &
+        (pd.to_numeric(stocks["Last Close"], errors="coerce").fillna(0) >= 10.0) &
+        (~stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(existing_long_keys))
+    )
+    radar_stocks = stocks[radar_mask].copy()
+
+    radar_rows = []
+    radar_tickers = []
+    if not radar_stocks.empty:
+        for _, r in radar_stocks.iterrows():
+            ticker = str(r["Ticker"]).replace("*", "").strip().upper()
+            radar_tickers.append(ticker)
+            theme_class = str(r.get("Theme_Class", "Unknown"))
+            disp_ticker = ("~" + ticker) if theme_class in ["Unknown", "Unclassified Leader"] else ticker
+            spdr = ZACKS_TO_SPDR.get(str(r.get("Sector", "")), "N/A")
+            s_rank = sector_rs_map.get(spdr, 0)
+            score_val = pd.to_numeric(r.get("Long_Score", 0), errors="coerce")
+            rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors="coerce")
+            radar_rows.append({
+                "Ticker": f" {disp_ticker}",
+                "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
+                "Status": "Radar",
+                "Zacks Rank": int(pd.to_numeric(r.get("Zacks Rank", 0), errors='coerce')),
+                "Long_Score": f"{float(score_val):.2f}",
+                "RS_Rating": int(rs_val),
+                "Movement": "NA",
+                "Days": 1,
+                "Sector (Rk)": f"{spdr} ({int(s_rank)})"
+            })
+
+    # --- COMBINED BULLISH UNIVERSE ---
+    bullish_rows = []
+    if not true_longs.empty:
+        for r_dict in true_longs.to_dict("records"):
+            r_dict["Status"] = "Strong"
+            bullish_rows.append(r_dict)
+    if mild_long_rows:
+        bullish_rows.extend(mild_long_rows)
+    if radar_rows:
+        bullish_rows.extend(radar_rows)
+
+    bullish_universe_out = "========================================\n"
+    bullish_universe_out += "BULLISH UNIVERSE (Momentum, Pullback & Radar)\n"
+    bullish_universe_out += "Legend: ~ = Unknown/Unclassified\n"
+    bullish_universe_out += "========================================\n"
+
+    if bullish_rows:
+        bullish_df = pd.DataFrame(bullish_rows)
+        cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Long_Score", "RS_Rating", "Movement", "Days", "Sector (Rk)"]
+        cols = [c for c in cols if c in bullish_df.columns]
+        bullish_df = bullish_df[cols]
+        status_rank_map = {"Strong": 0, "Mild": 1, "Radar": 2}
+        bullish_df["_st_rank"] = bullish_df["Status"].map(status_rank_map).fillna(9)
+        bullish_df["_score_num"] = pd.to_numeric(bullish_df["Long_Score"], errors="coerce").fillna(0)
+        bullish_df = bullish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, False]).drop(columns=["_st_rank", "_score_num"])
+        bullish_universe_out += bullish_df.to_string(index=False) + "\n"
+    else:
+        bullish_universe_out += "No active bullish candidates today.\n"
+
+    # --- COMBINED BEARISH UNIVERSE ---
+    bearish_rows = []
+    if not distribution_watchlist.empty and not display_df.empty:
+        for r_dict in display_df.to_dict("records"):
+            r_dict["Status"] = "Strong"
+            bearish_rows.append(r_dict)
+    if mild_short_rows:
+        bearish_rows.extend(mild_short_rows)
+
+    bearish_universe_out = "========================================\n"
+    bearish_universe_out += "BEARISH UNIVERSE (Breakdowns & Relief Rallies)\n"
+    bearish_universe_out += "========================================\n"
+
+    if bearish_rows:
+        bearish_df = pd.DataFrame(bearish_rows)
+        cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Short_Score", "Short_RS_Rating", "Movement", "Days", "Sector (Rk)"]
+        cols = [c for c in cols if c in bearish_df.columns]
+        bearish_df = bearish_df[cols]
+        status_rank_map = {"Strong": 0, "Mild": 1}
+        bearish_df["_st_rank"] = bearish_df["Status"].map(status_rank_map).fillna(9)
+        bearish_df["_score_num"] = pd.to_numeric(bearish_df["Short_Score"], errors="coerce").fillna(999)
+        bearish_df = bearish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, True]).drop(columns=["_st_rank", "_score_num"])
+        bearish_universe_out += bearish_df.to_string(index=False) + "\n"
+    else:
+        bearish_universe_out += "No active bearish candidates today.\n"
+
+    print("\n" + bullish_universe_out)
+    print("\n" + bearish_universe_out)
 
     print("TRADINGVIEW WATCHLIST EXPORT")
-    
-    # Dropped-based mild watchlists = Swing
-    print("###Bullish_Momentum," + full_long_list + ",") if full_long_list else print("###Bullish_Momentum,")
-    print("###Bullish_Swing," + long_pullback_str + ",") if long_pullback_str else print("###Bullish_Swing,")
+    all_bullish_tickers = []
+    for t_list in [true_long_tickers, long_pullback_tickers, radar_tickers]:
+        for t in t_list:
+            clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
+            if clean and clean not in all_bullish_tickers:
+                all_bullish_tickers.append(clean)
 
-    print("###Bearish_Momentum," + full_short_list + ",") if full_short_list else print("###Bearish_Momentum,")
-    print("###Bearish_Swing," + short_rally_str + ",") if short_rally_str else print("###Bearish_Swing,")
+    all_bearish_tickers = []
+    for t_list in [distribution_watchlist["Ticker"].tolist() if not distribution_watchlist.empty else [], short_rally_tickers]:
+        for t in t_list:
+            clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
+            if clean and clean not in all_bearish_tickers:
+                all_bearish_tickers.append(clean)
+
+    bullish_export_str = ",".join(all_bullish_tickers)
+    bearish_export_str = ",".join(all_bearish_tickers)
+
+    print("###Bullish_Stocks," + bullish_export_str + ",") if bullish_export_str else print("###Bullish_Stocks,")
+    print("###Bearish_Stocks," + bearish_export_str + ",") if bearish_export_str else print("###Bearish_Stocks,")
 
     # Thematic & Sector ETF Watchlists (Primary Pure-Play per theme)
     def extract_primary_etf(etf_raw):

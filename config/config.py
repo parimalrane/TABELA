@@ -80,7 +80,7 @@ LONG_ENTRY = {
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_500_000,
     "MIN_DROPPED_WATCH_SCORE": 70.0,
-    "MILD_DAYS": 50
+    "MILD_DAYS": 21
 }
 
 
@@ -147,7 +147,7 @@ SHORT_ENTRY = {
     
     # 2. MILD BEARISH (Relief Rallies - Days 1 to 14)
     "MAX_DROPPED_WATCH_SCORE": 70.0,
-    "MILD_DAYS": 50.0
+    "MILD_DAYS": 14
 }
 
 MILD_SHORT_ENTRY = {
