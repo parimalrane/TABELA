@@ -52,7 +52,7 @@ Refining & Marketing         Exploration        8    7  185.94   7.70   Leading 
 Communications Cloud         Cloud Computing    4    1   38.22   3.43   Leading (11 -> -1)          [XLK] CLOU, FCOM       FIVN, TWLO, RNG
 Gold Mining                  Gold Mining       44    4   33.39  14.18   Leading (2)                 [XLB] GDX, GDXJ        FSM, SSRM, WPM, AGI, B, CGAU, EQX,
                                                                                                                            ERO, ALM
-Healthcare                   Healthcare        38    3   27.85   3.41   Leading (12)                [XLV] IHI, XBI         LFST
+Healthcare                   Healthcare        38    3   27.85   3.41   Leading (12)                [XLV] IHI, XBI         LFST, #DHR
 Healthcare Services          Healthcare        12    1   21.15   3.41   Leading (12)                [XLV] IHI, XBI         AVAH
 Biotech                      Biotech           84    3   15.17   9.57   Leading (6)                 [XLV] XBI, IBB         HALO, ABCL, ARCT, KURA, MRNA, SRPT
 Exploration                  Exploration       85    2    9.63   7.70   Leading (7 -> +1)           [XLE] XOP, IEO         NESR, TALO
@@ -61,6 +61,7 @@ Aerospace & Defense          Aerospace & De..  36    0    0.00  -6.38   Lagging 
 Building Materials           Infrastructure    41    0    0.00  -3.29   Lagging (38 -> -1)          [XLI] PAVE, ITB        #CX, #WY
 Cybersecurity                Software          13    0    0.00   0.23   Neutral (28 -> +1)          [XLK] CIBR, BUG        OKTA
 Data Infrastructure          Software           4    0    0.00   0.23   Neutral (28 -> +1)          [XLK] IGV, CLOU        ESTC
+Developer Infrastructure     Software           3    0    0.00   0.23   Neutral (28 -> +1)          [XLK] IGV, CLOU        GTLB
 Diagnostics                  Medical Devices    9    0    0.00   0.10   Neutral (29 -> +9)          [XLV] IHI, XHE         NEO
 Digital Advertising          Internet           4    0    0.00   1.77   Neutral (20 -> -1)          [XLC] FDN              MGNI
 Digital Banking              Banking            3    0    0.00   1.75   Neutral (21 -> -3)          [XLF] FINX             #SOFI
@@ -69,16 +70,17 @@ Autonomous Driving AI        Artificial Int..   1    0    0.00  -1.28   Lagging 
 Banking                      Banking          188    0    0.00   1.75   Neutral (21 -> -3)          [XLF] KRE, KBE         #HBAN, #WFC
 AI Infrastructure            Artificial Int..   6    0    0.00  -1.28   Lagging (35 -> +5)          [XLK] AIQ, BOTZ        #AVGO
 Enterprise Cloud             Cloud Computing    2    0    0.00   3.43   Leading (11 -> -1)          [XLK] CLOU, SKYY       CRM
-Infrastructure               Infrastructure   191    0    0.00  -3.29   Lagging (38 -> -1)          [XLI] PAVE, IGF        #NI, #RIVN, #F, #ENB, #NEE, #PPL,
-                                                                                                                           #SO
+Infrastructure               Infrastructure   191    0    0.00  -3.29   Lagging (38 -> -1)          [XLI] PAVE, IGF        #NI, #RIVN, #TU, #XEL, #GPK, #F,
+                                                                                                                           #ENB, #NEE, #PPL, #SO
 Footwear/Apparel             Retail            36    0    0.00  -1.12   Lagging (34 -> +1)          [XLY] XRT              #GAP
 Materials/Metals             Infrastructure     3    0    0.00  -3.29   Lagging (38 -> -1)          [XLI] PAVE, IGF        #AA
-Life Sciences Tools          Medical Devices    5    0    0.00   0.10   Neutral (29 -> +9)          [XLV] IHI, XHE         BLFS, AVTR
-REITs                        REITs            124    0    0.00  -2.04   Lagging (36)                [XLRE] VNQ, IYR        #VICI
+Life Sciences Tools          Medical Devices    5    0    0.00   0.10   Neutral (29 -> +9)          [XLV] IHI, XHE         TXG, BLFS, AVTR
+REITs                        REITs            124    0    0.00  -2.04   Lagging (36)                [XLRE] VNQ, IYR        #VICI, #AGNC
+Professional Services        Software           3    0    0.00   0.23   Neutral (28 -> +1)          [XLK] IGV, XSW         MAN
 Retail                       Retail            25    0    0.00  -1.12   Lagging (34 -> +1)          [XLY] XRT              #TSCO, #ORLY, #BBWI
 Semiconductors               Semiconductors    46    0    0.00  -2.44   Lagging (37 -> +3)          [XLK] SMH, SOXX        #MCHP, #ON, #SWKS
 Silver Mining                Silver Mining      6    0    0.00  11.89   Leading (5)                 [XLB] SIL, SILJ        EXK
-Software                     Software         188    0    0.00   0.23   Neutral (28 -> +1)          [XLK] IGV, XSW         NTNX, DOCU, FIGR, NIQ, U
+Software                     Software         188    0    0.00   0.23   Neutral (28 -> +1)          [XLK] IGV, XSW         PD, NTNX, DOCU, FIGR, NIQ, U
 Space Infrastructure         Aerospace & De..   5    0    0.00  -6.38   Lagging (42 -> -1)          [XLI] ARKX, ITA        #ASTS, #PL, #LUNR
 Transportation Platform      Transportation..   1    0    0.00  -3.56   Lagging (39)                [XLI] IYT              #UBER
 Transportation/Shipping      Transportation..  52    0    0.00  -3.56   Lagging (39)                [XLI] IYT, BDRY        #LUV, #UPS, #AAL
@@ -87,47 +89,52 @@ Transportation/Shipping      Transportation..  52    0    0.00  -3.56   Lagging 
 BULLISH UNIVERSE (Momentum, Pullback & Radar)
 Legend: ~ = Unknown/Unclassified
 ========================================
-Ticker         Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
-  HALO              Biotech Strong         2.0      92.03         97        0    14     XLV (2)
-   MPC Refining & Marketing Strong         1.0      90.89         98       +2     4     XLE (1)
-   PBF Refining & Marketing Strong         1.0      90.89         98       -1     4     XLE (1)
-  DINO Refining & Marketing Strong         1.0      90.29         97       -1     4     XLE (1)
-   VLO Refining & Marketing Strong         1.0      89.69         96       +1     4     XLE (1)
-    DK Refining & Marketing Strong         1.0      89.69         96       -1     4     XLE (1)
-  NESR          Exploration Strong         1.0      88.49         94       +3     5     XLE (1)
-  AVAH  Healthcare Services Strong         2.0      87.51         99       NA     1     XLV (2)
-   FSM          Gold Mining Strong         3.0      86.33         97       -2     3     XLB (4)
-  TALO          Exploration Strong         1.0      86.09         90       +1     3     XLE (1)
-  SSRM          Gold Mining Strong         3.0      85.73         96       -3     3     XLB (4)
-   WPM          Gold Mining Strong         3.0      85.13         95       +1     3     XLB (4)
-  FIVN Communications Cloud Strong         2.0      85.12         95       -4     5     XLK (6)
-  LFST           Healthcare Strong         2.0      85.11         95       NA     1     XLV (2)
-   NIQ             Software   Mild         1.0      84.55         99       NA     2     XLK (6)
-   IAG          Gold Mining   Mild         3.0      84.53         94       NA     0     XLB (4)
-    HL        Silver Mining   Mild         3.0      84.19         97       NA     0     XLB (4)
-  ESTC  Data Infrastructure   Mild         1.0      83.95         98       NA     2     XLK (6)
-   ALM          Gold Mining   Mild         3.0      83.93         93       NA     1     XLB (4)
-  CGAU          Gold Mining   Mild         3.0      83.33         92       NA     3     XLB (4)
-  ABCL              Biotech   Mild         3.0      83.23         99       NA     1     XLV (2)
-  ARCT              Biotech   Mild         3.0      83.23         99       NA     1     XLV (2)
-  KURA              Biotech   Mild         3.0      83.23         99       NA     1     XLV (2)
-  MRNA              Biotech   Mild         3.0      83.23         99       NA     1     XLV (2)
-   EXK        Silver Mining   Mild         3.0      82.99         95       NA     1     XLB (4)
-   EQX          Gold Mining   Mild         3.0      82.73         91       NA     3     XLB (4)
-  SRPT              Biotech   Mild         3.0      82.63         98       NA     1     XLV (2)
-  TWLO Communications Cloud   Mild         2.0      82.12         90       NA    21     XLK (6)
-  FIGR             Software   Mild         1.0      81.55         94       NA     2     XLK (6)
-  AVTR  Life Sciences Tools   Mild         2.0      81.43         94       NA    16     XLV (2)
-   AGI          Gold Mining   Mild         3.0      80.93         88       NA     8     XLB (4)
-  SNOW Cloud Infrastructure   Mild         2.0      80.32         87       NA     0     XLK (6)
-   ERO          Gold Mining   Mild         3.0      78.53         84       NA     3     XLB (4)
-     U             Software   Mild         2.0      77.35         87       NA     2     XLK (6)
-  MGNI  Digital Advertising   Mild         2.0      76.98         84       NA     3     XLK (6)
-   CRM     Enterprise Cloud   Mild         3.0      76.92         98       NA     3     XLK (6)
-   RNG Communications Cloud   Mild         3.0      76.92         98       NA     3     XLK (6)
-     B          Gold Mining   Mild         3.0      73.73         76       NA     8     XLB (4)
-  DOCU             Software   Mild         3.0      72.75         96       NA     2     XLK (6)
-  OKTA        Cybersecurity   Mild         3.0      71.55         94       NA     3     XLK (6)
+Ticker          Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
+  HALO               Biotech Strong         2.0      92.03         97        0    14     XLV (2)
+   MPC  Refining & Marketing Strong         1.0      90.89         98       +2     4     XLE (1)
+   PBF  Refining & Marketing Strong         1.0      90.89         98       -1     4     XLE (1)
+  DINO  Refining & Marketing Strong         1.0      90.29         97       -1     4     XLE (1)
+   VLO  Refining & Marketing Strong         1.0      89.69         96       +1     4     XLE (1)
+    DK  Refining & Marketing Strong         1.0      89.69         96       -1     4     XLE (1)
+  NESR           Exploration Strong         1.0      88.49         94       +3     5     XLE (1)
+  AVAH   Healthcare Services Strong         2.0      87.51         99       NA     1     XLV (2)
+   FSM           Gold Mining Strong         3.0      86.33         97       -2     3     XLB (4)
+  TALO           Exploration Strong         1.0      86.09         90       +1     3     XLE (1)
+  SSRM           Gold Mining Strong         3.0      85.73         96       -3     3     XLB (4)
+   WPM           Gold Mining Strong         3.0      85.13         95       +1     3     XLB (4)
+  FIVN  Communications Cloud Strong         2.0      85.12         95       -4     5     XLK (6)
+  LFST            Healthcare Strong         2.0      85.11         95       NA     1     XLV (2)
+   NIQ              Software   Mild         1.0      84.55         99       NA     2     XLK (6)
+   IAG           Gold Mining   Mild         3.0      84.53         94       NA     0     XLB (4)
+    HL         Silver Mining   Mild         3.0      84.19         97       NA     0     XLB (4)
+  ESTC   Data Infrastructure   Mild         1.0      83.95         98       NA     2     XLK (6)
+   ALM           Gold Mining   Mild         3.0      83.93         93       NA     1     XLB (4)
+  CGAU           Gold Mining   Mild         3.0      83.33         92       NA     3     XLB (4)
+  ABCL               Biotech   Mild         3.0      83.23         99       NA     1     XLV (2)
+  ARCT               Biotech   Mild         3.0      83.23         99       NA     1     XLV (2)
+  KURA               Biotech   Mild         3.0      83.23         99       NA     1     XLV (2)
+  MRNA               Biotech   Mild         3.0      83.23         99       NA     1     XLV (2)
+   EXK         Silver Mining   Mild         3.0      82.99         95       NA     1     XLB (4)
+   EQX           Gold Mining   Mild         3.0      82.73         91       NA     3     XLB (4)
+  SRPT               Biotech   Mild         3.0      82.63         98       NA     1     XLV (2)
+  TWLO  Communications Cloud   Mild         2.0      82.12         90       NA    21     XLK (6)
+  FIGR              Software   Mild         1.0      81.55         94       NA     2     XLK (6)
+  AVTR   Life Sciences Tools   Mild         2.0      81.43         94       NA    16     XLV (2)
+   AGI           Gold Mining   Mild         3.0      80.93         88       NA     8     XLB (4)
+  SNOW  Cloud Infrastructure   Mild         2.0      80.32         87       NA     0     XLK (6)
+   NEO           Diagnostics   Mild         2.0      79.63         91       NA    22     XLV (2)
+   ERO           Gold Mining   Mild         3.0      78.53         84       NA     3     XLB (4)
+     U              Software   Mild         2.0      77.35         87       NA     2     XLK (6)
+  MGNI   Digital Advertising   Mild         2.0      76.98         84       NA     3     XLK (6)
+   CRM      Enterprise Cloud   Mild         3.0      76.92         98       NA     3     XLK (6)
+   RNG  Communications Cloud   Mild         3.0      76.92         98       NA     3     XLK (6)
+   TXG   Life Sciences Tools   Mild         3.0      74.43         99       NA    31     XLV (2)
+     B           Gold Mining   Mild         3.0      73.73         76       NA     8     XLB (4)
+    PD              Software   Mild         3.0      73.35         97       NA    32     XLK (6)
+   MAN Professional Services   Mild         3.0      72.75         96       NA    30     XLK (6)
+  DOCU              Software   Mild         3.0      72.75         96       NA     2     XLK (6)
+  BLFS   Life Sciences Tools   Mild         1.0      72.43         79       NA    22     XLV (2)
+  OKTA         Cybersecurity   Mild         3.0      71.55         94       NA     3     XLK (6)
 
 ========================================
 BEARISH UNIVERSE (Breakdowns & Relief Rallies)
@@ -142,7 +149,10 @@ Ticker            Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Rating M
     PL    Space Infrastructure   Mild         3.0        6.45                3       NA     7     XLK (6)
   LUNR    Space Infrastructure   Mild         3.0        8.40                6       NA     2    XLI (11)
   ASTS    Space Infrastructure   Mild         3.0        9.05                7       NA    10     XLK (6)
+   GPK          Infrastructure   Mild         3.0       11.27                6       NA    21    XLI (11)
    AAL Transportation/Shipping   Mild         3.0       12.33                8       NA     7    XLI (11)
+   LUV Transportation/Shipping   Mild         3.0       16.23               14       NA    15    XLI (11)
+    TU          Infrastructure   Mild         4.0       18.57                8       NA    35     XLU (8)
     BA     Aerospace & Defense   Mild         3.0       19.45               23       NA     2    XLI (11)
     WY      Building Materials   Mild         3.0       21.02               21       NA     3    XLI (11)
   SOFI         Digital Banking   Mild         3.0       21.16               14       NA    10     XLF (3)
@@ -155,20 +165,23 @@ Ticker            Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Rating M
   BBWI                  Retail   Mild         3.0       29.54               31       NA     1    XLY (10)
   TSLA   Autonomous Driving AI   Mild         4.0       29.55               22       NA    10    XLY (10)
    UPS Transportation/Shipping   Mild         3.0       29.88               35       NA     9    XLI (11)
+   XEL          Infrastructure   Mild         3.0       30.12               35       NA    24     XLU (8)
    PPL          Infrastructure   Mild         3.0       31.42               37       NA     2     XLU (8)
    GAP        Footwear/Apparel   Mild         3.0       31.49               34       NA     7    XLY (10)
+  AGNC                   REITs   Mild         3.0       32.58               37       NA    25     XLF (3)
    NEE          Infrastructure   Mild         3.0       32.72               39       NA     2     XLU (8)
   HBAN                 Banking   Mild         3.0       32.86               32       NA    10     XLF (3)
    KKR      Financial Services   Mild         3.0       32.86               32       NA    10     XLF (3)
   MCHP          Semiconductors   Mild         3.0       33.51               39       NA     8     XLK (6)
+  UBER Transportation Platform   Mild         3.0       33.78               41       NA    15     XLK (6)
    WFC                 Banking   Mild         3.0       39.36               42       NA    10     XLF (3)
     ON          Semiconductors   Mild         3.0       40.66               50       NA     8     XLK (6)
      F          Infrastructure   Mild         3.0       43.12               55       NA     3    XLY (10)
   SWKS          Semiconductors   Mild         3.0       49.76               64       NA     8     XLK (6)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,HALO,MPC,PBF,DINO,VLO,DK,NESR,AVAH,FSM,TALO,SSRM,WPM,FIVN,LFST,TWLO,AVTR,AGI,B,CGAU,CRM,EQX,ERO,MGNI,OKTA,RNG,DOCU,ESTC,FIGR,NIQ,U,ABCL,ALM,ARCT,EXK,KURA,MRNA,SRPT,HL,IAG,SNOW,
-###Bearish_Stocks,AVGO,NI,VICI,CX,WMT,RIVN,ASTS,HBAN,KKR,SOFI,TSCO,TSLA,WFC,UPS,MCHP,ON,SWKS,AAL,GAP,ORLY,PL,AA,F,WY,BA,ENB,LUNR,NEE,PPL,BBWI,SO,QCOM,
+###Bullish_Stocks,HALO,MPC,PBF,DINO,VLO,DK,NESR,AVAH,FSM,TALO,SSRM,WPM,FIVN,LFST,PD,TXG,MAN,BLFS,NEO,TWLO,AVTR,AGI,B,CGAU,CRM,EQX,ERO,MGNI,OKTA,RNG,DOCU,ESTC,FIGR,NIQ,U,ABCL,ALM,ARCT,EXK,KURA,MRNA,SRPT,HL,IAG,SNOW,
+###Bearish_Stocks,AVGO,NI,VICI,CX,WMT,RIVN,TU,AGNC,XEL,GPK,LUV,UBER,ASTS,HBAN,KKR,SOFI,TSCO,TSLA,WFC,UPS,MCHP,ON,SWKS,AAL,GAP,ORLY,PL,AA,F,WY,BA,ENB,LUNR,NEE,PPL,BBWI,SO,QCOM,
 ###Leading_ETF,CRAK,GDX,SIL,XBI,XOP,MOO,XPH,CLOU,IHI,
 ###Lagging_ETF,AIQ,PAVE,VNQ,XRT,IYZ,SMH,IYT,LIT,ITA,
 

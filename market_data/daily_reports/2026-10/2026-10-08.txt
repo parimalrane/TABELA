@@ -63,18 +63,23 @@ AI Connectivity              Artificial Int..   2    0    0.00  -0.27   Neutral 
 Aerospace & Defense          Aerospace & De..  40    0    0.00  -8.07   Lagging (40 -> +1)          [XLI] ITA, XAR         #BA
 Biotech                      Biotech          113    0    0.00  -5.36   Lagging (31 -> +1)          [XLV] XBI, IBB         HALO
 Banking                      Banking          210    0    0.00  -6.94   Lagging (39)                [XLF] KRE, KBE         #BAC, #BCS, #HBAN, #HDB
-Building Materials           Infrastructure    48    0    0.00  -4.27   Neutral (25 -> +1)          [XLI] PAVE, ITB        #WY
+Building Materials           Infrastructure    48    0    0.00  -4.27   Neutral (25 -> +1)          [XLI] PAVE, ITB        #CX, #WY
 Developer Infrastructure     Software           3    0    0.00   5.16   Leading (6 -> +1)           [XLK] IGV, CLOU        FROG
-Digital Banking              Banking            3    0    0.00  -6.94   Lagging (39)                [XLF] FINX             #NU
+Digital Banking              Banking            3    0    0.00  -6.94   Lagging (39)                [XLF] FINX             #SOFI, #NU
+Discount Retail              Retail            10    0    0.00  -2.15   Neutral (16 -> -3)          [XLY] XRT              #WMT
 Foundry                      Semiconductors     3    0    0.00  -1.37   Neutral (12)                [XLK] SMH, SOXX        TSM
-Infrastructure               Infrastructure   210    0    0.00  -4.27   Neutral (25 -> +1)          [XLI] PAVE, IGF        #RIVN
-Footwear/Apparel             Retail            45    0    0.00  -2.15   Neutral (16 -> -3)          [XLY] XRT              #VFC, #AEO, #CPRI, #ONON
+Financial Services           Banking           71    0    0.00  -6.94   Lagging (39)                [XLF] KRE, KCE         #KKR, #OWL
+Infrastructure               Infrastructure   210    0    0.00  -4.27   Neutral (25 -> +1)          [XLI] PAVE, IGF        #F, #ENB, #NEE, #NI, #EIX, #IP,
+                                                                                                                           #RIVN
+Footwear/Apparel             Retail            45    0    0.00  -2.15   Neutral (16 -> -3)          [XLY] XRT              #GAP, #VFC, #AEO, #CPRI, #ONON
+Materials/Metals             Infrastructure     2    0    0.00  -4.27   Neutral (25 -> +1)          [XLI] PAVE, IGF        #AA
+Medical Devices              Medical Devices  102    0    0.00  -2.15   Neutral (17 -> -4)          [XLV] IHI, XHE         #HIMS
 REITs                        REITs            137    0    0.00  -6.11   Lagging (35 -> +2)          [XLRE] VNQ, IYR        #NLY
-Retail                       Retail            30    0    0.00  -2.15   Neutral (16 -> -3)          [XLY] XRT              #BBWI, #TSCO
+Retail                       Retail            30    0    0.00  -2.15   Neutral (16 -> -3)          [XLY] XRT              #ORLY, #BBWI, #TSCO
 Semiconductor Equipment      Semiconductors    31    0    0.00  -1.37   Neutral (12)                [XLK] SMH, SOXX        AMAT, ENTG, LRCX
 Semiconductors               Semiconductors    48    0    0.00  -1.37   Neutral (12)                [XLK] SMH, SOXX        MXL, AXTI, RMBS, TXN, ASX, VSH
-Space Infrastructure         Aerospace & De..   6    0    0.00  -8.07   Lagging (40 -> +1)          [XLI] ARKX, ITA        #ASTS
-Transportation/Shipping      Transportation..  61    0    0.00  -5.45   Lagging (33 -> -2)          [XLI] IYT, BDRY        #AAL
+Space Infrastructure         Aerospace & De..   6    0    0.00  -8.07   Lagging (40 -> +1)          [XLI] ARKX, ITA        #LUNR, #ASTS
+Transportation/Shipping      Transportation..  61    0    0.00  -5.45   Lagging (33 -> -2)          [XLI] IYT, BDRY        #AAL, #LUV, #UPS
 Wireless Chips               Semiconductors     2    0    0.00  -1.37   Neutral (12)                [XLK] SMH, SOXX        ADI
 
 ========================================
@@ -107,6 +112,7 @@ Ticker              Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Moveme
  ~CIEN        Optical Networking   Mild           1      82.31         97       NA     0     XLK (2)
   NTSK                  Software   Mild           2      82.19         98       NA    13     XLK (2)
  ~LITE        Optical Networking   Mild           1      81.61         95       NA     0     XLK (2)
+   RNG      Communications Cloud   Mild           3      81.41         98       NA    22     XLK (2)
   SNPS                  Software   Mild           1      80.99         96       NA     3     XLK (2)
  ~VIAV        Optical Networking   Mild           1      80.41         93       NA     0     XLK (2)
  ~FORM            Semiconductors   Mild           1      79.99         95       NA     0     XLK (2)
@@ -133,28 +139,46 @@ Ticker            Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Rating M
     BA     Aerospace & Defense Strong           4       23.57               24       +5     3    XLI (10)
    BAC                 Banking Strong           3       24.73               30       +2     3     XLF (8)
    AAL Transportation/Shipping Strong           3       24.99               25       +4     2    XLI (10)
+   OWL      Financial Services   Mild           3       16.18               13       NA    21     XLF (8)
+  SOFI         Digital Banking   Mild           3       16.73               10       NA    44     XLF (8)
+   KKR      Financial Services   Mild           3       17.68               13       NA    44     XLF (8)
   RIVN          Infrastructure   Mild           3       17.98               13       NA    10     XLY (6)
    HDB                 Banking   Mild           3       18.03               12       NA    10     XLF (8)
+    AA        Materials/Metals   Mild           3       18.18               21       NA    37    XLI (10)
    NLY                   REITs   Mild           3       19.89               14       NA     3     XLF (8)
+    IP          Infrastructure   Mild           3       20.03               20       NA    22     XLB (7)
+    CX      Building Materials   Mild           3       21.43               16       NA    16    XLI (10)
   CPRI        Footwear/Apparel   Mild           3       21.46               20       NA    10     XLY (6)
     WY      Building Materials   Mild           3       22.43               16       NA    10    XLI (10)
+   EIX          Infrastructure   Mild           3       24.48               23       NA    22     XLU (9)
     HL           Silver Mining   Mild           3       25.23               33       NA     0     XLB (7)
+   UPS Transportation/Shipping   Mild           3       26.39               31       NA    43    XLI (10)
   FISV                 Banking   Mild           5       26.98               15       NA     0     XLK (2)
   UBER Transportation Platform   Mild           3       27.69               33       NA     0     XLK (2)
+     F          Infrastructure   Mild           3       27.73               28       NA    37     XLY (6)
   BBWI                  Retail   Mild           3       28.06               34       NA    13     XLY (6)
    WFC                 Banking   Mild           3       28.73               30       NA     0     XLF (8)
   TSCO                  Retail   Mild           3       29.36               26       NA    13     XLY (6)
+  HIMS         Medical Devices   Mild           3       30.46               30       NA    23     XLV (3)
     AG           Silver Mining   Mild           3       31.73               43       NA     0     XLB (7)
    AEO        Footwear/Apparel   Mild           3       32.61               41       NA    10     XLY (6)
   HBAN                 Banking   Mild           5       33.48               25       NA    13     XLF (8)
   ASTS    Space Infrastructure   Mild           4       33.67               28       NA    13     XLK (2)
    VFC        Footwear/Apparel   Mild           3       34.36               36       NA    13     XLY (6)
+   ENB          Infrastructure   Mild           3       34.43               36       NA    36     XLE (1)
+   NEE          Infrastructure   Mild           3       34.43               36       NA    36     XLU (9)
+   LUV Transportation/Shipping   Mild           3       35.59               49       NA    49    XLI (10)
+  LUNR    Space Infrastructure   Mild           4       35.62               31       NA    36    XLI (10)
+    NI          Infrastructure   Mild           3       37.03               40       NA    30     XLU (9)
+  ORLY                  Retail   Mild           3       39.66               48       NA    16     XLY (6)
   ONON        Footwear/Apparel   Mild           4       41.21               45       NA    10     XLY (6)
+   WMT         Discount Retail   Mild           3       41.71               55       NA    27     XLY (6)
     NU         Digital Banking   Mild           3       47.93               58       NA     6     XLF (8)
+   GAP        Footwear/Apparel   Mild           3       52.76               62       NA    41     XLY (6)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,VLO,MPC,PBF,FIVN,TWLO,DINO,FTNT,SHOP,ESTC,FSLY,PSX,CLMT,NTNX,SEI,CDNS,MXL,ALAB,NTSK,ODD,SMCI,AXTI,RMBS,HALO,DELL,SNOW,ADI,SNPS,ASX,DK,ENTG,FROG,LRCX,PLTR,TSM,U,CIEN,FORM,HPE,LITE,QMCO,SMTC,VIAV,
-###Bearish_Stocks,BCS,BA,BAC,AAL,ASTS,BBWI,HBAN,TSCO,VFC,AEO,CPRI,HDB,ONON,RIVN,WY,NU,NLY,AG,FISV,HL,UBER,WFC,
+###Bullish_Stocks,VLO,MPC,PBF,FIVN,TWLO,DINO,FTNT,SHOP,ESTC,FSLY,PSX,CLMT,NTNX,SEI,CDNS,RNG,MXL,ALAB,NTSK,ODD,SMCI,AXTI,RMBS,HALO,DELL,SNOW,ADI,SNPS,ASX,DK,ENTG,FROG,LRCX,PLTR,TSM,U,CIEN,FORM,HPE,LITE,QMCO,SMTC,VIAV,
+###Bearish_Stocks,BCS,BA,BAC,AAL,LUV,KKR,SOFI,UPS,GAP,AA,F,ENB,LUNR,NEE,NI,WMT,HIMS,EIX,IP,OWL,CX,ORLY,ASTS,BBWI,HBAN,TSCO,VFC,AEO,CPRI,HDB,ONON,RIVN,WY,NU,NLY,AG,FISV,HL,UBER,WFC,
 ###Leading_ETF,CRAK,CLOU,XOP,IGV,FDN,
 ###Lagging_ETF,KRE,ITA,IYT,LIT,XBI,SIL,VNQ,
 

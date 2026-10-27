@@ -1,3 +1,6 @@
+import os
+import json
+from pathlib import Path
 import pandas as pd
 import sys
 import io
@@ -84,6 +87,7 @@ def print_scan_epilogue():
         ("BULLISH_UNIVERSE", "BULLISH UNIVERSE"),
         ("BEARISH_UNIVERSE", "BEARISH UNIVERSE"),
         ("TRADINGVIEW_EXPORT", "TRADINGVIEW WATCHLIST EXPORT"),
+        ("DROPPED_EXPORT", "DROPPED WATCHLIST EXPORT"),
         ("WATCHLIST_DELTA", "WATCHLIST DELTA REPORT"),
         ("END_BANNER", "END OF TABELA SCAN")
     ]
@@ -123,6 +127,7 @@ def print_scan_epilogue():
         "BULLISH_UNIVERSE",
         "BEARISH_UNIVERSE",
         "TRADINGVIEW_EXPORT",
+        "DROPPED_EXPORT",
         "WATCHLIST_DELTA"
     ]
 
@@ -1316,5 +1321,69 @@ def print_daily_scan(
 
     print("###Leading_ETF," + leading_etf_str + ",") if leading_etf_str else print("###Leading_ETF,")
     print("###Lagging_ETF," + lagging_etf_str + ",") if lagging_etf_str else print("###Lagging_ETF,")
-
     print()
+
+    # =========================================================================
+    # DROPPED WATCHLIST EXPORT (Today's Exits)
+    # =========================================================================
+    dropped_bullish = sorted(list(set(deltas.get("dropped_longs", []))))
+    dropped_bearish = sorted(list(set(deltas.get("left_distribution", []))))
+
+    prev_leading_etfs = []
+    prev_lagging_etfs = []
+    try:
+        report_dir = Path("market_data") / "daily_reports"
+        current_date_str = str(context.market_date)
+        reports = sorted([f for f in report_dir.rglob("*.txt") if f.stem < current_date_str])
+        if reports:
+            for line in reports[-1].read_text(encoding="utf-8").splitlines():
+                if line.startswith("###Leading_ETF,"):
+                    prev_leading_etfs = [x.strip() for x in line.replace("###Leading_ETF,", "").split(",") if x.strip()]
+                elif line.startswith("###Lagging_ETF,"):
+                    prev_lagging_etfs = [x.strip() for x in line.replace("###Lagging_ETF,", "").split(",") if x.strip()]
+    except Exception:
+        pass
+
+    dropped_leading_etfs = [e for e in prev_leading_etfs if e not in leading_etfs]
+    dropped_lagging_etfs = [e for e in prev_lagging_etfs if e not in lagging_etfs]
+
+    d_bull_str = ",".join(dropped_bullish)
+    d_bear_str = ",".join(dropped_bearish)
+    d_lead_etf_str = ",".join(dropped_leading_etfs)
+    d_lag_etf_str = ",".join(dropped_lagging_etfs)
+
+    print("==============================================")
+    print("DROPPED WATCHLIST EXPORT")
+    print("==============================================")
+    print("###Dropped_Bullish_Stocks," + d_bull_str + ",") if d_bull_str else print("###Dropped_Bullish_Stocks,")
+    print("###Dropped_Bearish_Stocks," + d_bear_str + ",") if d_bear_str else print("###Dropped_Bearish_Stocks,")
+    print("###Dropped_Leading_ETF," + d_lead_etf_str + ",") if d_lead_etf_str else print("###Dropped_Leading_ETF,")
+    print("###Dropped_Lagging_ETF," + d_lag_etf_str + ",") if d_lag_etf_str else print("###Dropped_Lagging_ETF,")
+    print()
+
+    # --- SAVE OUTPUT FILE TO market_data/dropped_list/ ---
+    try:
+        dropped_dir = Path("market_data") / "dropped_list"
+        dropped_dir.mkdir(parents=True, exist_ok=True)
+
+        json_data = {
+            "date": str(context.market_date),
+            "dropped_bullish_stocks": dropped_bullish,
+            "dropped_bearish_stocks": dropped_bearish,
+            "dropped_leading_etfs": dropped_leading_etfs,
+            "dropped_lagging_etfs": dropped_lagging_etfs
+        }
+        with open(dropped_dir / "dropped_list.json", "w", encoding="utf-8") as f:
+            json.dump(json_data, f, indent=4)
+
+        txt_lines = [
+            f"###Dropped_Bullish_Stocks,{d_bull_str}," if d_bull_str else "###Dropped_Bullish_Stocks,",
+            f"###Dropped_Bearish_Stocks,{d_bear_str}," if d_bear_str else "###Dropped_Bearish_Stocks,",
+            f"###Dropped_Leading_ETF,{d_lead_etf_str}," if d_lead_etf_str else "###Dropped_Leading_ETF,",
+            f"###Dropped_Lagging_ETF,{d_lag_etf_str}," if d_lag_etf_str else "###Dropped_Lagging_ETF,",
+        ]
+        txt_content = "\n".join(txt_lines) + "\n"
+        (dropped_dir / "dropped_list.txt").write_text(txt_content, encoding="utf-8")
+        (dropped_dir / "dropped list.txt").write_text(txt_content, encoding="utf-8")
+    except Exception as e:
+        print(f"Error saving dropped list: {e}")

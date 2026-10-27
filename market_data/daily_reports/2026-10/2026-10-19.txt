@@ -63,17 +63,23 @@ Retail                       Retail            31    1   10.86   2.97   Leading 
 Medical Devices              Medical Devices  103    1    4.10   3.16   Leading (6 -> +2)           [XLV] IHI, XHE         CAH, A, BAX, ISRG
 Aerospace & Defense          Aerospace & De..  38    0    0.00  -3.83   Neutral (27 -> -1)          [XLI] ITA, XAR         #BA
 Biotech                      Biotech          107    0    0.00  -1.19   Neutral (18 -> +7)          [XLV] XBI, IBB         HALO
-Banking                      Banking          204    0    0.00  -6.43   Lagging (37 -> -4)          [XLF] KRE, KBE         #BCS, #SCHW, #BAC, #FISV, #WFC,
-                                                                                                                           #HDB
+Banking                      Banking          204    0    0.00  -6.43   Lagging (37 -> -4)          [XLF] KRE, KBE         #BCS, #SCHW, #HBAN, #BAC, #FISV,
+                                                                                                                           #WFC, #HDB
+Building Materials           Infrastructure    46    0    0.00  -3.58   Neutral (26 -> -2)          [XLI] PAVE, ITB        #CX, #WY
 Cybersecurity                Software          13    0    0.00   1.30   Leading (11 -> +10)         [XLK] CIBR, BUG        RPD
 Communications Cloud         Cloud Computing    4    0    0.00   1.97   Leading (10 -> +11)         [XLK] CLOU, FCOM       RNG
 E Commerce Infrastructure    Internet           3    0    0.00  -0.13   Neutral (15 -> +8)          [XLC] FDN, ONLN        SHOP
 Healthcare                   Healthcare        44    0    0.00   3.31   Leading (5)                 [XLV] IHI, XBI         RVTY
+Financial Services           Banking           71    0    0.00  -6.43   Lagging (37 -> -4)          [XLF] KRE, KCE         #OWL
+Infrastructure               Infrastructure   209    0    0.00  -3.58   Neutral (26 -> -2)          [XLI] PAVE, IGF        #F, #ENB, #NEE, #NI, #EIX, #IP,
+                                                                                                                           #RIVN
 Internet                     Internet          31    0    0.00  -0.13   Neutral (15 -> +8)          [XLC] FDN              W
 Insurance Technology         Software           1    0    0.00   1.30   Leading (11 -> +10)         [XLK] IGV, XSW         PRCH
 Life Sciences Tools          Medical Devices    4    0    0.00   3.16   Leading (6 -> +2)           [XLV] IHI, XHE         TXG
+Materials/Metals             Infrastructure     3    0    0.00  -3.58   Neutral (26 -> -2)          [XLI] PAVE, IGF        #AA
 REITs                        REITs            134    0    0.00  -3.94   Neutral (28 -> +1)          [XLRE] VNQ, IYR        #NLY
 Silver Mining                Silver Mining      6    0    0.00  -5.61   Lagging (34 -> -6)          [XLB] SIL, SILJ        #HL, #AG
+Space Infrastructure         Aerospace & De..   6    0    0.00  -3.83   Neutral (27 -> -1)          [XLI] ARKX, ITA        #LUNR, #ASTS
 Transportation Platform      Transportation..   1    0    0.00  -5.91   Lagging (35 -> +5)          [XLI] IYT              #UBER
 Transportation/Shipping      Transportation..  59    0    0.00  -5.91   Lagging (35 -> +5)          [XLI] IYT, BDRY        #LUV, #AAL, #UPS
 
@@ -122,10 +128,12 @@ Ticker              Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Moveme
      A           Medical Devices   Mild           2      81.23         86       NA     3     XLV (2)
      W                  Internet   Mild           1      81.04         88       NA     3     XLY (5)
   CLMT      Refining & Marketing   Mild           2      78.62         75       NA    10     XLE (1)
+  NTSK                  Software   Mild           2      78.28         95       NA    24     XLK (8)
   AVTR       Life Sciences Tools   Mild           3      76.03         94       NA     0     XLV (2)
   CDNS                  Software   Mild           2      74.98         77       NA     5     XLK (8)
   RVTY                Healthcare   Mild           3      74.34         91       NA     4     XLV (2)
    RPD             Cybersecurity   Mild           3      74.08         93       NA     6     XLK (8)
+   ODD                  Software   Mild           1      73.08         98       NA    24     XLK (8)
    TXG       Life Sciences Tools   Mild           2      72.13         70       NA     6     XLV (2)
    BAX           Medical Devices   Mild           3      71.13         85       NA     3     XLV (2)
    OXY               Exploration  Radar           2      86.52         89       NA     1     XLE (1)
@@ -140,20 +148,33 @@ Ticker            Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Rating M
    BCS                 Banking Strong           3       18.64               20       +1     9     XLF (7)
    LUV Transportation/Shipping Strong           3       23.02               30       NA     1    XLI (11)
   SCHW                 Banking Strong           3       23.94               22       NA     1     XLF (7)
+  ASTS    Space Infrastructure   Mild           3       14.49                3       NA    24     XLK (8)
+   OWL      Financial Services   Mild           3       15.94               12       NA    32     XLF (7)
+    AA        Materials/Metals   Mild           3       20.82               24       NA    48    XLI (11)
    AAL Transportation/Shipping   Mild           4       22.97               13       NA     7    XLI (11)
+  LUNR    Space Infrastructure   Mild           5       24.44                6       NA    47    XLI (11)
+    IP          Infrastructure   Mild           3       24.62               26       NA    33     XLB (4)
   AVGO       AI Infrastructure   Mild           3       25.76               33       NA     0     XLK (8)
    HDB                 Banking   Mild           4       28.99               19       NA     3     XLF (7)
    BAC                 Banking   Mild           4       29.09               23       NA    10     XLF (7)
+     F          Infrastructure   Mild           3       29.72               30       NA    48     XLY (5)
+   EIX          Infrastructure   Mild           3       29.72               30       NA    33     XLU (9)
    WFC                 Banking   Mild           3       29.79               31       NA     4     XLF (7)
   UBER Transportation Platform   Mild           3       30.07               37       NA    11     XLK (8)
+    WY      Building Materials   Mild           4       30.72               20       NA    21    XLI (11)
     BA     Aerospace & Defense   Mild           4       31.19               31       NA     4    XLI (11)
     AG           Silver Mining   Mild           5       31.24               30       NA    11     XLB (4)
   FISV                 Banking   Mild           4       32.24               24       NA     4     XLK (8)
    UPS Transportation/Shipping   Mild           3       34.62               44       NA     4    XLI (11)
+  HBAN                 Banking   Mild           5       36.49               29       NA    24     XLF (7)
+   ENB          Infrastructure   Mild           3       37.72               40       NA    47     XLE (1)
+   NEE          Infrastructure   Mild           3       37.72               40       NA    47     XLU (9)
+    CX      Building Materials   Mild           4       41.12               36       NA    27    XLI (11)
+    NI          Infrastructure   Mild           3       44.87               51       NA    41     XLU (9)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,MPC,APA,DINO,SU,OVV,PSX,VLO,COP,SM,FIGS,AR,BP,CNQ,PR,PBF,SHEL,XOM,CVX,EOG,EQNR,KSS,PTEN,ARHS,DOCU,CRGY,BRZE,EXLS,ILMN,ESTC,NAVN,CAH,HALO,SNPS,CLMT,RPD,TXG,CDNS,RVTY,A,BAX,ISRG,PRCH,RNG,SHOP,W,AVTR,DVN,OXY,CVE,
-###Bearish_Stocks,SCHW,BCS,HL,LUV,AG,UBER,BAC,AAL,BA,FISV,UPS,WFC,HDB,AVGO,
+###Bullish_Stocks,MPC,APA,DINO,SU,OVV,PSX,VLO,COP,SM,FIGS,AR,BP,CNQ,PR,PBF,SHEL,XOM,CVX,EOG,EQNR,KSS,PTEN,ARHS,DOCU,CRGY,BRZE,EXLS,ILMN,ESTC,NAVN,CAH,NTSK,ODD,HALO,SNPS,CLMT,RPD,TXG,CDNS,RVTY,A,BAX,ISRG,PRCH,RNG,SHOP,W,AVTR,DVN,OXY,CVE,
+###Bearish_Stocks,SCHW,BCS,HL,LUV,AA,F,ENB,LUNR,NEE,NI,EIX,IP,OWL,CX,ASTS,HBAN,WY,AG,UBER,BAC,AAL,BA,FISV,UPS,WFC,HDB,AVGO,
 ###Leading_ETF,XOP,CRAK,IHI,XRT,FCG,CLOU,IGV,KIE,
 ###Lagging_ETF,KRE,SIL,IYT,COPX,AIQ,SMH,LIT,URNM,
 
