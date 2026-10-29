@@ -1410,14 +1410,122 @@ def print_daily_scan(
         dropped_dir = Path("market_data") / "dropped_list"
         dropped_dir.mkdir(parents=True, exist_ok=True)
 
-        json_data = {
+        # Clean up legacy txt and json files
+        for old_f in ["dropped_list.json", "dropped_list.txt", "dropped list.txt"]:
+            old_p = dropped_dir / old_f
+            if old_p.exists():
+                try: old_p.unlink()
+                except Exception: pass
+
+        csv_path = dropped_dir / "dropped_history.csv"
+        market_date_val = str(context.market_date)
+
+        etf_theme_map = {}
+        for m_theme, e_str in THEME_ETF_MAPPING.items():
+            if pd.notna(e_str):
+                for tok in str(e_str).split(","):
+                    c_tok = tok.strip().upper()
+                    if c_tok and c_tok not in etf_theme_map:
+                        etf_theme_map[c_tok] = m_theme
+
+        stock_lookup = {}
+        if stocks is not None and not stocks.empty:
+            for _, s_row in stocks.iterrows():
+                tkr = str(s_row.get("Ticker", "")).replace("*", "").replace("~", "").strip().upper()
+                if tkr: stock_lookup[tkr] = s_row
+
+        new_records = []
+        for tkr in dropped_bullish:
+            s_data = stock_lookup.get(tkr)
+            if s_data is not None:
+                z_val = pd.to_numeric(s_data.get("Zacks Rank"), errors="coerce")
+                z_str = str(int(z_val)) if pd.notna(z_val) else "-"
+                rs_val = pd.to_numeric(s_data.get("RS_Rating"), errors="coerce")
+                rs_str = str(int(rs_val)) if pd.notna(rs_val) else "-"
+                l_score = pd.to_numeric(s_data.get("Long_Score"), errors="coerce")
+                l_str = f"{float(l_score):.2f}" if pd.notna(l_score) else "-"
+                s_rs = pd.to_numeric(s_data.get("Short_RS_Rating"), errors="coerce")
+                s_rs_str = str(int(s_rs)) if pd.notna(s_rs) else "-"
+                s_score = pd.to_numeric(s_data.get("Short_Score"), errors="coerce")
+                s_str = f"{float(s_score):.2f}" if pd.notna(s_score) else "-"
+                close_v = pd.to_numeric(s_data.get("Last Close"), errors="coerce")
+                close_str = f"{float(close_v):.2f}" if pd.notna(close_v) else "-"
+                vol_v = pd.to_numeric(s_data.get("Avg Volume"), errors="coerce")
+                vol_str = str(int(vol_v)) if pd.notna(vol_v) else "-"
+                theme_val = str(s_data.get("Mapped_Theme", "-"))
+            else:
+                z_str = rs_str = l_str = s_rs_str = s_str = close_str = vol_str = theme_val = "-"
+            new_records.append({
+                "Date": market_date_val, "Type": "Dropped Long", "Ticker": tkr, "Theme": theme_val,
+                "Zacks_Rank": z_str, "RS_Rating": rs_str, "Long_Score": l_str,
+                "Short_RS_Rating": s_rs_str, "Short_Score": s_str, "Last_Close": close_str, "Volume": vol_str
+            })
+
+        for tkr in dropped_bearish:
+            s_data = stock_lookup.get(tkr)
+            if s_data is not None:
+                z_val = pd.to_numeric(s_data.get("Zacks Rank"), errors="coerce")
+                z_str = str(int(z_val)) if pd.notna(z_val) else "-"
+                rs_val = pd.to_numeric(s_data.get("RS_Rating"), errors="coerce")
+                rs_str = str(int(rs_val)) if pd.notna(rs_val) else "-"
+                l_score = pd.to_numeric(s_data.get("Long_Score"), errors="coerce")
+                l_str = f"{float(l_score):.2f}" if pd.notna(l_score) else "-"
+                s_rs = pd.to_numeric(s_data.get("Short_RS_Rating"), errors="coerce")
+                s_rs_str = str(int(s_rs)) if pd.notna(s_rs) else "-"
+                s_score = pd.to_numeric(s_data.get("Short_Score"), errors="coerce")
+                s_str = f"{float(s_score):.2f}" if pd.notna(s_score) else "-"
+                close_v = pd.to_numeric(s_data.get("Last Close"), errors="coerce")
+                close_str = f"{float(close_v):.2f}" if pd.notna(close_v) else "-"
+                vol_v = pd.to_numeric(s_data.get("Avg Volume"), errors="coerce")
+                vol_str = str(int(vol_v)) if pd.notna(vol_v) else "-"
+                theme_val = str(s_data.get("Mapped_Theme", "-"))
+            else:
+                z_str = rs_str = l_str = s_rs_str = s_str = close_str = vol_str = theme_val = "-"
+            new_records.append({
+                "Date": market_date_val, "Type": "Dropped Short", "Ticker": tkr, "Theme": theme_val,
+                "Zacks_Rank": z_str, "RS_Rating": rs_str, "Long_Score": l_str,
+                "Short_RS_Rating": s_rs_str, "Short_Score": s_str, "Last_Close": close_str, "Volume": vol_str
+            })
+
+        for etf_tkr in dropped_leading_etfs:
+            new_records.append({
+                "Date": market_date_val, "Type": "Dropped Leading ETF", "Ticker": etf_tkr,
+                "Theme": etf_theme_map.get(etf_tkr, "-"), "Zacks_Rank": "-", "RS_Rating": "-",
+                "Long_Score": "-", "Short_RS_Rating": "-", "Short_Score": "-", "Last_Close": "-", "Volume": "-"
+            })
+
+        for etf_tkr in dropped_lagging_etfs:
+            new_records.append({
+                "Date": market_date_val, "Type": "Dropped Lagging ETF", "Ticker": etf_tkr,
+                "Theme": etf_theme_map.get(etf_tkr, "-"), "Zacks_Rank": "-", "RS_Rating": "-",
+                "Long_Score": "-", "Short_RS_Rating": "-", "Short_Score": "-", "Last_Close": "-", "Volume": "-"
+            })
+
+        cols = ["Date", "Type", "Ticker", "Theme", "Zacks_Rank", "RS_Rating", "Long_Score", "Short_RS_Rating", "Short_Score", "Last_Close", "Volume"]
+        new_df = pd.DataFrame(new_records, columns=cols)
+
+        if csv_path.exists():
+            try:
+                existing_df = pd.read_csv(csv_path, dtype=str)
+                existing_df = existing_df[existing_df["Date"] != market_date_val]
+                combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+            except Exception:
+                combined_df = new_df
+        else:
+            combined_df = new_df
+
+        combined_df.to_csv(csv_path, index=False, encoding="utf-8")
+        # Legacy file exports removed
+        if False:
+            pass
+            json_data = {
             "date": str(context.market_date),
             "dropped_bullish_stocks": dropped_bullish,
             "dropped_bearish_stocks": dropped_bearish,
             "dropped_leading_etfs": dropped_leading_etfs,
             "dropped_lagging_etfs": dropped_lagging_etfs
         }
-        with open(dropped_dir / "dropped_list.json", "w", encoding="utf-8") as f:
+        if False: # with open json
             json.dump(json_data, f, indent=4)
 
         txt_lines = [
@@ -1427,7 +1535,7 @@ def print_daily_scan(
             f"###Dropped_Lagging_ETF,{d_lag_etf_str}," if d_lag_etf_str else "###Dropped_Lagging_ETF,",
         ]
         txt_content = "\n".join(txt_lines) + "\n"
-        (dropped_dir / "dropped_list.txt").write_text(txt_content, encoding="utf-8")
-        (dropped_dir / "dropped list.txt").write_text(txt_content, encoding="utf-8")
+        if False: pass # write dropped_list.txt
+        if False: pass # write dropped list.txt
     except Exception as e:
         print(f"Error saving dropped list: {e}")
