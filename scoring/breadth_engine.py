@@ -7,11 +7,40 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     # DEFINE STRONG STOCKS (For aggregate breadth stats only)
     # ==========================================
 
-    from config.config import LONG_ENTRY
+    from config.config import LONG_ENTRY, SHORT_ENTRY
     s_rs = LONG_ENTRY.get("MIN_RS", 80.0)
     s_long = LONG_ENTRY.get("MIN_LONG_SCORE", 80.0)
 
-    strong_stocks = stocks[
+    s_rs = LONG_ENTRY.get("MIN_RS", 80.0)
+    s_long = LONG_ENTRY.get("MIN_LONG_SCORE", 80.0)
+    allowed_long_themes = LONG_ENTRY.get("THEMES", ["Leading", "Unclassified Leader"])
+    s_short_max_score = SHORT_ENTRY.get("MAX_SHORT_SCORE", 25.0)
+    s_short_min_rs = SHORT_ENTRY.get("MIN_SHORT_RS", 15.0)
+    s_short_max_rs = SHORT_ENTRY.get("MAX_SHORT_RS", 60.0)
+
+    stocks = stocks.copy()
+    stocks["Qual_Strength"] = 0.0
+    stocks["Is_Qual"] = False
+
+    is_long_cand = stocks["Is_Long_Candidate"] if "Is_Long_Candidate" in stocks.columns else False
+    long_mask = is_long_cand | (
+        (stocks["RS_Rating"] >= s_rs) & (stocks["Long_Score"] >= s_long) & (stocks["Theme_Class"].isin(allowed_long_themes))
+    )
+    stocks.loc[long_mask, "Is_Qual"] = True
+    stocks.loc[long_mask, "Qual_Strength"] = stocks.loc[long_mask, "RS_Rating"]
+
+    is_short_cand = stocks["Is_Short_Candidate"] if "Is_Short_Candidate" in stocks.columns else False
+    short_score_col = stocks["Short_Score"] if "Short_Score" in stocks.columns else pd.Series(999, index=stocks.index)
+    short_rs_col = stocks["Short_RS_Rating"] if "Short_RS_Rating" in stocks.columns else pd.Series(999, index=stocks.index)
+
+    short_mask = is_short_cand | (
+        (short_score_col <= s_short_max_score) & (short_rs_col >= s_short_min_rs) & (short_rs_col <= s_short_max_rs) & (stocks["Theme_Class"] == "Lagging")
+    )
+    stocks.loc[short_mask, "Is_Qual"] = True
+    stocks.loc[short_mask, "Qual_Strength"] = (100.0 - pd.to_numeric(short_rs_col.loc[short_mask], errors="coerce")).fillna(50.0)
+
+    strong_stocks = stocks[stocks["Is_Qual"]].copy()
+    _legacy_ignore = stocks[
 
         (stocks["RS_Rating"] >= s_rs)
 
@@ -98,7 +127,7 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
 
             Strong_Stocks=("Mapped_Theme", "size"),
 
-            Avg_Strong_RS=("RS_Rating", "mean"),
+            Avg_Strong_RS=("Qual_Strength", "mean"),
 
         )
 

@@ -94,7 +94,7 @@ MILD_LONG_ENTRY = {
     "BLOCKED_THEMES": ["Lagging"],
     
     # Zacks restriction: Long mild stocks must have Zacks rank 1 or 2 only
-    "ALLOWED_ZACKS": [1, 2, 3],
+    "ALLOWED_ZACKS": [1, 2],
     
     # Minimum thresholds (optional - can be more lenient than LONG_ENTRY)
     "MIN_RS": 70.0,
@@ -155,7 +155,7 @@ MILD_SHORT_ENTRY = {
     "BLOCKED_THEMES": ["Leading", "Unclassified Leader"],
     
     # Zacks restriction: Short mild stocks must have Zacks rank 4 or 5 only
-    "ALLOWED_ZACKS": [3, 4, 5],
+    "ALLOWED_ZACKS": [4, 5],
     
     # Maximum thresholds (optional - can be more lenient than SHORT_ENTRY)
     "MAX_SHORT_RS": 70.0,

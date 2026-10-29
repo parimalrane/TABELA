@@ -714,11 +714,23 @@ def print_daily_scan(
         si = SectorIntelligence(curr_etf, hist_etf)
         report_data = si.generate_intelligence_report()
         report_str = si.format_terminal_output(report_data, legacy_data_list, breadth)
-        if report_str:
+        if False and report_str:
+            print(report_str)
+        if report_data and "sectors" in report_data:
+            for s_rec in report_data["sectors"]:
+                sector_rs_map[s_rec["Ticker"]] = int(s_rec["Rank"])
             print(report_str)
     except Exception:
         pass
-    # ------------------------------------------
+    # ---------------------------------------
+    import math
+    theme_breadth["Strong_Stocks"] = pd.to_numeric(theme_breadth["Strong_Stocks"], errors="coerce").fillna(0).astype(int)
+    theme_breadth["Avg_Strong_RS"] = pd.to_numeric(theme_breadth["Avg_Strong_RS"], errors="coerce").fillna(0.0)
+    theme_breadth["Breadth_Percent"] = round((theme_breadth["Strong_Stocks"] / theme_breadth["Total_Stocks"]) * 100, 2)
+    theme_breadth["Weighted_Breadth_Score"] = round(
+        theme_breadth["Breadth_Percent"] * (theme_breadth["Avg_Strong_RS"] / 100) * theme_breadth["Total_Stocks"].apply(lambda x: math.log(x + 1)), 2
+    )
+    theme_breadth = theme_breadth.sort_values("Weighted_Breadth_Score", ascending=False)
 
     print("========================================")
     print("THEME BREADTH ANALYSIS")
@@ -752,6 +764,11 @@ def print_daily_scan(
                 existing = [t.strip().lstrip("#") for t in str(curr).split(",") if t.strip()]
                 if ticker not in existing:
                     new_val = f"{ticker}" if pd.isna(curr) or str(curr).strip() in ("", "None", "nan") else f"{curr}, {ticker}"
+                    c_strong = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Strong_Stocks"].iloc[0]
+                    c_rs = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Avg_Strong_RS"].iloc[0]
+                    st_rs = float(pd.to_numeric(match.iloc[0].get("RS_Rating", 70), errors="coerce") or 70)
+                    theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Strong_Stocks"] = c_strong + 1
+                    theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Avg_Strong_RS"] = (c_rs * c_strong + st_rs) / (c_strong + 1)
                     theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
 
     for ticker in accumulated_breadth.get("short_dropped", {}).keys():
@@ -763,6 +780,12 @@ def print_daily_scan(
                 existing = [t.strip().lstrip("#") for t in str(curr).split(",") if t.strip()]
                 if ticker not in existing:
                     new_val = f"#{ticker}" if pd.isna(curr) or str(curr).strip() in ("", "None", "nan") else f"{curr}, #{ticker}"
+                    c_strong = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Strong_Stocks"].iloc[0]
+                    c_rs = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Avg_Strong_RS"].iloc[0]
+                    st_short_rs = float(pd.to_numeric(match.iloc[0].get("Short_RS_Rating", 50), errors="coerce") or 50)
+                    st_rs = max(1.0, 100.0 - st_short_rs)
+                    theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Strong_Stocks"] = c_strong + 1
+                    theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Avg_Strong_RS"] = (c_rs * c_strong + st_rs) / (c_strong + 1)
                     theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
 
     # --- INJECT RADAR STOCKS INTO BREADTH ---
@@ -784,8 +807,21 @@ def print_daily_scan(
             existing = [t.strip().lstrip("#") for t in str(curr).split(",") if t.strip()]
             if r_ticker not in existing:
                 new_val = f"{r_ticker}" if pd.isna(curr) or str(curr).strip() in ("", "None", "nan") else f"{curr}, {r_ticker}"
+                c_strong = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Strong_Stocks"].iloc[0]
+                c_rs = theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Avg_Strong_RS"].iloc[0]
+                st_rs = float(pd.to_numeric(r_row.get("RS_Rating", 85), errors="coerce") or 85)
+                theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Strong_Stocks"] = c_strong + 1
+                theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Avg_Strong_RS"] = (c_rs * c_strong + st_rs) / (c_strong + 1)
                 theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
     # ---------------------------------------
+    import math
+    theme_breadth["Strong_Stocks"] = pd.to_numeric(theme_breadth["Strong_Stocks"], errors="coerce").fillna(0).astype(int)
+    theme_breadth["Avg_Strong_RS"] = pd.to_numeric(theme_breadth["Avg_Strong_RS"], errors="coerce").fillna(0.0)
+    theme_breadth["Breadth_Percent"] = round((theme_breadth["Strong_Stocks"] / theme_breadth["Total_Stocks"]) * 100, 2)
+    theme_breadth["Weighted_Breadth_Score"] = round(
+        theme_breadth["Breadth_Percent"] * (theme_breadth["Avg_Strong_RS"] / 100) * theme_breadth["Total_Stocks"].apply(lambda x: math.log(x + 1)), 2
+    )
+    theme_breadth = theme_breadth.sort_values("Weighted_Breadth_Score", ascending=False)
     
     display_df = (
         theme_breadth[
@@ -833,8 +869,9 @@ def print_daily_scan(
         score = float(row['Weighted_Breadth_Score']) if pd.notna(row['Weighted_Breadth_Score']) else 0.0
         
         tot_str = str(total).rjust(3)
-        q_str = str(qual).rjust(4)
-        s_str = f"{score:>.2f}".rjust(7)
+        macro_state = theme_class_map.get(parent_theme, "Unknown")
+        q_str = "-".rjust(4) if macro_state == "Neutral" else str(qual).rjust(4)
+        s_str = "-".rjust(7) if macro_state == "Neutral" else f"{score:>.2f}".rjust(7)
         
         macro_state = theme_class_map.get(parent_theme, "Unknown")
         
@@ -1019,6 +1056,9 @@ def print_daily_scan(
     current_date_str = str(context.market_date) if hasattr(context, "market_date") else datetime.today().strftime("%Y-%m-%d")
     current_date = datetime.strptime(current_date_str, "%Y-%m-%d")
 
+    prev_mild_longs = set(accumulated.get("long_dropped", {}).keys())
+    prev_mild_shorts = set(accumulated.get("short_dropped", {}).keys())
+
     # Add today's drops
     for t in deltas.get("dropped_longs", []):
         clean = str(t).replace("*", "").replace("^", "").replace("~", "").strip().upper()
@@ -1060,7 +1100,7 @@ def print_daily_scan(
                         theme_class = str(r.get("Theme_Class", ""))
                         if is_long:
                             score = float(pd.to_numeric(r.get("Long_Score", 0), errors="coerce"))
-                            if score < min_dropped_long or zacks_val not in [1, 2, 3]:
+                            if score < min_dropped_long:
                                 continue
                             if theme_class in mild_long_blocked_themes:
                                 continue
@@ -1068,7 +1108,7 @@ def print_daily_scan(
                                 continue
                         else:
                             score = float(pd.to_numeric(r.get("Short_Score", 0), errors="coerce"))
-                            if score > max_dropped_dist or zacks_val not in [3, 4, 5]:
+                            if score > max_dropped_dist:
                                 continue
                             if theme_class in mild_short_blocked_themes:
                                 continue
@@ -1326,8 +1366,12 @@ def print_daily_scan(
     # =========================================================================
     # DROPPED WATCHLIST EXPORT (Today's Exits)
     # =========================================================================
-    dropped_bullish = sorted(list(set(deltas.get("dropped_longs", []))))
-    dropped_bearish = sorted(list(set(deltas.get("left_distribution", []))))
+    active_bullish_set = set(all_bullish_tickers)
+    active_bearish_set = set(all_bearish_tickers)
+    dropped_bullish_candidates = set(deltas.get("dropped_longs", [])) | prev_mild_longs
+    dropped_bullish = sorted([t for t in dropped_bullish_candidates if t not in active_bullish_set])
+    dropped_bearish_candidates = set(deltas.get("left_distribution", [])) | prev_mild_shorts
+    dropped_bearish = sorted([t for t in dropped_bearish_candidates if t not in active_bearish_set])
 
     prev_leading_etfs = []
     prev_lagging_etfs = []
