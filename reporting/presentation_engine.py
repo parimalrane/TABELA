@@ -1339,6 +1339,13 @@ def print_daily_scan(
                     d_zacks = str(d_row.get("Zacks_Rank", "-"))
                     d_p_str = f"{float(d_price):.2f}" if pd.notna(d_price) else "-"
 
+                    d_date_raw = str(d_row.get("Date", ""))
+                    try:
+                        d_date_str = datetime.strptime(d_date_raw, "%Y-%m-%d").strftime("%d-%b")
+                    except Exception:
+                        d_date_str = d_date_raw
+                    drop_display = f"{d_date_str} ({int(d_row['_days'])}d)"
+
                     if tkr not in reentry_long_tickers:
                         reentry_long_tickers.append(tkr)
                     reentry_long_rows.append({
@@ -1349,7 +1356,7 @@ def print_daily_scan(
                         "Price (Now/Drop)": f"{float(p_val):.2f} / {d_p_str}",
                         "RS_Rating": int(rs_val),
                         "Long_Score": f"{float(score_val):.2f}",
-                        "Days Ago": int(d_row["_days"]),
+                        "Drop Date": drop_display,
                         "Sector (Rk)": f"{spdr} ({int(s_rank)})"
                     })
 
@@ -1436,6 +1443,13 @@ def print_daily_scan(
                     d_zacks = str(d_row.get("Zacks_Rank", "-"))
                     d_p_str = f"{float(d_price):.2f}" if pd.notna(d_price) else "-"
 
+                    d_date_raw = str(d_row.get("Date", ""))
+                    try:
+                        d_date_str = datetime.strptime(d_date_raw, "%Y-%m-%d").strftime("%d-%b")
+                    except Exception:
+                        d_date_str = d_date_raw
+                    drop_display = f"{d_date_str} ({int(d_row['_days'])}d)"
+
                     if tkr not in reentry_short_tickers:
                         reentry_short_tickers.append(tkr)
                     reentry_short_rows.append({
@@ -1446,7 +1460,7 @@ def print_daily_scan(
                         "Price (Now/Drop)": f"{float(p_val):.2f} / {d_p_str}",
                         "Short_RS": int(s_rs_val),
                         "Short_Score": f"{float(score_val):.2f}",
-                        "Days Ago": int(d_row["_days"]),
+                        "Drop Date": drop_display,
                         "Sector (Rk)": f"{spdr} ({int(s_rank)})"
                     })
 
@@ -1472,7 +1486,7 @@ def print_daily_scan(
     bullish_reentry_out += "========================================\n"
     if reentry_long_rows:
         reentry_long_df = pd.DataFrame(reentry_long_rows)
-        cols_l = ["Ticker", "Mapped_Theme", "Status", "Zacks (Now/Drop)", "Price (Now/Drop)", "RS_Rating", "Long_Score", "Days Ago", "Sector (Rk)"]
+        cols_l = ["Ticker", "Mapped_Theme", "Status", "Zacks (Now/Drop)", "Price (Now/Drop)", "RS_Rating", "Long_Score", "Drop Date", "Sector (Rk)"]
         cols_l = [c for c in cols_l if c in reentry_long_df.columns]
         reentry_long_df = reentry_long_df[cols_l]
         reentry_long_df["_score_num"] = pd.to_numeric(reentry_long_df["Long_Score"], errors="coerce").fillna(0)
@@ -1486,7 +1500,7 @@ def print_daily_scan(
     bearish_reentry_out += "========================================\n"
     if reentry_short_rows:
         reentry_short_df = pd.DataFrame(reentry_short_rows)
-        cols_s = ["Ticker", "Mapped_Theme", "Status", "Zacks (Now/Drop)", "Price (Now/Drop)", "Short_RS", "Short_Score", "Days Ago", "Sector (Rk)"]
+        cols_s = ["Ticker", "Mapped_Theme", "Status", "Zacks (Now/Drop)", "Price (Now/Drop)", "Short_RS", "Short_Score", "Drop Date", "Sector (Rk)"]
         cols_s = [c for c in cols_s if c in reentry_short_df.columns]
         reentry_short_df = reentry_short_df[cols_s]
         reentry_short_df["_score_num"] = pd.to_numeric(reentry_short_df["Short_Score"], errors="coerce").fillna(999)
