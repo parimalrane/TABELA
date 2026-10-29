@@ -164,3 +164,33 @@ MILD_SHORT_ENTRY = {
     "MIN_VOLUME": 1_000_000,
 }
 
+
+
+# ==========================
+# RE-ENTERED / INFLECTION ENGINE
+# Scans recent dropped history for stocks whose fundamentals,
+# theme flow, and price have confirmed a quantitative turnaround.
+# ==========================
+REENTERED_LONG = {
+    "LOOKBACK_DAYS": 21,
+    "HOLD_DAYS": 5,
+    "ALLOWED_ZACKS": [1, 2],
+    "THEMES": ["Leading", "Unclassified Leader"],
+    "PRICE_CONFIRMATION": True,
+    "MIN_PRICE": 10.0,
+    "MIN_VOLUME": 1_000_000,
+    "MIN_RS": 70.0,
+    "EXCLUDE_STRONG": True,
+}
+
+REENTERED_SHORT = {
+    "LOOKBACK_DAYS": 21,
+    "HOLD_DAYS": 5,
+    "ALLOWED_ZACKS": [4, 5],
+    "THEMES": ["Lagging"],
+    "PRICE_CONFIRMATION": True,
+    "MIN_PRICE": 10.0,
+    "MIN_VOLUME": 1_000_000,
+    "MAX_SHORT_RS": 60.0,
+    "EXCLUDE_STRONG": True,
+}
