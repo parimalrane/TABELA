@@ -180,6 +180,9 @@ market_data/
   daily_reports/       # Terminal output capture (.txt)
   stock_transition/    # Stock lifecycle registry JSONs
   unknown_classification/  # Unclassified ticker audit JSONs
+  dropped_list/        # dropped_history.csv (accumulating point-in-time drop audit ledger)
+  reentry_tracker.json # Active re-entry timestamp and hold-window tracker
+  dropped_accumulator.json # Active mild pullback & relief rally accumulator
 ```
 
 Only structured data is stored.
@@ -190,8 +193,8 @@ Only structured data is stored.
 
 Produces:
 
-* Console reports (Theme Breadth, Long Candidates, Distribution Watchlist, Dropped Details)
-* TradingView exports (NEW entries only — new longs and new distributions)
+* Console reports (Theme Performance, Bidirectional Theme Breadth, Bullish/Bearish Re-Entry Spotlights, Bullish/Bearish Universes, Dropped Watchlist Export, Watchlist Deltas)
+* TradingView exports (`###Bullish_Stocks`, `###Bearish_Stocks`, `###Reentered_Long_Stocks`, `###Reentered_Short_Stocks`, `###Leading_ETF`, `###Lagging_ETF`, and `###Dropped_*` watchlists)
 * Daily report text captures
 
 Presentation should not perform calculations.
@@ -305,9 +308,9 @@ No engine should modify upstream data.
 | ETF Scoring             | Calculate individual ETF RS using unified config weights |
 | Theme Mapping           | Convert industries to themes (raw Zacks casing preserved) |
 | Composite               | Calculate theme strength (config-driven weights) |
-| Breadth                 | Measure participation                     |
-| Watchlist Engine         | Identify strongest stocks, capped at 3 per Micro Theme |
-| Distribution            | Detect structurally weak shorts, capped at 3 per Micro Theme |
+| Breadth                 | Measure bidirectional participation (Long strength for Leading, Short weakness for Lagging) |
+| Watchlist Engine        | Identify strongest institutional long leaders meeting LONG_ENTRY |
+| Distribution            | Detect structurally weak breakdown shorts meeting SHORT_ENTRY |
 | Rotation                | Compare current and previous market state |
 | Snapshot                | Persist current market state              |
 | Historical Intelligence | Multi-day trend analysis                  |

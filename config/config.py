@@ -154,8 +154,8 @@ MILD_SHORT_ENTRY = {
     # Theme restriction: Short mild stocks must NOT be from leading themes
     "BLOCKED_THEMES": ["Leading", "Unclassified Leader"],
     
-    # Zacks restriction: Short mild stocks must have Zacks rank 4 or 5 only
-    "ALLOWED_ZACKS": [4, 5],
+    # Zacks restriction: Short mild stocks must have Zacks rank 3, 4, or 5 (matches SHORT_ENTRY)
+    "ALLOWED_ZACKS": [3, 4, 5],
     
     # Maximum thresholds (optional - can be more lenient than SHORT_ENTRY)
     "MAX_SHORT_RS": 70.0,
@@ -186,7 +186,7 @@ REENTERED_LONG = {
 REENTERED_SHORT = {
     "LOOKBACK_DAYS": 21,
     "HOLD_DAYS": 5,
-    "ALLOWED_ZACKS": [4, 5],
+    "ALLOWED_ZACKS": [3, 4, 5],
     "THEMES": ["Lagging"],
     "PRICE_CONFIRMATION": True,
     "MIN_PRICE": 10.0,

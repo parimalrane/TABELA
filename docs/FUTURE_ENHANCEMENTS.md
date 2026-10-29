@@ -20,3 +20,8 @@
 2. **Alpha Attribution (Winners vs. Losers Comparison):** Once the backtest runs exclusively in a Pandas matrix, intercept that matrix before it collapses into a single "Win Rate %" number. Output an attribution report that explicitly groups the characteristics of Winning trades vs. Losing trades (e.g., "75% of your losers had Zacks Rank 2" or "Winners overwhelmingly had RS > 95"). This allows the user to program precise negative constraints into the pipeline.
 
 **Execution Requirement:** Both of these must be built together because the Pandas matrix structure required for #1 natively enables the slicing required for #2.
+
+---
+
+## 🛠️ Codebase Maintenance & Housekeeping
+For non-functional technical debt items, dead code removals, and modular engine refactorings, see **[housekeep.md](file:///c:/TABELA/housekeep.md)**.

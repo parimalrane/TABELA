@@ -1080,7 +1080,7 @@ def print_daily_scan(
     mild_long_blocked_themes = MILD_LONG_ENTRY.get("BLOCKED_THEMES", ["Lagging", "Micro Laggard"])
     mild_long_allowed_zacks = MILD_LONG_ENTRY.get("ALLOWED_ZACKS", [1, 2])
     mild_short_blocked_themes = MILD_SHORT_ENTRY.get("BLOCKED_THEMES", ["Leading", "Micro Leader", "Unclassified Leader"])
-    mild_short_allowed_zacks = MILD_SHORT_ENTRY.get("ALLOWED_ZACKS", [4, 5])
+    mild_short_allowed_zacks = MILD_SHORT_ENTRY.get("ALLOWED_ZACKS", [3, 4, 5])
 
     def clean_accumulator(dropped_dict, active_list_str, is_long=True):
         active_set = set(t.strip().upper() for t in active_list_str.split(",") if t.strip())
