@@ -38,10 +38,10 @@ def save_unknown_classification(stocks):
 
             "last_close": float(row["Last Close"]),
             "price_position": float(
-                row["Price as a % of 52 Wk H-L Range"]
+                row.get("Price as a % of 52 Wk H-L Range", 0.0) or 0.0
             ),
             "market_cap_mil": float(
-                row["Market Cap (mil)"]
+                row.get("Market Cap (mil)", 0.0) or 0.0
             )
 
         })

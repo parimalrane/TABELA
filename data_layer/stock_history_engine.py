@@ -104,7 +104,7 @@ def save_stock_history(stocks):
 
             "price_position_52w": round(
                 safe_float(
-                    row["Price as a % of 52 Wk H-L Range"]
+                    row.get("Price as a % of 52 Wk H-L Range", 0.0)
                 ), 2
             ),
 
@@ -171,13 +171,13 @@ def save_stock_history(stocks):
 
             "sales_growth": round(
                 safe_float(
-                    row["Sales Growth F(0)/F(-1)"]
+                    row.get("Sales Growth F(0)/F(-1)", 0.0)
                 ), 2
             ),
 
             "operating_margin": round(
                 safe_float(
-                    row["Operating Margin 12 Mo %"]
+                    row.get("Operating Margin 12 Mo %", 0.0)
                 ), 2
             ),
 

@@ -612,7 +612,8 @@ def print_macro_weather(stocks, theme_strength_settings):
         print(line)
     print("")
     
-    print("[2] STRUCTURAL BREADTH (3,000+ Equities)")
+    stock_count_str = f"{len(stocks):,} Equities" if stocks is not None and not stocks.empty else "3,000+ Equities"
+    print(f"[2] STRUCTURAL BREADTH ({stock_count_str})")
     historical_nets = _load_historical_breadth_nets()
     streaks = _compute_breadth_streaks(historical_nets)
     movement_tag = ""
