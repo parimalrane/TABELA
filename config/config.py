@@ -63,7 +63,7 @@ RS_RAW_WEIGHTS = {
     "Price as a % of 52 Wk H-L Range": 0.00 # Force true breakouts near high ranges
 }
 
-# Zacks Binary: Only Rank 1/2 survive. Rank 3 turnarounds = poison (proven by 61-experiment grid search)
+# Zacks Binary: Only Rank 1/2 survive. Rank 3 turnarounds = poison (proven by Cartesian backtests)
 ZACKS_SCORE_MAP = {1: 100.0, 2: 100.0, 3: 0.0, 4: -50.0, 5: -100.0}
 GROWTH_SCORE_MAP = {'A': 100.0, 'B': 95.0, 'C': 90.0, 'D': 20.0, 'F': -50.0}
 
@@ -72,15 +72,15 @@ GROWTH_SCORE_MAP = {'A': 100.0, 'B': 95.0, 'C': 90.0, 'D': 20.0, 'F': -50.0}
 # ==========================
 
 LONG_ENTRY = {
-    # Re-tightened to Institutional Elite (Top 10% constraints) for strict watchlist quality over quantity
+    # Proven by 2026-10-31 Cartesian Backtest (101 Trades, 44.6% 10D WR, PF: 8.01, +42.8% Avg Return)
     "MIN_RS": 90.0,
-    "MIN_LONG_SCORE": 85.0,
+    "MIN_LONG_SCORE": 80.0,
     "THEMES": ["Leading", "Unclassified Leader"],
-    "BLOCKED_ZACKS": [4, 5],
+    "BLOCKED_ZACKS": [3, 4, 5],
     "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_500_000,
+    "MIN_VOLUME": 1_000_000,
     "MIN_DROPPED_WATCH_SCORE": 70.0,
-    "MILD_DAYS": 50
+    "MILD_DAYS": 14
 }
 
 
@@ -134,20 +134,20 @@ SHORT_ZACKS_SCORE_MAP = {1: -100.0, 2: -50.0, 3: 20.0, 4: 80.0, 5: 100.0}
 # Short-specific Growth scoring (reward deteriorating earnings quality)
 SHORT_GROWTH_SCORE_MAP = {'A': -50.0, 'B': 0.0, 'C': 50.0, 'D': 80.0, 'F': 100.0}
 
-# Short entry thresholds — Ultra-Premium Cartesian Winner (Low Volume / High Probability)
+# Short entry thresholds — Proven by 2026-10-31 Cartesian Backtest (197 Trades, 60.7% 10D WR, PF: 8.47, +20.5% Avg Return)
 SHORT_ENTRY = {
-    # 1. STRONG BEARISH (Active Breakdowns) - Thematic Exodus Strategy Winner
-    "MIN_SHORT_RS": 15.0,
+    # 1. STRONG BEARISH (Active Breakdowns)
+    "MIN_SHORT_RS": 8.0,
     "MAX_SHORT_RS": 60.0,
-    "MAX_SHORT_SCORE": 25.0,
+    "MAX_SHORT_SCORE": 30.0,
     "THEMES": ["Lagging"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 5_000_000,
     
-    # 2. MILD BEARISH (Relief Rallies - Days 1 to 14)
+    # 2. MILD BEARISH (Relief Rallies)
     "MAX_DROPPED_WATCH_SCORE": 70.0,
-    "MILD_DAYS": 50
+    "MILD_DAYS": 14
 }
 
 MILD_SHORT_ENTRY = {

@@ -226,13 +226,15 @@ class SectorIntelligence:
             q_pos, q_neg = breadth["q"]
             lines.append(f"    > Sector Breadth  : W (+{w_pos}/-{w_neg}) ; M (+{m_pos}/-{m_neg}) ; Q (+{q_pos}/-{q_neg})\n")
             
-        lines.append(f"    {'Rank':<4} {'Sector':<17} {'SPDR'}  {'1-Qtr':>9}  {'YTD':>9}  {'Strength':>9}  {'Rank Δ(1W)':>11}  {'SPY Ex(1M)':>11}  {'Impact':>7}   {'Status'}")
-        lines.append("    " + "-" * 111)
+        lines.append(f"    {'Rank':<4} {'Sector':<17} {'SPDR'}  {'1-Wk':>9}  {'1-Mo':>9}  {'1-Qtr':>9}  {'YTD':>9}  {'Strength':>9}  {'Rank Δ(1W)':>11}  {'SPY Ex(1M)':>11}  {'Impact':>7}   {'Status'}")
+        lines.append("    " + "-" * 133)
         
         for s in intel_data['sectors']:
             rank = int(s['Rank'])
             name = s['Name']
             ticker = s['Ticker']
+            p1w = s.get('1W', 0.0)
+            p1m = s.get('1M', 0.0)
             p3m = s['3M']
             pytd = s['YTD']
             score = s['Score']
@@ -240,6 +242,8 @@ class SectorIntelligence:
             spy_ex = s['Excess_1M']
             status = s['Status']
             
+            p1w_str = f"{p1w:>+8.2f}%" if pd.notna(p1w) else "     ---"
+            p1m_str = f"{p1m:>+8.2f}%" if pd.notna(p1m) else "     ---"
             p3m_str = f"{p3m:>+8.2f}%" if pd.notna(p3m) else "     ---"
             pytd_str = f"{pytd:>+8.2f}%" if pd.notna(pytd) else "     ---"
             rank_delta_str = f"{int(rank_delta):+d}" if rank_delta != 0 else "-"
@@ -249,7 +253,7 @@ class SectorIntelligence:
             if ticker in legacy_map:
                 impact = f"{legacy_map[ticker].get('Impact_Mom', 0):>7.1f}"
 
-            lines.append(f"    {rank:<4} {name:<17} {ticker:<4}  {p3m_str:>9}  {pytd_str:>9}  {score:>9.2f}  {rank_delta_str:>11}  {spy_ex_str:>11}  {impact:>7}   {status}")
+            lines.append(f"    {rank:<4} {name:<17} {ticker:<4}  {p1w_str:>9}  {p1m_str:>9}  {p3m_str:>9}  {pytd_str:>9}  {score:>9.2f}  {rank_delta_str:>11}  {spy_ex_str:>11}  {impact:>7}   {status}")
             
         lines.append("========================================================================\n")
         

@@ -5,24 +5,29 @@ from pathlib import Path
 import time
 import sys
 import numpy as np
+from datetime import datetime
 
 from quarterly_grid_config import SHORT_PHASE_1, SHORT_PHASE_2
 
 BASE_DIR = Path("c:/TABELA")
 CSV_DIR = BASE_DIR / "market_data" / "input_files"
+FWD_SWING_DAYS = 10  # Standard swing trading evaluation window
 
 def load_raw_csv_data():
-    """Load all daily stock and ETF CSVs. No JSON dependencies."""
+    """Load all daily stock and ETF CSVs into memory."""
     stock_data = {}
     etf_data = {}
     
-    print("[1/3] Loading all raw daily CSV files into memory...")
+    print("[1/3] Loading all raw daily CSV files into memory...", flush=True)
+    count = 0
     for root, dirs, files in os.walk(CSV_DIR):
         for file in files:
             filepath = os.path.join(root, file)
                 
             if file.endswith("_stocks.csv"):
-                print(f"Loading {file}...", end="\r")
+                count += 1
+                if count % 10 == 0:
+                    print(f"  Loaded {count} stock CSV files...", flush=True)
                 date_str = file[:8]
                 date_fmt = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:8]}"
                 df = pd.read_csv(filepath)
@@ -43,15 +48,15 @@ def load_raw_csv_data():
                 df["Ticker"] = df["Ticker"].astype(str).str.strip()
                 etf_data[date_fmt] = df
 
-    print("\n[1/3] Complete.")
     all_dates = sorted(stock_data.keys())
+    print(f"[1/3] Complete. Total days loaded: {len(all_dates)} ({all_dates[0]} to {all_dates[-1]})", flush=True)
     return stock_data, etf_data, all_dates
 
 sys.path.append(str(BASE_DIR))
 from themes.stock_mapper import map_stock_theme
 
 def precalculate_stock_themes(stock_data):
-    print("[2/3] Precalculating stock to theme mapping...")
+    print("[2/3] Precalculating stock to theme mapping...", flush=True)
     stock_to_theme = {}
     for date, df in stock_data.items():
         if "Industry" not in df.columns or "Sector" not in df.columns:
@@ -63,6 +68,7 @@ def precalculate_stock_themes(stock_data):
         for t, i, s in zip(tickers, inds, secs):
             if t not in stock_to_theme:
                 stock_to_theme[t] = map_stock_theme(i, s)
+    print(f"[2/3] Mapped {len(stock_to_theme)} unique stocks to themes.", flush=True)
     return stock_to_theme
 
 def load_mapping_dicts():
@@ -119,7 +125,7 @@ def extract_prices(stock_data):
     return prices
 
 def compile_stock_scores_short(stock_data, all_dates, stock_to_theme, compiled_themes_by_date, 
-                               rs_weights, comp_weights, zacks_map, growth_map):
+                                rs_weights, comp_weights, zacks_map, growth_map):
     daily_scored = {}
     
     w_rs_4w = rs_weights["4W"]
@@ -127,10 +133,10 @@ def compile_stock_scores_short(stock_data, all_dates, stock_to_theme, compiled_t
     w_rs_1w = rs_weights["1W"]
     w_rs_ytd = rs_weights["YTD"]
     
-    comp_rs = comp_weights["RS"]
-    comp_theme = comp_weights["THEME"]
-    comp_zacks = comp_weights["ZACKS"]
-    comp_growth = comp_weights["GROWTH"]
+    comp_rs = comp_weights.get("RS", comp_weights.get("RS_WEIGHT", 0.65))
+    comp_theme = comp_weights.get("THEME", comp_weights.get("THEME_WEIGHT", 0.20))
+    comp_zacks = comp_weights.get("ZACKS", comp_weights.get("ZACKS_WEIGHT", 0.10))
+    comp_growth = comp_weights.get("GROWTH", comp_weights.get("GROWTH_WEIGHT", 0.05))
     
     for date in all_dates:
         df = stock_data[date]
@@ -203,18 +209,41 @@ def compile_stock_scores_short(stock_data, all_dates, stock_to_theme, compiled_t
         
     return daily_scored
 
+def compute_metrics(rets):
+    """Calculates institutional performance metrics from a list of returns."""
+    if not rets:
+        return {"wr": 0.0, "avg": 0.0, "pf": 0.0, "n": 0, "avg_gain": 0.0, "avg_loss": 0.0}
+    gains = [r for r in rets if r > 0]
+    losses = [abs(r) for r in rets if r < 0]
+    sum_g = sum(gains)
+    sum_l = sum(losses)
+    pf = round(sum_g / sum_l, 2) if sum_l > 0 else (99.0 if sum_g > 0 else 1.0)
+    wr = round((len(gains) / len(rets)) * 100.0, 2)
+    avg_ret = round(sum(rets) / len(rets), 2)
+    avg_gain = round(sum_g / len(gains), 2) if gains else 0.0
+    avg_loss = round(sum_l / len(losses), 2) if losses else 0.0
+    return {"wr": wr, "avg": avg_ret, "pf": pf, "n": len(rets), "avg_gain": avg_gain, "avg_loss": avg_loss}
+
 def simulate_short_baseline_gates(daily_scored, prices, all_dates, baseline_gates):
+    """
+    Simulates Short state machine entries and computes both 10-day forward (FWD-10D) 
+    and Terminal (To-Date) returns with Profit Factor.
+    """
     entries = {}
     drop_tracker = {}
     
     max_score = baseline_gates["MAX_SHORT_SCORE"]
     max_rs = baseline_gates["MAX_SHORT_RS"]
     min_rs = baseline_gates["MIN_SHORT_RS"]
+    allowed_themes = baseline_gates.get("THEMES", ["Lagging", "Neutral"])
     basing_zack_blocks = baseline_gates["BLOCKED_ZACKS"]
-    mild_floor = baseline_gates["MAX_DROPPED_WATCH_SCORE"]
+    mild_floor = baseline_gates.get("MAX_DROPPED_WATCH_SCORE", 70.0)
     min_volume = baseline_gates["MIN_VOLUME"]
+    min_price = baseline_gates.get("MIN_PRICE", 10.0)
     
-    for date in all_dates:
+    total_dates = len(all_dates)
+    
+    for d_idx, date in enumerate(all_dates):
         df = daily_scored.get(date)
         if df is None or df.empty:
             continue
@@ -233,11 +262,11 @@ def simulate_short_baseline_gates(daily_scored, prices, all_dates, baseline_gate
         
         for t, score, rs, theme, zacks, vol in zip(tickers, scores, rs_ratings, theme_classes, z_ranks, volumes):
             entry_price = today_prices.get(t, 0)
-            if entry_price < 10.0 or vol < min_volume:
+            if entry_price < min_price or vol < min_volume:
                 continue
                 
-            # STRONG BEARISH Check
-            is_strong = (score <= max_score and min_rs <= rs <= max_rs and theme in ["Lagging", "Neutral"] and zacks not in basing_zack_blocks)
+            # STRONG BEARISH Entry Gate
+            is_strong = (score <= max_score and min_rs <= rs <= max_rs and theme in allowed_themes and zacks not in basing_zack_blocks)
             
             if t not in entries:
                 entries[t] = {}
@@ -245,72 +274,108 @@ def simulate_short_baseline_gates(daily_scored, prices, all_dates, baseline_gate
             if is_strong:
                 if t in drop_tracker: del drop_tracker[t]
                 if "Strong" not in entries[t]:
-                    entries[t]["Strong"] = {"entry_date": date, "entry_price": entry_price}
+                    entries[t]["Strong"] = {"entry_date": date, "entry_idx": d_idx, "entry_price": entry_price}
             else:
                 if "Strong" in entries[t] and t not in drop_tracker:
                     drop_tracker[t] = {"days_dropped": 1}
                 if t in drop_tracker:
                     days = drop_tracker[t]["days_dropped"]
-                    if days <= 21:
+                    if days <= 14:
                         if score <= mild_floor and rs <= mild_floor:
                             if "Mild" not in entries[t]:
-                                entries[t]["Mild"] = {"entry_date": date, "entry_price": entry_price}
+                                entries[t]["Mild"] = {"entry_date": date, "entry_idx": d_idx, "entry_price": entry_price}
                         else:
                             del drop_tracker[t]
-                    elif 22 <= days <= 50:
-                        if zacks in [4, 5] and theme in ["Lagging", "Neutral"]:
+                    elif 15 <= days <= 50:
+                        if zacks in [4, 5] and theme in allowed_themes:
                             if "Basing" not in entries[t]:
-                                entries[t]["Basing"] = {"entry_date": date, "entry_price": entry_price}
+                                entries[t]["Basing"] = {"entry_date": date, "entry_idx": d_idx, "entry_price": entry_price}
                         else:
                             del drop_tracker[t]
                     else:
                         del drop_tracker[t]
                         
-    current_date = all_dates[-1]
-    today_prices = prices.get(current_date, {})
-    all_returns = []
+    terminal_date = all_dates[-1]
+    terminal_prices = prices.get(terminal_date, {})
+    
+    strong_fwd10_returns = []
+    strong_todate_returns = []
+    
+    all_fwd10_returns = []
+    all_todate_returns = []
     
     for ticker, buckets in entries.items():
-        current_price = today_prices.get(ticker, 0)
-        if current_price > 0:
-            for bucket_type, data in buckets.items():
-                if data["entry_price"] > 0:
-                    # SHORT RETURN MATH: Entry - Current / Entry
-                    ret = ((data["entry_price"] - current_price) / data["entry_price"]) * 100.0
-                    all_returns.append(ret)
+        for b_name, b_data in buckets.items():
+            entry_price = b_data["entry_price"]
+            entry_idx = b_data["entry_idx"]
+            
+            if entry_price <= 0:
+                continue
+                
+            # 1. Forward 10-Day Swing Return (only if 10 days of future data exist)
+            if entry_idx + FWD_SWING_DAYS < total_dates:
+                exit_date_10 = all_dates[entry_idx + FWD_SWING_DAYS]
+                exit_price_10 = prices.get(exit_date_10, {}).get(ticker, 0)
+                if exit_price_10 > 0:
+                    ret_10 = ((entry_price - exit_price_10) / entry_price) * 100.0
+                    all_fwd10_returns.append(ret_10)
+                    if b_name == "Strong":
+                        strong_fwd10_returns.append(ret_10)
+                        
+            # 2. To-Date Terminal Return
+            last_price = terminal_prices.get(ticker, 0)
+            if last_price > 0:
+                ret_todate = ((entry_price - last_price) / entry_price) * 100.0
+                all_todate_returns.append(ret_todate)
+                if b_name == "Strong":
+                    strong_todate_returns.append(ret_todate)
                     
-    if not all_returns:
-        return 0.0, 0.0, 0
-        
-    avg = sum(all_returns) / len(all_returns)
-    wr = sum(1 for r in all_returns if r > 0) / len(all_returns) * 100
+    strong_10d_m = compute_metrics(strong_fwd10_returns)
+    strong_todate_m = compute_metrics(strong_todate_returns)
+    all_10d_m = compute_metrics(all_fwd10_returns)
     
-    return wr, avg, len(all_returns)
+    total_strong_trades = sum(1 for b in entries.values() if "Strong" in b)
+    
+    return {
+        "Strong_WR_10D": strong_10d_m["wr"],
+        "Strong_PF_10D": strong_10d_m["pf"],
+        "Strong_Avg_10D": strong_10d_m["avg"],
+        "Strong_N_10D": strong_10d_m["n"],
+        "Strong_WR_ToDate": strong_todate_m["wr"],
+        "Strong_Avg_ToDate": strong_todate_m["avg"],
+        "Strong_Trades": total_strong_trades,
+        "All_WR_10D": all_10d_m["wr"],
+        "All_PF_10D": all_10d_m["pf"],
+        "All_Trades": len(all_todate_returns)
+    }
 
 def run_short_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
-    print("\nStarting Short Phase 1 (Fundamental Math Sweep)...")
+    print("\n=======================================================", flush=True)
+    print("Starting Short Phase 1 (Fundamental Math Sweep)...", flush=True)
+    print("=======================================================", flush=True)
     keys, values = zip(*SHORT_PHASE_1.items())
     permutations = [dict(zip(keys, v)) for v in itertools.product(*values)]
-    print(f"Total Short Parameter Permutations to Test: {len(permutations)}")
+    print(f"Total Short Parameter Permutations to Test: {len(permutations)}", flush=True)
     
     baseline_gates = {k: v[0] for k, v in SHORT_PHASE_2.items()}
     baseline_gates["MAX_SHORT_SCORE"] = 60.0
     baseline_gates["MAX_SHORT_RS"] = 75.0
     baseline_gates["MIN_SHORT_RS"] = 1.0
+    baseline_gates["THEMES"] = ["Lagging", "Neutral"]
+    baseline_gates["MIN_VOLUME"] = 2_000_000
     
     results = []
     etf_explicit, macro_theme = load_mapping_dicts()
     
     for i, p in enumerate(permutations):
-        # We reuse the baseline un-tuned ETF weights since short phase 1 doesn't sweep them
         compiled_themes_by_date = compile_etf_themes(etf_data, all_dates, 0.40, 0.35, 0.25, 0.0, 0.0, etf_explicit, macro_theme)
         daily_scored = compile_stock_scores_short(
             stock_data, all_dates, stock_to_theme, compiled_themes_by_date, 
             p["SHORT_RS_RAW_WEIGHTS"], p["SHORT_COMPOSITE_WEIGHTS"], 
             p["SHORT_ZACKS_SCORE_MAP"], p["SHORT_GROWTH_SCORE_MAP"]
         )
-        wr, avg, trades = simulate_short_baseline_gates(daily_scored, prices, all_dates, baseline_gates)
-        print(f"  [P{i+1}] WR: {wr:.1f}% Avg: {avg:.2f}% Trades: {trades} | Math Map Evaluated")
+        metrics = simulate_short_baseline_gates(daily_scored, prices, all_dates, baseline_gates)
+        print(f"  [Model {i+1}] Strong 10D WR: {metrics['Strong_WR_10D']}% | PF: {metrics['Strong_PF_10D']} | Avg: {metrics['Strong_Avg_10D']}% | Trades: {metrics['Strong_Trades']}", flush=True)
         
         flat_p = {}
         for k, v in p.items():
@@ -322,33 +387,30 @@ def run_short_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
             else:
                 flat_p[k] = v
                 
-        flat_p["WinRate"] = wr
-        flat_p["AvgReturn"] = avg
-        flat_p["Trades"] = trades
+        flat_p.update(metrics)
         results.append(flat_p)
         
     out_df = pd.DataFrame(results)
     out_df.to_csv("c:/TABELA/backtesting/tuners/phase1_short_test_output.csv", index=False)
     
-    print("\nShort Phase 1 Complete. Selecting Top 5 Math Structures by Win Rate...")
-    sorted_results = sorted(results, key=lambda x: (x["WinRate"], x["AvgReturn"]), reverse=True)
-    top_5_math = sorted_results[:5]
+    print("\nShort Phase 1 Complete. Selecting Top Math Structures by 10D Profit Factor & Win Rate...", flush=True)
+    sorted_results = sorted(results, key=lambda x: (x["Strong_PF_10D"], x["Strong_WR_10D"], x["Strong_Avg_10D"]), reverse=True)
+    top_models = sorted_results[:2]  # Top 2 best math models
     
-    print("\n==================================")
-    print("Starting Short Phase 2 (Gate Sweep)...")
-    print("==================================")
+    print("\n=======================================================", flush=True)
+    print("Starting Short Phase 2 (Gate & Threshold Sweep)...", flush=True)
+    print("=======================================================", flush=True)
     
-    from itertools import product
     keys_p2, values_p2 = zip(*SHORT_PHASE_2.items())
-    phase2_perms = [dict(zip(keys_p2, v)) for v in product(*values_p2)]
-    print(f"Phase 2 Permutations per Math Model: {len(phase2_perms)}")
+    phase2_perms = [dict(zip(keys_p2, v)) for v in itertools.product(*values_p2)]
+    print(f"Phase 2 Permutations per Math Model: {len(phase2_perms)} (Total runs: {len(phase2_perms) * len(top_models)})", flush=True)
     
     final_phase2_results = []
     
-    for m_idx, flat_base_model in enumerate(top_5_math):
-        print(f"\nEvaluating Gates for Top Short Math Model #{m_idx+1} [WR: {flat_base_model['WinRate']:.1f}% Avg: {flat_base_model['AvgReturn']:.2f}%]")
+    for m_idx, flat_base_model in enumerate(top_models):
+        print(f"\nEvaluating Gates for Model #{m_idx+1} [Base 10D WR: {flat_base_model['Strong_WR_10D']}% PF: {flat_base_model['Strong_PF_10D']}]...", flush=True)
         
-        p = [pm for pm in permutations if pm["SHORT_RS_RAW_WEIGHTS"]["4W"] == flat_base_model["SHORT_RS_RAW_WEIGHTS_4W"] and pm["SHORT_COMPOSITE_WEIGHTS"]["RS"] == flat_base_model["SHORT_COMPOSITE_WEIGHTS_RS"]][0]
+        p = [pm for pm in permutations if pm["SHORT_RS_RAW_WEIGHTS"]["4W"] == flat_base_model["SHORT_RS_RAW_WEIGHTS_4W"] and (pm["SHORT_COMPOSITE_WEIGHTS"].get("RS", pm["SHORT_COMPOSITE_WEIGHTS"].get("RS_WEIGHT")) == flat_base_model.get("SHORT_COMPOSITE_WEIGHTS_RS", flat_base_model.get("SHORT_COMPOSITE_WEIGHTS_RS_WEIGHT")))][0]
         
         compiled_themes_by_date = compile_etf_themes(etf_data, all_dates, 0.40, 0.35, 0.25, 0.0, 0.0, etf_explicit, macro_theme)
         daily_scored = compile_stock_scores_short(
@@ -358,37 +420,53 @@ def run_short_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
         )
         
         for g_idx, gate in enumerate(phase2_perms):
-            p2_wr, p2_avg, trades = simulate_short_baseline_gates(daily_scored, prices, all_dates, gate)
-            merged = {**flat_base_model, **gate, 'WinRate_Final': p2_wr, 'AvgReturn_Final': p2_avg, 'Trades_Final': trades}
+            if (g_idx + 1) % 100 == 0 or g_idx == len(phase2_perms) - 1:
+                print(f"  Progress: {g_idx+1}/{len(phase2_perms)} gate permutations evaluated...", flush=True)
+            metrics = simulate_short_baseline_gates(daily_scored, prices, all_dates, gate)
+            
+            gate_flat = {}
+            for gk, gv in gate.items():
+                gate_flat[gk] = str(gv) if isinstance(gv, list) else gv
+                
+            merged = {**flat_base_model, **gate_flat, **metrics}
             final_phase2_results.append(merged)
             
-    from datetime import datetime
     date_str = datetime.now().strftime("%Y%m%d")
     df_p2 = pd.DataFrame(final_phase2_results)
-    df_p2 = df_p2.sort_values(by=["WinRate_Final", "AvgReturn_Final"], ascending=False)
+    
+    # Sort primarily by 10-day forward Profit Factor and Win Rate (minimum 30 trades for statistical significance)
+    df_p2 = df_p2.sort_values(by=["Strong_PF_10D", "Strong_WR_10D", "Strong_Avg_10D"], ascending=False)
     p2_csv = f"C:/TABELA/backtesting/tuners/{date_str}_quarterly_short_master_results.csv"
     df_p2.to_csv(p2_csv, index=False)
-    print(f"\nExported {p2_csv}")
+    print(f"\n=======================================================", flush=True)
+    print(f"Master Optimization Results Exported to:\n{p2_csv}", flush=True)
+    print(f"=======================================================", flush=True)
     
-    print("\nOptimum Final Short System Found:")
-    print(df_p2.head(1).to_string())
+    # Filter for statistically meaningful sample (trades >= 30)
+    sig_df = df_p2[df_p2["Strong_Trades"] >= 30]
+    if sig_df.empty:
+        sig_df = df_p2
+        
+    print("\n--- TOP 5 SHORT GATE CONFIGURATIONS (Minimum 30 Trades) ---")
+    cols_display = [
+        "MIN_VOLUME", "MAX_SHORT_SCORE", "MIN_SHORT_RS", "MAX_SHORT_RS", "THEMES", "BLOCKED_ZACKS",
+        "Strong_WR_10D", "Strong_PF_10D", "Strong_Avg_10D", "Strong_Trades", "Strong_WR_ToDate", "Strong_Avg_ToDate"
+    ]
+    avail_cols = [c for c in cols_display if c in sig_df.columns]
+    print(sig_df[avail_cols].head(5).to_string(index=False), flush=True)
     
     return final_phase2_results
 
 def main():
     start_time = time.time()
     stock_data, etf_data, all_dates = load_raw_csv_data()
-    print(f"Loaded {len(all_dates)} days of market data.")
-    
     stock_to_theme = precalculate_stock_themes(stock_data)
-    print(f"Mapped {len(stock_to_theme)} unique stocks to themes.")
-    
     prices = extract_prices(stock_data)
     
     run_short_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices)
     
     end_time = time.time()
-    print(f"\nTotal time elapsed: {end_time - start_time:.2f} seconds")
+    print(f"\nTotal execution time: {end_time - start_time:.2f} seconds", flush=True)
 
 if __name__ == "__main__":
     main()
