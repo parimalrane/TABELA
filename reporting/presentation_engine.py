@@ -1572,14 +1572,14 @@ def print_daily_scan(
 
     print("TRADINGVIEW WATCHLIST EXPORT")
     all_bullish_tickers = []
-    for t_list in [true_long_tickers, long_pullback_tickers, radar_tickers, reentry_long_tickers]:
+    for t_list in [true_long_tickers, long_pullback_tickers, radar_tickers]:
         for t in t_list:
             clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
             if clean and clean not in all_bullish_tickers:
                 all_bullish_tickers.append(clean)
 
     all_bearish_tickers = []
-    for t_list in [distribution_watchlist["Ticker"].tolist() if not distribution_watchlist.empty else [], short_rally_tickers, reentry_short_tickers]:
+    for t_list in [distribution_watchlist["Ticker"].tolist() if not distribution_watchlist.empty else [], short_rally_tickers]:
         for t in t_list:
             clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
             if clean and clean not in all_bearish_tickers:
@@ -1588,10 +1588,22 @@ def print_daily_scan(
     bullish_export_str = ",".join(all_bullish_tickers)
     bearish_export_str = ",".join(all_bearish_tickers)
 
+    clean_reentry_long = []
+    for t in reentry_long_tickers:
+        clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
+        if clean and clean not in clean_reentry_long:
+            clean_reentry_long.append(clean)
+
+    clean_reentry_short = []
+    for t in reentry_short_tickers:
+        clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
+        if clean and clean not in clean_reentry_short:
+            clean_reentry_short.append(clean)
+
     print("###Bullish_Stocks," + bullish_export_str + ",") if bullish_export_str else print("###Bullish_Stocks,")
     print("###Bearish_Stocks," + bearish_export_str + ",") if bearish_export_str else print("###Bearish_Stocks,")
-    reentry_long_str = ",".join(reentry_long_tickers)
-    reentry_short_str = ",".join(reentry_short_tickers)
+    reentry_long_str = ",".join(clean_reentry_long)
+    reentry_short_str = ",".join(clean_reentry_short)
     print("###Reentered_Long_Stocks," + reentry_long_str + ",") if reentry_long_str else print("###Reentered_Long_Stocks,")
     print("###Reentered_Short_Stocks," + reentry_short_str + ",") if reentry_short_str else print("###Reentered_Short_Stocks,")
 
