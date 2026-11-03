@@ -856,7 +856,19 @@ def print_daily_scan(
             
         return True
         
-    display_df = display_df[display_df.apply(should_display, axis=1)]
+    display_df = display_df[display_df.apply(should_display, axis=1)].copy()
+
+    # Sort by Trade View order: Bullish (Leading) -> Neutral -> Bearish (Lagging), with strongest breadth at top of each section
+    status_rank_map = {"Leading": 0, "Neutral": 1, "Lagging": 2}
+    display_df["_status_rank"] = display_df["Mapped_Theme"].apply(
+        lambda m: status_rank_map.get(theme_class_map.get(THEME_TRANSLATION.get(str(m), str(m)), "Unknown"), 1)
+    )
+    display_df["_score_num"] = pd.to_numeric(display_df["Weighted_Breadth_Score"], errors="coerce").fillna(0.0)
+    display_df["_tot_stocks"] = pd.to_numeric(display_df["Total_Stocks"], errors="coerce").fillna(0)
+    display_df = display_df.sort_values(
+        ["_status_rank", "_score_num", "_tot_stocks"],
+        ascending=[True, False, False]
+    ).drop(columns=["_status_rank", "_score_num", "_tot_stocks"])
 
     print(f"{'Micro Theme'.ljust(28)} {'Macro Theme'.ljust(16)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'W_Brdth'.rjust(7)} {'ETF_RS'.rjust(6)}   {'Macro State & Movement'.ljust(25)}   {'ETFs'.ljust(20)}   {'Stocks'}")
     print("-" * 145)
