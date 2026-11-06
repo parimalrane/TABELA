@@ -451,6 +451,58 @@ def _load_historical_breadth_nets():
     return nets
 
 
+def _range_data_quality_warning(stocks, blank_jump_pct=5.0, min_lost_near_lows=200):
+    """
+    Data-QA guard for the 52-week-range column that feeds New Highs / New Lows.
+    Blank values are counted as neither a high nor a low, so a sudden jump in
+    blanks (especially among names that were near lows the prior day) silently
+    understates New Lows. Returns a warning string, or "" when data looks sane.
+    """
+    col = "Price as a % of 52 Wk H-L Range"
+    try:
+        from config.runtime_context import context
+        if stocks is None or stocks.empty or col not in stocks.columns:
+            return ""
+        cur_date = str(context.market_date)
+        prev_files = sorted(
+            [p for p in (Path("market_data") / "input_files").rglob("*_stocks.csv")
+             if p.stem.replace("_stocks", "") < cur_date.replace("-", "")],
+            key=lambda p: p.stem,
+        )
+        if not prev_files:
+            return ""
+        prev = pd.read_csv(prev_files[-1])
+        if col not in prev.columns:
+            return ""
+
+        cur_vals = pd.to_numeric(stocks[col], errors="coerce")
+        prev_vals = pd.to_numeric(prev[col], errors="coerce")
+        cur_blank_pct = cur_vals.isna().mean() * 100
+        prev_blank_pct = prev_vals.isna().mean() * 100
+
+        def _clean(df):
+            t = df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper()
+            return t
+
+        cur_s = pd.Series(cur_vals.values, index=_clean(stocks)).groupby(level=0).first()
+        prev_s = pd.Series(prev_vals.values, index=_clean(prev)).groupby(level=0).first()
+        common = cur_s.index.intersection(prev_s.index)
+        lost = prev_s.loc[common].notna() & cur_s.loc[common].isna()
+        lost_near_lows = int((lost & (prev_s.loc[common] <= 10)).sum())
+
+        jump = cur_blank_pct - prev_blank_pct
+        if jump >= blank_jump_pct or lost_near_lows >= min_lost_near_lows:
+            return (
+                f"    ! DATA WARNING: 52-wk range blank {cur_blank_pct:.1f}% "
+                f"(prior file {prev_blank_pct:.1f}%, {jump:+.1f} pts); "
+                f"{lost_near_lows} names that were <=10 on prior file are now blank. "
+                f"New Lows are likely UNDERSTATED - verify the source export."
+            )
+    except Exception:
+        pass
+    return ""
+
+
 def _compute_breadth_streaks(nets):
     if len(nets) < 2:
         return []
@@ -622,6 +674,9 @@ def print_macro_weather(stocks, theme_strength_settings):
         parts = [f"{count}{trend}" for trend, count in last_3]
         movement_tag = f"  [ Movement: {' -> '.join(parts)} ]"
     print(f"    > Price Extremes  : {nh} New Highs | {nl} New Lows  [ Net: {net:+} ]{movement_tag}")
+    _qa_warn = _range_data_quality_warning(stocks)
+    if _qa_warn:
+        print(_qa_warn)
     print("========================================================================\n")
 
     return sector_rs_map, legacy_data_list, {"w": (w_pos, w_neg), "m": (m_pos, m_neg), "q": (q_pos, q_neg)}
@@ -1384,7 +1439,7 @@ def print_daily_scan(
             max_rs_s = REENTERED_SHORT.get("MAX_SHORT_RS", 60.0)
             exclude_strong_s = REENTERED_SHORT.get("EXCLUDE_STRONG", True)
 
-            existing_short_keys = set(distribution_watchlist["Ticker"].astype(str).str.replace("*", "").str.strip().upper().tolist()) if distribution_watchlist is not None and not distribution_watchlist.empty else set()
+            existing_short_keys = set(distribution_watchlist["Ticker"].astype(str).str.replace("*", "").str.strip().str.upper().tolist()) if distribution_watchlist is not None and not distribution_watchlist.empty else set()
 
             short_drops = hist_drops_df[hist_drops_df["Type"] == "Dropped Short"].copy()
             if not short_drops.empty and stocks is not None and not stocks.empty:
@@ -1491,7 +1546,8 @@ def print_daily_scan(
             except Exception:
                 pass
         except Exception:
-            pass
+            import traceback
+            print("[WARN] Re-entry scan failed; tracker not saved:\n" + traceback.format_exc(), file=sys.stderr)
 
     bullish_reentry_out = "========================================\n"
     bullish_reentry_out += "BULLISH RE-ENTRY / TURNAROUND ALERTS\n"
@@ -1679,9 +1735,29 @@ def print_daily_scan(
     # =========================================================================
     active_bullish_set = set(all_bullish_tickers)
     active_bearish_set = set(all_bearish_tickers)
-    dropped_bullish_candidates = set(deltas.get("dropped_longs", [])) | prev_mild_longs
+
+    # Re-entry exits: names on yesterday's Re-entered lists that are no longer
+    # Re-entered (or active) today were previously dropped silently (no audit trail).
+    prev_reentered_long = set()
+    prev_reentered_short = set()
+    try:
+        _rd = Path("market_data") / "daily_reports"
+        _cur = str(context.market_date)
+        _prev_reports = sorted([f for f in _rd.rglob("*.txt") if f.stem < _cur])
+        if _prev_reports:
+            for _line in _prev_reports[-1].read_text(encoding="utf-8").splitlines():
+                if _line.startswith("###Reentered_Long_Stocks,"):
+                    prev_reentered_long = {x.strip().upper() for x in _line.replace("###Reentered_Long_Stocks,", "").split(",") if x.strip()}
+                elif _line.startswith("###Reentered_Short_Stocks,"):
+                    prev_reentered_short = {x.strip().upper() for x in _line.replace("###Reentered_Short_Stocks,", "").split(",") if x.strip()}
+    except Exception:
+        pass
+    reentry_exit_long = prev_reentered_long - set(reentry_long_tickers)
+    reentry_exit_short = prev_reentered_short - set(reentry_short_tickers)
+
+    dropped_bullish_candidates = set(deltas.get("dropped_longs", [])) | prev_mild_longs | reentry_exit_long
     dropped_bullish = sorted([t for t in dropped_bullish_candidates if t not in active_bullish_set])
-    dropped_bearish_candidates = set(deltas.get("left_distribution", [])) | prev_mild_shorts
+    dropped_bearish_candidates = set(deltas.get("left_distribution", [])) | prev_mild_shorts | reentry_exit_short
     dropped_bearish = sorted([t for t in dropped_bearish_candidates if t not in active_bearish_set])
 
     prev_leading_etfs = []
