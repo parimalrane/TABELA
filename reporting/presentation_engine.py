@@ -798,24 +798,24 @@ def print_daily_scan(
     print("        + - = 1D Rank Delta")
     print("========================================")
 
-    # --- INJECT MILD STOCKS INTO BREADTH ---
+    # --- INJECT RE-ENTRY STOCKS INTO BREADTH (replacing legacy Mild) ---
     import os
     import json as _json
-    dropped_file = os.path.join(
+    tracker_file_breadth = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "market_data", "dropped_accumulator.json"
+        "market_data", "reentry_tracker.json"
     )
-    accumulated_breadth = {"long_dropped": {}, "short_dropped": {}}
-    if os.path.exists(dropped_file):
+    reentry_breadth = {"long_reentered": {}, "short_reentered": {}}
+    if os.path.exists(tracker_file_breadth):
         try:
-            with open(dropped_file, "r", encoding="utf-8") as _f:
-                loaded = _json.load(_f)
-                if not isinstance(loaded.get("long_dropped", []), list):
-                    accumulated_breadth = loaded
+            with open(tracker_file_breadth, "r", encoding="utf-8") as _f:
+                loaded_tr = _json.load(_f)
+                if isinstance(loaded_tr, dict):
+                    reentry_breadth = loaded_tr
         except Exception:
             pass
 
-    for ticker in accumulated_breadth.get("long_dropped", {}).keys():
+    for ticker in reentry_breadth.get("long_reentered", {}).keys():
         match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
         if not match.empty:
             theme = match.iloc[0].get("Mapped_Theme")
@@ -831,7 +831,7 @@ def print_daily_scan(
                     theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Avg_Strong_RS"] = (c_rs * c_strong + st_rs) / (c_strong + 1)
                     theme_breadth.loc[theme_breadth["Mapped_Theme"] == theme, "Leaders"] = new_val
 
-    for ticker in accumulated_breadth.get("short_dropped", {}).keys():
+    for ticker in reentry_breadth.get("short_reentered", {}).keys():
         match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
         if not match.empty:
             theme = match.iloc[0].get("Mapped_Theme")
@@ -1102,168 +1102,9 @@ def print_daily_scan(
     full_long_list = clean_all_tickers(true_longs)
     full_short_list = clean_all_tickers(distribution_watchlist)
 
-    # --- Accumulated Dropped History (21-Day Expiry + Auto-Purge) ---
-    import json as _json
-    from datetime import datetime, timedelta
-    from config.runtime_context import context
-    from config.config import LONG_ENTRY, SHORT_ENTRY, MILD_LONG_ENTRY, MILD_SHORT_ENTRY, REENTERED_LONG, REENTERED_SHORT
-
-    dropped_file = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "market_data", "dropped_accumulator.json"
-    )
-
-    accumulated = {"long_dropped": {}, "short_dropped": {}}
-    if os.path.exists(dropped_file):
-        try:
-            with open(dropped_file, "r", encoding="utf-8") as _f:
-                loaded = _json.load(_f)
-                if isinstance(loaded.get("long_dropped", []), list):
-                    pass
-                else:
-                    accumulated = loaded
-        except Exception:
-            pass
-
-    current_date_str = str(context.market_date) if hasattr(context, "market_date") else datetime.today().strftime("%Y-%m-%d")
-    current_date = datetime.strptime(current_date_str, "%Y-%m-%d")
-
-    prev_mild_longs = set(accumulated.get("long_dropped", {}).keys())
-    prev_mild_shorts = set(accumulated.get("short_dropped", {}).keys())
-
-    # Add today's drops
-    for t in deltas.get("dropped_longs", []):
-        clean = str(t).replace("*", "").replace("^", "").replace("~", "").strip().upper()
-        if clean:
-            accumulated["long_dropped"][clean] = current_date_str
-
-    for t in deltas.get("left_distribution", []):
-        clean = str(t).replace("*", "").replace("^", "").replace("~", "").strip().upper()
-        if clean:
-            accumulated["short_dropped"][clean] = current_date_str
-
-    min_dropped_long = LONG_ENTRY.get("MIN_DROPPED_WATCH_SCORE", 70.0)
-    max_dropped_dist = SHORT_ENTRY.get("MAX_DROPPED_WATCH_SCORE", 75.0)
-    
-    mild_long_blocked_themes = MILD_LONG_ENTRY.get("BLOCKED_THEMES", ["Lagging", "Micro Laggard"])
-    mild_long_allowed_zacks = MILD_LONG_ENTRY.get("ALLOWED_ZACKS", [1, 2])
-    mild_short_blocked_themes = MILD_SHORT_ENTRY.get("BLOCKED_THEMES", ["Leading", "Micro Leader", "Unclassified Leader"])
-    mild_short_allowed_zacks = MILD_SHORT_ENTRY.get("ALLOWED_ZACKS", [3, 4, 5])
-
-    def clean_accumulator(dropped_dict, active_list_str, is_long=True):
-        active_set = set(t.strip().upper() for t in active_list_str.split(",") if t.strip())
-        cleaned = {}
-        for ticker, date_str in dropped_dict.items():
-            if ticker in active_set:
-                continue
-            max_days = LONG_ENTRY.get("MILD_DAYS", 21) if is_long else SHORT_ENTRY.get("MILD_DAYS", 21)
-            try:
-                date_val = datetime.strptime(date_str, "%Y-%m-%d")
-                days_old = (current_date - date_val).days
-                if days_old <= max_days:
-                    match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
-                    if not match.empty:
-                        r = match.iloc[0]
-                        try:
-                            zacks_val = int(float(pd.to_numeric(r.get("Zacks Rank", 0), errors="coerce")))
-                        except:
-                            zacks_val = 0
-                        
-                        theme_class = str(r.get("Theme_Class", ""))
-                        if is_long:
-                            score = float(pd.to_numeric(r.get("Long_Score", 0), errors="coerce"))
-                            if score < min_dropped_long:
-                                continue
-                            if theme_class in mild_long_blocked_themes:
-                                continue
-                            if zacks_val not in mild_long_allowed_zacks:
-                                continue
-                        else:
-                            score = float(pd.to_numeric(r.get("Short_Score", 0), errors="coerce"))
-                            if score > max_dropped_dist:
-                                continue
-                            if theme_class in mild_short_blocked_themes:
-                                continue
-                            if zacks_val not in mild_short_allowed_zacks:
-                                continue
-                    cleaned[ticker] = date_str
-            except Exception:
-                pass
-        return cleaned
-
-    accumulated["long_dropped"] = clean_accumulator(accumulated["long_dropped"], full_long_list, is_long=True)
-    accumulated["short_dropped"] = clean_accumulator(accumulated["short_dropped"], full_short_list, is_long=False)
-
-    try:
-        os.makedirs(os.path.dirname(dropped_file), exist_ok=True)
-        with open(dropped_file, "w", encoding="utf-8") as _f:
-            _json.dump(accumulated, _f, indent=4)
-    except Exception:
-        pass
-
-    def get_dropped_rows(dropped_dict, max_days=21, min_days=0, is_long_table=True):
-        if not dropped_dict: return [], []
-        rows = []
-        valid_tickers = []
-        for ticker, date_str in dropped_dict.items():
-            try:
-                days_on_drop = (current_date - datetime.strptime(date_str, "%Y-%m-%d")).days
-            except:
-                days_on_drop = 0
-                
-            if not (min_days <= days_on_drop <= max_days):
-                continue
-                
-            match = stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper() == ticker]
-            if not match.empty:
-                valid_tickers.append(ticker)
-                r = match.iloc[0]
-                theme_class = str(r.get("Theme_Class", "Unknown"))
-                spdr = ZACKS_TO_SPDR.get(str(r.get("Sector", "")), "N/A")
-                s_rank = sector_rs_map.get(spdr, 0)
-                
-                display_ticker = ticker
-                if theme_class in ["Unknown", "Unclassified Leader"]: display_ticker = "~" + ticker
-                
-                if is_long_table:
-                    rs_val = pd.to_numeric(r.get("RS_Rating", 0), errors='coerce')
-                    score_val = pd.to_numeric(r.get("Long_Score", 0), errors='coerce')
-                    rows.append({
-                        "Ticker": f" {display_ticker}",
-                        "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
-                        "Status": "Mild",
-                        "Zacks Rank": int(pd.to_numeric(r.get("Zacks Rank", 0), errors='coerce')),
-                        "Long_Score": f"{float(score_val):.2f}",
-                        "RS_Rating": int(rs_val),
-                        "Movement": "NA",
-                        "Days": days_on_drop,
-                        "Sector (Rk)": f"{spdr} ({int(s_rank)})"
-                    })
-                else:
-                    rs_val = pd.to_numeric(r.get("Short_RS_Rating", 0), errors='coerce')
-                    score_val = pd.to_numeric(r.get("Short_Score", 0), errors='coerce')
-                    rows.append({
-                        "Ticker": f" {display_ticker}",
-                        "Mapped_Theme": str(r.get("Mapped_Theme", "Unknown")),
-                        "Status": "Mild",
-                        "Zacks Rank": int(pd.to_numeric(r.get("Zacks Rank", 0), errors='coerce')),
-                        "Short_Score": f"{float(score_val):.2f}",
-                        "Short_RS_Rating": int(rs_val),
-                        "Movement": "NA",
-                        "Days": days_on_drop,
-                        "Sector (Rk)": f"{spdr} ({int(s_rank)})"
-                    })
-        return rows, valid_tickers
-
-    long_mild_days = LONG_ENTRY.get("MILD_DAYS", 21)
-    short_mild_days = SHORT_ENTRY.get("MILD_DAYS", 21)
-
-    mild_long_rows, long_pullback_tickers = get_dropped_rows(accumulated["long_dropped"], max_days=long_mild_days, min_days=0, is_long_table=True)
-    mild_short_rows, short_rally_tickers = get_dropped_rows(accumulated["short_dropped"], max_days=short_mild_days, min_days=0, is_long_table=False)
-
     # --- RADAR CANDIDATES (Emerging Coiling Leaders: RS 85-89, Score >= 85, Zacks 1-2, Vol >= 1.5M) ---
     existing_long_keys = set(t.replace("*", "").replace("~", "").replace("^", "").strip().upper() for t in true_long_tickers)
-    existing_long_keys.update(accumulated.get("long_dropped", {}).keys())
+
 
     radar_mask = (
         (stocks["Theme_Class"].isin(["Leading", "Unclassified Leader"])) &
@@ -1339,14 +1180,12 @@ def print_daily_scan(
                 return sum(1 for rd in _run_dates if s_d <= rd < _cur_d)
 
             # --- Long Re-Entry Scan ---
-            lookback_l = REENTERED_LONG.get("LOOKBACK_DAYS", 21)
-            hold_days_l = REENTERED_LONG.get("HOLD_DAYS", 5)
+            lookback_l = REENTERED_LONG.get("LOOKBACK_DAYS", 50)
             allowed_zacks_l = REENTERED_LONG.get("ALLOWED_ZACKS", [1, 2])
             allowed_themes_l = REENTERED_LONG.get("THEMES", ["Leading", "Unclassified Leader"])
-            price_conf_l = REENTERED_LONG.get("PRICE_CONFIRMATION", True)
             min_price_l = REENTERED_LONG.get("MIN_PRICE", 10.0)
             min_vol_l = REENTERED_LONG.get("MIN_VOLUME", 1_000_000)
-            min_rs_l = REENTERED_LONG.get("MIN_RS", 70.0)
+            min_rs_l = REENTERED_LONG.get("MIN_RS", 0.0)
             exclude_strong_l = REENTERED_LONG.get("EXCLUDE_STRONG", True)
 
             long_drops = hist_drops_df[hist_drops_df["Type"] == "Dropped Long"].copy()
@@ -1354,7 +1193,6 @@ def print_daily_scan(
                 long_drops["_dt"] = pd.to_datetime(long_drops["Date"], errors="coerce")
                 long_drops = long_drops[long_drops["_dt"] < current_date]
                 long_drops["_days"] = long_drops["_dt"].apply(_trading_days_since)
-                long_drops = long_drops[(long_drops["_days"] > 0) & (long_drops["_days"] <= lookback_l)]
                 long_drops = long_drops.sort_values("_dt").drop_duplicates(subset=["Ticker"], keep="last")
 
                 for _, d_row in long_drops.iterrows():
@@ -1386,36 +1224,23 @@ def print_daily_scan(
                     if pd.isna(rs_val) or float(rs_val) < min_rs_l:
                         continue
 
-                    d_price = pd.to_numeric(d_row.get("Last_Close"), errors="coerce")
-                    is_price_conf = False
-                    if pd.notna(d_price) and float(d_price) > 0:
-                        if float(p_val) > float(d_price):
-                            is_price_conf = True
+                    # 50 trading days qualification window:
+                    # Stock must qualify within lookback_l trading days of drop, OR already be actively tracking in reentry_tracker
+                    drop_trading_days = int(d_row["_days"]) if pd.notna(d_row["_days"]) else 999
+                    already_tracked = tkr in reentry_tracker.get("long_reentered", {})
+                    if not (drop_trading_days <= lookback_l or already_tracked):
+                        continue
 
-                    is_hold_valid = False
-                    prior_reentry_date_str = reentry_tracker.get("long_reentered", {}).get(tkr)
-                    if prior_reentry_date_str and hold_days_l > 0:
-                        try:
-                            re_dt = datetime.strptime(prior_reentry_date_str, "%Y-%m-%d")
-                            days_since_reentry = _trading_days_since(re_dt)
-                            if 0 <= days_since_reentry <= hold_days_l:
-                                is_hold_valid = True
-                        except Exception:
-                            pass
+                    # Mark/refresh in tracker
+                    first_reentry_date = reentry_tracker.get("long_reentered", {}).get(tkr, current_date_str)
+                    reentry_tracker.setdefault("long_reentered", {})[tkr] = first_reentry_date
 
-                    # OR condition: Price Confirmation OR Hold Window
-                    if price_conf_l:
-                        if not (is_price_conf or is_hold_valid):
-                            continue
-
-                    if is_price_conf:
-                        reentry_tracker.setdefault("long_reentered", {})[tkr] = current_date_str
-
-                    status_label = "Re-entry" if is_price_conf else "Re-entry (Hold)"
+                    status_label = "Re-entry"
                     disp_tkr = ("~" + tkr) if th_class in ["Unknown", "Unclassified Leader"] else tkr
                     spdr = ZACKS_TO_SPDR.get(str(s_row.get("Sector", "")), "N/A")
                     s_rank = sector_rs_map.get(spdr, 0)
                     score_val = pd.to_numeric(s_row.get("Long_Score", 0), errors="coerce")
+                    d_price = pd.to_numeric(d_row.get("Last_Close"), errors="coerce")
                     d_zacks = str(d_row.get("Zacks_Rank", "-"))
                     d_p_str = f"{float(d_price):.2f}" if pd.notna(d_price) else "-"
 
@@ -1441,14 +1266,12 @@ def print_daily_scan(
                     })
 
             # --- Short Re-Entry Scan ---
-            lookback_s = REENTERED_SHORT.get("LOOKBACK_DAYS", 21)
-            hold_days_s = REENTERED_SHORT.get("HOLD_DAYS", 5)
-            allowed_zacks_s = REENTERED_SHORT.get("ALLOWED_ZACKS", [4, 5])
+            lookback_s = REENTERED_SHORT.get("LOOKBACK_DAYS", 50)
+            allowed_zacks_s = REENTERED_SHORT.get("ALLOWED_ZACKS", [3, 4, 5])
             allowed_themes_s = REENTERED_SHORT.get("THEMES", ["Lagging"])
-            price_conf_s = REENTERED_SHORT.get("PRICE_CONFIRMATION", True)
             min_price_s = REENTERED_SHORT.get("MIN_PRICE", 10.0)
             min_vol_s = REENTERED_SHORT.get("MIN_VOLUME", 1_000_000)
-            max_rs_s = REENTERED_SHORT.get("MAX_SHORT_RS", 60.0)
+            max_rs_s = REENTERED_SHORT.get("MAX_SHORT_RS", 100.0)
             exclude_strong_s = REENTERED_SHORT.get("EXCLUDE_STRONG", True)
 
             existing_short_keys = set(distribution_watchlist["Ticker"].astype(str).str.replace("*", "").str.strip().str.upper().tolist()) if distribution_watchlist is not None and not distribution_watchlist.empty else set()
@@ -1458,7 +1281,6 @@ def print_daily_scan(
                 short_drops["_dt"] = pd.to_datetime(short_drops["Date"], errors="coerce")
                 short_drops = short_drops[short_drops["_dt"] < current_date]
                 short_drops["_days"] = short_drops["_dt"].apply(_trading_days_since)
-                short_drops = short_drops[(short_drops["_days"] > 0) & (short_drops["_days"] <= lookback_s)]
                 short_drops = short_drops.sort_values("_dt").drop_duplicates(subset=["Ticker"], keep="last")
 
                 for _, d_row in short_drops.iterrows():
@@ -1490,36 +1312,23 @@ def print_daily_scan(
                     if pd.isna(s_rs_val) or float(s_rs_val) > max_rs_s:
                         continue
 
-                    d_price = pd.to_numeric(d_row.get("Last_Close"), errors="coerce")
-                    is_price_conf_s = False
-                    if pd.notna(d_price) and float(d_price) > 0:
-                        if float(p_val) < float(d_price):
-                            is_price_conf_s = True
+                    # 50 trading days qualification window:
+                    # Stock must qualify within lookback_s trading days of drop, OR already be actively tracking in reentry_tracker
+                    drop_trading_days_s = int(d_row["_days"]) if pd.notna(d_row["_days"]) else 999
+                    already_tracked_s = tkr in reentry_tracker.get("short_reentered", {})
+                    if not (drop_trading_days_s <= lookback_s or already_tracked_s):
+                        continue
 
-                    is_hold_valid_s = False
-                    prior_reentry_date_str_s = reentry_tracker.get("short_reentered", {}).get(tkr)
-                    if prior_reentry_date_str_s and hold_days_s > 0:
-                        try:
-                            re_dt_s = datetime.strptime(prior_reentry_date_str_s, "%Y-%m-%d")
-                            days_since_reentry_s = _trading_days_since(re_dt_s)
-                            if 0 <= days_since_reentry_s <= hold_days_s:
-                                is_hold_valid_s = True
-                        except Exception:
-                            pass
+                    # Mark/refresh in tracker
+                    first_reentry_date_s = reentry_tracker.get("short_reentered", {}).get(tkr, current_date_str)
+                    reentry_tracker.setdefault("short_reentered", {})[tkr] = first_reentry_date_s
 
-                    # OR condition: Price Confirmation OR Hold Window
-                    if price_conf_s:
-                        if not (is_price_conf_s or is_hold_valid_s):
-                            continue
-
-                    if is_price_conf_s:
-                        reentry_tracker.setdefault("short_reentered", {})[tkr] = current_date_str
-
-                    status_label_s = "Re-entry" if is_price_conf_s else "Re-entry (Hold)"
+                    status_label_s = "Re-entry"
                     disp_tkr = ("~" + tkr) if th_class in ["Unknown", "Unclassified Leader"] else tkr
                     spdr = ZACKS_TO_SPDR.get(str(s_row.get("Sector", "")), "N/A")
                     s_rank = sector_rs_map.get(spdr, 0)
                     score_val = pd.to_numeric(s_row.get("Short_Score", 0), errors="coerce")
+                    d_price = pd.to_numeric(d_row.get("Last_Close"), errors="coerce")
                     d_zacks = str(d_row.get("Zacks_Rank", "-"))
                     d_p_str = f"{float(d_price):.2f}" if pd.notna(d_price) else "-"
 
@@ -1596,13 +1405,11 @@ def print_daily_scan(
         for r_dict in true_longs.to_dict("records"):
             r_dict["Status"] = "Strong"
             bullish_rows.append(r_dict)
-    if mild_long_rows:
-        bullish_rows.extend(mild_long_rows)
     if radar_rows:
         bullish_rows.extend(radar_rows)
 
     bullish_universe_out = "========================================\n"
-    bullish_universe_out += "BULLISH UNIVERSE (Momentum, Pullback & Radar)\n"
+    bullish_universe_out += "BULLISH UNIVERSE (Momentum & Radar)\n"
     bullish_universe_out += "Legend: ~ = Unknown/Unclassified\n"
     bullish_universe_out += "========================================\n"
 
@@ -1611,7 +1418,7 @@ def print_daily_scan(
         cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Long_Score", "RS_Rating", "Movement", "Days", "Sector (Rk)"]
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
-        status_rank_map = {"Strong": 0, "Mild": 1, "Radar": 2}
+        status_rank_map = {"Strong": 0, "Radar": 1}
         bullish_df["_st_rank"] = bullish_df["Status"].map(status_rank_map).fillna(9)
         bullish_df["_score_num"] = pd.to_numeric(bullish_df["Long_Score"], errors="coerce").fillna(0)
         bullish_df = bullish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, False]).drop(columns=["_st_rank", "_score_num"])
@@ -1625,11 +1432,9 @@ def print_daily_scan(
         for r_dict in display_df.to_dict("records"):
             r_dict["Status"] = "Strong"
             bearish_rows.append(r_dict)
-    if mild_short_rows:
-        bearish_rows.extend(mild_short_rows)
 
     bearish_universe_out = "========================================\n"
-    bearish_universe_out += "BEARISH UNIVERSE (Breakdowns & Relief Rallies)\n"
+    bearish_universe_out += "BEARISH UNIVERSE (Active Breakdowns)\n"
     bearish_universe_out += "========================================\n"
 
     if bearish_rows:
@@ -1637,7 +1442,8 @@ def print_daily_scan(
         cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Short_Score", "Short_RS_Rating", "Movement", "Days", "Sector (Rk)"]
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
-        status_rank_map = {"Strong": 0, "Mild": 1}
+        status_rank_map = {"Strong": 0}
+        bullish_df_dummy = bearish_df.copy()
         bearish_df["_st_rank"] = bearish_df["Status"].map(status_rank_map).fillna(9)
         bearish_df["_score_num"] = pd.to_numeric(bearish_df["Short_Score"], errors="coerce").fillna(999)
         bearish_df = bearish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, True]).drop(columns=["_st_rank", "_score_num"])
@@ -1652,14 +1458,14 @@ def print_daily_scan(
 
     print("TRADINGVIEW WATCHLIST EXPORT")
     all_bullish_tickers = []
-    for t_list in [true_long_tickers, long_pullback_tickers, radar_tickers]:
+    for t_list in [true_long_tickers, radar_tickers]:
         for t in t_list:
             clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
             if clean and clean not in all_bullish_tickers:
                 all_bullish_tickers.append(clean)
 
     all_bearish_tickers = []
-    for t_list in [distribution_watchlist["Ticker"].tolist() if not distribution_watchlist.empty else [], short_rally_tickers]:
+    for t_list in [distribution_watchlist["Ticker"].tolist() if not distribution_watchlist.empty else []]:
         for t in t_list:
             clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
             if clean and clean not in all_bearish_tickers:
@@ -1767,9 +1573,9 @@ def print_daily_scan(
     reentry_exit_long = prev_reentered_long - set(reentry_long_tickers)
     reentry_exit_short = prev_reentered_short - set(reentry_short_tickers)
 
-    dropped_bullish_candidates = set(deltas.get("dropped_longs", [])) | prev_mild_longs | reentry_exit_long
+    dropped_bullish_candidates = set(deltas.get("dropped_longs", [])) | reentry_exit_long
     dropped_bullish = sorted([t for t in dropped_bullish_candidates if t not in active_bullish_set])
-    dropped_bearish_candidates = set(deltas.get("left_distribution", [])) | prev_mild_shorts | reentry_exit_short
+    dropped_bearish_candidates = set(deltas.get("left_distribution", [])) | reentry_exit_short
     dropped_bearish = sorted([t for t in dropped_bearish_candidates if t not in active_bearish_set])
 
     prev_leading_etfs = []

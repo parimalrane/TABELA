@@ -8,9 +8,7 @@ from pathlib import Path
 
 from config.config import (
     LONG_ENTRY,
-    SHORT_ENTRY,
-    MILD_LONG_ENTRY,
-    MILD_SHORT_ENTRY
+    SHORT_ENTRY
 )
 from config.runtime_context import context, get_monthly_path
 from reporting.watchlist_delta_engine import load_previous_long_watchlist
@@ -309,25 +307,3 @@ def get_transition_summary(registry: Dict) -> Dict:
     observation = [{"ticker": t, "runs": 1} for t, s in registry.items() if s["tracking_state"] == OBSERVATION]
     distribution = [{"ticker": t, "runs": 1} for t, s in registry.items() if s["tracking_state"] == DISTRIBUTION]
     return {"observation": observation, "distribution": distribution}
-
-
-def meets_mild_long_criteria(row) -> bool:
-    """
-    Check if a stock meets the mild long watchlist criteria.
-    
-    Criteria (config-driven via MILD_LONG_ENTRY):
-    - Must NOT be from lagging themes
-    - Must have Zacks rank 1 or 2
-    """
-    return _meets_criteria(row, MILD_LONG_ENTRY)
-
-
-def meets_mild_short_criteria(row) -> bool:
-    """
-    Check if a stock meets the mild short watchlist criteria.
-    
-    Criteria (config-driven via MILD_SHORT_ENTRY):
-    - Must NOT be from leading themes
-    - Must have Zacks rank 4 or 5
-    """
-    return _meets_criteria(row, MILD_SHORT_ENTRY)

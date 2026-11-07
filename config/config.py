@@ -79,29 +79,8 @@ LONG_ENTRY = {
     "BLOCKED_ZACKS": [3, 4, 5],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
-    "MIN_DROPPED_WATCH_SCORE": 70.0,
-    "MILD_DAYS": 14
 }
 
-
-# ==========================
-# MILD WATCHLIST ENTRY CRITERIA
-# Config-driven filtering for mild watchlist candidates
-# ==========================
-
-MILD_LONG_ENTRY = {
-    # Theme restriction: Long mild stocks must NOT be from lagging themes
-    "BLOCKED_THEMES": ["Lagging"],
-    
-    # Zacks restriction: Long mild stocks must have Zacks rank 1 or 2 only
-    "ALLOWED_ZACKS": [1, 2],
-    
-    # Minimum thresholds (optional - can be more lenient than LONG_ENTRY)
-    "MIN_RS": 70.0,
-    "MIN_LONG_SCORE": 60.0,
-    "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_000_000,
-}
 
 
 # ==========================
@@ -144,24 +123,6 @@ SHORT_ENTRY = {
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 5_000_000,
-    
-    # 2. MILD BEARISH (Relief Rallies)
-    "MAX_DROPPED_WATCH_SCORE": 70.0,
-    "MILD_DAYS": 14
-}
-
-MILD_SHORT_ENTRY = {
-    # Theme restriction: Short mild stocks must NOT be from leading themes
-    "BLOCKED_THEMES": ["Leading", "Unclassified Leader"],
-    
-    # Zacks restriction: Short mild stocks must have Zacks rank 3, 4, or 5 (matches SHORT_ENTRY)
-    "ALLOWED_ZACKS": [3, 4, 5],
-    
-    # Maximum thresholds (optional - can be more lenient than SHORT_ENTRY)
-    "MAX_SHORT_RS": 70.0,
-    "MAX_SHORT_SCORE": 60.0,
-    "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_000_000,
 }
 
 
@@ -173,10 +134,8 @@ MILD_SHORT_ENTRY = {
 # ==========================
 REENTERED_LONG = {
     "LOOKBACK_DAYS": 50,
-    "HOLD_DAYS": 5,
     "ALLOWED_ZACKS": [1, 2],
     "THEMES": ["Leading", "Unclassified Leader"],
-    "PRICE_CONFIRMATION": False,
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
     "MIN_RS": 0.0,
@@ -185,10 +144,8 @@ REENTERED_LONG = {
 
 REENTERED_SHORT = {
     "LOOKBACK_DAYS": 50,
-    "HOLD_DAYS": 5,
     "ALLOWED_ZACKS": [3, 4, 5],
     "THEMES": ["Lagging"],
-    "PRICE_CONFIRMATION": False,
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
     "MAX_SHORT_RS": 100.0,
