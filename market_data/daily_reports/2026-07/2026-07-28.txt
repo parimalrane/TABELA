@@ -53,12 +53,25 @@ Life Sciences Tools          Medical Devices    5    4  136.53   7.11   Leading 
 Pharmaceuticals              Pharma             3    3  134.47   8.02   Leading (4 -> -5)           [XLV] XPH, IHE         LQDA
 Cloud Infrastructure         Cloud Computing    5    3   95.32   9.10   Leading (2 -> -12)          [XLK] CLOU, WCLD       DDOG, NET
 Communications Cloud         Cloud Computing    4    2   77.66   9.10   Leading (2 -> -12)          [XLK] CLOU, FCOM       RNG
-Retail                       Retail            24    4   51.65   4.60   Leading (13 -> -7)          [XLY] XRT              KMX
+Medical Devices              Medical Devices   81   15   73.02   7.11   Leading (6 -> -2)           [XLV] IHI, XHE         #MDT, #ABT, #TEM
+Retail                       Retail            24    6   71.22   4.60   Leading (13 -> -7)          [XLY] XRT              KMX, #ORLY, #BBWI
 Insurance                    Insurance         63    7   43.23   9.38   Leading (1 -> -5)           [XLF] KIE, IAK         TRV, ALL
 Discount Retail              Retail            10    2   41.96   4.60   Leading (13 -> -7)          [XLY] XRT              ROST, DLTR
 Footwear/Apparel             Retail            36    3   28.98   4.60   Leading (13 -> -7)          [XLY] XRT              VSXY, CTAS
 Pharma                       Pharma            38    2   16.77   8.02   Leading (4 -> -5)           [XLV] XPH, IHE         NBIX
+SaaS Platform                Software           1    -       -   4.51   Neutral (14 -> -4)          [XLK] IGV, XSW         HUBS
+Cybersecurity                Software          13    -       -   4.51   Neutral (14 -> -4)          [XLK] CIBR, BUG        S, OKTA, FTNT
+Developer Infrastructure     Software           3    -       -   4.51   Neutral (14 -> -4)          [XLK] IGV, CLOU        GTLB
+Digital Assets Infrastruct.. Software           8    -       -   4.51   Neutral (14 -> -4)          [XLK] BITQ, DAPP       #COIN
+Digital Health               Software           1    -       -   4.51   Neutral (14 -> -4)          [XLK] IGV, XSW         HNGE
+Software                     Software         179    -       -   4.51   Neutral (14 -> -4)          [XLK] IGV, XSW         U, PENG, FIG, IOT, TRI, NTNX, PATH,
+                                                                                                                           #ADBE, #MSFT, #VISN
+Copper Mining                Copper Mining      8    -       -  -0.99   Neutral (28 -> +3)          [XLB] COPX             #FCX
+Agribusiness                 Agribusiness      10    -       -   3.52   Neutral (19 -> +8)          [XLB] MOO, VEGI        ADM
+REITs                        REITs            118    -       -   3.60   Neutral (18 -> +5)          [XLRE] VNQ, IYR        AHR
+Transportation/Shipping      Transportation..  54    -       -   1.70   Neutral (24 -> +2)          [XLI] IYT, BDRY        WERN
 Exploration                  Exploration       69    -       -   3.89   Neutral (17 -> +8)          [XLE] XOP, IEO         NESR
+Communication Infrastructure Telecom            1    -       -  -1.74   Neutral (29 -> -2)          [XLC] IYZ, VOX         BAND
 AI Infrastructure            Artificial Int..   6    5  123.88  -7.87   Lagging (38 -> -2)          [XLK] AIQ, BOTZ        #SMCI
 Gold Mining                  Gold Mining       30   12  113.78  -5.71   Lagging (35 -> +1)          [XLB] GDX, GDXJ        #B, #NEM, #VALE
 Semiconductors               Semiconductors    47   16  103.44 -13.82   Lagging (41 -> +6)          [XLK] SMH, SOXX        #SWKS
@@ -72,56 +85,89 @@ Wireless Chips               Semiconductors     2    1   49.44 -13.82   Lagging 
 BULLISH UNIVERSE (Strong, Re-entry & Radar)
 Legend: ~ = Unknown/Unclassified
 ========================================
-Ticker         Mapped_Theme   Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
-   RNG Communications Cloud   Strong           2      98.18         99       +1     2    XLK (10)
-  LQDA      Pharmaceuticals   Strong           1      96.76         98       -1    10     XLV (1)
-  AVTR  Life Sciences Tools   Strong           2      96.68         99       NA     1     XLV (1)
-   THC  Healthcare Services   Strong           2      96.47         99       NA     1     XLV (1)
-  DDOG Cloud Infrastructure   Strong           1      95.18         94       NA     1    XLK (10)
-   TRV            Insurance   Strong           1      94.20         92       -1     3     XLF (3)
-  VSXY     Footwear/Apparel   Strong           1      93.57         97       NA     1    XLY (11)
-   ALL            Insurance   Strong           2      93.00         90       NA     1     XLF (3)
-  CTAS     Footwear/Apparel   Strong           2      92.97         96       NA     1    XLY (11)
-  PGNY  Healthcare Services   Strong           1      92.87         93       -6    13     XLV (1)
-  BLFS  Life Sciences Tools   Strong           1      91.88         91       NA     1     XLV (1)
-   KMX               Retail   Strong           2      91.77         94       NA     1    XLY (11)
-  ROST      Discount Retail   Strong           2      89.37         90       NA     1    XLY (11)
-  NBIX               Pharma Re-entry           2      86.56         81       NA     4     XLV (1)
-  OSCR  Healthcare Services Re-entry           1      83.87         78       NA     2     XLF (3)
-   NET Cloud Infrastructure Re-entry           2      83.18         74       NA     4    XLK (10)
-   HUM  Healthcare Services Re-entry           1      67.07         50       NA     1     XLV (1)
-  DLTR      Discount Retail    Radar           2      86.37         85       NA     1    XLY (11)
+Ticker                 Mapped_Theme   Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
+   RNG         Communications Cloud   Strong           2      98.18         99       +1     2    XLK (10)
+  LQDA              Pharmaceuticals   Strong           1      96.76         98       -1    10     XLV (1)
+  AVTR          Life Sciences Tools   Strong           2      96.68         99       NA     1     XLV (1)
+   THC          Healthcare Services   Strong           2      96.47         99       NA     1     XLV (1)
+  DDOG         Cloud Infrastructure   Strong           1      95.18         94       NA     1    XLK (10)
+   TRV                    Insurance   Strong           1      94.20         92       -1     3     XLF (3)
+  VSXY             Footwear/Apparel   Strong           1      93.57         97       NA     1    XLY (11)
+   ALL                    Insurance   Strong           2      93.00         90       NA     1     XLF (3)
+  CTAS             Footwear/Apparel   Strong           2      92.97         96       NA     1    XLY (11)
+  PGNY          Healthcare Services   Strong           1      92.87         93       -6    13     XLV (1)
+  BLFS          Life Sciences Tools   Strong           1      91.88         91       NA     1     XLV (1)
+   KMX                       Retail   Strong           2      91.77         94       NA     1    XLY (11)
+  ROST              Discount Retail   Strong           2      89.37         90       NA     1    XLY (11)
+  HUBS                SaaS Platform Re-entry           1      94.10         98       NA     5    XLK (10)
+   FIG                     Software Re-entry           2      93.50         97       NA     8    XLK (10)
+   TRI                     Software Re-entry           2      92.90         96       NA     5    XLK (10)
+    PD                     Software Re-entry           2      92.30         95       NA     5    XLK (10)
+  NTNX                     Software Re-entry           1      92.30         95       NA     5    XLK (10)
+   IOT                     Software Re-entry           2      91.10         93       NA     5    XLK (10)
+  GTLB     Developer Infrastructure Re-entry           1      89.30         90       NA     8    XLK (10)
+  OKTA                Cybersecurity Re-entry           2      88.70         89       NA     8    XLK (10)
+   LTH    Leisure and Entertainment Re-entry           1      88.45         93       NA     9    XLY (11)
+  PATH                     Software Re-entry           2      87.50         87       NA     5    XLK (10)
+  NBIX                       Pharma Re-entry           2      86.56         81       NA     4     XLV (1)
+  HALO                      Biotech Re-entry           2      84.84         84       NA     1     XLV (1)
+  OSCR          Healthcare Services Re-entry           1      83.87         78       NA     2     XLF (3)
+   NET         Cloud Infrastructure Re-entry           2      83.18         74       NA     4    XLK (10)
+     U                     Software Re-entry           1      82.10         78       NA     8    XLK (10)
+     S                Cybersecurity Re-entry           2      79.70         74       NA     8    XLK (10)
+   AHR                        REITs Re-entry           2      78.41         73       NA     4     XLF (3)
+   HUM          Healthcare Services Re-entry           1      67.07         50       NA     1     XLV (1)
+   ADM                 Agribusiness Re-entry           2      65.15         51       NA     2     XLP (4)
+  HNGE               Digital Health Re-entry           1      56.30         35       NA     8     XLV (1)
+  NVCR                      Biotech Re-entry           2      50.64         27       NA     1     XLV (1)
+  NESR                  Exploration Re-entry           1      43.23         14       NA     7     XLE (2)
+  WERN      Transportation/Shipping Re-entry           2      40.97         13       NA     3     XLI (7)
+  PENG                     Software Re-entry           1      38.90          6       NA     8    XLK (10)
+  BAND Communication Infrastructure Re-entry           2      31.16          1       NA    11    XLK (10)
+  DLTR              Discount Retail    Radar           2      86.37         85       NA     1    XLY (11)
 
 ========================================
 BEARISH UNIVERSE (Strong & Re-entry Breakdowns)
 ========================================
-Ticker           Mapped_Theme   Status  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-  QCOM         Wireless Chips   Strong           3       13.39               10       -1     3    XLK (10)
-  SMCI      AI Infrastructure   Strong           3       17.26                9       NA     1    XLK (10)
-   GLW Optical Infrastructure   Strong           3       19.89               20       NA     1    XLK (10)
-  SWKS         Semiconductors   Strong           3       21.19               22       NA     1    XLK (10)
-  META            AI Platform   Strong           3       22.46               17       +3     2    XLK (10)
-  RIVN         Infrastructure   Strong           3       27.67               20       +1     2    XLY (11)
-    TU         Infrastructure   Strong           3       27.67               20       -6     2     XLU (9)
-     B            Gold Mining   Strong           4       28.15               14       NA     1     XLB (6)
-   NEM            Gold Mining   Strong           4       28.80               15       NA     1     XLB (6)
-  TSLA  Autonomous Driving AI Re-entry           4       18.06                1       NA     3    XLY (11)
-  XPEV         Infrastructure Re-entry           3       18.57                6       NA     6    XLY (11)
-  VALE            Gold Mining Re-entry           4       44.40               39       NA     5     XLB (6)
+Ticker                  Mapped_Theme   Status  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+  QCOM                Wireless Chips   Strong           3       13.39               10       -1     3    XLK (10)
+  SMCI             AI Infrastructure   Strong           3       17.26                9       NA     1    XLK (10)
+   GLW        Optical Infrastructure   Strong           3       19.89               20       NA     1    XLK (10)
+  SWKS                Semiconductors   Strong           3       21.19               22       NA     1    XLK (10)
+  META                   AI Platform   Strong           3       22.46               17       +3     2    XLK (10)
+  RIVN                Infrastructure   Strong           3       27.67               20       +1     2    XLY (11)
+    TU                Infrastructure   Strong           3       27.67               20       -6     2     XLU (9)
+     B                   Gold Mining   Strong           4       28.15               14       NA     1     XLB (6)
+   NEM                   Gold Mining   Strong           4       28.80               15       NA     1     XLB (6)
+  TSLA         Autonomous Driving AI Re-entry           4       18.06                1       NA     3    XLY (11)
+  XPEV                Infrastructure Re-entry           3       18.57                6       NA     6    XLY (11)
+  ASTS          Space Infrastructure Re-entry           3       19.20                1       NA     9    XLK (10)
+  VISN                      Software Re-entry           3       24.70                6       NA     2    XLK (10)
+  RKLB          Space Infrastructure Re-entry           4       25.85                2       NA     7     XLI (7)
+  COIN Digital Assets Infrastructure Re-entry           3       26.00                8       NA     2     XLF (3)
+    PL          Space Infrastructure Re-entry           4       26.50                3       NA     5    XLK (10)
+   PDD                      Internet Re-entry           3       27.90               15       NA     1    XLY (11)
+  MSFT                      Software Re-entry           3       31.20               16       NA     2    XLK (10)
+    BA           Aerospace & Defense Re-entry           3       36.75               28       NA     4     XLI (7)
+  NCLH     Leisure and Entertainment Re-entry           3       42.85               38       NA     1    XLY (11)
+  VALE                   Gold Mining Re-entry           4       44.40               39       NA     5     XLB (6)
+  ADBE                      Software Re-entry           3       45.50               38       NA     2    XLK (10)
+   FCX                 Copper Mining Re-entry           3       49.77               51       NA     6     XLB (6)
+  BKNG                      Internet Re-entry           4       58.60               53       NA     1    XLY (11)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,RNG,LQDA,AVTR,THC,DDOG,TRV,VSXY,ALL,CTAS,PGNY,BLFS,KMX,ROST,NBIX,NET,OSCR,HUM,DLTR,
-###Bearish_Stocks,GLW,QCOM,SMCI,SWKS,NEM,B,META,RIVN,TU,XPEV,VALE,TSLA,
-###Reentered_Long_Stocks,NBIX,NET,OSCR,HUM,
-###Reentered_Short_Stocks,XPEV,VALE,TSLA,
+###Bullish_Stocks,RNG,LQDA,AVTR,THC,DDOG,TRV,VSXY,ALL,CTAS,PGNY,BLFS,KMX,ROST,BAND,LTH,U,S,PENG,HNGE,OKTA,FIG,GTLB,NESR,PD,PATH,TRI,IOT,HUBS,NTNX,AHR,NBIX,NET,WERN,ADM,OSCR,HALO,HUM,NVCR,DLTR,
+###Bearish_Stocks,GLW,QCOM,SMCI,SWKS,NEM,B,META,RIVN,TU,ASTS,RKLB,XPEV,FCX,PL,VALE,BA,TSLA,ADBE,MSFT,VISN,COIN,PDD,BKNG,NCLH,
+###Reentered_Long_Stocks,BAND,LTH,U,S,PENG,HNGE,OKTA,FIG,GTLB,NESR,PD,PATH,TRI,IOT,HUBS,NTNX,AHR,NBIX,NET,WERN,ADM,OSCR,HALO,HUM,NVCR,
+###Reentered_Short_Stocks,ASTS,RKLB,XPEV,FCX,PL,VALE,BA,TSLA,ADBE,MSFT,VISN,COIN,PDD,BKNG,NCLH,
 ###Leading_ETF,KIE,CLOU,CRAK,XPH,IHI,XRT,
 ###Lagging_ETF,SMH,AIQ,GDX,PAVE,SIL,URNM,LIT,
 
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,ARX,CBOE,CLMT,DINO,DK,IVZ,MFG,NDAQ,NESR,PBF,PSX,RTX,SCHW,SF,SMFG,SNOW,VLO,WKC,
-###Dropped_Bearish_Stocks,AMZN,BABA,CCL,CVNA,DIS,DKNG,HL,NTDOY,
+###Dropped_Bullish_Stocks,ARX,CBOE,CLMT,DINO,DK,FTNT,IVZ,MFG,NDAQ,PBF,PSX,RTX,SCHW,SF,SMFG,SNOW,VLO,WKC,
+###Dropped_Bearish_Stocks,ABT,AMZN,BABA,BBWI,CCL,CVNA,DIS,DKNG,HL,MDT,NTDOY,ORLY,TEM,
 ###Dropped_Leading_ETF,ITA,KRE,XOP,
 ###Dropped_Lagging_ETF,FDN,
 

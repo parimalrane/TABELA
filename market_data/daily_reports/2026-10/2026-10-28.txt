@@ -47,7 +47,6 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Micro Theme                  Macro Theme      Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Refining & Marketing         Exploration        8    7  125.52   8.52   Leading (5)                 [XLE] CRAK             MPC, CLMT, VLO, PBF, PSX, DK, DINO
 Data Infrastructure          Software           4    3  103.41   6.81   Leading (6)                 [XLK] IGV, CLOU        ESTC, NTAP, MDB
 Exploration                  Exploration       95   19   84.42   8.52   Leading (5)                 [XLE] XOP, IEO         RRC, APA, AR, SM, OVV, PR, PTEN,
                                                                                                                            MTDR, EOG, MUR, NOG, SEI
@@ -56,9 +55,10 @@ Integrated Energy            Exploration        7    3   79.02   8.52   Leading 
 Cybersecurity                Software          13    4   68.41   6.81   Leading (6)                 [XLK] CIBR, BUG        ZS, FTNT
 Healthcare Services          Healthcare        13    4   63.95   1.70   Leading (11)                [XLV] IHI, XBI         CON, OSCR, AVAH
 LNG / Natural Gas Export I.. Natural Gas        1    1   62.38   8.76   Leading (4 -> +10)          [XLE] FCG, UNG         VG
+Refining & Marketing         Exploration        8    3   50.81   8.52   Leading (5)                 [XLE] CRAK             MPC, CLMT, PBF
 Cloud Infrastructure         Cloud Computing    5    2   48.02   8.90   Leading (3 -> +1)           [XLK] CLOU, WCLD       FSLY, SNOW
 Software                     Software         219   22   47.60   6.81   Leading (6)                 [XLK] IGV, XSW         NIQ, DOCU, CNXC, NAVN, EXLS, NTSK,
-                                                                                                                           VNT, FIGR, GEN, CDNS, SAIL
+                                                                                                                           FIGR, VNT, GEN, CDNS, SAIL
 Enterprise Cloud             Cloud Computing    2    1   43.94   8.90   Leading (3 -> +1)           [XLK] CLOU, SKYY       CRM
 Energy                       Exploration       14    2   36.76   8.52   Leading (5)                 [XLE] XOP, IEO         COP
 Life Sciences Tools          Medical Devices    4    1   35.81   2.39   Leading (10)                [XLV] IHI, XHE         TXG
@@ -69,18 +69,31 @@ Medical Devices              Medical Devices  103    3   12.25   2.39   Leading 
 Healthcare                   Healthcare        45    1    7.73   1.70   Leading (11)                [XLV] IHI, XBI         RVTY
 Biotech                      Biotech          109    1    4.28   2.75   Leading (9 -> -6)           [XLV] XBI, IBB         IOVA
 Education                    Software          10    1    1.92   6.81   Leading (6)                 [XLK] IGV, XSW         TAL
+Digital Banking              Banking            2    -       -  -2.46   Neutral (29 -> +2)          [XLF] FINX             #SOFI, #NU
+Materials/Metals             Infrastructure     3    -       -  -2.15   Neutral (27 -> -4)          [XLI] PAVE, IGF        #AA
+GLP-1 Weight Loss            Pharma             3    -       -  -0.26   Neutral (17)                [XLV] XPH, IHE         #NVO
 Discount Retail              Retail            10    -       -  -0.24   Neutral (15 -> +1)          [XLY] XRT              KSS, ROST
-Retail                       Retail            29    -       -  -0.24   Neutral (15 -> +1)          [XLY] XRT              HAS, BBWI, KMX
-Autonomous Driving AI        Artificial Int..   1    -       -  -0.24   Neutral (16 -> -4)          [XLK] AIQ, BOTZ        #TSLA
+Building Materials           Infrastructure    46    -       -  -2.15   Neutral (27 -> -4)          [XLI] PAVE, ITB        #WY, #CX, #CRH, #ROL
+Banking                      Banking          210    -       -  -2.46   Neutral (29 -> +2)          [XLF] KRE, KBE         #HBAN, #RF, #TFC, #FISV, #FHN,
+                                                                                                                           #WFC, #BAC, #FLG, #SCHW, #RKT,
+                                                                                                                           #HDB, #FIS, #BCS
+Retail                       Retail            29    -       -  -0.24   Neutral (15 -> +1)          [XLY] XRT              HAS, BBWI
 Wireless Chips               Semiconductors     2    -       -  -1.10   Neutral (21 -> -3)          [XLK] SMH, SOXX        #QCOM
+Infrastructure               Infrastructure   208    -       -  -2.15   Neutral (27 -> -4)          [XLI] PAVE, IGF        #AES, #NEE, #ENB, #F, #BCE, #PCG,
+                                                                                                                           #XEL, #SO, #NI, #SOLS, #EXC, #EIX,
+                                                                                                                           #CNP, #FE, #IP
+Financial Services           Banking           69    -       -  -2.46   Neutral (29 -> +2)          [XLF] KRE, KCE         #KKR, #APLD, #GLXY, #BX
 Footwear/Apparel             Retail            43    -       -  -0.24   Neutral (15 -> +1)          [XLY] XRT              FIGS
 Optical Networking           Semiconductors     8    -       -  -1.10   Neutral (21 -> -3)          [XLK] SMH, IYW         #COHR
+Leisure and Entertainment    Internet          52    -       -  -1.27   Neutral (24 -> +3)          [XLC] FDN              TH, CNK
+Industrial Automation        Infrastructure    46    -       -  -2.15   Neutral (27 -> -4)          [XLI] ROBO, BOTZ       #CNH
 Semiconductors               Semiconductors    47    -       -  -1.10   Neutral (21 -> -3)          [XLK] SMH, SOXX        #ON, #SWKS
+Telecom                      Telecom           25    -       -  -0.82   Neutral (19 -> -4)          [XLC] IYZ, VOX         #ERIC
 Silver Mining                Silver Mining      6    6  155.02  -6.58   Lagging (40 -> -1)          [XLB] SIL, SILJ        #AG, #HL
 Aerospace & Defense          Aerospace & De..  41   21  143.67  -3.75   Lagging (35 -> +3)          [XLI] ITA, XAR         #BA
 Space Infrastructure         Aerospace & De..   6    4  118.06  -3.75   Lagging (35 -> +3)          [XLI] ARKX, ITA        #LUNR, #PL, #RKLB, #ASTS
-REITs                        REITs            134   33   96.91  -2.92   Lagging (31 -> +4)          [XLRE] VNQ, IYR        #ARR
-Transportation/Shipping      Transportation..  60   18   95.99  -3.44   Lagging (34 -> -5)          [XLI] IYT, BDRY        #AAL
+REITs                        REITs            134   37  106.41  -2.92   Lagging (31 -> +4)          [XLRE] VNQ, IYR        #ARR, #VMRK, #O, #BN, #PLD
+Transportation/Shipping      Transportation..  60   20  101.94  -3.44   Lagging (34 -> -5)          [XLI] IYT, BDRY        #AAL, #UPS, #LUV
 Nuclear Infrastructure       Uranium Mining     3    2   66.08  -3.40   Lagging (33 -> -1)          [XLU] NLR, URNM        #VST
 Transportation Platform      Transportation..   1    1   54.07  -3.44   Lagging (34 -> -5)          [XLI] IYT              #UBER
 Agribusiness                 Agribusiness      11    2   38.17  -4.33   Lagging (36 -> +4)          [XLB] MOO, VEGI        #MOS
@@ -123,34 +136,47 @@ Ticker                            Mapped_Theme   Status  Zacks Rank Long_Score  
  ~FIGS                        Footwear/Apparel   Strong           2      81.21         99       NA     1     XLY (6)
     BP                       Integrated Energy Re-entry           1      84.23         87       NA    31     XLE (1)
   HUBS                           SaaS Platform Re-entry           2      84.12         88       NA     5     XLK (3)
-   PSX                    Refining & Marketing Re-entry           1      82.93         84       NA    26     XLE (1)
+   PSX                    Refining & Marketing Re-entry           1      82.93         84       NA     1     XLE (1)
   SNPS                                Software Re-entry           1      82.52         87       NA     8     XLK (3)
    TXG                     Life Sciences Tools Re-entry           2      81.13         89       NA     4     XLV (2)
   ILMN                             Diagnostics Re-entry           2      80.53         88       NA     4     XLV (2)
    CRM                        Enterprise Cloud Re-entry           2      80.29         80       NA     6     XLK (3)
    MDB                     Data Infrastructure Re-entry           1      79.92         81       NA    23     XLK (3)
-  AVAH                     Healthcare Services Re-entry           2      79.35         86       NA    29     XLV (2)
+  AVAH                     Healthcare Services Re-entry           2      79.35         86       NA    36     XLV (2)
   ISRG                         Medical Devices Re-entry           2      78.63         84       NA     7     XLV (2)
   FSLY                    Cloud Infrastructure Re-entry           2      78.39         76       NA    47     XLK (3)
-  DINO                    Refining & Marketing Re-entry           1      78.23         77       NA    26     XLE (1)
+  DINO                    Refining & Marketing Re-entry           1      78.23         77       NA     1     XLE (1)
    VNT                                Software Re-entry           2      77.72         79       NA    55     XLK (3)
   PATH                                Software Re-entry           2      76.52         77       NA     1     XLK (3)
   FROG                Developer Infrastructure Re-entry           2      75.72         74       NA    16     XLK (3)
  ~URBN                        Footwear/Apparel Re-entry           2      75.31         90       NA     3     XLY (6)
+   ADI                          Wireless Chips Re-entry           2      73.28         80       NA    17     XLK (3)
   NTAP                     Data Infrastructure Re-entry           1      71.32         80       NA     9     XLK (3)
-   VLO                    Refining & Marketing Re-entry           1      69.23         62       NA    26     XLE (1)
    SEI                             Exploration Re-entry           1      68.03         60       NA    26     XLE (1)
   CDNS                                Software Re-entry           2      68.02         62       NA     9     XLK (3)
   SNOW                    Cloud Infrastructure Re-entry           2      67.59         58       NA    25     XLK (3)
-  CLMT                    Refining & Marketing Re-entry           2      63.13         51       NA    26     XLE (1)
-    DK                    Refining & Marketing Re-entry           1      61.93         49       NA    26     XLE (1)
+  ENTG                 Semiconductor Equipment Re-entry           2      67.28         70       NA    15     XLK (3)
+  CLMT                    Refining & Marketing Re-entry           2      63.13         51       NA    13     XLE (1)
+   ASX                          Semiconductors Re-entry           1      63.08         63       NA    14     XLK (3)
+    DK                    Refining & Marketing Re-entry           1      61.93         49       NA     1     XLE (1)
    GEN                                Software Re-entry           2      61.72         64       NA    28     XLK (3)
+   CNK               Leisure and Entertainment Re-entry           1      61.67         60       NA    21     XLY (6)
+   TXN                          Semiconductors Re-entry           1      61.18         84       NA    17     XLK (3)
   FTNT                           Cybersecurity Re-entry           2      58.32         45       NA     9     XLK (3)
-   PBF                    Refining & Marketing Re-entry           1      57.73         42       NA    26     XLE (1)
-  TWLO                    Communications Cloud Re-entry           2      52.79         35       NA     8     XLK (3)
+   PBF                    Refining & Marketing Re-entry           1      57.73         42       NA     4     XLE (1)
+   HPE                              AI Servers Re-entry           2      53.49         46       NA    22     XLK (3)
+  TWLO                    Communications Cloud Re-entry           2      52.79         35       NA    30     XLK (3)
+   TSM                                 Foundry Re-entry           1      51.18         44       NA    15     XLK (3)
   PRCH                    Insurance Technology Re-entry           1      51.12         33       NA    30     XLK (3)
-  OSCR                     Healthcare Services Re-entry           1      49.95         37       NA    36     XLF (7)
+  OSCR                     Healthcare Services Re-entry           1      49.95         37       NA    66     XLF (7)
+  NVDA                         AI Accelerators Re-entry           2      43.29         29       NA    26     XLK (3)
+   MXL                          Semiconductors Re-entry           1      36.18         19       NA    26     XLK (3)
    TAL                               Education Re-entry           1      35.12          8       NA    10     XLY (6)
+   STX                            Data Storage Re-entry           2      28.78          5       NA    22     XLK (3)
+   TER                   Semiconductor Testing Re-entry           2      28.28          5       NA    22     XLK (3)
+    TH               Leisure and Entertainment Re-entry           2      27.47          3       NA    23     XLY (6)
+  ONTO                 Semiconductor Equipment Re-entry           2      27.18          4       NA    49     XLK (3)
+  RMBS                          Semiconductors Re-entry           1      25.58         13       NA    22     XLK (3)
   FIGR                                Software Re-entry           1      19.32          5       NA    39     XLK (3)
    CVX                       Integrated Energy    Radar           1      85.33         88       NA     1     XLE (1)
 
@@ -169,26 +195,91 @@ Ticker            Mapped_Theme   Status  Zacks Rank Short_Score  Short_RS_Rating
   LUNR    Space Infrastructure   Strong           5       25.43               10        0     2    XLI (10)
   UBER Transportation Platform   Strong           4       26.45               22       NA     1     XLK (3)
    VST  Nuclear Infrastructure   Strong           3       28.93               35       NA     1     XLU (8)
-  ASTS    Space Infrastructure Re-entry           3       12.23                2       NA    10     XLK (3)
+  ASTS    Space Infrastructure Re-entry           3       12.23                2       NA    17     XLK (3)
+   CDE             Gold Mining Re-entry           3       15.14               12       NA     9     XLB (4)
+    AA        Materials/Metals Re-entry           3       15.60               17       NA    40    XLI (10)
+  ONON        Footwear/Apparel Re-entry           3       16.94               17       NA    22     XLY (6)
+    NU         Digital Banking Re-entry           3       18.98               11       NA    44     XLF (7)
+   HDB                 Banking Re-entry           3       18.98               11       NA     6     XLF (7)
+   RKT                 Banking Re-entry           4       20.63               12       NA    44     XLF (7)
+  CPRI        Footwear/Apparel Re-entry           3       20.74               19       NA    22     XLY (6)
+   CRH      Building Materials Re-entry           3       21.25               18       NA    30    XLI (10)
+  APLD      Financial Services Re-entry           5       21.98               11       NA    29     XLF (7)
+  TSCO                  Retail Re-entry           3       22.14               15       NA    40     XLY (6)
+    IP          Infrastructure Re-entry           3       22.75               28       NA    30     XLB (4)
+   NVO       GLP-1 Weight Loss Re-entry           3       23.23               19       NA    15     XLV (2)
+   KKR      Financial Services Re-entry           3       23.83               20       NA    44     XLF (7)
+    BX      Financial Services Re-entry           3       24.28               23       NA     4     XLF (7)
+  SCHW                 Banking Re-entry           3       24.48               21       NA    14     XLF (7)
+   KGC             Gold Mining Re-entry           4       24.49               21       NA     9     XLB (4)
+   ROL      Building Materials Re-entry           5       24.80               15       NA    30     XLK (3)
+   FLG                 Banking Re-entry           4       24.98               11       NA     8     XLF (7)
+  META             AI Platform Re-entry           3       25.29               26       NA     3     XLK (3)
+   FIS                 Banking Re-entry           4       26.28               13       NA     4     XLK (3)
+   EQX             Gold Mining Re-entry           4       26.34               20       NA     9     XLB (4)
+  GLXY      Financial Services Re-entry           3       26.43               24       NA    45     XLF (7)
+  SOFI         Digital Banking Re-entry           3       26.78               23       NA    44     XLF (7)
+   BCE          Infrastructure Re-entry           3       28.30               25       NA    30     XLU (8)
+   TJX         Discount Retail Re-entry           3       28.54               31       NA    24     XLY (6)
+   AEO        Footwear/Apparel Re-entry           3       29.29               36       NA    33     XLY (6)
+    MP             Gold Mining Re-entry           5       30.39               17       NA     1     XLB (4)
+    WY      Building Materials Re-entry           4       30.40               19       NA    44    XLI (10)
+  FISV                 Banking Re-entry           4       30.83               20       NA    44     XLK (3)
+  AVGO       AI Infrastructure Re-entry           3       31.24               39       NA    44     XLK (3)
+   BAC                 Banking Re-entry           4       31.58               25       NA    13     XLF (7)
+   BCS                 Banking Re-entry           4       32.78               23       NA     4     XLF (7)
+   GAP        Footwear/Apparel Re-entry           3       33.19               32       NA    44     XLY (6)
    PLD                   REITs Re-entry           3       33.61               34       NA    47     XLF (7)
+   PCG          Infrastructure Re-entry           4       33.65               24       NA    29     XLU (8)
+     F          Infrastructure Re-entry           4       33.75               28       NA    55     XLY (6)
+   WFC                 Banking Re-entry           3       34.23               36       NA    44     XLF (7)
   VMRK                   REITs Re-entry           3       34.91               36       NA    37     XLF (7)
-   LUV Transportation/Shipping Re-entry           3       36.15               50       NA     4    XLI (10)
-    BN                   REITs Re-entry           5       36.71               28       NA    10     XLF (7)
-     O                   REITs Re-entry           3       37.81               42       NA    10     XLF (7)
+   FHN                 Banking Re-entry           3       35.88               37       NA     9     XLF (7)
+   LUV Transportation/Shipping Re-entry           3       36.15               50       NA    47    XLI (10)
+    CX      Building Materials Re-entry           3       36.20               41       NA    25    XLI (10)
+    BN                   REITs Re-entry           5       36.71               28       NA    14     XLF (7)
+     O                   REITs Re-entry           3       37.81               42       NA    26     XLF (7)
+   EIX          Infrastructure Re-entry           3       38.15               44       NA    22     XLU (8)
+  HBAN                 Banking Re-entry           5       39.63               32       NA    44     XLF (7)
+   TFC                 Banking Re-entry           3       39.78               43       NA    44     XLF (7)
+    GM          Infrastructure Re-entry           3       40.20               51       NA     1     XLY (6)
+  COHR      Optical Networking Re-entry           3       41.03               45       NA     2     XLK (3)
+   AES          Infrastructure Re-entry           3       42.70               51       NA    39     XLU (8)
+     M         Discount Retail Re-entry           3       42.84               53       NA    31     XLY (6)
+   NEE          Infrastructure Re-entry           3       42.90               49       NA    38     XLU (8)
+    RF                 Banking Re-entry           3       43.68               49       NA    14     XLF (7)
+   CNH   Industrial Automation Re-entry           3       45.85               52       NA    47    XLI (10)
+   EXC          Infrastructure Re-entry           3       45.95               56       NA    37     XLU (8)
+    FE          Infrastructure Re-entry           3       46.15               54       NA    54     XLU (8)
+  LRCX Semiconductor Equipment Re-entry           3       46.23               63       NA     3     XLK (3)
+    SO          Infrastructure Re-entry           3       46.60               57       NA    35     XLU (8)
+   UPS Transportation/Shipping Re-entry           3       47.10               63       NA    52    XLI (10)
+   ENB          Infrastructure Re-entry           4       47.60               47       NA    35     XLE (1)
+   XEL          Infrastructure Re-entry           3       48.10               57       NA    27     XLU (8)
+   WMT         Discount Retail Re-entry           3       48.79               66       NA    48     XLY (6)
+    NI          Infrastructure Re-entry           3       49.85               62       NA    35     XLU (8)
+   VFC        Footwear/Apparel Re-entry           3       50.64               65       NA    26     XLY (6)
+   CNP          Infrastructure Re-entry           3       53.30               65       NA    27     XLU (8)
+  SOLS          Infrastructure Re-entry           3       55.25               78       NA    61     XLB (4)
+    ON          Semiconductors Re-entry           3       57.18               76       NA    40     XLK (3)
+  QCOM          Wireless Chips Re-entry           4       57.43               61       NA    50     XLK (3)
+   KMI          Infrastructure Re-entry           3       58.95               76       NA    44     XLE (1)
+  ERIC                 Telecom Re-entry           3       62.69               78       NA    41     XLK (3)
+  SWKS          Semiconductors Re-entry           3       67.38               84       NA    59     XLK (3)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,RRC,APA,ZS,NIQ,AR,SM,DOCU,OVV,PR,COP,PTEN,ESTC,MTDR,MPC,CNXC,NAVN,IOVA,EOG,EQNR,VG,MUR,EXLS,AXGN,CON,NTSK,HAS,BBWI,NOG,KSS,RVTY,FIGS,VNT,FSLY,FIGR,OSCR,BP,PRCH,AVAH,GEN,VLO,SEI,PSX,PBF,DK,DINO,CLMT,SNOW,MDB,FROG,TAL,CDNS,FTNT,NTAP,TWLO,SNPS,ISRG,CRM,HUBS,TXG,ILMN,URBN,PATH,CVX,
-###Bearish_Stocks,LUNR,MOS,RKLB,BA,ARR,AG,PL,AAL,HL,UBER,VST,PLD,VMRK,ASTS,BN,O,LUV,
-###Reentered_Long_Stocks,VNT,FSLY,FIGR,OSCR,BP,PRCH,AVAH,GEN,VLO,SEI,PSX,PBF,DK,DINO,CLMT,SNOW,MDB,FROG,TAL,CDNS,FTNT,NTAP,TWLO,SNPS,ISRG,CRM,HUBS,TXG,ILMN,URBN,PATH,
-###Reentered_Short_Stocks,PLD,VMRK,ASTS,BN,O,LUV,
+###Bullish_Stocks,RRC,APA,ZS,NIQ,AR,SM,DOCU,OVV,PR,COP,PTEN,ESTC,MTDR,MPC,CNXC,NAVN,IOVA,EOG,EQNR,VG,MUR,EXLS,AXGN,CON,NTSK,HAS,BBWI,NOG,KSS,RVTY,FIGS,OSCR,VNT,ONTO,FSLY,FIGR,AVAH,BP,PRCH,TWLO,GEN,NVDA,SEI,MXL,SNOW,TH,MDB,TER,RMBS,HPE,STX,CNK,TXN,ADI,FROG,ENTG,TSM,ASX,CLMT,TAL,NTAP,FTNT,CDNS,SNPS,ISRG,CRM,HUBS,TXG,PBF,ILMN,URBN,DK,PATH,DINO,PSX,CVX,
+###Bearish_Stocks,LUNR,MOS,RKLB,BA,ARR,AG,PL,AAL,HL,UBER,VST,SOLS,SWKS,F,FE,UPS,QCOM,WMT,CNH,LUV,PLD,GLXY,RKT,WY,WFC,TFC,SOFI,NU,KKR,HBAN,GAP,FISV,AVGO,KMI,ERIC,TSCO,AA,ON,AES,NEE,VMRK,EXC,SO,NI,ENB,AEO,M,IP,ROL,BCE,CRH,APLD,PCG,CNP,XEL,VFC,O,CX,TJX,CPRI,EIX,ONON,ASTS,NVO,SCHW,RF,BN,BAC,KGC,CDE,EQX,FHN,FLG,HDB,BCS,BX,FIS,LRCX,META,COHR,MP,GM,
+###Reentered_Long_Stocks,OSCR,VNT,ONTO,FSLY,FIGR,AVAH,BP,PRCH,TWLO,GEN,NVDA,SEI,MXL,SNOW,TH,MDB,TER,RMBS,HPE,STX,CNK,TXN,ADI,FROG,ENTG,TSM,ASX,CLMT,TAL,NTAP,FTNT,CDNS,SNPS,ISRG,CRM,HUBS,TXG,PBF,ILMN,URBN,DK,PATH,DINO,PSX,
+###Reentered_Short_Stocks,SOLS,SWKS,F,FE,UPS,QCOM,WMT,CNH,LUV,PLD,GLXY,RKT,WY,WFC,TFC,SOFI,NU,KKR,HBAN,GAP,FISV,AVGO,KMI,ERIC,TSCO,AA,ON,AES,NEE,VMRK,EXC,SO,NI,ENB,AEO,M,IP,ROL,BCE,CRH,APLD,PCG,CNP,XEL,VFC,O,CX,TJX,CPRI,EIX,ONON,ASTS,NVO,SCHW,RF,BN,BAC,KGC,CDE,EQX,FHN,FLG,HDB,BCS,BX,FIS,LRCX,META,COHR,MP,GM,
 ###Leading_ETF,CLOU,FCG,XOP,IGV,XBI,IHI,
 ###Lagging_ETF,ARKX,MOO,ITA,VNQ,SIL,IYT,NLR,URNM,COPX,LIT,
 
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,ANF,ARHS,BAH,KMX,MNDY,RNG,ROST,SAIL,TALO,~CLF,
-###Dropped_Bearish_Stocks,AMKR,AVGO,B,CDE,COHR,EQX,KGC,META,ON,QCOM,SWKS,TSLA,VALE,
+###Dropped_Bullish_Stocks,ANF,ARHS,BAH,MNDY,RNG,ROST,SAIL,TALO,~CLF,
+###Dropped_Bearish_Stocks,AMKR,B,VALE,
 ###Dropped_Leading_ETF,KIE,XRT,
 ###Dropped_Lagging_ETF,GDX,SMH,AIQ,
 

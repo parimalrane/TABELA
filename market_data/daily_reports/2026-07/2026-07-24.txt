@@ -56,9 +56,16 @@ Biotech                      Biotech           79    6   30.43   2.62   Leading 
 Pharma                       Pharma            39    3   26.76   5.82   Leading (7 -> -1)           [XLV] XPH, IHE         NBIX
 Insurance                    Insurance         66    3   18.30   5.11   Leading (8 -> +3)           [XLF] KIE, IAK         TRV, ALL
 Financial Services           Banking           63    3   17.88   3.10   Leading (10 -> +2)          [XLF] KRE, KCE         IVZ
+REITs                        REITs            119    4   14.76   2.61   Leading (13 -> +7)          [XLRE] VNQ, IYR        RLJ, AHR
 Banking                      Banking          197    6   14.62   3.10   Leading (10 -> +2)          [XLF] KRE, KBE         FOUR, MFG
 Exploration                  Exploration       74    3   14.16   6.46   Leading (4)                 [XLE] XOP, IEO         NESR, FTI
-REITs                        REITs            119    3   11.26   2.61   Leading (13 -> +7)          [XLRE] VNQ, IYR        RLJ
+Space Infrastructure         Aerospace & De..   5    -       -   2.17   Neutral (16 -> -13)         [XLI] ARKX, ITA        #RKLB, #PL, #ASTS
+Communication Infrastructure Telecom            1    -       -  -0.41   Neutral (25 -> -2)          [XLC] IYZ, VOX         BAND
+Cloud Infrastructure         Cloud Computing    5    -       -   2.11   Neutral (17 -> +7)          [XLK] CLOU, WCLD       NET
+Copper Mining                Copper Mining      9    -       -   0.94   Neutral (21 -> -6)          [XLB] COPX             #FCX
+Aerospace & Defense          Aerospace & De..  38    -       -   2.17   Neutral (16 -> -13)         [XLI] ITA, XAR         #BA
+Infrastructure               Infrastructure   184    -       -  -1.17   Neutral (30 -> -3)          [XLI] PAVE, IGF        #XPEV, #TU
+AI Servers                   Artificial Int..   2    2  106.02  -3.87   Lagging (38 -> -7)          [XLK] SMH, AIQ         DELL, HPE
 Media Distribution           Internet          24    9   98.98  -2.90   Lagging (34 -> +5)          [XLC] FDN              #DIS
 Footwear/Apparel             Retail            35   11   95.02  -2.71   Lagging (33 -> +8)          [XLY] XRT              #NKE
 Leisure and Entertainment    Internet          44   13   93.10  -2.90   Lagging (34 -> +5)          [XLC] FDN              #CCL, #DKNG, #NCLH
@@ -70,7 +77,8 @@ E Commerce Infrastructure    Internet           3    2   72.09  -2.90   Lagging 
 Internet                     Internet          28    7   67.71  -2.90   Lagging (34 -> +5)          [XLC] FDN              #BABA, #BKNG, #PDD
 Wireless Chips               Semiconductors     2    1   44.49  -1.70   Lagging (31 -> -12)         [XLK] SMH, SOXX        #QCOM
 Semiconductors               Semiconductors    49    6   35.03  -1.70   Lagging (31 -> -12)         [XLK] SMH, SOXX        ASX
-Memory                       Semiconductors     4    3   30.58  -1.70   Lagging (31 -> -12)         [XLK] DRAM             SNDK, WDC, MU
+Memory                       Semiconductors     4    3   30.58  -1.70   Lagging (31 -> -12)         [XLK] DRAM             WDC, SNDK, MU
+AI Infrastructure            Artificial Int..   6    2   21.40  -3.87   Lagging (38 -> -7)          [XLK] AIQ, BOTZ        CRDO, #SMCI
 Semiconductor Equipment      Semiconductors    25    1    2.74  -1.70   Lagging (31 -> -12)         [XLK] SMH, SOXX        AMAT
 
 ========================================
@@ -95,11 +103,28 @@ Ticker                         Mapped_Theme   Status  Zacks Rank Long_Score  RS_
    ALL                            Insurance   Strong         2.0      87.67         91       NA     1     XLF (3)
   HALO                              Biotech   Strong         2.0      87.31         93       -3     2     XLV (2)
    IVZ                   Financial Services   Strong         2.0      85.81         90       -1     3     XLF (3)
+  OKTA                        Cybersecurity Re-entry         2.0      88.58         99       NA     6     XLK (4)
+  BAND         Communication Infrastructure Re-entry         1.0      87.80         97       NA     9     XLK (4)
+   NET                 Cloud Infrastructure Re-entry         2.0      86.99         93       NA     2     XLK (4)
+     S                        Cybersecurity Re-entry         2.0      86.78         96       NA     6     XLK (4)
+   FIG                             Software Re-entry         2.0      86.78         96       NA     6     XLK (4)
+  ACIW                             Software Re-entry         2.0      86.78         96       NA     6     XLK (4)
+  NTNX                             Software Re-entry         2.0      86.78         96       NA     3     XLK (4)
   NBIX                               Pharma Re-entry         2.0      86.31         88       NA     2     XLV (2)
+  FTNT                        Cybersecurity Re-entry         1.0      86.18         95       NA     6     XLK (4)
+  GTLB             Developer Infrastructure Re-entry         1.0      86.18         95       NA     6     XLK (4)
    AHR                                REITs Re-entry         2.0      83.70         87       NA     2     XLF (3)
+  HNGE                       Digital Health Re-entry         1.0      80.78         86       NA     6     XLV (2)
+   IOT                             Software Re-entry         2.0      78.98         83       NA     3     XLK (4)
+  HUBS                        SaaS Platform Re-entry         1.0      78.38         82       NA     3     XLK (4)
   FOUR                              Banking Re-entry         2.0      76.81         75       NA     2     XLK (4)
   MGTX                              Biotech Re-entry         2.0      74.71         72       NA     7     XLV (2)
+     U                             Software Re-entry         1.0      69.98         68       NA     6     XLK (4)
   NESR                          Exploration Re-entry         1.0      69.92         60       NA     5     XLE (1)
+  PATH                             Software Re-entry         2.0      68.78         66       NA     3     XLK (4)
+   TRI                             Software Re-entry         2.0      66.38         62       NA     3     XLK (4)
+  WERN              Transportation/Shipping Re-entry         2.0      61.30         51       NA     1     XLI (5)
+  PENG                             Software Re-entry         1.0      54.38         42       NA     6     XLK (4)
    FTI                          Exploration    Radar         2.0      85.52         86       NA     1     XLE (1)
    MFG                              Banking    Radar         2.0      85.21         89       NA     1     XLF (3)
 
@@ -123,25 +148,32 @@ Ticker              Mapped_Theme   Status  Zacks Rank Short_Score  Short_RS_Rati
   HIMS           Medical Devices   Strong         3.0       29.75               24       NA     1     XLV (2)
   TSLA     Autonomous Driving AI Re-entry         3.0       14.88                3       NA     1    XLY (11)
    TEM           Medical Devices Re-entry         3.0       16.10                3       NA     1     XLV (2)
+  XPEV            Infrastructure Re-entry         3.0       17.23                4       NA     4    XLY (11)
+    TU            Infrastructure Re-entry         3.0       19.83                8       NA     4     XLU (7)
+  ASTS      Space Infrastructure Re-entry         3.0       21.28                7       NA     7     XLK (4)
   SWKS            Semiconductors Re-entry         3.0       25.35               17       NA     3     XLK (4)
+    PL      Space Infrastructure Re-entry         4.0       30.53               12       NA     3     XLK (4)
+  RKLB      Space Infrastructure Re-entry         4.0       31.18               13       NA     5     XLI (5)
+    BA       Aerospace & Defense Re-entry         3.0       32.98               25       NA     2     XLI (5)
    NEM               Gold Mining Re-entry         4.0       33.95               23       NA     2     XLB (8)
    ABT           Medical Devices Re-entry         3.0       36.25               34       NA     6     XLV (2)
    MDT           Medical Devices Re-entry         4.0       37.70               27       NA     7     XLV (2)
   SMCI         AI Infrastructure Re-entry         3.0       45.43               50       NA     4     XLK (4)
   VALE               Gold Mining Re-entry         4.0       47.60               44       NA     3     XLB (8)
+   FCX             Copper Mining Re-entry         3.0       60.80               69       NA     4     XLB (8)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,DK,PBF,LQDA,CORT,DINO,PGNY,WKC,CLMT,TRV,PSX,VLO,HUM,NVCR,RLJ,ALL,HALO,IVZ,MGTX,NESR,AHR,FOUR,NBIX,MFG,FTI,
-###Bearish_Stocks,QCOM,HIMS,DIS,CCL,NKE,NCLH,HL,DKNG,SHOP,BKNG,B,MAT,PDD,BABA,MDT,ABT,SMCI,SWKS,VALE,NEM,TEM,TSLA,
-###Reentered_Long_Stocks,MGTX,NESR,AHR,FOUR,NBIX,
-###Reentered_Short_Stocks,MDT,ABT,SMCI,SWKS,VALE,NEM,TEM,TSLA,
+###Bullish_Stocks,DK,PBF,LQDA,CORT,DINO,PGNY,WKC,CLMT,TRV,PSX,VLO,HUM,NVCR,RLJ,ALL,HALO,IVZ,BAND,MGTX,U,S,PENG,OKTA,HNGE,FTNT,FIG,ACIW,GTLB,NESR,IOT,TRI,HUBS,NTNX,PATH,NET,AHR,FOUR,NBIX,WERN,MFG,FTI,
+###Bearish_Stocks,QCOM,HIMS,DIS,CCL,NKE,NCLH,HL,DKNG,SHOP,BKNG,B,MAT,PDD,BABA,ASTS,MDT,ABT,RKLB,XPEV,TU,SMCI,FCX,PL,SWKS,VALE,BA,NEM,TEM,TSLA,
+###Reentered_Long_Stocks,BAND,MGTX,U,S,PENG,OKTA,HNGE,FTNT,FIG,ACIW,GTLB,NESR,IOT,TRI,HUBS,NTNX,PATH,NET,AHR,FOUR,NBIX,WERN,
+###Reentered_Short_Stocks,ASTS,MDT,ABT,RKLB,XPEV,TU,SMCI,FCX,PL,SWKS,VALE,BA,NEM,TEM,TSLA,
 ###Leading_ETF,CRAK,XOP,IHI,XPH,KIE,KRE,MOO,XBI,VNQ,
 ###Lagging_ETF,SMH,IHI,FDN,XRT,SIL,GDX,AIQ,URNM,LIT,
 
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,ADM,AMAT,ASX,CF,MU,OSCR,SNDK,WDC,
+###Dropped_Bullish_Stocks,ADM,AMAT,ASX,CF,CRDO,DELL,HPE,MU,OSCR,SNDK,WDC,
 ###Dropped_Bearish_Stocks,ADBE,BBWI,CDE,CHWY,COIN,KGC,MSFT,ORLY,VISN,
 ###Dropped_Leading_ETF,SMH,
 ###Dropped_Lagging_ETF,IGV,BITQ,

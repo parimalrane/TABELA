@@ -135,7 +135,7 @@ SHORT_ENTRY = {
 REENTERED_LONG = {
     "LOOKBACK_DAYS": 50,
     "ALLOWED_ZACKS": [1, 2],
-    "THEMES": ["Leading", "Unclassified Leader"],
+    "THEMES": ["Leading", "Neutral", "Unclassified Leader"],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
     "MIN_RS": 0.0,
@@ -145,7 +145,7 @@ REENTERED_LONG = {
 REENTERED_SHORT = {
     "LOOKBACK_DAYS": 50,
     "ALLOWED_ZACKS": [3, 4, 5],
-    "THEMES": ["Lagging"],
+    "THEMES": ["Lagging", "Neutral"],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
     "MAX_SHORT_RS": 100.0,
