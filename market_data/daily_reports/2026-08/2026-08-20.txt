@@ -48,12 +48,18 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Micro Theme                  Macro Theme      Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Communications Cloud         Cloud Computing    4    1   39.03   9.40   Leading (5 -> +3)           [XLK] CLOU, FCOM       FIVN
+Communications Cloud         Cloud Computing    4    2   71.22   9.40   Leading (5 -> +3)           [XLK] CLOU, FCOM       FIVN, TWLO
+Refining & Marketing         Exploration        8    3   61.52   6.73   Leading (8 -> +2)           [XLE] CRAK             VLO, DINO, DK
+Energy Logistics & Fuel Di.. Exploration        1    1   39.51   6.73   Leading (8 -> +2)           [XLE] XOP, IEO         WKC
 Diagnostics                  Medical Devices    9    1   24.81   4.51   Leading (11 -> -2)          [XLV] IHI, XHE         CDNA
-Biotech                      Biotech           84    3   15.33  11.08   Leading (4 -> -1)           [XLV] XBI, IBB         HALO, RGEN
+Biotech                      Biotech           84    4   16.39  11.08   Leading (4 -> -1)           [XLV] XBI, IBB         HALO, RGEN, NVCR
+Cybersecurity                Software          13    -       -   3.36   Neutral (14 -> -2)          [XLK] CIBR, BUG        OKTA, FTNT, PANW
 Restaurants                  Consumer Staples  25    1   12.25   0.00   Unknown                     [XLY] MENU, PBJ        EAT
-Infrastructure               Infrastructure   182   83  176.02  -2.02   Lagging (43 -> +3)          [XLI] PAVE, IGF        #AES, #CNP, #ENB, #F, #NEE, #NI,
-                                                                                                                           #PPL, #RIVN, #SO
+Software                     Software         190    -       -   3.36   Neutral (14 -> -2)          [XLK] IGV, XSW         PENG, TRI, ACIW, KC, VNT, IOT, BKSY
+Professional Services        Software           3    -       -   3.36   Neutral (14 -> -2)          [XLK] IGV, XSW         VSTS
+Infrastructure               Infrastructure   182   88  187.82  -2.02   Lagging (43 -> +3)          [XLI] PAVE, IGF        #AES, #CNP, #ENB, #F, #NEE, #NI,
+                                                                                                                           #PPL, #RIVN, #SO, #XPEV, #FE, #XEL,
+                                                                                                                           #GPK, #TU
 REITs                        REITs            121   59  165.20  -0.99   Lagging (36 -> +1)          [XLRE] VNQ, IYR        #AGNC, #VICI
 Retail                       Retail            27   14  136.12  -1.70   Lagging (41 -> -7)          [XLY] XRT              #BBWI, #ORLY, #TSCO
 Semiconductors               Semiconductors    45   19  129.15  -1.42   Lagging (39 -> +20)         [XLK] SMH, SOXX        #MCHP, #ON, #SWKS
@@ -68,86 +74,96 @@ Space Infrastructure         Aerospace & De..   6    4  109.30   0.23   Lagging 
 Transportation/Shipping      Transportation..  58   18   92.57  -1.94   Lagging (42 -> +1)          [XLI] IYT, BDRY        #AAL, #UPS
 Digital Banking              Banking            3    2   77.64  -0.54   Lagging (35 -> +15)         [XLF] FINX             #SOFI
 Wireless Chips               Semiconductors     2    1   49.99  -1.42   Lagging (39 -> +20)         [XLK] SMH, SOXX        #QCOM
+Optical Infrastructure       Semiconductors     1    1   12.48  -1.42   Lagging (39 -> +20)         [XLK] SMH, SOXX        #GLW
 
 ========================================
-BULLISH RE-ENTRY / TURNAROUND ALERTS
+BULLISH UNIVERSE (Strong, Re-entry & Radar)
 Legend: ~ = Unknown/Unclassified
 ========================================
-No re-entered bullish candidates today.
+Ticker                         Mapped_Theme   Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
+   EAT                          Restaurants   Strong           2      91.40         94        0     5     XLY (9)
+  HALO                              Biotech   Strong           2      86.81         96        0     4     XLV (2)
+  RGEN                              Biotech   Strong           1      86.21         95       +1     2     XLV (2)
+  FIVN                 Communications Cloud   Strong           1      86.10         97       +1     5     XLK (3)
+  CDNA                          Diagnostics   Strong           1      82.29         97       +2     9     XLV (2)
+  PRGO                      Medical Devices Re-entry           2      79.89         93       NA     5     XLV (2)
+   PBF                 Refining & Marketing Re-entry           1      79.82         90       NA    12     XLE (1)
+   NEO                          Diagnostics Re-entry           2      78.69         91       NA     9     XLV (2)
+  NESR                          Exploration Re-entry           2      76.22         84       NA    24     XLE (1)
+  TWLO                 Communications Cloud Re-entry           1      75.90         80       NA     4     XLK (3)
+   VLO                 Refining & Marketing Re-entry           1      75.62         83       NA    17     XLE (1)
+  ILMN                          Diagnostics Re-entry           2      73.29         82       NA    13     XLV (2)
+  DINO                 Refining & Marketing Re-entry           1      70.22         74       NA    12     XLE (1)
+    DK                 Refining & Marketing Re-entry           1      66.02         67       NA    12     XLE (1)
+   WKC Energy Logistics & Fuel Distribution Re-entry           1      60.02         57       NA    12     XLE (1)
+  NVCR                              Biotech Re-entry           2      41.21         20       NA    18     XLV (2)
 
 ========================================
-BULLISH UNIVERSE (Momentum & Radar)
-Legend: ~ = Unknown/Unclassified
+BEARISH UNIVERSE (Strong & Re-entry Breakdowns)
 ========================================
-Ticker         Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
-   EAT          Restaurants Strong           2      91.40         94        0     5     XLY (9)
-  HALO              Biotech Strong           2      86.81         96        0     4     XLV (2)
-  RGEN              Biotech Strong           1      86.21         95       +1     2     XLV (2)
-  FIVN Communications Cloud Strong           1      86.10         97       +1     5     XLK (3)
-  CDNA          Diagnostics Strong           1      82.29         97       +2     9     XLV (2)
-
-========================================
-BEARISH RE-ENTRY / BREAKDOWN RESUMPTION
-========================================
-No re-entered bearish candidates today.
-
-========================================
-BEARISH UNIVERSE (Active Breakdowns)
-========================================
-Ticker            Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-   GAP        Footwear/Apparel Strong           3        9.95                8       NA     1     XLY (9)
-    CX      Building Materials Strong           3       10.35                9       -2    11     XLI (6)
-  ASTS    Space Infrastructure Strong           3       11.45                8       NA     1     XLK (3)
-   TJX         Discount Retail Strong           3       11.90               11       NA     1     XLY (9)
-   AAL Transportation/Shipping Strong           3       13.01               13      -11     4     XLI (6)
-   WMT         Discount Retail Strong           3       13.20               13       NA     1     XLY (9)
-    PL    Space Infrastructure Strong           3       13.40               11       NA     1     XLK (3)
-   RKT                 Banking Strong           3       13.45               12       NA     1     XLF (5)
-  SOFI         Digital Banking Strong           3       13.45               12       NA     1     XLF (5)
-  RIVN          Infrastructure Strong           3       13.60               14       NA     1     XLY (9)
-    NI          Infrastructure Strong           3       14.90               16       +3    11    XLU (10)
-  QCOM          Wireless Chips Strong           4       16.82                9       +1     2     XLK (3)
-  FISV                 Banking Strong           4       18.15               10       NA     1     XLK (3)
-   UPS Transportation/Shipping Strong           3       18.21               21       -3     4     XLI (6)
-   WFC                 Banking Strong           3       18.65               20       NA     1     XLF (5)
-  VICI                   REITs Strong           3       18.95               21      -14    13     XLF (5)
-   ENB          Infrastructure Strong           3       19.45               23       +1     5     XLE (1)
-   CNP          Infrastructure Strong           3       19.45               23       -1     2    XLU (10)
-     F          Infrastructure Strong           3       20.75               25       -4     4     XLY (9)
-  BBWI                  Retail Strong           3       22.30               27       NA     1     XLY (9)
-    BA     Aerospace & Defense Strong           3       22.50               25       NA     1     XLI (6)
-  HBAN                 Banking Strong           3       22.55               26       NA     1     XLF (5)
-   NEE          Infrastructure Strong           3       22.70               28       +1    10    XLU (10)
-    SO          Infrastructure Strong           3       22.70               28       -2     9    XLU (10)
-  ORLY                  Retail Strong           3       22.95               28       NA     1     XLY (9)
-  TSCO                  Retail Strong           4       23.10               19       NA     1     XLY (9)
-    ON          Semiconductors Strong           3       23.17               28       NA     1     XLK (3)
-   KKR      Financial Services Strong           3       23.85               28       NA     1     XLF (5)
-  MCHP          Semiconductors Strong           3       24.47               30       -4     2     XLK (3)
-   AES          Infrastructure Strong           3       25.30               32       -9     9    XLU (10)
-   TFC                 Banking Strong           3       25.80               31       NA     1     XLF (5)
-   OWL      Financial Services Strong           3       25.80               31       NA     1     XLF (5)
-  GLXY      Financial Services Strong           4       25.95               22       NA     1     XLF (5)
-   KEY                 Banking Strong           3       26.45               32       NA     1     XLF (5)
-  LUNR    Space Infrastructure Strong           3       27.05               32       NA     1     XLI (6)
-   PPL          Infrastructure Strong           4       27.40               26       NA     1    XLU (10)
-    WY      Building Materials Strong           3       28.55               37      -14     5     XLI (6)
-  AGNC                   REITs Strong           3       28.70               36      -12    13     XLF (5)
-  SWKS          Semiconductors Strong           3       29.02               37      -14     2     XLK (3)
+Ticker            Mapped_Theme   Status  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+   GAP        Footwear/Apparel   Strong           3        9.95                8       NA     1     XLY (9)
+    CX      Building Materials   Strong           3       10.35                9       -2    11     XLI (6)
+  ASTS    Space Infrastructure   Strong           3       11.45                8       NA     1     XLK (3)
+   TJX         Discount Retail   Strong           3       11.90               11       NA     1     XLY (9)
+   AAL Transportation/Shipping   Strong           3       13.01               13      -11     4     XLI (6)
+   WMT         Discount Retail   Strong           3       13.20               13       NA     1     XLY (9)
+    PL    Space Infrastructure   Strong           3       13.40               11       NA     1     XLK (3)
+   RKT                 Banking   Strong           3       13.45               12       NA     1     XLF (5)
+  SOFI         Digital Banking   Strong           3       13.45               12       NA     1     XLF (5)
+  RIVN          Infrastructure   Strong           3       13.60               14       NA     1     XLY (9)
+    NI          Infrastructure   Strong           3       14.90               16       +3    11    XLU (10)
+  QCOM          Wireless Chips   Strong           4       16.82                9       +1     2     XLK (3)
+  FISV                 Banking   Strong           4       18.15               10       NA     1     XLK (3)
+   UPS Transportation/Shipping   Strong           3       18.21               21       -3     4     XLI (6)
+   WFC                 Banking   Strong           3       18.65               20       NA     1     XLF (5)
+  VICI                   REITs   Strong           3       18.95               21      -14    13     XLF (5)
+   ENB          Infrastructure   Strong           3       19.45               23       +1     5     XLE (1)
+   CNP          Infrastructure   Strong           3       19.45               23       -1     2    XLU (10)
+     F          Infrastructure   Strong           3       20.75               25       -4     4     XLY (9)
+  BBWI                  Retail   Strong           3       22.30               27       NA     1     XLY (9)
+    BA     Aerospace & Defense   Strong           3       22.50               25       NA     1     XLI (6)
+  HBAN                 Banking   Strong           3       22.55               26       NA     1     XLF (5)
+   NEE          Infrastructure   Strong           3       22.70               28       +1    10    XLU (10)
+    SO          Infrastructure   Strong           3       22.70               28       -2     9    XLU (10)
+  ORLY                  Retail   Strong           3       22.95               28       NA     1     XLY (9)
+  TSCO                  Retail   Strong           4       23.10               19       NA     1     XLY (9)
+    ON          Semiconductors   Strong           3       23.17               28       NA     1     XLK (3)
+   KKR      Financial Services   Strong           3       23.85               28       NA     1     XLF (5)
+  MCHP          Semiconductors   Strong           3       24.47               30       -4     2     XLK (3)
+   AES          Infrastructure   Strong           3       25.30               32       -9     9    XLU (10)
+   TFC                 Banking   Strong           3       25.80               31       NA     1     XLF (5)
+   OWL      Financial Services   Strong           3       25.80               31       NA     1     XLF (5)
+  GLXY      Financial Services   Strong           4       25.95               22       NA     1     XLF (5)
+   KEY                 Banking   Strong           3       26.45               32       NA     1     XLF (5)
+  LUNR    Space Infrastructure   Strong           3       27.05               32       NA     1     XLI (6)
+   PPL          Infrastructure   Strong           4       27.40               26       NA     1    XLU (10)
+    WY      Building Materials   Strong           3       28.55               37      -14     5     XLI (6)
+  AGNC                   REITs   Strong           3       28.70               36      -12    13     XLF (5)
+  SWKS          Semiconductors   Strong           3       29.02               37      -14     2     XLK (3)
+   NKE        Footwear/Apparel Re-entry           3        7.35                4       NA    18     XLY (9)
+  XPEV          Infrastructure Re-entry           4       11.80                2       NA    23     XLY (9)
+   MAT                  Retail Re-entry           3       11.90               11       NA    18     XLY (9)
+   GPK          Infrastructure Re-entry           3       13.60               14       NA     3     XLI (6)
+    TU          Infrastructure Re-entry           4       15.05                7       NA    14    XLU (10)
+    FE          Infrastructure Re-entry           3       25.30               32       NA     7    XLU (10)
+   XEL          Infrastructure Re-entry           3       25.95               33       NA     5    XLU (10)
+  UBER Transportation Platform Re-entry           3       35.11               47       NA     7     XLK (3)
+   GLW  Optical Infrastructure Re-entry           3       58.27               82       NA    15     XLK (3)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,EAT,HALO,RGEN,FIVN,CDNA,
-###Bearish_Stocks,QCOM,ON,CX,PL,NI,TJX,MCHP,ENB,UPS,WMT,GLXY,CNP,ASTS,PPL,NEE,F,SO,AAL,FISV,GAP,KEY,HBAN,TFC,WFC,RIVN,BA,AES,VICI,BBWI,ORLY,WY,AGNC,SWKS,RKT,SOFI,LUNR,TSCO,KKR,OWL,
-###Reentered_Long_Stocks,
-###Reentered_Short_Stocks,
+###Bullish_Stocks,EAT,HALO,RGEN,FIVN,CDNA,NESR,NVCR,VLO,ILMN,WKC,PBF,DK,DINO,NEO,PRGO,TWLO,
+###Bearish_Stocks,QCOM,ON,CX,PL,NI,TJX,MCHP,ENB,UPS,WMT,GLXY,CNP,ASTS,PPL,NEE,F,SO,AAL,FISV,GAP,KEY,HBAN,TFC,WFC,RIVN,BA,AES,VICI,BBWI,ORLY,WY,AGNC,SWKS,RKT,SOFI,LUNR,TSCO,KKR,OWL,XPEV,NKE,MAT,GLW,TU,UBER,FE,XEL,GPK,
+###Reentered_Long_Stocks,NESR,NVCR,VLO,ILMN,WKC,PBF,DK,DINO,NEO,PRGO,TWLO,
+###Reentered_Short_Stocks,XPEV,NKE,MAT,GLW,TU,UBER,FE,XEL,GPK,
 ###Leading_ETF,GDX,SIL,COPX,XBI,CLOU,CRAK,XPH,XOP,IHI,
 ###Lagging_ETF,SMH,PAVE,ARKX,XRT,IYT,KRE,ITA,VNQ,FINX,LIT,
 
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,AVTR,BLFS,EFOR,FSLY,IT,NEO,NESR,NIQ,NTNX,OII,PAY,PAYC,PBF,PRGO,RPD,SNOW,SPT,TTAN,U,
-###Dropped_Bearish_Stocks,CNH,LUV,MOS,PLD,UBER,
+###Dropped_Bullish_Stocks,ACIW,AVTR,BKSY,BLFS,EFOR,FSLY,FTNT,IOT,IT,KC,NIQ,NTNX,OII,OKTA,PANW,PAY,PAYC,PENG,RPD,SNOW,SPT,TRI,TTAN,U,VNT,VSTS,
+###Dropped_Bearish_Stocks,CNH,LUV,MOS,PLD,
 ###Dropped_Leading_ETF,IGV,URNM,
 ###Dropped_Lagging_ETF,MOO,ROBO,KIE,FCG,
 

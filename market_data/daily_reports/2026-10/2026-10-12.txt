@@ -48,7 +48,7 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Micro Theme                  Macro Theme      Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Refining & Marketing         Exploration        8    5  127.99   5.56   Leading (6 -> +1)           [XLE] CRAK             MPC, DINO, VLO, PSX, PBF
+Refining & Marketing         Exploration        8    7  171.11   5.56   Leading (6 -> +1)           [XLE] CRAK             MPC, DINO, VLO, PSX, PBF, DK, CLMT
 Cybersecurity                Software          13    6  119.15   6.64   Leading (4 -> -2)           [XLK] CIBR, BUG        FTNT, RPD
 Data Infrastructure          Software           4    3  113.87   6.64   Leading (4 -> -2)           [XLK] IGV, CLOU        ESTC, MDB, NTAP
 Cloud Infrastructure         Cloud Computing    5    3  103.56   8.41   Leading (3 -> -1)           [XLK] CLOU, WCLD       FSLY, SNOW
@@ -56,106 +56,153 @@ E Commerce Infrastructure    Internet           3    2   89.19   2.29   Leading 
 Developer Infrastructure     Software           3    2   88.73   6.64   Leading (4 -> -2)           [XLK] IGV, CLOU        FROG
 Communications Cloud         Cloud Computing    4    2   78.46   8.41   Leading (3 -> -1)           [XLK] CLOU, FCOM       RNG, TWLO
 Life Sciences Tools          Medical Devices    4    1   39.03   1.33   Leading (11 -> -4)          [XLV] IHI, XHE         TXG
+Software                     Software         226   19   36.11   6.64   Leading (4 -> -2)           [XLK] IGV, XSW         NIQ, NTNX, CDNS, NTSK, SNPS, PATH,
+                                                                                                                           FIGR, BILL, MNDY, VNT, ODD, GEN,
+                                                                                                                           NAVN, RAL
+Professional Services        Software           3    1   34.19   6.64   Leading (4 -> -2)           [XLK] IGV, XSW         VSTS
+Internet                     Internet          33    3   26.71   2.29   Leading (7 -> -1)           [XLC] FDN              GLBE, W, AMZN
 Diagnostics                  Medical Devices    9    1   25.33   1.33   Leading (11 -> -4)          [XLV] IHI, XHE         ILMN
-Software                     Software         226   10   22.68   6.64   Leading (4 -> -2)           [XLK] IGV, XSW         NIQ, NTNX, CDNS, NTSK, SNPS
+Leisure and Entertainment    Internet          50    4   24.14   2.29   Leading (7 -> -1)           [XLC] FDN              LIND, LTH, TH
+Integrated Energy            Exploration        7    1   22.29   5.56   Leading (6 -> +1)           [XLE] XOP, IEO         BP
 Energy                       Exploration       14    1   18.76   5.56   Leading (6 -> +1)           [XLE] XOP, IEO         CVI
 Education                    Software          13    1   18.47   6.64   Leading (4 -> -2)           [XLK] IGV, XSW         TAL
-Leisure and Entertainment    Internet          50    2   15.33   2.29   Leading (7 -> -1)           [XLC] FDN              LIND
-Exploration                  Exploration      100    2    8.81   5.56   Leading (6 -> +1)           [XLE] XOP, IEO         SEI
+Exploration                  Exploration      100    4   15.65   5.56   Leading (6 -> +1)           [XLE] XOP, IEO         SEI, TALO, APA
+LNG / Natural Gas Export I.. Natural Gas        1    1   10.40   1.94   Leading (9)                 [XLE] FCG, UNG         VG
+Media Distribution           Internet          34    1    7.00   2.29   Leading (7 -> -1)           [XLC] FDN              NMAX
 Medical Devices              Medical Devices  102    1    4.22   1.33   Leading (11 -> -4)          [XLV] IHI, XHE         ISRG
+AI Networking                Artificial Int..   3    -       -  -1.70   Neutral (19)                [XLK] AIQ, BOTZ        ANET
 Discount Retail              Retail            10    -       -  -1.51   Neutral (18 -> +1)          [XLY] XRT              KSS
+Silver Mining                Silver Mining      6    -       -  -3.81   Neutral (28 -> -1)          [XLB] SIL, SILJ        #AG
+Nuclear Infrastructure       Uranium Mining     3    1   15.71   0.00   Unknown                     [XLU] NLR, URNM        #VST
 Healthcare                   Healthcare        43    -       -  -0.48   Neutral (13 -> -5)          [XLV] IHI, XBI         CAI
 Consumer Staples             Consumer Staples  75    1    5.47   0.00   Unknown                     [XLP] PBJ, IYK         ELF
+Restaurants                  Consumer Staples  28    1    4.09   0.00   Unknown                     [XLY] MENU, PBJ        EAT
+Biotech                      Biotech          111    -       -  -2.36   Neutral (21 -> -10)         [XLV] XBI, IBB         HALO
+Financial Services           Banking           71   34  162.22  -6.95   Lagging (39 -> -1)          [XLF] KRE, KCE         #GLXY, #KKR, #APLD
 Aerospace & Defense          Aerospace & De..  40   24  161.73  -6.74   Lagging (38 -> -4)          [XLI] ITA, XAR         #BA
-Financial Services           Banking           71   32  152.99  -6.95   Lagging (39 -> -1)          [XLF] KRE, KCE         #GLXY
-Banking                      Banking          208   51   99.89  -6.95   Lagging (39 -> -1)          [XLF] KRE, KBE         #BCS, #FISV, #FLG, #HDB, #TFC
-Transportation/Shipping      Transportation..  61   14   72.86  -5.99   Lagging (36 -> +2)          [XLI] IYT, BDRY        #UPS
+Banking                      Banking          208   57  111.07  -6.95   Lagging (39 -> -1)          [XLF] KRE, KBE         #BCS, #FISV, #FLG, #HDB, #TFC,
+                                                                                                                           #HBAN, #RKT, #KEY, #WFC, #RF, #SCHW
+Space Infrastructure         Aerospace & De..   6    3   77.19  -6.74   Lagging (38 -> -4)          [XLI] ARKX, ITA        #ASTS, #LUNR
+Transportation/Shipping      Transportation..  61   15   76.25  -5.99   Lagging (36 -> +2)          [XLI] IYT, BDRY        #UPS, #LUV
 Agribusiness                 Agribusiness      11    4   70.70  -5.06   Lagging (32 -> +7)          [XLB] MOO, VEGI        #MOS
-Space Infrastructure         Aerospace & De..   6    2   52.21  -6.74   Lagging (38 -> -4)          [XLI] ARKX, ITA        #ASTS
-Semiconductors               Semiconductors    49    6   41.74  -5.26   Lagging (34 -> +13)         [XLK] SMH, SOXX        SMTC, FORM
-Digital Banking              Banking            3    1   41.12  -6.95   Lagging (39 -> -1)          [XLF] FINX             #SOFI
+Digital Banking              Banking            3    2   54.99  -6.95   Lagging (39 -> -1)          [XLF] FINX             #SOFI, #NU
+Semiconductors               Semiconductors    49    7   49.19  -5.26   Lagging (34 -> +13)         [XLK] SMH, SOXX        SMTC, FORM, ASX
+Semiconductor Equipment      Semiconductors    31    5   44.16  -5.26   Lagging (34 -> +13)         [XLK] SMH, SOXX        ENTG
 Optical Networking           Semiconductors     8    1   26.64  -5.26   Lagging (34 -> +13)         [XLK] SMH, IYW         CIEN
 
 ========================================
-BULLISH RE-ENTRY / TURNAROUND ALERTS
+BULLISH UNIVERSE (Strong, Re-entry & Radar)
 Legend: ~ = Unknown/Unclassified
 ========================================
-No re-entered bullish candidates today.
+Ticker              Mapped_Theme   Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
+  FSLY      Cloud Infrastructure   Strong           2      91.63         98        0    19     XLK (2)
+   RNG      Communications Cloud   Strong           2      91.63         98       NA     1     XLK (2)
+  TWLO      Communications Cloud   Strong           2      90.03         97       -1     5     XLK (2)
+  ESTC       Data Infrastructure   Strong           1      89.41         97       -1     9     XLK (2)
+  FTNT             Cybersecurity   Strong           2      89.31         96        0     9     XLK (2)
+  SNOW      Cloud Infrastructure   Strong           2      89.23         94       -2     2     XLK (2)
+   CVI                    Energy   Strong           2      89.22         97       NA     1     XLE (1)
+   RPD             Cybersecurity   Strong           2      88.91         97       NA     1     XLK (2)
+   MPC      Refining & Marketing   Strong           1      88.62         96       -1    13     XLE (1)
+   NIQ                  Software   Strong           2      88.11         94       -1     3     XLK (2)
+  SHOP E Commerce Infrastructure   Strong           2      87.73         98       -5     6     XLK (2)
+  LIND Leisure and Entertainment   Strong           1      87.73         98       -5     4     XLY (8)
+  FROG  Developer Infrastructure   Strong           2      87.51         93       -3     2     XLK (2)
+  DINO      Refining & Marketing   Strong           1      87.42         94        0    13     XLE (1)
+   VLO      Refining & Marketing   Strong           1      87.42         94        0    13     XLE (1)
+  NTNX                  Software   Strong           2      87.11         94       -5     5     XLK (2)
+  CDNS                  Software   Strong           2      87.01         93       -5     7     XLK (2)
+  ILMN               Diagnostics   Strong           2      86.72         99       NA     1     XLV (3)
+   TXG       Life Sciences Tools   Strong           2      86.02         97       NA     1     XLV (3)
+   SEI               Exploration   Strong           1      85.72         92       -7    13     XLE (1)
+   MDB       Data Infrastructure   Strong           1      85.71         90       NA     1     XLK (2)
+   PSX      Refining & Marketing   Strong           1      85.62         91       -4     7     XLE (1)
+   PBF      Refining & Marketing   Strong           1      85.62         91       -6    13     XLE (1)
+   TAL                 Education   Strong           1      85.31         91       -8     5     XLY (8)
+  ISRG           Medical Devices   Strong           2      83.62         93       NA     1     XLV (3)
+  NTSK                  Software   Strong           2      83.11         99       -6     7     XLK (2)
+  SNPS                  Software   Strong           1      81.91         97       -5     7     XLK (2)
+  ~CAI                Healthcare   Strong           2      81.87         98       +2     2     XLV (3)
+ ~CIEN        Optical Networking   Strong           1      81.85         97       -6     3     XLK (2)
+  ~ELF          Consumer Staples   Strong           1      81.63         95       -2     2     XLP (4)
+  NTAP       Data Infrastructure   Strong           1      81.31         96      -10     7     XLK (2)
+ ~SMTC            Semiconductors   Strong           1      80.99         94       -6     3     XLK (2)
+  ~KSS           Discount Retail   Strong           1      80.59         94       -2     4     XLY (8)
+ ~FORM            Semiconductors   Strong           1      80.22         95       -2     2     XLK (2)
+   APA               Exploration Re-entry           1      83.82         88       NA    11     XLE (1)
+  NAVN                  Software Re-entry           2      83.31         86       NA    18     XLK (2)
+  MNDY                  Software Re-entry           2      82.11         84       NA    17     XLK (2)
+     W                  Internet Re-entry           1      81.73         88       NA    28     XLY (8)
+   RAL                  Software Re-entry           2      81.51         83       NA     5     XLK (2)
+  CLMT      Refining & Marketing Re-entry           1      81.42         84       NA    14     XLE (1)
+ ~DELL                AI Servers Re-entry           1      79.62         92       NA     2     XLK (2)
+ ~ENTG   Semiconductor Equipment Re-entry           2      78.52         93       NA     3     XLK (2)
+  ~ASX            Semiconductors Re-entry           1      78.52         93       NA     2     XLK (2)
+ ~ANET             AI Networking Re-entry           2      77.59         91       NA    45     XLK (2)
+ ~HALO                   Biotech Re-entry           2      75.93         90       NA    13     XLV (3)
+    BP         Integrated Energy Re-entry           1      75.52         75       NA    19     XLE (1)
+  AVTR       Life Sciences Tools Re-entry           2      74.92         91       NA    32     XLV (3)
+    DK      Refining & Marketing Re-entry           1      74.82         73       NA    14     XLE (1)
+  AMZN                  Internet Re-entry           2      74.63         77       NA    46     XLY (8)
+   ODD                  Software Re-entry           2      73.71         95       NA    11     XLK (2)
+  PATH                  Software Re-entry           2      72.71         70       NA    57     XLK (2)
+   VNT                  Software Re-entry           2      72.71         70       NA    43     XLK (2)
+  NMAX        Media Distribution Re-entry           2      68.13         67       NA    13     XLY (8)
+  QDEL           Medical Devices Re-entry           2      66.12         88       NA    47     XLV (3)
+  TALO               Exploration Re-entry           1      66.02         60       NA    24     XLE (1)
+    TH Leisure and Entertainment Re-entry           2      64.93         60       NA    11     XLY (8)
+  BILL                  Software Re-entry           1      61.21         50       NA    60     XLK (2)
+   LTH Leisure and Entertainment Re-entry           2      59.63         52       NA    61     XLY (8)
+   GEN                  Software Re-entry           2      27.31          6       NA    16     XLK (2)
+  FIGR                  Software Re-entry           1      25.11         14       NA    27     XLK (2)
 
 ========================================
-BULLISH UNIVERSE (Momentum & Radar)
-Legend: ~ = Unknown/Unclassified
+BEARISH UNIVERSE (Strong & Re-entry Breakdowns)
 ========================================
-Ticker              Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
-  FSLY      Cloud Infrastructure Strong           2      91.63         98        0    19     XLK (2)
-   RNG      Communications Cloud Strong           2      91.63         98       NA     1     XLK (2)
-  TWLO      Communications Cloud Strong           2      90.03         97       -1     5     XLK (2)
-  ESTC       Data Infrastructure Strong           1      89.41         97       -1     9     XLK (2)
-  FTNT             Cybersecurity Strong           2      89.31         96        0     9     XLK (2)
-  SNOW      Cloud Infrastructure Strong           2      89.23         94       -2     2     XLK (2)
-   CVI                    Energy Strong           2      89.22         97       NA     1     XLE (1)
-   RPD             Cybersecurity Strong           2      88.91         97       NA     1     XLK (2)
-   MPC      Refining & Marketing Strong           1      88.62         96       -1    13     XLE (1)
-   NIQ                  Software Strong           2      88.11         94       -1     3     XLK (2)
-  SHOP E Commerce Infrastructure Strong           2      87.73         98       -5     6     XLK (2)
-  LIND Leisure and Entertainment Strong           1      87.73         98       -5     4     XLY (8)
-  FROG  Developer Infrastructure Strong           2      87.51         93       -3     2     XLK (2)
-  DINO      Refining & Marketing Strong           1      87.42         94        0    13     XLE (1)
-   VLO      Refining & Marketing Strong           1      87.42         94        0    13     XLE (1)
-  NTNX                  Software Strong           2      87.11         94       -5     5     XLK (2)
-  CDNS                  Software Strong           2      87.01         93       -5     7     XLK (2)
-  ILMN               Diagnostics Strong           2      86.72         99       NA     1     XLV (3)
-   TXG       Life Sciences Tools Strong           2      86.02         97       NA     1     XLV (3)
-   SEI               Exploration Strong           1      85.72         92       -7    13     XLE (1)
-   MDB       Data Infrastructure Strong           1      85.71         90       NA     1     XLK (2)
-   PSX      Refining & Marketing Strong           1      85.62         91       -4     7     XLE (1)
-   PBF      Refining & Marketing Strong           1      85.62         91       -6    13     XLE (1)
-   TAL                 Education Strong           1      85.31         91       -8     5     XLY (8)
-  ISRG           Medical Devices Strong           2      83.62         93       NA     1     XLV (3)
-  NTSK                  Software Strong           2      83.11         99       -6     7     XLK (2)
-  SNPS                  Software Strong           1      81.91         97       -5     7     XLK (2)
-  ~CAI                Healthcare Strong           2      81.87         98       +2     2     XLV (3)
- ~CIEN        Optical Networking Strong           1      81.85         97       -6     3     XLK (2)
-  ~ELF          Consumer Staples Strong           1      81.63         95       -2     2     XLP (4)
-  NTAP       Data Infrastructure Strong           1      81.31         96      -10     7     XLK (2)
- ~SMTC            Semiconductors Strong           1      80.99         94       -6     3     XLK (2)
-  ~KSS           Discount Retail Strong           1      80.59         94       -2     4     XLY (8)
- ~FORM            Semiconductors Strong           1      80.22         95       -2     2     XLK (2)
-
-========================================
-BEARISH RE-ENTRY / BREAKDOWN RESUMPTION
-========================================
-No re-entered bearish candidates today.
-
-========================================
-BEARISH UNIVERSE (Active Breakdowns)
-========================================
-Ticker            Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-  ASTS    Space Infrastructure Strong           3       16.69               10        0     2     XLK (2)
-  SOFI         Digital Banking Strong           3       17.20               11        0    19     XLF (7)
-   HDB                 Banking Strong           3       17.20               11       +3    19     XLF (7)
-   BCS                 Banking Strong           3       18.70               21        0     4     XLF (7)
-   MOS            Agribusiness Strong           4       23.11                9        0     2     XLB (5)
-  FISV                 Banking Strong           4       23.50               13       -1    19     XLK (2)
-    BA     Aerospace & Defense Strong           4       24.94               25       -1     5    XLI (10)
-   UPS Transportation/Shipping Strong           3       25.82               31        0     3    XLI (10)
-   FLG                 Banking Strong           4       27.75               18        0     5     XLF (7)
-  GLXY      Financial Services Strong           4       28.50               23       +1     3     XLF (7)
-   TFC                 Banking Strong           3       29.20               31       -2     5     XLF (7)
+Ticker            Mapped_Theme   Status  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+  ASTS    Space Infrastructure   Strong           3       16.69               10        0     2     XLK (2)
+  SOFI         Digital Banking   Strong           3       17.20               11        0    19     XLF (7)
+   HDB                 Banking   Strong           3       17.20               11       +3    19     XLF (7)
+   BCS                 Banking   Strong           3       18.70               21        0     4     XLF (7)
+   MOS            Agribusiness   Strong           4       23.11                9        0     2     XLB (5)
+  FISV                 Banking   Strong           4       23.50               13       -1    19     XLK (2)
+    BA     Aerospace & Defense   Strong           4       24.94               25       -1     5    XLI (10)
+   UPS Transportation/Shipping   Strong           3       25.82               31        0     3    XLI (10)
+   FLG                 Banking   Strong           4       27.75               18        0     5     XLF (7)
+  GLXY      Financial Services   Strong           4       28.50               23       +1     3     XLF (7)
+   TFC                 Banking   Strong           3       29.20               31       -2     5     XLF (7)
+   RKT                 Banking Re-entry           4       14.95                6       NA    32     XLF (7)
+   KKR      Financial Services Re-entry           3       18.80               15       NA    32     XLF (7)
+  UBER Transportation Platform Re-entry           3       30.37               38       NA     6     XLK (2)
+   AAL Transportation/Shipping Re-entry           4       30.42               25       NA    42    XLI (10)
+   WFC                 Banking Re-entry           3       30.50               33       NA    32     XLF (7)
+   KEY                 Banking Re-entry           3       30.85               32       NA    32     XLF (7)
+    RF                 Banking Re-entry           3       31.50               33       NA     2     XLF (7)
+   BAC                 Banking Re-entry           4       31.85               32       NA     1     XLF (7)
+  SCHW                 Banking Re-entry           3       32.45               36       NA     2     XLF (7)
+  HBAN                 Banking Re-entry           5       32.65               24       NA    32     XLF (7)
+  LUNR    Space Infrastructure Re-entry           5       33.14               23       NA    33    XLI (10)
+  APLD      Financial Services Re-entry           5       33.85               32       NA    17     XLF (7)
+   LUV Transportation/Shipping Re-entry           3       35.67               50       NA    35    XLI (10)
+  RKLB    Space Infrastructure Re-entry           3       45.29               54       NA    18    XLI (10)
+  MCHP          Semiconductors Re-entry           3       49.03               66       NA    25     XLK (2)
+  QCOM          Wireless Chips Re-entry           4       49.28               51       NA    24     XLK (2)
+    NU         Digital Banking Re-entry           3       55.55               70       NA    32     XLF (7)
+    ON          Semiconductors Re-entry           3       56.83               78       NA    28     XLK (2)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,FSLY,RNG,TWLO,ESTC,FTNT,SNOW,CVI,RPD,MPC,NIQ,SHOP,LIND,FROG,DINO,VLO,NTNX,CDNS,ILMN,TXG,SEI,MDB,PSX,PBF,TAL,ISRG,NTSK,SNPS,CAI,CIEN,ELF,NTAP,SMTC,KSS,FORM,
-###Bearish_Stocks,MOS,FLG,ASTS,GLXY,FISV,SOFI,HDB,BCS,TFC,BA,UPS,
-###Reentered_Long_Stocks,
-###Reentered_Short_Stocks,
+###Bullish_Stocks,FSLY,RNG,TWLO,ESTC,FTNT,SNOW,CVI,RPD,MPC,NIQ,SHOP,LIND,FROG,DINO,VLO,NTNX,CDNS,ILMN,TXG,SEI,MDB,PSX,PBF,TAL,ISRG,NTSK,SNPS,CAI,CIEN,ELF,NTAP,SMTC,KSS,FORM,LTH,BILL,PATH,QDEL,AMZN,ANET,VNT,AVTR,W,FIGR,TALO,BP,NAVN,MNDY,GEN,DK,CLMT,HALO,NMAX,TH,ODD,APA,RAL,ENTG,ASX,DELL,
+###Bearish_Stocks,MOS,FLG,ASTS,GLXY,FISV,SOFI,HDB,BCS,TFC,BA,UPS,AAL,LUV,LUNR,RKT,WFC,NU,KKR,KEY,HBAN,ON,MCHP,QCOM,RKLB,APLD,UBER,RF,SCHW,BAC,
+###Reentered_Long_Stocks,LTH,BILL,PATH,QDEL,AMZN,ANET,VNT,AVTR,W,FIGR,TALO,BP,NAVN,MNDY,GEN,DK,CLMT,HALO,NMAX,TH,ODD,APA,RAL,ENTG,ASX,DELL,
+###Reentered_Short_Stocks,AAL,LUV,LUNR,RKT,WFC,NU,KKR,KEY,HBAN,ON,MCHP,QCOM,RKLB,APLD,UBER,RF,SCHW,BAC,
 ###Leading_ETF,CLOU,IGV,CRAK,XOP,FDN,FCG,IHI,
 ###Lagging_ETF,MOO,KRE,ARKX,FINX,ITA,IYT,SMH,LIT,
 
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,~FIGS,~ILMN,~LITE,~MTSI,~QMCO,~VIAV,
-###Dropped_Bearish_Stocks,AAL,HL,UBER,
+###Dropped_Bullish_Stocks,EAT,GLBE,VG,VSTS,~FIGS,~ILMN,~LITE,~MTSI,~QMCO,~VIAV,
+###Dropped_Bearish_Stocks,AG,HL,VST,
 ###Dropped_Leading_ETF,
 ###Dropped_Lagging_ETF,SIL,URNM,
 
