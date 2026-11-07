@@ -17,7 +17,7 @@ MARKET DATE: 2026-11-04
     Dow Jones (DIA)     +3.10%    +1.61%     +4.33%      -1.03%        +14.74%
 
 [2] STRUCTURAL BREADTH (4,122 Equities)
-    > Price Extremes  : 403 New Highs | 189 New Lows  [ Net: +214 ]  [ Movement: 2↑ -> 2↓ -> 2↑ ]
+    > Price Extremes  : 403 New Highs | 189 New Lows  [ Net: +214 ]
 ========================================================================
 
 ========================================================================
@@ -28,17 +28,17 @@ MARKET DATE: 2026-11-04
 
     Rank Sector            SPDR       1-Wk       1-Mo      1-Qtr        YTD   Strength   Rank Δ(1W)   SPY Ex(1M)   Impact   Status
     -------------------------------------------------------------------------------------------------------------------------------------
-    1    Health Care       XLV      +5.53%    +14.13%    +17.40%    +32.47%      15.22           +1      +14.50%     56.0   LEADING
-    2    Staples           XLP      +5.87%    +14.17%     +8.33%    +23.88%      11.73           +3      +14.54%     40.9   LEADING
-    3    Materials         XLB      +3.93%    +10.32%     +4.09%    +29.28%       9.07           +1      +10.68%     25.6   LEADING
-    4    Financials        XLF      +5.47%    +10.67%     +2.62%    +14.51%       7.60           +3      +11.04%     32.4   IMPROVING
-    5    Real Estate       XLRE     +7.10%    +10.56%     +0.67%    +13.73%       7.22           +4      +10.93%     27.0   IMPROVING
-    6    Discretionary     XLY      +6.07%    +11.17%     +3.62%     +3.51%       7.12            -      +11.54%     32.7   NEUTRAL
+    1    Health Care       XLV      +5.53%    +14.13%    +17.40%    +32.47%      15.22            -      +14.50%     56.0   LEADING
+    2    Staples           XLP      +5.87%    +14.17%     +8.33%    +23.88%      11.73           -1      +14.54%     40.9   LEADING
+    3    Materials         XLB      +3.93%    +10.32%     +4.09%    +29.28%       9.07           -2      +10.68%     25.6   LEADING
+    4    Financials        XLF      +5.47%    +10.67%     +2.62%    +14.51%       7.60           -3      +11.04%     32.4   DETERIORATING
+    5    Real Estate       XLRE     +7.10%    +10.56%     +0.67%    +13.73%       7.22           -4      +10.93%     27.0   DETERIORATING
+    6    Discretionary     XLY      +6.07%    +11.17%     +3.62%     +3.51%       7.12           -5      +11.54%     32.7   DETERIORATING
     7    Energy            XLE      -7.20%     +1.11%     +9.19%    +49.20%       6.68           -6       +1.48%      1.0   DETERIORATING
-    8    Utilities         XLU      +2.64%     +9.49%     -0.45%     +0.92%       4.28            -       +9.86%     20.2   NEUTRAL
-    9    Industrials       XLI      +0.58%     -0.29%     -8.84%    +12.28%      -1.43           +1       +0.08%     -9.6   LAGGING
-    10   Communications    XLC      +1.76%     -4.86%     -5.99%     -5.73%      -3.96           +1       -4.49%    -12.3   LAGGING
-    11   Technology        XLK      -7.59%    -11.67%     -5.45%    +20.66%      -5.75           -8      -11.30%    -44.0   LAGGING
+    8    Utilities         XLU      +2.64%     +9.49%     -0.45%     +0.92%       4.28           -7       +9.86%     20.2   DETERIORATING
+    9    Industrials       XLI      +0.58%     -0.29%     -8.84%    +12.28%      -1.43           -8       +0.08%     -9.6   LAGGING
+    10   Communications    XLC      +1.76%     -4.86%     -5.99%     -5.73%      -3.96           -9       -4.49%    -12.3   LAGGING
+    11   Technology        XLK      -7.59%    -11.67%     -5.45%    +20.66%      -5.75          -10      -11.30%    -44.0   LAGGING
 ========================================================================
 
 ========================================
@@ -48,64 +48,38 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Micro Theme                  Macro Theme      Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Footwear/Apparel             Retail            68   17  100.62   9.07   Leading (3 -> +3)           [XLY] XRT              VFC, FIGS, ANF, CROX, URBN
+Footwear/Apparel             Retail            68   16   95.33   9.07   Leading (3 -> +3)           [XLY] XRT              VFC, FIGS, ANF, CROX
 Medical Devices              Medical Devices  188   31   82.17  14.66   Leading (1 -> +2)           [XLV] IHI, XHE         GKOS, AXGN, GEHC, ISRG
 Retail                       Retail            39    8   71.88   9.07   Leading (3 -> +3)           [XLY] XRT              BBWI, ARHS, HAS
-Healthcare Services          Healthcare        15    4   64.52   6.94   Leading (6 -> -3)           [XLV] IHI, XBI         AVAH, CON, HUM
 Discount Retail              Retail            11    3   63.25   9.07   Leading (3 -> +3)           [XLY] XRT              DG
-Healthcare                   Healthcare        71    5   28.06   6.94   Leading (6 -> -3)           [XLV] IHI, XBI         EHC, CNC
+Healthcare Services          Healthcare        15    3   53.05   6.94   Leading (6 -> -3)           [XLV] IHI, XBI         AVAH, CON
 Biotech                      Biotech          367   16   24.89   6.09   Leading (9 -> -2)           [XLV] XBI, IBB         REPL
-Agribusiness                 Agribusiness      16    1   10.09   3.77   Leading (12 -> -2)          [XLB] MOO, VEGI        #MOS
+Healthcare                   Healthcare        71    4   22.81   6.94   Leading (6 -> -3)           [XLV] IHI, XBI         CNC
 REITs                        REITs            181    2    5.32   5.76   Leading (10 -> -2)          [XLRE] VNQ, IYR        PEB
-Space Infrastructure         Aerospace & De..   6    -       -  -3.27   Neutral (27 -> -3)          [XLI] ARKX, ITA        #LUNR, #PL, #RKLB
-Integrated Energy            Exploration        7    -       -  -2.55   Neutral (24 -> -1)          [XLE] XOP, IEO         BP, CVX, EQNR, SHEL, XOM
-Transportation Platform      Transportation..   1    -       -   3.43   Neutral (13 -> +5)          [XLI] IYT              #UBER
-Materials/Metals             Infrastructure     3    -       -  -1.55   Neutral (22 -> -2)          [XLI] PAVE, IGF        #AA
-Digital Banking              Banking            3    -       -   1.57   Neutral (17 -> +1)          [XLF] FINX             #SOFI
-Social Media Platform        Internet           3    -       -  -3.96   Neutral (28 -> -2)          [XLC] FDN              #PINS
-Nuclear Infrastructure       Uranium Mining     5    1   31.18   0.00   Unknown                     [XLU] NLR, URNM        #VST
-Refining & Marketing         Exploration        8    -       -  -2.55   Neutral (24 -> -1)          [XLE] CRAK             DINO, PSX, MPC
-Energy                       Exploration       24    -       -  -2.55   Neutral (24 -> -1)          [XLE] XOP, IEO         COP, SXC
-Leisure and Entertainment    Internet          80    -       -  -3.96   Neutral (28 -> -2)          [XLC] FDN              #MGM, #LVS
-Exploration                  Exploration      152    -       -  -2.55   Neutral (24 -> -1)          [XLE] XOP, IEO         RRC, APA, EOG, MUR, OVV, PR, SM,
-                                                                                                                           VNOM
-Aerospace & Defense          Aerospace & De..  61    -       -  -3.27   Neutral (27 -> -3)          [XLI] ITA, XAR         LMT, #BA
-Internet                     Internet          48    -       -  -3.96   Neutral (28 -> -2)          [XLC] FDN              #CHWY, #JD
-Restaurants                  Consumer Staples  36    1    9.34   0.00   Unknown                     [XLY] MENU, PBJ        CBRL
-Financial Services           Banking          122    -       -   1.57   Neutral (17 -> +1)          [XLF] KRE, KCE         #APLD, #BX, #KKR
-Transportation/Shipping      Transportation.. 105    -       -   3.43   Neutral (13 -> +5)          [XLI] IYT, BDRY        #LUV, #AAL
-Banking                      Banking          412    -       -   1.57   Neutral (17 -> +1)          [XLF] KRE, KBE         #BAC, #FLG, #WFC, #SCHW, #BCS,
-                                                                                                                           #FIS, #HDB, #RKT
-Building Materials           Infrastructure    69    -       -  -1.55   Neutral (22 -> -2)          [XLI] PAVE, ITB        #CRH, #ROL
-Gold Mining                  Gold Mining      117    -       -   0.65   Neutral (19 -> +4)          [XLB] GDX, GDXJ        #VALE
-Infrastructure               Infrastructure   349    -       -  -1.55   Neutral (22 -> -2)          [XLI] PAVE, IGF        #GM, #IP
+Exploration                  Exploration      152    -       -  -2.55   Neutral (24 -> -1)          [XLE] XOP, IEO         RRC
 Unknown                      Unknown          208    1    2.54   0.00   Unknown                                            REAL
 Semiconductor Equipment      Semiconductors    45   23  147.70 -16.63   Lagging (40 -> -3)          [XLK] SMH, SOXX        #AMKR, #LRCX
 Silver Mining                Silver Mining      8    7  146.66  -4.29   Lagging (31 -> +1)          [XLB] SIL, SILJ        #HL
-Software                     Software         352   92  127.60  -4.25   Lagging (30 -> -2)          [XLK] IGV, XSW         #CSGP, #DT, #GOOGL, #IONQ, #ORCL,
-                                                                                                                           #SE, EXLS, NIQ, PSN
 AI Infrastructure            Artificial Int..   6    5  124.53 -12.89   Lagging (39 -> -3)          [XLK] AIQ, BOTZ        #AVGO, #CRDO, #SMCI
+Software                     Software         352   89  123.01  -4.25   Lagging (30 -> -2)          [XLK] IGV, XSW         #CSGP, #DT, #GOOGL, #IONQ, #ORCL,
+                                                                                                                           #SE
 Optical Networking           Semiconductors    11    7  112.50 -16.63   Lagging (40 -> -3)          [XLK] SMH, IYW         #AAOI
 Telecom Infrastructure       Telecom            4    3   90.93  -5.65   Lagging (33 -> -1)          [XLC] IYZ, VOX         #T
-Digital Assets Infrastruct.. Software          11    5   90.35  -4.25   Lagging (30 -> -2)          [XLK] BITQ, DAPP       #COIN, #CORZ, #HUT, #RIOT
 AI Platform                  Artificial Int..   4    3   84.09 -12.89   Lagging (39 -> -3)          [XLK] AIQ, BOTZ        #GOOG, #META, #PLTR
 Enterprise Cloud             Cloud Computing    2    2   80.75  -4.02   Lagging (29 -> -1)          [XLK] CLOU, SKYY       #NOW
+Digital Assets Infrastruct.. Software          11    4   76.80  -4.25   Lagging (30 -> -2)          [XLK] BITQ, DAPP       #COIN, #CORZ, #HUT
 Telecom                      Telecom           47   11   71.23  -5.65   Lagging (33 -> -1)          [XLC] IYZ, VOX         #SFTBY
 Foundry                      Semiconductors     3    2   53.14 -16.63   Lagging (40 -> -3)          [XLK] SMH, SOXX        #GFS
-Copper Mining                Copper Mining     24    5   47.87  -8.64   Lagging (36 -> +1)          [XLB] COPX             CLF
 AI Compute                   Artificial Int..   5    1   24.73 -12.89   Lagging (39 -> -3)          [XLK] SMH, AIQ         #INTC
 
 ========================================
 BULLISH RE-ENTRY / TURNAROUND ALERTS
 Legend: ~ = Unknown/Unclassified
 ========================================
-Ticker     Mapped_Theme   Status Zacks (Now/Drop) Price (Now/Drop)  RS_Rating Long_Score    Drop Date Sector (Rk)
-   ~EL Consumer Staples Re-entry            2 / 2  112.04 / 103.66         91      78.81 21-Oct (14d)     XLP (2)
- ~CNXC         Software Re-entry            2 / 2    30.93 / 28.99         90      76.90  03-Nov (1d)    XLK (11)
-    ~W         Internet Re-entry            2 / 3  123.56 / 112.49         90      75.81 23-Oct (12d)     XLY (6)
+No re-entered bullish candidates today.
 
 ========================================
-BULLISH UNIVERSE (Momentum, Pullback & Radar)
+BULLISH UNIVERSE (Momentum & Radar)
 Legend: ~ = Unknown/Unclassified
 ========================================
 Ticker        Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
@@ -125,20 +99,7 @@ Ticker        Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Movement  Da
   ~RRC         Exploration Strong         2.0      81.66         96       NA     1     XLE (7)
  ~REAL             Unknown Strong         2.0      80.83         99       +7     3     XLY (6)
    PEB               REITs Strong         1.0      80.31         90       +4     2     XLF (4)
-  ISRG     Medical Devices   Mild         2.0      92.80         88       NA     9     XLV (1)
-  BLCO          Healthcare   Mild         1.0      87.97         89       NA     0     XLV (1)
-  URBN    Footwear/Apparel   Mild         2.0      87.43         85       NA     2     XLY (6)
-   EHC          Healthcare   Mild         2.0      87.27         87       NA     2     XLV (1)
-  SLDE           Insurance   Mild         2.0      85.78         83       NA     0     XLF (4)
-   DRH               REITs   Mild         2.0      79.11         88       NA     0     XLF (4)
-  APLE               REITs   Mild         2.0      78.51         87       NA     0     XLF (4)
- ~EXLS            Software   Mild         2.0      78.25         93       NA     6    XLK (11)
- ~DOCU            Software   Mild         2.0      77.77         91       NA     0    XLK (11)
- ~CBRL         Restaurants   Mild         1.0      77.44         93       NA    13     XLY (6)
-  ~PSN            Software   Mild         2.0      77.19         91       NA     1    XLK (11)
-   LMT Aerospace & Defense   Mild         2.0      74.24         77       NA     1     XLI (9)
-   SSL         Exploration   Mild         2.0      72.90         74       NA     0     XLE (7)
-   HUM Healthcare Services   Mild         2.0      72.27         62       NA    14     XLV (1)
+  ISRG     Medical Devices  Radar         2.0      92.80         88       NA     1     XLV (1)
     DG     Discount Retail  Radar         2.0      88.83         89       NA     1     XLY (6)
    CNC          Healthcare  Radar         2.0      87.37         88       NA     1     XLV (1)
 
@@ -148,7 +109,7 @@ BEARISH RE-ENTRY / BREAKDOWN RESUMPTION
 No re-entered bearish candidates today.
 
 ========================================
-BEARISH UNIVERSE (Breakdowns & Relief Rallies)
+BEARISH UNIVERSE (Active Breakdowns)
 ========================================
 Ticker                  Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
   AMKR       Semiconductor Equipment Strong         3.0        8.60               14       +1     4    XLK (11)
@@ -175,54 +136,11 @@ Ticker                  Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Ra
  GOOGL                      Software Strong         3.0       28.86               23        0     3    XLK (11)
     DT                      Software Strong         3.0       29.41               30       NA     1    XLK (11)
      T        Telecom Infrastructure Strong         3.0       29.72               28        0     2    XLK (11)
-  ~VST        Nuclear Infrastructure   Mild         3.0       10.45               13       NA     1     XLU (8)
-    PL          Space Infrastructure   Mild         3.0       15.74                8       NA     6    XLK (11)
-  CRWV                      Software   Mild         3.0       17.16                5       NA     0    XLK (11)
-  IREN Digital Assets Infrastructure   Mild         4.0       18.51                4       NA     0     XLF (4)
-  LUNR          Space Infrastructure   Mild         3.0       20.74                8       NA     6     XLI (9)
-  RKLB          Space Infrastructure   Mild         3.0       23.34               12       NA     6     XLI (9)
-    AA              Materials/Metals   Mild         3.0       23.44               22       NA     8     XLI (9)
-  NFLX            Media Distribution   Mild         3.0       24.40               22       NA     0     XLY (6)
-   CDE                   Gold Mining   Mild         3.0       26.69               21       NA     0     XLB (3)
-  APLD            Financial Services   Mild         5.0       26.83                8       NA    13     XLF (4)
-  BKNG                      Internet   Mild         3.0       27.75               31       NA     0     XLY (6)
-    BA           Aerospace & Defense   Mild         4.0       28.99               23       NA     6     XLI (9)
-  RBLX     Leisure and Entertainment   Mild         3.0       29.05               33       NA     0     XLY (6)
-  BABA                      Internet   Mild         3.0       29.40               22       NA     0     XLY (6)
-  DKNG     Leisure and Entertainment   Mild         3.0       30.25               31       NA     0     XLY (6)
-   FIS                       Banking   Mild         4.0       30.48                9       NA    13    XLK (11)
-    AG                 Silver Mining   Mild         4.0       30.93               27       NA     0     XLB (3)
-   KGC                   Gold Mining   Mild         4.0       31.39               19       NA     0     XLB (3)
-   PDD                      Internet   Mild         3.0       31.65               27       NA     0     XLY (6)
-    MP                   Gold Mining   Mild         5.0       32.84               12       NA     0     XLB (3)
-    JD                      Internet   Mild         3.0       32.95               39       NA     1     XLY (6)
-  PINS         Social Media Platform   Mild         4.0       36.25               31       NA     2    XLK (11)
-  UBER       Transportation Platform   Mild         3.0       36.27               33       NA     5    XLK (11)
-  CPNG                      Internet   Mild         3.0       37.30               38       NA     0     XLY (6)
-   LVS     Leisure and Entertainment   Mild         5.0       37.50               26       NA     2     XLY (6)
-    BX            Financial Services   Mild         3.0       37.58               33       NA    13     XLF (4)
-     B                   Gold Mining   Mild         3.0       37.74               38       NA     0     XLB (3)
-  VALE                   Gold Mining   Mild         5.0       37.84               22       NA     5     XLB (3)
-  RIOT Digital Assets Infrastructure   Mild         3.0       38.41               40       NA     1     XLF (4)
-   HDB                       Banking   Mild         3.0       38.78               31       NA    13     XLF (4)
-   AAL       Transportation/Shipping   Mild         3.0       38.87               37       NA     5     XLI (9)
-  SCHW                       Banking   Mild         3.0       39.08               33       NA    14     XLF (4)
-   EQX                   Gold Mining   Mild         4.0       39.84               32       NA     0     XLB (3)
-   KKR            Financial Services   Mild         3.0       40.38               35       NA    13     XLF (4)
-    IP                Infrastructure   Mild         4.0       40.49               39       NA     8     XLB (3)
-   ROL            Building Materials   Mild         5.0       41.19               37       NA     8    XLK (11)
-  CHWY                      Internet   Mild         4.0       42.20               44       NA     5     XLY (6)
-   CRH            Building Materials   Mild         3.0       44.89               45       NA     8     XLI (9)
-   BCS                       Banking   Mild         4.0       45.73               34       NA    13     XLF (4)
-   MGM     Leisure and Entertainment   Mild         5.0       45.85               35       NA     5     XLY (6)
-   LUV       Transportation/Shipping   Mild         3.0       55.87               67       NA    13     XLI (9)
-   RKT                       Banking   Mild         4.0       57.33               58       NA    13     XLF (4)
-    GM                Infrastructure   Mild         3.0       58.44               72       NA     8     XLY (6)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,GKOS,AXGN,GEHC,VFC,FIGS,BBWI,ANF,ARHS,CROX,HAS,REPL,AVAH,CON,RRC,REAL,PEB,HUM,CBRL,ISRG,EXLS,EHC,URBN,LMT,PSN,APLE,BLCO,DRH,SLDE,SSL,DOCU,DG,CNC,
-###Bearish_Stocks,IONQ,HUT,SFTBY,AAOI,INTC,LRCX,AMKR,CRDO,GOOG,SMCI,GFS,GOOGL,NOW,SE,CORZ,AVGO,DT,PLTR,ORCL,META,COIN,T,HL,CSGP,SCHW,APLD,BCS,BX,FIS,HDB,KKR,LUV,RKT,AA,CRH,GM,IP,ROL,BA,LUNR,PL,RKLB,AAL,CHWY,MGM,UBER,VALE,LVS,PINS,JD,RIOT,VST,AG,B,BABA,BKNG,CDE,CPNG,CRWV,DKNG,EQX,IREN,KGC,MP,NFLX,PDD,RBLX,
-###Reentered_Long_Stocks,EL,W,CNXC,
+###Bullish_Stocks,GKOS,AXGN,GEHC,VFC,FIGS,BBWI,ANF,ARHS,CROX,HAS,REPL,AVAH,CON,RRC,REAL,PEB,ISRG,DG,CNC,
+###Bearish_Stocks,IONQ,HUT,SFTBY,AAOI,INTC,LRCX,AMKR,CRDO,GOOG,SMCI,GFS,GOOGL,NOW,SE,CORZ,AVGO,DT,PLTR,ORCL,META,COIN,T,HL,CSGP,
+###Reentered_Long_Stocks,
 ###Reentered_Short_Stocks,
 ###Leading_ETF,IHI,XRT,XPH,KIE,XBI,VNQ,MOO,
 ###Lagging_ETF,IGV,BITQ,IYZ,SMH,AIQ,CLOU,SIL,FCG,COPX,LIT,
@@ -230,8 +148,8 @@ TRADINGVIEW WATCHLIST EXPORT
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,APA,BP,CLF,CNQ,COP,CPRI,CVX,DINO,EOG,EQNR,LNG,MPC,MUR,NIQ,OVV,PR,PSX,SHEL,SM,SXC,VNOM,XOM,~DOCU,~TENB,
-###Dropped_Bearish_Stocks,BAC,FLG,MOS,SOFI,WFC,
+###Dropped_Bullish_Stocks,APLE,BLCO,CPRI,DRH,LNG,SLDE,SSL,~DOCU,~TENB,
+###Dropped_Bearish_Stocks,AG,B,BABA,BKNG,CDE,CPNG,CRWV,DKNG,EQX,IREN,KGC,MP,NFLX,PDD,RBLX,
 ###Dropped_Leading_ETF,XOP,
 ###Dropped_Lagging_ETF,GDX,FDN,
 

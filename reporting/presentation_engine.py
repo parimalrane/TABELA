@@ -1,6 +1,7 @@
 import os
 import json
 from pathlib import Path
+from datetime import datetime, date
 import pandas as pd
 import sys
 import io
@@ -13,6 +14,8 @@ scoring.rotation_engine.print_rotation_report = lambda *args, **kwargs: None
 
 from reporting.watchlist_delta_engine import compare_watchlists
 from themes.theme_translation_engine import THEME_TRANSLATION, THEME_ETF_MAPPING
+from config.runtime_context import context
+from config.config import REENTERED_LONG, REENTERED_SHORT
 
 
 class OutputCapturer:
@@ -1145,6 +1148,9 @@ def print_daily_scan(
     # =========================================================================
     # RE-ENTERED / TURNAROUND ENGINE (Historical Dropped Scan)
     # =========================================================================
+    current_date_str = str(context.market_date) if hasattr(context, "market_date") else datetime.today().strftime("%Y-%m-%d")
+    current_date = datetime.strptime(current_date_str, "%Y-%m-%d")
+
     reentry_long_rows = []
     reentry_long_tickers = []
     reentry_short_rows = []
@@ -1257,10 +1263,13 @@ def print_daily_scan(
                         "Ticker": f" {disp_tkr}",
                         "Mapped_Theme": str(s_row.get("Mapped_Theme", "Unknown")),
                         "Status": status_label,
+                        "Zacks Rank": int(z_val),
                         "Zacks (Now/Drop)": f"{int(z_val)} / {d_zacks}",
                         "Price (Now/Drop)": f"{float(p_val):.2f} / {d_p_str}",
                         "RS_Rating": int(rs_val),
                         "Long_Score": f"{float(score_val):.2f}",
+                        "Movement": "NA",
+                        "Days": drop_trading_days,
                         "Drop Date": drop_display,
                         "Sector (Rk)": f"{spdr} ({int(s_rank)})"
                     })
@@ -1345,10 +1354,14 @@ def print_daily_scan(
                         "Ticker": f" {disp_tkr}",
                         "Mapped_Theme": str(s_row.get("Mapped_Theme", "Unknown")),
                         "Status": status_label_s,
+                        "Zacks Rank": int(z_val),
                         "Zacks (Now/Drop)": f"{int(z_val)} / {d_zacks}",
                         "Price (Now/Drop)": f"{float(p_val):.2f} / {d_p_str}",
                         "Short_RS": int(s_rs_val),
+                        "Short_RS_Rating": int(s_rs_val),
                         "Short_Score": f"{float(score_val):.2f}",
+                        "Movement": "NA",
+                        "Days": drop_trading_days_s,
                         "Drop Date": drop_display,
                         "Sector (Rk)": f"{spdr} ({int(s_rank)})"
                     })
@@ -1405,11 +1418,13 @@ def print_daily_scan(
         for r_dict in true_longs.to_dict("records"):
             r_dict["Status"] = "Strong"
             bullish_rows.append(r_dict)
+    if reentry_long_rows:
+        bullish_rows.extend(reentry_long_rows)
     if radar_rows:
         bullish_rows.extend(radar_rows)
 
     bullish_universe_out = "========================================\n"
-    bullish_universe_out += "BULLISH UNIVERSE (Momentum & Radar)\n"
+    bullish_universe_out += "BULLISH UNIVERSE (Strong, Re-entry & Radar)\n"
     bullish_universe_out += "Legend: ~ = Unknown/Unclassified\n"
     bullish_universe_out += "========================================\n"
 
@@ -1418,7 +1433,7 @@ def print_daily_scan(
         cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Long_Score", "RS_Rating", "Movement", "Days", "Sector (Rk)"]
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
-        status_rank_map = {"Strong": 0, "Radar": 1}
+        status_rank_map = {"Strong": 0, "Re-entry": 1, "Radar": 2}
         bullish_df["_st_rank"] = bullish_df["Status"].map(status_rank_map).fillna(9)
         bullish_df["_score_num"] = pd.to_numeric(bullish_df["Long_Score"], errors="coerce").fillna(0)
         bullish_df = bullish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, False]).drop(columns=["_st_rank", "_score_num"])
@@ -1432,9 +1447,11 @@ def print_daily_scan(
         for r_dict in display_df.to_dict("records"):
             r_dict["Status"] = "Strong"
             bearish_rows.append(r_dict)
+    if reentry_short_rows:
+        bearish_rows.extend(reentry_short_rows)
 
     bearish_universe_out = "========================================\n"
-    bearish_universe_out += "BEARISH UNIVERSE (Active Breakdowns)\n"
+    bearish_universe_out += "BEARISH UNIVERSE (Strong & Re-entry Breakdowns)\n"
     bearish_universe_out += "========================================\n"
 
     if bearish_rows:
@@ -1442,7 +1459,7 @@ def print_daily_scan(
         cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Short_Score", "Short_RS_Rating", "Movement", "Days", "Sector (Rk)"]
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
-        status_rank_map = {"Strong": 0}
+        status_rank_map = {"Strong": 0, "Re-entry": 1}
         bullish_df_dummy = bearish_df.copy()
         bearish_df["_st_rank"] = bearish_df["Status"].map(status_rank_map).fillna(9)
         bearish_df["_score_num"] = pd.to_numeric(bearish_df["Short_Score"], errors="coerce").fillna(999)
@@ -1451,21 +1468,19 @@ def print_daily_scan(
     else:
         bearish_universe_out += "No active bearish candidates today.\n"
 
-    print("\n" + bullish_reentry_out)
     print("\n" + bullish_universe_out)
-    print("\n" + bearish_reentry_out)
     print("\n" + bearish_universe_out)
 
     print("TRADINGVIEW WATCHLIST EXPORT")
     all_bullish_tickers = []
-    for t_list in [true_long_tickers, radar_tickers]:
+    for t_list in [true_long_tickers, reentry_long_tickers, radar_tickers]:
         for t in t_list:
             clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
             if clean and clean not in all_bullish_tickers:
                 all_bullish_tickers.append(clean)
 
     all_bearish_tickers = []
-    for t_list in [distribution_watchlist["Ticker"].tolist() if not distribution_watchlist.empty else []]:
+    for t_list in [distribution_watchlist["Ticker"].tolist() if not distribution_watchlist.empty else [], reentry_short_tickers]:
         for t in t_list:
             clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
             if clean and clean not in all_bearish_tickers:
@@ -1640,7 +1655,10 @@ def print_daily_scan(
                 if tkr: stock_lookup[tkr] = s_row
 
         new_records = []
-        for tkr in dropped_bullish:
+        # Only true drops from Strong Long are recorded as "Dropped Long" in the historical ledger
+        # to ensure the re-entry qualification window only measures genuine pedigree breakdown drops.
+        true_strong_drops_long = sorted([t for t in deltas.get("dropped_longs", []) if t not in active_bullish_set])
+        for tkr in true_strong_drops_long:
             s_data = stock_lookup.get(tkr)
             if s_data is not None:
                 z_val = pd.to_numeric(s_data.get("Zacks Rank"), errors="coerce")
@@ -1666,7 +1684,9 @@ def print_daily_scan(
                 "Short_RS_Rating": s_rs_str, "Short_Score": s_str, "Last_Close": close_str, "Volume": vol_str
             })
 
-        for tkr in dropped_bearish:
+        # Only true drops from Strong Short are recorded as "Dropped Short" in the historical ledger
+        true_strong_drops_short = sorted([t for t in deltas.get("left_distribution", []) if t not in active_bearish_set])
+        for tkr in true_strong_drops_short:
             s_data = stock_lookup.get(tkr)
             if s_data is not None:
                 z_val = pd.to_numeric(s_data.get("Zacks Rank"), errors="coerce")
