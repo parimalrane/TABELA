@@ -172,25 +172,25 @@ MILD_SHORT_ENTRY = {
 # theme flow, and price have confirmed a quantitative turnaround.
 # ==========================
 REENTERED_LONG = {
-    "LOOKBACK_DAYS": 21,
+    "LOOKBACK_DAYS": 50,
     "HOLD_DAYS": 5,
     "ALLOWED_ZACKS": [1, 2],
     "THEMES": ["Leading", "Unclassified Leader"],
-    "PRICE_CONFIRMATION": True,
+    "PRICE_CONFIRMATION": False,
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
-    "MIN_RS": 70.0,
+    "MIN_RS": 0.0,
     "EXCLUDE_STRONG": True,
 }
 
 REENTERED_SHORT = {
-    "LOOKBACK_DAYS": 21,
+    "LOOKBACK_DAYS": 50,
     "HOLD_DAYS": 5,
     "ALLOWED_ZACKS": [3, 4, 5],
     "THEMES": ["Lagging"],
-    "PRICE_CONFIRMATION": True,
+    "PRICE_CONFIRMATION": False,
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
-    "MAX_SHORT_RS": 60.0,
+    "MAX_SHORT_RS": 100.0,
     "EXCLUDE_STRONG": True,
 }

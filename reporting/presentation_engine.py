@@ -1326,6 +1326,18 @@ def print_daily_scan(
         try:
             hist_drops_df = pd.read_csv(dropped_csv_path, dtype=str)
 
+            # Trading-day counter: counts TABELA's own recorded run dates
+            # (from existing FileDiscovery) in the half-open range [start, current_date).
+            from data_layer.historical_query_engine import FileDiscovery
+            _run_dates = sorted(FileDiscovery().discover().keys())
+            _cur_d = current_date.date()
+
+            def _trading_days_since(start_dt):
+                if pd.isna(start_dt):
+                    return -1
+                s_d = pd.Timestamp(start_dt).date()
+                return sum(1 for rd in _run_dates if s_d <= rd < _cur_d)
+
             # --- Long Re-Entry Scan ---
             lookback_l = REENTERED_LONG.get("LOOKBACK_DAYS", 21)
             hold_days_l = REENTERED_LONG.get("HOLD_DAYS", 5)
@@ -1341,7 +1353,7 @@ def print_daily_scan(
             if not long_drops.empty and stocks is not None and not stocks.empty:
                 long_drops["_dt"] = pd.to_datetime(long_drops["Date"], errors="coerce")
                 long_drops = long_drops[long_drops["_dt"] < current_date]
-                long_drops["_days"] = (current_date - long_drops["_dt"]).dt.days
+                long_drops["_days"] = long_drops["_dt"].apply(_trading_days_since)
                 long_drops = long_drops[(long_drops["_days"] > 0) & (long_drops["_days"] <= lookback_l)]
                 long_drops = long_drops.sort_values("_dt").drop_duplicates(subset=["Ticker"], keep="last")
 
@@ -1385,7 +1397,7 @@ def print_daily_scan(
                     if prior_reentry_date_str and hold_days_l > 0:
                         try:
                             re_dt = datetime.strptime(prior_reentry_date_str, "%Y-%m-%d")
-                            days_since_reentry = (current_date - re_dt).days
+                            days_since_reentry = _trading_days_since(re_dt)
                             if 0 <= days_since_reentry <= hold_days_l:
                                 is_hold_valid = True
                         except Exception:
@@ -1445,7 +1457,7 @@ def print_daily_scan(
             if not short_drops.empty and stocks is not None and not stocks.empty:
                 short_drops["_dt"] = pd.to_datetime(short_drops["Date"], errors="coerce")
                 short_drops = short_drops[short_drops["_dt"] < current_date]
-                short_drops["_days"] = (current_date - short_drops["_dt"]).dt.days
+                short_drops["_days"] = short_drops["_dt"].apply(_trading_days_since)
                 short_drops = short_drops[(short_drops["_days"] > 0) & (short_drops["_days"] <= lookback_s)]
                 short_drops = short_drops.sort_values("_dt").drop_duplicates(subset=["Ticker"], keep="last")
 
@@ -1489,7 +1501,7 @@ def print_daily_scan(
                     if prior_reentry_date_str_s and hold_days_s > 0:
                         try:
                             re_dt_s = datetime.strptime(prior_reentry_date_str_s, "%Y-%m-%d")
-                            days_since_reentry_s = (current_date - re_dt_s).days
+                            days_since_reentry_s = _trading_days_since(re_dt_s)
                             if 0 <= days_since_reentry_s <= hold_days_s:
                                 is_hold_valid_s = True
                         except Exception:
