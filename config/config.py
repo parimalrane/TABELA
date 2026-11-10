@@ -122,7 +122,7 @@ SHORT_ENTRY = {
     "THEMES": ["Lagging"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 5_000_000,
+    "MIN_VOLUME": 1_000_000,
 }
 
 
@@ -147,7 +147,7 @@ REENTERED_LONG = {
 REENTERED_SHORT = {
     "LOOKBACK_DAYS": 50,
     "ALLOWED_ZACKS": [3, 4, 5],
-    "THEMES": ["Lagging"],
+    "THEMES": ["Lagging", "Neutral"],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
     "MAX_SHORT_RS": 50.0,
