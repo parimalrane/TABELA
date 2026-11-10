@@ -1124,10 +1124,12 @@ def print_daily_scan(
             # --- Long Re-Entry Scan ---
             lookback_l = REENTERED_LONG.get("LOOKBACK_DAYS", 50)
             allowed_zacks_l = REENTERED_LONG.get("ALLOWED_ZACKS", [1, 2])
+            zacks_3_min_score = REENTERED_LONG.get("ZACKS_3_MIN_SCORE", None)
             allowed_themes_l = REENTERED_LONG.get("THEMES", ["Leading", "Unclassified Leader"])
             min_price_l = REENTERED_LONG.get("MIN_PRICE", 10.0)
             min_vol_l = REENTERED_LONG.get("MIN_VOLUME", 1_000_000)
             min_rs_l = REENTERED_LONG.get("MIN_RS", 0.0)
+            min_score_l = REENTERED_LONG.get("MIN_LONG_SCORE", 0.0)
             exclude_strong_l = REENTERED_LONG.get("EXCLUDE_STRONG", True)
 
             long_drops = hist_drops_df[hist_drops_df["Type"] == "Dropped Long"].copy()
@@ -1147,8 +1149,20 @@ def print_daily_scan(
                         continue
                     s_row = m.iloc[0]
 
+                    score_val = pd.to_numeric(s_row.get("Long_Score", 0), errors="coerce")
+                    if pd.notna(score_val) and float(score_val) < min_score_l:
+                        continue
+
                     z_val = pd.to_numeric(s_row.get("Zacks Rank"), errors="coerce")
-                    if pd.isna(z_val) or int(z_val) not in allowed_zacks_l:
+                    if pd.isna(z_val):
+                        continue
+                    z_int = int(z_val)
+                    
+                    # Zacks Qualification: Must be in allowed_zacks (1,2) OR Zacks 3 if Long_Score >= zacks_3_min_score
+                    is_zacks_valid = (z_int in allowed_zacks_l) or (
+                        zacks_3_min_score is not None and z_int == 3 and pd.notna(score_val) and float(score_val) >= zacks_3_min_score
+                    )
+                    if not is_zacks_valid:
                         continue
 
                     th_class = str(s_row.get("Theme_Class", "Unknown"))
