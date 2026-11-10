@@ -193,8 +193,8 @@ Only structured data is stored.
 
 Produces:
 
-* Console reports (Theme Performance, Bidirectional Theme Breadth, Bullish/Bearish Re-Entry Spotlights, Bullish/Bearish Universes, Dropped Watchlist Export, Watchlist Deltas)
-* TradingView exports (`###Bullish_Stocks`, `###Bearish_Stocks`, `###Reentered_Long_Stocks`, `###Reentered_Short_Stocks`, `###Leading_ETF`, `###Lagging_ETF`, and `###Dropped_*` watchlists)
+* Console reports (Theme Performance, Bidirectional Theme Breadth, Bullish/Bearish Universes [Strong & Mild], Dropped Watchlist Export, Watchlist Deltas)
+* TradingView exports (`###Bullish_Stocks`, `###Bearish_Stocks`, `###Mild_Bullish_Stocks`, `###Mild_Bearish_Stocks`, `###Leading_ETF`, `###Lagging_ETF`, and `###Dropped_*` watchlists)
 * Daily report text captures
 
 Presentation should not perform calculations.

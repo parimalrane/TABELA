@@ -891,17 +891,32 @@ def print_daily_scan(
         
     display_df = display_df[display_df.apply(should_display, axis=1)].copy()
 
-    # Sort by Trade View order: Bullish (Leading) -> Neutral -> Bearish (Lagging), with strongest breadth at top of each section
-    status_rank_map = {"Leading": 0, "Neutral": 1, "Lagging": 2}
-    display_df["_status_rank"] = display_df["Mapped_Theme"].apply(
-        lambda m: status_rank_map.get(theme_class_map.get(THEME_TRANSLATION.get(str(m), str(m)), "Unknown"), 1)
-    )
+    # Sort from Most Bullish at the top to Most Bearish at the bottom:
+    # 1. Macro Rank ascending (Rank 1 Most Bullish -> Rank 42 Most Bearish)
+    # 2. For same macro rank:
+    #    - Leading: highest Weighted_Breadth_Score first
+    #    - Lagging: highest Weighted_Breadth_Score (most active breakdown) at bottom
+    def _get_theme_macro_rank(mapped_theme):
+        p_theme = THEME_TRANSLATION.get(str(mapped_theme), str(mapped_theme))
+        if not theme_strength.empty and "Theme" in theme_strength.columns:
+            m_row = theme_strength[theme_strength["Theme"] == p_theme]
+            if not m_row.empty:
+                return float(m_row.iloc[0].get("Theme_Rank", 25.0))
+        # Fallback for Unknown / unclassified: place right after Leading (rank 13.5)
+        cls = theme_class_map.get(p_theme, "Unknown")
+        if cls == "Leading": return 1.0
+        if cls == "Lagging": return 40.0
+        return 20.0
+
+    display_df["_macro_rank"] = display_df["Mapped_Theme"].apply(_get_theme_macro_rank)
     display_df["_score_num"] = pd.to_numeric(display_df["Weighted_Breadth_Score"], errors="coerce").fillna(0.0)
     display_df["_tot_stocks"] = pd.to_numeric(display_df["Total_Stocks"], errors="coerce").fillna(0)
+    
+    # Sort: Macro Rank ascending (1 -> 42), then Weighted Breadth Score descending
     display_df = display_df.sort_values(
-        ["_status_rank", "_score_num", "_tot_stocks"],
+        ["_macro_rank", "_score_num", "_tot_stocks"],
         ascending=[True, False, False]
-    ).drop(columns=["_status_rank", "_score_num", "_tot_stocks"])
+    ).drop(columns=["_macro_rank", "_score_num", "_tot_stocks"])
 
     print(f"{'Micro Theme'.ljust(28)} {'Macro Theme'.ljust(16)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'W_Brdth'.rjust(7)} {'ETF_RS'.rjust(6)}   {'Macro State & Movement'.ljust(25)}   {'ETFs'.ljust(20)}   {'Stocks'}")
     print("-" * 145)
@@ -1190,7 +1205,7 @@ def print_daily_scan(
                     first_reentry_date = reentry_tracker.get("long_reentered", {}).get(tkr, current_date_str)
                     reentry_tracker.setdefault("long_reentered", {})[tkr] = first_reentry_date
 
-                    status_label = "Re-entry"
+                    status_label = "Mild"
                     disp_tkr = ("~" + tkr) if th_class in ["Unknown", "Unclassified Leader"] else tkr
                     spdr = ZACKS_TO_SPDR.get(str(s_row.get("Sector", "")), "N/A")
                     s_rank = sector_rs_map.get(spdr, 0)
@@ -1280,7 +1295,7 @@ def print_daily_scan(
                     first_reentry_date_s = reentry_tracker.get("short_reentered", {}).get(tkr, current_date_str)
                     reentry_tracker.setdefault("short_reentered", {})[tkr] = first_reentry_date_s
 
-                    status_label_s = "Re-entry"
+                    status_label_s = "Mild"
                     disp_tkr = ("~" + tkr) if th_class in ["Unknown", "Unclassified Leader"] else tkr
                     spdr = ZACKS_TO_SPDR.get(str(s_row.get("Sector", "")), "N/A")
                     s_rank = sector_rs_map.get(spdr, 0)
@@ -1370,7 +1385,7 @@ def print_daily_scan(
         bullish_rows.extend(reentry_long_rows)
 
     bullish_universe_out = "========================================\n"
-    bullish_universe_out += "BULLISH UNIVERSE (Strong & Re-entry)\n"
+    bullish_universe_out += "BULLISH UNIVERSE (Strong & Mild)\n"
     bullish_universe_out += "Legend: ~ = Unknown/Unclassified\n"
     bullish_universe_out += "========================================\n"
 
@@ -1379,7 +1394,7 @@ def print_daily_scan(
         cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Long_Score", "RS_Rating", "Movement", "Days", "Sector (Rk)"]
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
-        status_rank_map = {"Strong": 0, "Re-entry": 1}
+        status_rank_map = {"Strong": 0, "Mild": 1}
         bullish_df["_st_rank"] = bullish_df["Status"].map(status_rank_map).fillna(9)
         bullish_df["_score_num"] = pd.to_numeric(bullish_df["Long_Score"], errors="coerce").fillna(0)
         bullish_df = bullish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, False]).drop(columns=["_st_rank", "_score_num"])
@@ -1397,7 +1412,7 @@ def print_daily_scan(
         bearish_rows.extend(reentry_short_rows)
 
     bearish_universe_out = "========================================\n"
-    bearish_universe_out += "BEARISH UNIVERSE (Strong & Re-entry Breakdowns)\n"
+    bearish_universe_out += "BEARISH UNIVERSE (Strong & Mild Breakdowns)\n"
     bearish_universe_out += "========================================\n"
 
     if bearish_rows:
@@ -1405,8 +1420,7 @@ def print_daily_scan(
         cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Short_Score", "Short_RS_Rating", "Movement", "Days", "Sector (Rk)"]
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
-        status_rank_map = {"Strong": 0, "Re-entry": 1}
-        bullish_df_dummy = bearish_df.copy()
+        status_rank_map = {"Strong": 0, "Mild": 1}
         bearish_df["_st_rank"] = bearish_df["Status"].map(status_rank_map).fillna(9)
         bearish_df["_score_num"] = pd.to_numeric(bearish_df["Short_Score"], errors="coerce").fillna(999)
         bearish_df = bearish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, True]).drop(columns=["_st_rank", "_score_num"])
@@ -1450,8 +1464,8 @@ def print_daily_scan(
     print("###Bearish_Stocks," + bearish_export_str + ",") if bearish_export_str else print("###Bearish_Stocks,")
     reentry_long_str = ",".join(clean_reentry_long)
     reentry_short_str = ",".join(clean_reentry_short)
-    print("###Reentered_Long_Stocks," + reentry_long_str + ",") if reentry_long_str else print("###Reentered_Long_Stocks,")
-    print("###Reentered_Short_Stocks," + reentry_short_str + ",") if reentry_short_str else print("###Reentered_Short_Stocks,")
+    print("###Mild_Bullish_Stocks," + reentry_long_str + ",") if reentry_long_str else print("###Mild_Bullish_Stocks,")
+    print("###Mild_Bearish_Stocks," + reentry_short_str + ",") if reentry_short_str else print("###Mild_Bearish_Stocks,")
 
     # Thematic & Sector ETF Watchlists (Primary Pure-Play per theme)
     def extract_primary_etf(etf_raw):
@@ -1524,10 +1538,10 @@ def print_daily_scan(
         _prev_reports = sorted([f for f in _rd.rglob("*.txt") if f.stem < _cur])
         if _prev_reports:
             for _line in _prev_reports[-1].read_text(encoding="utf-8").splitlines():
-                if _line.startswith("###Reentered_Long_Stocks,"):
-                    prev_reentered_long = {x.strip().upper() for x in _line.replace("###Reentered_Long_Stocks,", "").split(",") if x.strip()}
-                elif _line.startswith("###Reentered_Short_Stocks,"):
-                    prev_reentered_short = {x.strip().upper() for x in _line.replace("###Reentered_Short_Stocks,", "").split(",") if x.strip()}
+                if _line.startswith("###Mild_Bullish_Stocks,") or _line.startswith("###Reentered_Long_Stocks,"):
+                    prev_reentered_long = {x.strip().upper() for x in _line.split(",", 1)[1].split(",") if x.strip()}
+                elif _line.startswith("###Mild_Bearish_Stocks,") or _line.startswith("###Reentered_Short_Stocks,"):
+                    prev_reentered_short = {x.strip().upper() for x in _line.split(",", 1)[1].split(",") if x.strip()}
     except Exception:
         pass
     reentry_exit_long = prev_reentered_long - set(reentry_long_tickers)

@@ -208,27 +208,6 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
             etf_raw_score = None
             is_unclassified = False
 
-        # The Micro-Leader backdoor has been officially removed. 
-        # All stocks are strictly bound to their true ETF Macro performance.
-
-        # 2. Idiosyncratic Breakout Escape Hatch
-        if theme_class not in ["Leading"] and row["RS_Rating"] >= 90 and row.get("Growth_Score", 0) >= 95.0 and row.get("Zacks_Score", 0) >= 95.0:
-            theme_class = "Unclassified Leader"
-            
-            # Dynamic Theme Subsidy: Use Zacks Industry Rank as the pure proxy for missing ETF Macro points.
-            # DAMPENED: Rank 1 -> 25.0 points, Rank 260+ -> 0.0 points
-            # This mathematically caps their Long Score around ~80.7, making it physically impossible 
-            # to overtake true macro leaders like Semiconductors, while still dynamically sorting them.
-            z_ind = pd.to_numeric(row.get("Zacks Industry Rank"), errors="coerce")
-            if pd.notna(z_ind) and z_ind > 0:
-                theme_score = max(0.0, 25.0 - ((z_ind - 1) / 259.0) * 25.0)
-            else:
-                theme_score = 0.0
-                
-            is_unclassified = True
-            theme_state = None
-            etf_raw_score = None
-
         theme_classes.append(theme_class)
         theme_scores.append(theme_score)
         theme_states.append(theme_state)

@@ -40,15 +40,6 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     stocks.loc[short_mask, "Qual_Strength"] = (100.0 - pd.to_numeric(short_rs_col.loc[short_mask], errors="coerce")).fillna(50.0)
 
     strong_stocks = stocks[stocks["Is_Qual"]].copy()
-    _legacy_ignore = stocks[
-
-        (stocks["RS_Rating"] >= s_rs)
-
-        &
-
-        (stocks["Long_Score"] >= s_long)
-
-    ].copy()
 
     # ==========================================
     # TOP LEADERS PER THEME (Sourced from shared state long_candidates)
@@ -66,12 +57,6 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
         .groupby("Mapped_Theme")["Ticker"]
         .apply(lambda s: ", ".join(s.astype(str).str.replace("*", "", regex=False)))
     )
-
-    # Pre-Observation (Deprecated)
-    pre_obs_series = pd.Series(dtype=str)
-
-    # Observation
-    obs_series = pd.Series(dtype=str)
         
     # Distribution
     if not distribution_watchlist.empty:
@@ -85,13 +70,11 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
         dist_series = pd.Series(dtype=str)
 
     # Combine All States
-    all_themes = set(true_longs_series.index) | set(pre_obs_series.index) | set(obs_series.index) | set(dist_series.index)
+    all_themes = set(true_longs_series.index) | set(dist_series.index)
     combined_leaders = {}
     for t in all_themes:
         parts = []
         if t in true_longs_series and true_longs_series[t]: parts.append(true_longs_series[t])
-        if t in pre_obs_series and pre_obs_series[t]: parts.append(pre_obs_series[t])
-        if t in obs_series and obs_series[t]: parts.append(obs_series[t])
         if t in dist_series and dist_series[t]: parts.append(dist_series[t])
         combined_leaders[t] = ", ".join(parts)
         
