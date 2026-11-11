@@ -118,11 +118,11 @@ SHORT_ENTRY = {
     # 1. STRONG BEARISH (Active Breakdowns)
     "MIN_SHORT_RS": 8.0,
     "MAX_SHORT_RS": 60.0,
-    "MAX_SHORT_SCORE": 30.0,
+    "MAX_SHORT_SCORE": 25.0,
     "THEMES": ["Lagging"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_000_000,
+    "MIN_VOLUME": 2_000_000,
 }
 
 
