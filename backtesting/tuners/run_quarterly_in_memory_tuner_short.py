@@ -358,26 +358,27 @@ def run_short_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
     print(f"Total Short Parameter Permutations to Test: {len(permutations)}", flush=True)
     
     baseline_gates = {k: v[0] for k, v in SHORT_PHASE_2.items()}
-    baseline_gates["MAX_SHORT_SCORE"] = 60.0
-    baseline_gates["MAX_SHORT_RS"] = 75.0
-    baseline_gates["MIN_SHORT_RS"] = 1.0
-    baseline_gates["THEMES"] = ["Lagging", "Neutral"]
-    baseline_gates["MIN_VOLUME"] = 2_000_000
+    baseline_gates["MAX_SHORT_SCORE"] = 30.0
+    baseline_gates["MAX_SHORT_RS"] = 60.0
+    baseline_gates["MIN_SHORT_RS"] = 8.0
+    baseline_gates["THEMES"] = ["Lagging"]
+    baseline_gates["BLOCKED_ZACKS"] = [1, 2]
+    baseline_gates["MIN_VOLUME"] = 1_000_000
     
     results = []
     etf_explicit, macro_theme = load_mapping_dicts()
     
     for i, p in enumerate(permutations):
-        compiled_themes_by_date = compile_etf_themes(etf_data, all_dates, 0.40, 0.35, 0.25, 0.0, 0.0, etf_explicit, macro_theme)
+        compiled_themes_by_date = compile_etf_themes(etf_data, all_dates, 0.40, 0.20, 0.40, 0.0, 0.0, etf_explicit, macro_theme)
         daily_scored = compile_stock_scores_short(
             stock_data, all_dates, stock_to_theme, compiled_themes_by_date, 
             p["SHORT_RS_RAW_WEIGHTS"], p["SHORT_COMPOSITE_WEIGHTS"], 
             p["SHORT_ZACKS_SCORE_MAP"], p["SHORT_GROWTH_SCORE_MAP"]
         )
         metrics = simulate_short_baseline_gates(daily_scored, prices, all_dates, baseline_gates)
-        print(f"  [Model {i+1}] Strong 10D WR: {metrics['Strong_WR_10D']}% | PF: {metrics['Strong_PF_10D']} | Avg: {metrics['Strong_Avg_10D']}% | Trades: {metrics['Strong_Trades']}", flush=True)
+        print(f"  [Model {i+1:02d}] RS_W={p['SHORT_RS_RAW_WEIGHTS']} | COMP_W={p['SHORT_COMPOSITE_WEIGHTS']} -> 10D WR: {metrics['Strong_WR_10D']}% | PF: {metrics['Strong_PF_10D']} | Avg: {metrics['Strong_Avg_10D']}% | Trades: {metrics['Strong_Trades']}", flush=True)
         
-        flat_p = {}
+        flat_p = {"Model_ID": i + 1}
         for k, v in p.items():
             if isinstance(v, dict):
                 for sub_k, sub_v in v.items():
@@ -390,12 +391,12 @@ def run_short_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
         flat_p.update(metrics)
         results.append(flat_p)
         
-    out_df = pd.DataFrame(results)
+    sorted_results = sorted(results, key=lambda x: (x["Strong_PF_10D"], x["Strong_WR_10D"], x["Strong_Avg_10D"]), reverse=True)
+    out_df = pd.DataFrame(sorted_results)
     out_df.to_csv("c:/TABELA/backtesting/tuners/phase1_short_test_output.csv", index=False)
     
-    print("\nShort Phase 1 Complete. Selecting Top Math Structures by 10D Profit Factor & Win Rate...", flush=True)
-    sorted_results = sorted(results, key=lambda x: (x["Strong_PF_10D"], x["Strong_WR_10D"], x["Strong_Avg_10D"]), reverse=True)
-    top_models = sorted_results[:2]  # Top 2 best math models
+    print("\nShort Phase 1 Complete. Selecting Top 3 Math Structures by 10D Profit Factor & Win Rate...", flush=True)
+    top_models = sorted_results[:3]  # Top 3 best math models
     
     print("\n=======================================================", flush=True)
     print("Starting Short Phase 2 (Gate & Threshold Sweep)...", flush=True)
@@ -408,11 +409,11 @@ def run_short_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
     final_phase2_results = []
     
     for m_idx, flat_base_model in enumerate(top_models):
-        print(f"\nEvaluating Gates for Model #{m_idx+1} [Base 10D WR: {flat_base_model['Strong_WR_10D']}% PF: {flat_base_model['Strong_PF_10D']}]...", flush=True)
+        print(f"\nEvaluating Gates for Model #{m_idx+1} (Model_ID={flat_base_model['Model_ID']}) [Base 10D WR: {flat_base_model['Strong_WR_10D']}% PF: {flat_base_model['Strong_PF_10D']}]...", flush=True)
         
-        p = [pm for pm in permutations if pm["SHORT_RS_RAW_WEIGHTS"]["4W"] == flat_base_model["SHORT_RS_RAW_WEIGHTS_4W"] and (pm["SHORT_COMPOSITE_WEIGHTS"].get("RS", pm["SHORT_COMPOSITE_WEIGHTS"].get("RS_WEIGHT")) == flat_base_model.get("SHORT_COMPOSITE_WEIGHTS_RS", flat_base_model.get("SHORT_COMPOSITE_WEIGHTS_RS_WEIGHT")))][0]
+        p = permutations[flat_base_model["Model_ID"] - 1]
         
-        compiled_themes_by_date = compile_etf_themes(etf_data, all_dates, 0.40, 0.35, 0.25, 0.0, 0.0, etf_explicit, macro_theme)
+        compiled_themes_by_date = compile_etf_themes(etf_data, all_dates, 0.40, 0.20, 0.40, 0.0, 0.0, etf_explicit, macro_theme)
         daily_scored = compile_stock_scores_short(
             stock_data, all_dates, stock_to_theme, compiled_themes_by_date, 
             p["SHORT_RS_RAW_WEIGHTS"], p["SHORT_COMPOSITE_WEIGHTS"], 
@@ -449,6 +450,8 @@ def run_short_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
         
     print("\n--- TOP 5 SHORT GATE CONFIGURATIONS (Minimum 30 Trades) ---")
     cols_display = [
+        "Model_ID", "SHORT_RS_RAW_WEIGHTS_4W", "SHORT_RS_RAW_WEIGHTS_12W", "SHORT_RS_RAW_WEIGHTS_YTD",
+        "SHORT_COMPOSITE_WEIGHTS_RS", "SHORT_COMPOSITE_WEIGHTS_THEME", "SHORT_COMPOSITE_WEIGHTS_ZACKS",
         "MIN_VOLUME", "MAX_SHORT_SCORE", "MIN_SHORT_RS", "MAX_SHORT_RS", "THEMES", "BLOCKED_ZACKS",
         "Strong_WR_10D", "Strong_PF_10D", "Strong_Avg_10D", "Strong_Trades", "Strong_WR_ToDate", "Strong_Avg_ToDate"
     ]

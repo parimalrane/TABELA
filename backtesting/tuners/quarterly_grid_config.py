@@ -19,7 +19,7 @@ Phase 2: Sweep Gate Logic (Thresholds, Scores)
 LONG_PHASE_1 = {
     # 1. ETF Momentum Engine (How Themes are Scored)
     "ETF_PERIOD_WEIGHTS": [
-        {"1M": 0.40, "1W": 0.35, "3M": 0.25, "6M": 0.0, "1Y": 0.0}, # Production Baseline
+        {"1M": 0.40, "1W": 0.20, "3M": 0.40, "6M": 0.0, "1Y": 0.0}, # Production Baseline (Balanced 1M/3M)
     ],
     "ETF_AGGREGATION_MODE": ["aum_weighted"],
     "THEME_BUCKETS": [
@@ -28,15 +28,25 @@ LONG_PHASE_1 = {
     
     # 2. Stock Momentum (How RS Rating is Scored)
     "RS_RAW_WEIGHTS": [
-        # Production Baseline (High Near-Term Velocity)
+        # 1. Production Baseline (High Near-Term Velocity)
         {"4W": 0.60, "12W": 0.20, "1W": 0.20, "YTD": 0.0, "52W": 0.0},
-        # Structural 52W Patch
+        # 2. Balanced 4W/12W Trend Confirmation
+        {"4W": 0.40, "12W": 0.40, "1W": 0.20, "YTD": 0.0, "52W": 0.0},
+        # 3. Structural 52W Patch
         {"4W": 0.40, "12W": 0.20, "1W": 0.10, "YTD": 0.10, "52W": 0.20},
+        # 4. Multi-Timeframe Trend (YTD + 12W + 4W)
+        {"4W": 0.35, "12W": 0.35, "1W": 0.10, "YTD": 0.20, "52W": 0.0},
+        # 5. Ultra Short-Term Burst (1W/4W Heavy)
+        {"4W": 0.50, "12W": 0.10, "1W": 0.40, "YTD": 0.0, "52W": 0.0},
     ],
     
     # 3. Composite Calculation (How Long_Score is Scored)
     "LONG_WEIGHTS": [
-        {"RS": 0.60, "THEME": 0.20, "ZACKS": 0.10, "GROWTH": 0.10}, # Baseline Master
+        {"RS": 0.60, "THEME": 0.20, "ZACKS": 0.10, "GROWTH": 0.10}, # 1. Production Baseline (60/20/10/10)
+        {"RS": 0.50, "THEME": 0.25, "ZACKS": 0.15, "GROWTH": 0.10}, # 2. Config Comment Split (50% RS, 25% Theme, 25% Fund)
+        {"RS": 0.70, "THEME": 0.15, "ZACKS": 0.10, "GROWTH": 0.05}, # 3. Pure RS Momentum (70/15/10/5)
+        {"RS": 0.45, "THEME": 0.35, "ZACKS": 0.10, "GROWTH": 0.10}, # 4. Theme-Driven Leader (45/35/10/10)
+        {"RS": 0.50, "THEME": 0.15, "ZACKS": 0.20, "GROWTH": 0.15}, # 5. Fundamental + Momentum Anchor (50/15/20/15)
     ],
     
     # 4. Fundamental Curves
@@ -68,16 +78,25 @@ LONG_PHASE_2 = {
 SHORT_PHASE_1 = {
     # 1. Stock Breakdown Momentum
     "SHORT_RS_RAW_WEIGHTS": [
-        # YTD Reversal (Baseline)
+        # 1. YTD Reversal (Production Baseline)
         {"4W": 0.30, "12W": 0.20, "1W": 0.10, "YTD": 0.40},
-        # Sharp Collapse (Heavy Immediate)
+        # 2. Sharp Collapse (Heavy Immediate)
         {"4W": 0.50, "12W": 0.30, "1W": 0.20, "YTD": 0.0},
+        # 3. Balanced Intermediate Breakdown
+        {"4W": 0.40, "12W": 0.30, "1W": 0.10, "YTD": 0.20},
+        # 4. 12W Structural Roll-Over
+        {"4W": 0.25, "12W": 0.45, "1W": 0.10, "YTD": 0.20},
+        # 5. Heavy YTD Structural Decay
+        {"4W": 0.20, "12W": 0.20, "1W": 0.05, "YTD": 0.55},
     ],
     
     # 2. Composite Calculation
     "SHORT_COMPOSITE_WEIGHTS": [
-        {"RS": 0.65, "THEME": 0.20, "ZACKS": 0.10, "GROWTH": 0.05}, # Baseline Breakdown
-        {"RS": 0.50, "THEME": 0.35, "ZACKS": 0.10, "GROWTH": 0.05}, # Thematic Exodus
+        {"RS": 0.50, "THEME": 0.35, "ZACKS": 0.10, "GROWTH": 0.05}, # 1. Production Baseline: Thematic Exodus (50/35/10/5)
+        {"RS": 0.65, "THEME": 0.20, "ZACKS": 0.10, "GROWTH": 0.05}, # 2. Legacy Breakdown (65/20/10/5)
+        {"RS": 0.75, "THEME": 0.15, "ZACKS": 0.05, "GROWTH": 0.05}, # 3. Pure Breakdown Momentum (75/15/5/5)
+        {"RS": 0.55, "THEME": 0.25, "ZACKS": 0.10, "GROWTH": 0.10}, # 4. Balanced Bearish (55/25/10/10)
+        {"RS": 0.50, "THEME": 0.20, "ZACKS": 0.20, "GROWTH": 0.10}, # 5. Fundamental Deterioration Heavy (50/20/20/10)
     ],
     
     # 3. Fundamental Curves

@@ -366,9 +366,10 @@ def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
     
     baseline_gates = {k: v[0] for k, v in LONG_PHASE_2.items()}
     baseline_gates["MIN_LONG_SCORE"] = 80.0
-    baseline_gates["MIN_RS"] = 85.0
-    baseline_gates["THEMES"] = ["Leading", "Neutral"]
-    baseline_gates["MIN_VOLUME"] = 1_500_000
+    baseline_gates["MIN_RS"] = 90.0
+    baseline_gates["THEMES"] = ["Leading", "Unclassified Leader"]
+    baseline_gates["BLOCKED_ZACKS"] = [3, 4, 5]
+    baseline_gates["MIN_VOLUME"] = 1_000_000
     
     results = []
     etf_explicit, macro_theme = load_mapping_dicts()
@@ -381,9 +382,9 @@ def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
             p["ZACKS_SCORE_MAP"], p["GROWTH_SCORE_MAP"]
         )
         metrics = simulate_long_baseline_gates(daily_scored, prices, all_dates, baseline_gates)
-        print(f"  [Model {i+1}] Strong 10D WR: {metrics['Strong_WR_10D']}% | PF: {metrics['Strong_PF_10D']} | Avg: {metrics['Strong_Avg_10D']}% | Trades: {metrics['Strong_Trades']}", flush=True)
+        print(f"  [Model {i+1:02d}] RS_W={p['RS_RAW_WEIGHTS']} | COMP_W={p['LONG_WEIGHTS']} -> 10D WR: {metrics['Strong_WR_10D']}% | PF: {metrics['Strong_PF_10D']} | Avg: {metrics['Strong_Avg_10D']}% | Trades: {metrics['Strong_Trades']}", flush=True)
         
-        flat_p = {}
+        flat_p = {"Model_ID": i + 1}
         for k, v in p.items():
             if isinstance(v, dict):
                 for sub_k, sub_v in v.items():
@@ -396,12 +397,12 @@ def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
         flat_p.update(metrics)
         results.append(flat_p)
         
-    out_df = pd.DataFrame(results)
+    sorted_results = sorted(results, key=lambda x: (x["Strong_PF_10D"], x["Strong_WR_10D"], x["Strong_Avg_10D"]), reverse=True)
+    out_df = pd.DataFrame(sorted_results)
     out_df.to_csv("c:/TABELA/backtesting/tuners/phase1_test_output.csv", index=False)
     
-    print("\nLong Phase 1 Complete. Selecting Top Math Structures by 10D Profit Factor & Win Rate...", flush=True)
-    sorted_results = sorted(results, key=lambda x: (x["Strong_PF_10D"], x["Strong_WR_10D"], x["Strong_Avg_10D"]), reverse=True)
-    top_models = sorted_results[:2]  # Top 2 best math models
+    print("\nLong Phase 1 Complete. Selecting Top 3 Math Structures by 10D Profit Factor & Win Rate...", flush=True)
+    top_models = sorted_results[:3]  # Top 3 best math models
     
     print("\n=======================================================", flush=True)
     print("Starting Long Phase 2 (Gate & Threshold Sweep)...", flush=True)
@@ -414,13 +415,9 @@ def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
     final_phase2_results = []
     
     for m_idx, flat_base_model in enumerate(top_models):
-        print(f"\nEvaluating Gates for Model #{m_idx+1} [Base 10D WR: {flat_base_model['Strong_WR_10D']}% PF: {flat_base_model['Strong_PF_10D']}]...", flush=True)
+        print(f"\nEvaluating Gates for Model #{m_idx+1} (Model_ID={flat_base_model['Model_ID']}) [Base 10D WR: {flat_base_model['Strong_WR_10D']}% PF: {flat_base_model['Strong_PF_10D']}]...", flush=True)
         
-        p = permutations[0]  # Reference model
-        for candidate in permutations:
-            if candidate["RS_RAW_WEIGHTS"]["4W"] == flat_base_model["RS_RAW_WEIGHTS_4W"] and candidate["ETF_PERIOD_WEIGHTS"]["1M"] == flat_base_model["ETF_PERIOD_WEIGHTS_1M"]:
-                p = candidate
-                break
+        p = permutations[flat_base_model["Model_ID"] - 1]
                 
         compiled_themes_by_date = compile_etf_themes(etf_data, all_dates, p["ETF_PERIOD_WEIGHTS"], p["ETF_AGGREGATION_MODE"], etf_explicit, macro_theme)
         daily_scored = compile_stock_scores(
@@ -458,6 +455,8 @@ def run_long_phase_1(stock_data, etf_data, all_dates, stock_to_theme, prices):
         
     print("\n--- TOP 5 LONG GATE CONFIGURATIONS (Minimum 30 Trades) ---", flush=True)
     cols_display = [
+        "Model_ID", "RS_RAW_WEIGHTS_4W", "RS_RAW_WEIGHTS_12W", "RS_RAW_WEIGHTS_1W",
+        "LONG_WEIGHTS_RS", "LONG_WEIGHTS_THEME", "LONG_WEIGHTS_ZACKS", "LONG_WEIGHTS_GROWTH",
         "MIN_VOLUME", "MIN_LONG_SCORE", "MIN_RS", "THEMES", "BLOCKED_ZACKS",
         "Strong_WR_10D", "Strong_PF_10D", "Strong_Avg_10D", "Strong_Trades", "Strong_WR_ToDate", "Strong_Avg_ToDate"
     ]

@@ -6,8 +6,8 @@ THEME_STRENGTH_CONFIG = {
     # Fast Sector Rotation (Idea 3): Focus purely on immediate 1W, 1M, and 3M capital flow.
     "PERIOD_WEIGHTS": {
         "Performance 1M (%)": 0.40,
-        "Performance 1W (%)": 0.35,
-        "Performance 3M (%)": 0.25,
+        "Performance 1W (%)": 0.20,
+        "Performance 3M (%)": 0.40,
         "Performance 6M (%)": 0.00,
         "Performance 1Y (%)": 0.00,
         "Performance 1D (%)": 0.00,
@@ -27,10 +27,10 @@ THEME_STRENGTH_CONFIG = {
 
 # Weights for the sector composite strength score
 SECTOR_COMPOSITE_WEIGHTS = {
-    "Performance 1W (%)": 0.2,
-    "Performance 1M (%)": 0.4,
-    "Performance 3M (%)": 0.3,
-    "Performance YTD (%)": 0.1,
+    "Performance 1W (%)": 0.25,
+    "Performance 1M (%)": 0.25,
+    "Performance 3M (%)": 0.25,
+    "Performance YTD (%)": 0.25,
 }
 
 # Configuration for sector classification
@@ -101,8 +101,8 @@ SHORT_RS_RAW_WEIGHTS = {
 
 # Short-specific composite weights — P3-C Winner: RS Heavy (RS 65%, Theme 20%)
 SHORT_COMPOSITE_WEIGHTS = {
-    "RS_WEIGHT": 0.65,
-    "THEME_WEIGHT": 0.20,
+    "RS_WEIGHT": 0.50,
+    "THEME_WEIGHT": 0.35,
     "ZACKS_WEIGHT": 0.10,
     "GROWTH_WEIGHT": 0.05,
 }
