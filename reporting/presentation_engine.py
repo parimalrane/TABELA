@@ -430,17 +430,24 @@ def load_todays_registry():
     return {}
 
 
-def _load_historical_breadth_nets():
+def _load_historical_breadth_nets(limit=10):
     from pathlib import Path
+    from config.runtime_context import context
     data_dir = Path("market_data") / "input_files"
-    stock_files = sorted(
-        data_dir.rglob("*_stocks.csv"),
-        key=lambda p: p.stem.replace("_stocks", "")
-    )
+    cur_date = str(context.market_date).replace("-", "")
+    by_date = {}
+    for p in data_dir.rglob("*_stocks.csv"):
+        d_str = p.stem.replace("_stocks", "").replace("-", "")
+        if d_str < cur_date:
+            by_date[d_str] = p
+    stock_files = [by_date[d] for d in sorted(by_date.keys())[-limit:]]
     nets = []
     for f in stock_files:
         try:
-            df = pd.read_csv(f)
+            try:
+                df = pd.read_csv(f)
+            except UnicodeError:
+                df = pd.read_csv(f, encoding="utf-16")
             if "Price as a % of 52 Wk H-L Range" in df.columns:
                 valid_range = pd.to_numeric(
                     df["Price as a % of 52 Wk H-L Range"],
@@ -669,14 +676,14 @@ def print_macro_weather(stocks, theme_strength_settings):
     
     stock_count_str = f"{len(stocks):,} Equities" if stocks is not None and not stocks.empty else "3,000+ Equities"
     print(f"[2] STRUCTURAL BREADTH ({stock_count_str})")
-    historical_nets = _load_historical_breadth_nets()
-    streaks = _compute_breadth_streaks(historical_nets)
-    movement_tag = ""
-    if streaks:
-        last_3 = streaks[-3:]
-        parts = [f"{count}{trend}" for trend, count in last_3]
-        movement_tag = f"  [ Movement: {' -> '.join(parts)} ]"
-    print(f"    > Price Extremes  : {nh} New Highs | {nl} New Lows  [ Net: {net:+} ]{movement_tag}")
+    historical_nets = _load_historical_breadth_nets(limit=10)
+    if historical_nets:
+        # Most Recent First: Today (net) -> yesterday -> ... -> 10 days ago
+        all_nets = [f"{net:+d}"] + [f"{n:+d}" for n in reversed(historical_nets[-10:])]
+        net_str = " , ".join(all_nets)
+    else:
+        net_str = f"{net:+d}"
+    print(f"    > Price Extremes  : {nh} New Highs | {nl} New Lows  [ Net (Most Recent First): {net_str} ]")
     _qa_warn = _range_data_quality_warning(stocks)
     if _qa_warn:
         print(_qa_warn)
