@@ -14,7 +14,7 @@ def save_unknown_classification(stocks):
     ].copy()
 
     unknown_stocks = unknown_stocks.sort_values(
-        by=["RS_Rating", "Long_Score"],
+        by=["RS_Rating"],
         ascending=False
     )
 
@@ -34,7 +34,7 @@ def save_unknown_classification(stocks):
             "industry": row["Industry"],
 
             "rs_rating": int(row["RS_Rating"]),
-            "long_score": float(row["Long_Score"]),
+            "long_score": float(row["RS_Rating"]),
 
             "last_close": float(row["Last Close"]),
             "price_position": float(

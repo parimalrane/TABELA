@@ -117,7 +117,7 @@ def run_simulation(dates, daily_stocks, daily_prices,
                    is_long=True,
                    min_range=85.0, max_range=30.0,
                    use_52w_gate=True,
-                   use_club_rule=True,
+                   use_tabela_retention=True,
                    pullback_pct=0.05,
                    wait_days=21,
                    stop_pct=0.07,
@@ -187,8 +187,8 @@ def run_simulation(dates, daily_stocks, daily_prices,
                         if res["status"] in ["STOP", "TARGET", "EXPIRED", "OPEN"]:
                             trades.append(res)
                 else:
-                    # STAY-IN CRITERIA (Club Rule)
-                    if use_club_rule:
+                    # STAY-IN CRITERIA (TABELA Retention)
+                    if use_tabela_retention:
                         if rs >= 75.0 and theme_class in ["Leading", "Neutral", "Unclassified Leader"] and zacks in [1, 2, 3]:
                             next_watchlist.add(ticker)
                     else:
@@ -224,8 +224,8 @@ def run_simulation(dates, daily_stocks, daily_prices,
                         if res["status"] in ["STOP", "TARGET", "EXPIRED", "OPEN"]:
                             trades.append(res)
                 else:
-                    # STAY-IN CRITERIA (Club Rule)
-                    if use_club_rule:
+                    # STAY-IN CRITERIA (TABELA Retention)
+                    if use_tabela_retention:
                         if rs <= 75.0 and theme_class in ["Lagging", "Neutral"] and zacks in [2, 3, 4, 5]:
                             next_watchlist.add(ticker)
                     else:
@@ -283,26 +283,26 @@ def main():
     print(headers)
     print("-" * len(headers))
     
-    # Baseline Long (No 52W gate, No Club Rule)
-    res_base = run_simulation(dates, daily_stocks, daily_prices, is_long=True, use_52w_gate=False, use_club_rule=False)
+    # Baseline Long (No 52W gate, No TABELA Retention)
+    res_base = run_simulation(dates, daily_stocks, daily_prices, is_long=True, use_52w_gate=False, use_tabela_retention=False)
     print(f"{'Baseline (No 52W Gate, Daily Reset)':<35} | {res_base['total_trades']:<8} | {res_base['closed']:<7} | {res_base['win_rate']:<6}% | {res_base['avg_return']:<6}% | {res_base['profit_factor']:<6} | {res_base['avg_wl_size']:<7}")
     
-    # Long 52W Gate variations (with Club Rule)
+    # Long 52W Gate variations (with TABELA Retention)
     for r in [70.0, 75.0, 80.0, 85.0, 90.0, 95.0]:
-        res = run_simulation(dates, daily_stocks, daily_prices, is_long=True, min_range=r, use_52w_gate=True, use_club_rule=True)
-        lbl = f"52W Range >= {r:.0f}% + Club Rule"
+        res = run_simulation(dates, daily_stocks, daily_prices, is_long=True, min_range=r, use_52w_gate=True, use_tabela_retention=True)
+        lbl = f"52W Range >= {r:.0f}% + TABELA Retention"
         print(f"{lbl:<35} | {res['total_trades']:<8} | {res['closed']:<7} | {res['win_rate']:<6}% | {res['avg_return']:<6}% | {res['profit_factor']:<6} | {res['avg_wl_size']:<7}")
         
     print("\n--- SHORT SIDE: 52W RANGE GATE SWEEP ---")
     print(headers)
     print("-" * len(headers))
     
-    res_short_base = run_simulation(dates, daily_stocks, daily_prices, is_long=False, use_52w_gate=False, use_club_rule=False)
+    res_short_base = run_simulation(dates, daily_stocks, daily_prices, is_long=False, use_52w_gate=False, use_tabela_retention=False)
     print(f"{'Baseline (No 52W Gate, Daily Reset)':<35} | {res_short_base['total_trades']:<8} | {res_short_base['closed']:<7} | {res_short_base['win_rate']:<6}% | {res_short_base['avg_return']:<6}% | {res_short_base['profit_factor']:<6} | {res_short_base['avg_wl_size']:<7}")
     
     for r in [40.0, 30.0, 20.0, 15.0, 10.0]:
-        res = run_simulation(dates, daily_stocks, daily_prices, is_long=False, max_range=r, use_52w_gate=True, use_club_rule=True)
-        lbl = f"52W Range <= {r:.0f}% + Club Rule"
+        res = run_simulation(dates, daily_stocks, daily_prices, is_long=False, max_range=r, use_52w_gate=True, use_tabela_retention=True)
+        lbl = f"52W Range <= {r:.0f}% + TABELA Retention"
         print(f"{lbl:<35} | {res['total_trades']:<8} | {res['closed']:<7} | {res['win_rate']:<6}% | {res['avg_return']:<6}% | {res['profit_factor']:<6} | {res['avg_wl_size']:<7}")
         
     print("\n" + "="*80)
@@ -312,12 +312,12 @@ def main():
     print("-" * 80)
     
     for pb in [0.03, 0.05, 0.08, 0.10, 0.15, 0.20]:
-        res_l = run_simulation(dates, daily_stocks, daily_prices, is_long=True, min_range=85.0, use_52w_gate=True, use_club_rule=True, pullback_pct=pb)
+        res_l = run_simulation(dates, daily_stocks, daily_prices, is_long=True, min_range=85.0, use_52w_gate=True, use_tabela_retention=True, pullback_pct=pb)
         print(f"Long Pullback {pb*100:4.1f}% | Range>=85%    | {res_l['total_trades']:<8} | {res_l['closed']:<7} | {res_l['win_rate']:<6}% | {res_l['avg_return']:<6}% | {res_l['profit_factor']:<6} | Long")
         
     print("-" * 80)
     for pb in [0.03, 0.05, 0.08, 0.10, 0.15, 0.20]:
-        res_s = run_simulation(dates, daily_stocks, daily_prices, is_long=False, max_range=30.0, use_52w_gate=True, use_club_rule=True, pullback_pct=pb)
+        res_s = run_simulation(dates, daily_stocks, daily_prices, is_long=False, max_range=30.0, use_52w_gate=True, use_tabela_retention=True, pullback_pct=pb)
         print(f"Short Bounce  {pb*100:4.1f}% | Range<=30%    | {res_s['total_trades']:<8} | {res_s['closed']:<7} | {res_s['win_rate']:<6}% | {res_s['avg_return']:<6}% | {res_s['profit_factor']:<6} | Short")
 
 if __name__ == "__main__":

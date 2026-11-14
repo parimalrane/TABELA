@@ -48,7 +48,7 @@ def build_theme_breadth(stocks, long_candidates, distribution_watchlist):
     
     true_longs_series = (
         formatted_longs
-        .sort_values(["Long_Score", "RS_Rating"], ascending=[False, False])
+        .sort_values("RS_Rating", ascending=False)
         .groupby("Mapped_Theme")["Ticker"]
         .apply(lambda s: ", ".join(s.astype(str).str.replace("*", "", regex=False)))
     )

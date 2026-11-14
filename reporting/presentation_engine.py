@@ -1022,14 +1022,22 @@ def print_daily_scan(
 
     strong_bullish_out = "========================================\nSTRONG BULLISH (Trend Continuation)\nLegend: ~ = Unknown/Unclassified\n========================================\n"
 
-    display_df = long_candidates[
+    long_candidates_df = long_candidates.copy()
+    clean_close_l = pd.to_numeric(long_candidates_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+    clean_hi_l = pd.to_numeric(long_candidates_df['52 Week High'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+    long_candidates_df['% off Hi'] = ((clean_close_l - clean_hi_l) / clean_hi_l * 100).apply(
+        lambda v: str(int(round(v))) if pd.notna(v) and abs(round(v)) > 0 else "0"
+    )
+    long_candidates_df['Zacks'] = pd.to_numeric(long_candidates_df['Zacks Rank'], errors='coerce').fillna(0).astype(int).astype(str)
+
+    display_df = long_candidates_df[
         [
             "Ticker",
             "Mapped_Theme",
             "Theme_Class",
-            "Zacks Rank",
-            "Long_Score",
+            "Zacks",
             "RS_Rating",
+            "% off Hi",
             "Sector (SPDR)",
             "Sector Rank"
         ]
@@ -1038,11 +1046,6 @@ def print_daily_scan(
     
     # Prepend tag directly to the Ticker string for clean left-side reading
     display_df.loc[display_df["Theme_Class"].isin(["Unknown", "Unclassified Leader"]), "Ticker"] = "~" + display_df["Ticker"]
-    
-
-
-    if "Long_Score" in display_df.columns:
-        display_df["Long_Score"] = display_df["Long_Score"].map("{:.2f}".format)
 
     true_longs = display_df
     true_long_tickers = true_longs["Ticker"].tolist()
@@ -1066,21 +1069,27 @@ def print_daily_scan(
         true_longs = true_longs.drop(columns=["Sector (SPDR)", "Sector Rank"])
 
     if not distribution_watchlist.empty:
-        display_df = distribution_watchlist[
+        dist_df = distribution_watchlist.copy()
+        clean_close_s = pd.to_numeric(dist_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        clean_lo_s = pd.to_numeric(dist_df['52 Week Low'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        dist_df['% off Lo'] = ((clean_close_s - clean_lo_s) / clean_lo_s * 100).apply(
+            lambda v: str(int(round(v))) if pd.notna(v) and round(v) > 0 else "0"
+        )
+        dist_df['Zacks'] = pd.to_numeric(dist_df['Zacks Rank'], errors='coerce').fillna(0).astype(int).astype(str)
+
+        display_df = dist_df[
             [
                 "Ticker",
                 "Mapped_Theme",
                 "Theme_Class",
-                "Zacks Rank",
-                "Short_Score",
+                "Zacks",
                 "Short_RS_Rating",
+                "% off Lo",
                 "Sector (SPDR)",
                 "Sector Rank"
             ]
         ].copy()
         display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
-        if "Short_Score" in display_df.columns:
-            display_df["Short_Score"] = display_df["Short_Score"].map("{:.2f}".format)
 
         display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
         display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
@@ -1103,18 +1112,6 @@ def print_daily_scan(
     full_long_list = clean_all_tickers(true_longs)
     full_short_list = clean_all_tickers(distribution_watchlist)
 
-    # =========================================================================
-    # RE-ENTERED / TURNAROUND ENGINE (Historical Dropped Scan)
-    # =========================================================================
-    existing_long_keys = set(t.replace("*", "").replace("~", "").replace("^", "").strip().upper() for t in true_long_tickers)
-    current_date_str = str(context.market_date) if hasattr(context, "market_date") else datetime.today().strftime("%Y-%m-%d")
-    current_date = datetime.strptime(current_date_str, "%Y-%m-%d")
-
-    reentry_long_rows = []
-    reentry_long_tickers = []
-    reentry_short_rows = []
-    reentry_short_tickers = []
-
     # --- COMBINED BULLISH UNIVERSE ---
     bullish_rows = []
     if not true_longs.empty:
@@ -1128,10 +1125,10 @@ def print_daily_scan(
 
     if bullish_rows:
         bullish_df = pd.DataFrame(bullish_rows)
-        cols = ['Ticker', 'Mapped_Theme', 'Zacks Rank', 'Long_Score', 'RS_Rating', 'Movement', 'Days', 'Sector (Rk)']
+        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'RS_Rating', '% off Hi', 'Movement', 'Days', 'Sector (Rk)']
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
-        bullish_df['_score_num'] = pd.to_numeric(bullish_df['Long_Score'], errors='coerce').fillna(0)
+        bullish_df['_score_num'] = pd.to_numeric(bullish_df['RS_Rating'], errors='coerce').fillna(0)
         bullish_df = bullish_df.sort_values(['_score_num'], ascending=[False]).drop(columns=['_score_num'])
         bullish_universe_out += bullish_df.to_string(index=False) + '\n'
     else:
@@ -1149,12 +1146,14 @@ def print_daily_scan(
 
     if bearish_rows:
         bearish_df = pd.DataFrame(bearish_rows)
-        cols = ['Ticker', 'Mapped_Theme', 'Zacks Rank', 'Short_Score', 'Short_RS_Rating', 'Movement', 'Days', 'Sector (Rk)']
+        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', '% off Lo', 'Movement', 'Days', 'Sector (Rk)']
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
-        bearish_df['_score_num'] = pd.to_numeric(bearish_df['Short_Score'], errors='coerce').fillna(999)
+        bullish_short_rs = 'Short_RS_Rating' if 'Short_RS_Rating' in bearish_df.columns else 'RS_Rating'
+        bearish_df['_score_num'] = pd.to_numeric(bearish_df[bullish_short_rs], errors='coerce').fillna(999)
         bearish_df = bearish_df.sort_values(['_score_num'], ascending=[True]).drop(columns=['_score_num'])
         bearish_universe_out += bearish_df.to_string(index=False) + '\n'
+
     else:
         bearish_universe_out += 'No active bearish candidates today.\n'
 
@@ -1242,29 +1241,8 @@ def print_daily_scan(
     active_bullish_set = set(all_bullish_tickers)
     active_bearish_set = set(all_bearish_tickers)
 
-    # Re-entry exits: names on yesterday's Re-entered lists that are no longer
-    # Re-entered (or active) today were previously dropped silently (no audit trail).
-    prev_reentered_long = set()
-    prev_reentered_short = set()
-    try:
-        _rd = Path("market_data") / "daily_reports"
-        _cur = str(context.market_date)
-        _prev_reports = sorted([f for f in _rd.rglob("*.txt") if f.stem < _cur])
-        if _prev_reports:
-            for _line in _prev_reports[-1].read_text(encoding="utf-8").splitlines():
-                if _line.startswith("###Mild_Bullish_Stocks,") or _line.startswith("###Reentered_Long_Stocks,"):
-                    prev_reentered_long = {x.strip().upper() for x in _line.split(",", 1)[1].split(",") if x.strip()}
-                elif _line.startswith("###Mild_Bearish_Stocks,") or _line.startswith("###Reentered_Short_Stocks,"):
-                    prev_reentered_short = {x.strip().upper() for x in _line.split(",", 1)[1].split(",") if x.strip()}
-    except Exception:
-        pass
-    reentry_exit_long = prev_reentered_long - set(reentry_long_tickers)
-    reentry_exit_short = prev_reentered_short - set(reentry_short_tickers)
-
-    dropped_bullish_candidates = set(deltas.get("dropped_longs", [])) | reentry_exit_long
-    dropped_bullish = sorted([t for t in dropped_bullish_candidates if t not in active_bullish_set])
-    dropped_bearish_candidates = set(deltas.get("left_distribution", [])) | reentry_exit_short
-    dropped_bearish = sorted([t for t in dropped_bearish_candidates if t not in active_bearish_set])
+    dropped_bullish = sorted([t for t in deltas.get("dropped_longs", []) if t not in active_bullish_set])
+    dropped_bearish = sorted([t for t in deltas.get("left_distribution", []) if t not in active_bearish_set])
 
     prev_leading_etfs = []
     prev_lagging_etfs = []
@@ -1338,23 +1316,19 @@ def print_daily_scan(
                 z_str = str(int(z_val)) if pd.notna(z_val) else "-"
                 rs_val = pd.to_numeric(s_data.get("RS_Rating"), errors="coerce")
                 rs_str = str(int(rs_val)) if pd.notna(rs_val) else "-"
-                l_score = pd.to_numeric(s_data.get("Long_Score"), errors="coerce")
-                l_str = f"{float(l_score):.2f}" if pd.notna(l_score) else "-"
                 s_rs = pd.to_numeric(s_data.get("Short_RS_Rating"), errors="coerce")
                 s_rs_str = str(int(s_rs)) if pd.notna(s_rs) else "-"
-                s_score = pd.to_numeric(s_data.get("Short_Score"), errors="coerce")
-                s_str = f"{float(s_score):.2f}" if pd.notna(s_score) else "-"
                 close_v = pd.to_numeric(s_data.get("Last Close"), errors="coerce")
                 close_str = f"{float(close_v):.2f}" if pd.notna(close_v) else "-"
                 vol_v = pd.to_numeric(s_data.get("Avg Volume"), errors="coerce")
                 vol_str = str(int(vol_v)) if pd.notna(vol_v) else "-"
                 theme_val = str(s_data.get("Mapped_Theme", "-"))
             else:
-                z_str = rs_str = l_str = s_rs_str = s_str = close_str = vol_str = theme_val = "-"
+                z_str = rs_str = s_rs_str = close_str = vol_str = theme_val = "-"
             new_records.append({
                 "Date": market_date_val, "Type": "Dropped Long", "Ticker": tkr, "Theme": theme_val,
-                "Zacks_Rank": z_str, "RS_Rating": rs_str, "Long_Score": l_str,
-                "Short_RS_Rating": s_rs_str, "Short_Score": s_str, "Last_Close": close_str, "Volume": vol_str
+                "Zacks_Rank": z_str, "RS_Rating": rs_str,
+                "Short_RS_Rating": s_rs_str, "Last_Close": close_str, "Volume": vol_str
             })
 
         # Only true drops from Strong Short are recorded as "Dropped Short" in the historical ledger
@@ -1366,40 +1340,36 @@ def print_daily_scan(
                 z_str = str(int(z_val)) if pd.notna(z_val) else "-"
                 rs_val = pd.to_numeric(s_data.get("RS_Rating"), errors="coerce")
                 rs_str = str(int(rs_val)) if pd.notna(rs_val) else "-"
-                l_score = pd.to_numeric(s_data.get("Long_Score"), errors="coerce")
-                l_str = f"{float(l_score):.2f}" if pd.notna(l_score) else "-"
                 s_rs = pd.to_numeric(s_data.get("Short_RS_Rating"), errors="coerce")
                 s_rs_str = str(int(s_rs)) if pd.notna(s_rs) else "-"
-                s_score = pd.to_numeric(s_data.get("Short_Score"), errors="coerce")
-                s_str = f"{float(s_score):.2f}" if pd.notna(s_score) else "-"
                 close_v = pd.to_numeric(s_data.get("Last Close"), errors="coerce")
                 close_str = f"{float(close_v):.2f}" if pd.notna(close_v) else "-"
                 vol_v = pd.to_numeric(s_data.get("Avg Volume"), errors="coerce")
                 vol_str = str(int(vol_v)) if pd.notna(vol_v) else "-"
                 theme_val = str(s_data.get("Mapped_Theme", "-"))
             else:
-                z_str = rs_str = l_str = s_rs_str = s_str = close_str = vol_str = theme_val = "-"
+                z_str = rs_str = s_rs_str = close_str = vol_str = theme_val = "-"
             new_records.append({
                 "Date": market_date_val, "Type": "Dropped Short", "Ticker": tkr, "Theme": theme_val,
-                "Zacks_Rank": z_str, "RS_Rating": rs_str, "Long_Score": l_str,
-                "Short_RS_Rating": s_rs_str, "Short_Score": s_str, "Last_Close": close_str, "Volume": vol_str
+                "Zacks_Rank": z_str, "RS_Rating": rs_str,
+                "Short_RS_Rating": s_rs_str, "Last_Close": close_str, "Volume": vol_str
             })
 
         for etf_tkr in dropped_leading_etfs:
             new_records.append({
                 "Date": market_date_val, "Type": "Dropped Leading ETF", "Ticker": etf_tkr,
                 "Theme": etf_theme_map.get(etf_tkr, "-"), "Zacks_Rank": "-", "RS_Rating": "-",
-                "Long_Score": "-", "Short_RS_Rating": "-", "Short_Score": "-", "Last_Close": "-", "Volume": "-"
+                "Short_RS_Rating": "-", "Last_Close": "-", "Volume": "-"
             })
 
         for etf_tkr in dropped_lagging_etfs:
             new_records.append({
                 "Date": market_date_val, "Type": "Dropped Lagging ETF", "Ticker": etf_tkr,
                 "Theme": etf_theme_map.get(etf_tkr, "-"), "Zacks_Rank": "-", "RS_Rating": "-",
-                "Long_Score": "-", "Short_RS_Rating": "-", "Short_Score": "-", "Last_Close": "-", "Volume": "-"
+                "Short_RS_Rating": "-", "Last_Close": "-", "Volume": "-"
             })
 
-        cols = ["Date", "Type", "Ticker", "Theme", "Zacks_Rank", "RS_Rating", "Long_Score", "Short_RS_Rating", "Short_Score", "Last_Close", "Volume"]
+        cols = ["Date", "Type", "Ticker", "Theme", "Zacks_Rank", "RS_Rating", "Short_RS_Rating", "Last_Close", "Volume"]
         new_df = pd.DataFrame(new_records, columns=cols)
 
         if csv_path.exists():

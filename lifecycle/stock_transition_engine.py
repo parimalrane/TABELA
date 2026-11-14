@@ -69,11 +69,7 @@ def _meets_criteria(row, criteria_dict):
     Helper to check if a row meets entry or maintain criteria.
     """
     rs = float(row.get("RS_Rating", 0) or 0)
-    score = float(row.get("Long_Score", 0) or 0)
-    
     short_rs = float(row.get("Short_RS_Rating", 0) or 0)
-    short_score = float(row.get("Short_Score", 0) or 0)
-    
     theme = str(row.get("Theme_Class", ""))
 
     if "MIN_RS" in criteria_dict:
@@ -81,18 +77,10 @@ def _meets_criteria(row, criteria_dict):
     if "MAX_RS" in criteria_dict:
         if rs > criteria_dict["MAX_RS"]: return False
 
-    if "MIN_LONG_SCORE" in criteria_dict:
-        if score < criteria_dict["MIN_LONG_SCORE"]: return False
-    if "MAX_LONG_SCORE" in criteria_dict:
-        if score > criteria_dict["MAX_LONG_SCORE"]: return False
-        
     if "MIN_SHORT_RS" in criteria_dict:
         if short_rs < criteria_dict["MIN_SHORT_RS"]: return False
     if "MAX_SHORT_RS" in criteria_dict:
         if short_rs > criteria_dict["MAX_SHORT_RS"]: return False
-        
-    if "MAX_SHORT_SCORE" in criteria_dict:
-        if short_score > criteria_dict["MAX_SHORT_SCORE"]: return False
 
     if "THEMES" in criteria_dict:
         if theme not in criteria_dict["THEMES"]: return False

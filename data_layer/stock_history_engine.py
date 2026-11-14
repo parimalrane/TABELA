@@ -186,16 +186,16 @@ def save_stock_history(stocks):
             ),
 
             "long_score": round(
-                safe_float(row["Long_Score"]), 2
+                safe_float(row.get("RS_Rating", 0)), 2
             ),
 
             "composite_score": round(
-                safe_float(row.get("Long_Score", 0)), 2
+                safe_float(row.get("RS_Rating", 0)), 2
             ),
 
             # Short Engine (isolated scoring — never mixed with long_score)
             "short_score": round(
-                safe_float(row.get("Short_Score", 0)), 2
+                safe_float(row.get("Short_RS_Rating", 0)), 2
             ),
 
             "short_rs_rating": safe_int(

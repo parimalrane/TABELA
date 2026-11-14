@@ -22,7 +22,6 @@ from reporting.watchlist_delta_engine import (
 )
 
 from data_layer.historical_intelligence_engine import build_theme_performance_table
-from scoring.long_scoring_engine import calculate_long_score
 from reporting.presentation_engine import (
     print_daily_scan,
     print_etf_eligibility,
@@ -36,14 +35,13 @@ from reporting.presentation_engine import (
 
 from scoring.rotation_engine import (
     calculate_rotation_delta,
-    print_rotation_report,
     save_rotation_delta,
 )
 from scoring.scoring_engine import (
     calculate_rs_raw,
     calculate_rs_rating,
-    calculate_zacks_score,
-    calculate_growth_score,
+    calculate_short_rs_raw,
+    calculate_short_rs_rating,
 )
 
 from data_layer.snapshot_engine import save_daily_snapshot
@@ -506,11 +504,9 @@ def map_stock_themes(stocks):
     return stocks
 
 def score_stocks(stocks):
-    stocks = calculate_long_score(stocks)
-    # Short scoring is fully isolated — uses SHORT_* config variables only.
-    # Does NOT modify RS_Rating, Long_Score, Zacks_Score, or Growth_Score.
-    from scoring.scoring_engine import calculate_short_score
-    stocks = calculate_short_score(stocks)
+    # Calculate Short RS metrics for breakdown candidates
+    stocks = calculate_short_rs_raw(stocks)
+    stocks = calculate_short_rs_rating(stocks)
     return stocks
 
 
@@ -688,8 +684,6 @@ def run_tabela_pipeline():
 
     stocks = calculate_rs_raw(stocks)
     stocks = calculate_rs_rating(stocks)
-    stocks = calculate_zacks_score(stocks)
-    stocks = calculate_growth_score(stocks)
     stocks = resolve_unclassified_leaders(stocks, theme_class_map)
 
     stocks = assign_stock_theme_classification(
