@@ -925,7 +925,7 @@ def print_daily_scan(
         ascending=[True, False, False]
     ).drop(columns=["_macro_rank", "_score_num", "_tot_stocks"])
 
-    print(f"{'Micro Theme'.ljust(28)} {'Macro Theme'.ljust(16)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'W_Brdth'.rjust(7)} {'ETF_RS'.rjust(6)}   {'Macro State & Movement'.ljust(25)}   {'ETFs'.ljust(20)}   {'Stocks'}")
+    print(f"{'Macro Theme'.ljust(18)} {'Micro Theme'.ljust(26)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'W_Brdth'.rjust(7)} {'ETF_RS'.rjust(6)}   {'Macro State & Movement'.ljust(25)}   {'ETFs'.ljust(20)}   {'Stocks'}")
     print("-" * 145)
     
     for _, row in display_df.iterrows():
@@ -933,8 +933,8 @@ def print_daily_scan(
         parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
         
         # Format columns
-        micro = (mapped_theme[:26] + "..") if len(mapped_theme) > 28 else mapped_theme.ljust(28)
-        macro = (parent_theme[:14] + "..") if len(parent_theme) > 16 else parent_theme.ljust(16)
+        macro = (parent_theme[:16] + "..") if len(parent_theme) > 18 else parent_theme.ljust(18)
+        micro = (mapped_theme[:24] + "..") if len(mapped_theme) > 26 else mapped_theme.ljust(26)
         
         total = int(row['Total_Stocks']) if pd.notna(row['Total_Stocks']) else 0
         qual = int(row['Strong_Stocks']) if pd.notna(row['Strong_Stocks']) else 0
@@ -974,7 +974,8 @@ def print_daily_scan(
         etfs_val = THEME_ETF_MAPPING.get(mapped_theme) or THEME_ETF_MAPPING.get(parent_theme, "")
         etfs_col = (etfs_val[:18] + "..") if len(etfs_val) > 20 else etfs_val.ljust(20)
 
-        prefix = f"{micro} {macro} {tot_str} {q_str} {s_str} {r_str}   {mac_state_str}   {etfs_col}   "
+        prefix = f"{macro} {micro} {tot_str} {q_str} {s_str} {r_str}   {mac_state_str}   {etfs_col}   "
+
         prefix_len = len(prefix)
         
         leaders_str = str(row['Leaders']).strip()
@@ -1385,94 +1386,68 @@ def print_daily_scan(
     # --- COMBINED BULLISH UNIVERSE ---
     bullish_rows = []
     if not true_longs.empty:
-        for r_dict in true_longs.to_dict("records"):
-            r_dict["Status"] = "Strong"
+        for r_dict in true_longs.to_dict('records'):
             bullish_rows.append(r_dict)
-    if reentry_long_rows:
-        bullish_rows.extend(reentry_long_rows)
 
-    bullish_universe_out = "========================================\n"
-    bullish_universe_out += "BULLISH UNIVERSE (Strong & Mild)\n"
-    bullish_universe_out += "Legend: ~ = Unknown/Unclassified\n"
-    bullish_universe_out += "========================================\n"
+    bullish_universe_out = '========================================\n'
+    bullish_universe_out += 'BULLISH UNIVERSE\n'
+    bullish_universe_out += 'Legend: ~ = Unknown/Unclassified\n'
+    bullish_universe_out += '========================================\n'
 
     if bullish_rows:
         bullish_df = pd.DataFrame(bullish_rows)
-        cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Long_Score", "RS_Rating", "Movement", "Days", "Sector (Rk)"]
+        cols = ['Ticker', 'Mapped_Theme', 'Zacks Rank', 'Long_Score', 'RS_Rating', 'Movement', 'Days', 'Sector (Rk)']
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
-        status_rank_map = {"Strong": 0, "Mild": 1}
-        bullish_df["_st_rank"] = bullish_df["Status"].map(status_rank_map).fillna(9)
-        bullish_df["_score_num"] = pd.to_numeric(bullish_df["Long_Score"], errors="coerce").fillna(0)
-        bullish_df = bullish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, False]).drop(columns=["_st_rank", "_score_num"])
-        bullish_universe_out += bullish_df.to_string(index=False) + "\n"
+        bullish_df['_score_num'] = pd.to_numeric(bullish_df['Long_Score'], errors='coerce').fillna(0)
+        bullish_df = bullish_df.sort_values(['_score_num'], ascending=[False]).drop(columns=['_score_num'])
+        bullish_universe_out += bullish_df.to_string(index=False) + '\n'
     else:
-        bullish_universe_out += "No active bullish candidates today.\n"
+        bullish_universe_out += 'No active bullish candidates today.\n'
 
     # --- COMBINED BEARISH UNIVERSE ---
     bearish_rows = []
     if not distribution_watchlist.empty and not display_df.empty:
-        for r_dict in display_df.to_dict("records"):
-            r_dict["Status"] = "Strong"
+        for r_dict in display_df.to_dict('records'):
             bearish_rows.append(r_dict)
-    if reentry_short_rows:
-        bearish_rows.extend(reentry_short_rows)
 
-    bearish_universe_out = "========================================\n"
-    bearish_universe_out += "BEARISH UNIVERSE (Strong & Mild Breakdowns)\n"
-    bearish_universe_out += "========================================\n"
+    bearish_universe_out = '========================================\n'
+    bearish_universe_out += 'BEARISH UNIVERSE\n'
+    bearish_universe_out += '========================================\n'
 
     if bearish_rows:
         bearish_df = pd.DataFrame(bearish_rows)
-        cols = ["Ticker", "Mapped_Theme", "Status", "Zacks Rank", "Short_Score", "Short_RS_Rating", "Movement", "Days", "Sector (Rk)"]
+        cols = ['Ticker', 'Mapped_Theme', 'Zacks Rank', 'Short_Score', 'Short_RS_Rating', 'Movement', 'Days', 'Sector (Rk)']
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
-        status_rank_map = {"Strong": 0, "Mild": 1}
-        bearish_df["_st_rank"] = bearish_df["Status"].map(status_rank_map).fillna(9)
-        bearish_df["_score_num"] = pd.to_numeric(bearish_df["Short_Score"], errors="coerce").fillna(999)
-        bearish_df = bearish_df.sort_values(["_st_rank", "_score_num"], ascending=[True, True]).drop(columns=["_st_rank", "_score_num"])
-        bearish_universe_out += bearish_df.to_string(index=False) + "\n"
+        bearish_df['_score_num'] = pd.to_numeric(bearish_df['Short_Score'], errors='coerce').fillna(999)
+        bearish_df = bearish_df.sort_values(['_score_num'], ascending=[True]).drop(columns=['_score_num'])
+        bearish_universe_out += bearish_df.to_string(index=False) + '\n'
     else:
-        bearish_universe_out += "No active bearish candidates today.\n"
+        bearish_universe_out += 'No active bearish candidates today.\n'
 
-    print("\n" + bullish_universe_out)
-    print("\n" + bearish_universe_out)
+    print('\n' + bullish_universe_out)
+    print('\n' + bearish_universe_out)
 
-    print("TRADINGVIEW WATCHLIST EXPORT")
+    print('TRADINGVIEW WATCHLIST EXPORT')
     all_bullish_tickers = []
     for t in true_long_tickers:
-        clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
+        clean = str(t).replace('*', '').replace('~', '').replace('^', '').strip().upper()
         if clean and clean not in all_bullish_tickers:
             all_bullish_tickers.append(clean)
 
     all_bearish_tickers = []
     if not distribution_watchlist.empty:
-        for t in distribution_watchlist["Ticker"].tolist():
-            clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
+        for t in distribution_watchlist['Ticker'].tolist():
+            clean = str(t).replace('*', '').replace('~', '').replace('^', '').strip().upper()
             if clean and clean not in all_bearish_tickers:
                 all_bearish_tickers.append(clean)
 
-    bullish_export_str = ",".join(all_bullish_tickers)
-    bearish_export_str = ",".join(all_bearish_tickers)
+    bullish_export_str = ','.join(all_bullish_tickers)
+    bearish_export_str = ','.join(all_bearish_tickers)
 
-    clean_reentry_long = []
-    for t in reentry_long_tickers:
-        clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
-        if clean and clean not in clean_reentry_long:
-            clean_reentry_long.append(clean)
-
-    clean_reentry_short = []
-    for t in reentry_short_tickers:
-        clean = str(t).replace("*", "").replace("~", "").replace("^", "").strip().upper()
-        if clean and clean not in clean_reentry_short:
-            clean_reentry_short.append(clean)
-
-    print("###Bullish_Stocks," + bullish_export_str + ",") if bullish_export_str else print("###Bullish_Stocks,")
-    print("###Bearish_Stocks," + bearish_export_str + ",") if bearish_export_str else print("###Bearish_Stocks,")
-    reentry_long_str = ",".join(clean_reentry_long)
-    reentry_short_str = ",".join(clean_reentry_short)
-    print("###Mild_Bullish_Stocks," + reentry_long_str + ",") if reentry_long_str else print("###Mild_Bullish_Stocks,")
-    print("###Mild_Bearish_Stocks," + reentry_short_str + ",") if reentry_short_str else print("###Mild_Bearish_Stocks,")
+    print('###Bullish_Stocks,' + bullish_export_str + ',') if bullish_export_str else print('###Bullish_Stocks,')
+    print('###Bearish_Stocks,' + bearish_export_str + ',') if bearish_export_str else print('###Bearish_Stocks,')
 
     # Thematic & Sector ETF Watchlists (Primary Pure-Play per theme)
     def extract_primary_etf(etf_raw):

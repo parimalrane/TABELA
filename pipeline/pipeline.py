@@ -522,7 +522,7 @@ def build_candidates(stocks):
     long_candidates = (
         long_watchlist
         .drop_duplicates(subset="Ticker")
-        .sort_values("Long_Score", ascending=False)
+        .sort_values("RS_Rating", ascending=False)
         .reset_index(drop=True)
     )
 
@@ -534,9 +534,11 @@ def build_candidates(stocks):
     
     if not distribution_candidates.empty:
         distribution_candidates = distribution_candidates.drop_duplicates(subset=["Ticker"])
-        distribution_candidates = distribution_candidates.sort_values(["Long_Score", "RS_Rating"], ascending=[True, True])
+        sort_col = "Short_RS_Rating" if "Short_RS_Rating" in distribution_candidates.columns else "RS_Rating"
+        distribution_candidates = distribution_candidates.sort_values([sort_col], ascending=[True])
 
     distribution_watchlist = distribution_candidates
+
 
     current_long_tickers = {
         ticker.replace("*", "")

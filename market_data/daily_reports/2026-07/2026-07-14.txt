@@ -17,7 +17,7 @@ MARKET DATE: 2026-07-14
     Dow Jones (DIA)     +0.04%    -0.71%     +2.54%      +8.46%        +19.64%
 
 [2] STRUCTURAL BREADTH (2,219 Equities)
-    > Price Extremes  : 137 New Highs | 44 New Lows  [ Net: +93 ]
+    > Price Extremes  : 137 New Highs | 44 New Lows  [ Net (Most Recent First): +93 ]
 ========================================================================
 
 ========================================================================
@@ -46,114 +46,90 @@ THEME BREADTH ANALYSIS
 Legend: [No Prefix]=Long / #=Short
         + - = 1D Rank Delta
 ========================================
-Micro Theme                  Macro Theme      Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
+Macro Theme        Micro Theme                Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Memory                       Semiconductors     4    2   77.66  11.45   Leading (1 -> +3)           [XLK] DRAM             MU
-Semiconductor Equipment      Semiconductors    27    3   34.31  11.45   Leading (1 -> +3)           [XLK] SMH, SOXX        AMAT
-Communications Cloud         Cloud Computing    4    3  113.47   9.39   Leading (3)                 [XLK] CLOU, FCOM       TWLO
-Cloud Infrastructure         Cloud Computing    5    3  103.92   9.39   Leading (3)                 [XLK] CLOU, WCLD       NET
-Healthcare Services          Healthcare        15    7  124.22   9.39   Leading (4 -> -2)           [XLV] IHI, XBI         PGNY, HUM, OSCR
-Cybersecurity                Software          13    9  178.64   4.93   Leading (6 -> -1)           [XLK] CIBR, BUG        OKTA, S, BB, FTNT
-Developer Infrastructure     Software           3    2   88.73   4.93   Leading (6 -> -1)           [XLK] IGV, CLOU        GTLB
-Professional Services        Software           3    2   86.42   4.93   Leading (6 -> -1)           [XLK] IGV, XSW         VSTS
-Software                     Software         193   27   70.04   4.93   Leading (6 -> -1)           [XLK] IGV, XSW         PENG, PD, FIG, ACIW, PRGS, BILL
-Digital Health               Software           1    1   68.62   4.93   Leading (6 -> -1)           [XLK] IGV, XSW         HNGE
-Real Estate Technology       Software           1    1   66.54   4.93   Leading (6 -> -1)           [XLK] IGV, XSW         COMP
-Biotech                      Biotech           86   18   88.69   4.78   Leading (7)                 [XLV] XBI, IBB         SNDX, MGTX
-Biotechnology                Biotech            5    2   68.80   4.78   Leading (7)                 [XLV] XBI, IBB         KNSA
-Communication Infrastructure Telecom            1    1   68.62   3.17   Leading (10 -> +2)          [XLC] IYZ, VOX         BAND
-AI Servers                   Artificial Int..   2    2  104.92   1.84   Leading (12 -> +8)          [XLK] SMH, AIQ         DELL, HPE
-AI Compute                   Artificial Int..   5    1   34.40   1.84   Leading (12 -> +8)          [XLK] SMH, AIQ         AMD
-Space Infrastructure         Aerospace & De..   5    1   30.82  -8.50   Lagging (33 -> +3)          [XLI] ARKX, ITA        #ASTS
-Medical Devices              Medical Devices   87    9   39.09  -9.35   Lagging (34 -> -1)          [XLV] IHI, XHE         #ABT
-Uranium Mining               Uranium Mining     1    1   58.22 -15.20   Lagging (37 -> +5)          [XLU] URNM, URA        #CCJ
-Nuclear Infrastructure       Uranium Mining     3    1   40.66 -15.20   Lagging (37 -> +5)          [XLU] NLR, URNM        #CEG
-Silver Mining                Silver Mining      5    4  122.20 -16.37   Lagging (39 -> +1)          [XLB] SIL, SILJ        #PAAS
-Gold Mining                  Gold Mining       43   22  163.50 -17.19   Lagging (40 -> +1)          [XLB] GDX, GDXJ        #AU, #B, #CDE, #EGO, #HBM, #IAG,
-                                                                                                                           #KGC, #MP, #NEM, #VALE
+Semiconductors     Semiconductors              50    3   22.41  11.45   Leading (1 -> +3)           [XLK] SMH, SOXX        ASX
+Cloud Computing    Communications Cloud         4    3  113.47   9.39   Leading (3)                 [XLK] CLOU, FCOM       TWLO
+Cloud Computing    Cloud Infrastructure         5    3  103.92   9.39   Leading (3)                 [XLK] CLOU, WCLD       NET, DDOG
+Healthcare         Healthcare Services         15    7  124.22   9.39   Leading (4 -> -2)           [XLV] IHI, XBI         PGNY, OSCR, HUM
+Healthcare         Healthcare                  41   11   96.18   9.39   Leading (4 -> -2)           [XLV] IHI, XBI         LFST
+Software           Cybersecurity               13    9  178.64   4.93   Leading (6 -> -1)           [XLK] CIBR, BUG        OKTA, S, FTNT
+Software           Professional Services        3    2   86.42   4.93   Leading (6 -> -1)           [XLK] IGV, XSW         VSTS
+Software           Software                   193   27   70.04   4.93   Leading (6 -> -1)           [XLK] IGV, XSW         PENG, ACIW
+Software           Digital Health               1    1   68.62   4.93   Leading (6 -> -1)           [XLK] IGV, XSW         HNGE
+Biotech            Biotech                     86   18   88.69   4.78   Leading (7)                 [XLV] XBI, IBB         SNDX, NRIX, FTRE
+Biotech            Biotechnology                5    2   68.80   4.78   Leading (7)                 [XLV] XBI, IBB         KNSA
+Telecom            Communication Infrastruc..   1    1   68.62   3.17   Leading (10 -> +2)          [XLC] IYZ, VOX         BAND
+Artificial Intel.. AI Servers                   2    2  104.92   1.84   Leading (12 -> +8)          [XLK] SMH, AIQ         DELL
+Artificial Intel.. AI Compute                   5    1   34.40   1.84   Leading (12 -> +8)          [XLK] SMH, AIQ         AMD
+Internet           Leisure and Entertainment   48    -       -   1.59   Neutral (14 -> +2)          [XLC] FDN              LTH
+Exploration        Exploration                 82    -       -  -2.06   Neutral (19 -> -8)          [XLE] XOP, IEO         #AR, #CNX, #EQT, #EXE, #NOG, #RRC
+Medical Devices    Medical Devices             87   15   61.39  -9.35   Lagging (34 -> -1)          [XLV] IHI, XHE         #ABT, #BDX, #GEHC, #MDT, #SYK,
+                                                                                                                           #TEM, #VEEV
+Uranium Mining     Nuclear Infrastructure       3    2   70.24 -15.20   Lagging (37 -> +5)          [XLU] NLR, URNM        #CEG, #VST
+Gold Mining        Gold Mining                 43   23  171.79 -17.19   Lagging (40 -> +1)          [XLB] GDX, GDXJ        #AEM, #MP
 
 ========================================
-BULLISH UNIVERSE (Strong & Mild)
+BULLISH UNIVERSE
 Legend: ~ = Unknown/Unclassified
 ========================================
-Ticker                 Mapped_Theme Status  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
-  PGNY          Healthcare Services Strong         1.0      96.51         98       +1     3     XLV (4)
-    MU                       Memory Strong         1.0      96.00         95       NA     1     XLK (1)
-   HUM          Healthcare Services Strong         1.0      95.31         96        0     2     XLV (4)
-  OSCR          Healthcare Services Strong         1.0      95.31         96       NA     1     XLF (5)
-   NET         Cloud Infrastructure Strong         2.0      94.71         95       +3     3     XLK (1)
-  OKTA                Cybersecurity Strong         2.0      94.31         99       +4     2     XLK (1)
-  HNGE               Digital Health Strong         1.0      94.31         99       -3     3     XLV (4)
-  PENG                     Software Strong         1.0      94.31         99       -3     3     XLK (1)
-    PD                     Software Strong         2.0      93.71         98       -3     3     XLK (1)
-     S                Cybersecurity Strong         2.0      93.71         98       +8     3     XLK (1)
-    BB                Cybersecurity Strong         1.0      93.71         98       -4     3     XLK (1)
-  TWLO         Communications Cloud Strong         2.0      93.51         93       -1     2     XLK (1)
-  BAND Communication Infrastructure Strong         1.0      93.20         99       -4     3     XLK (1)
-   FIG                     Software Strong         2.0      93.11         97       NA     1     XLK (1)
-  FTNT                Cybersecurity Strong         1.0      93.11         97       -1     2     XLK (1)
-  AMAT      Semiconductor Equipment Strong         1.0      93.00         90       NA     1     XLK (1)
-  COMP       Real Estate Technology Strong         1.0      92.51         96       -4     2     XLK (1)
-  GTLB     Developer Infrastructure Strong         1.0      91.91         95       -6     3     XLK (1)
-  DELL                   AI Servers Strong         1.0      91.77         98       NA     1     XLK (1)
-  SNDX                      Biotech Strong         2.0      91.21         94       +1     2     XLV (4)
-  VSTS        Professional Services Strong         1.0      90.71         93       -1     3     XLI (3)
-  MGTX                      Biotech Strong         2.0      90.61         93       NA     1     XLV (4)
-  KNSA                Biotechnology Strong         1.0      90.61         93       -8     3     XLV (4)
-   AMD                   AI Compute Strong         2.0      90.57         96       NA     1     XLK (1)
-  ACIW                     Software Strong         2.0      90.11         92       -9     3     XLK (1)
-  PRGS                     Software Strong         2.0      89.51         91       NA     1     XLK (1)
-  BILL                     Software Strong         1.0      88.91         90      -10     3     XLK (1)
-   HPE                   AI Servers Strong         1.0      88.77         93       NA     1     XLK (1)
-   ASX               Semiconductors   Mild         1.0      91.80         88       NA     1     XLK (1)
-  SNDK                       Memory   Mild         1.0      91.80         88       NA     1     XLK (1)
-   LTH    Leisure and Entertainment   Mild         2.0      89.81         95       NA     1    XLY (10)
-  OMDA                   Healthcare   Mild         3.0      87.11         99       NA     1     XLV (4)
-  LFST                   Healthcare   Mild         3.0      85.91         97       NA     1     XLV (4)
-  NRIX                      Biotech   Mild         3.0      83.01         97       NA     1     XLV (4)
-  FTRE                      Biotech   Mild         3.0      82.41         96       NA     1     XLV (4)
-  AVPT                     Software   Mild         3.0      80.71         93       NA     1     XLK (1)
-  RDDT        Social Media Platform   Mild         3.0      77.41         91       NA     1     XLK (1)
-  CRDO            AI Infrastructure   Mild         1.0      70.77         63       NA     1     XLK (1)
+Ticker                 Mapped_Theme  Zacks Rank Long_Score  RS_Rating Movement  Days Sector (Rk)
+  PGNY          Healthcare Services         1.0      96.51         98       -2     3     XLV (4)
+  OSCR          Healthcare Services         1.0      95.31         96       NA     1     XLF (5)
+   HUM          Healthcare Services         1.0      95.31         96       -4     2     XLV (4)
+   NET         Cloud Infrastructure         2.0      94.71         95        0     3     XLK (1)
+  OKTA                Cybersecurity         2.0      94.31         99       +5     2     XLK (1)
+  HNGE               Digital Health         1.0      94.31         99       -2     3     XLV (4)
+  PENG                     Software         1.0      94.31         99       -2     3     XLK (1)
+     S                Cybersecurity         2.0      93.71         98       NA     1     XLK (1)
+  TWLO         Communications Cloud         2.0      93.51         93       -3     2     XLK (1)
+  BAND Communication Infrastructure         1.0      93.20         99       +2     3     XLK (1)
+  FTNT                Cybersecurity         1.0      93.11         97       +2     2     XLK (1)
+   ASX               Semiconductors         1.0      91.80         88       -3     3     XLK (1)
+  DELL                   AI Servers         1.0      91.77         98       +2     3     XLK (1)
+  SNDX                      Biotech         2.0      91.21         94       +1     2     XLV (4)
+  VSTS        Professional Services         1.0      90.71         93       -5     3     XLI (3)
+  KNSA                Biotechnology         1.0      90.61         93       -3     3     XLV (4)
+   AMD                   AI Compute         2.0      90.57         96       NA     1     XLK (1)
+  ACIW                     Software         2.0      90.11         92       -9     3     XLK (1)
+   LTH    Leisure and Entertainment         2.0      89.81         95       -6     3    XLY (10)
+  DDOG         Cloud Infrastructure         3.0      86.51         98       -1     3     XLK (1)
+  LFST                   Healthcare         3.0      85.91         97       -7     3     XLV (4)
+  NRIX                      Biotech         3.0      83.01         97       -1     3     XLV (4)
+  FTRE                      Biotech         3.0      82.41         96       +2     3     XLV (4)
 
 ========================================
-BEARISH UNIVERSE (Strong & Mild Breakdowns)
+BEARISH UNIVERSE
 ========================================
-Ticker           Mapped_Theme Status  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
-  PAAS          Silver Mining Strong         3.0       12.94                8       NA     1     XLB (8)
-     B            Gold Mining Strong         3.0       13.55               11       -1     3     XLB (8)
-   CEG Nuclear Infrastructure Strong         3.0       16.23               12       -2     3     XLE (2)
-   NEM            Gold Mining Strong         3.0       17.05               18       -2     3     XLB (8)
-    MP            Gold Mining Strong         3.0       17.55               19       -3     3     XLB (8)
-   CCJ         Uranium Mining Strong         3.0       18.23               16       -2     3     XLE (2)
-   EGO            Gold Mining Strong         4.0       19.05               10       -1     3     XLB (8)
-   KGC            Gold Mining Strong         5.0       20.05                8       NA     1     XLB (8)
-   IAG            Gold Mining Strong         4.0       20.55               13       -1     3     XLB (8)
-    AU            Gold Mining Strong         4.0       21.05               14       -1     3     XLB (8)
-   ABT        Medical Devices Strong         3.0       22.16               11       NA     1     XLV (4)
-   HBM            Gold Mining Strong         3.0       22.55               29       -2     3     XLB (8)
-   CDE            Gold Mining Strong         5.0       23.05               14       -1     3     XLB (8)
-  VALE            Gold Mining Strong         3.0       23.55               31       -2     3     XLB (8)
-  ASTS   Space Infrastructure Strong         3.0       24.59               14       -2     2     XLK (1)
-   AEM            Gold Mining   Mild         4.0       17.05                6       NA     1     XLB (8)
-   BTU                 Energy   Mild         3.0       31.67               14       NA     1     XLE (2)
-   EXE            Exploration   Mild         3.0       32.67               16       NA     1     XLE (2)
-   CNX            Exploration   Mild         3.0       33.67               18       NA     1     XLE (2)
-   NOG            Exploration   Mild         3.0       36.67               24       NA     1     XLE (2)
-    AR            Exploration   Mild         3.0       39.17               29       NA     1     XLE (2)
+Ticker           Mapped_Theme  Zacks Rank Short_Score  Short_RS_Rating Movement  Days Sector (Rk)
+   CEG Nuclear Infrastructure         3.0       16.23               12       -2     3     XLE (2)
+   AEM            Gold Mining         4.0       17.05                6        0     3     XLB (8)
+    MP            Gold Mining         3.0       17.55               19       -6     2     XLB (8)
+   ABT        Medical Devices         3.0       22.16               11       NA     1     XLV (4)
+  GEHC        Medical Devices         4.0       27.66               10       NA     1     XLV (4)
+   VST Nuclear Infrastructure         3.0       28.23               36       -5     3     XLU (6)
+   BDX        Medical Devices         4.0       31.66               18       NA     1     XLV (4)
+   MDT        Medical Devices         4.0       31.66               18       NA     1     XLV (4)
+   EXE            Exploration         3.0       32.67               16       -1     3     XLE (2)
+   CNX            Exploration         3.0       33.67               18       -1     3     XLE (2)
+   SYK        Medical Devices         4.0       34.16               23       NA     1     XLV (4)
+   NOG            Exploration         3.0       36.67               24       -5     3     XLE (2)
+    AR            Exploration         3.0       39.17               29       -4     3     XLE (2)
+  VEEV        Medical Devices         3.0       39.66               46       NA     1     XLV (4)
+   EQT            Exploration         4.0       41.17               21       -4     3     XLE (2)
+   TEM        Medical Devices         3.0       42.66               52       NA     1     XLV (4)
+   RRC            Exploration         5.0       47.17               29       -6     3     XLE (2)
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,PGNY,MU,HUM,OSCR,NET,OKTA,HNGE,PENG,PD,S,BB,TWLO,BAND,FIG,FTNT,AMAT,COMP,GTLB,DELL,SNDX,VSTS,MGTX,KNSA,AMD,ACIW,PRGS,BILL,HPE,
-###Bearish_Stocks,KGC,CDE,IAG,AU,EGO,PAAS,HBM,CCJ,B,MP,NEM,VALE,ASTS,CEG,ABT,
-###Mild_Bullish_Stocks,ASX,AVPT,CRDO,FTRE,LFST,LTH,NRIX,OMDA,RDDT,SNDK,
-###Mild_Bearish_Stocks,AEM,AR,BTU,CNX,EXE,NOG,
+###Bullish_Stocks,BAND,OKTA,HNGE,PENG,S,DDOG,DELL,PGNY,NRIX,FTNT,LFST,FTRE,OSCR,AMD,HUM,LTH,NET,SNDX,KNSA,VSTS,TWLO,ACIW,ASX,
+###Bearish_Stocks,AEM,GEHC,ABT,CEG,EXE,CNX,MDT,BDX,MP,EQT,SYK,NOG,AR,RRC,VST,VEEV,TEM,
 ###Leading_ETF,SMH,CLOU,IHI,IGV,XBI,KIE,IYZ,KRE,AIQ,
-###Lagging_ETF,GDX,SIL,URNM,ARKX,NLR,IHI,FCG,ITA,COPX,LIT,
+###Lagging_ETF,GDX,IHI,NLR,FCG,ITA,COPX,URNM,SIL,LIT,
 
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,DDOG,GRND,LQDA,
+###Dropped_Bullish_Stocks,
 ###Dropped_Bearish_Stocks,
 ###Dropped_Leading_ETF,XPH,IYT,
 ###Dropped_Lagging_ETF,

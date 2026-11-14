@@ -324,3 +324,33 @@ def load_previous_long_watchlist():
 
     import pandas as pd
     return pd.DataFrame(rows)
+
+def load_previous_distribution_watchlist():
+    """
+    Returns the previous trading day's DISTRIBUTION (short) watchlist as a DataFrame
+    with a single column: Ticker
+    """
+    previous_file = get_previous_watchlist(str(context.market_date))
+
+    if previous_file is None:
+        import pandas as pd
+        return pd.DataFrame(columns=["Ticker"])
+
+    with open(previous_file, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    rows = []
+    for item in data.get("distribution", []):
+        if isinstance(item, str):
+            ticker = item
+        else:
+            ticker = item["ticker"]
+
+        rows.append(
+            {
+                "Ticker": ticker.replace("*", "").strip()
+            }
+        )
+
+    import pandas as pd
+    return pd.DataFrame(rows)

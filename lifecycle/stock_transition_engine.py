@@ -8,10 +8,12 @@ from pathlib import Path
 
 from config.config import (
     LONG_ENTRY,
-    SHORT_ENTRY
+    SHORT_ENTRY,
+    SHORT_STAY,
+    PULLBACK_CONFIG
 )
 from config.runtime_context import context, get_monthly_path
-from reporting.watchlist_delta_engine import load_previous_long_watchlist
+from reporting.watchlist_delta_engine import load_previous_long_watchlist, load_previous_distribution_watchlist
 
 
 REGISTRY_DIR = "market_data/stock_transition"
@@ -212,24 +214,47 @@ def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFram
 
 def get_distribution_candidates(registry: Dict, stocks: pd.DataFrame) -> pd.DataFrame:
     """
-    Identify true short candidates using hysteresis entry/maintain rules.
+    Identify short candidates using Club Rule:
+    - Get-In: Strict SHORT_ENTRY criteria + 52W Range Gate (<= 30%)
+    - Stay-In: Relaxed SHORT_STAY criteria (RS <= 75, Lagging/Neutral, Zacks 2-5)
     """
     if stocks.empty:
         return stocks.iloc[0:0].copy()
+
+    prev_dist = load_previous_distribution_watchlist()
+    prev_tickers = set(prev_dist["Ticker"].str.upper().tolist()) if not prev_dist.empty else set()
+
+    max_52w = PULLBACK_CONFIG.get("SHORT_MAX_52W_RANGE", 30.0)
+    col_52w = "Price as a % of 52 Wk H-L Range"
 
     eligible = set()
     
     for _, row in stocks.iterrows():
         ticker = str(row["Ticker"]).replace("*", "").strip().upper()
-        
-        # Uses strict entry for all states, no hysteresis
-        if _meets_criteria(row, SHORT_ENTRY):
-            eligible.add(ticker)
+        is_existing = ticker in prev_tickers
+
+        if not is_existing:
+            # GET-IN
+            if _meets_criteria(row, SHORT_ENTRY):
+                # 52W Range Gate at entry
+                if col_52w in row and pd.notna(row[col_52w]):
+                    try:
+                        pos_52w = float(row[col_52w])
+                        if pos_52w > max_52w:
+                            continue
+                    except (ValueError, TypeError):
+                        pass
+                eligible.add(ticker)
+        else:
+            # STAY-IN (Club Rule)
+            if _meets_criteria(row, SHORT_STAY):
+                eligible.add(ticker)
 
     if not eligible:
         return stocks.iloc[0:0].copy()
 
     return stocks[stocks["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().isin(eligible)].copy()
+
 
 
 def post_distribution_update(registry: Dict, qualified_distribution: pd.DataFrame, stocks: pd.DataFrame) -> Dict:
