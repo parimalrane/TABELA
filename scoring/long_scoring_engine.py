@@ -1,14 +1,6 @@
 # engines/long_scoring_engine.py
 
-from config.config import LONG_WEIGHTS
-
-
 def calculate_long_score(stocks):
-    stocks["Long_Score"] = (
-        stocks["RS_Rating"] * LONG_WEIGHTS["RS_WEIGHT"]
-        + stocks["Theme_Score"] * LONG_WEIGHTS["THEME_WEIGHT"]
-        + stocks["Zacks_Score"] * LONG_WEIGHTS["ZACKS_WEIGHT"]
-        + stocks["Growth_Score"] * LONG_WEIGHTS["GROWTH_WEIGHT"]
-    )
-    
+    # Pure filter architecture: Long_Score maps directly to RS_Rating
+    stocks["Long_Score"] = stocks["RS_Rating"]
     return stocks

@@ -64,15 +64,12 @@ def calculate_rs_rating(stocks):
 # ZACKS SCORE
 # ----------------------------
 
-from config.config import ZACKS_SCORE_MAP
-
 def zacks_score(rank):
     try:
         rank = int(float(rank))
     except (ValueError, TypeError):
-        # Missing Zacks Data: Pro-rate to a neutral 50.0 (7.5 pts out of 15) to prevent math-locking true technical breakouts
         return 50.0
-    return ZACKS_SCORE_MAP.get(rank, 0.0)
+    return {1: 100.0, 2: 100.0, 3: 0.0, 4: -50.0, 5: -100.0}.get(rank, 0.0)
 
 
 def calculate_zacks_score(stocks):
@@ -83,11 +80,10 @@ def calculate_zacks_score(stocks):
 # GROWTH SCORE
 # ----------------------------
 
-from config.config import GROWTH_SCORE_MAP
-
 def growth_score(grade):
     grade = str(grade).strip().upper()
-    return GROWTH_SCORE_MAP.get(grade, 20.0)
+    return {'A': 100.0, 'B': 95.0, 'C': 90.0, 'D': 20.0, 'F': -50.0}.get(grade, 20.0)
+
 
 def calculate_growth_score(stocks):
     if "Growth Score" in stocks.columns:
@@ -99,16 +95,11 @@ def calculate_growth_score(stocks):
 
 # ============================================================
 # SHORT SCORING ENGINE (FULLY ISOLATED FROM LONG ENGINE)
-# Uses SHORT_* config variables exclusively.
-# Does NOT touch RS_Rating, Long_Score, Zacks_Score, Growth_Score.
+# Uses SHORT_RS_RAW_WEIGHTS config variable.
 # ============================================================
 
-from config.config import (
-    SHORT_RS_RAW_WEIGHTS,
-    SHORT_COMPOSITE_WEIGHTS,
-    SHORT_ZACKS_SCORE_MAP,
-    SHORT_GROWTH_SCORE_MAP,
-)
+from config.config import SHORT_RS_RAW_WEIGHTS
+
 
 def calculate_short_rs_raw(stocks):
     """Computes a dedicated raw RS score using SHORT_RS_RAW_WEIGHTS."""
@@ -146,29 +137,11 @@ def _short_growth_score(grade):
 
 def calculate_short_score(stocks):
     """
-    Computes Short_Score for each stock using SHORT_COMPOSITE_WEIGHTS.
-    A higher Short_Score = stronger breakdown conviction.
-    Completely separate from Long_Score.
+    Computes Short_RS_Rating for breakdown conviction.
+    Pure filter architecture: Short_Score maps directly to Short_RS_Rating.
     """
     stocks = calculate_short_rs_raw(stocks)
     stocks = calculate_short_rs_rating(stocks)
-
-    w = SHORT_COMPOSITE_WEIGHTS
-    rs_w = w.get("RS_WEIGHT", 0.50)
-    theme_w = w.get("THEME_WEIGHT", 0.25)
-    zacks_w = w.get("ZACKS_WEIGHT", 0.15)
-    growth_w = w.get("GROWTH_WEIGHT", 0.10)
-
-    short_zacks = stocks["Zacks Rank"].apply(_short_zacks_score) if "Zacks Rank" in stocks.columns else pd.Series(20.0, index=stocks.index)
-    short_growth = stocks["Growth Score"].fillna('C').apply(_short_growth_score) if "Growth Score" in stocks.columns else pd.Series(50.0, index=stocks.index)
-
-    theme_score = stocks["Theme_Score"] if "Theme_Score" in stocks.columns else pd.Series(50.0, index=stocks.index)
-
-    stocks["Short_Score"] = (
-        stocks["Short_RS_Rating"] * rs_w
-        + theme_score * theme_w
-        + short_zacks * zacks_w
-        + short_growth * growth_w
-    ).round(2)
-
+    stocks["Short_Score"] = stocks["Short_RS_Rating"]
     return stocks
+

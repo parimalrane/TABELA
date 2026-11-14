@@ -214,10 +214,11 @@ def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFram
 
 def get_distribution_candidates(registry: Dict, stocks: pd.DataFrame) -> pd.DataFrame:
     """
-    Identify short candidates using Club Rule:
+    Identify short candidates using TABELA Retention Rule:
     - Get-In: Strict SHORT_ENTRY criteria + 52W Range Gate (<= 30%)
     - Stay-In: Relaxed SHORT_STAY criteria (RS <= 75, Lagging/Neutral, Zacks 2-5)
     """
+
     if stocks.empty:
         return stocks.iloc[0:0].copy()
 
@@ -246,7 +247,7 @@ def get_distribution_candidates(registry: Dict, stocks: pd.DataFrame) -> pd.Data
                         pass
                 eligible.add(ticker)
         else:
-            # STAY-IN (Club Rule)
+            # STAY-IN (TABELA Retention)
             if _meets_criteria(row, SHORT_STAY):
                 eligible.add(ticker)
 

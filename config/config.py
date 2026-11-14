@@ -25,8 +25,30 @@ THEME_STRENGTH_CONFIG = {
     "CLASSIFICATION_PERCENTAGE_LAGGING": 0.30
 }
 
+# ==========================
+# RELATIVE STRENGTH (RS) WEIGHTS
+# ==========================
+RS_RAW_WEIGHTS = {
+    "% Price Change (4 Weeks)": 0.60,      # High velocity near-term
+    "% Price Change (12 Weeks)": 0.20,     # Core trend confirmation
+    "% Price Change (1 Week)": 0.20,       # Slight weight on immediate term
+    "Relative Price Change (YTD)": 0.00,   # Block severe structural downtrends
+    "Price as a % of 52 Wk H-L Range": 0.00 # 52W position enforced via PULLBACK_CONFIG gate
+}
+
+# Dedicated Short-specific RS raw weights (YTD peak-to-trough reversal)
+SHORT_RS_RAW_WEIGHTS = {
+    "% Price Change (4 Weeks)": 0.30,
+    "% Price Change (12 Weeks)": 0.20,
+    "% Price Change (1 Week)": 0.10,
+    "Relative Price Change (YTD)": 0.40,
+    "Price as a % of 52 Wk H-L Range": 0.00,
+}
+
+
 # Weights for the sector composite strength score
 SECTOR_COMPOSITE_WEIGHTS = {
+
     "Performance 1W (%)": 0.25,
     "Performance 1M (%)": 0.25,
     "Performance 3M (%)": 0.25,
@@ -47,26 +69,6 @@ SECTOR_CLASSIFICATION_CONFIG = {
     "DETERIORATING_RANK_DELTA": -2 # Rank delta for a sector to be classified as DETERIORATING
 }
 
-# User Request: 50% RS, 25% Theme, 25% Fundamentals
-LONG_WEIGHTS = {
-    "RS_WEIGHT": 0.60,
-    "THEME_WEIGHT": 0.20,
-    "ZACKS_WEIGHT": 0.10,
-    "GROWTH_WEIGHT": 0.10
-}
-
-RS_RAW_WEIGHTS = {
-    "% Price Change (4 Weeks)": 0.60,      # High velocity near-term
-    "% Price Change (12 Weeks)": 0.20,     # Core trend confirmation
-    "% Price Change (1 Week)": 0.20,       # Slight weight on immediate term
-    "Relative Price Change (YTD)": 0.00,   # Block severe structural downtrends
-    "Price as a % of 52 Wk H-L Range": 0.00 # Force true breakouts near high ranges
-}
-
-# Zacks Binary: Only Rank 1/2 survive. Rank 3 turnarounds = poison (proven by Cartesian backtests)
-ZACKS_SCORE_MAP = {1: 100.0, 2: 100.0, 3: 0.0, 4: -50.0, 5: -100.0}
-GROWTH_SCORE_MAP = {'A': 100.0, 'B': 95.0, 'C': 90.0, 'D': 20.0, 'F': -50.0}
-
 # ==========================
 # THRESHOLDS (STATE-BASED)
 # ==========================
@@ -79,42 +81,7 @@ LONG_ENTRY = {
     "MIN_VOLUME": 1_000_000,
 }
 
-
-
-
-# ==========================
-# SHORT ENGINE (ISOLATED)
-# These variables are EXCLUSIVELY used by the Short backtesting tuner.
-# They do NOT affect the live Long pipeline in any way.
-# Tune these freely without risk of breaking the Long engine.
-# ==========================
-
-# Short-specific RS raw weights — P3-C Winner: YTD Reversal (YTD 40%, 4W 30%, 12W 20%, 1W 10%)
-SHORT_RS_RAW_WEIGHTS = {
-    "% Price Change (4 Weeks)": 0.30,
-    "% Price Change (12 Weeks)": 0.20,
-    "% Price Change (1 Week)": 0.10,
-    "Relative Price Change (YTD)": 0.40,   # Peak-to-trough reversal is the key short signal
-    "Price as a % of 52 Wk H-L Range": 0.00,
-}
-
-# Short-specific composite weights — P3-C Winner: RS Heavy (RS 65%, Theme 20%)
-SHORT_COMPOSITE_WEIGHTS = {
-    "RS_WEIGHT": 0.50,
-    "THEME_WEIGHT": 0.35,
-    "ZACKS_WEIGHT": 0.10,
-    "GROWTH_WEIGHT": 0.05,
-}
-
-# Short-specific Zacks scoring (reward confirmed sell ratings, penalise buys)
-SHORT_ZACKS_SCORE_MAP = {1: -100.0, 2: -50.0, 3: 20.0, 4: 80.0, 5: 100.0}
-
-# Short-specific Growth scoring (reward deteriorating earnings quality)
-SHORT_GROWTH_SCORE_MAP = {'A': -50.0, 'B': 0.0, 'C': 50.0, 'D': 80.0, 'F': 100.0}
-
-# Short entry thresholds — Proven by 2026-10-31 Cartesian Backtest (197 Trades, 60.7% 10D WR, PF: 8.47, +20.5% Avg Return)
 SHORT_ENTRY = {
-    # 1. STRONG BEARISH (Active Breakdowns)
     "MIN_SHORT_RS": 8.0,
     "MAX_SHORT_RS": 60.0,
     "THEMES": ["Lagging"],
@@ -123,48 +90,29 @@ SHORT_ENTRY = {
     "MIN_VOLUME": 2_000_000,
 }
 
-
-
 # ==========================
-# RE-ENTERED / INFLECTION ENGINE
-# Scans recent dropped history for stocks whose fundamentals,
-# theme flow, and price have confirmed a quantitative turnaround.
-# ==========================
-REENTERED_LONG = {
-    "LOOKBACK_DAYS": 50,
-    "ALLOWED_ZACKS": [1, 2],
-    "ZACKS_3_MIN_SCORE": 70.0,
-    "THEMES": ["Leading", "Neutral", "Unclassified Leader"],
-    "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_000_000,
-    "MIN_RS": 60.0,
-    "MIN_LONG_SCORE": 60.0,
-    "EXCLUDE_STRONG": True,
-}
-
-REENTERED_SHORT = {
-    "LOOKBACK_DAYS": 50,
-    "ALLOWED_ZACKS": [3, 4, 5],
-    "THEMES": ["Lagging", "Neutral"],
-    "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 1_000_000,
-    "MAX_SHORT_RS": 50.0,
-    "EXCLUDE_STRONG": True,
-}
-
-# ==========================
-# PULLBACK & 52W RANGE GATE CONFIG (CLUB RULE)
+# 52W RANGE GATES (LIVE PIPELINE)
 # ==========================
 PULLBACK_CONFIG = {
     "LONG_MIN_52W_RANGE": 85.0,
     "SHORT_MAX_52W_RANGE": 30.0,
-    "WAIT_DAYS": 21,
-    "LONG_PULLBACK_PCT": 0.08,    # 8% dip from pick date
-    "SHORT_BOUNCE_PCT": 0.10,     # 10% bounce from pick date
-    "MAX_HOLD_DAYS": 50,
 }
 
-# CLUB RULE STAY-IN THRESHOLDS
+# ==========================
+# BACKTEST EXECUTION PARAMS (BACKTEST ONLY - DOES NOT AFFECT LIVE)
+# ==========================
+BACKTEST_PULLBACK_PARAMS = {
+    "BT_LONG_WAIT_DAYS": 42,         # 42 trading days (~8 weeks) to let bases form
+    "BT_SHORT_WAIT_DAYS": 21,        # 21 trading days (relief bounces are fast)
+    "BT_LONG_PULLBACK_PCT": 0.20,    # 20% healthy pullback entry simulation
+    "BT_SHORT_BOUNCE_PCT": 0.15,     # 15% relief rally bounce entry simulation
+    "BT_STOP_PCT": 0.07,             # 7% stop loss
+    "BT_TARGET_PCT": 0.21,           # 21% profit target (1:3 R:R)
+    "BT_MAX_HOLD_DAYS": 50,          # 50 days max hold horizon
+}
+
+
+# TABELA RETENTION STAY-IN THRESHOLDS
 LONG_STAY = {
     "MIN_RS": 75.0,
     "THEMES": ["Leading", "Neutral", "Unclassified Leader"],
@@ -176,4 +124,5 @@ SHORT_STAY = {
     "THEMES": ["Lagging", "Neutral"],
     "ALLOWED_ZACKS": [2, 3, 4, 5],
 }
+
 

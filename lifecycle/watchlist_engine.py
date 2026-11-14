@@ -3,7 +3,7 @@ from config.config import LONG_ENTRY, LONG_STAY, PULLBACK_CONFIG
 from reporting.watchlist_delta_engine import load_previous_long_watchlist
 
 def build_long_watchlist(stocks, registry=None):
-    # Determine which stocks were in the watchlist yesterday (Club Rule)
+    # Determine which stocks were in the watchlist yesterday (TABELA Retention)
     prev_wl = load_previous_long_watchlist()
     prev_tickers = set(prev_wl["Ticker"].str.upper().tolist()) if not prev_wl.empty else set()
 
@@ -32,7 +32,7 @@ def build_long_watchlist(stocks, registry=None):
         range_52w = pd.to_numeric(stocks_clean[col_52w], errors="coerce").fillna(0.0)
         entry_mask = entry_mask & (range_52w >= min_52w)
 
-    # 2. RETENTION (Club Rule: Stay-In Criteria)
+    # 2. RETENTION (TABELA Stay-In Criteria)
     stay_themes = LONG_STAY.get("THEMES", ["Leading", "Neutral", "Unclassified Leader"])
     stay_min_rs = LONG_STAY.get("MIN_RS", 75.0)
     stay_allowed_zacks = LONG_STAY.get("ALLOWED_ZACKS", [1, 2, 3])

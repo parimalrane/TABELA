@@ -1,6 +1,8 @@
 # TABELA Data Flow & Stock Lifecycle Architecture
 
-> **Purpose:** This document maps the authoritative flow of a stock candidate throughout the TABELA Market Intelligence Platform. TABELA V2 is a **Stateless Cross-Sectional** engine. It does not utilize decaying "grace periods" or memory tracking. Instead, it acts as a ruthless daily filter, continuously extracting absolute alpha based purely on present-day statistical deviations (the 16/68/16 Bell Curve model) and enforcing strict per-theme limits.
+> **Purpose:** This document maps the authoritative flow of a stock candidate throughout the TABELA Market Intelligence Platform. TABELA V2 uses a **Two-Tier Retention** engine with strict entry gates and tolerant pullback retention:
+> 1. **Get-In Gate:** Candidates must prove market leadership near 52-week extremes (`RS >= 90`, `Zacks 1-2`, `Leading Theme`, `52W Range >= 85%`).
+> 2. **Stay-In Retention:** Stocks that have qualified remain on the watchlist while pulling back to find support (`RS >= 75`, `Zacks 1-3`, `Leading/Neutral Theme`). They are only dropped if their structural thesis breaks down.
 
 ## 1. System Data Flow Diagram
 
@@ -8,47 +10,44 @@
 graph TD
     %% Base Data
     Universe[External ETF / Stock CSVs] --> macro_score(Macro ETF Ranking & Bell Curve)
-    macro_score --> micro_breakaway(Micro-Theme Breakaway Scans)
-    micro_breakaway --> stock_score(Individual Momentum & Long Score)
+    macro_score --> stock_score(RS Rating & 52W Range Analysis)
     
     %% Engine Evaluation
-    stock_score --> cross_section[Cross-Sectional Capping filter]
+    stock_score --> get_in{"Is New Candidate?<br/>RS >= 90 & Range >= 85% & Zacks 1-2 & Leading"}
+    stock_score --> stay_in{"Is Existing on Watchlist?<br/>RS >= 75 & Zacks 1-3 & Leading/Neutral"}
     
     %% Output
-    cross_section -- "RS >= 90 & Long Score >= 90 & Theme = Leading (Max 3/theme)" --> State_Long[LONG CANDIDATE UNIVERSE]
-    cross_section -- "RS <= 50 & Long Score <= 50 & Theme = Lagging (Max 3/theme)" --> State_Dist[DISTRIBUTION WATCHLIST]
+    get_in -- Pass --> State_Long[BULLISH UNIVERSE]
+    stay_in -- Pass --> State_Long
     
-    %% Memory
-    State_Long --> Delta[Watchlist Delta Engine]
-    State_Dist --> Delta
+    %% Exit
+    stay_in -- Fail --> State_Dropped[DROPPED WATCHLIST EXPORT]
 ```
 
-## 2. Definitive Lifecycle Breakdown: The Stateless Engine
+## 2. Definitive Lifecycle Breakdown: The TABELA Retention Engine
 
-TABELA manages whipsawing (rapidly flickering on/off lists due to daily noise) by implementing **strict mathematical purity**. Whipsaw is controlled purely by demanding absolute structural outperformance rather than forgiving underperformance with hysteresis.
 
-### Phase 1: Macro-Theme Bell Curve (16/68/16)
-The engine ranks all ~41 Macro ETF Themes to identify the underlying flow of institutional capital. 
-* **Leading (Top 16%)**: The absolute most explosive 7 themes in the market.
-* **Neutral (Middle 68%)**: The choppy, noisy, trendless middle. Fully ignored by TABELA.
-* **Lagging (Bottom 16%)**: The absolute worst 7 themes experiencing catastrophic institutional selling.
+TABELA manages whipsawing by decoupling the **initial conviction bar** from the **pullback retention bar**:
 
-### Phase 2: Micro-Theme Breakaway Override
-The engine tracks over 250 underlying Micro-Themes (e.g., "Optical Networking", "Digital Assets"). 
-* If a Micro-Theme organically calculates into the extreme **Top 5%** of all micro-themes in the market, it is tagged as a `Breakaway Leader`. 
-* If a stock is in a Breakaway micro-theme, it actively ignores its parent Macro ETF's failure and is allowed to compete for Long slots regardless of Macro head-winds.
+### Phase 1: The Initial Entry Cut (Get-In)
+To enter the `BULLISH UNIVERSE`:
+* **Momentum:** `RS_Rating >= 90`.
+* **52W Extreme:** `Price as a % of 52 Wk H-L Range >= 85.0%`.
+* **Theme:** Must be `Leading` (Macro) OR `Unclassified Leader`.
+* **Fundamentals:** Zacks Rank 1 or 2.
 
-### Phase 3: The Cross-Sectional Draft (Longs)
-To become a `LONG` candidate, a stock must be drafted in today's daily cross-section.
-* **The Math:** `RS_Rating >= 90` AND `Long_Score >= 90`.
-* **The Theme:** Must be mathematically `Leading` (Macro) OR `Breakaway Leader` (Micro).
-* **The Cap:** It must rank sequentially in the **Top 3** highest Long Scores within its specific theme. If it is the 4th best stock, it is "Crowded Out."
+### Phase 2: Pullback Monitoring (Stay-In)
+Once drafted, the stock is kept on the active watchlist for chart review while you wait for a favorable risk/reward pullback:
+* **Retention Floor:** `RS_Rating >= 75.0`.
+* **Theme Tolerance:** Can drift from `Leading` to `Neutral` without ejection.
+* **Fundamental Tolerance:** Zacks Rank 1, 2, or 3.
+* **Exit:** Ejected into `###Dropped_Bullish_Stocks` only if RS drops < 75, theme degrades to Lagging, or Zacks falls to 4 or 5.
 
-### Phase 4: The Cross-Sectional Draft (Distribution)
-The Distribution tier tracks structural breakdowns for short entry targets.
-* **The Math:** `RS_Rating <= 50` AND `Long_Score <= 50`.
-* **The Theme:** Must be mathematically `Lagging` (Macro) OR `Breakaway Laggard` (Micro).
-* **The Cap:** It must rank sequentially in the **Absolute Worst 3** Long Scores within its specific theme.
+### Phase 3: Short Engine Mirror
+To enter the `BEARISH UNIVERSE`:
+* **Get-In:** `RS_Rating` between 8 and 60, `52W Range <= 30.0%`, `Theme = Lagging`, `Zacks 3-5`.
+* **Stay-In:** `RS_Rating <= 75.0`, `Theme = Lagging/Neutral`, `Zacks 2-5`.
+
 
 ## 3. The Delta Watchlist
 

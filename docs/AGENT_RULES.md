@@ -157,8 +157,14 @@ These results took multiple sessions of 2–3 hour regressions to discover. Do n
 
 | Discovery | Proven Result | File |
 |---|---|---|
+| 52W Range Gate (Long >= 85%, Short <= 30%) | Filters over-extended chop, bounds entries near structural extremes | `backtest_report_52w_pullback.md` |
+| TABELA Retention (Two-Tier Hysteresis) | Get-In: RS 90, Zacks 1-2, Leading / Stay-In: RS 75, Zacks 1-3, Neutral OK | `backtest_report_52w_pullback.md` |
+| Pullback Entry (8% Long, 10-15% Short) | Positive expectancy (PF 1.16 Long / 1.31 Short), avoids buying extended tops | `backtest_report_52w_pullback.md` |
+| Re-Entry Engine Retired | Superseded by TABELA watchlist retention | `integrated_plan.md` |
+
 | 90/90 gate is optimal for Long | 44.58% WR, +0.95% avg | `master_optimization_results_20260930.csv` |
 | Volume 1.5M eliminates retail whipsaw | Significant WR lift over 300K | `cartesian_mild_long.csv` |
+
 | 21-day mild expiry beats 50-day | Dead money beyond Day 21 | `optimization_results_basing_20261003.csv` |
 | P1-F beats Combo C for short | 71.11% vs 70.33% WR | `optimization_results_short_v2_20261002.csv` |
 | Mild bounce ceiling 75.0 is optimal | Best Mild WR, avoids reversals | `cartesian_mild_short.csv` |
