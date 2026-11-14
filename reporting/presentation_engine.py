@@ -1112,7 +1112,7 @@ def print_daily_scan(
     full_long_list = clean_all_tickers(true_longs)
     full_short_list = clean_all_tickers(distribution_watchlist)
 
-    # --- COMBINED BULLISH & BEARISH UNIVERSE (SIDE BY SIDE) ---
+    # --- COMBINED BULLISH & BEARISH UNIVERSE (INLINE COLUMN ALIGNMENT) ---
     bullish_list = []
     if not true_longs.empty:
         bullish_df = true_longs.copy()
@@ -1134,74 +1134,58 @@ def print_daily_scan(
         bearish_df = bearish_df.sort_values(['_score_num'], ascending=[True]).drop(columns=['_score_num'])
         bearish_list = bearish_df.to_dict('records')
 
-    LEFT_WIDTH = 59
-    RIGHT_WIDTH = 60
-    DIVIDER = " | "
-
     def format_bullish_row(r):
-        if not r:
-            return " " * LEFT_WIDTH
         t = str(r.get("Ticker", "")).strip()[:6]
-        theme = str(r.get("Mapped_Theme", ""))[:21]
+        theme = str(r.get("Mapped_Theme", ""))[:26]
         zk = str(r.get("Zacks", ""))[:2]
-        rs = str(r.get("RS_Rating", ""))[:3]
+        rs = str(r.get("RS_Rating", ""))[:4]
         hi = str(r.get("% off Hi", ""))[:4]
         mov = str(r.get("Movement", ""))[:4]
-        dys = str(r.get("Days", ""))[:3]
-        sec = str(r.get("Sector (Rk)", ""))[:10]
-        return f"{t:<6} {theme:<21} {zk:>2} {rs:>3} {hi:>4} {mov:>4} {dys:>3} {sec:<10}"
+        dys = str(r.get("Days", ""))[:4]
+        sec = str(r.get("Sector (Rk)", ""))[:11]
+        return f"{t:<7} {theme:<26} {zk:>5} {rs:>10} {hi:>9} {mov:>9} {dys:>5}  {sec:<11}"
 
     def format_bearish_row(r):
-        if not r:
-            return " " * RIGHT_WIDTH
         t = str(r.get("Ticker", "")).strip()[:6]
-        theme = str(r.get("Mapped_Theme", ""))[:21]
+        theme = str(r.get("Mapped_Theme", ""))[:26]
         zk = str(r.get("Zacks", ""))[:2]
         shrs = str(r.get("Short_RS_Rating", r.get("RS_Rating", "")))[:4]
         lo = str(r.get("% off Lo", ""))[:4]
         mov = str(r.get("Movement", ""))[:4]
-        dys = str(r.get("Days", ""))[:3]
-        sec = str(r.get("Sector (Rk)", ""))[:10]
-        return f"{t:<6} {theme:<21} {zk:>2} {shrs:>4} {lo:>4} {mov:>4} {dys:>3} {sec:<10}"
+        dys = str(r.get("Days", ""))[:4]
+        sec = str(r.get("Sector (Rk)", ""))[:11]
+        return f"{t:<7} {theme:<26} {zk:>5} {shrs:>10} {lo:>9} {mov:>9} {dys:>5}  {sec:<11}"
 
-    b_hdr = f"{'Ticker':<6} {'Mapped_Theme':<21} {'Zk':>2} {'RS':>3} {'%Hi':>4} {'Mov':>4} {'Dys':>3} {'Sector (Rk)':<10}"
-    s_hdr = f"{'Ticker':<6} {'Mapped_Theme':<21} {'Zk':>2} {'ShRS':>4} {'%Lo':>4} {'Mov':>4} {'Dys':>3} {'Sector (Rk)':<10}"
+    b_hdr = f"{'Ticker':<7} {'Mapped_Theme':<26} {'Zacks':>5} {'RS_Rating':>10} {'% off Hi':>9} {'Movement':>9} {'Days':>5}  {'Sector (Rk)':<11}"
+    s_hdr = f"{'Ticker':<7} {'Mapped_Theme':<26} {'Zacks':>5} {'Short_RS':>10} {'% off Lo':>9} {'Movement':>9} {'Days':>5}  {'Sector (Rk)':<11}"
 
-    left_title = f"BULLISH UNIVERSE ({len(bullish_list)})"
-    right_title = f"BEARISH UNIVERSE ({len(bearish_list)})"
-    left_sub = "Legend: ~ = Unknown/Unclassified"
-    right_sub = ""
+    bullish_universe_out = '========================================\n'
+    bullish_universe_out += 'BULLISH UNIVERSE\n'
+    bullish_universe_out += 'Legend: ~ = Unknown/Unclassified\n'
+    bullish_universe_out += '========================================\n'
 
-    lines = []
-    lines.append("=" * LEFT_WIDTH + DIVIDER + "=" * RIGHT_WIDTH)
-    lines.append(f"{left_title:<{LEFT_WIDTH}}" + DIVIDER + f"{right_title:<{RIGHT_WIDTH}}")
-    lines.append(f"{left_sub:<{LEFT_WIDTH}}" + DIVIDER + f"{right_sub:<{RIGHT_WIDTH}}")
-    lines.append("=" * LEFT_WIDTH + DIVIDER + "=" * RIGHT_WIDTH)
-    lines.append(b_hdr + DIVIDER + s_hdr)
-    lines.append("-" * LEFT_WIDTH + DIVIDER + "-" * RIGHT_WIDTH)
-
-    max_rows = max(len(bullish_list), len(bearish_list))
-    if max_rows == 0:
-        lines.append(f"{'No active bullish candidates today.':<{LEFT_WIDTH}}" + DIVIDER + f"{'No active bearish candidates today.':<{RIGHT_WIDTH}}")
+    if bullish_list:
+        b_lines = [b_hdr]
+        for r in bullish_list:
+            b_lines.append(format_bullish_row(r))
+        bullish_universe_out += '\n'.join(b_lines) + '\n'
     else:
-        for idx in range(max_rows):
-            b_item = bullish_list[idx] if idx < len(bullish_list) else None
-            s_item = bearish_list[idx] if idx < len(bearish_list) else None
+        bullish_universe_out += 'No active bullish candidates today.\n'
 
-            if b_item is None and idx == 0:
-                b_str = f"{'No active bullish candidates.':<{LEFT_WIDTH}}"
-            else:
-                b_str = format_bullish_row(b_item)
+    bearish_universe_out = '========================================\n'
+    bearish_universe_out += 'BEARISH UNIVERSE\n'
+    bearish_universe_out += '========================================\n'
 
-            if s_item is None and idx == 0:
-                s_str = f"{'No active bearish candidates.':<{RIGHT_WIDTH}}"
-            else:
-                s_str = format_bearish_row(s_item)
+    if bearish_list:
+        s_lines = [s_hdr]
+        for r in bearish_list:
+            s_lines.append(format_bearish_row(r))
+        bearish_universe_out += '\n'.join(s_lines) + '\n'
+    else:
+        bearish_universe_out += 'No active bearish candidates today.\n'
 
-            lines.append(b_str + DIVIDER + s_str)
-
-    lines.append("=" * LEFT_WIDTH + DIVIDER + "=" * RIGHT_WIDTH)
-    print("\n" + "\n".join(lines) + "\n")
+    print('\n' + bullish_universe_out)
+    print('\n' + bearish_universe_out)
 
     print('TRADINGVIEW WATCHLIST EXPORT')
     all_bullish_tickers = []
