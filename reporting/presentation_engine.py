@@ -461,6 +461,58 @@ def _load_historical_breadth_nets(limit=10):
     return nets
 
 
+def _load_historical_advance_decline(limit=10):
+    from pathlib import Path
+    from config.runtime_context import context
+    data_dir = Path("market_data") / "input_files"
+    cur_date = str(context.market_date).replace("-", "")
+    by_date = {}
+    for p in data_dir.rglob("*_stocks.csv"):
+        d_str = p.stem.replace("_stocks", "").replace("-", "")
+        if d_str <= cur_date:
+            by_date[d_str] = p
+
+    # Need limit + 1 files to calculate limit transitions
+    stock_files = [by_date[d] for d in sorted(by_date.keys())[-(limit + 1):]]
+    if len(stock_files) < 2:
+        return 0, 0, 0.0, []
+
+    series_list = []
+    for f in stock_files:
+        try:
+            try:
+                df = pd.read_csv(f, usecols=["Ticker", "Last Close"])
+            except UnicodeError:
+                df = pd.read_csv(f, usecols=["Ticker", "Last Close"], encoding="utf-16")
+            px = pd.to_numeric(df["Last Close"].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+            s = pd.Series(px.values, index=df["Ticker"].astype(str).str.upper()).dropna()
+            s = s.groupby(level=0).first()
+            series_list.append(s)
+        except Exception:
+            continue
+
+    if len(series_list) < 2:
+        return 0, 0, 0.0, []
+
+    ad_nets = []
+    today_adv = today_dec = 0
+    for i in range(1, len(series_list)):
+        s_prev = series_list[i - 1]
+        s_curr = series_list[i]
+        common = s_curr.index.intersection(s_prev.index)
+        diff = s_curr.loc[common] - s_prev.loc[common]
+        adv = int((diff > 0).sum())
+        dec = int((diff < 0).sum())
+        net = adv - dec
+        ad_nets.append(net)
+        if i == len(series_list) - 1:
+            today_adv = adv
+            today_dec = dec
+
+    ratio = round(today_adv / today_dec, 2) if today_dec > 0 else 0.0
+    return today_adv, today_dec, ratio, ad_nets
+
+
 def _range_data_quality_warning(stocks, blank_jump_pct=5.0, min_lost_near_lows=200):
     """
     Data-QA guard for the 52-week-range column that feeds New Highs / New Lows.
@@ -676,14 +728,45 @@ def print_macro_weather(stocks, theme_strength_settings):
     
     stock_count_str = f"{len(stocks):,} Equities" if stocks is not None and not stocks.empty else "3,000+ Equities"
     print(f"[2] STRUCTURAL BREADTH ({stock_count_str})")
+
+    # --- Breadth & Sentiment Calculations ---
+    adv_today, dec_today, ad_ratio, ad_nets = _load_historical_advance_decline(limit=10)
     historical_nets = _load_historical_breadth_nets(limit=10)
+
+    b_5d = None
+    b_20d = None
+    pulse_lbl = "BALANCED"
+    trend_lbl = "HEALTHY"
+    if stocks is not None and not stocks.empty:
+        px = pd.to_numeric(stocks["Last Close"].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        vol = pd.to_numeric(stocks["Avg Volume"].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        liquid = (px >= 10) & (vol >= 500_000)
+        eval_stocks = stocks[liquid] if liquid.sum() >= 100 else stocks
+
+        if "% Price Change (1 Week)" in eval_stocks.columns:
+            p1w = pd.to_numeric(eval_stocks["% Price Change (1 Week)"].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').dropna()
+            if not p1w.empty:
+                b_5d = int(round((p1w > 0).mean() * 100))
+
+        if "% Price Change (4 Weeks)" in eval_stocks.columns:
+            p4w = pd.to_numeric(eval_stocks["% Price Change (4 Weeks)"].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').dropna()
+            if not p4w.empty:
+                b_20d = int(round((p4w > 0).mean() * 100))
+
+    # --- Structural Breadth Output Rows ---
+    if ad_nets:
+        ad_streak_str = " , ".join([f"{n:+d}" for n in reversed(ad_nets)])
+        print(f"    Advance / Decline : Ratio {ad_ratio:.2f}  ({adv_today:,} Adv / {dec_today:,} Dec)  | 10D Net: {ad_streak_str}")
+
     if historical_nets:
-        # Most Recent First: Today (net) -> yesterday -> ... -> 10 days ago
-        all_nets = [f"{net:+d}"] + [f"{n:+d}" for n in reversed(historical_nets[-10:])]
-        net_str = " , ".join(all_nets)
+        ext_all = [f"{net:+d}"] + [f"{n:+d}" for n in reversed(historical_nets[-9:])]
+        ext_streak_str = " , ".join(ext_all)
     else:
-        net_str = f"{net:+d}"
-    print(f"    > Price Extremes  : {nh} New Highs | {nl} New Lows  [ Net (Most Recent First): {net_str} ]")
+        ext_streak_str = f"{net:+d}"
+    print(f"    Price Extremes    : Net {net:+d}  ({nh} Highs / {nl} Lows)     | 10D Net: {ext_streak_str}")
+
+    if b_5d is not None and b_20d is not None:
+        print(f"    Market Sentiment  : 5-Day: {b_5d}% Positive                  | 20-Day: {b_20d}% Positive")
     _qa_warn = _range_data_quality_warning(stocks)
     if _qa_warn:
         print(_qa_warn)
