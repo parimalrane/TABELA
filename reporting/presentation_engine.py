@@ -756,14 +756,14 @@ def print_macro_weather(stocks, theme_strength_settings):
     # --- Structural Breadth Output Rows ---
     if ad_nets:
         ad_streak_str = " , ".join([f"{n:+d}" for n in reversed(ad_nets)])
-        print(f"    Advance / Decline : Ratio {ad_ratio:.2f}  ({adv_today:,} Adv / {dec_today:,} Dec)  | 10D Net: {ad_streak_str}")
+        print(f"    Advance / Decline : Ratio {ad_ratio:.2f}  ({adv_today:,} Adv / {dec_today:,} Dec)  | 10D Net (Today -> Past): {ad_streak_str}")
 
     if historical_nets:
         ext_all = [f"{net:+d}"] + [f"{n:+d}" for n in reversed(historical_nets[-9:])]
         ext_streak_str = " , ".join(ext_all)
     else:
         ext_streak_str = f"{net:+d}"
-    print(f"    Price Extremes    : Net {net:+d}  ({nh} Highs / {nl} Lows)     | 10D Net: {ext_streak_str}")
+    print(f"    Price Extremes    : Net {net:+d}  ({nh} Highs / {nl} Lows)     | 10D Net (Today -> Past): {ext_streak_str}")
 
     if b_5d is not None and b_20d is not None:
         print(f"    Market Sentiment  : 5-Day: {b_5d}% Positive                  | 20-Day: {b_20d}% Positive")

@@ -290,6 +290,16 @@ def load_inputs(theme_strength_settings):
         stocks["Zacks Rank"].astype(str).str.startswith(("1", "2", "3", "4", "5"))
     ].copy()
 
+    # Self-heal vendor blanks in 52-week range when Close, High, and Low exist
+    range_col = "Price as a % of 52 Wk H-L Range"
+    if range_col in stocks.columns and "Last Close" in stocks.columns and "52 Week High" in stocks.columns and "52 Week Low" in stocks.columns:
+        px = pd.to_numeric(stocks["Last Close"].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        hi = pd.to_numeric(stocks["52 Week High"].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        lo = pd.to_numeric(stocks["52 Week Low"].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        valid_hl = (hi > lo)
+        computed_range = ((px - lo) / (hi - lo) * 100).clip(0, 100)
+        stocks[range_col] = pd.to_numeric(stocks[range_col], errors='coerce').fillna(computed_range.where(valid_hl))
+
     raw_etf_df = pd.read_csv(ETF_FILE)
     benchmark_returns = extract_benchmark_returns(raw_etf_df, theme_strength_settings)
 
