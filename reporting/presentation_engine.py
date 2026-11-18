@@ -1106,11 +1106,14 @@ def print_daily_scan(
     strong_bullish_out = "========================================\nSTRONG BULLISH (Trend Continuation)\nLegend: ~ = Unknown/Unclassified\n========================================\n"
 
     long_candidates_df = long_candidates.copy()
-    clean_close_l = pd.to_numeric(long_candidates_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
-    clean_hi_l = pd.to_numeric(long_candidates_df['52 Week High'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
-    long_candidates_df['% off Hi'] = ((clean_close_l - clean_hi_l) / clean_hi_l * 100).apply(
-        lambda v: str(int(round(v))) if pd.notna(v) and abs(round(v)) > 0 else "0"
-    )
+    if '52 Week High' in long_candidates_df.columns and 'Last Close' in long_candidates_df.columns:
+        clean_close_l = pd.to_numeric(long_candidates_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        clean_hi_l = pd.to_numeric(long_candidates_df['52 Week High'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+        long_candidates_df['% off Hi'] = ((clean_close_l - clean_hi_l) / clean_hi_l * 100).apply(
+            lambda v: str(int(round(v))) if pd.notna(v) and abs(round(v)) > 0 else "0"
+        )
+    else:
+        long_candidates_df['% off Hi'] = "NA"
     long_candidates_df['Zacks'] = pd.to_numeric(long_candidates_df['Zacks Rank'], errors='coerce').fillna(0).astype(int).astype(str)
 
     display_df = long_candidates_df[
@@ -1153,11 +1156,14 @@ def print_daily_scan(
 
     if not distribution_watchlist.empty:
         dist_df = distribution_watchlist.copy()
-        clean_close_s = pd.to_numeric(dist_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
-        clean_lo_s = pd.to_numeric(dist_df['52 Week Low'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
-        dist_df['% off Lo'] = ((clean_close_s - clean_lo_s) / clean_lo_s * 100).apply(
-            lambda v: str(int(round(v))) if pd.notna(v) and round(v) > 0 else "0"
-        )
+        if '52 Week Low' in dist_df.columns and 'Last Close' in dist_df.columns:
+            clean_close_s = pd.to_numeric(dist_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+            clean_lo_s = pd.to_numeric(dist_df['52 Week Low'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
+            dist_df['% off Lo'] = ((clean_close_s - clean_lo_s) / clean_lo_s * 100).apply(
+                lambda v: str(int(round(v))) if pd.notna(v) and round(v) > 0 else "0"
+            )
+        else:
+            dist_df['% off Lo'] = "NA"
         dist_df['Zacks'] = pd.to_numeric(dist_df['Zacks Rank'], errors='coerce').fillna(0).astype(int).astype(str)
 
         display_df = dist_df[
