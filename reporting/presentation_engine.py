@@ -1349,13 +1349,23 @@ def print_daily_scan(
 
     print("###Leading_ETF," + leading_etf_str + ",") if leading_etf_str else print("###Leading_ETF,")
     print("###Lagging_ETF," + lagging_etf_str + ",") if lagging_etf_str else print("###Lagging_ETF,")
-    print()
 
     # =========================================================================
     # DROPPED WATCHLIST EXPORT (Today's Exits)
     # =========================================================================
     active_bullish_set = set(all_bullish_tickers)
     active_bearish_set = set(all_bearish_tickers)
+
+    # Reversal Watchlist Export (Dropped Bullish <= 90d, Zacks 1/2)
+    reversal_longs = []
+    try:
+        from runners.run_reversal_scan import get_reversal_long_tickers
+        reversal_longs = get_reversal_long_tickers(context.market_date, stocks, active_bullish_set, max_days=90)
+    except Exception:
+        pass
+    reversal_export_str = ",".join(reversal_longs)
+    print("###Reversal_Longs," + reversal_export_str + ",") if reversal_export_str else print("###Reversal_Longs,")
+    print()
 
     dropped_bullish = sorted([t for t in deltas.get("dropped_longs", []) if t not in active_bullish_set])
     dropped_bearish = sorted([t for t in deltas.get("left_distribution", []) if t not in active_bearish_set])
