@@ -706,6 +706,17 @@ def run_tabela_pipeline():
 
     stocks = score_stocks(stocks)
 
+    # Dynamic Micro-Leader / Micro-Lagging promotion (unlocks the theme gate only)
+    from scoring.micro_theme_engine import apply_micro_theme_promotion
+    stocks, _micro_info = apply_micro_theme_promotion(
+        stocks,
+        etf_master,
+        benchmark_returns,
+        theme_strength_settings,
+        theme_class_map,
+        avg_leading_score,
+    )
+
     stocks, long_candidates, distribution_watchlist, theme_breadth, recovered = build_candidates(stocks)
 
     today = context.market_date

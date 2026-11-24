@@ -971,6 +971,21 @@ def print_daily_scan(
             if clean_ticker not in true_long_tickers:
                 true_long_tickers.append(clean_ticker)
 
+    # Micro Leader / Micro Lagging lookup: {micro_theme: (tier, etf, etf_rs)}
+    micro_tier_by_theme = {}
+    try:
+        if stocks is not None and "Micro_Tier" in stocks.columns:
+            _mt = stocks[stocks["Micro_Tier"].astype(str) != ""]
+            for _th, _g in _mt.groupby("Mapped_Theme"):
+                _rs_vals = pd.to_numeric(_g["Micro_ETF_RS"], errors="coerce").dropna()
+                micro_tier_by_theme[str(_th)] = (
+                    str(_g["Micro_Tier"].iloc[0]),
+                    str(_g["Micro_ETF"].iloc[0]),
+                    float(_rs_vals.iloc[0]) if not _rs_vals.empty else None,
+                )
+    except Exception:
+        micro_tier_by_theme = {}
+
     def should_display(row):
         # Require at least one active stock candidate to display
         leaders_val = row.get("Leaders")
@@ -987,6 +1002,16 @@ def print_daily_scan(
     #    - Leading: highest Weighted_Breadth_Score first
     #    - Lagging: highest Weighted_Breadth_Score (most active breakdown) at bottom
     def _get_theme_macro_rank(mapped_theme):
+        # Micro Leader / Micro Lagging themes sit right at the boundary of the
+        # Leading / Lagging blocks so they are visible without distorting macro order.
+        if mapped_theme in micro_tier_by_theme:
+            tier = micro_tier_by_theme[mapped_theme][0]
+            if not theme_strength.empty and "Theme" in theme_strength.columns:
+                lead_ranks = [float(r) for t, r in zip(theme_strength["Theme"], theme_strength["Theme_Rank"]) if theme_class_map.get(t) == "Leading"]
+                lag_ranks = [float(r) for t, r in zip(theme_strength["Theme"], theme_strength["Theme_Rank"]) if theme_class_map.get(t) == "Lagging"]
+                if tier == "Micro Leader":
+                    return (max(lead_ranks) + 0.5) if lead_ranks else 1.0
+                return (min(lag_ranks) - 0.5) if lag_ranks else 40.0
         p_theme = THEME_TRANSLATION.get(str(mapped_theme), str(mapped_theme))
         if not theme_strength.empty and "Theme" in theme_strength.columns:
             m_row = theme_strength[theme_strength["Theme"] == p_theme]
@@ -1025,8 +1050,10 @@ def print_daily_scan(
         
         tot_str = str(total).rjust(3)
         macro_state = theme_class_map.get(parent_theme, "Unknown")
-        q_str = "-".rjust(4) if macro_state == "Neutral" else str(qual).rjust(4)
-        s_str = "-".rjust(7) if macro_state == "Neutral" else f"{score:>.2f}".rjust(7)
+        micro_info = micro_tier_by_theme.get(mapped_theme)
+        masked = (macro_state == "Neutral") and not micro_info
+        q_str = "-".rjust(4) if masked else str(qual).rjust(4)
+        s_str = "-".rjust(7) if masked else f"{score:>.2f}".rjust(7)
         
         macro_state = theme_class_map.get(parent_theme, "Unknown")
         
@@ -1052,6 +1079,12 @@ def print_daily_scan(
         else:
             mac_state_str = macro_state.ljust(25)
             
+        if micro_info:
+            _tier, _metf, _mrs = micro_info
+            mac_state_str = (f"{_tier} ({_metf})" if _metf else f"{_tier} (breadth)").ljust(25)
+            if _mrs is not None:
+                etf_rs_val = _mrs
+
         r_str = f"{etf_rs_val:>.2f}".rjust(6)
 
         etfs_val = THEME_ETF_MAPPING.get(mapped_theme) or THEME_ETF_MAPPING.get(parent_theme, "")
@@ -1133,6 +1166,8 @@ def print_daily_scan(
     # Prepend tag directly to the Ticker string for clean left-side reading
     display_df.loc[display_df["Theme_Class"].isin(["Unknown", "Unclassified Leader"]), "Ticker"] = "~" + display_df["Ticker"]
 
+    if "Micro_Tier" in long_candidates_df.columns:
+        display_df["Micro_Tier"] = long_candidates_df["Micro_Tier"].reindex(display_df.index).fillna("")
     true_longs = display_df
     true_long_tickers = true_longs["Ticker"].tolist()
 
@@ -1185,6 +1220,8 @@ def print_daily_scan(
         display_df["Sector (Rk)"] = display_df["Sector (SPDR)"].astype(str) + " (" + display_df["Sector Rank"].astype(str) + ")"
         display_df["Ticker"] = display_df["Ticker"].apply(lambda t: f" {str(t).strip()}")
         display_df = display_df.drop(columns=["Sector (SPDR)", "Sector Rank"])
+        if "Micro_Tier" in dist_df.columns:
+            display_df["Micro_Tier"] = dist_df["Micro_Tier"].reindex(display_df.index).fillna("")
 
     def clean_all_tickers(df):
         if df.empty:
@@ -1205,7 +1242,7 @@ def print_daily_scan(
     bullish_list = []
     if not true_longs.empty:
         bullish_df = true_longs.copy()
-        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'RS_Rating', '% off Hi', 'Movement', 'Days', 'Sector (Rk)']
+        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'RS_Rating', '% off Hi', 'Movement', 'Days', 'Sector (Rk)', 'Micro_Tier']
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
         bullish_df['_score_num'] = pd.to_numeric(bullish_df['RS_Rating'], errors='coerce').fillna(0)
@@ -1215,7 +1252,7 @@ def print_daily_scan(
     bearish_list = []
     if not distribution_watchlist.empty and not display_df.empty:
         bearish_df = display_df.copy()
-        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', '% off Lo', 'Movement', 'Days', 'Sector (Rk)']
+        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', '% off Lo', 'Movement', 'Days', 'Sector (Rk)', 'Micro_Tier']
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
         bullish_short_rs = 'Short_RS_Rating' if 'Short_RS_Rating' in bearish_df.columns else 'RS_Rating'
@@ -1223,9 +1260,17 @@ def print_daily_scan(
         bearish_df = bearish_df.sort_values(['_score_num'], ascending=[True]).drop(columns=['_score_num'])
         bearish_list = bearish_df.to_dict('records')
 
+    def _micro_tag(theme_name, tier):
+        tier = str(tier or "")
+        if tier == "Micro Leader":
+            return str(theme_name)[:21] + " [ML]"
+        if tier == "Micro Lagging":
+            return str(theme_name)[:20] + " [MLg]"
+        return str(theme_name)[:26]
+
     def format_bullish_row(r):
         t = str(r.get("Ticker", "")).strip()[:6]
-        theme = str(r.get("Mapped_Theme", ""))[:26]
+        theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         rs = str(r.get("RS_Rating", ""))[:4]
         hi = str(r.get("% off Hi", ""))[:4]
@@ -1236,7 +1281,7 @@ def print_daily_scan(
 
     def format_bearish_row(r):
         t = str(r.get("Ticker", "")).strip()[:6]
-        theme = str(r.get("Mapped_Theme", ""))[:26]
+        theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         shrs = str(r.get("Short_RS_Rating", r.get("RS_Rating", "")))[:4]
         lo = str(r.get("% off Lo", ""))[:4]
@@ -1250,7 +1295,7 @@ def print_daily_scan(
 
     bullish_universe_out = '========================================\n'
     bullish_universe_out += 'BULLISH UNIVERSE\n'
-    bullish_universe_out += 'Legend: ~ = Unknown/Unclassified\n'
+    bullish_universe_out += 'Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader (theme leading inside a weaker parent)\n'
     bullish_universe_out += '========================================\n'
 
     if bullish_list:
@@ -1263,6 +1308,7 @@ def print_daily_scan(
 
     bearish_universe_out = '========================================\n'
     bearish_universe_out += 'BEARISH UNIVERSE\n'
+    bearish_universe_out += 'Legend: [MLg] = Micro Lagging (theme breaking down inside a stronger parent)\n'
     bearish_universe_out += '========================================\n'
 
     if bearish_list:
@@ -1343,6 +1389,14 @@ def print_daily_scan(
             etf = extract_primary_etf(etf_raw)
             if etf and etf not in lagging_etfs:
                 lagging_etfs.append(etf)
+
+    # Micro Leader / Micro Lagging sub-ETFs (e.g. CIBR) join the ETF export lists
+    for _th, (_tier, _metf, _mrs) in micro_tier_by_theme.items():
+        if _metf:
+            if _tier == "Micro Leader" and _metf not in leading_etfs:
+                leading_etfs.append(_metf)
+            elif _tier == "Micro Lagging" and _metf not in lagging_etfs:
+                lagging_etfs.append(_metf)
 
     leading_etf_str = ",".join(leading_etfs)
     lagging_etf_str = ",".join(lagging_etfs)
