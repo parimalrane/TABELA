@@ -115,13 +115,13 @@ BACKTEST_PULLBACK_PARAMS = {
 # TABELA RETENTION STAY-IN THRESHOLDS
 LONG_STAY = {
     "MIN_RS": 75.0,
-    "THEMES": ["Leading", "Neutral", "Unclassified Leader"],
+    "THEMES": ["Leading", "Unclassified Leader"],
     "ALLOWED_ZACKS": [1, 2, 3],
 }
 
 SHORT_STAY = {
     "MAX_RS": 75.0,
-    "THEMES": ["Lagging", "Neutral"],
+    "THEMES": ["Lagging"],
     "ALLOWED_ZACKS": [2, 3, 4, 5],
 }
 
