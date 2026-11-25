@@ -48,292 +48,222 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Macro Theme        Micro Theme                Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Exploration        Refining & Marketing         8    8  215.60  12.22   Leading (4 -> -1)           [XLE] CRAK             DK, VLO, DINO, CLMT, MPC, PSX, PBF
-Exploration        Integrated Energy            7    3   79.92  12.22   Leading (4 -> -1)           [XLE] XOP, IEO         BP
-Cloud Computing    Communications Cloud         4    4  154.10   9.28   Leading (5 -> -3)           [XLK] CLOU, FCOM       RNG, FIVN, TWLO
+Exploration        Refining & Marketing         8    8  215.60  12.22   Leading (4 -> -1)           [XLE] CRAK             DINO, CLMT, VLO, DK, MPC, PSX, PBF,
+                                                                                                                           PARR
+Cloud Computing    Communications Cloud         4    4  154.10   9.28   Leading (5 -> -3)           [XLK] CLOU, FCOM       FIVN
 Cloud Computing    Cloud Infrastructure         5    3   99.98   9.28   Leading (5 -> -3)           [XLK] CLOU, WCLD       SNOW
 Biotech            Biotech                     82   11   57.26   7.42   Leading (7 -> +3)           [XLV] XBI, IBB         HALO
 Software           Cybersecurity               13   10  194.27   7.12   Leading (8 -> -4)           [XLK] CIBR, BUG        FTNT
-Software           Software                   189   51  133.57   7.12   Leading (8 -> -4)           [XLK] IGV, XSW         NIQ, MTCH
-Software           Data Infrastructure          4    2   73.63   7.12   Leading (8 -> -4)           [XLK] IGV, CLOU        ESTC
-Healthcare         Healthcare Services         13    5   91.55   3.45   Leading (11)                [XLV] IHI, XBI         AVAH, OSCR
+Software           Software                   189   51  133.57   7.12   Leading (8 -> -4)           [XLK] IGV, XSW         NIQ, PAYC, MANH, MTCH
+Healthcare         Healthcare Services         13    4   75.72   3.45   Leading (11)                [XLV] IHI, XBI         AVAH
 Healthcare         Food Safety                  1    1   63.77   3.45   Leading (11)                [XLV] IHI, XBI         NEOG
 Insurance          Insurance                   62    6   37.30   3.18   Leading (13 -> -7)          [XLF] KIE, IAK         SLDE
 Medical Devices    Diagnostics                  9    7  170.14   0.21   Micro Leader (breadth)      [XLV] IHI, XHE         CDNA, NEO, ILMN
-Medical Devices    Life Sciences Tools          5    4  136.89   0.21   Micro Leader (breadth)      [XLV] IHI, XHE         TXG, AVTR
-Banking            Financial Services          62   41  199.61  -1.57   Micro Lagging (KRE)         [XLF] KRE, KCE         #APLD, #APO, #ARES, #AXP, #BAM,
-                                                                                                                           #BX, #CG, #GLXY, #JEF, #KKR, #LAZ,
-                                                                                                                           #OBDC, #OWL, #TPG, #UPST
+Medical Devices    Life Sciences Tools          5    4  136.89   0.21   Micro Leader (breadth)      [XLV] IHI, XHE         AVTR
+Banking            Financial Services          62   39  186.83  -1.57   Micro Lagging (KRE)         [XLF] KRE, KCE         #APLD, #AXP, #BAM, #BX, #GLXY,
+                                                                                                                           #KKR, #OBDC, #OWL, #TPG
 Internet           Leisure and Entertainment   44   24  148.39   3.38   Micro Lagging (breadth)     [XLC] FDN              #DKNG, #RBLX
-REITs              REITs                      121   89  225.26  -3.20   Lagging (31 -> -1)          [XLRE] VNQ, IYR        #AGNC, #ARR, #BN, #BNL, #BXMT,
-                                                                                                                           #CBRE, #CWK, #EPRT, #GLPI, #IRT,
-                                                                                                                           #NLY, #NMRK, #NNN, #O, #STWD, #SUI,
-                                                                                                                           #UDR, #VICI, #VMRK, #WSC
-Retail             Footwear/Apparel            39   26  183.70  -3.63   Lagging (32 -> -5)          [XLY] XRT              #CPRI, #DECK, #GAP, #GIL, #LEVI,
-                                                                                                                           #LULU, #NKE, #TPR
-Retail             Retail                      25   17  166.94  -3.63   Lagging (32 -> -5)          [XLY] XRT              #AAP, #BBWI, #DKS, #FND, #HD, #LOW,
-                                                                                                                           #MAT, #ORLY, #SGI, #TSCO
+REITs              REITs                      121   88  221.59  -3.20   Lagging (31 -> -1)          [XLRE] VNQ, IYR        #ARR, #BN, #IRT, #O, #STWD, #UDR,
+                                                                                                                           #VICI, #WSC
+Retail             Footwear/Apparel            39   22  147.74  -3.63   Lagging (32 -> -5)          [XLY] XRT              #CPRI, #GAP, #TPR
+Retail             Retail                      25   15  141.92  -3.63   Lagging (32 -> -5)          [XLY] XRT              #AAP, #BBWI, #HD, #LOW, #MAT,
+                                                                                                                           #ORLY, #SGI, #TSCO
 Retail             Discount Retail             10    7  121.09  -3.63   Lagging (32 -> -5)          [XLY] XRT              #TJX, #WMT
-Transportation/S.. Transportation/Shipping     53   26  130.06  -5.78   Lagging (35 -> -3)          [XLI] IYT, BDRY        #AAL, #ALK, #CHRW, #ZTO
+Transportation/S.. Transportation/Shipping     53   26  130.06  -5.78   Lagging (35 -> -3)          [XLI] IYT, BDRY        #ALK
 Transportation/S.. Transportation Platform      1    1   51.99  -5.78   Lagging (35 -> -3)          [XLI] IYT              #UBER
-Infrastructure     Infrastructure             191  135  241.84  -5.84   Lagging (36 -> -1)          [XLI] PAVE, IGF        #ACM, #ALB, #AMTM, #BCE, #CC, #CE,
-                                                                                                                           #CMS, #CNP, #CSIQ, #CTRI, #DUK,
-                                                                                                                           #EIX, #ENB, #ES, #EXC, #F, #FE,
-                                                                                                                           #GPK, #HE, #HESM, #IP, #LBTYA, #LI,
-                                                                                                                           #LNT, #NEE, #NI, #NRG, #NXT, #OLN,
-                                                                                                                           #PCG, #PEG, #PNR, #PPL, #RIVN, #SO,
-                                                                                                                           #TAC, #WEC, #XEL, #XYL
-Infrastructure     Building Materials          43   33  227.57  -5.84   Lagging (36 -> -1)          [XLI] PAVE, ITB        #AMRZ, #CARR, #CRH, #CX, #FBIN,
-                                                                                                                           #ROL, #RYN, #WY
+Infrastructure     Infrastructure             191  127  224.00  -5.84   Lagging (36 -> -1)          [XLI] PAVE, IGF        #ACM, #BCE, #CMS, #CNP, #DUK, #EIX,
+                                                                                                                           #ENB, #EXC, #FE, #HE, #IP, #LI,
+                                                                                                                           #NI, #OLN, #PCG, #PEG, #PPL, #RIVN,
+                                                                                                                           #SO, #TAC, #WEC, #XEL, #XYL
+Infrastructure     Building Materials          43   31  210.76  -5.84   Lagging (36 -> -1)          [XLI] PAVE, ITB        #CRH, #CX, #FBIN, #RYN, #WY
 Infrastructure     Industrial Automation       43   29  165.53  -5.84   Lagging (36 -> -1)          [XLI] ROBO, BOTZ       #CNM, #IR, #OTIS
 Infrastructure     Homebuilders                 4    4  127.95  -5.84   Lagging (36 -> -1)          [XLY] XHB, ITB         #DHI, #LEN
-Infrastructure     Solar Infrastructure         4    3   80.47  -5.84   Lagging (36 -> -1)          [XLU] TAN              #ENPH, #FSLR, #SEDG
+Infrastructure     Solar Infrastructure         4    2   43.05  -5.84   Lagging (36 -> -1)          [XLU] TAN              #ENPH, #SEDG
 Infrastructure     Materials/Metals             3    1   37.43  -5.84   Lagging (36 -> -1)          [XLI] PAVE, IGF        #AA
-Aerospace & Defe.. Aerospace & Defense         35   30  216.84  -8.14   Lagging (37 -> -3)          [XLI] ITA, XAR         #BA, #FLY, #KRMN, #RDW, #SARO,
-                                                                                                                           #VOYG
-Aerospace & Defe.. Space Infrastructure         5    4  129.01  -8.14   Lagging (37 -> -3)          [XLI] ARKX, ITA        #ASTS, #LUNR, #PL, #RKLB
-Aerospace & Defe.. Defense Systems              1    1   65.16  -8.14   Lagging (37 -> -3)          [XLI] ITA, XAR         #KTOS
+Aerospace & Defe.. Aerospace & Defense         35   27  202.00  -8.14   Lagging (37 -> -3)          [XLI] ITA, XAR         #FLY, #SARO
+Aerospace & Defe.. Space Infrastructure         5    2   60.92  -8.14   Lagging (37 -> -3)          [XLI] ARKX, ITA        #ASTS
 Aerospace & Defe.. Defense Drone Systems        1    1   58.22  -8.14   Lagging (37 -> -3)          [XLI] ITA, XAR         #AVAV
-Semiconductors     Semiconductors              44   24  141.12  -8.75   Lagging (38 -> +9)          [XLK] SMH, SOXX        #ALGM, #NXPI, #ON, #RMBS, #TEL
-Semiconductors     Semiconductor Equipment     25    9   68.94  -8.75   Lagging (38 -> +9)          [XLK] SMH, SOXX        #HAYW
+Semiconductors     Semiconductors              44   24  141.12  -8.75   Lagging (38 -> +9)          [XLK] SMH, SOXX        #NXPI, #ON
 Semiconductors     Foundry                      3    1   31.42  -8.75   Lagging (38 -> +9)          [XLK] SMH, SOXX        #GFS
 Uranium Mining     Nuclear Infrastructure       3    3  117.37 -10.04   Lagging (41 -> +1)          [XLU] NLR, URNM        #CEG, #VST
 Uranium Mining     Uranium Mining               1    1   49.21 -10.04   Lagging (41 -> +1)          [XLU] URNM, URA        #CCJ
 
 =============================================================================================
 1. STRONG BULLISH UNIVERSE (Active Momentum Breakouts & Leaders)
-Criteria: RS >= 90 (Stay >= 75) | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only
-Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader
+Criteria: RS >= 90 | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only
+Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Momentum Carve-Out (RS >= 95, Zacks 3 with Growth A/B)
 =============================================================================================
 Ticker  Mapped_Theme               Zacks  RS_Rating  % off Hi  Movement  Days  Sector (Rk)
-CDNA    Diagnostics [ML]               2         99         0        +1    28  XLV (2)    
+CDNA    Diagnostics [ML]               2         99         0        NA     1  XLV (2)    
+DINO    Refining & Marketing           1         99         0       +28    11  XLE (1)    
+CLMT    Refining & Marketing           2         99         0        NA     1  XLE (1)    
+VLO     Refining & Marketing           1         99         0       +24    11  XLE (1)    
 DK      Refining & Marketing           1         99         0        NA     1  XLE (1)    
-VLO     Refining & Marketing           1         99         0        +8    11  XLE (1)    
-TXG     Life Sciences Tools [ML]       3         99        -2       +19    31  XLV (2)    
-RNG     Communications Cloud           3         99        -4        -2    36  XLK (3)    
-DINO    Refining & Marketing           1         99         0        +8    11  XLE (1)    
-CLMT    Refining & Marketing           2         99         0       +13     9  XLE (1)    
-FIVN    Communications Cloud           2         98        -1        +4    22  XLK (3)    
-NIQ     Software                       1         98        -7        -5     4  XLK (3)    
-AVTR    Life Sciences Tools [ML]       2         98         0        +8    35  XLV (2)    
-MPC     Refining & Marketing           1         98         0        -6    12  XLE (1)    
-NEO     Diagnostics [ML]               2         97         0        NA     1  XLV (2)    
-PSX     Refining & Marketing           1         97         0        +4     7  XLE (1)    
+AVTR    Life Sciences Tools [ML]       2         98         0        NA     1  XLV (2)    
+FIVN    Communications Cloud           2         98        -1        NA     1  XLK (3)    
+NIQ     Software                       1         98        -7        +7     4  XLK (3)    
+MPC     Refining & Marketing           1         98         0        +5    12  XLE (1)    
 AVAH    Healthcare Services            2         97        -1        NA     1  XLV (2)    
-PBF     Refining & Marketing           1         97        -3        -7    25  XLE (1)    
+PSX     Refining & Marketing           1         97         0       +22     7  XLE (1)    
+PBF     Refining & Marketing           1         97        -3       +14    11  XLE (1)    
+^PAYC   Software                       1         97        -5        NA     1  XLK (3)    
 SLDE    Insurance                      1         97        -3        NA     1  XLF (4)    
-ILMN    Diagnostics [ML]               2         96         0        -4     2  XLV (2)    
+^PARR   Refining & Marketing           1         97        -1        NA     1  XLE (1)    
+NEO     Diagnostics [ML]               2         97         0        NA     1  XLV (2)    
+ILMN    Diagnostics [ML]               2         96         0       +12     2  XLV (2)    
+^MANH   Software                       2         96        -5        +6     2  XLK (3)    
 FTNT    Cybersecurity                  1         95        -1        NA     1  XLK (3)    
-MTCH    Software                       1         94        -2        +3     4  XLK (3)    
-TWLO    Communications Cloud           3         93        -7       -10     2  XLK (3)    
-HALO    Biotech                        2         93        -2       -15    25  XLV (2)    
-SNOW    Cloud Infrastructure           2         92        -7        +2     9  XLK (3)    
+MTCH    Software                       1         94        -2        NA     1  XLK (3)    
+HALO    Biotech                        2         93        -2        -8    25  XLV (2)    
+SNOW    Cloud Infrastructure           2         92        -7        NA     1  XLK (3)    
 NEOG    Food Safety                    2         92         0        NA     1  XLV (2)    
-ESTC    Data Infrastructure            1         88       -15       -17    12  XLK (3)    
-BP      Integrated Energy              3         86        -5        -6     4  XLE (1)    
-OSCR    Healthcare Services            1         78        -4        -5     9  XLF (4)    
 
 =============================================================================================
 2. MILD BULLISH UNIVERSE (Institutional Pullbacks & Reversals)
 Criteria: Dropped Long <= 90d | Zacks 1-2 | Leading (RS >= 55, Range >= 50%) | Neutral (RS >= 75, Range >= 75%)
 =============================================================================================
 Ticker  Theme / Sector             Zacks         RS  % off Hi       YTD  Days  52W Range  
+IOVA    Biotech                        2         99      0.0%   +227.7%     0  100.0%     
+APPN    Software                       1         97    -17.8%     -4.0%     0  69.8%      
+CON     Healthcare Services            1         91      0.0%    +67.5%     0  100.0%     
+PCTY    Software                       2         90    -12.3%    -12.4%     0  71.6%      
 VG      LNG / Natural Gas Export I     2         93    -16.4%    +94.7%     1  75.2%      
-TALO    Exploration                    1         87     -5.0%    +43.3%     1  90.3%      
-NRIX    Biotech                        2         65     -9.5%    +20.2%     1  86.5%      
-LFST    Healthcare                     2         87     -4.4%    +64.7%     8  93.1%      
-NESR    Exploration                    2         65    -13.3%    +82.3%     8  81.7%      
-SXC     Energy                         2         80     -9.1%    +21.0%    13  80.4%      
+TALO    Exploration                    1         87     -5.0%    +43.3%     8  90.3%      
+ESTC    Data Infrastructure            1         88    -14.9%     +2.2%    14  73.7%      
+SXC     Energy                         2         80     -9.1%    +21.0%    14  80.4%      
 CRL     Healthcare                     2         79     -8.4%    +24.2%    14  83.5%      
-PAY     Digital Payments               2         92    -17.8%     +5.1%    15  67.4%      
-U       Software                       2         83    -14.8%    -13.5%    15  77.3%      
-RGEN    Biotech                        2         84     -5.0%     -4.3%    19  88.5%      
-MANH    Software                       2         96     -5.2%    +10.9%    20  88.6%      
-PAYC    Software                       1         97     -5.4%    +29.5%    22  89.8%      
-FSLY    Cloud Infrastructure           2         91    -29.7%   +109.6%    22  61.1%      
-THC     Healthcare Services            1         90     -5.3%    +21.2%    23  87.5%      
-OII     Oil Services                   2         57    -13.9%    +75.8%    23  76.5%      
-BLFS    Life Sciences Tools            1         90     -3.0%    +35.4%    27  94.2%      
-DELL    AI Servers                     1         99     -0.7%   +305.6%    29  99.1%      
+U       Software                       2         83    -14.8%    -13.5%    20  77.3%      
+OII     Oil Services                   2         57    -13.9%    +75.8%    27  76.5%      
 QMCO    AI Compute                     2         98     -8.7%   +234.9%    29  89.5%      
 HPE     AI Servers                     1         87     -8.7%   +113.9%    29  87.2%      
-DGX     Diagnostics                    2         87      0.0%    +29.1%    33  100.0%     
-PARR    Refining & Marketing           1         97     -1.3%   +119.0%    41  97.9%      
+PAY     Digital Payments               2         92    -17.8%     +5.1%    30  67.4%      
+FSLY    Cloud Infrastructure           2         91    -29.7%   +109.6%    30  61.1%      
+BLFS    Life Sciences Tools            1         90     -3.0%    +35.4%    34  94.2%      
+RGEN    Biotech                        2         84     -5.0%     -4.3%    36  88.5%      
+THC     Healthcare Services            1         90     -5.3%    +21.2%    41  87.5%      
 ANET    AI Networking                  1         90     -6.2%    +36.7%    41  86.3%      
-PGNY    Healthcare Services            2         84    -15.4%     -3.4%    42  69.0%      
-VSTS    Professional Services          2         84    -16.5%    +87.1%    42  78.1%      
-TRV     Insurance                      2         88     -4.6%    +18.4%    43  86.5%      
-WKC     Energy Logistics & Fuel Di     1         71    -11.9%    +37.2%    43  72.9%      
+PGNY    Healthcare Services            2         84    -15.4%     -3.4%    47  69.0%      
+WKC     Energy Logistics & Fuel Di     1         71    -11.9%    +37.2%    51  72.9%      
+DGX     Diagnostics                    2         87      0.0%    +29.1%    54  100.0%     
+TRV     Insurance                      2         88     -4.6%    +18.4%    55  86.5%      
+NESR    Exploration                    2         65    -13.3%    +82.3%    55  81.7%      
 ACIW    Software                       1         75    -14.3%     -2.2%    57  60.4%      
+VSTS    Professional Services          2         84    -16.5%    +87.1%    58  78.1%      
+OSCR    Healthcare Services            1         78     -4.3%   +104.0%    61  93.6%      
+DELL    AI Servers                     1         99     -0.7%   +305.6%    63  99.1%      
+LFST    Healthcare                     2         87     -4.4%    +64.7%    65  93.1%      
+NRIX    Biotech                        2         65     -9.5%    +20.2%    65  86.5%      
 
 =============================================================================================
 3. STRONG BEARISH UNIVERSE (Active Momentum Breakdowns & Short Candidates)
-Criteria: Short_RS 8-60 (Stay <= 75) | 52W Range <= 30% | Zacks 4-5 (Stay 2-5) | Lagging Themes Only
+Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 4-5 | Lagging Themes Only
 Legend: [MLg] = Micro Lagging
 =============================================================================================
 Ticker  Mapped_Theme               Zacks   Short_RS  % off Lo  Movement  Days  Sector (Rk)
-DKS     Retail                         4          1         0       +59     2  XLY (10)   
-CSIQ    Infrastructure                 4          1         0        +1    29  XLE (1)    
-KRMN    Aerospace & Defense            3          1         7        +2    15  XLI (8)    
-LULU    Footwear/Apparel               5          2         0       +11     2  XLY (10)   
-UPST    Financial Services [MLg]       4          2         3       +22     2  XLF (4)    
-PNR     Infrastructure                 5          2         0        +6     2  XLK (3)    
-PL      Space Infrastructure           2          3        64        +2    11  XLK (3)    
-ROL     Building Materials             4          4         0       +23     2  XLK (3)    
-NKE     Footwear/Apparel               4          4         0       +34     2  XLY (10)   
-CTRI    Infrastructure                 3          5         0       +43    26  XLU (0)    
-AMRZ    Building Materials             5          5         0       +28     9  XLI (8)    
-NRG     Infrastructure                 3          5         1        +7    22  XLU (0)    
-ALB     Infrastructure                 3          6        37        +8     2  XLB (5)    
-KTOS    Defense Systems                3          6         8        -8    13  XLI (8)    
-GPK     Infrastructure                 3          6         8        -7    23  XLI (8)    
-FSLR    Solar Infrastructure           3          7         3       +12    21  XLE (1)    
-FND     Retail                         3          7         6       +39     8  XLY (10)   
-LUNR    Space Infrastructure           4          7        72        -7    12  XLI (8)    
-DECK    Footwear/Apparel               2          7         1       +80     2  XLY (10)   
-CG      Financial Services [MLg]       3          7         0        -3     6  XLF (4)    
-BXMT    REITs                          5          7         1       -19    10  XLF (4)    
-GIL     Footwear/Apparel               3          7         1        +4     2  XLY (10)   
-PCG     Infrastructure                 3          8         2       +32     7  XLU (0)    
-CRH     Building Materials             3          8         0        +9    20  XLI (8)    
-LAZ     Financial Services [MLg]       5          8         0       +33     2  XLF (4)    
+PCG     Infrastructure                 3          8         2       +39     7  XLU (0)    
+CRH     Building Materials             3          8         0       +18     2  XLI (8)    
 TJX     Discount Retail                3          9         0        NA     1  XLY (10)   
-JEF     Financial Services [MLg]       4          9        31       +15     2  XLF (4)    
-CPRI    Footwear/Apparel               3         10        16       +39     2  XLY (10)   
+CPRI    Footwear/Apparel               3         10        16       +46     2  XLY (10)   
 MAT     Retail                         3         10         1        NA     1  XLY (10)   
-EIX     Infrastructure                 3         10         5       +45     9  XLU (0)    
+EIX     Infrastructure                 3         10         5       +50     9  XLU (0)    
 BBWI    Retail                         3         11        13        NA     1  XLY (10)   
-WSC     REITs                          3         11        21        +8     4  XLF (4)    
-ACM     Infrastructure                 5         11         3       -10     6  XLI (8)    
-NXT     Infrastructure                 3         11        17       +61    13  XLE (1)    
-LEN     Homebuilders                   5         11         1       +30    15  XLI (8)    
-RMBS    Semiconductors                 2         12         2       +91    14  XLK (3)    
-CWK     REITs                          3         12         6        +9     2  XLF (4)    
+WSC     REITs                          3         11        21       +17     4  XLF (4)    
+ACM     Infrastructure                 5         11         3        NA     1  XLI (8)    
+LEN     Homebuilders                   5         11         1       +38    15  XLI (8)    
 SGI     Retail                         3         12         4        NA     1  XLY (10)   
-FBIN    Building Materials             3         12        18       +24     9  XLI (8)    
-HE      Infrastructure                 4         12         0       -33    12  XLU (0)    
-AAL     Transportation/Shipping        3         13        25       +21     2  XLI (8)    
-SARO    Aerospace & Defense            3         13         0        -7    14  XLI (8)    
-HAYW    Semiconductor Equipment        2         13         1        +1     2  XLK (3)    
-FLY     Aerospace & Defense            4         13        21       -10    15  XLI (8)    
-BN      REITs                          3         13         0       +21    18  XLF (4)    
-APLD    Financial Services [MLg]       5         13        26       -33     3  XLF (4)    
-ALK     Transportation/Shipping        3         14        16       -15    13  XLI (8)    
-OLN     Infrastructure                 3         14         1       -26    10  XLB (5)    
-LOW     Retail                         4         14         0       +40     9  XLY (10)   
-TSCO    Retail                         5         14        12       +18     9  XLY (10)   
-AMTM    Infrastructure                 3         14         3       -15    25  XLI (8)    
-CEG     Nuclear Infrastructure         3         14        10       +36     4  XLE (1)    
-ASTS    Space Infrastructure           3         15        47       -52    15  XLK (3)    
-RKLB    Space Infrastructure           2         15        61       -34     2  XLI (8)    
-OWL     Financial Services [MLg]       3         15        23       -31     6  XLF (4)    
-LI      Infrastructure                 5         16         3        -8     8  XLY (10)   
+FBIN    Building Materials             3         12        18       +34     6  XLI (8)    
+HE      Infrastructure                 4         12         0        NA     1  XLU (0)    
+SARO    Aerospace & Defense            3         13         0        +7    14  XLI (8)    
+FLY     Aerospace & Defense            4         13        21        NA     1  XLI (8)    
+BN      REITs                          3         13         0       +33    12  XLF (4)    
+APLD    Financial Services [MLg]       5         13        26       -14     3  XLF (4)    
+ALK     Transportation/Shipping        3         14        16        +1     8  XLI (8)    
+OLN     Infrastructure                 3         14         1        -7     6  XLB (5)    
+LOW     Retail                         4         14         0       +49     9  XLY (10)   
+TSCO    Retail                         5         14        12       +30     9  XLY (10)   
+CEG     Nuclear Infrastructure         3         14        10        NA     1  XLE (1)    
+ASTS    Space Infrastructure           3         15        47        NA     1  XLK (3)    
+OWL     Financial Services [MLg]       3         15        23        NA     1  XLF (4)    
+LI      Infrastructure                 5         16         3        +8     8  XLY (10)   
 AVAV    Defense Drone Systems          3         16        14        NA     1  XLI (8)    
-IP      Infrastructure                 3         16        16       +28     6  XLB (5)    
-ARR     REITs                          3         16         5        -9     2  XLF (4)    
-NMRK    REITs                          2         17         2       -44     2  XLF (4)    
-KKR     Financial Services [MLg]       3         17        15       -24     4  XLF (4)    
+IP      Infrastructure                 3         16        16       +40     6  XLB (5)    
+ARR     REITs                          3         16         5        +7     2  XLF (4)    
+KKR     Financial Services [MLg]       3         17        15        -7     4  XLF (4)    
 DKNG    Leisure and Entertai [MLg]     3         17        17        NA     1  XLY (10)   
-STWD    REITs                          4         17         0       -49    21  XLF (4)    
-ARES    Financial Services [MLg]       3         18        29       -19     2  XLF (4)    
-AAP     Retail                         3         18         8       +71     9  XLY (10)   
-EPRT    REITs                          4         18         0        +5     2  XLF (4)    
-AA      Materials/Metals               4         19        48       -26     2  XLI (8)    
-XYL     Infrastructure                 3         19         1        -9     6  XLK (3)    
-HD      Retail                         3         19         2       +36     9  XLY (10)   
-IRT     REITs                          3         20         1        +4     6  XLF (4)    
-BX      Financial Services [MLg]       3         20        21       -42     2  XLF (4)    
-AXP     Financial Services [MLg]       3         20         7       +18     2  XLF (4)    
-TPG     Financial Services [MLg]       3         21        23       -21     2  XLF (4)    
-TPR     Footwear/Apparel               3         21        19       +30     4  XLY (10)   
-BAM     Financial Services [MLg]       3         22         5       +31     6  XLF (4)    
-OTIS    Industrial Automation          3         22         2       +20    47  XLI (8)    
-PEG     Infrastructure                 3         22         0        +7    29  XLU (0)    
-CNM     Industrial Automation          4         22         5        -1     6  XLI (8)    
-WY      Building Materials             3         22         2       -28     9  XLI (8)    
-CX      Building Materials             3         22        14        -1     2  XLI (8)    
-IR      Industrial Automation          3         23         4       +48    11  XLI (8)    
+STWD    REITs                          4         17         0       -27    21  XLF (4)    
+AAP     Retail                         3         18         8        NA     1  XLY (10)   
+AA      Materials/Metals               4         19        48        -7     2  XLI (8)    
+XYL     Infrastructure                 3         19         1        +9     6  XLK (3)    
+HD      Retail                         3         19         2       +49     9  XLY (10)   
+IRT     REITs                          3         20         1        NA     1  XLF (4)    
+BX      Financial Services [MLg]       3         20        21       -21     2  XLF (4)    
+AXP     Financial Services [MLg]       3         20         7       +32     2  XLF (4)    
+TPG     Financial Services [MLg]       3         21        23        -2     2  XLF (4)    
+TPR     Footwear/Apparel               3         21        19        NA     1  XLY (10)   
+BAM     Financial Services [MLg]       3         22         5       +44     6  XLF (4)    
+OTIS    Industrial Automation          3         22         2       +34    47  XLI (8)    
+PEG     Infrastructure                 3         22         0       +22    29  XLU (0)    
+CNM     Industrial Automation          4         22         5       +14     6  XLI (8)    
+WY      Building Materials             3         22         2        -9     9  XLI (8)    
+CX      Building Materials             3         22        14       +14     2  XLI (8)    
+IR      Industrial Automation          3         23         4        NA     1  XLI (8)    
 RIVN    Infrastructure                 3         23        22        NA     1  XLY (10)   
 GAP     Footwear/Apparel               3         24        10        NA     1  XLY (10)   
-LEVI    Footwear/Apparel               3         24        10       +36     4  XLY (10)   
-VST     Nuclear Infrastructure         4         24         4       +34     4  XLU (0)    
-VICI    REITs                          3         24         0       -13    21  XLF (4)    
-CARR    Building Materials             2         24         8       +25     2  XLI (8)    
-UBER    Transportation Platform        3         25         8       +20     9  XLK (3)    
-AGNC    REITs                          3         26         2       -32     4  XLF (4)    
+VST     Nuclear Infrastructure         4         24         4       +47     4  XLU (0)    
+VICI    REITs                          3         24         0        NA     1  XLF (4)    
+UBER    Transportation Platform        3         25         8       +36     9  XLK (3)    
 RBLX    Leisure and Entertai [MLg]     3         26        33        NA     1  XLY (10)   
-GLPI    REITs                          2         26         0        -8     9  XLF (4)    
-CBRE    REITs                          3         26        11         0     2  XLF (4)    
-DHI     Homebuilders                   3         26         4       +25    27  XLI (8)    
-APO     Financial Services [MLg]       3         27        24       -40     2  XLF (4)    
-BA      Aerospace & Defense            3         27        13       -15     2  XLI (8)    
-UDR     REITs                          3         28         3        +2     6  XLF (4)    
-CMS     Infrastructure                 4         28         0       +13    29  XLU (0)    
-ORLY    Retail                         3         28         1       +36     9  XLY (10)   
-NLY     REITs                          2         29         5       -52     2  XLF (4)    
-RYN     Building Materials             3         29         3       -22    20  XLI (8)    
-CCJ     Uranium Mining                 4         29        14       -25     2  XLE (1)    
-NXPI    Semiconductors                 3         30        19       +23    19  XLK (3)    
+DHI     Homebuilders                   3         26         4       +42     2  XLI (8)    
+UDR     REITs                          3         28         3       +23     6  XLF (4)    
+CMS     Infrastructure                 4         28         0       +34    29  XLU (0)    
+ORLY    Retail                         3         28         1       +47     9  XLY (10)   
+RYN     Building Materials             3         29         3        +1    20  XLI (8)    
+CCJ     Uranium Mining                 4         29        14        -2     2  XLE (1)    
+NXPI    Semiconductors                 3         30        19        NA     1  XLK (3)    
 TAC     Infrastructure                 3         31         4        NA     1  XLU (0)    
-XEL     Infrastructure                 3         31         1       +27     4  XLU (0)    
-PPL     Infrastructure                 3         31         1       +21    29  XLU (0)    
-GFS     Foundry                        3         32        34       +33    18  XLK (3)    
-SUI     REITs                          3         32         0        +8    18  XLF (4)    
-GLXY    Financial Services [MLg]       4         32        32       -83     4  XLF (4)    
-EXC     Infrastructure                 3         33         1        +2    25  XLU (0)    
-ZTO     Transportation/Shipping        3         33         9       -17     2  XLI (8)    
+XEL     Infrastructure                 3         31         1        NA     1  XLU (0)    
+PPL     Infrastructure                 3         31         1        NA     1  XLU (0)    
+GFS     Foundry                        3         32        34        NA     1  XLK (3)    
+GLXY    Financial Services [MLg]       4         32        32        NA     1  XLF (4)    
+EXC     Infrastructure                 3         33         1       +25     7  XLU (0)    
 WMT     Discount Retail                3         33         7        NA     1  XLY (10)   
-NI      Infrastructure                 3         34         3        +2    26  XLU (0)    
-WEC     Infrastructure                 3         34         0       +11    27  XLU (0)    
-ON      Semiconductors                 3         34        48       +24     6  XLK (3)    
-LBTYA   Infrastructure                 4         34         7      -105    28  XLU (0)    
-SO      Infrastructure                 3         34         3       +16    12  XLU (0)    
-BCE     Infrastructure                 3         35         8       -48    29  XLU (0)    
-CNP     Infrastructure                 3         35         3       +15    17  XLU (0)    
-ENPH    Solar Infrastructure           3         35        36       -55    28  XLE (1)    
-O       REITs                          3         35         2       -19     2  XLF (4)    
-TEL     Semiconductors                 2         36         3        +9    19  XLK (3)    
-ALGM    Semiconductors                 4         36        45        +1    15  XLK (3)    
-LNT     Infrastructure                 3         36         4        +5    17  XLU (0)    
-NEE     Infrastructure                 4         37        15       -17     2  XLU (0)    
-NNN     REITs                          2         37         7        -9     2  XLF (4)    
-OBDC    Financial Services [MLg]       3         37         4       -56     6  XLF (4)    
-ENB     Infrastructure                 3         37         7       -30     4  XLE (1)    
-ES      Infrastructure                 4         39         7       -28     2  XLU (0)    
-DUK     Infrastructure                 3         39         3        -7     4  XLU (0)    
-F       Infrastructure                 3         40        19       -49     2  XLY (10)   
-CHRW    Transportation/Shipping        3         41        23       -70    14  XLI (8)    
-VMRK    REITs                          3         42         9       -29     2  XLF (4)    
-FE      Infrastructure                 3         42         5       -12     2  XLU (0)    
-CC      Infrastructure                 4         44        38       -40    19  XLB (5)    
-BNL     REITs                          3         47        13       -33     2  XLF (4)    
-SEDG    Solar Infrastructure           3         58        22       -49    28  XLE (1)    
-CE      Infrastructure                 3         61        32         0    28  XLB (5)    
-HESM    Infrastructure                 3         66        25      -108     2  XLE (1)    
-RDW     Aerospace & Defense            3         74       113       -26    10  XLI (8)    
-VOYG    Aerospace & Defense            3         80        96       -58     2  XLI (8)    
+NI      Infrastructure                 3         34         3       +25    19  XLU (0)    
+WEC     Infrastructure                 3         34         0       +32    17  XLU (0)    
+ON      Semiconductors                 3         34        48        NA     1  XLK (3)    
+SO      Infrastructure                 3         34         3        NA     1  XLU (0)    
+BCE     Infrastructure                 3         35         8       -20     2  XLU (0)    
+CNP     Infrastructure                 3         35         3        NA     1  XLU (0)    
+ENPH    Solar Infrastructure           3         35        36       -27    21  XLE (1)    
+O       REITs                          3         35         2        +6     2  XLF (4)    
+OBDC    Financial Services [MLg]       3         37         4       -23     6  XLF (4)    
+ENB     Infrastructure                 3         37         7         0     4  XLE (1)    
+DUK     Infrastructure                 3         39         3       +21     4  XLU (0)    
+FE      Infrastructure                 3         42         5       +19     2  XLU (0)    
+SEDG    Solar Infrastructure           3         58        22       -12    10  XLE (1)    
 
 =============================================================================================
-4. MILD BEARISH UNIVERSE (Relief Bounce Exhaustions & Breakdown Resumptions)
-Criteria: Dropped Short <= 90d | 52W Range <= 50% | Zacks 3-5 | Lagging (Short_RS >= 55) | Neutral (Short_RS >= 70)
+4. MILD BEARISH UNIVERSE (Sell the Bounce — Relief Rally Exhaustion Zone)
+Criteria: Dropped Short <= 90d | 52W Range <= 50% | Bounced >= +10% off Low | Zacks 3-5 | Lagging (Short_RS >= 55) | Neutral (Short_RS >= 65)
 =============================================================================================
 Ticker  Theme / Sector             Zacks   Short_RS  % off Lo       YTD  Days  52W Range  
-ARE     REITs                          3         66    +32.4%     -0.9%     0  27.9%      
-QCOM    Wireless Chips                 5         66    +49.0%     -2.0%     5  47.9%      
-SFTBY   Telecom                        3         85    +80.8%    +26.2%     7  49.6%      
+RDW     Aerospace & Defense            3         74   +113.2%    +28.7%     1  27.5%      
+ARE     REITs                          3         66    +32.4%     -0.9%     8  27.9%      
+SFTBY   Telecom                        3         85    +80.8%    +26.2%    20  49.6%      
+CE      Infrastructure                 3         61    +31.9%     +0.5%    33  33.6%      
+QCOM    Wireless Chips                 5         66    +49.0%     -2.0%    48  47.9%      
 
 TRADINGVIEW WATCHLIST EXPORT
-###Strong_Bullish,CDNA,DK,VLO,TXG,RNG,DINO,CLMT,FIVN,NIQ,AVTR,MPC,NEO,PSX,AVAH,PBF,SLDE,ILMN,FTNT,MTCH,TWLO,HALO,SNOW,NEOG,ESTC,BP,OSCR,
-###Mild_Bullish,VG,TALO,NRIX,LFST,NESR,SXC,CRL,PAY,U,RGEN,MANH,PAYC,FSLY,THC,OII,BLFS,DELL,QMCO,HPE,DGX,PARR,ANET,PGNY,VSTS,TRV,WKC,ACIW,
-###Strong_Bearish,DKS,CSIQ,KRMN,LULU,UPST,PNR,PL,ROL,NKE,CTRI,AMRZ,NRG,ALB,KTOS,GPK,FSLR,FND,LUNR,DECK,CG,BXMT,GIL,PCG,CRH,LAZ,TJX,JEF,CPRI,MAT,EIX,BBWI,WSC,ACM,NXT,LEN,RMBS,CWK,SGI,FBIN,HE,AAL,SARO,HAYW,FLY,BN,APLD,ALK,OLN,LOW,TSCO,AMTM,CEG,ASTS,RKLB,OWL,LI,AVAV,IP,ARR,NMRK,KKR,DKNG,STWD,ARES,AAP,EPRT,AA,XYL,HD,IRT,BX,AXP,TPG,TPR,BAM,OTIS,PEG,CNM,WY,CX,IR,RIVN,GAP,LEVI,VST,VICI,CARR,UBER,AGNC,RBLX,GLPI,CBRE,DHI,APO,BA,UDR,CMS,ORLY,NLY,RYN,CCJ,NXPI,TAC,XEL,PPL,GFS,SUI,GLXY,EXC,ZTO,WMT,NI,WEC,ON,LBTYA,SO,BCE,CNP,ENPH,O,TEL,ALGM,LNT,NEE,NNN,OBDC,ENB,ES,DUK,F,CHRW,VMRK,FE,CC,BNL,SEDG,CE,HESM,RDW,VOYG,
-###Mild_Bearish,ARE,QCOM,SFTBY,
+###Strong_Bullish,CDNA,DINO,CLMT,VLO,DK,AVTR,FIVN,NIQ,MPC,AVAH,PSX,PBF,PAYC,SLDE,PARR,NEO,ILMN,MANH,FTNT,MTCH,HALO,SNOW,NEOG,
+###Mild_Bullish,IOVA,APPN,CON,PCTY,VG,TALO,ESTC,SXC,CRL,U,OII,QMCO,HPE,PAY,FSLY,BLFS,RGEN,THC,ANET,PGNY,WKC,DGX,TRV,NESR,ACIW,VSTS,OSCR,DELL,LFST,NRIX,
+###Strong_Bearish,PCG,CRH,TJX,CPRI,MAT,EIX,BBWI,WSC,ACM,LEN,SGI,FBIN,HE,SARO,FLY,BN,APLD,ALK,OLN,LOW,TSCO,CEG,ASTS,OWL,LI,AVAV,IP,ARR,KKR,DKNG,STWD,AAP,AA,XYL,HD,IRT,BX,AXP,TPG,TPR,BAM,OTIS,PEG,CNM,WY,CX,IR,RIVN,GAP,VST,VICI,UBER,RBLX,DHI,UDR,CMS,ORLY,RYN,CCJ,NXPI,TAC,XEL,PPL,GFS,GLXY,EXC,WMT,NI,WEC,ON,SO,BCE,CNP,ENPH,O,OBDC,ENB,DUK,FE,SEDG,
+###Mild_Bearish,RDW,ARE,SFTBY,CE,QCOM,
 ###Leading_ETF,FDN,CRAK,XOP,CLOU,XBI,IGV,MOO,XPH,IHI,KIE,
-###Lagging_ETF,XRT,PAVE,ITA,ARKX,TAN,VNQ,XHB,SMH,IYT,NLR,ROBO,URNM,COPX,LIT,KRE,
+###Lagging_ETF,PAVE,XRT,VNQ,XHB,ITA,IYT,NLR,ARKX,ROBO,URNM,SMH,TAN,COPX,LIT,KRE,
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,CNK,CON,PRCH,SHOP,
-###Dropped_Bearish_Stocks,AMKR,ARE,AVGO,COIN,CORZ,GNTX,RIOT,THRM,VRT,WYFI,
+###Dropped_Bullish_Stocks,CNK,CON,ESTC,PRCH,RNG,SHOP,TWLO,^AMPL,^APPN,^BOX,^CDNA,^CVI,^DOCU,^FRSH,^GCT,^IOVA,^LIND,^MRNA,^PBR,^PCRX,^PCTY,^RBRK,^TEAM,^XERS,
+###Dropped_Bearish_Stocks,AAL,AEO,ALB,ALGM,AMKR,AMRZ,APO,ARE,ARES,AVGO,BA,BNL,CARR,CBRE,CC,CG,COIN,CORZ,CTRI,CWK,DECK,DKS,EPRT,ES,F,FND,FSLR,GIL,GLPI,GNTX,HAYW,HESM,JEF,LAZ,LNT,LULU,LUNR,NEE,NKE,NLY,NMRK,NNN,NRG,NXT,PNR,RIOT,RKLB,RMBS,ROL,THRM,UPST,VMRK,VOYG,VRT,ZTO,
 ###Dropped_Leading_ETF,BITQ,FCG,GDX,
 ###Dropped_Lagging_ETF,AIQ,DAPP,
 

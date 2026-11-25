@@ -49,7 +49,8 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Macro Theme        Micro Theme                Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Semiconductors     Semiconductors              50    3   22.73  17.88   Leading (1)                 [XLK] SMH, SOXX        ASX
+Semiconductors     Memory                       4    4  152.49  17.88   Leading (1)                 [XLK] DRAM             SIMO
+Semiconductors     Semiconductors              50    3   22.73  17.88   Leading (1)                 [XLK] SMH, SOXX        AMBQ, ASX
 Cloud Computing    Cloud Infrastructure         5    3  102.85   9.98   Leading (3)                 [XLK] CLOU, WCLD       DDOG, NET
 Healthcare         Healthcare Services         14    7  127.67   8.27   Leading (4)                 [XLV] IHI, XBI         PGNY
 Healthcare         Healthcare                  41   12  103.93   8.27   Leading (4)                 [XLV] IHI, XBI         LFST
@@ -57,12 +58,14 @@ Biotech            Biotech                     85   31  153.75   8.19   Leading 
 Biotech            Biotechnology                4    3  113.47   8.19   Leading (5)                 [XLV] XBI, IBB         KNSA
 Artificial Intel.. AI Servers                   2    2  106.02   6.59   Leading (7)                 [XLK] SMH, AIQ         DELL
 Telecom            Communication Infrastruc..   1    1   68.62   5.51   Leading (8)                 [XLC] IYZ, VOX         BAND
+Software           Digital Payments             4    3  117.09   4.61   Leading (10)                [XLF] IPAY             SEZL
 Software           Software                   193   33   85.17   4.61   Leading (10)                [XLK] IGV, XSW         PENG, ACIW
 Software           Digital Health               1    1   68.62   4.61   Leading (10)                [XLK] IGV, XSW         HNGE
 Software           Professional Services        3    1   41.58   4.61   Leading (10)                [XLK] IGV, XSW         VSTS
 Internet           Leisure and Entertainment   48    4   30.15   2.38   Leading (12)                [XLC] FDN              LTH
 Medical Devices    Diagnostics                  9    8  196.23  -6.78   Micro Leader (breadth)      [XLV] IHI, XHE         VCYT, ILMN
 Pharma             Pharmaceuticals              3    3  132.16   4.69   Micro Leader (XPH)          [XLV] XPH, IHE         LQDA
+Banking            Digital Banking              3    1   45.74   1.92   Micro Leader (breadth)      [XLF] FINX             DAVE
 Banking            Financial Services          67   42  184.53  -0.44   Micro Lagging (KCE)         [XLF] KRE, KCE         #ARES, #BAM, #BX, #CG, #KKR, #LAZ,
                                                                                                                            #OBDC, #PGY, #TPG, #UPST, #XP
 Infrastructure     Building Materials          49   33  183.31  -4.09   Micro Lagging (PAVE)        [XLI] PAVE, ITB        #AMRZ, #BLDR, #ROL, #RYN
@@ -76,26 +79,30 @@ Gold Mining        Gold Mining                 44   30  207.37 -15.67   Lagging 
 
 =============================================================================================
 1. STRONG BULLISH UNIVERSE (Active Momentum Breakouts & Leaders)
-Criteria: RS >= 90 (Stay >= 75) | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only
-Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader
+Criteria: RS >= 90 | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only
+Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Momentum Carve-Out (RS >= 95, Zacks 3 with Growth A/B)
 =============================================================================================
 Ticker  Mapped_Theme               Zacks  RS_Rating  % off Hi  Movement  Days  Sector (Rk)
-PENG    Software                       1         99        -4        NA     1  XLK (1)    
+^SIMO   Memory                         1         99        -3        NA     1  XLK (1)    
 DELL    AI Servers                     1         99        -7        NA     1  XLK (1)    
 BAND    Communication Infrastructu     1         99        -4        NA     1  XLK (1)    
+PENG    Software                       1         99        -4        NA     1  XLK (1)    
+^DAVE   Digital Banking [ML]           1         99         0        NA     1  XLK (1)    
 HNGE    Digital Health                 1         99        -1        NA     1  XLV (3)    
+^SEZL   Digital Payments               2         99        -2        NA     1  XLK (1)    
 DDOG    Cloud Infrastructure           2         98        -7        NA     1  XLK (1)    
-NRIX    Biotech                        2         97        -7        NA     1  XLV (3)    
-LFST    Healthcare                     1         97        -6        NA     1  XLV (3)    
+^AMBQ   Semiconductors                 2         98        -6        NA     1  XLK (1)    
 VCYT    Diagnostics [ML]               1         97        -6        NA     1  XLV (3)    
+LFST    Healthcare                     1         97        -6        NA     1  XLV (3)    
+NRIX    Biotech                        2         97        -7        NA     1  XLV (3)    
 PGNY    Healthcare Services            1         96        -1        NA     1  XLV (3)    
-LQDA    Pharmaceuticals [ML]           1         96        -4        NA     1  XLV (3)    
 LTH     Leisure and Entertainment      2         96         0        NA     1  XLY (6)    
+LQDA    Pharmaceuticals [ML]           1         96        -4        NA     1  XLV (3)    
 KNSA    Biotechnology                  1         95        -6        NA     1  XLV (3)    
-ACIW    Software                       2         94         0        NA     1  XLK (1)    
 FTRE    Biotech                        1         94        -3        NA     1  XLV (3)    
-NET     Cloud Infrastructure           2         93        -3        NA     1  XLK (1)    
+ACIW    Software                       2         94         0        NA     1  XLK (1)    
 ILMN    Diagnostics [ML]               2         93        -2        NA     1  XLV (3)    
+NET     Cloud Infrastructure           2         93        -3        NA     1  XLK (1)    
 ASX     Semiconductors                 1         92        -5        NA     1  XLK (1)    
 VSTS    Professional Services          1         90        -2        NA     1  XLI (2)    
 
@@ -107,7 +114,7 @@ No active mild bullish candidates today.
 
 =============================================================================================
 3. STRONG BEARISH UNIVERSE (Active Momentum Breakdowns & Short Candidates)
-Criteria: Short_RS 8-60 (Stay <= 75) | 52W Range <= 30% | Zacks 4-5 (Stay 2-5) | Lagging Themes Only
+Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 4-5 | Lagging Themes Only
 Legend: [MLg] = Micro Lagging
 =============================================================================================
 Ticker  Mapped_Theme               Zacks   Short_RS  % off Lo  Movement  Days  Sector (Rk)
@@ -143,13 +150,13 @@ CNH     Industrial Automatio [MLg]     3         48        13        NA     1  X
 PGY     Financial Services [MLg]       3         48        69        NA     1  XLF (4)    
 
 =============================================================================================
-4. MILD BEARISH UNIVERSE (Relief Bounce Exhaustions & Breakdown Resumptions)
-Criteria: Dropped Short <= 90d | 52W Range <= 50% | Zacks 3-5 | Lagging (Short_RS >= 55) | Neutral (Short_RS >= 70)
+4. MILD BEARISH UNIVERSE (Sell the Bounce — Relief Rally Exhaustion Zone)
+Criteria: Dropped Short <= 90d | 52W Range <= 50% | Bounced >= +10% off Low | Zacks 3-5 | Lagging (Short_RS >= 55) | Neutral (Short_RS >= 65)
 =============================================================================================
 No active mild bearish candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###Strong_Bullish,PENG,DELL,BAND,HNGE,DDOG,NRIX,LFST,VCYT,PGNY,LQDA,LTH,KNSA,ACIW,FTRE,NET,ILMN,ASX,VSTS,
+###Strong_Bullish,SIMO,DELL,BAND,PENG,DAVE,HNGE,SEZL,DDOG,AMBQ,VCYT,LFST,NRIX,PGNY,LTH,LQDA,KNSA,FTRE,ACIW,ILMN,NET,ASX,VSTS,
 ###Mild_Bullish,
 ###Strong_Bearish,AEM,ROL,BLDR,CELH,CEG,TPG,NOG,RUN,GIL,CG,NKE,ARES,EXE,LAZ,CNX,KKR,EQT,UPST,BX,OTIS,AMRZ,OBDC,RRC,AR,BAM,RYN,XP,VST,CNH,PGY,
 ###Mild_Bearish,
