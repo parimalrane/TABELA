@@ -25,10 +25,11 @@ def build_long_watchlist(stocks, registry=None):
     dollar_vol = close_numeric * vol_numeric
     growth_score = stocks_clean["Growth Score"].astype(str).str.strip().str.upper() if "Growth Score" in stocks_clean.columns else pd.Series("", index=stocks_clean.index)
 
-    # Standard Entry: Zacks 1-2, RS >= 90, Range >= 85%, Volume >= 1M
+    # 1. STATELESS DAILY EVALUATION (Pure Breakout Standards)
+    # A stock must satisfy today's full breakout criteria to qualify for Strong Bullish.
+    # No sticky stay retention buffer holding decaying momentum.
     standard_entry_mask = (
-        (~is_existing)
-        & stocks_clean["Theme_Class"].isin(allowed_entry_themes)
+        stocks_clean["Theme_Class"].isin(allowed_entry_themes)
         & (stocks_clean["RS_Rating"] >= LONG_ENTRY["MIN_RS"])
         & (~zacks_numeric.isin(blocked_zacks))
         & (range_52w >= min_52w)
@@ -40,8 +41,7 @@ def build_long_watchlist(stocks, registry=None):
     # Leading theme + Exceptional RS (>= 95) + Range >= 85% + Zacks 3 allowed ONLY IF Growth A/B
     # Liquidity: Volume >= 1M OR Dollar Volume >= $30,000,000 (with volume >= 500k)
     elite_exception_mask = (
-        (~is_existing)
-        & stocks_clean["Theme_Class"].isin(allowed_entry_themes)
+        stocks_clean["Theme_Class"].isin(allowed_entry_themes)
         & (stocks_clean["RS_Rating"] >= 95.0)
         & (range_52w >= min_52w)
         & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
@@ -61,28 +61,9 @@ def build_long_watchlist(stocks, registry=None):
     if new_elite_mask.any():
         stocks_clean.loc[new_elite_mask, "Is_Elite_Exception"] = True
 
-    entry_mask = standard_entry_mask | elite_exception_mask
+    qualifying_mask = standard_entry_mask | elite_exception_mask
 
-    # 2. RETENTION (TABELA Stay-In Criteria)
-    stay_themes = LONG_STAY.get("THEMES", ["Leading", "Neutral", "Unclassified Leader"])
-    stay_min_rs = LONG_STAY.get("MIN_RS", 75.0)
-    stay_allowed_zacks = LONG_STAY.get("ALLOWED_ZACKS", [1, 2, 3])
-
-    stay_mask = (
-        is_existing
-        & stocks_clean["Theme_Class"].isin(stay_themes)
-        & (stocks_clean["RS_Rating"] >= stay_min_rs)
-        & zacks_numeric.isin(stay_allowed_zacks)
-        & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
-        & (
-            (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
-            | ((vol_numeric >= 500_000) & (dollar_vol >= 30_000_000))
-        )
-    )
-
-    standard_entry = entry_mask | stay_mask
-
-    long_watchlist = stocks_clean[standard_entry].copy()
+    long_watchlist = stocks_clean[qualifying_mask].copy()
     
     if long_watchlist.empty:
         return long_watchlist

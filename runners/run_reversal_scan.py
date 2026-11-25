@@ -23,11 +23,15 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_all_dropped_bullish(market_date: datetime.date):
+def load_all_dropped_bullish(market_date: datetime.date, extra_drops: dict = None):
     """
     Extracts all dropped bullish stocks up to market_date from:
     1. market_data/dropped_list/dropped_history.csv
     2. market_data/daily_reports/*.txt
+    3. extra_drops (today's freshly dropped delta)
+
+    Anchors each stock to its EARLIEST drop date so the 90-day window
+    allows temporary drops/downgrades to resurface cleanly.
     """
     drops = {}
 
@@ -45,7 +49,7 @@ def load_all_dropped_bullish(market_date: datetime.date):
                         continue
                     if d_val <= market_date:
                         theme = str(row.get("Theme", "-"))
-                        if tkr not in drops or d_val > drops[tkr]["date"]:
+                        if tkr not in drops or d_val < drops[tkr]["date"]:
                             drops[tkr] = {"date": d_val, "theme": theme}
         except Exception:
             pass
@@ -66,17 +70,29 @@ def load_all_dropped_bullish(market_date: datetime.date):
             if line.startswith("###Dropped_Bullish_Stocks,"):
                 tickers = [t.strip().upper() for t in line.split(",")[1:] if t.strip()]
                 for tkr in tickers:
-                    if tkr not in drops or r_date > drops[tkr]["date"]:
+                    if tkr not in drops or r_date < drops[tkr]["date"]:
                         drops[tkr] = {"date": r_date, "theme": "-"}
+
+    if extra_drops:
+        for tkr, info in extra_drops.items():
+            tkr_clean = str(tkr).strip().upper()
+            d_val = info.get("date", market_date)
+            theme_val = info.get("theme", "-")
+            if tkr_clean not in drops:
+                drops[tkr_clean] = {"date": d_val, "theme": theme_val}
 
     return drops
 
 
-def load_all_dropped_bearish(market_date: datetime.date):
+def load_all_dropped_bearish(market_date: datetime.date, extra_drops: dict = None):
     """
     Extracts all dropped bearish stocks up to market_date from:
     1. market_data/dropped_list/dropped_history.csv
     2. market_data/daily_reports/*.txt
+    3. extra_drops (today's freshly dropped delta)
+
+    Anchors each stock to its EARLIEST drop date so the 90-day window
+    allows temporary drops/relief bounces to resurface cleanly.
     """
     drops = {}
 
@@ -94,7 +110,7 @@ def load_all_dropped_bearish(market_date: datetime.date):
                         continue
                     if d_val <= market_date:
                         theme = str(row.get("Theme", "-"))
-                        if tkr not in drops or d_val > drops[tkr]["date"]:
+                        if tkr not in drops or d_val < drops[tkr]["date"]:
                             drops[tkr] = {"date": d_val, "theme": theme}
         except Exception:
             pass
@@ -115,8 +131,16 @@ def load_all_dropped_bearish(market_date: datetime.date):
             if line.startswith("###Dropped_Bearish_Stocks,"):
                 tickers = [t.strip().upper() for t in line.split(",")[1:] if t.strip()]
                 for tkr in tickers:
-                    if tkr not in drops or r_date > drops[tkr]["date"]:
+                    if tkr not in drops or r_date < drops[tkr]["date"]:
                         drops[tkr] = {"date": r_date, "theme": "-"}
+
+    if extra_drops:
+        for tkr, info in extra_drops.items():
+            tkr_clean = str(tkr).strip().upper()
+            d_val = info.get("date", market_date)
+            theme_val = info.get("theme", "-")
+            if tkr_clean not in drops:
+                drops[tkr_clean] = {"date": d_val, "theme": theme_val}
 
     return drops
 
@@ -239,7 +263,7 @@ def prepare_stocks_df(stocks, market_date):
     return s_copy
 
 
-def get_reversal_long_candidates(market_date, stocks, active_bullish_set, max_days=90):
+def get_reversal_long_candidates(market_date, stocks, active_bullish_set, max_days=90, extra_drops: dict = None):
     """
     Qualifies Long Reversals:
     1. Dropped Long within max_days (not in active_bulls)
@@ -251,7 +275,7 @@ def get_reversal_long_candidates(market_date, stocks, active_bullish_set, max_da
     if stocks is None or stocks.empty:
         return pd.DataFrame()
 
-    dropped_dict = load_all_dropped_bullish(market_date)
+    dropped_dict = load_all_dropped_bullish(market_date, extra_drops=extra_drops)
     if not dropped_dict:
         return pd.DataFrame()
 
@@ -312,7 +336,7 @@ def get_reversal_long_candidates(market_date, stocks, active_bullish_set, max_da
     return df_res
 
 
-def get_reversal_short_candidates(market_date, stocks, active_bearish_set, max_days=90):
+def get_reversal_short_candidates(market_date, stocks, active_bearish_set, max_days=90, extra_drops: dict = None):
     """
     Qualifies Short Reversals:
     1. Dropped Short within max_days (not in active_bears)
@@ -324,7 +348,7 @@ def get_reversal_short_candidates(market_date, stocks, active_bearish_set, max_d
     if stocks is None or stocks.empty:
         return pd.DataFrame()
 
-    dropped_dict = load_all_dropped_bearish(market_date)
+    dropped_dict = load_all_dropped_bearish(market_date, extra_drops=extra_drops)
     if not dropped_dict:
         return pd.DataFrame()
 
@@ -345,37 +369,40 @@ def get_reversal_short_candidates(market_date, stocks, active_bearish_set, max_d
             t_cls = row["Theme_Class"]
             m_tier = row["Micro_Tier"]
 
-            # Exact mirror guardrails (High-Bar Gate for Neutral):
+            # Exact mirror guardrails (Sell-the-Bounce Strategy):
             # - Zacks 3, 4, or 5
             # - Blocks Leading unless Micro Lagging
-            # - Range <= 50.0%
+            # - Overhead Resistance Envelope: 52W Range <= 50.0%
+            # - Relief Rally Floor: pct_off_lo >= 10.0% (actively bouncing into resistance)
             # - Lagging / Micro Lagging: Short_RS >= 55.0
-            # - Neutral: High-Bar only (Short_RS >= 70.0)
+            # - Neutral: High-Bar only (Short_RS >= 65.0)
             if pd.notna(z_val) and int(z_val) in [3, 4, 5]:
                 if pd.notna(range_val) and range_val <= 50.0:
-                    if t_cls != "Leading" or m_tier == "Micro Lagging":
-                        is_lagger = (t_cls == "Lagging" or m_tier == "Micro Lagging")
-                        min_srs = 55.0 if is_lagger else 70.0
+                    lo_val = row.get("pct_off_lo")
+                    if pd.notna(lo_val) and lo_val >= 10.0:
+                        if t_cls != "Leading" or m_tier == "Micro Lagging":
+                            is_lagger = (t_cls == "Lagging" or m_tier == "Micro Lagging")
+                            min_srs = 55.0 if is_lagger else 65.0
 
-                        if pd.notna(srs_val) and srs_val >= min_srs:
-                            theme_val = drop_info["theme"]
-                            if theme_val == "-" and "Mapped_Theme" in row and pd.notna(row["Mapped_Theme"]):
-                                theme_val = str(row["Mapped_Theme"])
-                            elif theme_val == "-" and "Industry" in row and pd.notna(row["Industry"]):
-                                theme_val = str(row["Industry"])[:24]
+                            if pd.notna(srs_val) and srs_val >= min_srs:
+                                theme_val = drop_info["theme"]
+                                if theme_val == "-" and "Mapped_Theme" in row and pd.notna(row["Mapped_Theme"]):
+                                    theme_val = str(row["Mapped_Theme"])
+                                elif theme_val == "-" and "Industry" in row and pd.notna(row["Industry"]):
+                                    theme_val = str(row["Industry"])[:24]
 
-                            candidates.append({
-                                "Ticker": tkr,
-                                "Theme": theme_val if theme_val and theme_val != "-" else str(row.get("Sector", "-")),
-                                "Zacks": int(z_val),
-                                "Short_RS": int(round(srs_val)),
-                                "YTD": row["YTD_Num"],
-                                "pct_off_hi": row["pct_off_hi"],
-                                "pct_off_lo": row["pct_off_lo"],
-                                "Range": range_val,
-                                "Days_Dropped": days_since,
-                                "Drop_Date": str(drop_info["date"]),
-                            })
+                                candidates.append({
+                                    "Ticker": tkr,
+                                    "Theme": theme_val if theme_val and theme_val != "-" else str(row.get("Sector", "-")),
+                                    "Zacks": int(z_val),
+                                    "Short_RS": int(round(srs_val)),
+                                    "YTD": row["YTD_Num"],
+                                    "pct_off_hi": row["pct_off_hi"],
+                                    "pct_off_lo": row["pct_off_lo"],
+                                    "Range": range_val,
+                                    "Days_Dropped": days_since,
+                                    "Drop_Date": str(drop_info["date"]),
+                                })
 
     if not candidates:
         return pd.DataFrame()

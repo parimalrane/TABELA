@@ -1313,19 +1313,37 @@ def print_daily_scan(
     # Fetch Mild Bullish (Reversal Longs) & Mild Bearish (Reversal Shorts)
     active_bullish_set = set(all_bullish_tickers)
     active_bearish_set = set(all_bearish_tickers)
+
+    # Detect Day-0 fresh drops directly from deltas so they appear in today's Mild list immediately
+    fresh_long_drops = {}
+    for t in deltas.get("dropped_longs", []):
+        t_clean = str(t).replace('*', '').replace('~', '').replace('^', '').strip().upper()
+        if t_clean and t_clean not in active_bullish_set:
+            fresh_long_drops[t_clean] = {"date": context.market_date, "theme": "-"}
+
+    fresh_short_drops = {}
+    for t in deltas.get("left_distribution", []):
+        t_clean = str(t).replace('*', '').replace('~', '').replace('^', '').strip().upper()
+        if t_clean and t_clean not in active_bearish_set:
+            fresh_short_drops[t_clean] = {"date": context.market_date, "theme": "-"}
+
     df_reversal_long = pd.DataFrame()
     df_reversal_short = pd.DataFrame()
     try:
         from runners.run_reversal_scan import get_reversal_long_candidates, get_reversal_short_candidates
-        df_reversal_long = get_reversal_long_candidates(context.market_date, stocks, active_bullish_set, max_days=90)
-        df_reversal_short = get_reversal_short_candidates(context.market_date, stocks, active_bearish_set, max_days=90)
+        df_reversal_long = get_reversal_long_candidates(
+            context.market_date, stocks, active_bullish_set, max_days=90, extra_drops=fresh_long_drops
+        )
+        df_reversal_short = get_reversal_short_candidates(
+            context.market_date, stocks, active_bearish_set, max_days=90, extra_drops=fresh_short_drops
+        )
     except Exception:
         pass
 
     # 1. STRONG BULLISH UNIVERSE
     strong_bullish_out = '=============================================================================================\n'
     strong_bullish_out += '1. STRONG BULLISH UNIVERSE (Active Momentum Breakouts & Leaders)\n'
-    strong_bullish_out += 'Criteria: RS >= 90 (Stay >= 75) | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only\n'
+    strong_bullish_out += 'Criteria: RS >= 90 | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only\n'
     strong_bullish_out += 'Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Momentum Carve-Out (RS >= 95, Zacks 3 with Growth A/B)\n'
     strong_bullish_out += '=============================================================================================\n'
 
@@ -1365,7 +1383,7 @@ def print_daily_scan(
     # 3. STRONG BEARISH UNIVERSE
     strong_bearish_out = '=============================================================================================\n'
     strong_bearish_out += '3. STRONG BEARISH UNIVERSE (Active Momentum Breakdowns & Short Candidates)\n'
-    strong_bearish_out += 'Criteria: Short_RS 8-60 (Stay <= 75) | 52W Range <= 30% | Zacks 4-5 (Stay 2-5) | Lagging Themes Only\n'
+    strong_bearish_out += 'Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 4-5 | Lagging Themes Only\n'
     strong_bearish_out += 'Legend: [MLg] = Micro Lagging\n'
     strong_bearish_out += '=============================================================================================\n'
 
@@ -1379,8 +1397,8 @@ def print_daily_scan(
 
     # 4. MILD BEARISH UNIVERSE
     mild_bearish_out = '=============================================================================================\n'
-    mild_bearish_out += '4. MILD BEARISH UNIVERSE (Relief Bounce Exhaustions & Breakdown Resumptions)\n'
-    mild_bearish_out += 'Criteria: Dropped Short <= 90d | 52W Range <= 50% | Zacks 3-5 | Lagging (Short_RS >= 55) | Neutral (Short_RS >= 70)\n'
+    mild_bearish_out += '4. MILD BEARISH UNIVERSE (Sell the Bounce — Relief Rally Exhaustion Zone)\n'
+    mild_bearish_out += 'Criteria: Dropped Short <= 90d | 52W Range <= 50% | Bounced >= +10% off Low | Zacks 3-5 | Lagging (Short_RS >= 55) | Neutral (Short_RS >= 65)\n'
     mild_bearish_out += '=============================================================================================\n'
 
     reversal_shorts = []
