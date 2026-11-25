@@ -1165,6 +1165,9 @@ def print_daily_scan(
     
     # Prepend tag directly to the Ticker string for clean left-side reading
     display_df.loc[display_df["Theme_Class"].isin(["Unknown", "Unclassified Leader"]), "Ticker"] = "~" + display_df["Ticker"]
+    if "Is_Elite_Exception" in long_candidates_df.columns:
+        is_elite = long_candidates_df["Is_Elite_Exception"].reindex(display_df.index).fillna(False)
+        display_df.loc[is_elite, "Ticker"] = "^" + display_df.loc[is_elite, "Ticker"]
 
     if "Micro_Tier" in long_candidates_df.columns:
         display_df["Micro_Tier"] = long_candidates_df["Micro_Tier"].reindex(display_df.index).fillna("")
@@ -1323,7 +1326,7 @@ def print_daily_scan(
     strong_bullish_out = '=============================================================================================\n'
     strong_bullish_out += '1. STRONG BULLISH UNIVERSE (Active Momentum Breakouts & Leaders)\n'
     strong_bullish_out += 'Criteria: RS >= 90 (Stay >= 75) | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only\n'
-    strong_bullish_out += 'Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader\n'
+    strong_bullish_out += 'Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Momentum Carve-Out (RS >= 95, Zacks 3 with Growth A/B)\n'
     strong_bullish_out += '=============================================================================================\n'
 
     if bullish_list:

@@ -15,22 +15,53 @@ def build_long_watchlist(stocks, registry=None):
     # 1. NEW ENTRY (Get-In Criteria)
     allowed_entry_themes = LONG_ENTRY.get("THEMES", ["Leading", "Micro Leader", "Unclassified Leader", "Unknown"])
     blocked_zacks = LONG_ENTRY.get("BLOCKED_ZACKS", [])
-    entry_mask = (
+
+    min_52w = PULLBACK_CONFIG.get("LONG_MIN_52W_RANGE", 85.0)
+    col_52w = "Price as a % of 52 Wk H-L Range"
+    range_52w = pd.to_numeric(stocks_clean[col_52w], errors="coerce").fillna(0.0) if col_52w in stocks_clean.columns else pd.Series(0.0, index=stocks_clean.index)
+    zacks_numeric = pd.to_numeric(stocks_clean["Zacks Rank"], errors="coerce").fillna(0).astype(int) if "Zacks Rank" in stocks_clean.columns else pd.Series(0, index=stocks_clean.index)
+    close_numeric = pd.to_numeric(stocks_clean["Last Close"].astype(str).str.replace(r'[%$,]', '', regex=True), errors="coerce").fillna(0.0) if "Last Close" in stocks_clean.columns else pd.Series(0.0, index=stocks_clean.index)
+    vol_numeric = pd.to_numeric(stocks_clean["Avg Volume"].astype(str).str.replace(r'[%$,]', '', regex=True), errors="coerce").fillna(0.0) if "Avg Volume" in stocks_clean.columns else pd.Series(0.0, index=stocks_clean.index)
+    dollar_vol = close_numeric * vol_numeric
+    growth_score = stocks_clean["Growth Score"].astype(str).str.strip().str.upper() if "Growth Score" in stocks_clean.columns else pd.Series("", index=stocks_clean.index)
+
+    # Standard Entry: Zacks 1-2, RS >= 90, Range >= 85%, Volume >= 1M
+    standard_entry_mask = (
         (~is_existing)
         & stocks_clean["Theme_Class"].isin(allowed_entry_themes)
         & (stocks_clean["RS_Rating"] >= LONG_ENTRY["MIN_RS"])
+        & (~zacks_numeric.isin(blocked_zacks))
+        & (range_52w >= min_52w)
+        & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
+        & (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
     )
 
-    if blocked_zacks:
-        zacks_numeric = pd.to_numeric(stocks_clean["Zacks Rank"], errors="coerce").fillna(0).astype(int)
-        entry_mask = entry_mask & (~zacks_numeric.isin(blocked_zacks))
+    # Elite Momentum Exception (e.g. KNSA):
+    # Leading theme + Exceptional RS (>= 95) + Range >= 85% + Zacks 3 allowed ONLY IF Growth A/B
+    # Liquidity: Volume >= 1M OR Dollar Volume >= $30,000,000 (with volume >= 500k)
+    elite_exception_mask = (
+        (~is_existing)
+        & stocks_clean["Theme_Class"].isin(allowed_entry_themes)
+        & (stocks_clean["RS_Rating"] >= 95.0)
+        & (range_52w >= min_52w)
+        & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
+        & (
+            (~zacks_numeric.isin(blocked_zacks))  # Zacks 1 or 2
+            | ((zacks_numeric == 3) & growth_score.isin(["A", "B"]))  # Zacks 3 with verified growth
+        )
+        & (
+            (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
+            | ((vol_numeric >= 500_000) & (dollar_vol >= 30_000_000))
+        )
+    )
 
-    # 52W Range Gate on entry only
-    min_52w = PULLBACK_CONFIG.get("LONG_MIN_52W_RANGE", 85.0)
-    col_52w = "Price as a % of 52 Wk H-L Range"
-    if col_52w in stocks_clean.columns:
-        range_52w = pd.to_numeric(stocks_clean[col_52w], errors="coerce").fillna(0.0)
-        entry_mask = entry_mask & (range_52w >= min_52w)
+    # Tag elite exception stocks for visual clarity
+    stocks_clean["Is_Elite_Exception"] = False
+    new_elite_mask = elite_exception_mask & (~standard_entry_mask)
+    if new_elite_mask.any():
+        stocks_clean.loc[new_elite_mask, "Is_Elite_Exception"] = True
+
+    entry_mask = standard_entry_mask | elite_exception_mask
 
     # 2. RETENTION (TABELA Stay-In Criteria)
     stay_themes = LONG_STAY.get("THEMES", ["Leading", "Neutral", "Unclassified Leader"])
@@ -41,23 +72,15 @@ def build_long_watchlist(stocks, registry=None):
         is_existing
         & stocks_clean["Theme_Class"].isin(stay_themes)
         & (stocks_clean["RS_Rating"] >= stay_min_rs)
+        & zacks_numeric.isin(stay_allowed_zacks)
+        & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
+        & (
+            (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
+            | ((vol_numeric >= 500_000) & (dollar_vol >= 30_000_000))
+        )
     )
-    if "Zacks Rank" in stocks_clean.columns:
-        zacks_numeric = pd.to_numeric(stocks_clean["Zacks Rank"], errors="coerce").fillna(0).astype(int)
-        stay_mask = stay_mask & zacks_numeric.isin(stay_allowed_zacks)
 
     standard_entry = entry_mask | stay_mask
-        
-    min_price = LONG_ENTRY.get("MIN_PRICE", 0.0)
-    min_volume = LONG_ENTRY.get("MIN_VOLUME", 0)
-    
-    if "Last Close" in stocks_clean.columns:
-        valid_price = pd.to_numeric(stocks_clean["Last Close"], errors="coerce").fillna(0) >= min_price
-        standard_entry = standard_entry & valid_price
-        
-    if "Avg Volume" in stocks_clean.columns:
-        valid_volume = pd.to_numeric(stocks_clean["Avg Volume"], errors="coerce").fillna(0) >= min_volume
-        standard_entry = standard_entry & valid_volume
 
     long_watchlist = stocks_clean[standard_entry].copy()
     
