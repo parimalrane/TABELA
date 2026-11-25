@@ -61,51 +61,100 @@ Software           Software                   193   33   85.17   4.61   Leading 
 Software           Digital Health               1    1   68.62   4.61   Leading (10)                [XLK] IGV, XSW         HNGE
 Software           Professional Services        3    1   41.58   4.61   Leading (10)                [XLK] IGV, XSW         VSTS
 Internet           Leisure and Entertainment   48    4   30.15   2.38   Leading (12)                [XLC] FDN              LTH
+Medical Devices    Diagnostics                  9    8  196.23  -6.78   Micro Leader (breadth)      [XLV] IHI, XHE         VCYT, ILMN
+Pharma             Pharmaceuticals              3    3  132.16   4.69   Micro Leader (XPH)          [XLV] XPH, IHE         LQDA
+Banking            Financial Services          67   42  184.53  -0.44   Micro Lagging (KCE)         [XLF] KRE, KCE         #ARES, #BAM, #BX, #CG, #KKR, #LAZ,
+                                                                                                                           #OBDC, #PGY, #TPG, #UPST, #XP
+Infrastructure     Building Materials          49   33  183.31  -4.09   Micro Lagging (PAVE)        [XLI] PAVE, ITB        #AMRZ, #BLDR, #ROL, #RYN
+Retail             Footwear/Apparel            37   25  170.97  -2.34   Micro Lagging (XRT)         [XLY] XRT              #GIL, #NKE
+Infrastructure     Industrial Automation       50   28  142.73  -4.37   Micro Lagging (BOTZ)        [XLI] ROBO, BOTZ       #CNH, #OTIS
+Broad              Consumer Momentum            3    3  116.45   8.11   Micro Lagging (breadth)                            #CELH
+Infrastructure     Solar Infrastructure         5    2   59.49 -10.08   Micro Lagging (TAN)         [XLU] TAN              #RUN
 Exploration        Exploration                 84   48  165.16 -10.11   Lagging (31)                [XLE] XOP, IEO         #AR, #CNX, #EQT, #EXE, #NOG, #RRC
 Uranium Mining     Nuclear Infrastructure       3    3   92.88 -11.95   Lagging (34)                [XLU] NLR, URNM        #CEG, #VST
 Gold Mining        Gold Mining                 44   30  207.37 -15.67   Lagging (39)                [XLB] GDX, GDXJ        #AEM
 
-========================================
-BULLISH UNIVERSE
-Legend: ~ = Unknown/Unclassified
-========================================
+=============================================================================================
+1. STRONG BULLISH UNIVERSE (Active Momentum Breakouts & Leaders)
+Criteria: RS >= 90 (Stay >= 75) | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only
+Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader
+=============================================================================================
 Ticker  Mapped_Theme               Zacks  RS_Rating  % off Hi  Movement  Days  Sector (Rk)
 PENG    Software                       1         99        -4        NA     1  XLK (1)    
+DELL    AI Servers                     1         99        -7        NA     1  XLK (1)    
 BAND    Communication Infrastructu     1         99        -4        NA     1  XLK (1)    
 HNGE    Digital Health                 1         99        -1        NA     1  XLV (3)    
-DELL    AI Servers                     1         99        -7        NA     1  XLK (1)    
 DDOG    Cloud Infrastructure           2         98        -7        NA     1  XLK (1)    
-LFST    Healthcare                     1         97        -6        NA     1  XLV (3)    
 NRIX    Biotech                        2         97        -7        NA     1  XLV (3)    
+LFST    Healthcare                     1         97        -6        NA     1  XLV (3)    
+VCYT    Diagnostics [ML]               1         97        -6        NA     1  XLV (3)    
 PGNY    Healthcare Services            1         96        -1        NA     1  XLV (3)    
+LQDA    Pharmaceuticals [ML]           1         96        -4        NA     1  XLV (3)    
 LTH     Leisure and Entertainment      2         96         0        NA     1  XLY (6)    
 KNSA    Biotechnology                  1         95        -6        NA     1  XLV (3)    
-FTRE    Biotech                        1         94        -3        NA     1  XLV (3)    
 ACIW    Software                       2         94         0        NA     1  XLK (1)    
+FTRE    Biotech                        1         94        -3        NA     1  XLV (3)    
 NET     Cloud Infrastructure           2         93        -3        NA     1  XLK (1)    
+ILMN    Diagnostics [ML]               2         93        -2        NA     1  XLV (3)    
 ASX     Semiconductors                 1         92        -5        NA     1  XLK (1)    
 VSTS    Professional Services          1         90        -2        NA     1  XLI (2)    
 
-========================================
-BEARISH UNIVERSE
-========================================
+=============================================================================================
+2. MILD BULLISH UNIVERSE (Institutional Pullbacks & Reversals)
+Criteria: Dropped Long <= 90d | Zacks 1-2 | Leading (RS >= 55, Range >= 50%) | Neutral (RS >= 75, Range >= 75%)
+=============================================================================================
+No active mild bullish candidates today.
+
+=============================================================================================
+3. STRONG BEARISH UNIVERSE (Active Momentum Breakdowns & Short Candidates)
+Criteria: Short_RS 8-60 (Stay <= 75) | 52W Range <= 30% | Zacks 4-5 (Stay 2-5) | Lagging Themes Only
+Legend: [MLg] = Micro Lagging
+=============================================================================================
 Ticker  Mapped_Theme               Zacks   Short_RS  % off Lo  Movement  Days  Sector (Rk)
 AEM     Gold Mining                    3          8        25        NA     1  XLB (9)    
+ROL     Building Materials [MLg]       3          8         7        NA     1  XLK (1)    
+BLDR    Building Materials [MLg]       3          8        14        NA     1  XLY (6)    
+CELH    Consumer Momentum [MLg]        3          9        10        NA     1  XLP (10)   
 CEG     Nuclear Infrastructure         3          9         6        NA     1  XLE (5)    
+TPG     Financial Services [MLg]       4          9        12        NA     1  XLF (4)    
 NOG     Exploration                    3          9         7        NA     1  XLE (5)    
+RUN     Solar Infrastructure [MLg]     4         10        37        NA     1  XLE (5)    
+GIL     Footwear/Apparel [MLg]         3         10         7        NA     1  XLY (6)    
+CG      Financial Services [MLg]       3         11        10        NA     1  XLF (4)    
+NKE     Footwear/Apparel [MLg]         5         11         9        NA     1  XLY (6)    
+ARES    Financial Services [MLg]       3         12        26        NA     1  XLF (4)    
 EXE     Exploration                    3         13         0        NA     1  XLE (5)    
+LAZ     Financial Services [MLg]       4         14         6        NA     1  XLF (4)    
 CNX     Exploration                    3         14        14        NA     1  XLE (5)    
+KKR     Financial Services [MLg]       3         15        16        NA     1  XLF (4)    
 EQT     Exploration                    4         16         0        NA     1  XLE (5)    
+UPST    Financial Services [MLg]       3         17        35        NA     1  XLF (4)    
+BX      Financial Services [MLg]       3         17        21        NA     1  XLF (4)    
+OTIS    Industrial Automatio [MLg]     4         20         5        NA     1  XLI (2)    
+AMRZ    Building Materials [MLg]       3         21         9        NA     1  XLI (2)    
+OBDC    Financial Services [MLg]       4         21         3        NA     1  XLF (4)    
 RRC     Exploration                    4         22         8        NA     1  XLE (5)    
 AR      Exploration                    3         23        11        NA     1  XLE (5)    
+BAM     Financial Services [MLg]       3         24         9        NA     1  XLF (4)    
+RYN     Building Materials [MLg]       4         31         9        NA     1  XLI (2)    
+XP      Financial Services [MLg]       3         34        13        NA     1  XLF (4)    
 VST     Nuclear Infrastructure         3         39        18        NA     1  XLU (8)    
+CNH     Industrial Automatio [MLg]     3         48        13        NA     1  XLI (2)    
+PGY     Financial Services [MLg]       3         48        69        NA     1  XLF (4)    
+
+=============================================================================================
+4. MILD BEARISH UNIVERSE (Relief Bounce Exhaustions & Breakdown Resumptions)
+Criteria: Dropped Short <= 90d | 52W Range <= 50% | Zacks 3-5 | Lagging (Short_RS >= 55) | Neutral (Short_RS >= 70)
+=============================================================================================
+No active mild bearish candidates today.
 
 TRADINGVIEW WATCHLIST EXPORT
-###Bullish_Stocks,PENG,BAND,HNGE,DELL,DDOG,LFST,NRIX,PGNY,LTH,KNSA,FTRE,ACIW,NET,ASX,VSTS,
-###Bearish_Stocks,AEM,CEG,NOG,EXE,CNX,EQT,RRC,AR,VST,
-###Leading_ETF,SMH,CLOU,IHI,XBI,AIQ,IYZ,IGV,IYT,FDN,KIE,
-###Lagging_ETF,GDX,NLR,XOP,COPX,URNM,FCG,SIL,LIT,
-
+###Strong_Bullish,PENG,DELL,BAND,HNGE,DDOG,NRIX,LFST,VCYT,PGNY,LQDA,LTH,KNSA,ACIW,FTRE,NET,ILMN,ASX,VSTS,
+###Mild_Bullish,
+###Strong_Bearish,AEM,ROL,BLDR,CELH,CEG,TPG,NOG,RUN,GIL,CG,NKE,ARES,EXE,LAZ,CNX,KKR,EQT,UPST,BX,OTIS,AMRZ,OBDC,RRC,AR,BAM,RYN,XP,VST,CNH,PGY,
+###Mild_Bearish,
+###Leading_ETF,SMH,CLOU,IHI,XBI,AIQ,IYZ,IGV,IYT,FDN,KIE,XPH,
+###Lagging_ETF,GDX,NLR,XOP,COPX,URNM,FCG,SIL,LIT,PAVE,KCE,XRT,BOTZ,TAN,
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
