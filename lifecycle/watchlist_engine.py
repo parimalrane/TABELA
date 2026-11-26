@@ -13,7 +13,7 @@ def build_long_watchlist(stocks, registry=None):
     is_existing = ticker_clean.isin(prev_tickers)
 
     # 1. NEW ENTRY (Get-In Criteria)
-    allowed_entry_themes = LONG_ENTRY.get("THEMES", ["Leading", "Micro Leader", "Unclassified Leader", "Unknown"])
+    allowed_entry_themes = LONG_ENTRY.get("THEMES", ["Leading", "Micro Leader"])
     blocked_zacks = LONG_ENTRY.get("BLOCKED_ZACKS", [])
 
     min_52w = PULLBACK_CONFIG.get("LONG_MIN_52W_RANGE", 85.0)
@@ -37,21 +37,26 @@ def build_long_watchlist(stocks, registry=None):
         & (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
     )
 
-    # Elite Momentum Exception (e.g. KNSA):
-    # Leading theme + Exceptional RS (>= 95) + Range >= 85% + Zacks 3 allowed ONLY IF Growth A/B
+    # Elite Momentum Exception (Configurable from LONG_ENTRY):
+    # Leading theme + Exceptional RS + Range >= 85% + Zacks 3 allowed ONLY IF Growth A/B
     # Liquidity: Volume >= 1M OR Dollar Volume >= $30,000,000 (with volume >= 500k)
+    elite_min_rs = LONG_ENTRY.get("ELITE_MIN_RS", 95.0)
+    elite_growth = LONG_ENTRY.get("ELITE_ALLOWED_GROWTH", ["A", "B"])
+    alt_min_vol = LONG_ENTRY.get("ELITE_ALT_MIN_VOLUME", 500_000)
+    alt_min_dvol = LONG_ENTRY.get("ELITE_ALT_MIN_DOLLAR_VOL", 30_000_000)
+
     elite_exception_mask = (
         stocks_clean["Theme_Class"].isin(allowed_entry_themes)
-        & (stocks_clean["RS_Rating"] >= 95.0)
+        & (stocks_clean["RS_Rating"] >= elite_min_rs)
         & (range_52w >= min_52w)
         & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
         & (
             (~zacks_numeric.isin(blocked_zacks))  # Zacks 1 or 2
-            | ((zacks_numeric == 3) & growth_score.isin(["A", "B"]))  # Zacks 3 with verified growth
+            | ((zacks_numeric == 3) & growth_score.isin(elite_growth))  # Zacks 3 with verified growth
         )
         & (
             (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
-            | ((vol_numeric >= 500_000) & (dollar_vol >= 30_000_000))
+            | ((vol_numeric >= alt_min_vol) & (dollar_vol >= alt_min_dvol))
         )
     )
 

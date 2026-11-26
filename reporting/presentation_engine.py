@@ -1358,7 +1358,7 @@ def print_daily_scan(
     # 2. MILD BULLISH UNIVERSE
     mild_bullish_out = '=============================================================================================\n'
     mild_bullish_out += '2. MILD BULLISH UNIVERSE (Institutional Pullbacks & Reversals)\n'
-    mild_bullish_out += 'Criteria: Dropped Long <= 90d | Zacks 1-2 | Leading (RS >= 55, Range >= 50%) | Neutral (RS >= 75, Range >= 75%)\n'
+    mild_bullish_out += 'Criteria: Dropped Long <= 90d | Leading or [ML] | Zacks 1-2 (Z3 if RS >= 95 & Growth A/B/C) | Range >= 50% | RS >= 55\n'
     mild_bullish_out += '=============================================================================================\n'
 
     reversal_longs = []
@@ -1398,7 +1398,7 @@ def print_daily_scan(
     # 4. MILD BEARISH UNIVERSE
     mild_bearish_out = '=============================================================================================\n'
     mild_bearish_out += '4. MILD BEARISH UNIVERSE (Sell the Bounce — Relief Rally Exhaustion Zone)\n'
-    mild_bearish_out += 'Criteria: Dropped Short <= 90d | 52W Range <= 50% | Bounced >= +10% off Low | Zacks 3-5 | Lagging (Short_RS >= 55) | Neutral (Short_RS >= 65)\n'
+    mild_bearish_out += 'Criteria: Dropped Short <= 90d | Lagging or [MLg] | 52W Range <= 50% | Bounced >= +10% off Low | Zacks 3-5 | Short_RS <= 60\n'
     mild_bearish_out += '=============================================================================================\n'
 
     reversal_shorts = []
