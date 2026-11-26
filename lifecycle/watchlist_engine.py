@@ -58,7 +58,33 @@ def build_long_watchlist(stocks, registry=None):
     if new_elite_mask.any():
         stocks_clean.loc[new_elite_mask, "Is_Elite_Exception"] = True
 
-    qualifying_mask = standard_entry_mask | elite_exception_mask
+    # Independent Leader Theme Exemption (Safety Valve against flawed/neutral themes):
+    # If a stock has exceptional RS (>= 95.0), Range >= 85%, and Zacks 1-2,
+    # it qualifies for Strong Bullish even if its theme is Neutral/Unknown.
+    theme_exemption_enabled = LONG_ENTRY.get("THEME_EXEMPTION_ENABLED", True)
+    theme_exempt_min_rs = LONG_ENTRY.get("THEME_EXEMPTION_MIN_RS", 95.0)
+    theme_exempt_min_range = LONG_ENTRY.get("THEME_EXEMPTION_MIN_RANGE", 85.0)
+    theme_exempt_zacks = LONG_ENTRY.get("THEME_EXEMPTION_ALLOWED_ZACKS", [1, 2])
+
+    theme_exempt_mask = pd.Series(False, index=stocks_clean.index)
+    if theme_exemption_enabled:
+        theme_exempt_mask = (
+            (stocks_clean["RS_Rating"] >= theme_exempt_min_rs)
+            & (range_52w >= theme_exempt_min_range)
+            & (zacks_numeric.isin(theme_exempt_zacks))
+            & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
+            & (
+                (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
+                | ((vol_numeric >= alt_min_vol) & (dollar_vol >= alt_min_dvol))
+            )
+        )
+
+    stocks_clean["Is_Theme_Exempt"] = False
+    new_exempt_mask = theme_exempt_mask & (~standard_entry_mask) & (~elite_exception_mask)
+    if new_exempt_mask.any():
+        stocks_clean.loc[new_exempt_mask, "Is_Theme_Exempt"] = True
+
+    qualifying_mask = standard_entry_mask | elite_exception_mask | theme_exempt_mask
 
     long_watchlist = stocks_clean[qualifying_mask].copy()
     

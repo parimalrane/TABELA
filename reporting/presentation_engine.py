@@ -1169,6 +1169,10 @@ def print_daily_scan(
         is_elite = long_candidates_df["Is_Elite_Exception"].reindex(display_df.index).fillna(False)
         display_df.loc[is_elite, "Ticker"] = "^" + display_df.loc[is_elite, "Ticker"]
 
+    if "Is_Theme_Exempt" in long_candidates_df.columns:
+        is_exempt = long_candidates_df["Is_Theme_Exempt"].reindex(display_df.index).fillna(False)
+        display_df.loc[is_exempt, "Ticker"] = "*" + display_df.loc[is_exempt, "Ticker"]
+
     if "Micro_Tier" in long_candidates_df.columns:
         display_df["Micro_Tier"] = long_candidates_df["Micro_Tier"].reindex(display_df.index).fillna("")
     true_longs = display_df
@@ -1314,24 +1318,11 @@ def print_daily_scan(
     active_bullish_set = set(all_bullish_tickers)
     active_bearish_set = set(all_bearish_tickers)
 
-    # Detect Day-0 fresh drops directly from deltas so they appear in today's Mild list immediately
-    fresh_long_drops = {}
-    for t in deltas.get("dropped_longs", []):
-        t_clean = str(t).replace('*', '').replace('~', '').replace('^', '').strip().upper()
-        if t_clean and t_clean not in active_bullish_set:
-            fresh_long_drops[t_clean] = {"date": context.market_date, "theme": "-"}
-
-    fresh_short_drops = {}
-    for t in deltas.get("left_distribution", []):
-        t_clean = str(t).replace('*', '').replace('~', '').replace('^', '').strip().upper()
-        if t_clean and t_clean not in active_bearish_set:
-            fresh_short_drops[t_clean] = {"date": context.market_date, "theme": "-"}
-
     df_reversal_long = pd.DataFrame()
     try:
         from runners.run_reversal_scan import get_reversal_long_candidates
         df_reversal_long = get_reversal_long_candidates(
-            context.market_date, stocks, active_bullish_set, max_days=90, extra_drops=fresh_long_drops
+            context.market_date, stocks, active_bullish_set
         )
     except Exception:
         pass
@@ -1340,7 +1331,7 @@ def print_daily_scan(
     strong_bullish_out = '=============================================================================================\n'
     strong_bullish_out += '1. STRONG BULLISH UNIVERSE (Active Momentum Breakouts & Leaders)\n'
     strong_bullish_out += 'Criteria: RS >= 90 | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only\n'
-    strong_bullish_out += 'Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Momentum Carve-Out (RS >= 95, Zacks 3 with Growth A/B)\n'
+    strong_bullish_out += 'Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Momentum Carve-Out (RS >= 95, Zacks 3 with Growth A/B) | * = Independent Leader (RS >= 95 Theme Exemption)\n'
     strong_bullish_out += '=============================================================================================\n'
 
     if bullish_list:
@@ -1354,12 +1345,12 @@ def print_daily_scan(
     # 2. MILD BULLISH UNIVERSE
     mild_bullish_out = '=============================================================================================\n'
     mild_bullish_out += '2. MILD BULLISH UNIVERSE (Institutional Pullbacks & Reversals)\n'
-    mild_bullish_out += 'Criteria: Dropped Long <= 90d | Leading or [ML] | Zacks 1-2 (Z3 if RS >= 95 & Growth A/B/C) | Range >= 50% | RS >= 55\n'
+    mild_bullish_out += 'Criteria: Leading or [ML] | Zacks 1-2 (Z3 if RS >= 95 & Growth A/B/C) | Range >= 40% | RS >= 50\n'
     mild_bullish_out += '=============================================================================================\n'
 
     reversal_longs = []
     if not df_reversal_long.empty:
-        hdr_rev_l = f"{'Ticker':<7} {'Theme / Sector':<26} {'Zacks':>5} {'RS':>10} {'% off Hi':>9} {'YTD':>9} {'Days':>5}  {'52W Range':<11}"
+        hdr_rev_l = f"{'Ticker':<7} {'Theme / Sector':<26} {'Zacks':>5} {'RS':>10} {'% off Hi':>9} {'YTD':>9}  {'52W Range':<11}"
         m_lines = [hdr_rev_l]
         for _, r in df_reversal_long.iterrows():
             t = str(r["Ticker"]).strip()
@@ -1369,9 +1360,8 @@ def print_daily_scan(
             rs_s = str(r["RS"])
             hi_s = f"{r['pct_off_hi']:.1f}%" if pd.notna(r["pct_off_hi"]) else "NA"
             ytd_s = f"+{r['YTD']:.1f}%" if pd.notna(r["YTD"]) and r["YTD"] > 0 else (f"{r['YTD']:.1f}%" if pd.notna(r["YTD"]) else "NA")
-            dd_s = str(r["Days_Dropped"])
             rg_s = f"{r['Range']:.1f}%" if pd.notna(r["Range"]) else "NA"
-            m_lines.append(f"{t:<7} {th:<26} {zk:>5} {rs_s:>10} {hi_s:>9} {ytd_s:>9} {dd_s:>5}  {rg_s:<11}")
+            m_lines.append(f"{t:<7} {th:<26} {zk:>5} {rs_s:>10} {hi_s:>9} {ytd_s:>9}  {rg_s:<11}")
         mild_bullish_out += '\n'.join(m_lines) + '\n'
     else:
         mild_bullish_out += 'No active mild bullish candidates today.\n'

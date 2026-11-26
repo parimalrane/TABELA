@@ -273,10 +273,10 @@ def prepare_stocks_df(stocks, market_date):
     return s_copy
 
 
-def get_reversal_long_candidates(market_date, stocks, active_bullish_set, max_days=90, extra_drops: dict = None):
+def get_reversal_long_candidates(market_date, stocks, active_bullish_set, max_days=0, extra_drops: dict = None):
     """
-    Qualifies Long Reversals (Mild Bullish) strictly from MILD_CONFIG:
-    1. Dropped Long within max_days (not in active_bulls)
+    Qualifies Long Pullbacks (Mild Bullish) - 100% Stateless:
+    1. Not in active_bullish_set today (not already in Strong Bullish)
     2. Theme in LONG_ALLOWED_THEMES (or Micro Leader if LONG_ALLOW_MICRO_LEADER is True)
     3. Zacks in LONG_ALLOWED_ZACKS (or Zacks 3 if RS >= LONG_ZACKS_3_MIN_RS and Growth in LONG_ZACKS_3_ALLOWED_GROWTH)
     4. Price >= LONG_MIN_PRICE and Volume >= LONG_MIN_VOLUME
@@ -285,93 +285,80 @@ def get_reversal_long_candidates(market_date, stocks, active_bullish_set, max_da
     if stocks is None or stocks.empty:
         return pd.DataFrame()
 
-    dropped_dict = load_all_dropped_bullish(market_date, extra_drops=extra_drops)
-    if not dropped_dict:
-        return pd.DataFrame()
-
     s_copy = prepare_stocks_df(stocks, market_date)
     candidates = []
 
     # Configurable parameters
     allowed_themes = MILD_CONFIG.get("LONG_ALLOWED_THEMES", ["Leading"])
     allow_micro = MILD_CONFIG.get("LONG_ALLOW_MICRO_LEADER", True)
-    min_rs = MILD_CONFIG.get("LONG_MIN_RS", 55.0)
-    min_range = MILD_CONFIG.get("LONG_MIN_52W_RANGE", 50.0)
+    min_rs = MILD_CONFIG.get("LONG_MIN_RS", 50.0)
+    min_range = MILD_CONFIG.get("LONG_MIN_52W_RANGE", 40.0)
     allowed_zacks = MILD_CONFIG.get("LONG_ALLOWED_ZACKS", [1, 2])
     z3_min_rs = MILD_CONFIG.get("LONG_ZACKS_3_MIN_RS", 95.0)
     z3_growth = MILD_CONFIG.get("LONG_ZACKS_3_ALLOWED_GROWTH", ["A", "B", "C"])
     min_price = MILD_CONFIG.get("LONG_MIN_PRICE", 10.0)
     min_vol = MILD_CONFIG.get("LONG_MIN_VOLUME", 1_000_000)
 
-    effective_max_days = max_days if max_days > 0 else MILD_CONFIG.get("LONG_MAX_DAYS_DROPPED", 90)
-
     for _, row in s_copy.iterrows():
         tkr = row["Ticker_Clean"]
-        if tkr in dropped_dict and tkr not in active_bullish_set:
-            drop_info = dropped_dict[tkr]
-            days_since = (market_date - drop_info["date"]).days
-            if effective_max_days > 0 and days_since > effective_max_days:
-                continue
+        if tkr in active_bullish_set:
+            continue
 
-            z_val = row["Zacks_Num"]
-            rs_val = row["RS_Num"]
-            range_val = row["Range_Num"]
-            t_cls = row["Theme_Class"]
-            m_tier = row["Micro_Tier"]
-            close_val = row.get("Close_Num")
-            vol_val = row.get("Vol_Num")
-            growth_val = row.get("Growth_Score", "")
+        z_val = row["Zacks_Num"]
+        rs_val = row["RS_Num"]
+        range_val = row["Range_Num"]
+        t_cls = row["Theme_Class"]
+        m_tier = row["Micro_Tier"]
+        close_val = row.get("Close_Num")
+        vol_val = row.get("Vol_Num")
+        growth_val = row.get("Growth_Score", "")
 
-            # 1. Strict Theme Gate: Leading or Micro Leader only
-            is_valid_theme = (t_cls in allowed_themes) or (allow_micro and m_tier == "Micro Leader")
-            if not is_valid_theme:
-                continue
+        # 1. Strict Theme Gate: Leading or Micro Leader only
+        is_valid_theme = (t_cls in allowed_themes) or (allow_micro and m_tier == "Micro Leader")
+        if not is_valid_theme:
+            continue
 
-            # 2. Zacks Rank Gate: Zacks 1-2 standard, Zacks 3 if RS >= 95 and Growth in A/B/C
-            if pd.isna(z_val):
-                continue
-            z_int = int(z_val)
-            is_std_zacks = z_int in allowed_zacks
-            is_elite_z3 = (z_int == 3) and pd.notna(rs_val) and (rs_val >= z3_min_rs) and (growth_val in z3_growth)
-            if not (is_std_zacks or is_elite_z3):
-                continue
+        # 2. Zacks Rank Gate: Zacks 1-2 standard, Zacks 3 if RS >= 95 and Growth in A/B/C
+        if pd.isna(z_val):
+            continue
+        z_int = int(z_val)
+        is_std_zacks = z_int in allowed_zacks
+        is_elite_z3 = (z_int == 3) and pd.notna(rs_val) and (rs_val >= z3_min_rs) and (growth_val in z3_growth)
+        if not (is_std_zacks or is_elite_z3):
+            continue
 
-            # 3. Liquidity Gate
-            if pd.isna(close_val) or close_val < min_price:
-                continue
-            if pd.isna(vol_val) or vol_val < min_vol:
-                continue
+        # 3. Liquidity Gate
+        if pd.isna(close_val) or close_val < min_price:
+            continue
+        if pd.isna(vol_val) or vol_val < min_vol:
+            continue
 
-            # 4. Pullback Envelope & RS Gate
-            if pd.isna(range_val) or range_val < min_range:
-                continue
-            if pd.isna(rs_val) or rs_val < min_rs:
-                continue
+        # 4. Pullback Envelope & RS Gate
+        if pd.isna(range_val) or range_val < min_range:
+            continue
+        if pd.isna(rs_val) or rs_val < min_rs:
+            continue
 
-            theme_val = drop_info["theme"]
-            if theme_val == "-" and "Mapped_Theme" in row and pd.notna(row["Mapped_Theme"]):
-                theme_val = str(row["Mapped_Theme"])
-            elif theme_val == "-" and "Industry" in row and pd.notna(row["Industry"]):
-                theme_val = str(row["Industry"])[:24]
+        theme_val = str(row.get("Mapped_Theme", ""))
+        if not theme_val or theme_val == "-":
+            theme_val = str(row.get("Industry", ""))[:24]
 
-            candidates.append({
-                "Ticker": tkr,
-                "Theme": theme_val if theme_val and theme_val != "-" else str(row.get("Sector", "-")),
-                "Zacks": int(z_val),
-                "RS": int(round(rs_val)),
-                "YTD": row["YTD_Num"],
-                "pct_off_hi": row["pct_off_hi"],
-                "pct_off_lo": row["pct_off_lo"],
-                "Range": range_val,
-                "Days_Dropped": days_since,
-                "Drop_Date": str(drop_info["date"]),
-            })
+        candidates.append({
+            "Ticker": tkr,
+            "Theme": theme_val if theme_val and theme_val != "-" else str(row.get("Sector", "-")),
+            "Zacks": int(z_val),
+            "RS": int(round(rs_val)),
+            "YTD": row["YTD_Num"],
+            "pct_off_hi": row["pct_off_hi"],
+            "pct_off_lo": row["pct_off_lo"],
+            "Range": range_val,
+        })
 
     if not candidates:
         return pd.DataFrame()
 
     df_res = pd.DataFrame(candidates)
-    df_res = df_res.sort_values(by=["Days_Dropped", "RS"], ascending=[True, False])
+    df_res = df_res.sort_values(by=["RS", "Range"], ascending=[False, False])
     return df_res
 
 
