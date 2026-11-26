@@ -1139,20 +1139,15 @@ def print_daily_scan(
         clean_close_l = pd.to_numeric(long_candidates_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
         clean_hi_l = pd.to_numeric(long_candidates_df['52 Week High'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
         clean_lo_l = pd.to_numeric(long_candidates_df['52 Week Low'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce') if '52 Week Low' in long_candidates_df.columns else pd.Series(index=long_candidates_df.index, dtype=float)
-        long_candidates_df['% off Hi'] = ((clean_close_l - clean_hi_l) / clean_hi_l * 100).apply(
-            lambda v: "0.0%" if pd.notna(v) and abs(round(v, 1)) == 0 else (f"{v:.1f}%" if pd.notna(v) else "NA")
-        )
         range_span = clean_hi_l - clean_lo_l
         long_candidates_df['52W Range'] = ((clean_close_l - clean_lo_l) / range_span.replace(0, float('nan')) * 100).apply(
             lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
         )
     elif 'Price as a % of 52 Wk H-L Range' in long_candidates_df.columns:
-        long_candidates_df['% off Hi'] = "NA"
         long_candidates_df['52W Range'] = pd.to_numeric(long_candidates_df['Price as a % of 52 Wk H-L Range'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').apply(
             lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
         )
     else:
-        long_candidates_df['% off Hi'] = "NA"
         long_candidates_df['52W Range'] = "NA"
     long_candidates_df['Zacks'] = pd.to_numeric(long_candidates_df['Zacks Rank'], errors='coerce').fillna(0).astype(int).astype(str)
 
@@ -1163,7 +1158,6 @@ def print_daily_scan(
             "Theme_Class",
             "Zacks",
             "RS_Rating",
-            "% off Hi",
             "52W Range",
             "Sector (SPDR)",
             "Sector Rank"
@@ -1210,20 +1204,15 @@ def print_daily_scan(
             clean_close_s = pd.to_numeric(dist_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
             clean_lo_s = pd.to_numeric(dist_df['52 Week Low'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
             clean_hi_s = pd.to_numeric(dist_df['52 Week High'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce') if '52 Week High' in dist_df.columns else pd.Series(index=dist_df.index, dtype=float)
-            dist_df['% off Lo'] = ((clean_close_s - clean_lo_s) / clean_lo_s * 100).apply(
-                lambda v: "0.0%" if pd.notna(v) and abs(round(v, 1)) == 0 else (f"+{v:.1f}%" if pd.notna(v) and v > 0 else (f"{v:.1f}%" if pd.notna(v) else "NA"))
-            )
             range_span_s = clean_hi_s - clean_lo_s
             dist_df['52W Range'] = ((clean_close_s - clean_lo_s) / range_span_s.replace(0, float('nan')) * 100).apply(
                 lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
             )
         elif 'Price as a % of 52 Wk H-L Range' in dist_df.columns:
-            dist_df['% off Lo'] = "NA"
             dist_df['52W Range'] = pd.to_numeric(dist_df['Price as a % of 52 Wk H-L Range'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').apply(
                 lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
             )
         else:
-            dist_df['% off Lo'] = "NA"
             dist_df['52W Range'] = "NA"
         dist_df['Zacks'] = pd.to_numeric(dist_df['Zacks Rank'], errors='coerce').fillna(0).astype(int).astype(str)
 
@@ -1234,7 +1223,6 @@ def print_daily_scan(
                 "Theme_Class",
                 "Zacks",
                 "Short_RS_Rating",
-                "% off Lo",
                 "52W Range",
                 "Sector (SPDR)",
                 "Sector Rank"
@@ -1269,7 +1257,7 @@ def print_daily_scan(
     bullish_list = []
     if not true_longs.empty:
         bullish_df = true_longs.copy()
-        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'RS_Rating', '% off Hi', '52W Range', 'Movement', 'Days', 'Sector (Rk)', 'Micro_Tier']
+        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'RS_Rating', '52W Range', 'Movement', 'Days', 'Sector (Rk)', 'Micro_Tier']
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
         bullish_df['_score_num'] = pd.to_numeric(bullish_df['RS_Rating'], errors='coerce').fillna(0)
@@ -1279,7 +1267,7 @@ def print_daily_scan(
     bearish_list = []
     if not distribution_watchlist.empty and not display_df.empty:
         bearish_df = display_df.copy()
-        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', '% off Lo', '52W Range', 'Movement', 'Days', 'Sector (Rk)', 'Micro_Tier']
+        cols = ['Ticker', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', '52W Range', 'Movement', 'Days', 'Sector (Rk)', 'Micro_Tier']
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
         bullish_short_rs = 'Short_RS_Rating' if 'Short_RS_Rating' in bearish_df.columns else 'RS_Rating'
@@ -1300,27 +1288,26 @@ def print_daily_scan(
         theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         rs = str(r.get("RS_Rating", ""))[:4]
-        hi = str(r.get("% off Hi", ""))[:8]
         rng = str(r.get("52W Range", ""))[:8]
         mov = str(r.get("Movement", ""))[:4]
         dys = str(r.get("Days", ""))[:4]
         sec = str(r.get("Sector (Rk)", ""))[:11]
-        return f"{t:<7} {theme:<26} {zk:>5} {rs:>6} {hi:>9} {rng:>10} {mov:>9} {dys:>5}  {sec:<11}"
+        return f"{t:<7} {theme:<26} {zk:>5} {rs:>6} {rng:>10} {mov:>9} {dys:>5}  {sec:<11}"
 
     def format_bearish_row(r):
         t = str(r.get("Ticker", "")).strip()[:6]
         theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         shrs = str(r.get("Short_RS_Rating", r.get("RS_Rating", "")))[:4]
-        lo = str(r.get("% off Lo", ""))[:8]
         rng = str(r.get("52W Range", ""))[:8]
         mov = str(r.get("Movement", ""))[:4]
         dys = str(r.get("Days", ""))[:4]
         sec = str(r.get("Sector (Rk)", ""))[:11]
-        return f"{t:<7} {theme:<26} {zk:>5} {shrs:>6} {lo:>9} {rng:>10} {mov:>9} {dys:>5}  {sec:<11}"
+        return f"{t:<7} {theme:<26} {zk:>5} {shrs:>6} {rng:>10} {mov:>9} {dys:>5}  {sec:<11}"
 
-    b_hdr = f"{'Ticker':<7} {'Mapped_Theme':<26} {'Zacks':>5} {'RS':>6} {'% off Hi':>9} {'52W Range':>10} {'Movement':>9} {'Days':>5}  {'Sector (Rk)':<11}"
-    s_hdr = f"{'Ticker':<7} {'Mapped_Theme':<26} {'Zacks':>5} {'RS':>6} {'% off Lo':>9} {'52W Range':>10} {'Movement':>9} {'Days':>5}  {'Sector (Rk)':<11}"
+    b_hdr = f"{'Ticker':<7} {'Mapped_Theme':<26} {'Zacks':>5} {'RS':>6} {'52W Range':>10} {'Movement':>9} {'Days':>5}  {'Sector (Rk)':<11}"
+    s_hdr = f"{'Ticker':<7} {'Mapped_Theme':<26} {'Zacks':>5} {'RS':>6} {'52W Range':>10} {'Movement':>9} {'Days':>5}  {'Sector (Rk)':<11}"
+    sep_line = '=' * len(b_hdr) + '\n'
 
     # Extract all active strong bullish & bearish tickers
     all_bullish_tickers = []
@@ -1340,11 +1327,11 @@ def print_daily_scan(
     active_bearish_set = set(all_bearish_tickers)
 
     # 1. LONG UNIVERSE
-    long_out = '=================================================================================================\n'
+    long_out = sep_line
     long_out += '1. LONG UNIVERSE (Institutional Leaders)\n'
     long_out += 'Criteria: Leading Themes | Zacks 1-2 | RS >= 85 | 52W Range >= 50%\n'
     long_out += 'Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Carve-Out (Z3 Growth A/B) | * = Independent Leader (RS >= 95)\n'
-    long_out += '=================================================================================================\n'
+    long_out += sep_line
 
     if bullish_list:
         b_lines = [b_hdr]
@@ -1355,11 +1342,11 @@ def print_daily_scan(
         long_out += 'No active long candidates today.\n'
 
     # 2. SHORT UNIVERSE (Stage 4 Candidates)
-    short_out = '=================================================================================================\n'
+    short_out = sep_line
     short_out += '2. SHORT UNIVERSE (Stage 4 Candidates)\n'
     short_out += 'Criteria: Lagging Themes | Zacks 3-5 | Short_RS 8-60 | 52W Range <= 30%\n'
     short_out += 'Legend: [MLg] = Micro Lagging\n'
-    short_out += '=================================================================================================\n'
+    short_out += sep_line
 
     if bearish_list:
         s_lines = [s_hdr]
