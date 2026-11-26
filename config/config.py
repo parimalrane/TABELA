@@ -89,7 +89,7 @@ LONG_ENTRY = {
 SHORT_ENTRY = {
     "MIN_SHORT_RS": 8.0,
     "MAX_SHORT_RS": 60.0,
-    "THEMES": ["Lagging"],
+    "BLOCKED_THEMES": ["Leading"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 2_000_000,
@@ -126,7 +126,7 @@ LONG_STAY = {
 
 SHORT_STAY = {
     "MAX_RS": 75.0,
-    "THEMES": ["Lagging"],
+    "BLOCKED_THEMES": ["Leading"],
     "ALLOWED_ZACKS": [2, 3, 4, 5],
 }
 

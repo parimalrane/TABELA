@@ -1328,14 +1328,10 @@ def print_daily_scan(
             fresh_short_drops[t_clean] = {"date": context.market_date, "theme": "-"}
 
     df_reversal_long = pd.DataFrame()
-    df_reversal_short = pd.DataFrame()
     try:
-        from runners.run_reversal_scan import get_reversal_long_candidates, get_reversal_short_candidates
+        from runners.run_reversal_scan import get_reversal_long_candidates
         df_reversal_long = get_reversal_long_candidates(
             context.market_date, stocks, active_bullish_set, max_days=90, extra_drops=fresh_long_drops
-        )
-        df_reversal_short = get_reversal_short_candidates(
-            context.market_date, stocks, active_bearish_set, max_days=90, extra_drops=fresh_short_drops
         )
     except Exception:
         pass
@@ -1380,61 +1376,33 @@ def print_daily_scan(
     else:
         mild_bullish_out += 'No active mild bullish candidates today.\n'
 
-    # 3. STRONG BEARISH UNIVERSE
-    strong_bearish_out = '=============================================================================================\n'
-    strong_bearish_out += '3. STRONG BEARISH UNIVERSE (Active Momentum Breakdowns & Short Candidates)\n'
-    strong_bearish_out += 'Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 4-5 | Lagging Themes Only\n'
-    strong_bearish_out += 'Legend: [MLg] = Micro Lagging\n'
-    strong_bearish_out += '=============================================================================================\n'
+    # 3. SHORT UNIVERSE (Stage 4 Candidates)
+    short_out = '=============================================================================================\n'
+    short_out += '3. SHORT UNIVERSE (Stage 4 Breakdown & Short Candidates)\n'
+    short_out += 'Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 3-5 | Non-Leading Themes (Blocks Leading)\n'
+    short_out += 'Legend: [MLg] = Micro Lagging\n'
+    short_out += '=============================================================================================\n'
 
     if bearish_list:
         s_lines = [s_hdr]
         for r in bearish_list:
             s_lines.append(format_bearish_row(r))
-        strong_bearish_out += '\n'.join(s_lines) + '\n'
+        short_out += '\n'.join(s_lines) + '\n'
     else:
-        strong_bearish_out += 'No active strong bearish candidates today.\n'
-
-    # 4. MILD BEARISH UNIVERSE
-    mild_bearish_out = '=============================================================================================\n'
-    mild_bearish_out += '4. MILD BEARISH UNIVERSE (Sell the Bounce — Relief Rally Exhaustion Zone)\n'
-    mild_bearish_out += 'Criteria: Dropped Short <= 90d | Lagging or [MLg] | 52W Range <= 50% | Bounced >= +10% off Low | Zacks 3-5 | Short_RS <= 60\n'
-    mild_bearish_out += '=============================================================================================\n'
-
-    reversal_shorts = []
-    if not df_reversal_short.empty:
-        hdr_rev_s = f"{'Ticker':<7} {'Theme / Sector':<26} {'Zacks':>5} {'Short_RS':>10} {'% off Lo':>9} {'YTD':>9} {'Days':>5}  {'52W Range':<11}"
-        ms_lines = [hdr_rev_s]
-        for _, r in df_reversal_short.iterrows():
-            t = str(r["Ticker"]).strip()
-            reversal_shorts.append(t)
-            th = str(r["Theme"])[:26]
-            zk = str(r["Zacks"])
-            srs_s = str(r["Short_RS"])
-            lo_s = f"+{r['pct_off_lo']:.1f}%" if pd.notna(r["pct_off_lo"]) else "NA"
-            ytd_s = f"+{r['YTD']:.1f}%" if pd.notna(r["YTD"]) and r["YTD"] > 0 else (f"{r['YTD']:.1f}%" if pd.notna(r["YTD"]) else "NA")
-            dd_s = str(r["Days_Dropped"])
-            rg_s = f"{r['Range']:.1f}%" if pd.notna(r["Range"]) else "NA"
-            ms_lines.append(f"{t:<7} {th:<26} {zk:>5} {srs_s:>10} {lo_s:>9} {ytd_s:>9} {dd_s:>5}  {rg_s:<11}")
-        mild_bearish_out += '\n'.join(ms_lines) + '\n'
-    else:
-        mild_bearish_out += 'No active mild bearish candidates today.\n'
+        short_out += 'No active short candidates today.\n'
 
     print('\n' + strong_bullish_out)
     print('\n' + mild_bullish_out)
-    print('\n' + strong_bearish_out)
-    print('\n' + mild_bearish_out)
+    print('\n' + short_out)
 
     print('TRADINGVIEW WATCHLIST EXPORT')
     strong_bullish_str = ','.join(all_bullish_tickers)
     mild_bullish_str = ','.join(reversal_longs)
-    strong_bearish_str = ','.join(all_bearish_tickers)
-    mild_bearish_str = ','.join(reversal_shorts)
+    short_str = ','.join(all_bearish_tickers)
 
     print('###Strong_Bullish,' + strong_bullish_str + ',') if strong_bullish_str else print('###Strong_Bullish,')
     print('###Mild_Bullish,' + mild_bullish_str + ',') if mild_bullish_str else print('###Mild_Bullish,')
-    print('###Strong_Bearish,' + strong_bearish_str + ',') if strong_bearish_str else print('###Strong_Bearish,')
-    print('###Mild_Bearish,' + mild_bearish_str + ',') if mild_bearish_str else print('###Mild_Bearish,')
+    print('###Short,' + short_str + ',') if short_str else print('###Short,')
 
     # Thematic & Sector ETF Watchlists (Primary Pure-Play per theme)
     def extract_primary_etf(etf_raw):
