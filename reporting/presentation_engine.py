@@ -1369,7 +1369,7 @@ def print_daily_scan(
     # 3. SHORT UNIVERSE (Stage 4 Candidates)
     short_out = '=============================================================================================\n'
     short_out += '3. SHORT UNIVERSE (Stage 4 Breakdown & Short Candidates)\n'
-    short_out += 'Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 3-5 | Non-Leading Themes (Blocks Leading)\n'
+    short_out += 'Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 3-5 | Lagging Themes Only\n'
     short_out += 'Legend: [MLg] = Micro Lagging\n'
     short_out += '=============================================================================================\n'
 
@@ -1409,14 +1409,15 @@ def print_daily_scan(
         return None
 
     leading_etfs = []
-    for _, row in display_df.iterrows():
-        micro_theme = str(row['Mapped_Theme'])
-        macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
-        if theme_class_map.get(macro_theme) == "Leading":
-            etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
-            etf = extract_primary_etf(etf_raw)
-            if etf and etf not in leading_etfs:
-                leading_etfs.append(etf)
+    if not true_longs.empty:
+        for _, row in true_longs.iterrows():
+            micro_theme = str(row.get('Mapped_Theme', ''))
+            macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+            if theme_class_map.get(micro_theme) == "Leading" or theme_class_map.get(macro_theme) == "Leading":
+                etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+                etf = extract_primary_etf(etf_raw)
+                if etf and etf not in leading_etfs:
+                    leading_etfs.append(etf)
     for row in leading_themes:
         theme = row.get("Theme")
         if theme:
@@ -1426,14 +1427,15 @@ def print_daily_scan(
                 leading_etfs.append(etf)
 
     lagging_etfs = []
-    for _, row in display_df.iterrows():
-        micro_theme = str(row['Mapped_Theme'])
-        macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
-        if theme_class_map.get(macro_theme) == "Lagging":
-            etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
-            etf = extract_primary_etf(etf_raw)
-            if etf and etf not in lagging_etfs:
-                lagging_etfs.append(etf)
+    if not distribution_watchlist.empty:
+        for _, row in distribution_watchlist.iterrows():
+            micro_theme = str(row.get('Mapped_Theme', ''))
+            macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+            if theme_class_map.get(micro_theme) == "Lagging" or theme_class_map.get(macro_theme) == "Lagging":
+                etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+                etf = extract_primary_etf(etf_raw)
+                if etf and etf not in lagging_etfs:
+                    lagging_etfs.append(etf)
     for row in lagging_themes:
         theme = row.get("Theme")
         if theme:
@@ -1449,6 +1451,9 @@ def print_daily_scan(
                 leading_etfs.append(_metf)
             elif _tier == "Micro Lagging" and _metf not in lagging_etfs:
                 lagging_etfs.append(_metf)
+
+    # Enforce strict mutual exclusion: an ETF can never be both Leading and Lagging
+    leading_etfs = [e for e in leading_etfs if e not in lagging_etfs]
 
     leading_etf_str = ",".join(leading_etfs)
     lagging_etf_str = ",".join(lagging_etfs)

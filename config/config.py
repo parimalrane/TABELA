@@ -20,9 +20,24 @@ THEME_STRENGTH_CONFIG = {
     "ENABLE_NORMALIZATION": True,
 
     # Theme breakdown. Leading/Lagging percentages.
-    # User Request: 30% Leading / 40% Neutral / 30% Lagging (Expands early-warning drop coverage)
-    "CLASSIFICATION_PERCENTAGE_LEADING": 0.30,
-    "CLASSIFICATION_PERCENTAGE_LAGGING": 0.30
+    # Backtest Winner (Theme Tier Optimization): 20% Leading / 60% Neutral / 20% Lagging
+    "CLASSIFICATION_PERCENTAGE_LEADING": 0.20,
+    "CLASSIFICATION_PERCENTAGE_LAGGING": 0.20
+}
+
+# ==========================
+# BOTTOM-UP THEME BREADTH CONFIG
+# ==========================
+BOTTOM_UP_THEME_CONFIG = {
+    "ENABLED": True,
+    "LEADER_MIN_RS": 75.0,              # Minimum RS for a stock to qualify as a group leader
+    "LEADER_MAX_OFF_HIGH_PCT": 15.0,    # Must be within 15% of 52-week high
+    "SHRINKAGE_C": 10.0,                # Confidence weighting parameter (smooths small themes)
+    "TOP_TIER_PCT": 0.20,               # Top 20% of themes = Leading (Backtest Winner)
+    "BOTTOM_TIER_PCT": 0.20,            # Bottom 20% of themes = Lagging (Backtest Winner)
+    # Dual-Engine Composite Weights:
+    "WEIGHT_TOP_DOWN_ETF": 0.50,        # 50% Macro Top-Down ETF momentum
+    "WEIGHT_BOTTOM_UP_BREADTH": 0.50,   # 50% Organic Bottom-Up stock breadth
 }
 
 # ==========================
@@ -94,7 +109,7 @@ LONG_ENTRY = {
 SHORT_ENTRY = {
     "MIN_SHORT_RS": 8.0,
     "MAX_SHORT_RS": 60.0,
-    "BLOCKED_THEMES": ["Leading"],
+    "THEMES": ["Lagging"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 2_000_000,

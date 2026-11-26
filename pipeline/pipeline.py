@@ -191,13 +191,14 @@ def assign_stock_theme_classification(stocks, theme_class_map, theme_score_map, 
         etf_theme = row["ETF_Theme"]
         mapped_theme = row["Mapped_Theme"]
 
+        # Support granular bottom-up theme key first, falling back to ETF theme
+        theme_key = mapped_theme if mapped_theme in theme_class_map else etf_theme
 
-
-        if etf_theme in theme_class_map:
-            theme_class = theme_class_map[etf_theme]
-            theme_score = theme_score_map.get(etf_theme, 80) # Fallback incase it was injected without score
-            theme_state = theme_class_map.get(etf_theme)
-            etf_raw_score = theme_raw_score_map.get(etf_theme)
+        if theme_key in theme_class_map:
+            theme_class = theme_class_map[theme_key]
+            theme_score = theme_score_map.get(theme_key, 80) # Fallback incase it was injected without score
+            theme_state = theme_class_map.get(theme_key)
+            etf_raw_score = theme_raw_score_map.get(theme_key)
             is_unclassified = False
         else:
             theme_class = "Unknown"
@@ -690,10 +691,24 @@ def run_tabela_pipeline():
 
 
 
-    stocks["Theme_Rank"] = stocks["ETF_Theme"].map(theme_rank_map)
-
     stocks = calculate_rs_raw(stocks)
     stocks = calculate_rs_rating(stocks)
+
+    from config.config import BOTTOM_UP_THEME_CONFIG
+    if BOTTOM_UP_THEME_CONFIG.get("ENABLED", False):
+        from scoring.bottom_up_theme_engine import calculate_bottom_up_theme_classification
+        bu_class_map, bu_score_map, bu_rank_map, bu_stats = calculate_bottom_up_theme_classification(
+            stocks,
+            top_down_theme_strength=theme_strength
+        )
+        theme_class_map.update(bu_class_map)
+        theme_score_map.update(bu_score_map)
+        theme_rank_map.update(bu_rank_map)
+        bu_leading = [score for theme, score in bu_score_map.items() if bu_class_map.get(theme) == "Leading"]
+        if bu_leading:
+            avg_leading_score = sum(bu_leading) / len(bu_leading)
+
+    stocks["Theme_Rank"] = stocks["Mapped_Theme"].map(theme_rank_map).fillna(stocks["ETF_Theme"].map(theme_rank_map))
     stocks = resolve_unclassified_leaders(stocks, theme_class_map)
 
     stocks = assign_stock_theme_classification(
