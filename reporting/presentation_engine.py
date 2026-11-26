@@ -884,7 +884,6 @@ def print_daily_scan(
     print("========================================")
     print("THEME BREADTH ANALYSIS")
     print("Legend: [No Prefix]=Long / #=Short")
-    print("        + - = 1D Rank Delta")
     print("========================================")
 
     # --- INJECT RE-ENTRY STOCKS INTO BREADTH (replacing legacy Mild) ---
@@ -1029,80 +1028,71 @@ def print_daily_scan(
         ascending=[True, False, False]
     ).drop(columns=["_macro_rank", "_score_num", "_tot_stocks"])
 
-    print(f"{'Macro Theme'.ljust(18)} {'Micro Theme'.ljust(26)} {'Tot'.rjust(3)} {'Qual'.rjust(4)} {'W_Brdth'.rjust(7)} {'ETF_RS'.rjust(6)}   {'Macro State & Movement'.ljust(25)}   {'ETFs'.ljust(20)}   {'Stocks'}")
-    print("-" * 145)
+    print(f"{'Macro Theme':<16} {'Micro Theme':<24} {'Rank / Tier':<18} {'ETFs':<18} {'Stocks'}")
+    print("-" * 115)
     
+    tot_macro = len(theme_strength) if not theme_strength.empty else 42
+    leading_cut = math.ceil(tot_macro * 0.20)
+    lagging_cut = tot_macro - math.ceil(tot_macro * 0.20) + 1
+
     for _, row in display_df.iterrows():
         mapped_theme = str(row['Mapped_Theme'])
         parent_theme = THEME_TRANSLATION.get(mapped_theme, mapped_theme)
         
-        # Format columns
-        macro = (parent_theme[:16] + "..") if len(parent_theme) > 18 else parent_theme.ljust(18)
-        micro = (mapped_theme[:24] + "..") if len(mapped_theme) > 26 else mapped_theme.ljust(26)
-        
-        total = int(row['Total_Stocks']) if pd.notna(row['Total_Stocks']) else 0
-        qual = int(row['Strong_Stocks']) if pd.notna(row['Strong_Stocks']) else 0
-        score = float(row['Weighted_Breadth_Score']) if pd.notna(row['Weighted_Breadth_Score']) else 0.0
-        
-        tot_str = str(total).rjust(3)
-        macro_state = theme_class_map.get(parent_theme, "Unknown")
-        micro_info = micro_tier_by_theme.get(mapped_theme)
-        masked = (macro_state == "Neutral") and not micro_info
-        q_str = "-".rjust(4) if masked else str(qual).rjust(4)
-        s_str = "-".rjust(7) if masked else f"{score:>.2f}".rjust(7)
-        
-        macro_state = theme_class_map.get(parent_theme, "Unknown")
-        
-        etf_rs_val = 0.0
-        if not theme_strength[theme_strength["Theme"] == parent_theme].empty:
+        macro_rank = None
+        if not theme_strength.empty and not theme_strength[theme_strength["Theme"] == parent_theme].empty:
             ts_row = theme_strength[theme_strength["Theme"] == parent_theme].iloc[0]
-            macro_rank = ts_row["Theme_Rank"]
-            etf_rs_val = float(ts_row.get("ETF_RS_Raw", 0.0))
-            
-            movement_str = ""
-            if theme_performance is not None and not theme_performance.empty:
-                perf_row = theme_performance[theme_performance["Theme"] == parent_theme]
-                if not perf_row.empty:
-                    rank_delta = perf_row.iloc[0].get("Rank Δ")
-                    if pd.notna(rank_delta):
-                        r_d = int(rank_delta)
-                        if r_d > 0:
-                            movement_str = f" -> -{r_d}"
-                        elif r_d < 0:
-                            movement_str = f" -> +{abs(r_d)}"
-                            
-            mac_state_str = f"{macro_state} ({macro_rank}{movement_str})".ljust(25)
-        else:
-            mac_state_str = macro_state.ljust(25)
-            
-        if micro_info:
-            _tier, _metf, _mrs = micro_info
-            mac_state_str = (f"{_tier} ({_metf})" if _metf else f"{_tier} (breadth)").ljust(25)
-            if _mrs is not None:
-                etf_rs_val = _mrs
+            macro_rank = int(ts_row["Theme_Rank"])
 
-        r_str = f"{etf_rs_val:>.2f}".rjust(6)
+        micro_info = micro_tier_by_theme.get(mapped_theme)
+        if micro_info:
+            rank_tier = str(micro_info[0])
+        elif macro_rank is not None:
+            if macro_rank <= leading_cut:
+                rank_tier = f"#{macro_rank} Leading"
+            elif macro_rank >= lagging_cut:
+                rank_tier = f"#{macro_rank} Lagging"
+            else:
+                if theme_class_map.get(mapped_theme) == "Leading":
+                    rank_tier = "Micro Leader"
+                elif theme_class_map.get(mapped_theme) == "Lagging":
+                    rank_tier = "Micro Lagging"
+                else:
+                    rank_tier = f"#{macro_rank} Neutral"
+        else:
+            if theme_class_map.get(mapped_theme) == "Leading":
+                rank_tier = "Micro Leader"
+            elif theme_class_map.get(mapped_theme) == "Lagging":
+                rank_tier = "Micro Lagging"
+            else:
+                rank_tier = "Neutral"
+
+        # Strictly exclude Neutral themes from display (Bullish and Bearish only)
+        if "Neutral" in rank_tier:
+            continue
+
+        macro = (parent_theme[:14] + "..") if len(parent_theme) > 16 else parent_theme.ljust(16)
+        micro = (mapped_theme[:22] + "..") if len(mapped_theme) > 24 else mapped_theme.ljust(24)
+        rt_col = (rank_tier[:16] + "..") if len(rank_tier) > 18 else rank_tier.ljust(18)
 
         etfs_val = THEME_ETF_MAPPING.get(mapped_theme) or THEME_ETF_MAPPING.get(parent_theme, "")
-        etfs_col = (etfs_val[:18] + "..") if len(etfs_val) > 20 else etfs_val.ljust(20)
+        etfs_col = (etfs_val[:16] + "..") if len(etfs_val) > 18 else etfs_val.ljust(18)
 
-        prefix = f"{macro} {micro} {tot_str} {q_str} {s_str} {r_str}   {mac_state_str}   {etfs_col}   "
-
+        prefix = f"{macro} {micro} {rt_col} {etfs_col} "
         prefix_len = len(prefix)
-        
+
         leaders_str = str(row['Leaders']).strip()
-        
         if not leaders_str:
             print(prefix)
             continue
-            
+
         wrapped = textwrap.wrap(
             leaders_str, 
-            width=max(35, 145 - prefix_len),
+            width=max(35, 120 - prefix_len),
             break_long_words=False,
             break_on_hyphens=False
         )
-        
+
         for i, line in enumerate(wrapped):
             if i == 0:
                 print(f"{prefix}{line}")
@@ -1330,7 +1320,7 @@ def print_daily_scan(
     long_out = sep_line
     long_out += '1. LONG UNIVERSE (Institutional Leaders)\n'
     long_out += 'Criteria: Leading Themes | Zacks 1-2 | RS >= 85 | 52W Range >= 50%\n'
-    long_out += 'Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Carve-Out (Z3 Growth A/B) | * = Independent Leader (RS >= 95)\n'
+    long_out += 'Legend: [ML] = Micro Leader | ~ = Unclassified Leader\n'
     long_out += sep_line
 
     if bullish_list:

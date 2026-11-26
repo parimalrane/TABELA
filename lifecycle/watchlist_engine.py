@@ -38,20 +38,23 @@ def build_long_watchlist(stocks, registry=None):
     )
 
     # Zacks 3 Exception: Leading theme + Exceptional RS >= 95 + Growth A/B/C
+    z3_exception_enabled = LONG_ENTRY.get("ZACKS_3_EXCEPTION_ENABLED", False)
     z3_min_rs = LONG_ENTRY.get("ZACKS_3_ALLOWED_MIN_RS", 95.0)
     z3_growth = LONG_ENTRY.get("ZACKS_3_ALLOWED_GROWTH", ["A", "B", "C"])
-    z3_exception_mask = (
-        stocks_clean["Theme_Class"].isin(allowed_entry_themes)
-        & (stocks_clean["RS_Rating"] >= z3_min_rs)
-        & (zacks_numeric == 3)
-        & (growth_score.isin(z3_growth))
-        & (range_52w >= min_52w)
-        & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
-        & (
-            (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
-            | ((vol_numeric >= LONG_ENTRY.get("ELITE_ALT_MIN_VOLUME", 500_000)) & (dollar_vol >= LONG_ENTRY.get("ELITE_ALT_MIN_DOLLAR_VOL", 30_000_000)))
+    z3_exception_mask = pd.Series(False, index=stocks_clean.index)
+    if z3_exception_enabled:
+        z3_exception_mask = (
+            stocks_clean["Theme_Class"].isin(allowed_entry_themes)
+            & (stocks_clean["RS_Rating"] >= z3_min_rs)
+            & (zacks_numeric == 3)
+            & (growth_score.isin(z3_growth))
+            & (range_52w >= min_52w)
+            & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
+            & (
+                (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
+                | ((vol_numeric >= LONG_ENTRY.get("ELITE_ALT_MIN_VOLUME", 500_000)) & (dollar_vol >= LONG_ENTRY.get("ELITE_ALT_MIN_DOLLAR_VOL", 30_000_000)))
+            )
         )
-    )
 
     stocks_clean["Is_Elite_Exception"] = False
     new_elite_mask = z3_exception_mask & (~standard_entry_mask)

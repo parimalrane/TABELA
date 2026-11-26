@@ -99,6 +99,7 @@ LONG_ENTRY = {
     "MIN_52W_RANGE": 50.0,             # Minimum 52W range for pullback eligibility (upper half)
     "BREAKOUT_MIN_52W_RANGE": 85.0,    # Minimum 52W range for breakout classification (near highs)
     # Zacks 3 Exception:
+    "ZACKS_3_EXCEPTION_ENABLED": False,
     "ZACKS_3_ALLOWED_MIN_RS": 95.0,
     "ZACKS_3_ALLOWED_GROWTH": ["A", "B", "C"],
     # Elite Momentum Exception (e.g. KNSA):
@@ -107,7 +108,7 @@ LONG_ENTRY = {
     "ELITE_ALT_MIN_VOLUME": 500_000,
     "ELITE_ALT_MIN_DOLLAR_VOL": 30_000_000,
     # Independent Leader Theme Exemption (Safety Valve against flawed/neutral themes):
-    "THEME_EXEMPTION_ENABLED": True,
+    "THEME_EXEMPTION_ENABLED": False,
     "THEME_EXEMPTION_MIN_RS": 95.0,
     "THEME_EXEMPTION_MIN_RANGE": 85.0,
     "THEME_EXEMPTION_ALLOWED_ZACKS": [1, 2],
