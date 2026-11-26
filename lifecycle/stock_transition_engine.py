@@ -9,11 +9,9 @@ from pathlib import Path
 from config.config import (
     LONG_ENTRY,
     SHORT_ENTRY,
-    SHORT_STAY,
     PULLBACK_CONFIG
 )
 from config.runtime_context import context, get_monthly_path
-from reporting.watchlist_delta_engine import load_previous_long_watchlist, load_previous_distribution_watchlist
 
 
 REGISTRY_DIR = "market_data/stock_transition"

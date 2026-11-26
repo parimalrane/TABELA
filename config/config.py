@@ -117,24 +117,10 @@ BACKTEST_PULLBACK_PARAMS = {
 }
 
 
-# TABELA RETENTION STAY-IN THRESHOLDS
-LONG_STAY = {
-    "MIN_RS": 75.0,
-    "THEMES": ["Leading", "Unclassified Leader"],
-    "ALLOWED_ZACKS": [1, 2, 3],
-}
-
-SHORT_STAY = {
-    "MAX_RS": 75.0,
-    "BLOCKED_THEMES": ["Leading"],
-    "ALLOWED_ZACKS": [2, 3, 4, 5],
-}
-
 # ==========================
-# MILD WATCHLIST CONFIGURATION (PULLBACKS & SELL-THE-BOUNCE)
+# MILD BULLISH WATCHLIST CONFIGURATION (PULLBACKS / REVERSALS)
 # ==========================
 MILD_CONFIG = {
-    # --- Mild Bullish (Pullbacks / Reversals) ---
     "LONG_MAX_DAYS_DROPPED": 90,
     "LONG_ALLOWED_THEMES": ["Leading"],
     "LONG_ALLOW_MICRO_LEADER": True,
@@ -145,17 +131,6 @@ MILD_CONFIG = {
     "LONG_ZACKS_3_ALLOWED_GROWTH": ["A", "B", "C"],
     "LONG_MIN_PRICE": 10.0,
     "LONG_MIN_VOLUME": 1_000_000,
-
-    # --- Mild Bearish (Sell the Bounce) ---
-    "SHORT_MAX_DAYS_DROPPED": 90,
-    "SHORT_ALLOWED_THEMES": ["Lagging"],
-    "SHORT_ALLOW_MICRO_LAGGING": True,
-    "SHORT_MAX_SHORT_RS": 60.0,  # Weakness percentile (bottom 60%)
-    "SHORT_MAX_52W_RANGE": 50.0, # Under overhead resistance
-    "SHORT_MIN_PCT_OFF_LO": 10.0,# Bounced >= +10% off 52W low
-    "SHORT_ALLOWED_ZACKS": [3, 4, 5],
-    "SHORT_MIN_PRICE": 10.0,
-    "SHORT_MIN_VOLUME": 2_000_000,
 }
 
 

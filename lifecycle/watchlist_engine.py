@@ -1,16 +1,8 @@
 import pandas as pd
-from config.config import LONG_ENTRY, LONG_STAY, PULLBACK_CONFIG
-from reporting.watchlist_delta_engine import load_previous_long_watchlist
+from config.config import LONG_ENTRY, PULLBACK_CONFIG
 
 def build_long_watchlist(stocks, registry=None):
-    # Determine which stocks were in the watchlist yesterday (TABELA Retention)
-    prev_wl = load_previous_long_watchlist()
-    prev_tickers = set(prev_wl["Ticker"].str.upper().tolist()) if not prev_wl.empty else set()
-
     stocks_clean = stocks.copy()
-    ticker_clean = stocks_clean["Ticker"].astype(str).str.replace("*", "", regex=False).str.strip().str.upper()
-
-    is_existing = ticker_clean.isin(prev_tickers)
 
     # 1. NEW ENTRY (Get-In Criteria)
     allowed_entry_themes = LONG_ENTRY.get("THEMES", ["Leading", "Micro Leader"])
