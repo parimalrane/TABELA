@@ -4,13 +4,11 @@
     "new_entries": [],
     "exits": [],
     "entered_leading": [],
-    "exited_leading": [],
-    "entered_lagging": [
-        "Engineering and Construction"
+    "exited_leading": [
+        "Pharma"
     ],
-    "exited_lagging": [
-        "Medical Devices"
-    ],
+    "entered_lagging": [],
+    "exited_lagging": [],
     "persistent_same_bucket": [
         {
             "theme": "Aerospace & Defense",
@@ -25,7 +23,7 @@
         },
         {
             "theme": "Agribusiness",
-            "bucket": "Neutral",
+            "bucket": "Leading",
             "previous_rank": 19,
             "latest_rank": 20,
             "rank_change": 1,
@@ -36,7 +34,7 @@
         },
         {
             "theme": "Artificial Intelligence",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 32,
             "latest_rank": 31,
             "rank_change": -1,
@@ -58,7 +56,7 @@
         },
         {
             "theme": "Banking",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 12,
             "rank_change": 1,
@@ -156,8 +154,19 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Engineering and Construction",
+            "bucket": "Neutral",
+            "previous_rank": 28,
+            "latest_rank": 32,
+            "rank_change": 4,
+            "previous_score": -2.05,
+            "latest_score": -5.2,
+            "score_change": -3.15,
+            "direction": "Weakening"
+        },
+        {
             "theme": "Equipment and services",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 33,
             "latest_rank": 33,
             "rank_change": 0,
@@ -168,7 +177,7 @@
         },
         {
             "theme": "Exploration",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 7,
             "latest_rank": 6,
             "rank_change": -1,
@@ -212,7 +221,7 @@
         },
         {
             "theme": "Infrastructure",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 29,
             "latest_rank": 29,
             "rank_change": 0,
@@ -256,7 +265,7 @@
         },
         {
             "theme": "MLP",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 12,
             "latest_rank": 10,
             "rank_change": -2,
@@ -275,6 +284,17 @@
             "latest_score": 2.16,
             "score_change": -0.05,
             "direction": "Weakening"
+        },
+        {
+            "theme": "Medical Devices",
+            "bucket": "Neutral",
+            "previous_rank": 31,
+            "latest_rank": 28,
+            "rank_change": -3,
+            "previous_score": -3.16,
+            "latest_score": -3.0,
+            "score_change": 0.16,
+            "direction": "Strengthening"
         },
         {
             "theme": "Natural Gas",
@@ -299,19 +319,8 @@
             "direction": "Strengthening"
         },
         {
-            "theme": "Pharma",
-            "bucket": "Leading",
-            "previous_rank": 6,
-            "latest_rank": 7,
-            "rank_change": 1,
-            "previous_score": 6.25,
-            "latest_score": 5.31,
-            "score_change": -0.94,
-            "direction": "Weakening"
-        },
-        {
             "theme": "REITs",
-            "bucket": "Neutral",
+            "bucket": "Leading",
             "previous_rank": 16,
             "latest_rank": 16,
             "rank_change": 0,
@@ -333,7 +342,7 @@
         },
         {
             "theme": "Regional Banks",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 10,
             "latest_rank": 11,
             "rank_change": 1,
@@ -355,7 +364,7 @@
         },
         {
             "theme": "Semiconductors",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 18,
             "latest_rank": 18,
             "rank_change": 0,
@@ -399,7 +408,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 13,
             "latest_rank": 13,
             "rank_change": 0,
@@ -455,14 +464,14 @@
     ],
     "persistent_leaders": [
         {
-            "theme": "Banking",
+            "theme": "Agribusiness",
             "bucket": "Leading",
-            "previous_rank": 11,
-            "latest_rank": 12,
+            "previous_rank": 19,
+            "latest_rank": 20,
             "rank_change": 1,
-            "previous_score": 4.99,
-            "latest_score": 4.03,
-            "score_change": -0.96,
+            "previous_score": 0.84,
+            "latest_score": 0.36,
+            "score_change": -0.48,
             "direction": "Weakening"
         },
         {
@@ -510,17 +519,6 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Exploration",
-            "bucket": "Leading",
-            "previous_rank": 7,
-            "latest_rank": 6,
-            "rank_change": -1,
-            "previous_score": 6.08,
-            "latest_score": 5.94,
-            "score_change": -0.14,
-            "direction": "Stable"
-        },
-        {
             "theme": "Healthcare",
             "bucket": "Leading",
             "previous_rank": 2,
@@ -543,36 +541,14 @@
             "direction": "Strengthening"
         },
         {
-            "theme": "MLP",
+            "theme": "REITs",
             "bucket": "Leading",
-            "previous_rank": 12,
-            "latest_rank": 10,
-            "rank_change": -2,
-            "previous_score": 4.07,
-            "latest_score": 4.38,
-            "score_change": 0.31,
-            "direction": "Strengthening"
-        },
-        {
-            "theme": "Pharma",
-            "bucket": "Leading",
-            "previous_rank": 6,
-            "latest_rank": 7,
-            "rank_change": 1,
-            "previous_score": 6.25,
-            "latest_score": 5.31,
-            "score_change": -0.94,
-            "direction": "Weakening"
-        },
-        {
-            "theme": "Regional Banks",
-            "bucket": "Leading",
-            "previous_rank": 10,
-            "latest_rank": 11,
-            "rank_change": 1,
-            "previous_score": 5.29,
-            "latest_score": 4.2,
-            "score_change": -1.09,
+            "previous_rank": 16,
+            "latest_rank": 16,
+            "rank_change": 0,
+            "previous_score": 2.2,
+            "latest_score": 1.96,
+            "score_change": -0.24,
             "direction": "Weakening"
         },
         {
@@ -584,17 +560,6 @@
             "previous_score": 13.53,
             "latest_score": 12.21,
             "score_change": -1.32,
-            "direction": "Weakening"
-        },
-        {
-            "theme": "Software",
-            "bucket": "Leading",
-            "previous_rank": 13,
-            "latest_rank": 13,
-            "rank_change": 0,
-            "previous_score": 3.4,
-            "latest_score": 3.32,
-            "score_change": -0.08,
             "direction": "Weakening"
         }
     ],
@@ -611,17 +576,6 @@
             "direction": "Strengthening"
         },
         {
-            "theme": "Artificial Intelligence",
-            "bucket": "Lagging",
-            "previous_rank": 32,
-            "latest_rank": 31,
-            "rank_change": -1,
-            "previous_score": -4.38,
-            "latest_score": -4.36,
-            "score_change": 0.02,
-            "direction": "Strengthening"
-        },
-        {
             "theme": "Copper Mining",
             "bucket": "Lagging",
             "previous_rank": 36,
@@ -630,17 +584,6 @@
             "previous_score": -15.02,
             "latest_score": -12.61,
             "score_change": 2.41,
-            "direction": "Strengthening"
-        },
-        {
-            "theme": "Equipment and services",
-            "bucket": "Lagging",
-            "previous_rank": 33,
-            "latest_rank": 33,
-            "rank_change": 0,
-            "previous_score": -5.68,
-            "latest_score": -5.22,
-            "score_change": 0.46,
             "direction": "Strengthening"
         },
         {
@@ -664,6 +607,17 @@
             "latest_score": -19.63,
             "score_change": 1.43,
             "direction": "Stable"
+        },
+        {
+            "theme": "Infrastructure",
+            "bucket": "Lagging",
+            "previous_rank": 29,
+            "latest_rank": 29,
+            "rank_change": 0,
+            "previous_score": -2.87,
+            "latest_score": -3.52,
+            "score_change": -0.65,
+            "direction": "Weakening"
         },
         {
             "theme": "Natural Gas",
@@ -696,6 +650,17 @@
             "previous_score": -21.57,
             "latest_score": -22.98,
             "score_change": -1.41,
+            "direction": "Weakening"
+        },
+        {
+            "theme": "Semiconductors",
+            "bucket": "Lagging",
+            "previous_rank": 18,
+            "latest_rank": 18,
+            "rank_change": 0,
+            "previous_score": 0.86,
+            "latest_score": 0.55,
+            "score_change": -0.31,
             "direction": "Weakening"
         },
         {
@@ -735,7 +700,7 @@
     "rank_changes": [
         {
             "theme": "Agribusiness",
-            "bucket": "Neutral",
+            "bucket": "Leading",
             "previous_rank": 19,
             "latest_rank": 20,
             "rank_change": 1,
@@ -746,7 +711,7 @@
         },
         {
             "theme": "Artificial Intelligence",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 32,
             "latest_rank": 31,
             "rank_change": -1,
@@ -768,7 +733,7 @@
         },
         {
             "theme": "Banking",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 12,
             "rank_change": 1,
@@ -833,8 +798,19 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Engineering and Construction",
+            "bucket": "Neutral",
+            "previous_rank": 28,
+            "latest_rank": 32,
+            "rank_change": 4,
+            "previous_score": -2.05,
+            "latest_score": -5.2,
+            "score_change": -3.15,
+            "direction": "Weakening"
+        },
+        {
             "theme": "Exploration",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 7,
             "latest_rank": 6,
             "rank_change": -1,
@@ -889,13 +865,24 @@
         },
         {
             "theme": "MLP",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 12,
             "latest_rank": 10,
             "rank_change": -2,
             "previous_score": 4.07,
             "latest_score": 4.38,
             "score_change": 0.31,
+            "direction": "Strengthening"
+        },
+        {
+            "theme": "Medical Devices",
+            "bucket": "Neutral",
+            "previous_rank": 31,
+            "latest_rank": 28,
+            "rank_change": -3,
+            "previous_score": -3.16,
+            "latest_score": -3.0,
+            "score_change": 0.16,
             "direction": "Strengthening"
         },
         {
@@ -910,17 +897,6 @@
             "direction": "Strengthening"
         },
         {
-            "theme": "Pharma",
-            "bucket": "Leading",
-            "previous_rank": 6,
-            "latest_rank": 7,
-            "rank_change": 1,
-            "previous_score": 6.25,
-            "latest_score": 5.31,
-            "score_change": -0.94,
-            "direction": "Weakening"
-        },
-        {
             "theme": "Rare Earth/Lithium",
             "bucket": "Lagging",
             "previous_rank": 39,
@@ -933,7 +909,7 @@
         },
         {
             "theme": "Regional Banks",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 10,
             "latest_rank": 11,
             "rank_change": 1,
@@ -1012,7 +988,7 @@
         },
         {
             "theme": "Agribusiness",
-            "bucket": "Neutral",
+            "bucket": "Leading",
             "previous_rank": 19,
             "latest_rank": 20,
             "rank_change": 1,
@@ -1023,7 +999,7 @@
         },
         {
             "theme": "Artificial Intelligence",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 32,
             "latest_rank": 31,
             "rank_change": -1,
@@ -1045,7 +1021,7 @@
         },
         {
             "theme": "Banking",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 12,
             "rank_change": 1,
@@ -1143,8 +1119,19 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Engineering and Construction",
+            "bucket": "Neutral",
+            "previous_rank": 28,
+            "latest_rank": 32,
+            "rank_change": 4,
+            "previous_score": -2.05,
+            "latest_score": -5.2,
+            "score_change": -3.15,
+            "direction": "Weakening"
+        },
+        {
             "theme": "Equipment and services",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 33,
             "latest_rank": 33,
             "rank_change": 0,
@@ -1155,7 +1142,7 @@
         },
         {
             "theme": "Exploration",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 7,
             "latest_rank": 6,
             "rank_change": -1,
@@ -1199,7 +1186,7 @@
         },
         {
             "theme": "Infrastructure",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 29,
             "latest_rank": 29,
             "rank_change": 0,
@@ -1243,7 +1230,7 @@
         },
         {
             "theme": "MLP",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 12,
             "latest_rank": 10,
             "rank_change": -2,
@@ -1262,6 +1249,17 @@
             "latest_score": 2.16,
             "score_change": -0.05,
             "direction": "Weakening"
+        },
+        {
+            "theme": "Medical Devices",
+            "bucket": "Neutral",
+            "previous_rank": 31,
+            "latest_rank": 28,
+            "rank_change": -3,
+            "previous_score": -3.16,
+            "latest_score": -3.0,
+            "score_change": 0.16,
+            "direction": "Strengthening"
         },
         {
             "theme": "Natural Gas",
@@ -1286,19 +1284,8 @@
             "direction": "Strengthening"
         },
         {
-            "theme": "Pharma",
-            "bucket": "Leading",
-            "previous_rank": 6,
-            "latest_rank": 7,
-            "rank_change": 1,
-            "previous_score": 6.25,
-            "latest_score": 5.31,
-            "score_change": -0.94,
-            "direction": "Weakening"
-        },
-        {
             "theme": "REITs",
-            "bucket": "Neutral",
+            "bucket": "Leading",
             "previous_rank": 16,
             "latest_rank": 16,
             "rank_change": 0,
@@ -1320,7 +1307,7 @@
         },
         {
             "theme": "Regional Banks",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 10,
             "latest_rank": 11,
             "rank_change": 1,
@@ -1342,7 +1329,7 @@
         },
         {
             "theme": "Semiconductors",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 18,
             "latest_rank": 18,
             "rank_change": 0,
@@ -1386,7 +1373,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 13,
             "latest_rank": 13,
             "rank_change": 0,
@@ -1454,7 +1441,7 @@
         },
         {
             "theme": "Artificial Intelligence",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 32,
             "latest_rank": 31,
             "rank_change": -1,
@@ -1487,7 +1474,7 @@
         },
         {
             "theme": "Equipment and services",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 33,
             "latest_rank": 33,
             "rank_change": 0,
@@ -1542,13 +1529,24 @@
         },
         {
             "theme": "MLP",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 12,
             "latest_rank": 10,
             "rank_change": -2,
             "previous_score": 4.07,
             "latest_score": 4.38,
             "score_change": 0.31,
+            "direction": "Strengthening"
+        },
+        {
+            "theme": "Medical Devices",
+            "bucket": "Neutral",
+            "previous_rank": 31,
+            "latest_rank": 28,
+            "rank_change": -3,
+            "previous_score": -3.16,
+            "latest_score": -3.0,
+            "score_change": 0.16,
             "direction": "Strengthening"
         },
         {
@@ -1599,7 +1597,7 @@
     "weakening_themes": [
         {
             "theme": "Agribusiness",
-            "bucket": "Neutral",
+            "bucket": "Leading",
             "previous_rank": 19,
             "latest_rank": 20,
             "rank_change": 1,
@@ -1621,7 +1619,7 @@
         },
         {
             "theme": "Banking",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 12,
             "rank_change": 1,
@@ -1675,8 +1673,19 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Infrastructure",
+            "theme": "Engineering and Construction",
             "bucket": "Neutral",
+            "previous_rank": 28,
+            "latest_rank": 32,
+            "rank_change": 4,
+            "previous_score": -2.05,
+            "latest_score": -5.2,
+            "score_change": -3.15,
+            "direction": "Weakening"
+        },
+        {
+            "theme": "Infrastructure",
+            "bucket": "Lagging",
             "previous_rank": 29,
             "latest_rank": 29,
             "rank_change": 0,
@@ -1708,19 +1717,8 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Pharma",
-            "bucket": "Leading",
-            "previous_rank": 6,
-            "latest_rank": 7,
-            "rank_change": 1,
-            "previous_score": 6.25,
-            "latest_score": 5.31,
-            "score_change": -0.94,
-            "direction": "Weakening"
-        },
-        {
             "theme": "REITs",
-            "bucket": "Neutral",
+            "bucket": "Leading",
             "previous_rank": 16,
             "latest_rank": 16,
             "rank_change": 0,
@@ -1742,7 +1740,7 @@
         },
         {
             "theme": "Regional Banks",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 10,
             "latest_rank": 11,
             "rank_change": 1,
@@ -1764,7 +1762,7 @@
         },
         {
             "theme": "Semiconductors",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 18,
             "latest_rank": 18,
             "rank_change": 0,
@@ -1786,7 +1784,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 13,
             "latest_rank": 13,
             "rank_change": 0,

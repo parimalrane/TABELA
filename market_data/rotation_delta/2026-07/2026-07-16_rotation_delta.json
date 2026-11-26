@@ -6,20 +6,16 @@
     ],
     "exits": [],
     "entered_leading": [
-        "MLP",
-        "Services"
+        "Services",
+        "Transportation/Shipping"
     ],
     "exited_leading": [
         "Broad",
         "Brokers/ Capital markets"
     ],
-    "entered_lagging": [
-        "Artificial Intelligence",
-        "Infrastructure"
-    ],
+    "entered_lagging": [],
     "exited_lagging": [
-        "Medical Devices",
-        "Timber"
+        "Medical Devices"
     ],
     "persistent_same_bucket": [
         {
@@ -43,6 +39,17 @@
             "latest_score": -1.22,
             "score_change": 1.55,
             "direction": "Strengthening"
+        },
+        {
+            "theme": "Artificial Intelligence",
+            "bucket": "Neutral",
+            "previous_rank": 18,
+            "latest_rank": 31,
+            "rank_change": 13,
+            "previous_score": -0.82,
+            "latest_score": -3.58,
+            "score_change": -2.76,
+            "direction": "Weakening"
         },
         {
             "theme": "Asset",
@@ -156,7 +163,7 @@
         },
         {
             "theme": "Exploration",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 19,
             "latest_rank": 19,
             "rank_change": 0,
@@ -199,8 +206,19 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Infrastructure",
+            "bucket": "Lagging",
+            "previous_rank": 28,
+            "latest_rank": 30,
+            "rank_change": 2,
+            "previous_score": -3.05,
+            "latest_score": -3.36,
+            "score_change": -0.31,
+            "direction": "Weakening"
+        },
+        {
             "theme": "Insurance",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 13,
             "latest_rank": 9,
             "rank_change": -4,
@@ -232,8 +250,19 @@
             "direction": "Stable"
         },
         {
+            "theme": "MLP",
+            "bucket": "Neutral",
+            "previous_rank": 16,
+            "latest_rank": 12,
+            "rank_change": -4,
+            "previous_score": -0.04,
+            "latest_score": 2.04,
+            "score_change": 2.08,
+            "direction": "Strengthening"
+        },
+        {
             "theme": "Media",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 13,
             "rank_change": 2,
@@ -321,7 +350,7 @@
         },
         {
             "theme": "Semiconductors",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 2,
             "latest_rank": 10,
             "rank_change": 8,
@@ -354,7 +383,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 8,
             "latest_rank": 11,
             "rank_change": 3,
@@ -365,7 +394,7 @@
         },
         {
             "theme": "Telecom",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 14,
             "latest_rank": 21,
             "rank_change": 7,
@@ -375,14 +404,14 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Transportation/Shipping",
-            "bucket": "Leading",
-            "previous_rank": 12,
-            "latest_rank": 8,
-            "rank_change": -4,
-            "previous_score": 1.57,
-            "latest_score": 3.59,
-            "score_change": 2.02,
+            "theme": "Timber",
+            "bucket": "Neutral",
+            "previous_rank": 29,
+            "latest_rank": 28,
+            "rank_change": -1,
+            "previous_score": -4.32,
+            "latest_score": -2.81,
+            "score_change": 1.51,
             "direction": "Strengthening"
         },
         {
@@ -443,28 +472,6 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Insurance",
-            "bucket": "Leading",
-            "previous_rank": 13,
-            "latest_rank": 9,
-            "rank_change": -4,
-            "previous_score": 1.08,
-            "latest_score": 3.31,
-            "score_change": 2.23,
-            "direction": "Strengthening"
-        },
-        {
-            "theme": "Media",
-            "bucket": "Leading",
-            "previous_rank": 11,
-            "latest_rank": 13,
-            "rank_change": 2,
-            "previous_score": 2.67,
-            "latest_score": 1.88,
-            "score_change": -0.79,
-            "direction": "Weakening"
-        },
-        {
             "theme": "Pharma",
             "bucket": "Leading",
             "previous_rank": 10,
@@ -484,39 +491,6 @@
             "previous_score": 3.02,
             "latest_score": 6.01,
             "score_change": 2.99,
-            "direction": "Strengthening"
-        },
-        {
-            "theme": "Semiconductors",
-            "bucket": "Leading",
-            "previous_rank": 2,
-            "latest_rank": 10,
-            "rank_change": 8,
-            "previous_score": 6.95,
-            "latest_score": 2.88,
-            "score_change": -4.07,
-            "direction": "Weakening"
-        },
-        {
-            "theme": "Software",
-            "bucket": "Leading",
-            "previous_rank": 8,
-            "latest_rank": 11,
-            "rank_change": 3,
-            "previous_score": 3.11,
-            "latest_score": 2.56,
-            "score_change": -0.55,
-            "direction": "Weakening"
-        },
-        {
-            "theme": "Transportation/Shipping",
-            "bucket": "Leading",
-            "previous_rank": 12,
-            "latest_rank": 8,
-            "rank_change": -4,
-            "previous_score": 1.57,
-            "latest_score": 3.59,
-            "score_change": 2.02,
             "direction": "Strengthening"
         }
     ],
@@ -555,6 +529,17 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Exploration",
+            "bucket": "Lagging",
+            "previous_rank": 19,
+            "latest_rank": 19,
+            "rank_change": 0,
+            "previous_score": -1.1,
+            "latest_score": 0.21,
+            "score_change": 1.31,
+            "direction": "Strengthening"
+        },
+        {
             "theme": "Gold",
             "bucket": "Lagging",
             "previous_rank": 35,
@@ -574,6 +559,17 @@
             "previous_score": -18.53,
             "latest_score": -22.39,
             "score_change": -3.86,
+            "direction": "Weakening"
+        },
+        {
+            "theme": "Infrastructure",
+            "bucket": "Lagging",
+            "previous_rank": 28,
+            "latest_rank": 30,
+            "rank_change": 2,
+            "previous_score": -3.05,
+            "latest_score": -3.36,
+            "score_change": -0.31,
             "direction": "Weakening"
         },
         {
@@ -632,6 +628,17 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Telecom",
+            "bucket": "Lagging",
+            "previous_rank": 14,
+            "latest_rank": 21,
+            "rank_change": 7,
+            "previous_score": 1.05,
+            "latest_score": -0.32,
+            "score_change": -1.37,
+            "direction": "Weakening"
+        },
+        {
             "theme": "Uranium Mining",
             "bucket": "Lagging",
             "previous_rank": 40,
@@ -665,6 +672,17 @@
             "latest_score": -1.22,
             "score_change": 1.55,
             "direction": "Strengthening"
+        },
+        {
+            "theme": "Artificial Intelligence",
+            "bucket": "Neutral",
+            "previous_rank": 18,
+            "latest_rank": 31,
+            "rank_change": 13,
+            "previous_score": -0.82,
+            "latest_score": -3.58,
+            "score_change": -2.76,
+            "direction": "Weakening"
         },
         {
             "theme": "Asset",
@@ -777,8 +795,19 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Infrastructure",
+            "bucket": "Lagging",
+            "previous_rank": 28,
+            "latest_rank": 30,
+            "rank_change": 2,
+            "previous_score": -3.05,
+            "latest_score": -3.36,
+            "score_change": -0.31,
+            "direction": "Weakening"
+        },
+        {
             "theme": "Insurance",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 13,
             "latest_rank": 9,
             "rank_change": -4,
@@ -810,8 +839,19 @@
             "direction": "Stable"
         },
         {
+            "theme": "MLP",
+            "bucket": "Neutral",
+            "previous_rank": 16,
+            "latest_rank": 12,
+            "rank_change": -4,
+            "previous_score": -0.04,
+            "latest_score": 2.04,
+            "score_change": 2.08,
+            "direction": "Strengthening"
+        },
+        {
             "theme": "Media",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 13,
             "rank_change": 2,
@@ -899,7 +939,7 @@
         },
         {
             "theme": "Semiconductors",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 2,
             "latest_rank": 10,
             "rank_change": 8,
@@ -932,7 +972,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 8,
             "latest_rank": 11,
             "rank_change": 3,
@@ -943,7 +983,7 @@
         },
         {
             "theme": "Telecom",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 14,
             "latest_rank": 21,
             "rank_change": 7,
@@ -953,14 +993,14 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Transportation/Shipping",
-            "bucket": "Leading",
-            "previous_rank": 12,
-            "latest_rank": 8,
-            "rank_change": -4,
-            "previous_score": 1.57,
-            "latest_score": 3.59,
-            "score_change": 2.02,
+            "theme": "Timber",
+            "bucket": "Neutral",
+            "previous_rank": 29,
+            "latest_rank": 28,
+            "rank_change": -1,
+            "previous_score": -4.32,
+            "latest_score": -2.81,
+            "score_change": 1.51,
             "direction": "Strengthening"
         },
         {
@@ -997,6 +1037,17 @@
             "latest_score": -1.22,
             "score_change": 1.55,
             "direction": "Strengthening"
+        },
+        {
+            "theme": "Artificial Intelligence",
+            "bucket": "Neutral",
+            "previous_rank": 18,
+            "latest_rank": 31,
+            "rank_change": 13,
+            "previous_score": -0.82,
+            "latest_score": -3.58,
+            "score_change": -2.76,
+            "direction": "Weakening"
         },
         {
             "theme": "Asset",
@@ -1110,7 +1161,7 @@
         },
         {
             "theme": "Exploration",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 19,
             "latest_rank": 19,
             "rank_change": 0,
@@ -1153,8 +1204,19 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Infrastructure",
+            "bucket": "Lagging",
+            "previous_rank": 28,
+            "latest_rank": 30,
+            "rank_change": 2,
+            "previous_score": -3.05,
+            "latest_score": -3.36,
+            "score_change": -0.31,
+            "direction": "Weakening"
+        },
+        {
             "theme": "Insurance",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 13,
             "latest_rank": 9,
             "rank_change": -4,
@@ -1186,8 +1248,19 @@
             "direction": "Stable"
         },
         {
+            "theme": "MLP",
+            "bucket": "Neutral",
+            "previous_rank": 16,
+            "latest_rank": 12,
+            "rank_change": -4,
+            "previous_score": -0.04,
+            "latest_score": 2.04,
+            "score_change": 2.08,
+            "direction": "Strengthening"
+        },
+        {
             "theme": "Media",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 13,
             "rank_change": 2,
@@ -1264,7 +1337,7 @@
         },
         {
             "theme": "Semiconductors",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 2,
             "latest_rank": 10,
             "rank_change": 8,
@@ -1297,7 +1370,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 8,
             "latest_rank": 11,
             "rank_change": 3,
@@ -1308,7 +1381,7 @@
         },
         {
             "theme": "Telecom",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 14,
             "latest_rank": 21,
             "rank_change": 7,
@@ -1318,14 +1391,14 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Transportation/Shipping",
-            "bucket": "Leading",
-            "previous_rank": 12,
-            "latest_rank": 8,
-            "rank_change": -4,
-            "previous_score": 1.57,
-            "latest_score": 3.59,
-            "score_change": 2.02,
+            "theme": "Timber",
+            "bucket": "Neutral",
+            "previous_rank": 29,
+            "latest_rank": 28,
+            "rank_change": -1,
+            "previous_score": -4.32,
+            "latest_score": -2.81,
+            "score_change": 1.51,
             "direction": "Strengthening"
         },
         {
@@ -1376,7 +1449,7 @@
         },
         {
             "theme": "Exploration",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 19,
             "latest_rank": 19,
             "rank_change": 0,
@@ -1387,13 +1460,24 @@
         },
         {
             "theme": "Insurance",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 13,
             "latest_rank": 9,
             "rank_change": -4,
             "previous_score": 1.08,
             "latest_score": 3.31,
             "score_change": 2.23,
+            "direction": "Strengthening"
+        },
+        {
+            "theme": "MLP",
+            "bucket": "Neutral",
+            "previous_rank": 16,
+            "latest_rank": 12,
+            "rank_change": -4,
+            "previous_score": -0.04,
+            "latest_score": 2.04,
+            "score_change": 2.08,
             "direction": "Strengthening"
         },
         {
@@ -1441,14 +1525,14 @@
             "direction": "Strengthening"
         },
         {
-            "theme": "Transportation/Shipping",
-            "bucket": "Leading",
-            "previous_rank": 12,
-            "latest_rank": 8,
-            "rank_change": -4,
-            "previous_score": 1.57,
-            "latest_score": 3.59,
-            "score_change": 2.02,
+            "theme": "Timber",
+            "bucket": "Neutral",
+            "previous_rank": 29,
+            "latest_rank": 28,
+            "rank_change": -1,
+            "previous_score": -4.32,
+            "latest_score": -2.81,
+            "score_change": 1.51,
             "direction": "Strengthening"
         }
     ],
@@ -1462,6 +1546,17 @@
             "previous_score": -7.28,
             "latest_score": -8.23,
             "score_change": -0.95,
+            "direction": "Weakening"
+        },
+        {
+            "theme": "Artificial Intelligence",
+            "bucket": "Neutral",
+            "previous_rank": 18,
+            "latest_rank": 31,
+            "rank_change": 13,
+            "previous_score": -0.82,
+            "latest_score": -3.58,
+            "score_change": -2.76,
             "direction": "Weakening"
         },
         {
@@ -1553,6 +1648,17 @@
             "direction": "Weakening"
         },
         {
+            "theme": "Infrastructure",
+            "bucket": "Lagging",
+            "previous_rank": 28,
+            "latest_rank": 30,
+            "rank_change": 2,
+            "previous_score": -3.05,
+            "latest_score": -3.36,
+            "score_change": -0.31,
+            "direction": "Weakening"
+        },
+        {
             "theme": "Internet",
             "bucket": "Neutral",
             "previous_rank": 15,
@@ -1565,7 +1671,7 @@
         },
         {
             "theme": "Media",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 13,
             "rank_change": 2,
@@ -1598,7 +1704,7 @@
         },
         {
             "theme": "Semiconductors",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 2,
             "latest_rank": 10,
             "rank_change": 8,
@@ -1631,7 +1737,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 8,
             "latest_rank": 11,
             "rank_change": 3,
@@ -1642,7 +1748,7 @@
         },
         {
             "theme": "Telecom",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 14,
             "latest_rank": 21,
             "rank_change": 7,

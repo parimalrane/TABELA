@@ -89,11 +89,18 @@ SECTOR_CLASSIFICATION_CONFIG = {
 # ==========================
 
 LONG_ENTRY = {
-    "MIN_RS": 90.0,
+    "MIN_RS": 85.0,                    # Minimum RS for Long eligibility (Pullback floor: top 15%)
+    "BREAKOUT_MIN_RS": 90.0,           # Minimum RS for Breakout classification (top 10%)
     "THEMES": ["Leading", "Unclassified Leader"],
+    "ALLOWED_ZACKS": [1, 2],
     "BLOCKED_ZACKS": [3, 4, 5],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
+    "MIN_52W_RANGE": 50.0,             # Minimum 52W range for pullback eligibility (upper half)
+    "BREAKOUT_MIN_52W_RANGE": 85.0,    # Minimum 52W range for breakout classification (near highs)
+    # Zacks 3 Exception:
+    "ZACKS_3_ALLOWED_MIN_RS": 95.0,
+    "ZACKS_3_ALLOWED_GROWTH": ["A", "B", "C"],
     # Elite Momentum Exception (e.g. KNSA):
     "ELITE_MIN_RS": 95.0,
     "ELITE_ALLOWED_GROWTH": ["A", "B"],
@@ -119,7 +126,8 @@ SHORT_ENTRY = {
 # 52W RANGE GATES (LIVE PIPELINE)
 # ==========================
 PULLBACK_CONFIG = {
-    "LONG_MIN_52W_RANGE": 85.0,
+    "LONG_MIN_52W_RANGE": 50.0,
+    "LONG_BREAKOUT_MIN_52W_RANGE": 85.0,
     "SHORT_MAX_52W_RANGE": 30.0,
 }
 

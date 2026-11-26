@@ -2,9 +2,9 @@
     "date": "2026-08-19",
     "metadata": {
         "total_stock_count": 2109,
-        "classified_stock_count": 1939,
-        "unclassified_stock_count": 170,
-        "total_themes_detected": 118
+        "classified_stock_count": 2062,
+        "unclassified_stock_count": 47,
+        "total_themes_detected": 120
     },
     "leading_themes": [
         {
@@ -46,7 +46,9 @@
             "theme": "Medical Devices",
             "rank": 8,
             "score": 6.85
-        },
+        }
+    ],
+    "neutral_themes": [
         {
             "theme": "Software",
             "rank": 9,
@@ -71,9 +73,7 @@
             "theme": "Aerospace & Defense",
             "rank": 13,
             "score": 3.24
-        }
-    ],
-    "neutral_themes": [
+        },
         {
             "theme": "Timber",
             "rank": 14,
@@ -158,9 +158,7 @@
             "theme": "Insurance",
             "rank": 30,
             "score": -0.12
-        }
-    ],
-    "lagging_themes": [
+        },
         {
             "theme": "Copper",
             "rank": 31,
@@ -180,7 +178,9 @@
             "theme": "MLP",
             "rank": 34,
             "score": -1.7
-        },
+        }
+    ],
+    "lagging_themes": [
         {
             "theme": "Semiconductors",
             "rank": 35,
@@ -250,6 +250,13 @@
             "Weighted_Breadth_Score": 173.08
         },
         {
+            "Mapped_Theme": "Consumer Staples",
+            "Total_Stocks": 61,
+            "Strong_Stocks": 35.0,
+            "Breadth_Percent": 57.38,
+            "Weighted_Breadth_Score": 158.87
+        },
+        {
             "Mapped_Theme": "Data Infrastructure",
             "Total_Stocks": 4,
             "Strong_Stocks": 4.0,
@@ -264,11 +271,25 @@
             "Weighted_Breadth_Score": 148.17
         },
         {
+            "Mapped_Theme": "Industrial Automation",
+            "Total_Stocks": 51,
+            "Strong_Stocks": 29.0,
+            "Breadth_Percent": 56.86,
+            "Weighted_Breadth_Score": 145.03
+        },
+        {
             "Mapped_Theme": "Natural Gas",
             "Total_Stocks": 8,
             "Strong_Stocks": 8.0,
             "Breadth_Percent": 100.0,
             "Weighted_Breadth_Score": 144.47
+        },
+        {
+            "Mapped_Theme": "Automotive Technology",
+            "Total_Stocks": 25,
+            "Strong_Stocks": 15.0,
+            "Breadth_Percent": 60.0,
+            "Weighted_Breadth_Score": 143.49
         },
         {
             "Mapped_Theme": "Life Sciences Tools",
@@ -278,25 +299,11 @@
             "Weighted_Breadth_Score": 136.53
         },
         {
-            "Mapped_Theme": "Transportation/Shipping",
-            "Total_Stocks": 57,
-            "Strong_Stocks": 30.0,
-            "Breadth_Percent": 52.63,
-            "Weighted_Breadth_Score": 136.27
-        },
-        {
             "Mapped_Theme": "Agribusiness",
             "Total_Stocks": 10,
             "Strong_Stocks": 8.0,
             "Breadth_Percent": 80.0,
             "Weighted_Breadth_Score": 134.76
-        },
-        {
-            "Mapped_Theme": "Industrial Automation",
-            "Total_Stocks": 45,
-            "Strong_Stocks": 24.0,
-            "Breadth_Percent": 53.33,
-            "Weighted_Breadth_Score": 133.99
         },
         {
             "Mapped_Theme": "Semiconductors",
@@ -306,20 +313,6 @@
             "Weighted_Breadth_Score": 133.25
         },
         {
-            "Mapped_Theme": "Automotive Technology",
-            "Total_Stocks": 22,
-            "Strong_Stocks": 12.0,
-            "Breadth_Percent": 54.55,
-            "Weighted_Breadth_Score": 128.71
-        },
-        {
-            "Mapped_Theme": "Software",
-            "Total_Stocks": 189,
-            "Strong_Stocks": 45.0,
-            "Breadth_Percent": 23.81,
-            "Weighted_Breadth_Score": 118.32
-        },
-        {
             "Mapped_Theme": "Homebuilders",
             "Total_Stocks": 4,
             "Strong_Stocks": 4.0,
@@ -327,18 +320,18 @@
             "Weighted_Breadth_Score": 115.07
         },
         {
-            "Mapped_Theme": "Digital Advertising",
-            "Total_Stocks": 4,
-            "Strong_Stocks": 3.0,
-            "Breadth_Percent": 75.0,
-            "Weighted_Breadth_Score": 114.27
-        },
-        {
             "Mapped_Theme": "Medical Devices",
             "Total_Stocks": 88,
             "Strong_Stocks": 23.0,
             "Breadth_Percent": 26.14,
             "Weighted_Breadth_Score": 111.93
+        },
+        {
+            "Mapped_Theme": "IT Services",
+            "Total_Stocks": 5,
+            "Strong_Stocks": 3.0,
+            "Breadth_Percent": 60.0,
+            "Weighted_Breadth_Score": 105.0
         },
         {
             "Mapped_Theme": "Refining & Marketing",
@@ -353,6 +346,13 @@
             "Strong_Stocks": 4.0,
             "Breadth_Percent": 44.44,
             "Weighted_Breadth_Score": 95.16
+        },
+        {
+            "Mapped_Theme": "Digital Advertising",
+            "Total_Stocks": 6,
+            "Strong_Stocks": 3.0,
+            "Breadth_Percent": 50.0,
+            "Weighted_Breadth_Score": 92.11
         },
         {
             "Mapped_Theme": "Pharmaceuticals",
@@ -370,13 +370,6 @@
         },
         {
             "Mapped_Theme": "Professional Services",
-            "Total_Stocks": 3,
-            "Strong_Stocks": 2.0,
-            "Breadth_Percent": 66.67,
-            "Weighted_Breadth_Score": 90.11
-        },
-        {
-            "Mapped_Theme": "IT Services",
             "Total_Stocks": 3,
             "Strong_Stocks": 2.0,
             "Breadth_Percent": 66.67,
@@ -439,32 +432,11 @@
             "Weighted_Breadth_Score": 67.24
         },
         {
-            "Mapped_Theme": "Oil Services",
-            "Total_Stocks": 5,
+            "Mapped_Theme": "Business Services",
+            "Total_Stocks": 6,
             "Strong_Stocks": 2.0,
-            "Breadth_Percent": 40.0,
-            "Weighted_Breadth_Score": 66.3
-        },
-        {
-            "Mapped_Theme": "Defense Systems",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 1.0,
-            "Breadth_Percent": 100.0,
-            "Weighted_Breadth_Score": 62.38
-        },
-        {
-            "Mapped_Theme": "Leisure and Entertainment",
-            "Total_Stocks": 41,
-            "Strong_Stocks": 7.0,
-            "Breadth_Percent": 17.07,
-            "Weighted_Breadth_Score": 60.25
-        },
-        {
-            "Mapped_Theme": "Aerospace & Defense",
-            "Total_Stocks": 37,
-            "Strong_Stocks": 6.0,
-            "Breadth_Percent": 16.22,
-            "Weighted_Breadth_Score": 55.26
+            "Breadth_Percent": 33.33,
+            "Weighted_Breadth_Score": 62.26
         },
         {
             "Mapped_Theme": "Healthcare Services",
@@ -474,6 +446,13 @@
             "Weighted_Breadth_Score": 53.42
         },
         {
+            "Mapped_Theme": "Leisure and Entertainment",
+            "Total_Stocks": 49,
+            "Strong_Stocks": 7.0,
+            "Breadth_Percent": 14.29,
+            "Weighted_Breadth_Score": 52.79
+        },
+        {
             "Mapped_Theme": "Materials/Metals",
             "Total_Stocks": 2,
             "Strong_Stocks": 1.0,
@@ -481,25 +460,18 @@
             "Weighted_Breadth_Score": 52.73
         },
         {
-            "Mapped_Theme": "Transportation Platform",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 1.0,
-            "Breadth_Percent": 100.0,
-            "Weighted_Breadth_Score": 51.29
-        },
-        {
-            "Mapped_Theme": "Semiconductor IP",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 1.0,
-            "Breadth_Percent": 100.0,
-            "Weighted_Breadth_Score": 50.6
-        },
-        {
             "Mapped_Theme": "Wireless Chips",
             "Total_Stocks": 2,
             "Strong_Stocks": 1.0,
             "Breadth_Percent": 50.0,
             "Weighted_Breadth_Score": 50.54
+        },
+        {
+            "Mapped_Theme": "Restaurants",
+            "Total_Stocks": 25,
+            "Strong_Stocks": 4.0,
+            "Breadth_Percent": 16.0,
+            "Weighted_Breadth_Score": 48.87
         },
         {
             "Mapped_Theme": "Pharma",
@@ -530,18 +502,18 @@
             "Weighted_Breadth_Score": 36.08
         },
         {
+            "Mapped_Theme": "AI Compute",
+            "Total_Stocks": 5,
+            "Strong_Stocks": 1.0,
+            "Breadth_Percent": 20.0,
+            "Weighted_Breadth_Score": 35.48
+        },
+        {
             "Mapped_Theme": "Financial Services",
             "Total_Stocks": 61,
             "Strong_Stocks": 5.0,
             "Breadth_Percent": 8.2,
             "Weighted_Breadth_Score": 31.61
-        },
-        {
-            "Mapped_Theme": "Business Software",
-            "Total_Stocks": 6,
-            "Strong_Stocks": 1.0,
-            "Breadth_Percent": 16.67,
-            "Weighted_Breadth_Score": 31.14
         },
         {
             "Mapped_Theme": "Foundry",
@@ -572,18 +544,18 @@
             "Weighted_Breadth_Score": 28.56
         },
         {
+            "Mapped_Theme": "Consumer Discretionary",
+            "Total_Stocks": 9,
+            "Strong_Stocks": 1.0,
+            "Breadth_Percent": 11.11,
+            "Weighted_Breadth_Score": 24.3
+        },
+        {
             "Mapped_Theme": "Media Distribution",
             "Total_Stocks": 27,
             "Strong_Stocks": 2.0,
             "Breadth_Percent": 7.41,
             "Weighted_Breadth_Score": 23.21
-        },
-        {
-            "Mapped_Theme": "Education",
-            "Total_Stocks": 12,
-            "Strong_Stocks": 1.0,
-            "Breadth_Percent": 8.33,
-            "Weighted_Breadth_Score": 20.51
         },
         {
             "Mapped_Theme": "Footwear/Apparel",
@@ -593,25 +565,67 @@
             "Weighted_Breadth_Score": 18.79
         },
         {
-            "Mapped_Theme": "Optical Networking",
-            "Total_Stocks": 8,
+            "Mapped_Theme": "Telecom",
+            "Total_Stocks": 23,
             "Strong_Stocks": 1.0,
-            "Breadth_Percent": 12.5,
-            "Weighted_Breadth_Score": 16.48
+            "Breadth_Percent": 4.35,
+            "Weighted_Breadth_Score": 13.69
         },
         {
-            "Mapped_Theme": "Exploration",
-            "Total_Stocks": 75,
-            "Strong_Stocks": 3.0,
-            "Breadth_Percent": 4.0,
-            "Weighted_Breadth_Score": 16.05
+            "Mapped_Theme": "Internet",
+            "Total_Stocks": 30,
+            "Strong_Stocks": 1.0,
+            "Breadth_Percent": 3.33,
+            "Weighted_Breadth_Score": 11.09
         },
         {
-            "Mapped_Theme": "Restaurants",
-            "Total_Stocks": 25,
+            "Mapped_Theme": "Healthcare",
+            "Total_Stocks": 39,
             "Strong_Stocks": 1.0,
-            "Breadth_Percent": 4.0,
-            "Weighted_Breadth_Score": 12.51
+            "Breadth_Percent": 2.56,
+            "Weighted_Breadth_Score": 9.16
+        },
+        {
+            "Mapped_Theme": "Software",
+            "Total_Stocks": 189,
+            "Strong_Stocks": 2.0,
+            "Breadth_Percent": 1.06,
+            "Weighted_Breadth_Score": 5.51
+        },
+        {
+            "Mapped_Theme": "AI Power Infrastructure",
+            "Total_Stocks": 5,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "AI Platform",
+            "Total_Stocks": 4,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "AI Networking",
+            "Total_Stocks": 3,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "AI ASIC",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Enterprise Cloud",
+            "Total_Stocks": 2,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
         },
         {
             "Mapped_Theme": "Energy Services",
@@ -621,8 +635,8 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Enterprise Cloud",
-            "Total_Stocks": 2,
+            "Mapped_Theme": "Energy Logistics & Fuel Distribution",
+            "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -649,8 +663,8 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Digital Health",
-            "Total_Stocks": 1,
+            "Mapped_Theme": "Education",
+            "Total_Stocks": 12,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -670,6 +684,62 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
+            "Mapped_Theme": "Digital Health",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Chemicals",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Copper Mining",
+            "Total_Stocks": 8,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Data Storage",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Defense Drone Systems",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Defense Systems",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Delivery Platform",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Communication Infrastructure",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
             "Mapped_Theme": "Consumer Momentum",
             "Total_Stocks": 2,
             "Strong_Stocks": 0.0,
@@ -684,50 +754,8 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Communication Infrastructure",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Data Storage",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Copper Mining",
-            "Total_Stocks": 8,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Defense Drone Systems",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Delivery Platform",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Chemicals",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Consumer Staples",
-            "Total_Stocks": 60,
+            "Mapped_Theme": "AI Infrastructure",
+            "Total_Stocks": 6,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -740,13 +768,6 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "AI Compute",
-            "Total_Stocks": 5,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
             "Mapped_Theme": "AI Accelerators",
             "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
@@ -754,22 +775,22 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "AI ASIC",
+            "Mapped_Theme": "AI Servers",
+            "Total_Stocks": 2,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "AI Sensors",
             "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "AI Platform",
-            "Total_Stocks": 4,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "AI Power Infrastructure",
-            "Total_Stocks": 5,
+            "Mapped_Theme": "Autonomous Driving AI",
+            "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -789,15 +810,15 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "AI Sensors",
-            "Total_Stocks": 1,
+            "Mapped_Theme": "Aerospace & Defense",
+            "Total_Stocks": 37,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "AI Servers",
-            "Total_Stocks": 2,
+            "Mapped_Theme": "Batteries",
+            "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -817,43 +838,15 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Autonomous Driving AI",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Batteries",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "AI Infrastructure",
+            "Mapped_Theme": "Business Software",
             "Total_Stocks": 6,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "AI Networking",
-            "Total_Stocks": 3,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Energy Logistics & Fuel Distribution",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Nuclear Infrastructure",
-            "Total_Stocks": 3,
+            "Mapped_Theme": "Optical Networking",
+            "Total_Stocks": 8,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -861,6 +854,20 @@
         {
             "Mapped_Theme": "Optical Infrastructure",
             "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Oil Services",
+            "Total_Stocks": 5,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Nuclear Infrastructure",
+            "Total_Stocks": 3,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -880,8 +887,15 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Insurance",
-            "Total_Stocks": 63,
+            "Mapped_Theme": "LNG / Natural Gas Export Infrastructure",
+            "Total_Stocks": 1,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Integrated Energy",
+            "Total_Stocks": 6,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -901,8 +915,8 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Healthcare",
-            "Total_Stocks": 39,
+            "Mapped_Theme": "Exploration",
+            "Total_Stocks": 75,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -915,29 +929,29 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Integrated Energy",
-            "Total_Stocks": 6,
+            "Mapped_Theme": "Insurance",
+            "Total_Stocks": 63,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "LNG / Natural Gas Export Infrastructure",
+            "Mapped_Theme": "Real Estate Technology",
             "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Internet",
-            "Total_Stocks": 30,
+            "Mapped_Theme": "Retail",
+            "Total_Stocks": 26,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Retail",
-            "Total_Stocks": 25,
+            "Mapped_Theme": "Private Wireless Infrastructure",
+            "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -957,7 +971,7 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "SaaS Platform",
+            "Mapped_Theme": "Semiconductor IP",
             "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
@@ -978,14 +992,7 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Private Wireless Infrastructure",
-            "Total_Stocks": 1,
-            "Strong_Stocks": 0.0,
-            "Breadth_Percent": 0.0,
-            "Weighted_Breadth_Score": 0.0
-        },
-        {
-            "Mapped_Theme": "Real Estate Technology",
+            "Mapped_Theme": "SaaS Platform",
             "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
@@ -994,6 +1001,13 @@
         {
             "Mapped_Theme": "Social Media Platform",
             "Total_Stocks": 3,
+            "Strong_Stocks": 0.0,
+            "Breadth_Percent": 0.0,
+            "Weighted_Breadth_Score": 0.0
+        },
+        {
+            "Mapped_Theme": "Specialty Alloys / Aerospace Materials",
+            "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -1013,7 +1027,7 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Specialty Alloys / Aerospace Materials",
+            "Mapped_Theme": "Transportation Platform",
             "Total_Stocks": 1,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
@@ -1027,8 +1041,8 @@
             "Weighted_Breadth_Score": 0.0
         },
         {
-            "Mapped_Theme": "Telecom",
-            "Total_Stocks": 23,
+            "Mapped_Theme": "Transportation/Shipping",
+            "Total_Stocks": 57,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0
@@ -1042,7 +1056,7 @@
         },
         {
             "Mapped_Theme": "Unknown",
-            "Total_Stocks": 85,
+            "Total_Stocks": 47,
             "Strong_Stocks": 0.0,
             "Breadth_Percent": 0.0,
             "Weighted_Breadth_Score": 0.0

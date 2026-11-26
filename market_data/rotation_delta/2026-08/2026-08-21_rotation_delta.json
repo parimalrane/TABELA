@@ -5,26 +5,27 @@
     "exits": [
         "Media"
     ],
-    "entered_leading": [
-        "Uranium Mining"
-    ],
+    "entered_leading": [],
     "exited_leading": [
-        "Leisure and Entertainment"
+        "Services"
     ],
     "entered_lagging": [
         "Artificial Intelligence",
         "Broad",
-        "Telecom"
+        "Crude Oil",
+        "MLP"
     ],
     "exited_lagging": [
-        "Copper",
+        "Agribusiness",
+        "Banking",
         "Engineering and Construction",
-        "Nuclear Power"
+        "Nuclear Power",
+        "Telecom"
     ],
     "persistent_same_bucket": [
         {
             "theme": "Aerospace & Defense",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 23,
             "latest_rank": 27,
             "rank_change": 4,
@@ -32,17 +33,6 @@
             "latest_score": -0.02,
             "score_change": -0.71,
             "direction": "Weakening"
-        },
-        {
-            "theme": "Agribusiness",
-            "bucket": "Neutral",
-            "previous_rank": 25,
-            "latest_rank": 20,
-            "rank_change": -5,
-            "previous_score": 0.61,
-            "latest_score": 2.77,
-            "score_change": 2.16,
-            "direction": "Strengthening"
         },
         {
             "theme": "Asset",
@@ -53,17 +43,6 @@
             "previous_score": 0.35,
             "latest_score": -0.0,
             "score_change": -0.35,
-            "direction": "Stable"
-        },
-        {
-            "theme": "Banking",
-            "bucket": "Neutral",
-            "previous_rank": 22,
-            "latest_rank": 23,
-            "rank_change": 1,
-            "previous_score": 0.96,
-            "latest_score": 1.09,
-            "score_change": 0.13,
             "direction": "Stable"
         },
         {
@@ -111,6 +90,17 @@
             "direction": "Strengthening"
         },
         {
+            "theme": "Copper",
+            "bucket": "Neutral",
+            "previous_rank": 34,
+            "latest_rank": 28,
+            "rank_change": -6,
+            "previous_score": -0.44,
+            "latest_score": -0.08,
+            "score_change": 0.36,
+            "direction": "Strengthening"
+        },
+        {
             "theme": "Copper Mining",
             "bucket": "Leading",
             "previous_rank": 5,
@@ -120,17 +110,6 @@
             "latest_score": 14.1,
             "score_change": 2.56,
             "direction": "Strengthening"
-        },
-        {
-            "theme": "Crude Oil",
-            "bucket": "Lagging",
-            "previous_rank": 31,
-            "latest_rank": 36,
-            "rank_change": 5,
-            "previous_score": -0.09,
-            "latest_score": -0.95,
-            "score_change": -0.86,
-            "direction": "Weakening"
         },
         {
             "theme": "Equipment and services",
@@ -145,7 +124,7 @@
         },
         {
             "theme": "Exploration",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 8,
             "latest_rank": 9,
             "rank_change": 1,
@@ -156,7 +135,7 @@
         },
         {
             "theme": "Gold",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 12,
             "latest_rank": 13,
             "rank_change": 1,
@@ -221,15 +200,15 @@
             "direction": "Stable"
         },
         {
-            "theme": "MLP",
-            "bucket": "Lagging",
-            "previous_rank": 33,
-            "latest_rank": 37,
-            "rank_change": 4,
-            "previous_score": -0.21,
-            "latest_score": -1.0,
-            "score_change": -0.79,
-            "direction": "Weakening"
+            "theme": "Leisure and Entertainment",
+            "bucket": "Neutral",
+            "previous_rank": 13,
+            "latest_rank": 14,
+            "rank_change": 1,
+            "previous_score": 3.83,
+            "latest_score": 4.57,
+            "score_change": 0.74,
+            "direction": "Stable"
         },
         {
             "theme": "Medical Devices",
@@ -310,7 +289,7 @@
         },
         {
             "theme": "Retail",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 40,
             "latest_rank": 33,
             "rank_change": -7,
@@ -329,17 +308,6 @@
             "latest_score": -4.64,
             "score_change": -3.28,
             "direction": "Weakening"
-        },
-        {
-            "theme": "Services",
-            "bucket": "Leading",
-            "previous_rank": 9,
-            "latest_rank": 11,
-            "rank_change": 2,
-            "previous_score": 5.56,
-            "latest_score": 6.69,
-            "score_change": 1.13,
-            "direction": "Stable"
         },
         {
             "theme": "Silver",
@@ -365,7 +333,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 10,
             "rank_change": -1,
@@ -394,6 +362,17 @@
             "previous_score": -1.2,
             "latest_score": -0.41,
             "score_change": 0.79,
+            "direction": "Strengthening"
+        },
+        {
+            "theme": "Uranium Mining",
+            "bucket": "Neutral",
+            "previous_rank": 29,
+            "latest_rank": 12,
+            "rank_change": -17,
+            "previous_score": 0.21,
+            "latest_score": 5.67,
+            "score_change": 5.46,
             "direction": "Strengthening"
         }
     ],
@@ -432,28 +411,6 @@
             "direction": "Strengthening"
         },
         {
-            "theme": "Exploration",
-            "bucket": "Leading",
-            "previous_rank": 8,
-            "latest_rank": 9,
-            "rank_change": 1,
-            "previous_score": 6.47,
-            "latest_score": 7.35,
-            "score_change": 0.88,
-            "direction": "Stable"
-        },
-        {
-            "theme": "Gold",
-            "bucket": "Leading",
-            "previous_rank": 12,
-            "latest_rank": 13,
-            "rank_change": 1,
-            "previous_score": 3.86,
-            "latest_score": 4.95,
-            "score_change": 1.09,
-            "direction": "Stable"
-        },
-        {
             "theme": "Gold Mining",
             "bucket": "Leading",
             "previous_rank": 1,
@@ -498,17 +455,6 @@
             "direction": "Strengthening"
         },
         {
-            "theme": "Services",
-            "bucket": "Leading",
-            "previous_rank": 9,
-            "latest_rank": 11,
-            "rank_change": 2,
-            "previous_score": 5.56,
-            "latest_score": 6.69,
-            "score_change": 1.13,
-            "direction": "Stable"
-        },
-        {
             "theme": "Silver Mining",
             "bucket": "Leading",
             "previous_rank": 2,
@@ -518,29 +464,18 @@
             "latest_score": 16.12,
             "score_change": -1.3,
             "direction": "Weakening"
-        },
-        {
-            "theme": "Software",
-            "bucket": "Leading",
-            "previous_rank": 11,
-            "latest_rank": 10,
-            "rank_change": -1,
-            "previous_score": 4.58,
-            "latest_score": 6.98,
-            "score_change": 2.4,
-            "direction": "Strengthening"
         }
     ],
     "persistent_laggards": [
         {
-            "theme": "Crude Oil",
+            "theme": "Aerospace & Defense",
             "bucket": "Lagging",
-            "previous_rank": 31,
-            "latest_rank": 36,
-            "rank_change": 5,
-            "previous_score": -0.09,
-            "latest_score": -0.95,
-            "score_change": -0.86,
+            "previous_rank": 23,
+            "latest_rank": 27,
+            "rank_change": 4,
+            "previous_score": 0.69,
+            "latest_score": -0.02,
+            "score_change": -0.71,
             "direction": "Weakening"
         },
         {
@@ -564,17 +499,6 @@
             "latest_score": -3.16,
             "score_change": -0.75,
             "direction": "Stable"
-        },
-        {
-            "theme": "MLP",
-            "bucket": "Lagging",
-            "previous_rank": 33,
-            "latest_rank": 37,
-            "rank_change": 4,
-            "previous_score": -0.21,
-            "latest_score": -1.0,
-            "score_change": -0.79,
-            "direction": "Weakening"
         },
         {
             "theme": "Natural Gas",
@@ -607,17 +531,6 @@
             "previous_score": -4.67,
             "latest_score": -1.96,
             "score_change": 2.71,
-            "direction": "Strengthening"
-        },
-        {
-            "theme": "Retail",
-            "bucket": "Lagging",
-            "previous_rank": 40,
-            "latest_rank": 33,
-            "rank_change": -7,
-            "previous_score": -1.38,
-            "latest_score": -0.58,
-            "score_change": 0.8,
             "direction": "Strengthening"
         },
         {
@@ -646,7 +559,7 @@
     "rank_changes": [
         {
             "theme": "Aerospace & Defense",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 23,
             "latest_rank": 27,
             "rank_change": 4,
@@ -654,17 +567,6 @@
             "latest_score": -0.02,
             "score_change": -0.71,
             "direction": "Weakening"
-        },
-        {
-            "theme": "Agribusiness",
-            "bucket": "Neutral",
-            "previous_rank": 25,
-            "latest_rank": 20,
-            "rank_change": -5,
-            "previous_score": 0.61,
-            "latest_score": 2.77,
-            "score_change": 2.16,
-            "direction": "Strengthening"
         },
         {
             "theme": "Asset",
@@ -675,17 +577,6 @@
             "previous_score": 0.35,
             "latest_score": -0.0,
             "score_change": -0.35,
-            "direction": "Stable"
-        },
-        {
-            "theme": "Banking",
-            "bucket": "Neutral",
-            "previous_rank": 22,
-            "latest_rank": 23,
-            "rank_change": 1,
-            "previous_score": 0.96,
-            "latest_score": 1.09,
-            "score_change": 0.13,
             "direction": "Stable"
         },
         {
@@ -733,6 +624,17 @@
             "direction": "Strengthening"
         },
         {
+            "theme": "Copper",
+            "bucket": "Neutral",
+            "previous_rank": 34,
+            "latest_rank": 28,
+            "rank_change": -6,
+            "previous_score": -0.44,
+            "latest_score": -0.08,
+            "score_change": 0.36,
+            "direction": "Strengthening"
+        },
+        {
             "theme": "Copper Mining",
             "bucket": "Leading",
             "previous_rank": 5,
@@ -742,17 +644,6 @@
             "latest_score": 14.1,
             "score_change": 2.56,
             "direction": "Strengthening"
-        },
-        {
-            "theme": "Crude Oil",
-            "bucket": "Lagging",
-            "previous_rank": 31,
-            "latest_rank": 36,
-            "rank_change": 5,
-            "previous_score": -0.09,
-            "latest_score": -0.95,
-            "score_change": -0.86,
-            "direction": "Weakening"
         },
         {
             "theme": "Equipment and services",
@@ -767,7 +658,7 @@
         },
         {
             "theme": "Exploration",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 8,
             "latest_rank": 9,
             "rank_change": 1,
@@ -778,7 +669,7 @@
         },
         {
             "theme": "Gold",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 12,
             "latest_rank": 13,
             "rank_change": 1,
@@ -821,15 +712,15 @@
             "direction": "Stable"
         },
         {
-            "theme": "MLP",
-            "bucket": "Lagging",
-            "previous_rank": 33,
-            "latest_rank": 37,
-            "rank_change": 4,
-            "previous_score": -0.21,
-            "latest_score": -1.0,
-            "score_change": -0.79,
-            "direction": "Weakening"
+            "theme": "Leisure and Entertainment",
+            "bucket": "Neutral",
+            "previous_rank": 13,
+            "latest_rank": 14,
+            "rank_change": 1,
+            "previous_score": 3.83,
+            "latest_score": 4.57,
+            "score_change": 0.74,
+            "direction": "Stable"
         },
         {
             "theme": "Medical Devices",
@@ -877,7 +768,7 @@
         },
         {
             "theme": "Retail",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 40,
             "latest_rank": 33,
             "rank_change": -7,
@@ -898,17 +789,6 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Services",
-            "bucket": "Leading",
-            "previous_rank": 9,
-            "latest_rank": 11,
-            "rank_change": 2,
-            "previous_score": 5.56,
-            "latest_score": 6.69,
-            "score_change": 1.13,
-            "direction": "Stable"
-        },
-        {
             "theme": "Silver",
             "bucket": "Neutral",
             "previous_rank": 14,
@@ -921,7 +801,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 10,
             "rank_change": -1,
@@ -940,12 +820,23 @@
             "latest_score": -0.41,
             "score_change": 0.79,
             "direction": "Strengthening"
+        },
+        {
+            "theme": "Uranium Mining",
+            "bucket": "Neutral",
+            "previous_rank": 29,
+            "latest_rank": 12,
+            "rank_change": -17,
+            "previous_score": 0.21,
+            "latest_score": 5.67,
+            "score_change": 5.46,
+            "direction": "Strengthening"
         }
     ],
     "score_changes": [
         {
             "theme": "Aerospace & Defense",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 23,
             "latest_rank": 27,
             "rank_change": 4,
@@ -953,17 +844,6 @@
             "latest_score": -0.02,
             "score_change": -0.71,
             "direction": "Weakening"
-        },
-        {
-            "theme": "Agribusiness",
-            "bucket": "Neutral",
-            "previous_rank": 25,
-            "latest_rank": 20,
-            "rank_change": -5,
-            "previous_score": 0.61,
-            "latest_score": 2.77,
-            "score_change": 2.16,
-            "direction": "Strengthening"
         },
         {
             "theme": "Asset",
@@ -974,17 +854,6 @@
             "previous_score": 0.35,
             "latest_score": -0.0,
             "score_change": -0.35,
-            "direction": "Stable"
-        },
-        {
-            "theme": "Banking",
-            "bucket": "Neutral",
-            "previous_rank": 22,
-            "latest_rank": 23,
-            "rank_change": 1,
-            "previous_score": 0.96,
-            "latest_score": 1.09,
-            "score_change": 0.13,
             "direction": "Stable"
         },
         {
@@ -1032,6 +901,17 @@
             "direction": "Strengthening"
         },
         {
+            "theme": "Copper",
+            "bucket": "Neutral",
+            "previous_rank": 34,
+            "latest_rank": 28,
+            "rank_change": -6,
+            "previous_score": -0.44,
+            "latest_score": -0.08,
+            "score_change": 0.36,
+            "direction": "Strengthening"
+        },
+        {
             "theme": "Copper Mining",
             "bucket": "Leading",
             "previous_rank": 5,
@@ -1041,17 +921,6 @@
             "latest_score": 14.1,
             "score_change": 2.56,
             "direction": "Strengthening"
-        },
-        {
-            "theme": "Crude Oil",
-            "bucket": "Lagging",
-            "previous_rank": 31,
-            "latest_rank": 36,
-            "rank_change": 5,
-            "previous_score": -0.09,
-            "latest_score": -0.95,
-            "score_change": -0.86,
-            "direction": "Weakening"
         },
         {
             "theme": "Equipment and services",
@@ -1066,7 +935,7 @@
         },
         {
             "theme": "Exploration",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 8,
             "latest_rank": 9,
             "rank_change": 1,
@@ -1077,7 +946,7 @@
         },
         {
             "theme": "Gold",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 12,
             "latest_rank": 13,
             "rank_change": 1,
@@ -1142,15 +1011,15 @@
             "direction": "Stable"
         },
         {
-            "theme": "MLP",
-            "bucket": "Lagging",
-            "previous_rank": 33,
-            "latest_rank": 37,
-            "rank_change": 4,
-            "previous_score": -0.21,
-            "latest_score": -1.0,
-            "score_change": -0.79,
-            "direction": "Weakening"
+            "theme": "Leisure and Entertainment",
+            "bucket": "Neutral",
+            "previous_rank": 13,
+            "latest_rank": 14,
+            "rank_change": 1,
+            "previous_score": 3.83,
+            "latest_score": 4.57,
+            "score_change": 0.74,
+            "direction": "Stable"
         },
         {
             "theme": "Medical Devices",
@@ -1231,7 +1100,7 @@
         },
         {
             "theme": "Retail",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 40,
             "latest_rank": 33,
             "rank_change": -7,
@@ -1250,17 +1119,6 @@
             "latest_score": -4.64,
             "score_change": -3.28,
             "direction": "Weakening"
-        },
-        {
-            "theme": "Services",
-            "bucket": "Leading",
-            "previous_rank": 9,
-            "latest_rank": 11,
-            "rank_change": 2,
-            "previous_score": 5.56,
-            "latest_score": 6.69,
-            "score_change": 1.13,
-            "direction": "Stable"
         },
         {
             "theme": "Silver",
@@ -1286,7 +1144,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 10,
             "rank_change": -1,
@@ -1316,20 +1174,20 @@
             "latest_score": -0.41,
             "score_change": 0.79,
             "direction": "Strengthening"
+        },
+        {
+            "theme": "Uranium Mining",
+            "bucket": "Neutral",
+            "previous_rank": 29,
+            "latest_rank": 12,
+            "rank_change": -17,
+            "previous_score": 0.21,
+            "latest_score": 5.67,
+            "score_change": 5.46,
+            "direction": "Strengthening"
         }
     ],
     "strengthening_themes": [
-        {
-            "theme": "Agribusiness",
-            "bucket": "Neutral",
-            "previous_rank": 25,
-            "latest_rank": 20,
-            "rank_change": -5,
-            "previous_score": 0.61,
-            "latest_score": 2.77,
-            "score_change": 2.16,
-            "direction": "Strengthening"
-        },
         {
             "theme": "Brokers/ Capital markets",
             "bucket": "Neutral",
@@ -1350,6 +1208,17 @@
             "previous_score": 13.05,
             "latest_score": 15.17,
             "score_change": 2.12,
+            "direction": "Strengthening"
+        },
+        {
+            "theme": "Copper",
+            "bucket": "Neutral",
+            "previous_rank": 34,
+            "latest_rank": 28,
+            "rank_change": -6,
+            "previous_score": -0.44,
+            "latest_score": -0.08,
+            "score_change": 0.36,
             "direction": "Strengthening"
         },
         {
@@ -1431,7 +1300,7 @@
         },
         {
             "theme": "Retail",
-            "bucket": "Lagging",
+            "bucket": "Neutral",
             "previous_rank": 40,
             "latest_rank": 33,
             "rank_change": -7,
@@ -1442,7 +1311,7 @@
         },
         {
             "theme": "Software",
-            "bucket": "Leading",
+            "bucket": "Neutral",
             "previous_rank": 11,
             "latest_rank": 10,
             "rank_change": -1,
@@ -1472,12 +1341,23 @@
             "latest_score": -0.41,
             "score_change": 0.79,
             "direction": "Strengthening"
+        },
+        {
+            "theme": "Uranium Mining",
+            "bucket": "Neutral",
+            "previous_rank": 29,
+            "latest_rank": 12,
+            "rank_change": -17,
+            "previous_score": 0.21,
+            "latest_score": 5.67,
+            "score_change": 5.46,
+            "direction": "Strengthening"
         }
     ],
     "weakening_themes": [
         {
             "theme": "Aerospace & Defense",
-            "bucket": "Neutral",
+            "bucket": "Lagging",
             "previous_rank": 23,
             "latest_rank": 27,
             "rank_change": 4,
@@ -1498,17 +1378,6 @@
             "direction": "Weakening"
         },
         {
-            "theme": "Crude Oil",
-            "bucket": "Lagging",
-            "previous_rank": 31,
-            "latest_rank": 36,
-            "rank_change": 5,
-            "previous_score": -0.09,
-            "latest_score": -0.95,
-            "score_change": -0.86,
-            "direction": "Weakening"
-        },
-        {
             "theme": "Equipment and services",
             "bucket": "Lagging",
             "previous_rank": 35,
@@ -1517,17 +1386,6 @@
             "previous_score": -0.59,
             "latest_score": -1.86,
             "score_change": -1.27,
-            "direction": "Weakening"
-        },
-        {
-            "theme": "MLP",
-            "bucket": "Lagging",
-            "previous_rank": 33,
-            "latest_rank": 37,
-            "rank_change": 4,
-            "previous_score": -0.21,
-            "latest_score": -1.0,
-            "score_change": -0.79,
             "direction": "Weakening"
         },
         {

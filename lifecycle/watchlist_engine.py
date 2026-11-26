@@ -17,50 +17,49 @@ def build_long_watchlist(stocks, registry=None):
     dollar_vol = close_numeric * vol_numeric
     growth_score = stocks_clean["Growth Score"].astype(str).str.strip().str.upper() if "Growth Score" in stocks_clean.columns else pd.Series("", index=stocks_clean.index)
 
-    # 1. STATELESS DAILY EVALUATION (Pure Breakout Standards)
-    # A stock must satisfy today's full breakout criteria to qualify for Strong Bullish.
-    # No sticky stay retention buffer holding decaying momentum.
+    # 1. STATELESS DAILY EVALUATION (Unified Long Standards: Breakouts & Pullbacks)
+    min_rs = LONG_ENTRY.get("MIN_RS", 85.0)
+    min_52w = PULLBACK_CONFIG.get("LONG_MIN_52W_RANGE", 50.0)
+    breakout_rs = LONG_ENTRY.get("BREAKOUT_MIN_RS", 90.0)
+    breakout_range = PULLBACK_CONFIG.get("LONG_BREAKOUT_MIN_52W_RANGE", 85.0)
+    allowed_zacks = LONG_ENTRY.get("ALLOWED_ZACKS", [1, 2])
+
+    # Standard Entry: Leading theme + Zacks 1-2 + RS >= 85 + Range >= 50%
     standard_entry_mask = (
         stocks_clean["Theme_Class"].isin(allowed_entry_themes)
-        & (stocks_clean["RS_Rating"] >= LONG_ENTRY["MIN_RS"])
-        & (~zacks_numeric.isin(blocked_zacks))
+        & (stocks_clean["RS_Rating"] >= min_rs)
+        & (zacks_numeric.isin(allowed_zacks))
         & (range_52w >= min_52w)
         & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
-        & (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
-    )
-
-    # Elite Momentum Exception (Configurable from LONG_ENTRY):
-    # Leading theme + Exceptional RS + Range >= 85% + Zacks 3 allowed ONLY IF Growth A/B
-    # Liquidity: Volume >= 1M OR Dollar Volume >= $30,000,000 (with volume >= 500k)
-    elite_min_rs = LONG_ENTRY.get("ELITE_MIN_RS", 95.0)
-    elite_growth = LONG_ENTRY.get("ELITE_ALLOWED_GROWTH", ["A", "B"])
-    alt_min_vol = LONG_ENTRY.get("ELITE_ALT_MIN_VOLUME", 500_000)
-    alt_min_dvol = LONG_ENTRY.get("ELITE_ALT_MIN_DOLLAR_VOL", 30_000_000)
-
-    elite_exception_mask = (
-        stocks_clean["Theme_Class"].isin(allowed_entry_themes)
-        & (stocks_clean["RS_Rating"] >= elite_min_rs)
-        & (range_52w >= min_52w)
-        & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
-        & (
-            (~zacks_numeric.isin(blocked_zacks))  # Zacks 1 or 2
-            | ((zacks_numeric == 3) & growth_score.isin(elite_growth))  # Zacks 3 with verified growth
-        )
         & (
             (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
-            | ((vol_numeric >= alt_min_vol) & (dollar_vol >= alt_min_dvol))
+            | ((vol_numeric >= LONG_ENTRY.get("ELITE_ALT_MIN_VOLUME", 500_000)) & (dollar_vol >= LONG_ENTRY.get("ELITE_ALT_MIN_DOLLAR_VOL", 30_000_000)))
         )
     )
 
-    # Tag elite exception stocks for visual clarity
+    # Zacks 3 Exception: Leading theme + Exceptional RS >= 95 + Growth A/B/C
+    z3_min_rs = LONG_ENTRY.get("ZACKS_3_ALLOWED_MIN_RS", 95.0)
+    z3_growth = LONG_ENTRY.get("ZACKS_3_ALLOWED_GROWTH", ["A", "B", "C"])
+    z3_exception_mask = (
+        stocks_clean["Theme_Class"].isin(allowed_entry_themes)
+        & (stocks_clean["RS_Rating"] >= z3_min_rs)
+        & (zacks_numeric == 3)
+        & (growth_score.isin(z3_growth))
+        & (range_52w >= min_52w)
+        & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
+        & (
+            (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
+            | ((vol_numeric >= LONG_ENTRY.get("ELITE_ALT_MIN_VOLUME", 500_000)) & (dollar_vol >= LONG_ENTRY.get("ELITE_ALT_MIN_DOLLAR_VOL", 30_000_000)))
+        )
+    )
+
     stocks_clean["Is_Elite_Exception"] = False
-    new_elite_mask = elite_exception_mask & (~standard_entry_mask)
+    new_elite_mask = z3_exception_mask & (~standard_entry_mask)
     if new_elite_mask.any():
         stocks_clean.loc[new_elite_mask, "Is_Elite_Exception"] = True
 
     # Independent Leader Theme Exemption (Safety Valve against flawed/neutral themes):
-    # If a stock has exceptional RS (>= 95.0), Range >= 85%, and Zacks 1-2,
-    # it qualifies for Strong Bullish even if its theme is Neutral/Unknown.
+    # Exceptional RS (>= 95.0), Range >= 85%, Zacks 1-2
     theme_exemption_enabled = LONG_ENTRY.get("THEME_EXEMPTION_ENABLED", True)
     theme_exempt_min_rs = LONG_ENTRY.get("THEME_EXEMPTION_MIN_RS", 95.0)
     theme_exempt_min_range = LONG_ENTRY.get("THEME_EXEMPTION_MIN_RANGE", 85.0)
@@ -75,16 +74,20 @@ def build_long_watchlist(stocks, registry=None):
             & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
             & (
                 (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))
-                | ((vol_numeric >= alt_min_vol) & (dollar_vol >= alt_min_dvol))
+                | ((vol_numeric >= LONG_ENTRY.get("ELITE_ALT_MIN_VOLUME", 500_000)) & (dollar_vol >= LONG_ENTRY.get("ELITE_ALT_MIN_DOLLAR_VOL", 30_000_000)))
             )
         )
 
     stocks_clean["Is_Theme_Exempt"] = False
-    new_exempt_mask = theme_exempt_mask & (~standard_entry_mask) & (~elite_exception_mask)
+    new_exempt_mask = theme_exempt_mask & (~standard_entry_mask) & (~z3_exception_mask)
     if new_exempt_mask.any():
         stocks_clean.loc[new_exempt_mask, "Is_Theme_Exempt"] = True
 
-    qualifying_mask = standard_entry_mask | elite_exception_mask | theme_exempt_mask
+    qualifying_mask = standard_entry_mask | z3_exception_mask | theme_exempt_mask
+
+    # Tag setup type: Breakout vs Pullback
+    is_breakout = (stocks_clean["RS_Rating"] >= breakout_rs) & (range_52w >= breakout_range)
+    stocks_clean["Setup_Type"] = is_breakout.map({True: "Breakout", False: "Pullback"})
 
     long_watchlist = stocks_clean[qualifying_mask].copy()
     
