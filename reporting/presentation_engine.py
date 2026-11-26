@@ -1143,7 +1143,7 @@ def print_daily_scan(
         clean_close_l = pd.to_numeric(long_candidates_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
         clean_hi_l = pd.to_numeric(long_candidates_df['52 Week High'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
         long_candidates_df['% off Hi'] = ((clean_close_l - clean_hi_l) / clean_hi_l * 100).apply(
-            lambda v: str(int(round(v))) if pd.notna(v) and abs(round(v)) > 0 else "0"
+            lambda v: "0.0%" if pd.notna(v) and abs(round(v, 1)) == 0 else (f"{v:.1f}%" if pd.notna(v) else "NA")
         )
     else:
         long_candidates_df['% off Hi'] = "NA"
@@ -1202,7 +1202,7 @@ def print_daily_scan(
             clean_close_s = pd.to_numeric(dist_df['Last Close'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
             clean_lo_s = pd.to_numeric(dist_df['52 Week Low'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce')
             dist_df['% off Lo'] = ((clean_close_s - clean_lo_s) / clean_lo_s * 100).apply(
-                lambda v: str(int(round(v))) if pd.notna(v) and round(v) > 0 else "0"
+                lambda v: "0.0%" if pd.notna(v) and abs(round(v, 1)) == 0 else (f"+{v:.1f}%" if pd.notna(v) and v > 0 else (f"{v:.1f}%" if pd.notna(v) else "NA"))
             )
         else:
             dist_df['% off Lo'] = "NA"
@@ -1280,7 +1280,7 @@ def print_daily_scan(
         theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         rs = str(r.get("RS_Rating", ""))[:4]
-        hi = str(r.get("% off Hi", ""))[:4]
+        hi = str(r.get("% off Hi", ""))[:8]
         mov = str(r.get("Movement", ""))[:4]
         dys = str(r.get("Days", ""))[:4]
         sec = str(r.get("Sector (Rk)", ""))[:11]
@@ -1291,7 +1291,7 @@ def print_daily_scan(
         theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         shrs = str(r.get("Short_RS_Rating", r.get("RS_Rating", "")))[:4]
-        lo = str(r.get("% off Lo", ""))[:4]
+        lo = str(r.get("% off Lo", ""))[:8]
         mov = str(r.get("Movement", ""))[:4]
         dys = str(r.get("Days", ""))[:4]
         sec = str(r.get("Sector (Rk)", ""))[:11]
@@ -1358,7 +1358,7 @@ def print_daily_scan(
             th = str(r["Theme"])[:26]
             zk = str(r["Zacks"])
             rs_s = str(r["RS"])
-            hi_s = f"{r['pct_off_hi']:.1f}%" if pd.notna(r["pct_off_hi"]) else "NA"
+            hi_s = "0.0%" if pd.notna(r["pct_off_hi"]) and abs(round(r["pct_off_hi"], 1)) == 0 else (f"{r['pct_off_hi']:.1f}%" if pd.notna(r["pct_off_hi"]) else "NA")
             ytd_s = f"+{r['YTD']:.1f}%" if pd.notna(r["YTD"]) and r["YTD"] > 0 else (f"{r['YTD']:.1f}%" if pd.notna(r["YTD"]) else "NA")
             rg_s = f"{r['Range']:.1f}%" if pd.notna(r["Range"]) else "NA"
             m_lines.append(f"{t:<7} {th:<26} {zk:>5} {rs_s:>10} {hi_s:>9} {ytd_s:>9}  {rg_s:<11}")
