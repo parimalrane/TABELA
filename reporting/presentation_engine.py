@@ -1146,6 +1146,11 @@ def print_daily_scan(
         long_candidates_df['52W Range'] = ((clean_close_l - clean_lo_l) / range_span.replace(0, float('nan')) * 100).apply(
             lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
         )
+    elif 'Price as a % of 52 Wk H-L Range' in long_candidates_df.columns:
+        long_candidates_df['% off Hi'] = "NA"
+        long_candidates_df['52W Range'] = pd.to_numeric(long_candidates_df['Price as a % of 52 Wk H-L Range'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').apply(
+            lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
+        )
     else:
         long_candidates_df['% off Hi'] = "NA"
         long_candidates_df['52W Range'] = "NA"
@@ -1210,6 +1215,11 @@ def print_daily_scan(
             )
             range_span_s = clean_hi_s - clean_lo_s
             dist_df['52W Range'] = ((clean_close_s - clean_lo_s) / range_span_s.replace(0, float('nan')) * 100).apply(
+                lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
+            )
+        elif 'Price as a % of 52 Wk H-L Range' in dist_df.columns:
+            dist_df['% off Lo'] = "NA"
+            dist_df['52W Range'] = pd.to_numeric(dist_df['Price as a % of 52 Wk H-L Range'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').apply(
                 lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
             )
         else:

@@ -48,17 +48,23 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Macro Theme        Micro Theme                Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Cloud Computing    Communications Cloud         4    1   38.22  12.24   Leading (3 -> -1)           [XLK] CLOU, FCOM       RNG
-Exploration        Exploration                 95   25  113.12   9.98   Leading (4 -> -1)           [XLE] XOP, IEO         RRC, APA, PR, SM, OVV, MUR, PTEN,
-                                                                                                                           TALO
+Cloud Computing    Communications Cloud         4    2   74.03  12.24   Leading (3 -> -1)           [XLK] CLOU, FCOM       RNG
+Exploration        Exploration                 95   40  175.43   9.98   Leading (4 -> -1)           [XLE] XOP, IEO         RRC, NOG, APA, AR, CNX, PR, SM,
+                                                                                                                           OVV, MTDR, PTEN, MUR, TALO, EOG,
+                                                                                                                           VNOM, LNG, CHRD, OXY, TRGP, DVN
+Exploration        Integrated Energy            7    4  103.37   9.98   Leading (4 -> -1)           [XLE] XOP, IEO         EQNR, CVX, BP, XOM
 Exploration        Energy                      14    3   53.97   9.98   Leading (4 -> -1)           [XLE] XOP, IEO         CVI, COP
-Software           Software                   218   81  189.48   9.36   Leading (5 -> +1)           [XLK] IGV, XSW         NTSK, APPN, AMPL, RBRK, BOX, NIQ,
-                                                                                                                           DOCU, CVLT, AVPT, EXLS, SAIL
-Software           Cybersecurity               13    7  137.85   9.36   Leading (5 -> +1)           [XLK] CIBR, BUG        TENB, QLYS, OKTA
-Software           Developer Infrastructure     3    2   91.04   9.36   Leading (5 -> +1)           [XLK] IGV, CLOU        TEAM
-Software           Data Infrastructure          4    2   76.05   9.36   Leading (5 -> +1)           [XLK] IGV, CLOU        ESTC
+Exploration        Refining & Marketing         8    1   24.72   9.98   Leading (4 -> -1)           [XLE] CRAK             MPC
+Software           Software                   218   98  226.20   9.36   Leading (5 -> +1)           [XLK] IGV, XSW         AMPL, NTSK, APPN, RBRK, ACN, BOX,
+                                                                                                                           WK, PD, NIQ, DOCU, AVPT, CVLT,
+                                                                                                                           NCNO, TIC, NAVN, BAH, CXT, EXLS,
+                                                                                                                           SAIL, SNPS, PRGS
+Software           Cybersecurity               13    8  155.30   9.36   Leading (5 -> +1)           [XLK] CIBR, BUG        TENB, ZS, QLYS, OKTA
+Software           Data Infrastructure          4    4  146.06   9.36   Leading (5 -> +1)           [XLK] IGV, CLOU        ESTC, MDB, NTAP
+Software           Developer Infrastructure     3    3  131.70   9.36   Leading (5 -> +1)           [XLK] IGV, CLOU        TEAM, FROG
 Software           Digital Health               1    1   66.54   9.36   Leading (5 -> +1)           [XLK] IGV, XSW         HNGE
-Healthcare         Healthcare                  45    7   57.02   2.34   Leading (9 -> +3)           [XLV] IHI, XBI         CAI
+Medical Devices    Diagnostics                  8    -       -   3.21   Neutral (6 -> -1)           [XLV] IHI, XHE         ILMN
+Healthcare         Healthcare                  45    9   71.64   2.34   Leading (9 -> +3)           [XLV] IHI, XBI         CAI, OPCH
 Healthcare         Healthcare Services         13    2   38.56   2.34   Leading (9 -> +3)           [XLV] IHI, XBI         AMN, CON
 Biotech            Biotech                    110    -       -   2.24   Neutral (10 -> -2)          [XLV] XBI, IBB         IOVA
 Retail             Retail                      31    -       -   0.21   Neutral (15 -> +1)          [XLY] XRT              HAS, ARHS, ASO
@@ -95,232 +101,192 @@ Silver Mining      Silver Mining                6    6  152.43  -9.29   Lagging 
 Uranium Mining     Nuclear Infrastructure       3    3   88.26  -9.44   Lagging (39 -> -1)          [XLU] NLR, URNM        #CEG, #VST
 Uranium Mining     Uranium Mining               1    1   49.91  -9.44   Lagging (39 -> -1)          [XLU] URNM, URA        #CCJ
 
-=============================================================================================
-1. STRONG BULLISH UNIVERSE (Active Momentum Breakouts & Leaders)
-Criteria: RS >= 90 | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only
-Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Momentum Carve-Out (RS >= 95, Zacks 3 with Growth A/B) | * = Independent Leader (RS >= 95 Theme Exemption)
-=============================================================================================
-Ticker  Mapped_Theme               Zacks  RS_Rating  % off Hi  Movement  Days  Sector (Rk)
-*IOVA   Biotech                        2         99     -1.9%        +2     2  XLV (2)    
-*RXO    Transportation/Shipping        1         99     -0.7%         0    17  XLI (9)    
-RRC     Exploration                    2         99      0.0%        +9     2  XLE (1)    
-^TENB   Cybersecurity                  3         99      0.0%        +3     3  XLK (3)    
-NTSK    Software                       2         99      0.0%        +4     5  XLK (3)    
-*FIGS   Footwear/Apparel [MLg]         2         99     -1.7%         0    13  XLY (7)    
-^TEAM   Developer Infrastructure       3         99     -3.6%        +4    13  XLK (3)    
-^APPN   Software                       3         99     -4.6%        -7     5  XLK (3)    
-^AMPL   Software                       3         99     -0.9%        +1     5  XLK (3)    
-^AMN    Healthcare Services            2         99     -4.5%        -6     7  XLK (3)    
-^QLYS   Cybersecurity                  2         98      0.0%        +3     3  XLK (3)    
-^RBRK   Software                       3         98      0.0%        +3     3  XLK (3)    
-*ANF    Footwear/Apparel [MLg]         2         98      0.0%        +7    10  XLY (7)    
-*SG     Restaurants                    2         98     -3.4%        NA     1  XLY (7)    
-^BOX    Software                       3         98     -1.6%        -7     5  XLK (3)    
-^CAI    Healthcare                     3         98      0.0%       +11     3  XLV (2)    
-*HAS    Retail                         1         98      0.0%         0     4  XLY (7)    
-*ARHS   Retail                         1         97     -2.0%         0     4  XLY (7)    
-*KSS    Discount Retail                2         97     -4.0%        +3     4  XLY (7)    
-ESTC    Data Infrastructure            1         97     -0.7%        -1    20  XLK (3)    
-*CBRL   Restaurants                    1         97     -1.2%       +12    10  XLY (7)    
-NIQ     Software                       2         97     -1.0%        -1     9  XLK (3)    
-DOCU    Software                       2         97     -3.8%        -7     7  XLK (3)    
-^CVLT   Software                       2         96     -0.9%        NA     1  XLK (3)    
-^AVPT   Software                       3         96     -2.3%        +3     5  XLK (3)    
-^CVI    Energy                         1         96     -9.0%       -21     2  XLE (1)    
-^HNGE   Digital Health                 3         96      0.0%        -2     6  XLV (2)    
-^OKTA   Cybersecurity                  3         96     -2.6%        NA     1  XLK (3)    
-APA     Exploration                    2         96     -2.1%        -5     8  XLE (1)    
-RNG     Communications Cloud           2         95     -0.8%        +1     2  XLK (3)    
-*ASO    Retail                         2         95     -4.0%        NA     1  XLY (7)    
-PR      Exploration                    1         94     -1.2%        +4     3  XLE (1)    
-COP     Energy                         1         93     -2.3%        +1     2  XLE (1)    
-SM      Exploration                    2         93     -5.4%        +4     3  XLE (1)    
-OVV     Exploration                    1         93     -2.0%        +4     3  XLE (1)    
-EXLS    Software                       2         92     -5.6%        +4     6  XLK (3)    
-MUR     Exploration                    2         92     -2.7%        +5     3  XLE (1)    
-PTEN    Exploration                    2         92     -7.1%        NA     1  XLE (1)    
-SAIL    Software                       2         91     -1.7%        NA     1  XLK (3)    
-CON     Healthcare Services            2         91     -0.5%        +4     2  XLV (2)    
-TALO    Exploration                    2         90     -1.9%        NA     1  XLE (1)    
+=================================================================================================
+1. LONG UNIVERSE (Institutional Leaders)
+Criteria: Leading Themes | Zacks 1-2 | RS >= 85 | 52W Range >= 50%
+Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Carve-Out (Z3 Growth A/B) | * = Independent Leader (RS >= 95)
+=================================================================================================
+Ticker  Mapped_Theme               Zacks     RS  % off Hi  52W Range  Movement  Days  Sector (Rk)
+RRC     Exploration                    2     99      0.0%     100.0%        +9     2  XLE (1)    
+^AMPL   Software                       3     99     -0.9%      98.6%        +9     5  XLK (3)    
+^TEAM   Developer Infrastructure       3     99     -3.6%      95.2%        +9    13  XLK (3)    
+*FIGS   Footwear/Apparel [MLg]         2     99     -1.7%      97.4%       +10    13  XLY (7)    
+NTSK    Software                       2     99      0.0%     100.0%        +8     5  XLK (3)    
+AMN     Healthcare Services            2     99     -4.5%      93.5%        -1     2  XLK (3)    
+*RXO    Transportation/Shipping        1     99     -0.7%      98.9%        -4    17  XLI (9)    
+*IOVA   Biotech                        2     99     -1.9%      97.9%        -2     2  XLV (2)    
+^APPN   Software                       3     99     -4.6%      92.8%        -2     5  XLK (3)    
+^TENB   Cybersecurity                  3     99      0.0%     100.0%        -8     3  XLK (3)    
+ZS      Cybersecurity                  2     99    -22.6%      65.1%        -2     3  XLK (3)    
+^CAI    Healthcare                     3     98      0.0%     100.0%       +23     3  XLV (2)    
+*HAS    Retail                         1     98      0.0%     100.0%        +7     4  XLY (7)    
+^RBRK   Software                       3     98      0.0%     100.0%        +5     3  XLK (3)    
+*SG     Restaurants                    2     98     -3.4%      94.0%        NA     1  XLY (7)    
+^ACN    Software                       3     98    -18.5%      67.5%       -15     5  XLK (3)    
+QLYS    Cybersecurity                  2     98      0.0%     100.0%        +1     7  XLK (3)    
+*ANF    Footwear/Apparel [MLg]         2     98      0.0%     100.0%        +8    10  XLY (7)    
+^BOX    Software                       3     98     -1.6%      96.8%       -11     5  XLK (3)    
+^WK     Software                       3     98     -9.5%      81.9%        -3     4  XLK (3)    
+^OPCH   Healthcare                     3     98    -14.5%      69.0%        -5     9  XLV (2)    
+NOG     Exploration                    2     97     -8.7%      80.1%       +14     8  XLE (1)    
+^PD     Software                       3     97     -0.4%      99.4%        -2     5  XLK (3)    
+NIQ     Software                       2     97     -1.0%      98.3%        +4     9  XLK (3)    
+*ARHS   Retail                         1     97     -2.0%      96.1%        -3     4  XLY (7)    
+DOCU    Software                       2     97     -3.8%      92.6%       -11     7  XLK (3)    
+*KSS    Discount Retail                2     97     -4.0%      92.3%        -3     4  XLY (7)    
+ESTC    Data Infrastructure            1     97     -0.7%      98.8%        -1    21  XLK (3)    
+*CBRL   Restaurants                    1     97     -1.2%      98.1%       +10    10  XLY (7)    
+APA     Exploration                    2     96     -2.1%      96.3%        -1     8  XLE (1)    
+^OKTA   Cybersecurity                  3     96     -2.6%      96.4%        NA     1  XLK (3)    
+^AVPT   Software                       3     96     -2.3%      95.0%        -2     5  XLK (3)    
+AR      Exploration                    2     96     -6.8%      79.8%       +24     3  XLE (1)    
+^HNGE   Digital Health                 3     96      0.0%     100.0%        -3     6  XLV (2)    
+CVLT    Software                       2     96     -0.9%      98.4%       +16     5  XLK (3)    
+CVI     Energy                         1     96     -9.0%      86.6%       -32     2  XLE (1)    
+^NCNO   Software                       3     96    -15.4%      68.1%        -4     2  XLK (3)    
+^TIC    Software                       3     95    -19.7%      58.6%        NA     1  XLK (3)    
+NAVN    Software                       2     95    -11.4%      84.1%        -2     5  XLK (3)    
+*ASO    Retail                         2     95     -4.0%      87.8%        NA     1  XLY (7)    
+RNG     Communications Cloud           2     95     -0.8%      98.8%        -1     2  XLK (3)    
+^CNX    Exploration                    3     95     -9.5%      64.8%        NA     1  XLE (1)    
+BAH     Software                       2     94    -18.4%      55.7%       +10     2  XLK (3)    
+PR      Exploration                    1     94     -1.2%      97.7%        +3     8  XLE (1)    
+CXT     Software                       2     94    -11.5%      74.6%       +24     5  XLK (3)    
+SM      Exploration                    2     93     -5.4%      90.6%        +8     3  XLE (1)    
+OVV     Exploration                    1     93     -2.0%      96.0%        +8     7  XLE (1)    
+COP     Energy                         1     93     -2.3%      94.8%        +1     2  XLE (1)    
+EXLS    Software                       2     92     -5.6%      86.5%        +3     6  XLK (3)    
+MTDR    Exploration                    2     92     -9.4%      78.1%       +12     3  XLE (1)    
+PTEN    Exploration                    2     92     -7.1%      87.9%       +30     2  XLE (1)    
+MUR     Exploration                    2     92     -2.7%      93.3%        +7     3  XLE (1)    
+SAIL    Software                       2     91     -1.7%      96.8%        NA     1  XLK (3)    
+CON     Healthcare Services            2     91     -0.5%      99.1%        +7    17  XLV (2)    
+SNPS    Software                       1     90    -11.3%      64.0%        NA     1  XLK (3)    
+MPC     Refining & Marketing           1     90    -10.1%      84.8%       -18    46  XLE (1)    
+TALO    Exploration                    2     90     -1.9%      96.0%       +14     3  XLE (1)    
+EQNR    Integrated Energy              1     89     -3.6%      93.3%       +10     3  XLE (1)    
+EOG     Exploration                    2     88     -1.6%      95.8%        +8     3  XLE (1)    
+VNOM    Exploration                    1     88     -8.9%      70.2%       +17     3  XLE (1)    
+PRGS    Software                       1     88     -2.6%      94.4%        +3     4  XLK (3)    
+FROG    Developer Infrastructure       2     88     -3.4%      94.8%        +8     3  XLK (3)    
+LNG     Exploration                    2     88     -0.3%      99.2%       +21     2  XLE (1)    
+MDB     Data Infrastructure            1     87    -17.5%      66.5%        +1     2  XLK (3)    
+CVX     Integrated Energy              1     87     -2.1%      94.2%       +14     3  XLE (1)    
+CHRD    Exploration                    1     87     -3.0%      93.4%       +16     3  XLE (1)    
+OXY     Exploration                    2     87     -5.3%      87.2%        +9     2  XLE (1)    
+NTAP    Data Infrastructure            1     87     -4.8%      92.0%       +19     2  XLK (3)    
+BP      Integrated Energy              1     86     -4.7%      86.7%       +14     8  XLE (1)    
+XOM     Integrated Energy              1     86     -2.5%      93.5%        +3     3  XLE (1)    
+TRGP    Exploration                    2     86     -0.7%      98.6%        NA     1  XLE (1)    
+ILMN    Diagnostics                    2     86     -4.8%      92.8%        NA     1  XLV (2)    
+DVN     Exploration                    2     85     -1.6%      95.8%        NA     1  XLE (1)    
 
-=============================================================================================
-2. MILD BULLISH UNIVERSE (Institutional Pullbacks & Reversals)
-Criteria: Leading or [ML] | Zacks 1-2 (Z3 if RS >= 95 & Growth A/B/C) | Range >= 40% | RS >= 50
-=============================================================================================
-Ticker  Theme / Sector             Zacks         RS  % off Hi       YTD  52W Range  
-ZS      Cybersecurity                  2         99    -22.6%     +2.5%  65.1%      
-WK      Software                       3         98     -9.5%    -13.2%  81.9%      
-OPCH    Healthcare                     3         98    -14.5%    -12.9%  69.0%      
-ACN     Software                       3         98    -18.5%    -22.3%  67.5%      
-PD      Software                       3         97     -0.4%    +20.0%  99.4%      
-NOG     Exploration                    2         97     -8.7%    +16.2%  80.2%      
-AR      Exploration                    2         96     -6.8%     +8.3%  79.8%      
-NCNO    Software                       3         96    -15.4%    -20.8%  68.1%      
-NAVN    Software                       2         95    -11.4%    +40.5%  84.1%      
-CNX     Exploration                    3         95     -9.5%     -7.0%  64.8%      
-TIC     Software                       3         95    -19.7%    -12.2%  58.6%      
-BSY     Software                       3         95    -24.7%     -8.7%  45.8%      
-BAH     Software                       2         94    -18.4%    -12.4%  55.7%      
-MTDR    Exploration                    2         92     -9.4%    +23.8%  78.1%      
-MPC     Refining & Marketing           1         90    -10.1%   +137.6%  84.8%      
-SNPS    Software                       1         90    -11.3%    -10.5%  64.0%      
-EQNR    Integrated Energy              1         89     -3.6%    +76.5%  93.3%      
-LNG     Exploration                    2         88     -0.3%    +36.7%  99.2%      
-EOG     Exploration                    2         88     -1.6%    +36.0%  95.8%      
-FROG    Developer Infrastructure       2         88     -3.4%    +42.6%  94.8%      
-VNOM    Exploration                    1         88     -8.9%     +6.6%  70.2%      
-ADSK    Software                       2         88    -22.8%    -27.5%  43.2%      
-CVX     Integrated Energy              1         87     -2.1%    +32.7%  94.2%      
-NTAP    Data Infrastructure            1         87     -4.8%    +88.4%  92.0%      
-OXY     Exploration                    2         87     -5.3%    +35.2%  87.2%      
-MDB     Data Infrastructure            1         87    -17.5%    -17.7%  66.5%      
-TRGP    Exploration                    2         86     -0.7%    +45.4%  98.7%      
-XOM     Integrated Energy              1         86     -2.5%    +32.5%  93.5%      
-ILMN    Diagnostics                    2         86     -4.8%    +88.9%  92.8%      
-BP      Integrated Energy              1         86     -4.7%    +24.9%  86.7%      
-DVN     Exploration                    2         85     -1.6%    +24.0%  95.8%      
-SHEL    Integrated Energy              1         84     -3.1%    +26.4%  91.0%      
-CRM     Enterprise Cloud               2         84     -9.5%    -19.4%  78.2%      
-PATH    Software                       2         84    -27.1%    -24.0%  47.2%      
-KNTK    Exploration                    2         83     -0.4%    +37.1%  99.1%      
-ADP     Software                       2         83     -4.8%     +1.0%  87.5%      
-DINO    Refining & Marketing           1         83    -10.9%   +119.7%  83.0%      
-FANG    Exploration                    2         82     -4.3%    +20.6%  87.9%      
-PSX     Refining & Marketing           1         82     -9.7%    +84.5%  83.0%      
-CRGY    Exploration                    2         82    -10.9%    +44.6%  78.0%      
-CNC     Healthcare                     2         79     -3.6%    +48.0%  93.6%      
-GEN     Software                       2         79    -22.8%    -20.9%  47.0%      
-VNT     Software                       2         78    -19.3%    -17.2%  45.5%      
-HUM     Healthcare Services            2         77     -4.3%    +43.6%  93.1%      
-FTNT    Cybersecurity                  2         77     -5.0%   +106.5%  91.8%      
-AVAH    Healthcare Services            2         77    -11.7%    +37.8%  79.4%      
-TXG     Life Sciences Tools            2         76    -20.2%   +324.0%  76.9%      
-ELV     Healthcare                     2         74     -5.3%     +6.6%  85.5%      
-TTE     Exploration                    1         72     -1.5%    +25.1%  95.7%      
-UNH     Healthcare                     2         72     -5.9%    +10.2%  85.4%      
-CDNS    Software                       2         71    -17.6%     -2.7%  51.4%      
-PENG    Software                       1         70    -27.5%   +167.3%  65.6%      
-EC      Exploration                    1         65     -5.3%    +53.0%  89.4%      
-BKR     Oil Services                   1         65    -15.3%    +14.8%  57.7%      
-INGM    Software                       2         63    -10.6%    +17.6%  72.5%      
-APG     Software                       2         63    -17.4%     -5.5%  43.1%      
-VLO     Refining & Marketing           1         62    -15.8%   +110.9%  75.7%      
-CVE     Exploration                    1         60     -6.7%    +65.9%  87.5%      
-OSCR    Healthcare Services            1         60     -8.7%    +93.4%  87.3%      
-AFRM    Software                       1         54    -15.3%    -13.4%  69.7%      
-DK      Refining & Marketing           1         52    -13.8%   +110.1%  79.5%      
-SEI     Exploration                    1         52    -21.2%    +26.0%  58.5%      
-WES     Exploration                    2         50     -9.0%     +1.7%  64.0%      
-
-=============================================================================================
-3. SHORT UNIVERSE (Stage 4 Breakdown & Short Candidates)
-Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 3-5 | Lagging Themes Only
+=================================================================================================
+2. SHORT UNIVERSE (Stage 4 Candidates)
+Criteria: Lagging Themes | Zacks 3-5 | Short_RS 8-60 | 52W Range <= 30%
 Legend: [MLg] = Micro Lagging
-=============================================================================================
-Ticker  Mapped_Theme               Zacks   Short_RS  % off Lo  Movement  Days  Sector (Rk)
-APLD    Financial Services             5          8     +9.4%        NA     1  XLF (6)    
-BLDR    Building Materials [MLg]       4          8    +12.2%        +1     4  XLY (7)    
-UPST    Financial Services             3          9     +4.3%        -1     4  XLF (6)    
-GLXY    Financial Services             3         10    +17.0%        NA     1  XLF (6)    
-PL      Space Infrastructure           3         10    +29.8%        NA     1  XLK (3)    
-HDB     Banking                        3         10      0.0%        +6     2  XLF (6)    
-NFLX    Media Distribution             3         10      0.0%        NA     1  XLY (7)    
-LUNR    Space Infrastructure           5         11    +43.6%        NA     1  XLI (9)    
-FIS     Banking                        4         11     +9.8%        +6     2  XLK (3)    
-BA      Aerospace & Defense            4         11      0.0%       +41    26  XLI (9)    
-FLG     Banking                        4         12      0.0%        +2     2  XLF (6)    
-LULU    Footwear/Apparel [MLg]         5         12    +13.8%        NA     1  XLY (7)    
-CG      Financial Services             3         12     +7.7%        +4     4  XLF (6)    
-ARR     REITs                          4         12     +3.0%        NA     1  XLF (6)    
-FSLR    Solar Infrastructure           3         12     +4.6%        -8     2  XLE (1)    
-HON     Industrial Automation          3         13     +8.7%        +4     6  XLI (9)    
-CDE     Gold Mining                    3         13     +5.7%        -9     4  XLB (4)    
-CMG     Restaurants                    3         13     +1.7%        -2     3  XLY (7)    
-RKT     Banking                        4         14    +12.4%        -5     2  XLF (6)    
-RIOT    Digital Assets Infra [MLg]     3         14    +14.6%       -19     2  XLF (6)    
-BROS    Restaurants                    4         14    +11.7%         0     3  XLY (7)    
-MOS     Agribusiness                   4         14     +8.8%       -16     2  XLB (4)    
-CBRE    REITs                          3         14      0.0%        NA     1  XLF (6)    
-NKE     Footwear/Apparel [MLg]         5         15    +10.9%        NA     1  XLY (7)    
-HL      Silver Mining                  3         16    +22.1%        -7     5  XLB (4)    
-COIN    Digital Assets Infra [MLg]     3         16    +14.2%        -3    14  XLF (6)    
-ROL     Building Materials [MLg]       5         16    +14.6%        +2     9  XLK (3)    
-RKLB    Space Infrastructure           3         17    +47.7%       -23     3  XLI (9)    
-AMKR    Semiconductor Equipment        3         17    +32.3%       -20    10  XLK (3)    
-CPRI    Footwear/Apparel [MLg]         4         17    +21.3%        NA     1  XLY (7)    
-XP      Financial Services             3         17     +6.8%        -9     2  XLF (6)    
-CRH     Building Materials [MLg]       3         17     +8.3%        -5    27  XLI (9)    
-KKR     Financial Services             3         18     +9.6%        -5     4  XLF (6)    
-FISV    Banking                        4         19     +6.9%        +6     2  XLK (3)    
-MP      Gold Mining                    5         19     +9.1%       -24     4  XLB (4)    
-ONON    Footwear/Apparel [MLg]         3         19    +20.2%        NA     1  XLY (7)    
-DB      Banking                        4         19    +13.2%        -6     2  XLF (6)    
-PAAS    Silver Mining                  3         19    +25.5%       -14     5  XLB (4)    
-SARO    Aerospace & Defense            4         20    +13.5%        -7    43  XLI (9)    
-TPG     Financial Services             4         20    +17.5%        +2     4  XLF (6)    
-WY      Building Materials [MLg]       4         20     +5.0%        -3    38  XLI (9)    
-CORZ    Digital Assets Infra [MLg]     3         20     +8.9%       -23    14  XLF (6)    
-VALE    Gold Mining                    5         20     +3.8%        -6     4  XLB (4)    
-DECK    Footwear/Apparel [MLg]         3         20     +3.9%        NA     1  XLY (7)    
-APO     Financial Services             4         21    +13.9%        -6     4  XLF (6)    
-AMRZ    Building Materials [MLg]       5         21    +11.5%       -21    26  XLI (9)    
-GNTX    Automotive Technology          3         21      0.0%        +2    14  XLY (7)    
-ENPH    Solar Infrastructure           4         21    +13.9%        +7     2  XLE (1)    
-CEG     Nuclear Infrastructure         3         22     +9.5%       -23     3  XLE (1)    
-UBER    Transportation Platf [MLg]     4         22      0.0%        -7     3  XLK (3)    
-THRM    Automotive Technology          3         22    +21.7%       -41     3  XLY (7)    
-CWK     REITs                          4         22     +9.3%        NA     1  XLF (6)    
-BCS     Banking                        4         22    +11.9%       -19     2  XLF (6)    
-EQX     Gold Mining                    4         22    +21.0%       -24     4  XLB (4)    
-BX      Financial Services             3         22    +14.3%        -5     4  XLF (6)    
-SCHW    Banking                        3         23     +4.6%        -9     2  XLF (6)    
-CAVA    Restaurants                    3         24    +19.0%       -12     3  XLY (7)    
-BAC     Banking                        4         25     +8.5%       -12     2  XLF (6)    
-RBA     Banking                        3         25     +6.5%       -11     2  XLK (3)    
-KGC     Gold Mining                    4         25     +3.4%       -24     4  XLB (4)    
-WSC     REITs                          3         27    +17.8%        NA     1  XLF (6)    
-BN      REITs                          5         27     +5.8%        NA     1  XLF (6)    
-TTMI    Electronics Manufacturing      3         27    +48.5%       -11     4  XLK (3)    
-AG      Silver Mining                  4         27    +46.6%       -29     5  XLB (4)    
-BNL     REITs                          3         28      0.0%        NA     1  XLF (6)    
-CCJ     Uranium Mining                 3         28     +4.8%       -25     3  XLE (1)    
-ALLY    Banking                        5         28     +7.7%       -10     2  XLF (6)    
-AGI     Gold Mining                    3         28    +12.0%       -24     4  XLB (4)    
-HAYW    Semiconductor Equipment        4         29    +14.8%       -16    10  XLK (3)    
-AXP     Financial Services             3         29     +7.1%       -10     3  XLF (6)    
-GLPI    REITs                          3         29     +3.2%        NA     1  XLF (6)    
-MCD     Restaurants                    4         31     +8.1%        -9     3  XLY (7)    
-IR      Industrial Automation          3         32    +10.2%       -14     4  XLI (9)    
-RYN     Building Materials [MLg]       4         32     +6.8%       -16    40  XLI (9)    
-AVGO    AI Infrastructure              3         33    +16.7%       -19     5  XLK (3)    
-EPRT    REITs                          4         33     +7.9%        NA     1  XLF (6)    
-HBAN    Banking                        5         34     +4.6%       -12     2  XLF (6)    
-BAM     Financial Services             3         34     +9.1%        NA     1  XLF (6)    
-DEI     REITs                          4         35     +9.6%        NA     1  XLF (6)    
-PLD     REITs                          3         36     +3.3%        NA     1  XLF (6)    
-ELS     REITs                          4         39     +3.2%        NA     1  XLF (6)    
-SEDG    Solar Infrastructure           3         40    +13.0%       -16     2  XLE (1)    
-FLEX    Electronics Manufacturing      3         40    +52.9%       -29     4  XLK (3)    
-VST     Nuclear Infrastructure         3         40     +8.9%       -22     3  XLU (8)    
-FHB     Banking                        3         41     +8.0%       -18     2  XLF (6)    
-CX      Building Materials [MLg]       3         41    +12.7%       -22     9  XLI (9)    
-UDR     REITs                          3         44     +7.0%        NA     1  XLF (6)    
-O       REITs                          3         44     +6.5%        NA     1  XLF (6)    
-NNN     REITs                          3         46     +6.9%        NA     1  XLF (6)    
-CARR    Building Materials [MLg]       3         53    +14.8%       -21    19  XLI (9)    
-ALGM    Semiconductors                 3         57    +49.0%       -23     4  XLK (3)    
+=================================================================================================
+Ticker  Mapped_Theme               Zacks     RS  % off Lo  52W Range  Movement  Days  Sector (Rk)
+APLD    Financial Services             5      8     +9.4%       5.3%        NA     1  XLF (6)    
+BLDR    Building Materials [MLg]       4      8    +12.2%       7.9%        +1     4  XLY (7)    
+UPST    Financial Services             3      9     +4.3%       3.2%        -1     4  XLF (6)    
+GLXY    Financial Services             3     10    +17.0%       9.7%        NA     1  XLF (6)    
+PL      Space Infrastructure           3     10    +29.8%       8.3%        NA     1  XLK (3)    
+HDB     Banking                        3     10      0.0%       0.0%        +6     2  XLF (6)    
+NFLX    Media Distribution             3     10      0.0%       0.0%        NA     1  XLY (7)    
+LUNR    Space Infrastructure           5     11    +43.6%       9.3%        NA     1  XLI (9)    
+FIS     Banking                        4     11     +9.8%       9.0%        +6     2  XLK (3)    
+BA      Aerospace & Defense            4     11      0.0%       0.0%       +41    26  XLI (9)    
+FLG     Banking                        4     12      0.0%       0.0%        +2     2  XLF (6)    
+LULU    Footwear/Apparel [MLg]         5     12    +13.8%      10.3%        NA     1  XLY (7)    
+CG      Financial Services             3     12     +7.7%       9.1%        +4     4  XLF (6)    
+ARR     REITs                          4     12     +3.0%       5.4%        NA     1  XLF (6)    
+FSLR    Solar Infrastructure           3     12     +4.6%       5.1%        -8     2  XLE (1)    
+HON     Industrial Automation          3     13     +8.7%       5.9%        +4     6  XLI (9)    
+CDE     Gold Mining                    3     13     +5.7%       5.5%        -9     4  XLB (4)    
+CMG     Restaurants                    3     13     +1.7%       3.4%        -2     3  XLY (7)    
+RKT     Banking                        4     14    +12.4%      10.1%        -5     2  XLF (6)    
+RIOT    Digital Assets Infra [MLg]     3     14    +14.6%      10.3%       -19     2  XLF (6)    
+BROS    Restaurants                    4     14    +11.7%      12.1%         0     3  XLY (7)    
+MOS     Agribusiness                   4     14     +8.8%      10.8%       -16     2  XLB (4)    
+CBRE    REITs                          3     14      0.0%       0.0%        NA     1  XLF (6)    
+NKE     Footwear/Apparel [MLg]         5     15    +10.9%      10.5%        NA     1  XLY (7)    
+HL      Silver Mining                  3     16    +22.1%      13.4%        -7     5  XLB (4)    
+COIN    Digital Assets Infra [MLg]     3     16    +14.2%       9.1%        -3    14  XLF (6)    
+ROL     Building Materials [MLg]       5     16    +14.6%      12.0%        +2     9  XLK (3)    
+RKLB    Space Infrastructure           3     17    +47.7%      17.0%       -23     3  XLI (9)    
+AMKR    Semiconductor Equipment        3     17    +32.3%      15.4%       -20    10  XLK (3)    
+CPRI    Footwear/Apparel [MLg]         4     17    +21.3%      18.1%        NA     1  XLY (7)    
+XP      Financial Services             3     17     +6.8%       5.8%        -9     2  XLF (6)    
+CRH     Building Materials [MLg]       3     17     +8.3%      12.6%        -5    27  XLI (9)    
+KKR     Financial Services             3     18     +9.6%      13.7%        -5     4  XLF (6)    
+FISV    Banking                        4     19     +6.9%       3.7%        +6     2  XLK (3)    
+MP      Gold Mining                    5     19     +9.1%       9.7%       -24     4  XLB (4)    
+ONON    Footwear/Apparel [MLg]         3     19    +20.2%      22.7%        NA     1  XLY (7)    
+DB      Banking                        4     19    +13.2%      28.4%        -6     2  XLF (6)    
+PAAS    Silver Mining                  3     19    +25.5%      23.8%       -14     5  XLB (4)    
+SARO    Aerospace & Defense            4     20    +13.5%      19.9%        -7    43  XLI (9)    
+TPG     Financial Services             4     20    +17.5%      21.0%        +2     4  XLF (6)    
+WY      Building Materials [MLg]       4     20     +5.0%      10.7%        -3    38  XLI (9)    
+CORZ    Digital Assets Infra [MLg]     3     20     +8.9%       7.3%       -23    14  XLF (6)    
+VALE    Gold Mining                    5     20     +3.8%       6.7%        -6     4  XLB (4)    
+DECK    Footwear/Apparel [MLg]         3     20     +3.9%       7.0%        NA     1  XLY (7)    
+APO     Financial Services             4     21    +13.9%      26.6%        -6     4  XLF (6)    
+AMRZ    Building Materials [MLg]       5     21    +11.5%      13.9%       -21    26  XLI (9)    
+GNTX    Automotive Technology          3     21      0.0%       0.0%        +2    14  XLY (7)    
+ENPH    Solar Infrastructure           4     21    +13.9%       7.9%        +7     2  XLE (1)    
+CEG     Nuclear Infrastructure         3     22     +9.5%      13.6%       -23     3  XLE (1)    
+UBER    Transportation Platf [MLg]     4     22      0.0%       0.0%        -7     3  XLK (3)    
+THRM    Automotive Technology          3     22    +21.7%      29.1%       -41     3  XLY (7)    
+CWK     REITs                          4     22     +9.3%      16.7%        NA     1  XLF (6)    
+BCS     Banking                        4     22    +11.9%      28.2%       -19     2  XLF (6)    
+EQX     Gold Mining                    4     22    +21.0%      17.9%       -24     4  XLB (4)    
+BX      Financial Services             3     22    +14.3%      23.8%        -5     4  XLF (6)    
+SCHW    Banking                        3     23     +4.6%      14.0%        -9     2  XLF (6)    
+CAVA    Restaurants                    3     24    +19.0%      15.4%       -12     3  XLY (7)    
+BAC     Banking                        4     25     +8.5%      21.9%       -12     2  XLF (6)    
+RBA     Banking                        3     25     +6.5%      13.2%       -11     2  XLK (3)    
+KGC     Gold Mining                    4     25     +3.4%       4.8%       -24     4  XLB (4)    
+WSC     REITs                          3     27    +17.8%      18.9%        NA     1  XLF (6)    
+BN      REITs                          5     27     +5.8%      15.7%        NA     1  XLF (6)    
+TTMI    Electronics Manufacturing      3     27    +48.5%      17.4%       -11     4  XLK (3)    
+AG      Silver Mining                  4     27    +46.6%      23.3%       -29     5  XLB (4)    
+BNL     REITs                          3     28      0.0%       0.0%        NA     1  XLF (6)    
+CCJ     Uranium Mining                 3     28     +4.8%       6.9%       -25     3  XLE (1)    
+ALLY    Banking                        5     28     +7.7%      24.4%       -10     2  XLF (6)    
+AGI     Gold Mining                    3     28    +12.0%      12.2%       -24     4  XLB (4)    
+HAYW    Semiconductor Equipment        4     29    +14.8%      28.2%       -16    10  XLK (3)    
+AXP     Financial Services             3     29     +7.1%      22.3%       -10     3  XLF (6)    
+GLPI    REITs                          3     29     +3.2%      10.0%        NA     1  XLF (6)    
+MCD     Restaurants                    4     31     +8.1%      16.9%        -9     3  XLY (7)    
+IR      Industrial Automation          3     32    +10.2%      23.1%       -14     4  XLI (9)    
+RYN     Building Materials [MLg]       4     32     +6.8%      18.5%       -16    40  XLI (9)    
+AVGO    AI Infrastructure              3     33    +16.7%      26.0%       -19     5  XLK (3)    
+EPRT    REITs                          4     33     +7.9%      20.2%        NA     1  XLF (6)    
+HBAN    Banking                        5     34     +4.6%      16.2%       -12     2  XLF (6)    
+BAM     Financial Services             3     34     +9.1%      29.9%        NA     1  XLF (6)    
+DEI     REITs                          4     35     +9.6%      21.1%        NA     1  XLF (6)    
+PLD     REITs                          3     36     +3.3%      14.7%        NA     1  XLF (6)    
+ELS     REITs                          4     39     +3.2%      17.4%        NA     1  XLF (6)    
+SEDG    Solar Infrastructure           3     40    +13.0%       7.4%       -16     2  XLE (1)    
+FLEX    Electronics Manufacturing      3     40    +52.9%      26.8%       -29     4  XLK (3)    
+VST     Nuclear Infrastructure         3     40     +8.9%      17.9%       -22     3  XLU (8)    
+FHB     Banking                        3     41     +8.0%      27.1%       -18     2  XLF (6)    
+CX      Building Materials [MLg]       3     41    +12.7%      28.4%       -22     9  XLI (9)    
+UDR     REITs                          3     44     +7.0%      29.4%        NA     1  XLF (6)    
+O       REITs                          3     44     +6.5%      24.4%        NA     1  XLF (6)    
+NNN     REITs                          3     46     +6.9%      25.5%        NA     1  XLF (6)    
+CARR    Building Materials [MLg]       3     53    +14.8%      29.1%       -21    19  XLI (9)    
+ALGM    Semiconductors                 3     57    +49.0%      23.9%       -23     4  XLK (3)    
 
 TRADINGVIEW WATCHLIST EXPORT
-###Strong_Bullish,IOVA,RXO,RRC,TENB,NTSK,FIGS,TEAM,APPN,AMPL,AMN,QLYS,RBRK,ANF,SG,BOX,CAI,HAS,ARHS,KSS,ESTC,CBRL,NIQ,DOCU,CVLT,AVPT,CVI,HNGE,OKTA,APA,RNG,ASO,PR,COP,SM,OVV,EXLS,MUR,PTEN,SAIL,CON,TALO,
-###Mild_Bullish,ZS,WK,OPCH,ACN,PD,NOG,AR,NCNO,NAVN,CNX,TIC,BSY,BAH,MTDR,MPC,SNPS,EQNR,LNG,EOG,FROG,VNOM,ADSK,CVX,NTAP,OXY,MDB,TRGP,XOM,ILMN,BP,DVN,SHEL,CRM,PATH,KNTK,ADP,DINO,FANG,PSX,CRGY,CNC,GEN,VNT,HUM,FTNT,AVAH,TXG,ELV,TTE,UNH,CDNS,PENG,EC,BKR,INGM,APG,VLO,CVE,OSCR,AFRM,DK,SEI,WES,
+###Long,RRC,AMPL,TEAM,FIGS,NTSK,AMN,RXO,IOVA,APPN,TENB,ZS,CAI,HAS,RBRK,SG,ACN,QLYS,ANF,BOX,WK,OPCH,NOG,PD,NIQ,ARHS,DOCU,KSS,ESTC,CBRL,APA,OKTA,AVPT,AR,HNGE,CVLT,CVI,NCNO,TIC,NAVN,ASO,RNG,CNX,BAH,PR,CXT,SM,OVV,COP,EXLS,MTDR,PTEN,MUR,SAIL,CON,SNPS,MPC,TALO,EQNR,EOG,VNOM,PRGS,FROG,LNG,MDB,CVX,CHRD,OXY,NTAP,BP,XOM,TRGP,ILMN,DVN,
 ###Short,APLD,BLDR,UPST,GLXY,PL,HDB,NFLX,LUNR,FIS,BA,FLG,LULU,CG,ARR,FSLR,HON,CDE,CMG,RKT,RIOT,BROS,MOS,CBRE,NKE,HL,COIN,ROL,RKLB,AMKR,CPRI,XP,CRH,KKR,FISV,MP,ONON,DB,PAAS,SARO,TPG,WY,CORZ,VALE,DECK,APO,AMRZ,GNTX,ENPH,CEG,UBER,THRM,CWK,BCS,EQX,BX,SCHW,CAVA,BAC,RBA,KGC,WSC,BN,TTMI,AG,BNL,CCJ,ALLY,AGI,HAYW,AXP,GLPI,MCD,IR,RYN,AVGO,EPRT,HBAN,BAM,DEI,PLD,ELS,SEDG,FLEX,VST,FHB,CX,UDR,O,NNN,CARR,ALGM,
-###Leading_ETF,XOP,CIBR,IGV,IHI,CLOU,CRAK,FCG,
+###Leading_ETF,XOP,IGV,IHI,CIBR,CLOU,CRAK,FCG,
 ###Lagging_ETF,KRE,ARKX,FDN,ITA,VNQ,TAN,ROBO,GDX,MENU,MOO,SIL,SMH,AIQ,NLR,PAVE,URNM,LIT,DAPP,XRT,IYT,
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,DINO,DK,MPC,PSX,SHOP,TW,URBN,^FRSH,^PCTY,^WK,
-###Dropped_Bearish_Stocks,EGO,HUT,SLM,
 ###Dropped_Leading_ETF,FDN,XBI,XRT,
 ###Dropped_Lagging_ETF,
 

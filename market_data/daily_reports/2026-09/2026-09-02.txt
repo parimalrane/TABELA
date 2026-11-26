@@ -49,17 +49,22 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Macro Theme        Micro Theme                Tot Qual W_Brdth ETF_RS   Macro State & Movement      ETFs                   Stocks
 -------------------------------------------------------------------------------------------------------------------------------------------------
-Biotech            Biotech                     84   25  125.76  15.64   Leading (1 -> -5)           [XLV] XBI, IBB         HALO
-Exploration        Refining & Marketing         8    8  209.83   9.07   Leading (5 -> -4)           [XLE] CRAK             PBF, MPC, DINO, VLO, DK
-Exploration        Exploration                 85   18   87.48   9.07   Leading (5 -> -4)           [XLE] XOP, IEO         NESR, TALO
-Healthcare         Healthcare                  38    7   64.21   5.86   Leading (11 -> -5)          [XLV] IHI, XBI         LFST, RVTY
-Healthcare         Healthcare Services         12    2   40.62   5.86   Leading (11 -> -5)          [XLV] IHI, XBI         AVAH
-Cloud Computing    Communications Cloud         4    -       -   5.47   Neutral (12 -> +9)          [XLK] CLOU, FCOM       FIVN
-Medical Devices    Life Sciences Tools          5    3  102.13   5.00   Leading (14 -> +3)          [XLV] IHI, XHE         AVTR
+Biotech            Biotech                     84   40  195.00  15.64   Leading (1 -> -5)           [XLV] XBI, IBB         HALO, RGEN
+Exploration        Refining & Marketing         8    8  209.83   9.07   Leading (5 -> -4)           [XLE] CRAK             MPC, DINO, PBF, DK, VLO, PARR
+Exploration        Energy                      15    8  138.62   9.07   Leading (5 -> -4)           [XLE] XOP, IEO         CNR
+Exploration        Exploration                 85   27  128.74   9.07   Leading (5 -> -4)           [XLE] XOP, IEO         NESR, TALO
+Exploration        Oil Services                 5    4  123.63   9.07   Leading (5 -> -4)           [XLE] OIH, XES         OII
+Pharma             Pharma                      44   12   97.41   8.95   Leading (6 -> -3)           [XLV] XPH, IHE         BCRX
+Healthcare         Healthcare                  38    8   72.78   5.86   Leading (11 -> -5)          [XLV] IHI, XBI         LFST, CRL, RVTY
+Healthcare         Healthcare Services         12    3   58.78   5.86   Leading (11 -> -5)          [XLV] IHI, XBI         AVAH, CON
+Cloud Computing    Communications Cloud         4    -       -   5.47   Neutral (12 -> +9)          [XLK] CLOU, FCOM       FIVN, TWLO
+Medical Devices    Life Sciences Tools          5    4  134.02   5.00   Leading (14 -> +3)          [XLV] IHI, XHE         AVTR
+Medical Devices    Medical Devices             86   20   98.16   5.00   Leading (14 -> +3)          [XLV] IHI, XHE         ATRC
 Medical Devices    Diagnostics                  9    4   96.70   5.00   Leading (14 -> +3)          [XLV] IHI, XHE         CDNA, NEO
-Medical Devices    Medical Devices             86   16   80.21   5.00   Leading (14 -> +3)          [XLV] IHI, XHE         ATRC
+Software           Data Infrastructure          4    2   78.46   2.18   Micro Leader (IGV)          [XLK] IGV, CLOU        ESTC
 Internet           Digital Advertising          6    2   61.29   1.58   Micro Leader (breadth)      [XLC] FDN              MGNI
-Banking            Financial Services          64    5   31.17   0.94   Micro Leader (KRE)          [XLF] KRE, KCE         CHYM
+Banking            Financial Services          64    7   42.34   0.94   Micro Leader (KRE)          [XLF] KRE, KCE         CHYM
+Internet           Media Distribution          28    3   32.58   1.58   Micro Leader (breadth)      [XLC] FDN              NMAX, ROKU
 Insurance          Insurance                   63    -       -   3.74   Neutral (15 -> +2)          [XLF] KIE, IAK         ARX
 Software           Software                   190    -       -   1.84   Neutral (20 -> +10)         [XLK] IGV, XSW         NIQ, PAYC
 Internet           Leisure and Entertainment   54   33  181.74   1.58   Micro Lagging (breadth)     [XLC] FDN              #DKNG, #FUN, #RBLX
@@ -80,139 +85,125 @@ Consumer Staples   Consumer Staples            66   44  176.10   0.00   Lagging 
 Infrastructure     Industrial Automation       48   33  171.73  -5.29   Lagging (40 -> -2)          [XLI] ROBO, BOTZ       #IR, #OTIS
 Infrastructure     Homebuilders                 4    4  122.32  -5.29   Lagging (40 -> -2)          [XLY] XHB, ITB         #LEN
 Infrastructure     Solar Infrastructure         4    2   57.94  -5.29   Lagging (40 -> -2)          [XLU] TAN              #ENPH, #SEDG
+Consumer Staples   Restaurants                 26    1   10.91   0.00   Lagging                     [XLY] MENU, PBJ        EAT
 Aerospace & Defe.. Aerospace & Defense         36   28  209.54  -6.31   Lagging (41 -> -1)          [XLI] ITA, XAR         #FLY, #RDW, #SARO
 Aerospace & Defe.. Space Infrastructure         5    3   95.32  -6.31   Lagging (41 -> -1)          [XLI] ARKX, ITA        #ASTS, #LUNR
 Semiconductors     Semiconductors              46   23  132.83  -6.88   Lagging (42 -> +4)          [XLK] SMH, SOXX        #NXPI
 Semiconductors     Foundry                      3    1   32.81  -6.88   Lagging (42 -> +4)          [XLK] SMH, SOXX        #GFS
 
-=============================================================================================
-1. STRONG BULLISH UNIVERSE (Active Momentum Breakouts & Leaders)
-Criteria: RS >= 90 | 52W Range >= 85% | Zacks 1-2 | Leading Themes Only
-Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Momentum Carve-Out (RS >= 95, Zacks 3 with Growth A/B) | * = Independent Leader (RS >= 95 Theme Exemption)
-=============================================================================================
-Ticker  Mapped_Theme               Zacks  RS_Rating  % off Hi  Movement  Days  Sector (Rk)
-*ARX    Insurance                      2         99     -7.2%        NA     1  XLF (5)    
-CHYM    Financial Services [ML]        1         99      0.0%        +6    11  XLF (5)    
-AVAH    Healthcare Services            2         99     -4.5%        -1     6  XLV (2)    
-*NIQ    Software                       1         99     -4.6%        +1    10  XLK (3)    
-^ATRC   Medical Devices                1         99      0.0%        +4     2  XLV (2)    
-*PAYC   Software                       1         98     -1.2%        -2     2  XLK (3)    
-PBF     Refining & Marketing           1         97      0.0%       +12     2  XLE (1)    
-MPC     Refining & Marketing           2         97      0.0%       +10     3  XLE (1)    
-DINO    Refining & Marketing           1         97      0.0%       +14     2  XLE (1)    
-LFST    Healthcare                     2         97      0.0%        NA     1  XLV (2)    
-HALO    Biotech                        2         97      0.0%         0    12  XLV (2)    
-*ANF    Footwear/Apparel [MLg]         2         96     -8.0%       -11     4  XLY (11)   
-CDNA    Diagnostics                    1         96     -5.3%        -3    19  XLV (2)    
-MGNI    Digital Advertising [ML]       2         96     -4.1%        NA     1  XLK (3)    
-NESR    Exploration                    1         95     -4.3%         0     4  XLE (1)    
-FIVN    Communications Cloud           1         94     -2.8%         0     3  XLK (3)    
-VLO     Refining & Marketing           1         94      0.0%        +4     2  XLE (1)    
-DK      Refining & Marketing           1         94     -3.9%        +2     2  XLE (1)    
-AVTR    Life Sciences Tools            2         91     -6.1%        NA     1  XLV (2)    
-NEO     Diagnostics                    2         91     -6.7%        -3    12  XLV (2)    
-TALO    Exploration                    1         91     -2.9%        NA     1  XLE (1)    
-RVTY    Healthcare                     2         90      0.0%        NA     1  XLV (2)    
+=================================================================================================
+1. LONG UNIVERSE (Institutional Leaders)
+Criteria: Leading Themes | Zacks 1-2 | RS >= 85 | 52W Range >= 50%
+Legend: ~ = Unknown/Unclassified | [ML] = Micro Leader | ^ = Elite Carve-Out (Z3 Growth A/B) | * = Independent Leader (RS >= 95)
+=================================================================================================
+Ticker  Mapped_Theme               Zacks     RS  % off Hi  52W Range  Movement  Days  Sector (Rk)
+CHYM    Financial Services [ML]        1     99      0.0%     100.0%        +7    11  XLF (5)    
+AVAH    Healthcare Services            2     99     -4.5%      91.8%        +3     6  XLV (2)    
+*ARX    Insurance                      2     99     -7.2%      87.2%        NA     1  XLF (5)    
+*NIQ    Software                       1     99     -4.6%      92.1%        +2    10  XLK (3)    
+ATRC    Medical Devices                1     99      0.0%     100.0%        +5     5  XLV (2)    
+*PAYC   Software                       1     98     -1.2%      97.7%        -2     9  XLK (3)    
+MPC     Refining & Marketing           2     97      0.0%     100.0%       +10     8  XLE (1)    
+DINO    Refining & Marketing           1     97      0.0%     100.0%       +17     3  XLE (1)    
+LFST    Healthcare                     2     97      0.0%     100.0%        NA     1  XLV (2)    
+HALO    Biotech                        2     97      0.0%     100.0%        -1    12  XLV (2)    
+ESTC    Data Infrastructure [ML]       1     97    -10.3%      81.8%        -4     4  XLK (3)    
+PBF     Refining & Marketing           1     97      0.0%     100.0%       +10     2  XLE (1)    
+MGNI    Digital Advertising [ML]       2     96     -4.1%      92.7%        +2    15  XLK (3)    
+*ANF    Footwear/Apparel [MLg]         2     96     -8.0%      85.7%       -12     4  XLY (11)   
+CDNA    Diagnostics                    1     96     -5.3%      93.0%        -4    19  XLV (2)    
+NESR    Exploration                    1     95     -4.3%      94.2%         0     4  XLE (1)    
+NMAX    Media Distribution [ML]        2     95    -22.5%      64.7%        NA     1  XLY (11)   
+FIVN    Communications Cloud           1     94     -2.8%      95.3%        +2    13  XLK (3)    
+DK      Refining & Marketing           1     94     -3.9%      93.9%        +2     4  XLE (1)    
+VLO     Refining & Marketing           1     94      0.0%     100.0%        +3     4  XLE (1)    
+PARR    Refining & Marketing           1     92     -6.8%      89.0%        NA     1  XLE (1)    
+CRL     Healthcare                     2     92     -2.3%      95.5%       -10    19  XLV (2)    
+CNR     Energy                         1     91     -9.3%      75.1%        +1     5  XLE (1)    
+NEO     Diagnostics                    2     91     -6.7%      89.2%        -6    23  XLV (2)    
+TALO    Exploration                    1     91     -2.9%      94.1%        +9     2  XLE (1)    
+AVTR    Life Sciences Tools            2     91     -6.1%      88.4%        +6     3  XLV (2)    
+RVTY    Healthcare                     2     90      0.0%     100.0%        NA     1  XLV (2)    
+BCRX    Pharma                         2     87     -8.5%      80.7%        NA     1  XLV (2)    
+EAT     Restaurants                    2     86     -9.0%      84.9%        NA     1  XLY (11)   
+TWLO    Communications Cloud           1     86    -11.4%      81.3%        +1     3  XLK (3)    
+RGEN    Biotech                        1     85     -5.0%      88.5%       -12    12  XLV (2)    
+ROKU    Media Distribution [ML]        1     85     -1.3%      97.3%        NA     1  XLY (11)   
+CON     Healthcare Services            1     85     -4.2%      91.1%        NA     1  XLV (2)    
+OII     Oil Services                   2     85     -4.6%      92.2%        NA     1  XLE (1)    
 
-=============================================================================================
-2. MILD BULLISH UNIVERSE (Institutional Pullbacks & Reversals)
-Criteria: Leading or [ML] | Zacks 1-2 (Z3 if RS >= 95 & Growth A/B/C) | Range >= 40% | RS >= 50
-=============================================================================================
-Ticker  Theme / Sector             Zacks         RS  % off Hi       YTD  52W Range  
-ESTC    Data Infrastructure            1         97    -10.3%     +6.0%  81.8%      
-NMAX    Media Distribution             2         95    -22.5%    +27.1%  64.7%      
-BCRX    Pharma                         2         87     -8.5%    +16.4%  80.7%      
-TWLO    Communications Cloud           1         86    -11.4%    +42.3%  81.3%      
-ROKU    Media Distribution             1         85     -1.3%    +29.8%  97.3%      
-SXC     Energy                         2         84      0.0%    +31.1%  100.0%     
-SONY    Media Distribution             2         83    -18.5%    -14.0%  48.7%      
-CLBK    Financial Services             2         82     -1.4%    +47.3%  97.0%      
-TAK     Pharma                         1         82     -2.0%     +5.6%  93.4%      
-ADM     Agribusiness                   1         79     -2.2%    +32.6%  93.8%      
-NEOG    Food Safety                    2         78     -2.8%    +50.9%  95.1%      
-NVCR    Biotech                        2         78    -10.8%    +23.1%  78.3%      
-VIRT    Financial Services             1         72     -7.7%    +68.0%  85.3%      
-NWS     Media Distribution             1         65     -2.6%     +3.7%  90.6%      
-OSCR    Healthcare Services            1         58     -7.4%    +88.5%  88.9%      
-IVZ     Financial Services             1         58     -4.8%     +7.8%  86.4%      
-CNC     Healthcare                     1         57     -2.0%    +46.1%  96.6%      
-NVST    Medical Devices                1         51     -9.5%    +12.7%  74.6%      
-
-=============================================================================================
-3. SHORT UNIVERSE (Stage 4 Breakdown & Short Candidates)
-Criteria: Short_RS 8-60 | 52W Range <= 30% | Zacks 3-5 | Lagging Themes Only
+=================================================================================================
+2. SHORT UNIVERSE (Stage 4 Candidates)
+Criteria: Lagging Themes | Zacks 3-5 | Short_RS 8-60 | 52W Range <= 30%
 Legend: [MLg] = Micro Lagging
-=============================================================================================
-Ticker  Mapped_Theme               Zacks   Short_RS  % off Lo  Movement  Days  Sector (Rk)
-BIRK    Footwear/Apparel [MLg]         3          8     +8.3%         0     4  XLY (11)   
-BXMT    REITs                          5          8     +2.1%        NA     1  XLF (5)    
-SARO    Aerospace & Defense            3          8      0.0%        +3     5  XLI (7)    
-CRH     Building Materials             3          8     +1.6%        +1     2  XLI (7)    
-ASTS    Space Infrastructure           3          9    +69.1%        NA     1  XLK (3)    
-NXT     Infrastructure                 3          9    +28.3%        -3     4  XLE (1)    
-RBLX    Leisure and Entertai [MLg]     3          9    +16.0%        NA     1  XLY (11)   
-FLY     Aerospace & Defense            3         10    +25.6%        -6     9  XLI (7)    
-OLN     Infrastructure                 3         10     +3.1%        NA     1  XLB (4)    
-RDDT    Social Media Platfor [MLg]     3         10    +29.8%        NA     1  XLK (3)    
-FUN     Leisure and Entertai [MLg]     5         10    +20.6%        NA     1  XLY (11)   
-ACI     Consumer Staples               5         10    +13.1%        NA     1  XLP (6)    
-HE      Infrastructure                 5         11     +0.6%        -2     3  XLU (10)   
-GPK     Infrastructure                 3         11    +23.2%        +2    15  XLI (7)    
-BN      REITs                          3         12     +3.8%        +6     3  XLF (5)    
-LUNR    Space Infrastructure           3         12    +84.6%        +1     6  XLI (7)    
-DKNG    Leisure and Entertai [MLg]     3         12    +16.8%        -7     9  XLY (11)   
-PINS    Social Media Platfor [MLg]     3         12    +37.6%        -5     2  XLK (3)    
-LEN     Homebuilders                   5         13     +2.1%        -4     6  XLI (7)    
-BTDR    Digital Assets Infra [MLg]     3         15    +47.5%       -13     5  XLK (3)    
-CCI     REITs                          3         15     +2.4%        -7    11  XLF (5)    
-CORZ    Digital Assets Infra [MLg]     3         15    +23.9%        NA     1  XLF (5)    
-CLX     Consumer Staples               5         17     +9.5%        NA     1  XLP (6)    
-OTIS    Industrial Automation          3         17     +2.1%        -4     3  XLI (7)    
-LKQ     Automotive Technology          5         19    +10.2%        +4     5  XLY (11)   
-STWD    REITs                          4         19     +1.9%        -7    22  XLF (5)    
-IR      Industrial Automation          3         20     +9.4%        +4     2  XLI (7)    
-VICI    REITs                          3         20     +0.3%        -5    22  XLF (5)    
-TAP     Consumer Staples               3         20     +5.5%        NA     1  XLP (6)    
-CLSK    Digital Assets Infra [MLg]     3         21    +38.5%       -12     4  XLF (5)    
-RYN     Building Materials             3         22     +3.7%        -1     2  XLI (7)    
-ENPH    Solar Infrastructure           3         22    +36.0%        -4    12  XLE (1)    
-PEG     Infrastructure                 3         22     +1.0%        -8    15  XLU (10)   
-NI      Infrastructure                 3         25     +4.5%        -8    10  XLU (10)   
-CMS     Infrastructure                 4         25     +0.1%        -2    15  XLU (10)   
-GNTX    Automotive Technology          3         25    +10.4%        -9     3  XLY (11)   
-KR      Consumer Staples               4         26     +4.8%        NA     1  XLY (11)   
-CPB     Consumer Staples               4         27    +18.9%        NA     1  XLP (6)    
-TSN     Consumer Staples               4         27    +10.0%        NA     1  XLP (6)    
-LBTYA   Infrastructure                 4         28    +10.2%        NA     1  XLU (10)   
-GFS     Foundry                        3         29    +38.8%        -5     9  XLK (3)    
-SO      Infrastructure                 3         29     +5.0%        -7     3  XLU (10)   
-VST     Nuclear Infrastructu [MLg]     3         29     +6.5%       -31     3  XLU (10)   
-IREN    Digital Assets Infra [MLg]     3         29    +51.5%       -35     3  XLF (5)    
-WEC     Infrastructure                 3         30     +2.2%        -7     8  XLU (10)   
-NXPI    Semiconductors                 3         30    +24.1%       -14    10  XLK (3)    
-SUI     REITs                          3         30     +2.5%        -8     3  XLF (5)    
-PPL     Infrastructure                 3         31     +3.8%       -14     9  XLU (10)   
-CNP     Infrastructure                 3         32     +5.9%        NA     1  XLU (10)   
-LNT     Infrastructure                 3         33     +6.5%        NA     1  XLU (10)   
-PEP     Consumer Staples               3         33     +4.1%        NA     1  XLP (6)    
-SEDG    Solar Infrastructure           3         34    +19.4%        NA     1  XLE (1)    
-COIN    Digital Assets Infra [MLg]     5         34    +24.0%       -10     2  XLF (5)    
-MARA    Digital Assets Infra [MLg]     3         36    +55.6%       -14     4  XLF (5)    
-JBS     Consumer Staples               3         36    +16.5%        NA     1  XLP (6)    
-ARE     REITs                          3         52    +30.5%       -15     9  XLF (5)    
-RDW     Aerospace & Defense            3         53   +104.2%        NA     1  XLI (7)    
+=================================================================================================
+Ticker  Mapped_Theme               Zacks     RS  % off Lo  52W Range  Movement  Days  Sector (Rk)
+BIRK    Footwear/Apparel [MLg]         3      8     +8.3%      12.4%         0     4  XLY (11)   
+BXMT    REITs                          5      8     +2.1%       4.2%        NA     1  XLF (5)    
+SARO    Aerospace & Defense            3      8      0.0%       0.0%        +3     5  XLI (7)    
+CRH     Building Materials             3      8     +1.6%       3.7%        +1     2  XLI (7)    
+ASTS    Space Infrastructure           3      9    +69.1%      26.5%        NA     1  XLK (3)    
+NXT     Infrastructure                 3      9    +28.3%      19.8%        -3     4  XLE (1)    
+RBLX    Leisure and Entertai [MLg]     3      9    +16.0%       5.3%        NA     1  XLY (11)   
+FLY     Aerospace & Defense            3     10    +25.6%      10.2%        -6     9  XLI (7)    
+OLN     Infrastructure                 3     10     +3.1%       4.1%        NA     1  XLB (4)    
+RDDT    Social Media Platfor [MLg]     3     10    +29.8%      24.4%        NA     1  XLK (3)    
+FUN     Leisure and Entertai [MLg]     5     10    +20.6%      19.0%        NA     1  XLY (11)   
+ACI     Consumer Staples               5     10    +13.1%      16.6%        NA     1  XLP (6)    
+HE      Infrastructure                 5     11     +0.6%       1.0%        -2     3  XLU (10)   
+GPK     Infrastructure                 3     11    +23.2%      15.5%        +2    15  XLI (7)    
+BN      REITs                          3     12     +3.8%      13.3%        +6     3  XLF (5)    
+LUNR    Space Infrastructure           3     12    +84.6%      18.1%        +1     6  XLI (7)    
+DKNG    Leisure and Entertai [MLg]     3     12    +16.8%      12.8%        -7     9  XLY (11)   
+PINS    Social Media Platfor [MLg]     3     12    +37.6%      25.7%        -5     2  XLK (3)    
+LEN     Homebuilders                   5     13     +2.1%       2.9%        -4     6  XLI (7)    
+BTDR    Digital Assets Infra [MLg]     3     15    +47.5%      18.6%       -13     5  XLK (3)    
+CCI     REITs                          3     15     +2.4%       6.9%        -7    11  XLF (5)    
+CORZ    Digital Assets Infra [MLg]     3     15    +23.9%      20.8%        NA     1  XLF (5)    
+CLX     Consumer Staples               5     17     +9.5%      19.9%        NA     1  XLP (6)    
+OTIS    Industrial Automation          3     17     +2.1%       6.1%        -4     3  XLI (7)    
+LKQ     Automotive Technology          5     19    +10.2%      18.5%        +4     5  XLY (11)   
+STWD    REITs                          4     19     +1.9%       5.6%        -7    22  XLF (5)    
+IR      Industrial Automation          3     20     +9.4%      21.4%        +4     2  XLI (7)    
+VICI    REITs                          3     20     +0.3%       0.8%        -5    22  XLF (5)    
+TAP     Consumer Staples               3     20     +5.5%      13.2%        NA     1  XLP (6)    
+CLSK    Digital Assets Infra [MLg]     3     21    +38.5%      21.0%       -12     4  XLF (5)    
+RYN     Building Materials             3     22     +3.7%       9.8%        -1     2  XLI (7)    
+ENPH    Solar Infrastructure           3     22    +36.0%      20.3%        -4    12  XLE (1)    
+PEG     Infrastructure                 3     22     +1.0%       5.0%        -8    15  XLU (10)   
+NI      Infrastructure                 3     25     +4.5%      18.3%        -8    10  XLU (10)   
+CMS     Infrastructure                 4     25     +0.1%       0.8%        -2    15  XLU (10)   
+GNTX    Automotive Technology          3     25    +10.4%      25.8%        -9     3  XLY (11)   
+KR      Consumer Staples               4     26     +4.8%      13.4%        NA     1  XLY (11)   
+CPB     Consumer Staples               4     27    +18.9%      26.9%        NA     1  XLP (6)    
+TSN     Consumer Staples               4     27    +10.0%      28.2%        NA     1  XLP (6)    
+LBTYA   Infrastructure                 4     28    +10.2%      29.6%        NA     1  XLU (10)   
+GFS     Foundry                        3     29    +38.8%      21.1%        -5     9  XLK (3)    
+SO      Infrastructure                 3     29     +5.0%      27.0%        -7     3  XLU (10)   
+VST     Nuclear Infrastructu [MLg]     3     29     +6.5%      10.5%       -31     3  XLU (10)   
+IREN    Digital Assets Infra [MLg]     3     29    +51.5%      26.8%       -35     3  XLF (5)    
+WEC     Infrastructure                 3     30     +2.2%      14.6%        -7     8  XLU (10)   
+NXPI    Semiconductors                 3     30    +24.1%      29.8%       -14    10  XLK (3)    
+SUI     REITs                          3     30     +2.5%      15.6%        -8     3  XLF (5)    
+PPL     Infrastructure                 3     31     +3.8%      19.5%       -14     9  XLU (10)   
+CNP     Infrastructure                 3     32     +5.9%      28.4%        NA     1  XLU (10)   
+LNT     Infrastructure                 3     33     +6.5%      28.6%        NA     1  XLU (10)   
+PEP     Consumer Staples               3     33     +4.1%      15.7%        NA     1  XLP (6)    
+SEDG    Solar Infrastructure           3     34    +19.4%      11.0%        NA     1  XLE (1)    
+COIN    Digital Assets Infra [MLg]     5     34    +24.0%      13.8%       -10     2  XLF (5)    
+MARA    Digital Assets Infra [MLg]     3     36    +55.6%      23.2%       -14     4  XLF (5)    
+JBS     Consumer Staples               3     36    +16.5%      28.2%        NA     1  XLP (6)    
+ARE     REITs                          3     52    +30.5%      26.2%       -15     9  XLF (5)    
+RDW     Aerospace & Defense            3     53   +104.2%      25.3%        NA     1  XLI (7)    
 
 TRADINGVIEW WATCHLIST EXPORT
-###Strong_Bullish,ARX,CHYM,AVAH,NIQ,ATRC,PAYC,PBF,MPC,DINO,LFST,HALO,ANF,CDNA,MGNI,NESR,FIVN,VLO,DK,AVTR,NEO,TALO,RVTY,
-###Mild_Bullish,ESTC,NMAX,BCRX,TWLO,ROKU,SXC,SONY,CLBK,TAK,ADM,NEOG,NVCR,VIRT,NWS,OSCR,IVZ,CNC,NVST,
+###Long,CHYM,AVAH,ARX,NIQ,ATRC,PAYC,MPC,DINO,LFST,HALO,ESTC,PBF,MGNI,ANF,CDNA,NESR,NMAX,FIVN,DK,VLO,PARR,CRL,CNR,NEO,TALO,AVTR,RVTY,BCRX,EAT,TWLO,RGEN,ROKU,CON,OII,
 ###Short,BIRK,BXMT,SARO,CRH,ASTS,NXT,RBLX,FLY,OLN,RDDT,FUN,ACI,HE,GPK,BN,LUNR,DKNG,PINS,LEN,BTDR,CCI,CORZ,CLX,OTIS,LKQ,STWD,IR,VICI,TAP,CLSK,RYN,ENPH,PEG,NI,CMS,GNTX,KR,CPB,TSN,LBTYA,GFS,SO,VST,IREN,WEC,NXPI,SUI,PPL,CNP,LNT,PEP,SEDG,COIN,MARA,JBS,ARE,RDW,
-###Leading_ETF,IHI,CRAK,XBI,XOP,CLOU,GDX,SIL,XPH,MOO,IGV,FDN,KRE,
+###Leading_ETF,IHI,CRAK,XBI,XOP,CLOU,XPH,OIH,GDX,SIL,MOO,IGV,FDN,KRE,
 ###Lagging_ETF,VNQ,ITA,PAVE,ARKX,PBJ,XHB,ROBO,AIQ,TAN,SMH,LIT,DAPP,XRT,NLR,
 ==============================================
 DROPPED WATCHLIST EXPORT
 ==============================================
-###Dropped_Bullish_Stocks,APPN,CRL,ESTC,QMCO,SN,SXC,^QLYS,
-###Dropped_Bearish_Stocks,ALK,BRSL,CC,CEG,EXC,PL,
 ###Dropped_Leading_ETF,CIBR,
 ###Dropped_Lagging_ETF,IYT,
 

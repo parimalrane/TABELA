@@ -37,17 +37,36 @@ def calculate_bottom_up_theme_classification(stocks, top_down_theme_strength=Non
 
     df = stocks.copy()
 
-    # Clean price columns to calculate % off 52-week high
-    clean_close = pd.to_numeric(
-        df["Last Close"].astype(str).str.replace(r"[%$,]", "", regex=True),
-        errors="coerce"
-    )
-    clean_high = pd.to_numeric(
-        df["52 Week High"].astype(str).str.replace(r"[%$,]", "", regex=True),
-        errors="coerce"
-    )
-    
-    pct_off_hi = ((clean_high - clean_close) / clean_high * 100.0).fillna(999.0)
+    # Clean price columns to calculate % off 52-week high or range near highs
+    if "52 Week High" in df.columns and "Last Close" in df.columns:
+        clean_close = pd.to_numeric(
+            df["Last Close"].astype(str).str.replace(r"[%$,]", "", regex=True),
+            errors="coerce"
+        )
+        clean_high = pd.to_numeric(
+            df["52 Week High"].astype(str).str.replace(r"[%$,]", "", regex=True),
+            errors="coerce"
+        )
+        pct_off_hi = ((clean_high - clean_close) / clean_high * 100.0).fillna(999.0)
+    elif "% off Hi" in df.columns:
+        pct_off_hi = pd.to_numeric(
+            df["% off Hi"].astype(str).str.replace(r"[%$,]", "", regex=True),
+            errors="coerce"
+        ).abs().fillna(999.0)
+    elif "Price as a % of 52 Wk H-L Range" in df.columns:
+        range_val = pd.to_numeric(
+            df["Price as a % of 52 Wk H-L Range"].astype(str).str.replace(r"[%$,]", "", regex=True),
+            errors="coerce"
+        ).fillna(0.0)
+        pct_off_hi = (100.0 - range_val).clip(lower=0.0)
+    elif "52W Range" in df.columns:
+        range_val = pd.to_numeric(
+            df["52W Range"].astype(str).str.replace(r"[%$,]", "", regex=True),
+            errors="coerce"
+        ).fillna(0.0)
+        pct_off_hi = (100.0 - range_val).clip(lower=0.0)
+    else:
+        pct_off_hi = pd.Series(0.0, index=df.index)
 
     # Individual constituent leadership condition
     rs_col = pd.to_numeric(df.get("RS_Rating", 0), errors="coerce").fillna(0)
