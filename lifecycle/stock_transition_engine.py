@@ -118,6 +118,29 @@ def _meets_criteria(row, criteria_dict):
             vol_val = 0.0
         if vol_val < criteria_dict["MIN_VOLUME"]: return False
 
+    if "MAX_PCT_OFF_HIGH" in criteria_dict:
+        max_pct = criteria_dict["MAX_PCT_OFF_HIGH"]
+        hi_raw = row.get("52 Week High")
+        close_raw = row.get("Last Close")
+        if pd.notna(hi_raw) and pd.notna(close_raw):
+            try:
+                hi_val = float(str(hi_raw).replace('$', '').replace(',', '').strip())
+                close_val = float(str(close_raw).replace('$', '').replace(',', '').strip())
+                if hi_val > 0:
+                    pct_off_hi = (close_val - hi_val) / hi_val * 100.0
+                    if pct_off_hi > max_pct:
+                        return False
+            except (ValueError, TypeError):
+                pass
+        elif "Price as a % of 52 Wk H-L Range" in row and pd.notna(row["Price as a % of 52 Wk H-L Range"]):
+            try:
+                pos_52w = float(str(row["Price as a % of 52 Wk H-L Range"]).replace('%', '').strip())
+                max_52w = criteria_dict.get("MAX_52W_RANGE", 30.0)
+                if pos_52w > max_52w:
+                    return False
+            except (ValueError, TypeError):
+                pass
+
     return True
 
 def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFrame, stocks: pd.DataFrame = None) -> Tuple[Dict, Dict]:
@@ -201,15 +224,12 @@ def pre_distribution_update(registry: Dict, current_long_candidates: pd.DataFram
 def get_distribution_candidates(registry: Dict, stocks: pd.DataFrame) -> pd.DataFrame:
     """
     Identify short candidates using Stateless Daily Evaluation (Pure Breakdown Standards):
-    - Strict SHORT_ENTRY criteria + 52W Range Gate (<= 30%) evaluated fresh every day.
+    - Strict SHORT_ENTRY criteria + Distance Gate (% off Hi <= -20%) evaluated fresh every day.
     - No sticky stay buffer holding recovering stocks.
     """
 
     if stocks.empty:
         return stocks.iloc[0:0].copy()
-
-    max_52w = PULLBACK_CONFIG.get("SHORT_MAX_52W_RANGE", 30.0)
-    col_52w = "Price as a % of 52 Wk H-L Range"
 
     eligible = set()
     
@@ -217,14 +237,6 @@ def get_distribution_candidates(registry: Dict, stocks: pd.DataFrame) -> pd.Data
         ticker = str(row["Ticker"]).replace("*", "").strip().upper()
 
         if _meets_criteria(row, SHORT_ENTRY):
-            # 52W Range Gate at entry
-            if col_52w in row and pd.notna(row[col_52w]):
-                try:
-                    pos_52w = float(row[col_52w])
-                    if pos_52w > max_52w:
-                        continue
-                except (ValueError, TypeError):
-                    pass
             eligible.add(ticker)
 
     if not eligible:

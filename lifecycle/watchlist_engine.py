@@ -18,18 +18,26 @@ def build_long_watchlist(stocks, registry=None):
     growth_score = stocks_clean["Growth Score"].astype(str).str.strip().str.upper() if "Growth Score" in stocks_clean.columns else pd.Series("", index=stocks_clean.index)
 
     # 1. STATELESS DAILY EVALUATION (Unified Long Standards: Breakouts & Pullbacks)
-    min_rs = LONG_ENTRY.get("MIN_RS", 85.0)
+    min_rs = LONG_ENTRY.get("MIN_RS", 70.0)
+    min_pct_off_low = LONG_ENTRY.get("MIN_PCT_OFF_LOW", 50.0)
     min_52w = PULLBACK_CONFIG.get("LONG_MIN_52W_RANGE", 50.0)
     breakout_rs = LONG_ENTRY.get("BREAKOUT_MIN_RS", 90.0)
     breakout_range = PULLBACK_CONFIG.get("LONG_BREAKOUT_MIN_52W_RANGE", 85.0)
     allowed_zacks = LONG_ENTRY.get("ALLOWED_ZACKS", [1, 2])
 
-    # Standard Entry: Leading theme + Zacks 1-2 + RS >= 85 + Range >= 50%
+    if "52 Week Low" in stocks_clean.columns and "Last Close" in stocks_clean.columns:
+        low_clean = pd.to_numeric(stocks_clean["52 Week Low"].astype(str).str.replace(r'[%$,]', '', regex=True), errors="coerce").replace(0, float('nan'))
+        pct_off_low = ((close_numeric - low_clean) / low_clean * 100.0).fillna(0.0)
+    else:
+        # Fallback for historical files missing raw 52 Week Low
+        pct_off_low = range_52w.fillna(0.0)
+
+    # Standard Entry: Leading theme + Zacks 1-2 + RS >= 85 + % off Low >= 70%
     standard_entry_mask = (
         stocks_clean["Theme_Class"].isin(allowed_entry_themes)
         & (stocks_clean["RS_Rating"] >= min_rs)
         & (zacks_numeric.isin(allowed_zacks))
-        & (range_52w >= min_52w)
+        & (pct_off_low >= min_pct_off_low)
         & (close_numeric >= LONG_ENTRY.get("MIN_PRICE", 10.0))
         & (
             (vol_numeric >= LONG_ENTRY.get("MIN_VOLUME", 1_000_000))

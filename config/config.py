@@ -89,14 +89,15 @@ SECTOR_CLASSIFICATION_CONFIG = {
 # ==========================
 
 LONG_ENTRY = {
-    "MIN_RS": 85.0,                    # Minimum RS for Long eligibility (Pullback floor: top 15%)
+    "MIN_RS": 70.0,                    # Minimum RS for Long eligibility (relaxed to 70)
     "BREAKOUT_MIN_RS": 90.0,           # Minimum RS for Breakout classification (top 10%)
     "THEMES": ["Leading", "Unclassified Leader"],
     "ALLOWED_ZACKS": [1, 2],
     "BLOCKED_ZACKS": [3, 4, 5],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
-    "MIN_52W_RANGE": 50.0,             # Minimum 52W range for pullback eligibility (upper half)
+    "MIN_PCT_OFF_LOW": 50.0,           # Minimum +50% gain above 52W low
+    "MIN_52W_RANGE": 50.0,             # Preserved for backward-compat / fallback
     "BREAKOUT_MIN_52W_RANGE": 85.0,    # Minimum 52W range for breakout classification (near highs)
     # Zacks 3 Exception:
     "ZACKS_3_EXCEPTION_ENABLED": False,
@@ -115,12 +116,14 @@ LONG_ENTRY = {
 }
 
 SHORT_ENTRY = {
-    "MIN_SHORT_RS": 8.0,
-    "MAX_SHORT_RS": 60.0,
+    "MIN_SHORT_RS": 0.0,
+    "MAX_SHORT_RS": 50.0,
     "THEMES": ["Lagging"],
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 2_000_000,
+    "MAX_PCT_OFF_HIGH": -20.0,          # Minimum -20% drop from 52W high (top broken)
+    "MAX_52W_RANGE": 30.0,              # Fallback for historical files missing raw 52W High
 }
 
 # ==========================
