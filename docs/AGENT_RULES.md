@@ -1,5 +1,5 @@
 # TABELA — Agent Operating Rules
-**Last Updated:** October 4, 2026  
+**Last Updated:** November 27, 2026  
 **Audience:** Any LLM agent, coding assistant, or AI pair programmer working on this codebase.  
 **Purpose:** Strict rules of engagement to prevent regressions and unauthorized parameter changes.
 

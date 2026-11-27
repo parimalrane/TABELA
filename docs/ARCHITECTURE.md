@@ -119,13 +119,17 @@ Input Data
 
 ## Input Layer
 
-Responsible for loading external data.
+Responsible for loading external data and reference mappings.
 
 Typical sources:
 
-* ETF.csv
-* stocks.csv
-* theme mapping tables (`data/macro_theme_mapping.csv`, `data/theme_etf_mapping.csv`)
+* ETF.csv (e.g. `market_data/input_files/YYYY-MM/YYYYMMDD_ETF.csv`)
+* stocks.csv (e.g. `market_data/input_files/YYYY-MM/YYYYMMDD_stocks.csv`)
+* Relational theme mapping tables in `data/`:
+  - `data/macro_theme_mapping.csv` (Micro/Narrative $\rightarrow$ Macro Benchmark Theme)
+  - `data/theme_etf_mapping.csv` (Theme $\rightarrow$ SPDR Sector & Pure-Play ETFs)
+  - `data/industry_theme_mapping.csv` (Raw Zacks Industry $\rightarrow$ Narrative Theme)
+  - `data/stock_theme_mapping.csv` (Explicit ticker-level dominant narrative overrides)
 
 No calculations occur here.
 
@@ -193,9 +197,19 @@ Only structured data is stored.
 
 Produces:
 
-* Console reports (Theme Performance, Bidirectional Theme Breadth, Bullish/Bearish Universes [Strong & Mild], Dropped Watchlist Export, Watchlist Deltas)
-* TradingView exports (`###Bullish_Stocks`, `###Bearish_Stocks`, `###Mild_Bullish_Stocks`, `###Mild_Bearish_Stocks`, `###Leading_ETF`, `###Lagging_ETF`, and `###Dropped_*` watchlists)
-* Daily report text captures
+* Console reports:
+  - Macro Weather Report & Breadth X-Ray (Multi-timeframe index returns, advance/decline streaks, 52W extremes)
+  - Sector Intelligence Engine Rankings (Multi-timeframe SPDR performance vs SPY)
+  - Theme Breadth Analysis (Top-down macro rank, micro tier, pure-play ETFs, active stock breadth leaders)
+  - Long Universe (Screened Stage 2 Institutional Leaders)
+  - Short Universe (Screened Stage 4 Breakdown Candidates)
+* TradingView Watchlist Exports:
+  - `TRADINGVIEW WATCHLIST : BULLISH`: `###leading_ETF,...` header with granular ETF stock buckets (`###XBI,...`, `###XRT,...`).
+  - `TRADINGVIEW WATCHLIST : BEARISH`: `###lagging_ETF,...` header with granular ETF stock buckets (`###SMH,...`, `###COPX,...`).
+  - Dropped Watchlists: `###Dropped_Leading_ETF,...` and `###Dropped_Lagging_ETF,...`.
+* File Captures & Ledgers:
+  - Daily report captures in `market_data/daily_reports/YYYY-MM/YYYY-MM-DD.txt`
+  - Dropped candidate audit ledger in `market_data/dropped_list/dropped_history.csv`
 
 Presentation should not perform calculations.
 
