@@ -86,6 +86,10 @@ def _meets_criteria(row, criteria_dict):
     if "BLOCKED_THEMES" in criteria_dict:
         if theme in criteria_dict["BLOCKED_THEMES"]: return False
 
+    if "BLOCKED_SECTOR_STATUSES" in criteria_dict:
+        sec_status = str(row.get("Sector_Status", ""))
+        if sec_status in criteria_dict["BLOCKED_SECTOR_STATUSES"]: return False
+
     if "BLOCKED_ZACKS" in criteria_dict:
         zacks_raw = row.get("Zacks Rank", 0)
         try:

@@ -523,6 +523,24 @@ def score_stocks(stocks):
 
 
 def build_candidates(stocks):
+    # Sector Gate: derive Sector (SPDR) and Sector_Status (LEADING, LAGGING, NEUTRAL)
+    from config.config import ZACKS_TO_SPDR
+    from scoring.sector_intelligence import SectorIntelligence, get_historical_etf_path
+    
+    sector_status_map = {}
+    try:
+        curr_etf = str(context.etf_file)
+        hist_etf = get_historical_etf_path(curr_etf, days_back=7)
+        si = SectorIntelligence(curr_etf, hist_etf)
+        report_data = si.generate_intelligence_report()
+        if report_data and "sectors" in report_data:
+            sector_status_map = {s["Ticker"]: s["Status"] for s in report_data["sectors"]}
+    except Exception:
+        pass
+
+    if "Sector" in stocks.columns:
+        stocks["Sector (SPDR)"] = stocks["Sector"].map(ZACKS_TO_SPDR).fillna("N/A")
+        stocks["Sector_Status"] = stocks["Sector (SPDR)"].map(sector_status_map).fillna("NEUTRAL")
 
     long_watchlist = build_long_watchlist(stocks)
 

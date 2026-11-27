@@ -32,9 +32,18 @@ def build_long_watchlist(stocks, registry=None):
         # Fallback for historical files missing raw 52 Week Low
         pct_off_low = range_52w.fillna(0.0)
 
-    # Standard Entry: Leading theme + Zacks 1-2 + RS >= 85 + % off Low >= 70%
+    # Sector Filter: Never swim upstream against lagging sectors
+    blocked_sector_statuses = LONG_ENTRY.get("BLOCKED_SECTOR_STATUSES", ["LAGGING"])
+    sector_ok = (
+        ~stocks_clean["Sector_Status"].isin(blocked_sector_statuses)
+        if "Sector_Status" in stocks_clean.columns
+        else pd.Series(True, index=stocks_clean.index)
+    )
+
+    # Standard Entry: Leading theme + Non-lagging sector + Zacks 1-2 + RS >= 70 + % off Low >= 50%
     standard_entry_mask = (
         stocks_clean["Theme_Class"].isin(allowed_entry_themes)
+        & sector_ok
         & (stocks_clean["RS_Rating"] >= min_rs)
         & (zacks_numeric.isin(allowed_zacks))
         & (pct_off_low >= min_pct_off_low)

@@ -85,6 +85,29 @@ SECTOR_CLASSIFICATION_CONFIG = {
 }
 
 # ==========================
+# SECTOR MAPPINGS & GATES
+# ==========================
+ZACKS_TO_SPDR = {
+    "Computer and Technology": "XLK",
+    "Business Services": "XLK",
+    "Finance": "XLF",
+    "Medical": "XLV",
+    "Oils-Energy": "XLE",
+    "Consumer Discretionary": "XLY",
+    "Retail-Wholesale": "XLY",
+    "Auto-Tires-Trucks": "XLY",
+    "Consumer Staples": "XLP",
+    "Utilities": "XLU",
+    "Basic Materials": "XLB",
+    "Construction": "XLI",
+    "Industrial Products": "XLI",
+    "Aerospace": "XLI",
+    "Transportation": "XLI",
+    "Conglomerates": "XLI",
+    "Multi-Sector Conglomerates": "XLI",
+}
+
+# ==========================
 # THRESHOLDS (STATE-BASED)
 # ==========================
 
@@ -92,6 +115,7 @@ LONG_ENTRY = {
     "MIN_RS": 70.0,                    # Minimum RS for Long eligibility (relaxed to 70)
     "BREAKOUT_MIN_RS": 90.0,           # Minimum RS for Breakout classification (top 10%)
     "THEMES": ["Leading", "Unclassified Leader"],
+    "BLOCKED_SECTOR_STATUSES": ["LAGGING"], # Never swim upstream against lagging sectors
     "ALLOWED_ZACKS": [1, 2],
     "BLOCKED_ZACKS": [3, 4, 5],
     "MIN_PRICE": 10.0,
@@ -119,6 +143,7 @@ SHORT_ENTRY = {
     "MIN_SHORT_RS": 0.0,
     "MAX_SHORT_RS": 50.0,
     "THEMES": ["Lagging"],
+    "BLOCKED_SECTOR_STATUSES": ["LEADING"], # Never short into a leading sector tide
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 2_000_000,

@@ -1173,8 +1173,6 @@ def print_daily_scan(
     movements = deltas.get("movements", {})
     days = deltas.get("days_on_list", {})
     if not true_longs.empty:
-        true_longs["Movement"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
-        true_longs["Days"] = true_longs["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
         true_longs["Sector (Rk)"] = true_longs["Sector (SPDR)"].astype(str) + " (" + true_longs["Sector Rank"].astype(str) + ")"
         true_longs["Ticker"] = true_longs["Ticker"].apply(lambda t: f" {str(t).strip()}")
         true_longs = true_longs.drop(columns=["Sector (SPDR)", "Sector Rank"])
@@ -1202,8 +1200,6 @@ def print_daily_scan(
         ].copy()
         display_df["Ticker"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False)
 
-        display_df["Movement"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(movements).fillna("NA")
-        display_df["Days"] = display_df["Ticker"].astype(str).str.replace("*", "", regex=False).str.upper().map(days).fillna(1).astype(int)
         display_df["Sector (Rk)"] = display_df["Sector (SPDR)"].astype(str) + " (" + display_df["Sector Rank"].astype(str) + ")"
         display_df["Ticker"] = display_df["Ticker"].apply(lambda t: f" {str(t).strip()}")
         display_df = display_df.drop(columns=["Sector (SPDR)", "Sector Rank"])
@@ -1229,7 +1225,7 @@ def print_daily_scan(
     bullish_list = []
     if not true_longs.empty:
         bullish_df = true_longs.copy()
-        cols = ['Ticker', 'Price', 'Mapped_Theme', 'Zacks', 'RS_Rating', 'Movement', 'Days', 'Sector (Rk)', 'Micro_Tier']
+        cols = ['Ticker', 'Price', 'Mapped_Theme', 'Zacks', 'RS_Rating', 'Sector (Rk)', 'Micro_Tier']
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
         bullish_df['_score_num'] = pd.to_numeric(bullish_df['RS_Rating'], errors='coerce').fillna(0)
@@ -1239,7 +1235,7 @@ def print_daily_scan(
     bearish_list = []
     if not distribution_watchlist.empty and not display_df.empty:
         bearish_df = display_df.copy()
-        cols = ['Ticker', 'Price', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', 'Movement', 'Days', 'Sector (Rk)', 'Micro_Tier']
+        cols = ['Ticker', 'Price', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', 'Sector (Rk)', 'Micro_Tier']
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
         bullish_short_rs = 'Short_RS_Rating' if 'Short_RS_Rating' in bearish_df.columns else 'RS_Rating'
@@ -1261,10 +1257,8 @@ def print_daily_scan(
         theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         rs = str(r.get("RS_Rating", ""))[:4]
-        mov = str(r.get("Movement", ""))[:4]
-        dys = str(r.get("Days", ""))[:4]
         sec = str(r.get("Sector (Rk)", ""))[:11]
-        return f"{t:<6}   {pr:>8}   {theme:<28}  {zk:>5}  {rs:>5}  {mov:>8}  {dys:>4}  {sec:<11}"
+        return f"{t:<6}   {pr:>8}   {theme:<28}  {zk:>5}  {rs:>5}  {sec:<11}"
 
     def format_bearish_row(r):
         t = str(r.get("Ticker", "")).strip()[:6]
@@ -1272,13 +1266,11 @@ def print_daily_scan(
         theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         shrs = str(r.get("Short_RS_Rating", r.get("RS_Rating", "")))[:4]
-        mov = str(r.get("Movement", ""))[:4]
-        dys = str(r.get("Days", ""))[:4]
         sec = str(r.get("Sector (Rk)", ""))[:11]
-        return f"{t:<6}   {pr:>8}   {theme:<28}  {zk:>5}  {shrs:>5}  {mov:>8}  {dys:>4}  {sec:<11}"
+        return f"{t:<6}   {pr:>8}   {theme:<28}  {zk:>5}  {shrs:>5}  {sec:<11}"
 
-    b_hdr = f"{'Ticker':<6}   {'Price':>8}   {'Theme':<28}  {'Zacks':>5}  {'RS':>5}  {'Movement':>8}  {'Days':>4}  {'Sector (Rk)':<11}"
-    s_hdr = f"{'Ticker':<6}   {'Price':>8}   {'Theme':<28}  {'Zacks':>5}  {'Sh_RS':>5}  {'Movement':>8}  {'Days':>4}  {'Sector (Rk)':<11}"
+    b_hdr = f"{'Ticker':<6}   {'Price':>8}   {'Theme':<28}  {'Zacks':>5}  {'RS':>5}  {'Sector (Rk)':<11}"
+    s_hdr = f"{'Ticker':<6}   {'Price':>8}   {'Theme':<28}  {'Zacks':>5}  {'Sh_RS':>5}  {'Sector (Rk)':<11}"
     sep_line = '=' * len(b_hdr) + '\n'
 
     # Extract all active strong bullish & bearish tickers
@@ -1301,7 +1293,7 @@ def print_daily_scan(
     # 1. LONG UNIVERSE
     long_out = sep_line
     long_out += '1. LONG UNIVERSE (Institutional Leaders)\n'
-    long_out += 'Criteria: Leading Themes | Zacks 1-2 | RS >= 70 | % off Lo >= +50%\n'
+    long_out += 'Criteria: Leading Themes | Non-Lagging Sectors | Zacks 1-2 | RS >= 70 | % off Lo >= +50%\n'
     long_out += 'Legend: [ML] = Micro Leader | ~ = Unclassified Leader\n'
     long_out += sep_line
 
@@ -1316,7 +1308,7 @@ def print_daily_scan(
     # 2. SHORT UNIVERSE (Stage 4 Candidates)
     short_out = sep_line
     short_out += '2. SHORT UNIVERSE (Stage 4 Candidates)\n'
-    short_out += 'Criteria: Lagging Themes | Zacks 3-5 | Short_RS 0-50 | % off Hi <= -20%\n'
+    short_out += 'Criteria: Lagging Themes | Non-Leading Sectors | Zacks 3-5 | Short_RS 0-50 | % off Hi <= -20%\n'
     short_out += 'Legend: [MLg] = Micro Lagging\n'
     short_out += sep_line
 
@@ -1430,9 +1422,6 @@ def print_daily_scan(
     d_lead_etf_str = ",".join(dropped_leading_etfs)
     d_lag_etf_str = ",".join(dropped_lagging_etfs)
 
-    print("==============================================")
-    print("DROPPED WATCHLIST EXPORT")
-    print("==============================================")
     print("###Dropped_Leading_ETF," + d_lead_etf_str + ",") if d_lead_etf_str else print("###Dropped_Leading_ETF,")
     print("###Dropped_Lagging_ETF," + d_lag_etf_str + ",") if d_lag_etf_str else print("###Dropped_Lagging_ETF,")
     print()
