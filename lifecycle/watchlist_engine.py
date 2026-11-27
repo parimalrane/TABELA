@@ -17,10 +17,10 @@ def build_long_watchlist(stocks, registry=None):
     dollar_vol = close_numeric * vol_numeric
     growth_score = stocks_clean["Growth Score"].astype(str).str.strip().str.upper() if "Growth Score" in stocks_clean.columns else pd.Series("", index=stocks_clean.index)
 
-    # 1. STATELESS DAILY EVALUATION (Unified Long Standards: Breakouts & Pullbacks)
-    min_rs = LONG_ENTRY.get("MIN_RS", 70.0)
-    min_pct_off_low = LONG_ENTRY.get("MIN_PCT_OFF_LOW", 50.0)
-    min_52w = PULLBACK_CONFIG.get("LONG_MIN_52W_RANGE", 50.0)
+    # 1. STATELESS DAILY EVALUATION (Unified Long Screening)
+    min_rs = LONG_ENTRY.get("MIN_RS", 0.0)
+    min_pct_off_low = LONG_ENTRY.get("MIN_PCT_OFF_LOW", 0.0)
+    min_52w = PULLBACK_CONFIG.get("LONG_MIN_52W_RANGE", 0.0)
     breakout_rs = LONG_ENTRY.get("BREAKOUT_MIN_RS", 90.0)
     breakout_range = PULLBACK_CONFIG.get("LONG_BREAKOUT_MIN_52W_RANGE", 85.0)
     allowed_zacks = LONG_ENTRY.get("ALLOWED_ZACKS", [1, 2])
@@ -32,6 +32,8 @@ def build_long_watchlist(stocks, registry=None):
         # Fallback for historical files missing raw 52 Week Low
         pct_off_low = range_52w.fillna(0.0)
 
+    stocks_clean["% off Lo"] = pct_off_low
+
     # Sector Filter: Never swim upstream against lagging sectors
     blocked_sector_statuses = LONG_ENTRY.get("BLOCKED_SECTOR_STATUSES", ["LAGGING"])
     sector_ok = (
@@ -40,7 +42,7 @@ def build_long_watchlist(stocks, registry=None):
         else pd.Series(True, index=stocks_clean.index)
     )
 
-    # Standard Entry: Leading theme + Non-lagging sector + Zacks 1-2 + RS >= 70 + % off Low >= 50%
+    # Standard Entry: Leading theme + Non-lagging sector + Zacks 1-2 + Price >= $10 + Vol >= 1M
     standard_entry_mask = (
         stocks_clean["Theme_Class"].isin(allowed_entry_themes)
         & sector_ok

@@ -89,7 +89,7 @@ def print_scan_epilogue():
         ("THEME_BREADTH", "THEME BREADTH ANALYSIS"),
         ("LONG_UNIVERSE", "1. LONG UNIVERSE"),
         ("SHORT_UNIVERSE", "2. SHORT UNIVERSE"),
-        ("TRADINGVIEW_EXPORT", "TRADINGVIEW WATCHLIST EXPORT"),
+        ("TRADINGVIEW_EXPORT", "TRADINGVIEW WATCHLIST"),
         ("DROPPED_EXPORT", "DROPPED WATCHLIST EXPORT"),
         ("WATCHLIST_DELTA", "WATCHLIST DELTA REPORT"),
         ("END_BANNER", "END OF TABELA SCAN")
@@ -1130,6 +1130,19 @@ def print_daily_scan(
         long_candidates_df['Price'] = clean_close_l.apply(lambda v: f"${v:.2f}" if pd.notna(v) else "NA")
     else:
         long_candidates_df['Price'] = "NA"
+
+    if '52 Week Low' in long_candidates_df.columns and 'Last Close' in long_candidates_df.columns:
+        clean_lo_l = pd.to_numeric(long_candidates_df['52 Week Low'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').replace(0, float('nan'))
+        long_candidates_df['% off Lo'] = ((clean_close_l - clean_lo_l) / clean_lo_l * 100.0).apply(
+            lambda v: f"+{v:.1f}%" if pd.notna(v) and v > 0 else (f"{v:.1f}%" if pd.notna(v) else "NA")
+        )
+    elif 'Price as a % of 52 Wk H-L Range' in long_candidates_df.columns:
+        long_candidates_df['% off Lo'] = pd.to_numeric(long_candidates_df['Price as a % of 52 Wk H-L Range'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').apply(
+            lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
+        )
+    else:
+        long_candidates_df['% off Lo'] = "NA"
+
     long_candidates_df['Zacks'] = pd.to_numeric(long_candidates_df['Zacks Rank'], errors='coerce').fillna(0).astype(int).astype(str)
 
     display_df = long_candidates_df[
@@ -1140,6 +1153,7 @@ def print_daily_scan(
             "Theme_Class",
             "Zacks",
             "RS_Rating",
+            "% off Lo",
             "Sector (SPDR)",
             "Sector Rank"
         ]
@@ -1184,6 +1198,19 @@ def print_daily_scan(
             dist_df['Price'] = clean_close_s.apply(lambda v: f"${v:.2f}" if pd.notna(v) else "NA")
         else:
             dist_df['Price'] = "NA"
+
+        if '52 Week High' in dist_df.columns and 'Last Close' in dist_df.columns:
+            clean_hi_s = pd.to_numeric(dist_df['52 Week High'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').replace(0, float('nan'))
+            dist_df['% off Hi'] = ((clean_close_s - clean_hi_s) / clean_hi_s * 100.0).apply(
+                lambda v: f"{v:.1f}%" if pd.notna(v) else "NA"
+            )
+        elif 'Price as a % of 52 Wk H-L Range' in dist_df.columns:
+            dist_df['% off Hi'] = pd.to_numeric(dist_df['Price as a % of 52 Wk H-L Range'].astype(str).str.replace(r'[%$,]', '', regex=True), errors='coerce').apply(
+                lambda v: f"-{100.0 - v:.1f}%" if pd.notna(v) else "NA"
+            )
+        else:
+            dist_df['% off Hi'] = "NA"
+
         dist_df['Zacks'] = pd.to_numeric(dist_df['Zacks Rank'], errors='coerce').fillna(0).astype(int).astype(str)
 
         display_df = dist_df[
@@ -1194,6 +1221,7 @@ def print_daily_scan(
                 "Theme_Class",
                 "Zacks",
                 "Short_RS_Rating",
+                "% off Hi",
                 "Sector (SPDR)",
                 "Sector Rank"
             ]
@@ -1225,7 +1253,7 @@ def print_daily_scan(
     bullish_list = []
     if not true_longs.empty:
         bullish_df = true_longs.copy()
-        cols = ['Ticker', 'Price', 'Mapped_Theme', 'Zacks', 'RS_Rating', 'Sector (Rk)', 'Micro_Tier']
+        cols = ['Ticker', 'Price', 'Mapped_Theme', 'Zacks', 'RS_Rating', '% off Lo', 'Sector (Rk)', 'Micro_Tier']
         cols = [c for c in cols if c in bullish_df.columns]
         bullish_df = bullish_df[cols]
         bullish_df['_score_num'] = pd.to_numeric(bullish_df['RS_Rating'], errors='coerce').fillna(0)
@@ -1235,7 +1263,7 @@ def print_daily_scan(
     bearish_list = []
     if not distribution_watchlist.empty and not display_df.empty:
         bearish_df = display_df.copy()
-        cols = ['Ticker', 'Price', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', 'Sector (Rk)', 'Micro_Tier']
+        cols = ['Ticker', 'Price', 'Mapped_Theme', 'Zacks', 'Short_RS_Rating', '% off Hi', 'Sector (Rk)', 'Micro_Tier']
         cols = [c for c in cols if c in bearish_df.columns]
         bearish_df = bearish_df[cols]
         bullish_short_rs = 'Short_RS_Rating' if 'Short_RS_Rating' in bearish_df.columns else 'RS_Rating'
@@ -1257,8 +1285,9 @@ def print_daily_scan(
         theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         rs = str(r.get("RS_Rating", ""))[:4]
+        lo = str(r.get("% off Lo", ""))[:9]
         sec = str(r.get("Sector (Rk)", ""))[:11]
-        return f"{t:<6}   {pr:>8}   {theme:<28}  {zk:>5}  {rs:>5}  {sec:<11}"
+        return f"{t:<6}   {pr:>8}   {theme:<28}  {zk:>5}  {rs:>5}   {lo:>9}  {sec:<11}"
 
     def format_bearish_row(r):
         t = str(r.get("Ticker", "")).strip()[:6]
@@ -1266,11 +1295,12 @@ def print_daily_scan(
         theme = _micro_tag(r.get("Mapped_Theme", ""), r.get("Micro_Tier"))
         zk = str(r.get("Zacks", ""))[:2]
         shrs = str(r.get("Short_RS_Rating", r.get("RS_Rating", "")))[:4]
+        hi = str(r.get("% off Hi", ""))[:9]
         sec = str(r.get("Sector (Rk)", ""))[:11]
-        return f"{t:<6}   {pr:>8}   {theme:<28}  {zk:>5}  {shrs:>5}  {sec:<11}"
+        return f"{t:<6}   {pr:>8}   {theme:<28}  {zk:>5}  {shrs:>5}   {hi:>9}  {sec:<11}"
 
-    b_hdr = f"{'Ticker':<6}   {'Price':>8}   {'Theme':<28}  {'Zacks':>5}  {'RS':>5}  {'Sector (Rk)':<11}"
-    s_hdr = f"{'Ticker':<6}   {'Price':>8}   {'Theme':<28}  {'Zacks':>5}  {'Sh_RS':>5}  {'Sector (Rk)':<11}"
+    b_hdr = f"{'Ticker':<6}   {'Price':>8}   {'Theme':<28}  {'Zacks':>5}  {'RS':>5}   {'% off Lo':>9}  {'Sector (Rk)':<11}"
+    s_hdr = f"{'Ticker':<6}   {'Price':>8}   {'Theme':<28}  {'Zacks':>5}  {'Sh_RS':>5}   {'% off Hi':>9}  {'Sector (Rk)':<11}"
     sep_line = '=' * len(b_hdr) + '\n'
 
     # Extract all active strong bullish & bearish tickers
@@ -1292,8 +1322,8 @@ def print_daily_scan(
 
     # 1. LONG UNIVERSE
     long_out = sep_line
-    long_out += '1. LONG UNIVERSE (Institutional Leaders)\n'
-    long_out += 'Criteria: Leading Themes | Non-Lagging Sectors | Zacks 1-2 | RS >= 70 | % off Lo >= +50%\n'
+    long_out += '1. LONG UNIVERSE (Screened Institutional Leaders)\n'
+    long_out += 'Criteria: Leading Themes | Non-Lagging Sectors | Zacks 1-2 | Price >= $10 | Vol >= 1M\n'
     long_out += 'Legend: [ML] = Micro Leader | ~ = Unclassified Leader\n'
     long_out += sep_line
 
@@ -1307,8 +1337,8 @@ def print_daily_scan(
 
     # 2. SHORT UNIVERSE (Stage 4 Candidates)
     short_out = sep_line
-    short_out += '2. SHORT UNIVERSE (Stage 4 Candidates)\n'
-    short_out += 'Criteria: Lagging Themes | Non-Leading Sectors | Zacks 3-5 | Short_RS 0-50 | % off Hi <= -20%\n'
+    short_out += '2. SHORT UNIVERSE (Screened Stage 4 Candidates)\n'
+    short_out += 'Criteria: Lagging Themes | Non-Leading Sectors | Zacks 3-5 | Price >= $10 | Vol >= 1M\n'
     short_out += 'Legend: [MLg] = Micro Lagging\n'
     short_out += sep_line
 
@@ -1322,13 +1352,6 @@ def print_daily_scan(
 
     print('\n' + long_out)
     print('\n' + short_out)
-
-    print('TRADINGVIEW WATCHLIST EXPORT')
-    long_str = ','.join(all_bullish_tickers)
-    short_str = ','.join(all_bearish_tickers)
-
-    print('###Long,' + long_str + ',') if long_str else print('###Long,')
-    print('###Short,' + short_str + ',') if short_str else print('###Short,')
 
     # Thematic & Sector ETF Watchlists (Primary Pure-Play per theme)
     def extract_primary_etf(etf_raw):
@@ -1386,6 +1409,7 @@ def print_daily_scan(
             if _tier == "Micro Leader" and _metf not in leading_etfs:
                 leading_etfs.append(_metf)
             elif _tier == "Micro Lagging" and _metf not in lagging_etfs:
+                lagging_etf_stocks.setdefault(_metf, []) if False else None
                 lagging_etfs.append(_metf)
 
     # Enforce strict mutual exclusion: an ETF can never be both Leading and Lagging
@@ -1394,13 +1418,9 @@ def print_daily_scan(
     leading_etf_str = ",".join(leading_etfs)
     lagging_etf_str = ",".join(lagging_etfs)
 
-    print("###Leading_ETF," + leading_etf_str + ",") if leading_etf_str else print("###Leading_ETF,")
-    print("###Lagging_ETF," + lagging_etf_str + ",") if lagging_etf_str else print("###Lagging_ETF,")
-
     # =========================================================================
-    # DROPPED WATCHLIST EXPORT (Today's Exits)
+    # DROPPED WATCHLIST CALCULATION
     # =========================================================================
-
     prev_leading_etfs = []
     prev_lagging_etfs = []
     try:
@@ -1409,10 +1429,10 @@ def print_daily_scan(
         reports = sorted([f for f in report_dir.rglob("*.txt") if f.stem < current_date_str])
         if reports:
             for line in reports[-1].read_text(encoding="utf-8").splitlines():
-                if line.startswith("###Leading_ETF,"):
-                    prev_leading_etfs = [x.strip() for x in line.replace("###Leading_ETF,", "").split(",") if x.strip()]
-                elif line.startswith("###Lagging_ETF,"):
-                    prev_lagging_etfs = [x.strip() for x in line.replace("###Lagging_ETF,", "").split(",") if x.strip()]
+                if line.startswith("###Leading_ETF,") or line.startswith("###leading_ETF,"):
+                    prev_leading_etfs = [x.strip() for x in line.replace("###Leading_ETF,", "").replace("###leading_ETF,", "").split(",") if x.strip()]
+                elif line.startswith("###Lagging_ETF,") or line.startswith("###lagging_ETF,"):
+                    prev_lagging_etfs = [x.strip() for x in line.replace("###Lagging_ETF,", "").replace("###lagging_ETF,", "").split(",") if x.strip()]
     except Exception:
         pass
 
@@ -1421,6 +1441,101 @@ def print_daily_scan(
 
     d_lead_etf_str = ",".join(dropped_leading_etfs)
     d_lag_etf_str = ",".join(dropped_lagging_etfs)
+
+    # =========================================================================
+    # HIERARCHICAL ETF-TO-STOCK WATCHLIST COLLECTION
+    # =========================================================================
+    leading_etf_stocks = {}
+    if not true_longs.empty:
+        t_longs = true_longs.copy()
+        t_longs["_rs_num"] = pd.to_numeric(t_longs.get("RS_Rating"), errors="coerce").fillna(0)
+        t_longs = t_longs.sort_values(by="_rs_num", ascending=False).drop(columns=["_rs_num"])
+        for _, row in t_longs.iterrows():
+            tkr = str(row.get("Ticker", "")).replace("*", "").replace("~", "").replace("^", "").replace("+", "").strip().upper()
+            if not tkr:
+                continue
+            micro_theme = str(row.get("Mapped_Theme", "")).strip()
+            macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+            target_etf = None
+            if micro_theme in micro_tier_by_theme:
+                _tier, _metf, _ = micro_tier_by_theme[micro_theme]
+                if _tier == "Micro Leader" and _metf and _metf in leading_etfs:
+                    target_etf = _metf
+            if not target_etf:
+                etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+                cand_etf = extract_primary_etf(etf_raw)
+                if cand_etf and cand_etf in leading_etfs:
+                    target_etf = cand_etf
+            if not target_etf:
+                cand_etf = extract_primary_etf(row.get("ETF_Theme"))
+                if cand_etf and cand_etf in leading_etfs:
+                    target_etf = cand_etf
+            if target_etf:
+                leading_etf_stocks.setdefault(target_etf, [])
+                if tkr not in leading_etf_stocks[target_etf]:
+                    leading_etf_stocks[target_etf].append(tkr)
+
+    lagging_etf_stocks = {}
+    if not distribution_watchlist.empty:
+        d_watch = distribution_watchlist.copy()
+        sh_col = "Short_RS_Rating" if "Short_RS_Rating" in d_watch.columns else "RS_Rating"
+        d_watch["_rs_num"] = pd.to_numeric(d_watch.get(sh_col), errors="coerce").fillna(999)
+        d_watch = d_watch.sort_values(by="_rs_num", ascending=True).drop(columns=["_rs_num"])
+        for _, row in d_watch.iterrows():
+            tkr = str(row.get("Ticker", "")).replace("*", "").replace("~", "").replace("^", "").replace("+", "").strip().upper()
+            if not tkr:
+                continue
+            micro_theme = str(row.get("Mapped_Theme", "")).strip()
+            macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+            target_etf = None
+            if micro_theme in micro_tier_by_theme:
+                _tier, _metf, _ = micro_tier_by_theme[micro_theme]
+                if _tier == "Micro Lagging" and _metf and _metf in lagging_etfs:
+                    target_etf = _metf
+            if not target_etf:
+                etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+                cand_etf = extract_primary_etf(etf_raw)
+                if cand_etf and cand_etf in lagging_etfs:
+                    target_etf = cand_etf
+            if not target_etf:
+                cand_etf = extract_primary_etf(row.get("ETF_Theme"))
+                if cand_etf and cand_etf in lagging_etfs:
+                    target_etf = cand_etf
+            if target_etf:
+                lagging_etf_stocks.setdefault(target_etf, [])
+                if tkr not in lagging_etf_stocks[target_etf]:
+                    lagging_etf_stocks[target_etf].append(tkr)
+
+    # =========================================================================
+    # TRADINGVIEW WATCHLIST EXPORTS: BULLISH & BEARISH
+    # =========================================================================
+    print('TRADINGVIEW WATCHLIST : BULLISH')
+    print("###leading_ETF," + leading_etf_str + ",") if leading_etf_str else print("###leading_ETF,")
+    printed_lead = set()
+    for etf in leading_etfs:
+        stks = leading_etf_stocks.get(etf, [])
+        if stks:
+            print(f"###{etf}," + ",".join(stks) + ",")
+            printed_lead.add(etf)
+    for etf, stks in leading_etf_stocks.items():
+        if etf not in printed_lead and stks:
+            print(f"###{etf}," + ",".join(stks) + ",")
+    print()
+    print()
+
+    print('TRADINGVIEW WATCHLIST : BEARISH')
+    print("###lagging_ETF," + lagging_etf_str + ",") if lagging_etf_str else print("###lagging_ETF,")
+    printed_lag = set()
+    for etf in lagging_etfs:
+        stks = lagging_etf_stocks.get(etf, [])
+        if stks:
+            print(f"###{etf}," + ",".join(stks) + ",")
+            printed_lag.add(etf)
+    for etf, stks in lagging_etf_stocks.items():
+        if etf not in printed_lag and stks:
+            print(f"###{etf}," + ",".join(stks) + ",")
+    print()
+    print()
 
     print("###Dropped_Leading_ETF," + d_lead_etf_str + ",") if d_lead_etf_str else print("###Dropped_Leading_ETF,")
     print("###Dropped_Lagging_ETF," + d_lag_etf_str + ",") if d_lag_etf_str else print("###Dropped_Lagging_ETF,")

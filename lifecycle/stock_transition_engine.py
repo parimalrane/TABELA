@@ -124,26 +124,27 @@ def _meets_criteria(row, criteria_dict):
 
     if "MAX_PCT_OFF_HIGH" in criteria_dict:
         max_pct = criteria_dict["MAX_PCT_OFF_HIGH"]
-        hi_raw = row.get("52 Week High")
-        close_raw = row.get("Last Close")
-        if pd.notna(hi_raw) and pd.notna(close_raw):
-            try:
-                hi_val = float(str(hi_raw).replace('$', '').replace(',', '').strip())
-                close_val = float(str(close_raw).replace('$', '').replace(',', '').strip())
-                if hi_val > 0:
-                    pct_off_hi = (close_val - hi_val) / hi_val * 100.0
-                    if pct_off_hi > max_pct:
+        if max_pct is not None and max_pct < 0:
+            hi_raw = row.get("52 Week High")
+            close_raw = row.get("Last Close")
+            if pd.notna(hi_raw) and pd.notna(close_raw):
+                try:
+                    hi_val = float(str(hi_raw).replace('$', '').replace(',', '').strip())
+                    close_val = float(str(close_raw).replace('$', '').replace(',', '').strip())
+                    if hi_val > 0:
+                        pct_off_hi = (close_val - hi_val) / hi_val * 100.0
+                        if pct_off_hi > max_pct:
+                            return False
+                except (ValueError, TypeError):
+                    pass
+            elif "Price as a % of 52 Wk H-L Range" in row and pd.notna(row["Price as a % of 52 Wk H-L Range"]):
+                try:
+                    pos_52w = float(str(row["Price as a % of 52 Wk H-L Range"]).replace('%', '').strip())
+                    max_52w = criteria_dict.get("MAX_52W_RANGE", 30.0)
+                    if pos_52w > max_52w:
                         return False
-            except (ValueError, TypeError):
-                pass
-        elif "Price as a % of 52 Wk H-L Range" in row and pd.notna(row["Price as a % of 52 Wk H-L Range"]):
-            try:
-                pos_52w = float(str(row["Price as a % of 52 Wk H-L Range"]).replace('%', '').strip())
-                max_52w = criteria_dict.get("MAX_52W_RANGE", 30.0)
-                if pos_52w > max_52w:
-                    return False
-            except (ValueError, TypeError):
-                pass
+                except (ValueError, TypeError):
+                    pass
 
     return True
 

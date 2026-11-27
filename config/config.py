@@ -112,7 +112,7 @@ ZACKS_TO_SPDR = {
 # ==========================
 
 LONG_ENTRY = {
-    "MIN_RS": 70.0,                    # Minimum RS for Long eligibility (relaxed to 70)
+    "MIN_RS": 0.0,                     # RS unconstrained in screening (evaluated on chart)
     "BREAKOUT_MIN_RS": 90.0,           # Minimum RS for Breakout classification (top 10%)
     "THEMES": ["Leading", "Unclassified Leader"],
     "BLOCKED_SECTOR_STATUSES": ["LAGGING"], # Never swim upstream against lagging sectors
@@ -120,8 +120,8 @@ LONG_ENTRY = {
     "BLOCKED_ZACKS": [3, 4, 5],
     "MIN_PRICE": 10.0,
     "MIN_VOLUME": 1_000_000,
-    "MIN_PCT_OFF_LOW": 50.0,           # Minimum +50% gain above 52W low
-    "MIN_52W_RANGE": 50.0,             # Preserved for backward-compat / fallback
+    "MIN_PCT_OFF_LOW": 0.0,            # 52W distance unconstrained (evaluated on chart)
+    "MIN_52W_RANGE": 0.0,              # Preserved for backward-compat / fallback
     "BREAKOUT_MIN_52W_RANGE": 85.0,    # Minimum 52W range for breakout classification (near highs)
     # Zacks 3 Exception:
     "ZACKS_3_EXCEPTION_ENABLED": False,
@@ -141,14 +141,14 @@ LONG_ENTRY = {
 
 SHORT_ENTRY = {
     "MIN_SHORT_RS": 0.0,
-    "MAX_SHORT_RS": 50.0,
+    "MAX_SHORT_RS": 100.0,             # Sh_RS unconstrained in screening (evaluated on chart)
     "THEMES": ["Lagging"],
     "BLOCKED_SECTOR_STATUSES": ["LEADING"], # Never short into a leading sector tide
     "BLOCKED_ZACKS": [1, 2],
     "MIN_PRICE": 10.0,
-    "MIN_VOLUME": 2_000_000,
-    "MAX_PCT_OFF_HIGH": -20.0,          # Minimum -20% drop from 52W high (top broken)
-    "MAX_52W_RANGE": 30.0,              # Fallback for historical files missing raw 52W High
+    "MIN_VOLUME": 1_000_000,
+    "MAX_PCT_OFF_HIGH": 0.0,           # 52W distance unconstrained (evaluated on chart)
+    "MAX_52W_RANGE": 100.0,            # Preserved for backward-compat
 }
 
 # ==========================
