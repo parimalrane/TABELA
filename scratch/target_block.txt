@@ -1,0 +1,188 @@
+    # Thematic & Sector ETF Watchlists (Primary Pure-Play per theme)
+    def extract_primary_etf(etf_raw):
+        if not etf_raw or pd.isna(etf_raw):
+            return None
+        cleaned = re.sub(r'\[.*?\]', '', str(etf_raw)).strip()
+        if not cleaned:
+            return None
+        tokens = [t.strip() for t in cleaned.split(',') if t.strip()]
+        if tokens:
+            ticker = tokens[0].split()[0].replace('/', '').strip().upper()
+            if ticker and ticker.isalpha():
+                return ticker
+        return None
+
+    leading_etfs = []
+    if not true_longs.empty:
+        for _, row in true_longs.iterrows():
+            micro_theme = str(row.get('Mapped_Theme', ''))
+            macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+            if theme_class_map.get(micro_theme) == "Leading" or theme_class_map.get(macro_theme) == "Leading":
+                etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+                etf = extract_primary_etf(etf_raw)
+                if etf and etf not in leading_etfs:
+                    leading_etfs.append(etf)
+    for row in leading_themes:
+        theme = row.get("Theme")
+        if theme:
+            etf_raw = THEME_ETF_MAPPING.get(theme)
+            etf = extract_primary_etf(etf_raw)
+            if etf and etf not in leading_etfs:
+                leading_etfs.append(etf)
+
+    lagging_etfs = []
+    if not distribution_watchlist.empty:
+        for _, row in distribution_watchlist.iterrows():
+            micro_theme = str(row.get('Mapped_Theme', ''))
+            macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+            if theme_class_map.get(micro_theme) == "Lagging" or theme_class_map.get(macro_theme) == "Lagging":
+                etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+                etf = extract_primary_etf(etf_raw)
+                if etf and etf not in lagging_etfs:
+                    lagging_etfs.append(etf)
+    for row in lagging_themes:
+        theme = row.get("Theme")
+        if theme:
+            etf_raw = THEME_ETF_MAPPING.get(theme)
+            etf = extract_primary_etf(etf_raw)
+            if etf and etf not in lagging_etfs:
+                lagging_etfs.append(etf)
+
+    # Micro Leader / Micro Lagging sub-ETFs (e.g. CIBR) join the ETF export lists
+    for _th, (_tier, _metf, _mrs) in micro_tier_by_theme.items():
+        if _metf:
+            if _tier == "Micro Leader" and _metf not in leading_etfs:
+                leading_etfs.append(_metf)
+            elif _tier == "Micro Lagging" and _metf not in lagging_etfs:
+                lagging_etf_stocks.setdefault(_metf, []) if False else None
+                lagging_etfs.append(_metf)
+
+    # Enforce strict mutual exclusion: an ETF can never be both Leading and Lagging
+    leading_etfs = [e for e in leading_etfs if e not in lagging_etfs]
+
+    leading_etf_str = ",".join(leading_etfs)
+    lagging_etf_str = ",".join(lagging_etfs)
+
+    # =========================================================================
+    # DROPPED WATCHLIST CALCULATION
+    # =========================================================================
+    prev_leading_etfs = []
+    prev_lagging_etfs = []
+    try:
+        report_dir = Path("market_data") / "daily_reports"
+        current_date_str = str(context.market_date)
+        reports = sorted([f for f in report_dir.rglob("*.txt") if f.stem < current_date_str])
+        if reports:
+            for line in reports[-1].read_text(encoding="utf-8").splitlines():
+                if line.startswith("###Leading_ETF,") or line.startswith("###leading_ETF,"):
+                    prev_leading_etfs = [x.strip() for x in line.replace("###Leading_ETF,", "").replace("###leading_ETF,", "").split(",") if x.strip()]
+                elif line.startswith("###Lagging_ETF,") or line.startswith("###lagging_ETF,"):
+                    prev_lagging_etfs = [x.strip() for x in line.replace("###Lagging_ETF,", "").replace("###lagging_ETF,", "").split(",") if x.strip()]
+    except Exception:
+        pass
+
+    dropped_leading_etfs = [e for e in prev_leading_etfs if e not in leading_etfs]
+    dropped_lagging_etfs = [e for e in prev_lagging_etfs if e not in lagging_etfs]
+
+    d_lead_etf_str = ",".join(dropped_leading_etfs)
+    d_lag_etf_str = ",".join(dropped_lagging_etfs)
+
+    # =========================================================================
+    # HIERARCHICAL ETF-TO-STOCK WATCHLIST COLLECTION
+    # =========================================================================
+    leading_etf_stocks = {}
+    if not true_longs.empty:
+        t_longs = true_longs.copy()
+        t_longs["_rs_num"] = pd.to_numeric(t_longs.get("RS_Rating"), errors="coerce").fillna(0)
+        t_longs = t_longs.sort_values(by="_rs_num", ascending=False).drop(columns=["_rs_num"])
+        for _, row in t_longs.iterrows():
+            tkr = str(row.get("Ticker", "")).replace("*", "").replace("~", "").replace("^", "").replace("+", "").strip().upper()
+            if not tkr:
+                continue
+            micro_theme = str(row.get("Mapped_Theme", "")).strip()
+            macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+            target_etf = None
+            if micro_theme in micro_tier_by_theme:
+                _tier, _metf, _ = micro_tier_by_theme[micro_theme]
+                if _tier == "Micro Leader" and _metf and _metf in leading_etfs:
+                    target_etf = _metf
+            if not target_etf:
+                etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+                cand_etf = extract_primary_etf(etf_raw)
+                if cand_etf and cand_etf in leading_etfs:
+                    target_etf = cand_etf
+            if not target_etf:
+                cand_etf = extract_primary_etf(row.get("ETF_Theme"))
+                if cand_etf and cand_etf in leading_etfs:
+                    target_etf = cand_etf
+            if target_etf:
+                leading_etf_stocks.setdefault(target_etf, [])
+                if tkr not in leading_etf_stocks[target_etf]:
+                    leading_etf_stocks[target_etf].append(tkr)
+
+    lagging_etf_stocks = {}
+    if not distribution_watchlist.empty:
+        d_watch = distribution_watchlist.copy()
+        sh_col = "Short_RS_Rating" if "Short_RS_Rating" in d_watch.columns else "RS_Rating"
+        d_watch["_rs_num"] = pd.to_numeric(d_watch.get(sh_col), errors="coerce").fillna(999)
+        d_watch = d_watch.sort_values(by="_rs_num", ascending=True).drop(columns=["_rs_num"])
+        for _, row in d_watch.iterrows():
+            tkr = str(row.get("Ticker", "")).replace("*", "").replace("~", "").replace("^", "").replace("+", "").strip().upper()
+            if not tkr:
+                continue
+            micro_theme = str(row.get("Mapped_Theme", "")).strip()
+            macro_theme = THEME_TRANSLATION.get(micro_theme, micro_theme)
+            target_etf = None
+            if micro_theme in micro_tier_by_theme:
+                _tier, _metf, _ = micro_tier_by_theme[micro_theme]
+                if _tier == "Micro Lagging" and _metf and _metf in lagging_etfs:
+                    target_etf = _metf
+            if not target_etf:
+                etf_raw = THEME_ETF_MAPPING.get(micro_theme) or THEME_ETF_MAPPING.get(macro_theme)
+                cand_etf = extract_primary_etf(etf_raw)
+                if cand_etf and cand_etf in lagging_etfs:
+                    target_etf = cand_etf
+            if not target_etf:
+                cand_etf = extract_primary_etf(row.get("ETF_Theme"))
+                if cand_etf and cand_etf in lagging_etfs:
+                    target_etf = cand_etf
+            if target_etf:
+                lagging_etf_stocks.setdefault(target_etf, [])
+                if tkr not in lagging_etf_stocks[target_etf]:
+                    lagging_etf_stocks[target_etf].append(tkr)
+
+    # =========================================================================
+    # TRADINGVIEW WATCHLIST EXPORTS: BULLISH & BEARISH
+    # =========================================================================
+    print('TRADINGVIEW WATCHLIST : BULLISH')
+    print("###leading_ETF," + leading_etf_str + ",") if leading_etf_str else print("###leading_ETF,")
+    printed_lead = set()
+    for etf in leading_etfs:
+        stks = leading_etf_stocks.get(etf, [])
+        if stks:
+            print(f"###{etf}," + ",".join(stks) + ",")
+            printed_lead.add(etf)
+    for etf, stks in leading_etf_stocks.items():
+        if etf not in printed_lead and stks:
+            print(f"###{etf}," + ",".join(stks) + ",")
+    print()
+    print()
+
+    print('TRADINGVIEW WATCHLIST : BEARISH')
+    print("###lagging_ETF," + lagging_etf_str + ",") if lagging_etf_str else print("###lagging_ETF,")
+    printed_lag = set()
+    for etf in lagging_etfs:
+        stks = lagging_etf_stocks.get(etf, [])
+        if stks:
+            print(f"###{etf}," + ",".join(stks) + ",")
+            printed_lag.add(etf)
+    for etf, stks in lagging_etf_stocks.items():
+        if etf not in printed_lag and stks:
+            print(f"###{etf}," + ",".join(stks) + ",")
+    print()
+    print()
+
+    print("###Dropped_Leading_ETF," + d_lead_etf_str + ",") if d_lead_etf_str else print("###Dropped_Leading_ETF,")
+    print("###Dropped_Lagging_ETF," + d_lag_etf_str + ",") if d_lag_etf_str else print("###Dropped_Lagging_ETF,")
+    print()
+
