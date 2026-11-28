@@ -204,8 +204,9 @@ Produces:
   - Long Universe (Screened Stage 2 Institutional Leaders)
   - Short Universe (Screened Stage 4 Breakdown Candidates)
 * TradingView Watchlist Exports:
-  - `TRADINGVIEW WATCHLIST : BULLISH`: `###leading_ETF,...` header with granular ETF stock buckets (`###XBI,...`, `###XRT,...`).
-  - `TRADINGVIEW WATCHLIST : BEARISH`: `###lagging_ETF,...` header with granular ETF stock buckets (`###SMH,...`, `###COPX,...`).
+  - `TRADINGVIEW WATCHLIST : BULLISH`: Filtered by Dual-Gate Structural Health (`RS >= 0%` vs SPY AND `52W Range >= 50%`) with Actionable 1:1 Pruning ($\ge 1$ stock required), generating `###leading_ETF,...` header with granular ETF stock buckets (`###XBI,...`, `###XRT,...`). Disqualifies low-range defensive assets (e.g. `VOX`) and empty secondary ETFs.
+  - `TRADINGVIEW WATCHLIST : BEARISH`: Filtered by Dual-Gate Structural Health (`RS < 0%` vs SPY AND `52W Range <= 50%`) with Actionable 1:1 Pruning ($\ge 1$ stock required), generating `###lagging_ETF,...` header with granular ETF stock buckets (`###SMH,...`, `###COPX,...`). Disqualifies high-range pullbacks in bull markets (e.g. `CLOU`, `SKYY`, `IGV`) and empty secondary ETFs.
+  - Neutral Zone: Assets with conflicting signals are cleanly dropped from both watchlists.
   - Dropped Watchlists: `###Dropped_Leading_ETF,...` and `###Dropped_Lagging_ETF,...`.
 * File Captures & Ledgers:
   - Daily report captures in `market_data/daily_reports/YYYY-MM/YYYY-MM-DD.txt`

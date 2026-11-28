@@ -16,11 +16,18 @@
 ## 🟢 COMPLETED: Thematic Architecture & Watchlist Restructuring
 1. **Industry & Stock Thematic Relational Mappings:**
    - Decoupled misclassified stocks out of improper thematic ETFs (e.g. general industrials and base metal miners out of ###GDX) into legitimate pure-play themes (Infrastructure, Copper Mining, Silver Mining, Industrials, Utilities).
-   - Integrated data/industry_theme_mapping.csv, data/stock_theme_mapping.csv, and data/theme_etf_mapping.csv.
-2. **TradingView Watchlist Restructuring:**
-   - Header lists (###leading_ETF,... and ###lagging_ETF,...) dynamically include all primary and secondary pure-play ETFs displayed in the Theme Breadth table.
-   - Individual ETF relative strength scored against SPY (20% 1W + 40% 1M + 40% 3M) with deterministic mutual exclusion.
+   - Integrated `data/industry_theme_mapping.csv`, `data/stock_theme_mapping.csv`, and `data/theme_etf_mapping.csv`.
+2. **TradingView Watchlist Restructuring & Granular Bucketing:**
+   - Header lists (`###leading_ETF,...` and `###lagging_ETF,...`) dynamically include all primary and secondary pure-play ETFs displayed in the Theme Breadth table.
+   - Individual ETF relative strength scored against SPY ($20\%\text{ 1W} + 40\%\text{ 1M} + 40\%\text{ 3M}$) with deterministic mutual exclusion.
    - Stocks segmented into single granular ETF buckets with zero cross-bucket duplicates.
+3. **Dual-Gate Structural Health Filter for ETF Watchlists:**
+   - Solved the counter-trend defensive trap (`VOX` falling slower than SPY while near 52W lows) by enforcing `52W Range >= 50.0%` for `###leading_ETF`.
+   - Solved the bull market pullback trap (`CLOU`, `SKYY`, `IGV` pulling back while holding above 50% range) by enforcing `52W Range <= 50.0%` for `###lagging_ETF`.
+   - Conflicted assets cleanly route to the Neutral Zone (excluded from both watchlists).
+4. **Bottom-Up Theme Scoring Engine:**
+   - Implemented `scoring/bottom_up_theme_engine.py` to evaluate breadth participation across thematic groups.
+   - Added `backtesting/tuners/run_theme_tier_tuner.py` to optimize threshold parameters.
 
 ---
 

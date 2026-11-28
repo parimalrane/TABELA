@@ -38,12 +38,17 @@ When rendering rows in the Theme Breadth table or assigning stocks to TradingVie
 ## 3. TradingView Watchlist Export Rules
 The TradingView export engine enforces strict quantitative rules:
 1. **All Active Table ETFs Included**: Every ETF displayed in the Theme Breadth Analysis table is extracted (both primary and secondary tokens).
-2. **Individual Multi-Timeframe Scoring vs SPY**: Every ETF is scored individually against `SPY` using unified weights ($20\%\text{ 1W} + 40\%\text{ 1M} + 40\%\text{ 3M}$):
-   - ETFs with relative return $\ge 0\%$ are routed to `###leading_ETF,`.
-   - ETFs with relative return $< 0\%$ are routed to `###lagging_ETF,`.
+2. **Individual Multi-Timeframe Scoring vs SPY**: Every ETF is scored individually against `SPY` using unified weights ($20\%\text{ 1W} + 40\%\text{ 1M} + 40\%\text{ 3M}$).
+3. **Dual-Gate Structural Health Filter (52-Week Range Position)**:
+   - **Leading ETF Gate (Long Header `###leading_ETF,`)**: An ETF must be outperforming `SPY` ($\text{Relative Score} \ge 0.0\%$) **AND** holding the upper half of its annual range ($\text{52W Range} \ge 50.0\%$). This prevents defensive, counter-trend cushions near 52-week lows (e.g., `VOX`) from masquerading as market leaders.
+   - **Lagging ETF Gate (Short Header `###lagging_ETF,`)**: An ETF must be underperforming `SPY` ($\text{Relative Score} < 0.0\%$) **AND** breaking down in the lower half of its annual range ($\text{52W Range} \le 50.0\%$). This prevents routine pullbacks in secular bull uptrends (e.g., `CLOU`, `SKYY`, `IGV`) from triggering premature short watches.
+   - **Neutral Zone**: ETFs with conflicting signals (e.g. falling slower than SPY while near lows, or pulling back while holding above 50% range) are excluded from both watchlists.
    - ETFs without pricing data in the input files (e.g., unpriced or defunct funds) are excluded.
-3. **Mutual Exclusion**: An ETF can appear in `leading_ETF` OR `lagging_ETF`, never both.
-4. **Single Stock Granularity**: Each stock candidate appears **once**, under its most granular active thematic ETF (primary pure-play preferred). Secondary ETFs remain in the header list without duplicating stock rows.
+4. **Actionable 1:1 Header Filter (Active Stock Pruning)**:
+   - To keep TradingView watchlists completely actionable and avoid opening empty charts, an ETF is printed in `###leading_ETF,` or `###lagging_ETF,` **only if it has at least 1 qualified stock candidate** in its bucket below.
+   - Secondary ETFs (e.g., `SOXX`, `IAK`, `IBB`) and themes where zero stocks passed institutional filters are pruned from the header. Every ETF in the header has a direct, actionable stock bucket below it.
+5. **Mutual Exclusion**: An ETF can appear in `leading_ETF` OR `lagging_ETF`, never both.
+6. **Single Stock Granularity**: Each stock candidate appears **once**, under its most granular active thematic ETF (primary pure-play preferred). Secondary ETFs do not duplicate stock rows.
 
 ---
 

@@ -49,15 +49,15 @@ Legend: [No Prefix]=Long / #=Short
 ========================================
 Macro Theme      Micro Theme              Rank / Tier        ETFs               Stocks
 -------------------------------------------------------------------------------------------------------------------
-Consumer Staples Consumer Staples         Micro Leader       [XLP] PBJ, IYK     LKNCY, OLLI, MO, SJM, LW, ELF
+Consumer Staples Consumer Staples         Micro Leader       [XLP] IYK          LKNCY, OLLI, MO, SJM, LW, ELF
 Insurance        Insurance                #1 Leading         [XLF] KIE, IAK     RLI, BRK.B, AFG, RGA, RDN, CNO, BWIN,
                                                                                 SLDE
 Utilities        Utilities                Micro Leader       [XLU] XLU, VPU     WTRG, WEC, AVA, ED, OGE, EVRG, ATO, TAC,
                                                                                 PNW
-Consumer Staples Restaurants              Micro Leader       [XLY] MENU, PBJ    SG, CBRL, FWRG, EAT
-Medical Devices  Medical Devices          #2 Leading         [XLV] IHI, XHE     GKOS, IDXX, AXGN, SIBN, CAH, STE, MCK,
+Restaurants      Restaurants              Micro Leader       [XLY] PEJ          SG, CBRL, FWRG, EAT
+Medical Devices  Medical Devices          #2 Leading         [XLV] IHI          GKOS, IDXX, AXGN, SIBN, CAH, STE, MCK,
                                                                                 GEHC, ISRG, PODD, WST, ATRC
-Medical Devices  Diagnostics              #2 Leading         [XLV] IHI, XHE     CDNA, ADPT
+Medical Devices  Diagnostics              #2 Leading         [XLV] IHI          CDNA, ADPT
 Retail           Footwear/Apparel         #3 Leading         [XLY] XRT          CROX, WWW, TPR, KTB, FIGS, RL, VSXY,
                                                                                 SHOO
 Retail           Retail                   #3 Leading         [XLY] XRT          ASO, ALH, BBY, HAS, KMX, FIVE
@@ -75,7 +75,7 @@ Healthcare       Healthcare               Micro Leader       [XLV] IHI, XBI     
 Healthcare       Healthcare Services      Micro Leader       [XLV] IHI, XBI     PGNY, CON, BTSG, HUM, OSCR
 Telecom          Telecom Infrastructure   Micro Leader       [XLC] IYZ, VOX     LBTYA
 Artificial Int.. Automotive Technology    Micro Leader       [XLK] AIQ, BOTZ    ATMU
-Software         Digital Assets Infrast.. Micro Lagging      [XLK] BITQ, DAPP   #COIN, #HUT, #IREN, #MSTR, #RIOT, #WULF
+Software         Digital Assets Infrast.. Micro Lagging      [XLK] BITQ         #COIN, #HUT, #IREN, #MSTR, #RIOT, #WULF
 Software         Education                Micro Lagging      [XLK] IGV, XSW     #UTI
 Cloud Computing  Enterprise Cloud         Micro Lagging      [XLK] CLOU, SKYY   #NOW
 Internet         Leisure and Entertainm.. Micro Leader       [XLC] FDN          TTWO, RCL, CALY, TCOM, SGHC, IMAX, CRSR,
@@ -86,7 +86,6 @@ Gold Mining      Gold Mining              #34 Lagging        [XLB] GDX, GDXJ    
                                                                                 #OR, #SSRM, #WPM
 Artificial Int.. AI Infrastructure        #35 Lagging        [XLK] AIQ, BOTZ    #AVGO, #CRDO, #INOD, #NBIS
 Artificial Int.. AI Platform              #35 Lagging        [XLK] AIQ, BOTZ    #GOOG, #META, #PLTR
-Artificial Int.. AI Power Infrastructure  #35 Lagging        [XLK] AIQ, BOTZ    #ETN, #MOD, #MPWR
 Artificial Int.. AI Compute               #35 Lagging        [XLK] SMH, AIQ     #AMD, #ARM, #HPQ, #INTC
 Semiconductors   Semiconductors           #36 Lagging        [XLK] SMH, SOXX    #AMBA, #MCHP, #NXPI, #STM, #SYNA
 Semiconductors   Semiconductor Equipment  #36 Lagging        [XLK] SMH, SOXX    #ACMR, #AEHR, #AMKR, #ASML, #CGNX,
@@ -101,6 +100,7 @@ Silver Mining    Silver Mining            #37 Lagging        [XLB] SIL, SILJ    
 Rare Earth/Lit.. Rare Earth/Lithium       #38 Lagging        [XLB] LIT, REMX    #MP
 Copper Mining    Copper Mining            #40 Lagging        [XLB] COPX         #BHP, #ERO, #FCX, #GLNCY, #HBM, #RIO,
                                                                                 #SCCO, #TECK
+AI Power Infra.. AI Power Infrastructure  Micro Lagging      [XLI] GRID         #ETN, #MOD, #MPWR
 Uranium Mining   Nuclear Infrastructure   #41 Lagging        [XLU] NLR, URNM    #VST
 
 =======================================================================================
@@ -318,33 +318,32 @@ SNDK       $73.61   Memory                            3     93      -74.8%  XLK 
 SYNA      $116.63   Semiconductors                    3     94      -21.0%  XLK (11)   
 
 TRADINGVIEW WATCHLIST : BULLISH
-###leading_ETF,IYK,KIE,IAK,XLU,VPU,IHI,XRT,XPH,IHE,XBI,IBB,VNQ,IYR,VOX,XSW,CIBR,
-###IYK,LKNCY,SG,CBRL,OLLI,FWRG,MO,SJM,LW,ELF,EAT,
+###leading_ETF,IYK,KIE,XLU,PEJ,IHI,XRT,XPH,XBI,VNQ,
+###IYK,LKNCY,OLLI,MO,SJM,LW,ELF,
 ###KIE,RLI,BRK.B,AFG,RGA,RDN,CNO,BWIN,SLDE,
 ###XLU,WTRG,WEC,AVA,ED,OGE,EVRG,ATO,TAC,PNW,
+###PEJ,SG,CBRL,FWRG,EAT,
 ###IHI,PGNY,GKOS,IDXX,AXGN,SIBN,CDNA,CAH,STE,MCK,EHC,GEHC,CON,LFST,BTSG,SOLV,ADPT,ISRG,HUM,RDNT,HQY,RVTY,PODD,WST,ATRC,OSCR,SHC,UNH,WGS,OMDA,
 ###XRT,ASO,CROX,WWW,ALH,TGT,TPR,KTB,DG,FIGS,BBY,RL,HAS,VSXY,KMX,SHOO,FIVE,
 ###XPH,GRDN,ETON,NVS,SMMT,
 ###XBI,REPL,VCEL,REGN,ROIV,DNTH,IMVT,IRON,QGEN,TECH,ZLAB,RVMD,ABVX,GRAL,ABCL,
 ###VNQ,AHR,APLE,BRX,EPR,CTRE,STAG,DRH,SHO,CURB,OUT,RLJ,PEB,HST,PK,EQIX,NLY,STWD,
-###VOX,LBTYA,
 
 TRADINGVIEW WATCHLIST : BEARISH
-###lagging_ETF,IYZ,AIQ,BOTZ,BITQ,IGV,CLOU,SKYY,FDN,GDX,GDXJ,SMH,SOXX,IYW,DRAM,SIL,SILJ,LIT,REMX,COPX,NLR,URNM,TAN,
-###AIQ,INOD,CRDO,NBIS,AVGO,GOOG,ETN,PLTR,MOD,META,MPWR,
+###lagging_ETF,AIQ,BITQ,GDX,SMH,DRAM,SIL,LIT,COPX,GRID,NLR,
+###AIQ,INOD,CRDO,NBIS,AVGO,GOOG,PLTR,META,
 ###BITQ,IREN,COIN,MSTR,WULF,HUT,RIOT,
-###IGV,UTI,
-###CLOU,NOW,
 ###GDX,HYMC,KGC,AGI,EGO,HMY,ARIS,B,GFI,AU,SSRM,AEM,IAG,NEM,OR,WPM,CGAU,
 ###SMH,AMBA,AAOI,AMKR,MCHP,ACMR,CIEN,LITE,LRCX,ONTO,GFS,TELWY,ASML,INTC,QCOM,ADI,CGNX,ARM,TKR,NXPI,STX,STM,UMC,COHU,HAYW,HPQ,AEHR,AMD,SYNA,
 ###DRAM,SIMO,MU,SNDK,
 ###SIL,HL,AG,PAAS,CDE,BVN,
 ###LIT,MP,
 ###COPX,ERO,HBM,FCX,SCCO,RIO,GLNCY,TECK,BHP,
+###GRID,ETN,MOD,MPWR,
 ###NLR,VST,
 
-###Dropped_Leading_ETF,MENU,IYT,FDN,FCG,PAVE,KRE,
-###Dropped_Lagging_ETF,XOP,BITO,CRAK,ARKX,
+###Dropped_Leading_ETF,MENU,IYT,FDN,FCG,PAVE,CIBR,KRE,
+###Dropped_Lagging_ETF,XOP,BITO,URNM,CRAK,CLOU,TAN,ARKX,
 
 ==============================================
 END OF TABELA SCAN - 2026-11-25

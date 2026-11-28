@@ -52,14 +52,19 @@ To enter the `SHORT UNIVERSE (Screened Stage 4 Candidates)`:
 
 ## 3. TradingView Watchlist Segregation
 
-The output pipeline renders two distinct watchlists:
+The output pipeline renders two distinct watchlists governed by a **Dual-Gate Structural Health Filter** (requiring both relative momentum vs `SPY` and 52-week range positioning):
 1. **TRADINGVIEW WATCHLIST : BULLISH**
-   - Header: `###leading_ETF,IYK,KIE,IAK,XLU,VPU,IHI,XRT,XPH,IHE,XBI,IBB,VNQ,IYR,VOX,XSW,CIBR,`
+   - Header: `###leading_ETF,IYK,KIE,XLU,IHI,XRT,XPH,XBI,VNQ,`
+   - Gate: Relative Score $\ge 0.0\%$ vs `SPY` **AND** `52W Range >= 50.0%` **AND** $\ge 1$ qualified active stock in the watchlist below.
    - Stock Buckets: Each qualified stock appears under its most granular pure-play ETF (e.g. `###XBI,REPL,VCEL,...`, `###XRT,CROX,WWW,...`).
    - Stocks are listed strictly once (zero duplicates across buckets).
 2. **TRADINGVIEW WATCHLIST : BEARISH**
-   - Header: `###lagging_ETF,IYZ,AIQ,BOTZ,BITQ,IGV,CLOU,SKYY,FDN,GDX,GDXJ,SMH,SOXX,IYW,DRAM,SIL,SILJ,LIT,REMX,COPX,NLR,URNM,TAN,`
+   - Header: `###lagging_ETF,AIQ,BITQ,GDX,SMH,DRAM,SIL,LIT,COPX,NLR,`
+   - Gate: Relative Score $< 0.0\%$ vs `SPY` **AND** `52W Range <= 50.0%` **AND** $\ge 1$ qualified active stock in the watchlist below.
    - Stock Buckets: Structurally broken stocks mapped to their thematic short vehicle (e.g. `###SMH,AMBA,AAOI,...`, `###COPX,ERO,FCX,...`).
+3. **ACTIONABLE 1:1 PRUNING & NEUTRAL ZONE**
+   - **Zero Empty Charts**: Any ETF without at least 1 qualified stock candidate below it (e.g. secondary ETFs like `SOXX`, `IAK`, `IBB` or themes with 0 passing stocks like `TAN`, `IYZ`) is pruned from the header list.
+   - Assets failing structural health (e.g. defensive cushions near lows like `VOX`, or high-range pullbacks like `CLOU`) are safely excluded.
 
 ---
 

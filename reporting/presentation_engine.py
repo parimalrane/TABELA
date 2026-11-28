@@ -1385,6 +1385,7 @@ def print_daily_scan(
             etf_pricing_df = None
 
     etf_rel_score_map = {}
+    etf_52w_range_map = {}
     if etf_pricing_df is not None and not etf_pricing_df.empty:
         etf_pricing_df['Ticker_clean'] = etf_pricing_df['Ticker'].astype(str).str.strip().str.upper()
         etf_pricing_lookup = etf_pricing_df.set_index('Ticker_clean')
@@ -1415,6 +1416,7 @@ def print_daily_scan(
                     s += w * (val - spy_rets[p])
                 if valid:
                     etf_rel_score_map[tkr] = s
+                    etf_52w_range_map[tkr] = _clean_pct_val(row.get("Price as a % of 52 Wk H-L Range"))
 
     # 1. Collect all ETFs displayed in the Theme Breadth Analysis table
     all_table_etfs = []
@@ -1438,42 +1440,17 @@ def print_daily_scan(
     for e in all_table_etfs:
         if e in etf_rel_score_map:
             score = etf_rel_score_map[e]
-            if score >= 0:
+            rng_pos = etf_52w_range_map.get(e, 0.0)
+            # Dual-gate classification:
+            # 1. Leading (Bullish): Outperforming SPY (score >= 0) AND upper structural range (52W Range >= 50%)
+            # 2. Lagging (Bearish): Underperforming SPY (score < 0) AND lower structural range (52W Range <= 50%)
+            # 3. Neutral: Disqualified from both (e.g. falling slower than SPY but in a downtrend like VOX, or lagging on dip but high range like CLOU)
+            if score >= 0 and pd.notna(rng_pos) and rng_pos >= 50.0:
                 if e not in leading_etfs:
                     leading_etfs.append(e)
-            else:
+            elif score < 0 and pd.notna(rng_pos) and rng_pos <= 50.0:
                 if e not in lagging_etfs:
                     lagging_etfs.append(e)
-
-    # Enforce strict mutual exclusion (cannot appear in both)
-    leading_etfs = [e for e in leading_etfs if e not in lagging_etfs]
-
-    leading_etf_str = ','.join(leading_etfs)
-    lagging_etf_str = ','.join(lagging_etfs)
-
-    # =========================================================================
-    # DROPPED WATCHLIST CALCULATION
-    # =========================================================================
-    prev_leading_etfs = []
-    prev_lagging_etfs = []
-    try:
-        report_dir = Path('market_data') / 'daily_reports'
-        current_date_str = str(context.market_date)
-        reports = sorted([f for f in report_dir.rglob('*.txt') if f.stem < current_date_str])
-        if reports:
-            for line in reports[-1].read_text(encoding='utf-8').splitlines():
-                if line.startswith('###Leading_ETF,') or line.startswith('###leading_ETF,'):
-                    prev_leading_etfs = [x.strip() for x in line.replace('###Leading_ETF,', '').replace('###leading_ETF,', '').split(',') if x.strip()]
-                elif line.startswith('###Lagging_ETF,') or line.startswith('###lagging_ETF,'):
-                    prev_lagging_etfs = [x.strip() for x in line.replace('###Lagging_ETF,', '').replace('###lagging_ETF,', '').split(',') if x.strip()]
-    except Exception:
-        pass
-
-    dropped_leading_etfs = [e for e in prev_leading_etfs if e not in leading_etfs]
-    dropped_lagging_etfs = [e for e in prev_lagging_etfs if e not in lagging_etfs]
-
-    d_lead_etf_str = ','.join(dropped_leading_etfs)
-    d_lag_etf_str = ','.join(dropped_lagging_etfs)
 
     # =========================================================================
     # HIERARCHICAL ETF-TO-STOCK WATCHLIST COLLECTION (SINGLE GRANULAR ETF PER STOCK)
@@ -1595,13 +1572,44 @@ def print_daily_scan(
                 if tkr not in lagging_etf_stocks[target_etf]:
                     lagging_etf_stocks[target_etf].append(tkr)
 
+    # Active ETF filter: Only keep ETFs in the header if they have at least 1 qualified stock
+    active_leading_etfs = [e for e in leading_etfs if len(leading_etf_stocks.get(e, [])) > 0]
+    active_lagging_etfs = [e for e in lagging_etfs if len(lagging_etf_stocks.get(e, [])) > 0]
+
+    leading_etf_str = ','.join(active_leading_etfs)
+    lagging_etf_str = ','.join(active_lagging_etfs)
+
+    # =========================================================================
+    # DROPPED WATCHLIST CALCULATION
+    # =========================================================================
+    prev_leading_etfs = []
+    prev_lagging_etfs = []
+    try:
+        report_dir = Path('market_data') / 'daily_reports'
+        current_date_str = str(context.market_date)
+        reports = sorted([f for f in report_dir.rglob('*.txt') if f.stem < current_date_str])
+        if reports:
+            for line in reports[-1].read_text(encoding='utf-8').splitlines():
+                if line.startswith('###Leading_ETF,') or line.startswith('###leading_ETF,'):
+                    prev_leading_etfs = [x.strip() for x in line.replace('###Leading_ETF,', '').replace('###leading_ETF,', '').split(',') if x.strip()]
+                elif line.startswith('###Lagging_ETF,') or line.startswith('###lagging_ETF,'):
+                    prev_lagging_etfs = [x.strip() for x in line.replace('###Lagging_ETF,', '').replace('###lagging_ETF,', '').split(',') if x.strip()]
+    except Exception:
+        pass
+
+    dropped_leading_etfs = [e for e in prev_leading_etfs if e not in active_leading_etfs]
+    dropped_lagging_etfs = [e for e in prev_lagging_etfs if e not in active_lagging_etfs]
+
+    d_lead_etf_str = ','.join(dropped_leading_etfs)
+    d_lag_etf_str = ','.join(dropped_lagging_etfs)
+
     # =========================================================================
     # TRADINGVIEW WATCHLIST EXPORTS: BULLISH & BEARISH
     # =========================================================================
     print('TRADINGVIEW WATCHLIST : BULLISH')
     print('###leading_ETF,' + leading_etf_str + ',') if leading_etf_str else print('###leading_ETF,')
     printed_lead = set()
-    for etf in leading_etfs:
+    for etf in active_leading_etfs:
         stks = leading_etf_stocks.get(etf, [])
         if stks:
             print(f'###{etf},' + ','.join(stks) + ',')
@@ -1615,7 +1623,7 @@ def print_daily_scan(
     print('TRADINGVIEW WATCHLIST : BEARISH')
     print('###lagging_ETF,' + lagging_etf_str + ',') if lagging_etf_str else print('###lagging_ETF,')
     printed_lag = set()
-    for etf in lagging_etfs:
+    for etf in active_lagging_etfs:
         stks = lagging_etf_stocks.get(etf, [])
         if stks:
             print(f'###{etf},' + ','.join(stks) + ',')
